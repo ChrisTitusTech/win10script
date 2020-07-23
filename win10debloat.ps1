@@ -184,11 +184,10 @@ $tweaks = @(
 Function InstallTitusProgs{
 	Write-Output "Installing Chocolatey"
 	Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
-	Write-Output "Download O&O Shutup 10 exe and cfg then RUN!"
-	Invoke-WebRequest -Uri "https://raw.githubusercontent.com/ChrisTitusTech/win10script/master/ooshutup10.cfg"
-	Invoke-WebRequest -Uri "https://dl5.oo-software.com/files/ooshutup10/OOSU10.exe"
-	OOSU10.exe ooshutup10.cfg /quiet
-	"WaitForKey"
+	Import-Module BitsTransfer
+	Start-BitsTransfer -Source "https://raw.githubusercontent.com/ChrisTitusTech/win10script/master/ooshutup10.cfg" -Destination ooshutup10.cfg
+	Start-BitsTransfer -Source "https://dl5.oo-software.com/files/ooshutup10/OOSU10.exe" -Destination OOSU10.exe
+	./OOSU10.exe ooshutup10.cfg /quiet
 }
 
 ##########
