@@ -20,7 +20,8 @@
 #	- One Command to launch and run
 #	- Chocolatey Install
 #	- O&O Shutup10 CFG and Run
-#
+#	- Added Install Programs
+#	- Added Debloat Microsoft Store Apps
 #
 ##########
 # Default preset
