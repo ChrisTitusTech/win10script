@@ -29,7 +29,14 @@ $tweaks = @(
 	"RequireAdmin",
 
 	### External Program Setup
-	"InstallTitusProgs",
+	"InstallTitusProgs", #REQUIRED FOR OTHER PROGRAM INSTALLS!
+	"InstallAdobe",
+	"Install7Zip",
+	"InstallNotepadplusplus",
+	"InstallMediaPlayerClassic",
+
+	### Windows Apps
+	"DebloatAll",
 
 	### Privacy Tweaks ###
 	"DisableTelemetry",             # "EnableTelemetry",
@@ -115,6 +122,7 @@ $tweaks = @(
 	# "AddENKeyboard",              # "RemoveENKeyboard",
 	"EnableNumlock",             	# "DisableNumlock",
 	"EnableDarkMode",				# "DisableDarkMode",
+	"Stop-EdgePDF",
 
 	### Explorer UI Tweaks ###
 	"ShowKnownExtensions",          # "HideKnownExtensions",
@@ -181,13 +189,40 @@ $tweaks = @(
 # Recommended Titus Programs
 #########
 
-Function InstallTitusProgs{
+Function InstallTitusProgs {
 	Write-Output "Installing Chocolatey"
 	Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
+	choco install chocolatey-core.extension -y
+	Write-Output "Running O&O Shutup with Recommended Settings"
 	Import-Module BitsTransfer
 	Start-BitsTransfer -Source "https://raw.githubusercontent.com/ChrisTitusTech/win10script/master/ooshutup10.cfg" -Destination ooshutup10.cfg
 	Start-BitsTransfer -Source "https://dl5.oo-software.com/files/ooshutup10/OOSU10.exe" -Destination OOSU10.exe
 	./OOSU10.exe ooshutup10.cfg /quiet
+}
+
+Function InstallAdobe {
+	Write-Output "Installing Adobe Acrobat Reader"
+	choco install adobereader -y
+}
+
+Function InstallJava {
+	Write-Output "Installing Java"
+	choco install jre8 -y
+}
+
+Function Install7Zip {
+	Write-Output "Installing 7-Zip"
+	choco install 7zip -y
+}
+
+Function InstallNotepadplusplus {
+	Write-Output "Installing Notepad++"
+	choco install notepadplusplus -y
+}
+
+Function InstallMediaPlayerClassic {
+	Write-Output "Installing Media Player Classic (VLC Alternative)"
+	choco install mpc-hc -y
 }
 
 ##########
@@ -2433,7 +2468,7 @@ Function Restart {
 
 Function EnableDarkMode {
   Write-Output "Enabling Dark Mode"
-	New-ItemProperty -Path HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize -Name AppsUseLightTheme -Value 0
+	Set-ItemProperty -Path HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize -Name AppsUseLightTheme -Value 0
 }
 
 Function DisableDarkMode {
@@ -2441,6 +2476,107 @@ Function DisableDarkMode {
 	Remove-ItemProperty -Path HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize -Name AppsUseLightTheme
 }
 
+##########
+# Debloat Script Additions
+##########
+
+Function Stop-EdgePDF {
+    
+    #Stops edge from taking over as the default .PDF viewer    
+    Write-Output "Stopping Edge from taking over as the default .PDF viewer"
+    $NoPDF = "HKCR:\.pdf"
+    $NoProgids = "HKCR:\.pdf\OpenWithProgids"
+    $NoWithList = "HKCR:\.pdf\OpenWithList" 
+    If (!(Get-ItemProperty $NoPDF  NoOpenWith)) {
+        New-ItemProperty $NoPDF NoOpenWith 
+    }        
+    If (!(Get-ItemProperty $NoPDF  NoStaticDefaultVerb)) {
+        New-ItemProperty $NoPDF  NoStaticDefaultVerb 
+    }        
+    If (!(Get-ItemProperty $NoProgids  NoOpenWith)) {
+        New-ItemProperty $NoProgids  NoOpenWith 
+    }        
+    If (!(Get-ItemProperty $NoProgids  NoStaticDefaultVerb)) {
+        New-ItemProperty $NoProgids  NoStaticDefaultVerb 
+    }        
+    If (!(Get-ItemProperty $NoWithList  NoOpenWith)) {
+        New-ItemProperty $NoWithList  NoOpenWith
+    }        
+    If (!(Get-ItemProperty $NoWithList  NoStaticDefaultVerb)) {
+        New-ItemProperty $NoWithList  NoStaticDefaultVerb 
+    }
+            
+    #Appends an underscore '_' to the Registry key for Edge
+    $Edge = "HKCR:\AppXd4nrz8ff68srnhf9t5a8sbjyar1cr723_"
+    If (Test-Path $Edge) {
+        Set-Item $Edge AppXd4nrz8ff68srnhf9t5a8sbjyar1cr723_ 
+    }
+}
+
+Function DebloatAll {
+
+    $Bloatware = @(
+
+        #Unnecessary Windows 10 AppX Apps
+        "Microsoft.BingNews"
+        "Microsoft.GetHelp"
+        "Microsoft.Getstarted"
+        "Microsoft.Messaging"
+        "Microsoft.Microsoft3DViewer"
+        "Microsoft.MicrosoftSolitaireCollection"
+        "Microsoft.NetworkSpeedTest"
+        "Microsoft.News"
+        "Microsoft.Office.Lens"
+        "Microsoft.Office.Sway"
+        "Microsoft.OneConnect"
+        "Microsoft.People"
+        "Microsoft.Print3D"
+        "Microsoft.SkypeApp"
+        "Microsoft.StorePurchaseApp"
+        "Microsoft.Whiteboard"
+        "Microsoft.WindowsAlarms"
+        "microsoft.windowscommunicationsapps"
+        "Microsoft.WindowsFeedbackHub"
+        "Microsoft.WindowsMaps"
+        "Microsoft.WindowsSoundRecorder"
+        "Microsoft.ZuneMusic"
+        "Microsoft.ZuneVideo"
+
+        #Sponsored Windows 10 AppX Apps
+        #Add sponsored/featured apps to remove in the "*AppName*" format
+        "*EclipseManager*"
+        "*ActiproSoftwareLLC*"
+        "*AdobeSystemsIncorporated.AdobePhotoshopExpress*"
+        "*Duolingo-LearnLanguagesforFree*"
+        "*PandoraMediaInc*"
+        "*CandyCrush*"
+        "*BubbleWitch3Saga*"
+        "*Wunderlist*"
+        "*Flipboard*"
+        "*Twitter*"
+        "*Facebook*"
+        "*Spotify*"
+        "*Royal Revolt*"
+        "*Sway*"
+        "*Speed Test*"
+        "*Dolby*"
+             
+        #Optional: Typically not removed but you can if you need to for some reason
+        #"*Microsoft.Advertising.Xaml_10.1712.5.0_x64__8wekyb3d8bbwe*"
+        #"*Microsoft.Advertising.Xaml_10.1712.5.0_x86__8wekyb3d8bbwe*"
+        #"*Microsoft.BingWeather*"
+        #"*Microsoft.MSPaint*"
+        #"*Microsoft.MicrosoftStickyNotes*"
+        #"*Microsoft.Windows.Photos*"
+        #"*Microsoft.WindowsCalculator*"
+        #"*Microsoft.WindowsStore*"
+    )
+    foreach ($Bloat in $Bloatware) {
+        Get-AppxPackage -Name $Bloat| Remove-AppxPackage
+        Get-AppxProvisionedPackage -Online | Where-Object DisplayName -like $Bloat | Remove-AppxProvisionedPackage -Online
+        Write-Output "Trying to remove $Bloat."
+    }
+}
 
 ##########
 # Parse parameters and apply tweaks
