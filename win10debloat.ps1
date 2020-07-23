@@ -1,15 +1,8 @@
 ##########
 # Tweaked Win10 Initial Setup Script
 # Primary Author: Disassembler <disassembler@dasm.cz>
-# Modified by: alirobe <alirobe@alirobe.com>
-# Further Modifications made by: Chris Titus
-# Version: 2.20.2, 2018-09-14
 # Primary Author Source: https://github.com/Disassembler0/Win10-Initial-Setup-Script
 # Tweaked Source: https://gist.github.com/alirobe/7f3b34ad89a159e6daa1/
-# Tweak difference:
-#
-#    @alirobe's version is a subset focused on safely disabling telemetry, some 'smart' features and 3rd party bloat ...
-#    ... while retaining win10 defaults + security features. Aim to be suitable for end-user rollout.
 #
 #    If you're a power user looking to tweak your machinea, or doing larger roll-out.. 
 #    Use the @Disassembler0 script instead. It'll probably be more up-to-date than mine:
@@ -17,9 +10,15 @@
 # 
 #    Note from author: Never run scripts without reading them & understanding what they do.
 #
-#	Titus Addition: One command to rule them all, One command to find it, and One command to Run it! 
+#	Addition: One command to rule them all, One command to find it, and One command to Run it! 
 #
-#     > powershell -nop -c "iex(New-Object Net.WebClient).DownloadString('https://git.io/JJ8Wh')"
+#     > powershell -nop -c "iex(New-Object Net.WebClient).DownloadString('https://git.io/JJ8R4')"
+#
+#	Chris Titus Additions:
+#
+#	- Dark Mode
+#	- One Command to launch and run
+#
 #
 ##########
 # Default preset
@@ -172,7 +171,16 @@ $tweaks = @(
 	"Restart"
 )
 
+#########
+# Recommended Titus Programs
+#########
 
+Function InstallTitusProgs{
+	Write-Output "Installing Chocolatey"
+	Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
+	Write-Output "Download O&O Shutup 10 exe and cfg"
+	Invoke-WebRequest -Uri 
+}
 
 ##########
 # Privacy Tweaks
@@ -2411,11 +2419,19 @@ Function Restart {
 	Restart-Computer
 }
 
+###########
+# Titus Additions
+###########
+
 Function EnableDarkMode {
   Write-Output "Enabling Dark Mode"
 	New-ItemProperty -Path HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize -Name AppsUseLightTheme -Value 0
 }
 
+Function DisableDarkMode {
+    Write-Output "Disabling Dark Mode"
+	Remove-ItemProperty -Path HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize -Name AppsUseLightTheme
+}
 
 
 ##########
