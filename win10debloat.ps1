@@ -18,6 +18,8 @@
 #
 #	- Dark Mode
 #	- One Command to launch and run
+#	- Chocolatey Install
+#	- O&O Shutup10 CFG and Run
 #
 #
 ##########
@@ -25,6 +27,9 @@
 $tweaks = @(
 	### Require administrator privileges ###
 	"RequireAdmin",
+
+	### External Program Setup
+	"InstallTitusProgs",
 
 	### Privacy Tweaks ###
 	"DisableTelemetry",             # "EnableTelemetry",
@@ -106,9 +111,10 @@ $tweaks = @(
 	"DisableSearchAppInStore",      # "EnableSearchAppInStore",
 	"DisableNewAppPrompt",          # "EnableNewAppPrompt",
 	# "SetControlPanelSmallIcons",  # "SetControlPanelLargeIcons",  # "SetControlPanelCategories",
-	# "SetVisualFXPerformance",       # "SetVisualFXAppearance",
+	# "SetVisualFXPerformance",     # "SetVisualFXAppearance",
 	# "AddENKeyboard",              # "RemoveENKeyboard",
-	"EnableNumlock",              # "DisableNumlock",
+	"EnableNumlock",             	# "DisableNumlock",
+	"EnableDarkMode",				# "DisableDarkMode",
 
 	### Explorer UI Tweaks ###
 	"ShowKnownExtensions",          # "HideKnownExtensions",
@@ -178,8 +184,11 @@ $tweaks = @(
 Function InstallTitusProgs{
 	Write-Output "Installing Chocolatey"
 	Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
-	Write-Output "Download O&O Shutup 10 exe and cfg"
-	Invoke-WebRequest -Uri 
+	Write-Output "Download O&O Shutup 10 exe and cfg then RUN!"
+	Invoke-WebRequest -Uri "https://raw.githubusercontent.com/ChrisTitusTech/win10script/master/ooshutup10.cfg"
+	Invoke-WebRequest -Uri "https://dl5.oo-software.com/files/ooshutup10/OOSU10.exe"
+	OOSU10.exe ooshutup10.cfg /quiet
+	"WaitForKey"
 }
 
 ##########
