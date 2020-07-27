@@ -182,7 +182,6 @@ $tweaks = @(
 	#"UnpinTaskbarIcons",
 
 	### Auxiliary Functions ###
-	Write-Output "Press Any Key to Continue and Reboot your PC!",
 	"WaitForKey"
 	"Restart"
 )
