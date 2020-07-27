@@ -182,7 +182,7 @@ $tweaks = @(
 	#"UnpinTaskbarIcons",
 
 	### Auxiliary Functions ###
-	Write-Output "Press Any Key to Continue and Reboot your PC!"
+	Write-Output "Press Any Key to Continue and Reboot your PC!",
 	"WaitForKey"
 	"Restart"
 )
@@ -2454,7 +2454,7 @@ Function RequireAdmin {
 
 # Wait for key press
 Function WaitForKey {
-	Write-Output "`nPress any key to continue..."
+	Write-Output "Press any key to continue..."
 	[Console]::ReadKey($true) | Out-Null
 }
 
