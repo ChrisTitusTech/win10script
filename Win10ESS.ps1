@@ -37,7 +37,8 @@ $tweaks = @(
    	"InstallGoogleChrome",
    	"InstallFirefox",
    	"InstallMicrosoftEdge",
-   	"InstallNotepadplusplus",
+   	"InstallGodmode",
+	"InstallNotepadplusplus",
    	"InstallWinTerminal",
    	"InstallVLCPlayer",
    	"InstallOBSStudio",
@@ -132,7 +133,7 @@ $tweaks = @(
 	# "AddENKeyboard",              # "RemoveENKeyboard",
 	"EnableNumlock",             	# "DisableNumlock",
 	"EnableDarkMode",		# "DisableDarkMode",
-	"Stop-EdgePDF",
+	#"Stop-EdgePDF",
 
 	### Explorer UI Tweaks ###
 	"ShowKnownExtensions",          # "HideKnownExtensions",
@@ -177,6 +178,10 @@ $tweaks = @(
 	"InstallPDFPrinter",		# "UninstallPDFPrinter",
 	# "UninstallXPSPrinter",        # "InstallXPSPrinter",
 	# "RemoveFaxPrinter",           # "AddFaxPrinter",
+
+	### Control Panel Tweaks ###
+	"DisableIPv6All",               # "EnableIPv6All",
+	"EnableHighPerformancePS"
 
 	### Server Specific Tweaks ###
 	# "HideServerManagerOnLogin",   # "ShowServerManagerOnLogin",
@@ -238,6 +243,11 @@ choco install firefox
 Function InstallMicrosoftEdge {
 Write-Output "Installing Microsoft Edge"
 choco install microsoft-edge -y
+}
+
+Function InstallGodmode {
+Write-Output "Installing Godmode"
+choco install godmode -y
 }
 
 Function InstallNotepadplusplus {
@@ -2363,6 +2373,37 @@ Function AddFaxPrinter {
 }
 
 
+##########
+# Control Panel Tweaks
+##########
+
+# Disable IPv6 On All Network Adapters
+Function DisableIPv6All {
+Write-Output "Disable IPv6 on all network adapters..."
+Disable-NetAdapterBinding -Name * -ComponentID ms_tcpip6 -PassThru
+}
+
+# Enable IPv6 On All Network Adapters
+Function EnableIPv6All {
+Write-Output "Enable IPv6 on all network adapters..."
+Enable-NetAdapterBinding -Name * -ComponentID ms_tcpip6 -PassThru
+}
+
+# Enable High Performance Power Scheme
+Function EnableHighPerformancePS {
+Write-Output "Enable high performance power scheme..."
+Try {
+
+        $HighPerf = powercfg -l | %{if($_.contains("High performance")) {$_.split()[3]}}
+
+        $CurrPlan = $(powercfg -getactivescheme).split()[3]
+
+        if ($CurrPlan -ne $HighPerf) {powercfg -setactive $HighPerf}
+
+    } Catch {
+
+        Write-Warning -Message "Unable to set power plan to high performance"
+}
 
 ##########
 # Server specific Tweaks
