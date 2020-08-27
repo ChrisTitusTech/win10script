@@ -182,6 +182,7 @@ $tweaks = @(
 	### Control Panel Tweaks ###
 	"DisableIPv6All",               # "EnableIPv6All",
 	"EnableHighPerformancePS"
+	"EnableNetFx3",			#"DisableNetFx3",
 
 	### Server Specific Tweaks ###
 	# "HideServerManagerOnLogin",   # "ShowServerManagerOnLogin",
@@ -2404,6 +2405,20 @@ Try {
 
         Write-Warning -Message "Unable to set power plan to high performance"
 }
+
+# Enable .NET Framework 3.5 (includes .NET 2.0 and 3.0)
+Function EnableNetFx3 {
+Write-Output "Enable .NET Framework 3.5..."
+Enable-WindowsOptionalFeature -Online -FeatureName “NetFx3” -All
+}
+
+# Disable .NET Framework 3.5 (includes .NET 2.0 and 3.0)
+Function DisableNetFx3 {
+Write-Output "Disable .NET Framework 3.5..."
+Disable-WindowsOptionalFeature -Online -FeatureName “NetFx3”
+}
+
+
 
 ##########
 # Server specific Tweaks
