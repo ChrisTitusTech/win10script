@@ -2394,17 +2394,12 @@ Enable-NetAdapterBinding -Name * -ComponentID ms_tcpip6 -PassThru
 Function EnableHighPerformancePS {
 Write-Output "Enable high performance power scheme..."
 Try {
-
         $HighPerf = powercfg -l | %{if($_.contains("High performance")) {$_.split()[3]}}
-
         $CurrPlan = $(powercfg -getactivescheme).split()[3]
-
         if ($CurrPlan -ne $HighPerf) {powercfg -setactive $HighPerf}
-
     } Catch {
-
         Write-Warning -Message "Unable to set power plan to high performance"
-}
+    }
 
 # Enable .NET Framework 3.5 (includes .NET 2.0 and 3.0)
 Function EnableNetFx3 {
