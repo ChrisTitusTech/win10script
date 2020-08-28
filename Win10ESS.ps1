@@ -181,8 +181,7 @@ $tweaks = @(
 
 	### Control Panel Tweaks ###
 	"DisableIPv6All",               # "EnableIPv6All",
-	#"EnableHighPerformancePS"
-	"EnableNetFx3",			#"DisableNetFx3",
+	"EnableNetFx3",			# "DisableNetFx3",
 
 	### Server Specific Tweaks ###
 	# "HideServerManagerOnLogin",   # "ShowServerManagerOnLogin",
@@ -2389,17 +2388,6 @@ Function EnableIPv6All {
 Write-Output "Enable IPv6 on all network adapters..."
 Enable-NetAdapterBinding -Name * -ComponentID ms_tcpip6 -PassThru
 }
-
-# Enable High Performance Power Scheme
-Function EnableHighPerformancePS {
-Write-Output "Enable high performance power scheme..."
-Try {
-        $HighPerf = powercfg -l | %{if($_.contains("High performance")) {$_.split()[3]}}
-        $CurrPlan = $(powercfg -getactivescheme).split()[3]
-        if ($CurrPlan -ne $HighPerf) {powercfg -setactive $HighPerf}
-    } Catch {
-        Write-Warning -Message "Unable to set power plan to high performance"
-    }
 
 # Enable .NET Framework 3.5 (includes .NET 2.0 and 3.0)
 Function EnableNetFx3 {
