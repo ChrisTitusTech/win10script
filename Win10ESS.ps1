@@ -181,7 +181,7 @@ $tweaks = @(
 
 	### Control Panel Tweaks ###
 	"DisableIPv6All",               # "EnableIPv6All",
-	"EnableHighPerformancePS"
+	#"EnableHighPerformancePS"
 	"EnableNetFx3",			#"DisableNetFx3",
 
 	### Server Specific Tweaks ###
