@@ -182,7 +182,7 @@ $tweaks = @(
 	### Control Panel Tweaks ###
 	"DisableIPv6All",               # "EnableIPv6All",
 	"EnableNetFx3",			# "DisableNetFx3",
-	"HighPerfPS",			# "BalancedPS",			# "PowerSaverPS",
+	"EnableHighPerfPS",		# "EnableBalancedPS",			# "EnablePowerSaverPS",
 
 	### Server Specific Tweaks ###
 	# "HideServerManagerOnLogin",   # "ShowServerManagerOnLogin",
@@ -2403,7 +2403,7 @@ Disable-WindowsOptionalFeature -Online -FeatureName “NetFx3”
 }
 
 # Enable High Performance Power Scheme
-Function HighPerfPS {
+Function EnableHighPerfPS {
 Write-Output "Enable High Performance Power Scheme..."
 Powercfg -SETACTIVE SCHEME_MIN
 	$currentScheme = Powercfg -getactivescheme
@@ -2412,7 +2412,7 @@ Powercfg -SETACTIVE SCHEME_MIN
 }
 
 # Enable Balanced Power Scheme
-Function BalancedPS {
+Function EnableBalancedPS {
 Write-Output "Enable Balanced Power Scheme..."
 Powercfg -SETACTIVE SCHEME_BALANCED
 	$currentScheme = Powercfg -getactivescheme
@@ -2421,7 +2421,7 @@ Powercfg -SETACTIVE SCHEME_BALANCED
 }
 
 # Enable Power Saver Power Scheme
-Function PowerSaverPS {
+Function EnablePowerSaverPS {
 Powercfg -SETACTIVE SCHEME_MAX
 	$currentScheme = Powercfg -getactivescheme
 	$currentScheme = $currentScheme.split("()")
