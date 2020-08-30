@@ -182,6 +182,7 @@ $tweaks = @(
 	### Control Panel Tweaks ###
 	"DisableIPv6All",               # "EnableIPv6All",
 	"EnableNetFx3",			# "DisableNetFx3",
+	"HighPerfPS",			# "BalancedPS",			# "PowerSaverPS",
 
 	### Server Specific Tweaks ###
 	# "HideServerManagerOnLogin",   # "ShowServerManagerOnLogin",
@@ -2399,6 +2400,32 @@ Enable-WindowsOptionalFeature -Online -FeatureName “NetFx3” -All
 Function DisableNetFx3 {
 Write-Output "Disable .NET Framework 3.5..."
 Disable-WindowsOptionalFeature -Online -FeatureName “NetFx3”
+}
+
+# Enable High Performance Power Scheme
+Function HighPerfPS {
+Write-Output "Enable High Performance Power Scheme..."
+Powercfg -SETACTIVE SCHEME_MIN
+	$currentScheme = Powercfg -getactivescheme
+	$currentScheme = $currentScheme.split("()")
+	Write-Host "Applied Power Scheme:" $currentScheme[1]
+}
+
+# Enable Balanced Power Scheme
+Function BalancedPS {
+Write-Output "Enable Balanced Power Scheme..."
+Powercfg -SETACTIVE SCHEME_BALANCED
+	$currentScheme = Powercfg -getactivescheme
+	$currentScheme = $currentScheme.split("()")
+	Write-Host "Applied Power Scheme:" $currentScheme[1]
+}
+
+# Enable Power Saver Power Scheme
+Function PowerSaverPS {
+Powercfg -SETACTIVE SCHEME_MAX
+	$currentScheme = Powercfg -getactivescheme
+	$currentScheme = $currentScheme.split("()")
+	Write-Host "Applied Power Scheme:" $currentScheme[1]
 }
 
 
