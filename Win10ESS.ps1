@@ -71,7 +71,7 @@ $tweaks = @(
 	# "DisableAdminShares",         # "EnableAdminShares",
 	"DisableSMB1",                	# "EnableSMB1",
 	# "DisableSMBServer",           # "EnableSMBServer",
-	# "DisableLLMNR",               # "EnableLLMNR",
+	"DisableLLMNR",               	# "EnableLLMNR",
 	"SetCurrentNetworkPrivate",     # "SetCurrentNetworkPublic",
 	"SetUnknownNetworksPrivate",  	# "SetUnknownNetworksPublic",
 	"DisableNetDevicesAutoInst",  	# "EnableNetDevicesAutoInst",
@@ -174,7 +174,7 @@ $tweaks = @(
 	"AddPhotoViewerOpenWith",       # "RemovePhotoViewerOpenWith",
 	"InstallPDFPrinter",		# "UninstallPDFPrinter",
 	# "UninstallXPSPrinter",        # "InstallXPSPrinter",
-	# "RemoveFaxPrinter",           # "AddFaxPrinter",
+	"RemoveFaxPrinter",           	# "AddFaxPrinter",
 
 	### Control Panel Tweaks ###
 	"DisableIPv6All",               # "EnableIPv6All",
@@ -230,7 +230,7 @@ choco install microsoft-edge -y
 
 Function InstallBrave {
 Write-Output "Installing Brave"
-choco install brave
+choco install brave -y
 }
 
 Function InstallGodmode {
@@ -265,7 +265,7 @@ choco install steam -y
 
 Function InstallStreamDeck {
 Write-Output "Installing Stream Deck"
-choco install streamdeck
+choco install streamdeck -y
 }
 
 ##########
