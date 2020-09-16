@@ -33,13 +33,10 @@ $tweaks = @(
 	"InstallTitusProgs", #REQUIRED FOR OTHER PROGRAM INSTALLS!
 	"Install7Zip",
    	"InstallJava",
-   	"InstallBrave",
-   	"InstallGoogleChrome",
-   	"InstallFirefox",
    	"InstallMicrosoftEdge",
+	"InstallBrave",
    	"InstallGodmode",
 	"InstallNotepadplusplus",
-   	"InstallWinTerminal",
    	"InstallVLCPlayer",
    	"InstallOBSStudio",
    	"InstallDiscord",
@@ -226,24 +223,14 @@ Write-Output "Installing Java"
 choco install jre8 -y
 }
 
-Function InstallBrave {
-Write-Output "Installing Brave"
-choco install brave
-}
-
-Function InstallGoogleChrome {
-Write-Output "Installing Java"
-choco install googlechrome
-}
-
-Function InstallFirefox {
-Write-Output "Installing Firefox"
-choco install firefox
-}
-
 Function InstallMicrosoftEdge {
 Write-Output "Installing Microsoft Edge"
 choco install microsoft-edge -y
+}
+
+Function InstallBrave {
+Write-Output "Installing Brave"
+choco install brave
 }
 
 Function InstallGodmode {
@@ -254,11 +241,6 @@ choco install godmode -y
 Function InstallNotepadplusplus {
 Write-Output "Installing Notepad++"
 choco install notepadplusplus -y
-}
-
-Function InstallWinTerminal {
-Write-Output "Installing Windows Terminal"
-choco install microsoft-windows-terminal -y
 }
 
 Function InstallVLCPlayer {
