@@ -177,7 +177,13 @@ $tweaks = @(
 	"RemoveFaxPrinter",           	# "AddFaxPrinter",
 
 	### Control Panel Tweaks ###
-	"DisableIPv6All",               # "EnableIPv6All",
+	# "DisableIPv6All",             # "EnableIPv6All",
+	"DisableIPv6EthernetWiFi",	# "EnableIPv6EthernetWiFi",
+	# "ResetDNS",
+	# "SetCloudFlareDNS",
+	# "SetGoogleDNS",
+	"SetOpenDNS",
+	# "SetQuad9DNS",
 	"EnableNetFx3",			# "DisableNetFx3",
 	"EnableHighPerfPS",		# "EnableBalancedPS",			# "EnablePowerSaverPS",
 
@@ -2370,6 +2376,57 @@ Disable-NetAdapterBinding -Name * -ComponentID ms_tcpip6 -PassThru
 Function EnableIPv6All {
 Write-Output "Enable IPv6 on all network adapters..."
 Enable-NetAdapterBinding -Name * -ComponentID ms_tcpip6 -PassThru
+}
+
+# Disable IPv6 On Ethernet and Wi-Fi Network Adapters
+Function DisableIPv6EthernetWiFi {
+Write-Output "Disable IPv6 on all network adapters..."
+Disable-NetAdapterBinding -Name Eth* -ComponentID ms_tcpip6 -PassThru
+Disable-NetAdapterBinding -Name Local* -ComponentID ms_tcpip6 -PassThru
+Disable-NetAdapterBinding -Name Wi* -ComponentID ms_tcpip6 -PassThru
+}
+
+# Enable IPv6 On Ethernet and Wi-Fi Network Adapters
+Function EnableIPv6EthernetWiFi {
+Write-Output "Enable IPv6 on all network adapters..."
+Enable-NetAdapterBinding -Name Eth* -ComponentID ms_tcpip6 -PassThru
+Enable-NetAdapterBinding -Name Local* -ComponentID ms_tcpip6 -PassThru
+Enable-NetAdapterBinding -Name Wi* -ComponentID ms_tcpip6 -PassThru
+}
+
+# Reset DNS On Ethernet and Wi-Fi Network Adapters
+Function ResetDNS {
+Write-Output "Reset DNS On Ethernet and Wi-Fi network adapters..."
+Set-DnsClientServerAddress -InterfaceAlias "Ethernet" -ResetServerAddresses -PassThru
+Set-DnsClientServerAddress -InterfaceAlias "Wi-fi" -ResetServerAddresses -PassThru
+}
+
+# Set CloudFlare DNS On Ethernet and Wi-Fi Network Adapters
+Function SetCloudFlareDNS {
+Write-Output "Set CloudFlare DNS On Ethernet and Wi-Fi network adapters..."
+Set-DnsClientServerAddress -InterfaceAlias "Ethernet" -ServerAddresses ("1.1.1.1","1.0.0.1") -PassThru
+Set-DnsClientServerAddress -InterfaceAlias "Wi-fi" -ServerAddresses ("1.1.1.1","1.0.0.1") -PassThru
+}
+
+# Set Google DNS On Ethernet and Wi-Fi Network Adapters
+Function SetGoogleDNS {
+Write-Output "Set Google DNS On Ethernet and Wi-Fi network adapters..."
+Set-DnsClientServerAddress -InterfaceAlias "Ethernet" -ServerAddresses ("8.8.8.8","8.8.4.4") -PassThru
+Set-DnsClientServerAddress -InterfaceAlias "Wi-fi" -ServerAddresses ("8.8.8.8","8.8.4.4") -PassThru
+}
+
+# Set Open DNS On Ethernet and Wi-Fi Network Adapters
+Function SetOpenDNS {
+Write-Output "Set Open DNS On Ethernet and Wi-Fi network adapters..."
+Set-DnsClientServerAddress -InterfaceAlias "Ethernet" -ServerAddresses ("208.67.222.222","208.67.220.220") -PassThru
+Set-DnsClientServerAddress -InterfaceAlias "Wi-fi" -ServerAddresses ("208.67.222.222","208.67.220.220") -PassThru
+}
+
+# Set Quad9 DNS On Ethernet and Wi-Fi Network Adapters
+Function SetQuad9DNS {
+Write-Output "Set Quad9 DNS On Ethernet and Wi-Fi network adapters..."
+Set-DnsClientServerAddress -InterfaceAlias "Ethernet" -ServerAddresses ("9.9.9.9","149.112.112.112") -PassThru
+Set-DnsClientServerAddress -InterfaceAlias "Wi-fi" -ServerAddresses ("9.9.9.9","149.112.112.112") -PassThru
 }
 
 # Enable .NET Framework 3.5 (includes .NET 2.0 and 3.0)
