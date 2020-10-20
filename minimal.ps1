@@ -266,8 +266,8 @@ Function InstallBrave {
     switch ($selection)
     {
     'y' { 
-		Invoke-WebRequest -Uri "https://laptop-updates.brave.com/download/CHR253" -OutFile brave.exe
-		./brave.exe
+		Invoke-WebRequest -Uri "https://laptop-updates.brave.com/download/CHR253" -OutFile $env:USERPROFILE\Downloads\brave.exe
+		~/Downloads/brave.exe
 	}
     'n' { Break }
     'q' { Exit  }
