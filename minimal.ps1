@@ -267,7 +267,7 @@ Function InstallBrave {
     {
     'y' { 
 		Invoke-WebRequest -Uri "https://laptop-updates.brave.com/download/CHR253" -OutFile brave.exe
-		./brave.exe /silent /install	
+		./brave.exe
 	}
     'n' { Break }
     'q' { Exit  }
