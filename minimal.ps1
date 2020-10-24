@@ -249,11 +249,6 @@ Function InstallAdobe {
 	Show-Choco-Menu -Title "Do you want to install Adobe Acrobat Reader?" -ChocoInstall "adobereader"
 }
 
-Function InstallJava {
-	Write-Output "Installing Java"
-	choco install jre8 -y
-}
-
 Function InstallBrave {
 	do
  {
@@ -277,23 +272,19 @@ Function InstallBrave {
 	
 }
 Function Install7Zip {
-	Write-Output "Installing 7-Zip"
-	choco install 7zip -y
+	Show-Choco-Menu -Title "Do you want to install 7-Zip?" -ChocoInstall "7zip"
 }
 
 Function InstallNotepadplusplus {
-	Write-Output "Installing Notepad++"
-	choco install notepadplusplus -y
+	Show-Choco-Menu -Title "Do you want to install Notepad++?" -ChocoInstall "notepadplusplus"
 }
 
 Function InstallVLC {
-	Write-Output "Installing VLC"
-	choco install vlc -y
+	Show-Choco-Menu -Title "Do you want to install VLC?" -ChocoInstall "vlc"
 }
 
 Function InstallIrfanview {
-	Write-Output "Installing IrFanView Image Viewer"
-	choco install irfanview -y
+	Show-Choco-Menu -Title "Do you want to install Irfanview?" -ChocoInstall "irfanview"
 }
 
 Function ChangeDefaultApps {
