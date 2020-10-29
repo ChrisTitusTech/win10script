@@ -37,7 +37,7 @@ $tweaks = @(
 	"InstallVLC",
 	"InstallAdobe",
 	"InstallBrave",
-	"ChangeDefaultApps",
+	# "ChangeDefaultApps", # Removed due to issues with steam and resetting default apps
 
 	### Windows Apps
 	"DebloatAll",
