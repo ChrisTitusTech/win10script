@@ -38,6 +38,7 @@ $tweaks = @(
 	"InstallAdobe",
 	"InstallBrave",
 	# "ChangeDefaultApps", # Removed due to issues with steam and resetting default apps
+	"RunAdobeCleanerTool",
 
 	### Windows Apps
 	"DebloatAll",
@@ -291,6 +292,11 @@ Function ChangeDefaultApps {
 	Write-Output "Setting Default Programs - Notepad++ Brave VLC IrFanView"
 	Start-BitsTransfer -Source "https://raw.githubusercontent.com/ChrisTitusTech/win10script/master/MyDefaultAppAssociations.xml" -Destination $HOME\Desktop\MyDefaultAppAssociations.xml
 	dism /online /Import-DefaultAppAssociations:"%UserProfile%\Desktop\MyDefaultAppAssociations.xml"
+}
+
+Function RunAdobeCleanerTool {
+    Start-BitsTransfer -Source "https://swupmf.adobe.com/webfeed/CleanerTool/win/AdobeCreativeCloudCleanerTool.exe" -Destination AdobeCreativeCloudCleanerTool.exe
+    .\AdobeCreativeCloudCleanerTool.exe --removeAll=ALL
 }
 
 ##########
