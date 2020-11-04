@@ -1,11 +1,31 @@
 # This script restores cortana, action center and tray icons to their out of box state
+$ErrorActionPreference = 'SilentlyContinue'
 
-Function RequireAdmin {
-    If (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]"Administrator")) {
-        Start-Process powershell.exe "-NoProfile -ExecutionPolicy Bypass -File `"$PSCommandPath`" $PSCommandArgs" -WorkingDirectory $pwd -Verb RunAs
-        Exit
+$Button = [System.Windows.MessageBoxButton]::YesNoCancel
+$ErrorIco = [System.Windows.MessageBoxImage]::Error
+$Ask = 'Do you want to run this as an Administrator?
+        Select "Yes" to Run as an Administrator
+        Select "No" to not run this as an Administrator
+        
+        Select "Cancel" to stop the script.'
+
+If (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]'Administrator')) {
+    $Prompt = [System.Windows.MessageBox]::Show($Ask, "Run as an Administrator or not?", $Button, $ErrorIco) 
+    Switch ($Prompt) {
+        #This will debloat Windows 10
+        Yes {
+            Write-Host "You didn't run this script as an Administrator. This script will self elevate to run as an Administrator and continue."
+            Start-Process PowerShell.exe -ArgumentList ("-NoProfile -ExecutionPolicy Bypass -File `"{0}`"" -f $PSCommandPath) -Verb RunAs
+            Exit
+        }
+        No {
+            Break
+        }
     }
 }
+
+
+
 Function EnableActionCenter {
 	Write-Output "Enabling Action Center..."
 	Remove-ItemProperty -Path "HKCU:\SOFTWARE\Policies\Microsoft\Windows\Explorer" -Name "DisableNotificationCenter" -ErrorAction SilentlyContinue
@@ -28,6 +48,3 @@ Function EnableCortana {
 	Remove-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\InputPersonalization\TrainedDataStore" -Name "HarvestContacts" -ErrorAction SilentlyContinue
 	Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Windows Search" -Name "AllowCortana" -ErrorAction SilentlyContinue
 }
-
-RequireAdmin
-
