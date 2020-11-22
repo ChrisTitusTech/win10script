@@ -2752,4 +2752,3 @@ bcdedit /set useplatformtick Yes
 
 bcdedit /set tscsyncpolicy Enhanced
 
-Write-Output "HPET Successfully Disabled!"
