@@ -3,6 +3,7 @@
 # Primary Author: Disassembler <disassembler@dasm.cz>
 # Primary Author Source: https://github.com/Disassembler0/Win10-Initial-Setup-Script
 # Tweaked Source: https://gist.github.com/alirobe/7f3b34ad89a159e6daa1/
+# Master Branch : https://github.com/ChrisTitusTech/win10script
 #
 #    Note from author: Never run scripts without reading them & understanding what they do.
 #
