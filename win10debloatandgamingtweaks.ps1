@@ -2733,13 +2733,9 @@ $tweaks | ForEach { Invoke-Expression $_ }
 
 Write-Output "Disabling HPET..."
 
-mkdir C:\DaddyMaduScript | Out-Null
+Invoke-WebRequest -Uri "https://git.io/JkrLn" -OutFile "$Env:windir\system32\SetTimerResolutionService.exe"
 
-Invoke-WebRequest -Uri "https://git.io/JkrLn" -OutFile C:\DaddyMaduScript\SetTimerResolutionService.exe
-
-New-Service -Name "SetTimerResolutionService" -BinaryPathName "C:\DaddyMaduScript\SetTimerResolutionService.exe" | Out-Null
-
-Start-Service SetTimerResolutionService
+New-Service -name "SetTimerResolutionService" -BinaryPathName "$Env:windir\system32\SetTimerResolutionService.exe" -StartupType Automatic | Out-Null
 
 bcdedit /set x2apicpolicy Enable
 
