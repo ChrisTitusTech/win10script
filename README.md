@@ -1,5 +1,5 @@
-# win10script
-This is the Ultimate Windows 10 Script from a creation from multiple debloat scripts and gists from github. I also added Chocolatey and other tools to the script that I install on every machine.
+# Windows10GamingFocus
+This is A FORK Based On ChrisTitusTech that's foucus on debloat and optimize windows 10 for the lowest latency and best gaming experience, the Ultimate Windows 10 Script from a creation from multiple debloat scripts and gists from github. I also added Chocolatey and other tools to the script that I install on every machine.
 
 ## My Additions
 
@@ -9,6 +9,7 @@ This is the Ultimate Windows 10 Script from a creation from multiple debloat scr
 - O&O Shutup10 CFG and Run
 - Added Install Programs
 - Added Debloat Microsoft Store Apps
+- Added Gaming Optimization Tweaks
 
 ## Modifications
 I encourage people to fork this project and comment out things they don't like! Here is a list of normal things people change:
