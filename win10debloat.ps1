@@ -183,6 +183,16 @@ $tweaks = @(
 	#"UnpinStartMenuTiles",
 	#"UnpinTaskbarIcons",
 
+
+### Gaming Functions ###
+	"DisableDVR1",
+	"DisableDVR2",
+	"FullscreenOptimizationFIX",
+	"GameOptimizationFIX",
+	"LowToMedPCOptimizations",
+	"MedtoHighPCOptimizations",
+	
+	
 	### Auxiliary Functions ###
 )
 
@@ -2498,7 +2508,50 @@ Function UnpinTaskbarIcons {
 	Remove-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Taskband" -Name "FavoritesResolve" -ErrorAction SilentlyContinue
 }
 
+##########
+# Gaming Tweaks Functions
+##########
+# Disabling Game DVR1
+Function DisableDVR1 {
+	Write-Output "Disabling GameDVR1..."
+	Set-ItemProperty -Path "HKCU:\System\GameConfigStore" -Name "GameDVR_Enabled" -Type DWord -Value 0
+}
 
+#Disabling Game DVR2
+Function DisableDVR2 {
+	Write-Output "Disabling GameDVR2..."
+	Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\PolicyManager\default\ApplicationManagement\AllowGameDVR" -Name "value" -Type DWord -Value 0
+}
+
+#Disable Fullscreen Optimizations
+Function FullscreenOptimizationFIX {
+	Write-Output "Disabling Full ScreenOptimization..."
+	Set-ItemProperty -Path "HKCU:\System\GameConfigStore" -Name "GameDVR_FSEBehaviorMode" -Type DWord -Value 2
+	Set-ItemProperty -Path "HKCU:\System\GameConfigStore" -Name "GameDVR_HonorUserFSEBehaviorMode" -Type DWord -Value 1
+	Set-ItemProperty -Path "HKCU:\System\GameConfigStore" -Name "GameDVR_FSEBehavior" -Type DWord -Value 2
+	Set-ItemProperty -Path "HKCU:\System\GameConfigStore" -Name "GameDVR_DXGIHonorFSEWindowsCompatible" -Type DWord -Value 1
+}
+
+#Game Optimizations Priority Tweaks -Type String -Value "Deny"
+Function GameOptimizationFIX {
+	Write-Output "Apply Gaming Optimization Fixs..."
+	Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games" -Name "GPU Priority" -Type DWord -Value 8
+	Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games" -Name "Priority" -Type DWord -Value 6
+	Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games" -Name "Scheduling Category" -Type String -Value "High"
+	Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games" -Name "SFIO Priority" -Type String -Value "High"
+}
+
+#Low To Med PC SPECS Optimizations
+Function LowToMedPCOptimizations {
+	Write-Output "Applying Low To Med PC SPECS Optimizations..."
+	Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile" -Name "SystemResponsiveness" -Type DWord -Value 1
+}
+
+#Med To High PC SPECS Optimizations
+Function MedToHighPCOptimizations {
+	Write-Output "Applying Med To High PC SPECS Optimizations..."
+	Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile" -Name "SystemResponsiveness" -Type DWord -Value 0
+}
 
 ##########
 # Auxiliary Functions
