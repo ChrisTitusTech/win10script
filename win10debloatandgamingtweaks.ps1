@@ -197,7 +197,8 @@ $tweaks = @(
 	"FullscreenOptimizationFIX",
 	"GameOptimizationFIX",
 	"LowToMedPCOptimizations",
-	"MedtoHighPCOptimizations"
+	"MedtoHighPCOptimizations",
+	"DisableHPET"
 	### Auxiliary Functions ###
 )
 
@@ -2560,6 +2561,22 @@ Function MedToHighPCOptimizations {
 	Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile" -Name "NetworkThrottlingIndex" -Type DWord -Value 4294967295
 }
 
+### Disable HPET ###
+Function DisableHPET {
+        Write-Output "Disabling High Precision Event Timer..."
+        Invoke-WebRequest -Uri "https://git.io/JkrLn" -OutFile "$Env:windir\system32\SetTimerResolutionService.exe"
+        New-Service -name "SetTimerResolutionService" -BinaryPathName "$Env:windir\system32\SetTimerResolutionService.exe" -StartupType Automatic | Out-Null
+        bcdedit /set x2apicpolicy Enable
+        bcdedit /set configaccesspolicy Default
+        bcdedit /set MSI Default
+        bcdedit /set usephysicaldestination No
+        bcdedit /set usefirmwarepcisettings No
+        bcdedit /deletevalue useplatformclock
+        bcdedit /set disabledynamictick yes
+        bcdedit /set useplatformtick Yes
+        bcdedit /set tscsyncpolicy Enhanced
+}
+
 ##########
 # Auxiliary Functions
 ##########
@@ -2728,30 +2745,4 @@ If ($args) {
 
 # Call the desired tweak functions
 $tweaks | ForEach { Invoke-Expression $_ }
-
-### Disable HPET ###
-
-Write-Output "Disabling HPET..."
-
-Invoke-WebRequest -Uri "https://git.io/JkrLn" -OutFile "$Env:windir\system32\SetTimerResolutionService.exe"
-
-New-Service -name "SetTimerResolutionService" -BinaryPathName "$Env:windir\system32\SetTimerResolutionService.exe" -StartupType Automatic | Out-Null
-
-bcdedit /set x2apicpolicy Enable
-
-bcdedit /set configaccesspolicy Default
-
-bcdedit /set MSI Default
-
-bcdedit /set usephysicaldestination No
-
-bcdedit /set usefirmwarepcisettings No
-
-bcdedit /deletevalue useplatformclock
-
-bcdedit /set disabledynamictick yes
-
-bcdedit /set useplatformtick Yes
-
-bcdedit /set tscsyncpolicy Enhanced
 
