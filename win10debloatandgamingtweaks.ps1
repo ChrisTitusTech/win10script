@@ -2728,3 +2728,28 @@ If ($args) {
 
 # Call the desired tweak functions
 $tweaks | ForEach { Invoke-Expression $_ }
+
+### Disable HPET ###
+Write-Output "Disabling HPET..."
+mkdir C:\DaddyMaduScript
+powershell –c “(new-object System.Net.WebClient).DownloadFile(‘https://git.io/JkrLn’,’C:\DaddyMaduScript\SetTimerResolutionService.exe’)”
+C:\DaddyMaduScript\SetTimerResolutionService.exe -install
+bcdedit /set x2apicpolicy Enable
+
+bcdedit /set configaccesspolicy Default
+
+bcdedit /set MSI Default
+
+bcdedit /set usephysicaldestination No
+
+bcdedit /set usefirmwarepcisettings No
+
+bcdedit /deletevalue useplatformclock
+
+bcdedit /set disabledynamictick yes
+
+bcdedit /set useplatformtick Yes
+
+bcdedit /set tscsyncpolicy Enhanced
+
+Write-Output "HPET Successfully Disabled!"
