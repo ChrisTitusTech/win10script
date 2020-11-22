@@ -21,6 +21,12 @@
 #	- Added Confirm Menu for Adobe and Brave Browser
 #	- Changed Default Apps to Notepad++, Brave, Irfanview, and more using XML Import feature
 #
+#       DaddyMadu Additions:
+#
+#       - Gaming Tweaks Optimizations
+#
+#
+#
 ##########
 # Default preset
 $tweaks = @(
