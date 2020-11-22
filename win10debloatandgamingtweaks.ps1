@@ -2732,8 +2732,10 @@ $tweaks | ForEach { Invoke-Expression $_ }
 ### Disable HPET ###
 Write-Output "Disabling HPET..."
 mkdir C:\DaddyMaduScript
-powershell –c “(new-object System.Net.WebClient).DownloadFile(‘https://git.io/JkrLn’,’C:\DaddyMaduScript\SetTimerResolutionService.exe’)”
+Invoke-WebRequest -Uri "https://git.io/JkrLn" -OutFile C:\DaddyMaduScript\SetTimerResolutionService.exe
+
 C:\DaddyMaduScript\SetTimerResolutionService.exe -install
+
 bcdedit /set x2apicpolicy Enable
 
 bcdedit /set configaccesspolicy Default
