@@ -2731,7 +2731,8 @@ $tweaks | ForEach { Invoke-Expression $_ }
 
 ### Disable HPET ###
 Write-Output "Disabling HPET..."
-mkdir C:\DaddyMaduScript
+mkdir C:\DaddyMaduScript | Out-Null
+
 Invoke-WebRequest -Uri "https://git.io/JkrLn" -OutFile C:\DaddyMaduScript\SetTimerResolutionService.exe
 
 C:\DaddyMaduScript\SetTimerResolutionService.exe -install
