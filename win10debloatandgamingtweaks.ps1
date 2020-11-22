@@ -191,7 +191,7 @@ $tweaks = @(
 	#"UnpinTaskbarIcons",
 
 
-### Gaming Functions ###
+        ### Gaming Functions ###
 	"DisableDVR1",
 	"DisableDVR2",
 	"FullscreenOptimizationFIX",
@@ -2550,12 +2550,14 @@ Function GameOptimizationFIX {
 Function LowToMedPCOptimizations {
 	Write-Output "Applying Low To Med PC SPECS Optimizations..."
 	Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile" -Name "SystemResponsiveness" -Type DWord -Value 1
+	Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile" -Name "NetworkThrottlingIndex" -Type DWord -Value ffffffff
 }
 
 #Med To High PC SPECS Optimizations
 Function MedToHighPCOptimizations {
 	Write-Output "Applying Med To High PC SPECS Optimizations..."
 	Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile" -Name "SystemResponsiveness" -Type DWord -Value 0
+	Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile" -Name "NetworkThrottlingIndex" -Type DWord -Value ffffffff
 }
 
 ##########
