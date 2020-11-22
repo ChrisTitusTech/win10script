@@ -197,7 +197,7 @@ $tweaks = @(
 	"FullscreenOptimizationFIX",
 	"GameOptimizationFIX",
 	"LowToMedPCOptimizations",
-	"MedtoHighPCOptimizations",
+	"MedtoHighPCOptimizations"
 	### Auxiliary Functions ###
 )
 
