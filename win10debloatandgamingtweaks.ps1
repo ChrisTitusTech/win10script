@@ -174,7 +174,7 @@ $tweaks = @(
 	# "InstallHyperV",              # "UninstallHyperV",
 	"SetPhotoViewerAssociation",    # "UnsetPhotoViewerAssociation",
 	"AddPhotoViewerOpenWith",       # "RemovePhotoViewerOpenWith",
-	"InstallPDFPrinter"		# "UninstallPDFPrinter",
+	"InstallPDFPrinter",		# "UninstallPDFPrinter",
 	# "UninstallXPSPrinter",          # "InstallXPSPrinter",
 	# "RemoveFaxPrinter",             # "AddFaxPrinter",
 
@@ -197,7 +197,7 @@ $tweaks = @(
 	"FullscreenOptimizationFIX",
 	"GameOptimizationFIX",
 	"LowToMedPCOptimizations",
-	"MedtoHighPCOptimizations",
+	"MedtoHighPCOptimizations"
 	
 	
 	### Auxiliary Functions ###
