@@ -266,6 +266,7 @@ Function InstallTitusProgs {
 
 # Install Microsoft visual C++ Liberaries from 2005 to 2017
 Function InstallMVC {
+Write-Output "Installing the latest Microsoft Visual C++ 2010-2017 Redistributable Packages..."
 choco install -y vcredist2005 | Out-Null
 choco install -y vcredist2008 | Out-Null
 choco install -y vcredist2010 | Out-Null
