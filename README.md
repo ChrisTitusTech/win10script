@@ -15,6 +15,12 @@ This is A FORK Based On ChrisTitusTech that's foucus on debloat and optimize win
 - Install Microsoft Visual Studio Libraries 2005-2017
 - Disable FastBoot
 
+# How To Use!
+Simply Run cmd (Command Prompt) as Administrator and paste the following!
+powershell -nop -c "iex(New-Object Net.WebClient).DownloadString('http://tweaks.daddymadu.gg')"
+Or Run Powershell As Administrator and paste the following!
+iex(New-Object Net.WebClient).DownloadString('http://tweaks.daddymadu.gg')
+
 ## Modifications
 I encourage people to fork this project and comment out things they don't like! Here is a list of normal things people change:
 - Uninstalling OneDrive (This is on in my script)
