@@ -44,6 +44,7 @@ $tweaks = @(
 	"InstallVLC",
 	"InstallAdobe",
 	"InstallBrave",
+	"ChoosePCOptimizations", # DaddyMadu PC Picker Don't Change!
 	# "ChangeDefaultApps", # Removed due to issues with steam and resetting default apps
 
 	### Windows Apps
@@ -197,7 +198,6 @@ $tweaks = @(
 	"DisableDVR2",
 	"FullscreenOptimizationFIX",
 	"GameOptimizationFIX",
-	"ChoosePCOptimizations",
 	"DisableHPET"
 	### Auxiliary Functions ###
 )
