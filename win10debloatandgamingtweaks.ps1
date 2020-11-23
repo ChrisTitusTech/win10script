@@ -36,7 +36,7 @@ $tweaks = @(
 	"CreateRestorePoint",
 	
 	### Chris Titus Tech Additions
-	"TitusRegistryTweaks",
+	#"TitusRegistryTweaks",
 	"InstallTitusProgs", #REQUIRED FOR OTHER PROGRAM INSTALLS!
 	"Install7Zip",
 	"InstallNotepadplusplus",
@@ -104,11 +104,11 @@ $tweaks = @(
 	"DisableDefragmentation",     # "EnableDefragmentation",
 	"DisableSuperfetch",          # "EnableSuperfetch",
 	"EnableIndexing",
-	"SetBIOSTimeUTC",             # "SetBIOSTimeLocal",
-	"DisableHibernation",		# "EnableHibernation",          # 
+	"SetBIOSTimeLocal",         # "SetBIOSTimeUTC",
+	"DisableHibernation",		# "EnableHibernation",
 	"EnableSleepButton",		# "DisableSleepButton",         
 	"DisableSleepTimeout",        # "EnableSleepTimeout",
-	# "DisableFastStartup",         # "EnableFastStartup",
+	"DisableFastStartup",         # "EnableFastStartup",
 
 	### UI Tweaks ###
 	"DisableActionCenter",          # "EnableActionCenter",
@@ -2060,7 +2060,7 @@ Function UninstallMsftBloat {
 	Get-AppxPackage "Microsoft.MicrosoftSolitaireCollection" | Remove-AppxPackage
 	Get-AppxPackage "Microsoft.MicrosoftStickyNotes" | Remove-AppxPackage
 	Get-AppxPackage "Microsoft.NetworkSpeedTest" | Remove-AppxPackage
-	#Get-AppxPackage "Microsoft.Office.OneNote" | Remove-AppxPackage
+	Get-AppxPackage "Microsoft.Office.OneNote" | Remove-AppxPackage
 	Get-AppxPackage "Microsoft.Office.Sway" | Remove-AppxPackage
 	Get-AppxPackage "Microsoft.OneConnect" | Remove-AppxPackage
 	Get-AppxPackage "Microsoft.People" | Remove-AppxPackage
