@@ -197,8 +197,7 @@ $tweaks = @(
 	"DisableDVR2",
 	"FullscreenOptimizationFIX",
 	"GameOptimizationFIX",
-	"LowToMedPCOptimizations",
-	"MedtoHighPCOptimizations",
+	"ChoosePCOptimizations",
 	"DisableHPET"
 	### Auxiliary Functions ###
 )
@@ -272,7 +271,7 @@ Function InstallBrave {
     Clear-Host
     Write-Host "================ Do You Want to Install Brave Browser? ================"
     Write-Host "Y: Press 'Y' to do this."
-    Write-Host "2: Press 'N' to skip this."
+    Write-Host "N: Press 'N' to skip this."
 	Write-Host "Q: Press 'Q' to stop the entire script."
     $selection = Read-Host "Please make a selection"
     switch ($selection)
@@ -312,13 +311,13 @@ Function ChangeDefaultApps {
 
 
 #Low To Med PC SPECS Optimizations
-Function LowToMedPCOptimizations {
+Function ChoosePCOptimizations {
 	do
  {
     Clear-Host
-    Write-Host "================ Is This Low to Med SPECS PC? ================"
-    Write-Host "Y: Press 'Y' to do this."
-    Write-Host "2: Press 'N' to skip this."
+    Write-Host "================ Choose Your PC Specification to Optimize for! ================"
+    Write-Host "Y: Press 'Y' For Low To Med PC Specification."
+    Write-Host "N: Press 'N' For Med To High End PC Specification."
 	Write-Host "Q: Press 'Q' to stop the entire script."
     $selection = Read-Host "Please make a selection"
     switch ($selection)
@@ -328,32 +327,11 @@ Function LowToMedPCOptimizations {
 	Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile" -Name "SystemResponsiveness" -Type DWord -Value 1
 	Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile" -Name "NetworkThrottlingIndex" -Type DWord -Value 4294967295	
 	}
-    'n' { Break }
-    'q' { Exit  }
-    }
- }
- until ($selection -match "y" -or $selection -match "n" -or $selection -match "q")
-	
-}
-
-#Med To High PC SPECS Optimizations
-Function MedToHighPCOptimizations {
-	do
- {
-    Clear-Host
-    Write-Host "================ Is This Med to High End SPECS PC? ================"
-    Write-Host "Y: Press 'Y' to do this."
-    Write-Host "2: Press 'N' to skip this."
-	Write-Host "Q: Press 'Q' to stop the entire script."
-    $selection = Read-Host "Please make a selection"
-    switch ($selection)
-    {
-    'y' { 
-	Write-Output "Applying Med To High End PC SPECS Optimizations..."
+    'n' {
+    Write-Output "Applying Med To High End PC SPECS Optimizations..."
 	Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile" -Name "SystemResponsiveness" -Type DWord -Value 0
-	Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile" -Name "NetworkThrottlingIndex" -Type DWord -Value 4294967295	
-	}
-    'n' { Break }
+	Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile" -Name "NetworkThrottlingIndex" -Type DWord -Value 4294967295
+		}
     'q' { Exit  }
     }
  }
@@ -2783,4 +2761,3 @@ If ($args) {
 
 # Call the desired tweak functions
 $tweaks | ForEach { Invoke-Expression $_ }
-
