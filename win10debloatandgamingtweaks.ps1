@@ -129,7 +129,7 @@ $tweaks = @(
 	"DisableSearchAppInStore",      # "EnableSearchAppInStore",
 	"DisableNewAppPrompt",          # "EnableNewAppPrompt",
 	# "SetControlPanelSmallIcons",  # "SetControlPanelLargeIcons",  # "SetControlPanelCategories",
-	# "SetVisualFXPerformance",     # "SetVisualFXAppearance",
+	"SetVisualFXPerformance",     # "SetVisualFXAppearance",
 	# "AddENKeyboard",              # "RemoveENKeyboard",
 	"EnableNumlock",             	# "DisableNumlock",
 	"EnableDarkMode",				# "DisableDarkMode",
@@ -141,7 +141,7 @@ $tweaks = @(
 	"HideSyncNotifications"         # "ShowSyncNotifications",
 	"HideRecentShortcuts",          # "ShowRecentShortcuts",
 	"SetExplorerThisPC",            # "SetExplorerQuickAccess",
-	"HideThisPCFromDesktop",	# "ShowThisPCOnDesktop",
+	# "HideThisPCFromDesktop",	# "ShowThisPCOnDesktop",
 	# "ShowUserFolderOnDesktop",    # "HideUserFolderFromDesktop",
 	# "HideDesktopFromThisPC",        # "ShowDesktopInThisPC",
 	# "HideDesktopFromExplorer",    # "ShowDesktopInExplorer",
@@ -161,7 +161,8 @@ $tweaks = @(
 	# "DisableThumbsDB",              # "EnableThumbsDB",
 
 	### Application Tweaks ###
-    # "EnableOneDrive",
+        #"DisableOneDrive",              # "EnableOneDrive".
+	"UninstallOneDrive",            # "InstallOneDrive",
 	"UninstallMsftBloat",           # "InstallMsftBloat",
 	"UninstallThirdPartyBloat",     # "InstallThirdPartyBloat",
 	# "UninstallWindowsStore",      # "InstallWindowsStore",
