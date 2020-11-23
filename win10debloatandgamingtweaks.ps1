@@ -2549,18 +2549,53 @@ Function GameOptimizationFIX {
 
 #Low To Med PC SPECS Optimizations
 Function LowToMedPCOptimizations {
+	do
+ {
+    Clear-Host
+    Write-Host "================ Is This Low to Med SPECS PC? ================"
+    Write-Host "Y: Press 'Y' to do this."
+    Write-Host "2: Press 'N' to skip this."
+	Write-Host "Q: Press 'Q' to stop the entire script."
+    $selection = Read-Host "Please make a selection"
+    switch ($selection)
+    {
+    'y' { 
 	Write-Output "Applying Low To Med PC SPECS Optimizations..."
 	Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile" -Name "SystemResponsiveness" -Type DWord -Value 1
-	Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile" -Name "NetworkThrottlingIndex" -Type DWord -Value 4294967295
+	Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile" -Name "NetworkThrottlingIndex" -Type DWord -Value 4294967295	
+	}
+    'n' { Break }
+    'q' { Exit  }
+    }
+ }
+ until ($selection -match "y" -or $selection -match "n" -or $selection -match "q")
+	
 }
 
 #Med To High PC SPECS Optimizations
 Function MedToHighPCOptimizations {
-	Write-Output "Applying Med To High PC SPECS Optimizations..."
-	Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile" -Name "SystemResponsiveness" -Type DWord -Value 0
-	Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile" -Name "NetworkThrottlingIndex" -Type DWord -Value 4294967295
+	do
+ {
+    Clear-Host
+    Write-Host "================ Is This Med to High End SPECS PC? ================"
+    Write-Host "Y: Press 'Y' to do this."
+    Write-Host "2: Press 'N' to skip this."
+	Write-Host "Q: Press 'Q' to stop the entire script."
+    $selection = Read-Host "Please make a selection"
+    switch ($selection)
+    {
+    'y' { 
+	Write-Output "Applying Med To High End PC SPECS Optimizations..."
+	Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile" -Name "SystemResponsiveness" -Type DWord -Value 1
+	Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile" -Name "NetworkThrottlingIndex" -Type DWord -Value 4294967295	
+	}
+    'n' { Break }
+    'q' { Exit  }
+    }
+ }
+ until ($selection -match "y" -or $selection -match "n" -or $selection -match "q")
+	
 }
-
 ### Disable HPET ###
 Function DisableHPET {
         Write-Output "Disabling High Precision Event Timer..."
