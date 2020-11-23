@@ -201,7 +201,8 @@ $tweaks = @(
 	"FullscreenOptimizationFIX",
 	"GameOptimizationFIX",
 	"DisableHPET",
-	"EnableUlimatePower"
+	"EnableUlimatePower",
+	"Finished"
 	### Auxiliary Functions ###
 )
 
@@ -2614,6 +2615,13 @@ Function EnableUlimatePower {
 	powercfg -duplicatescheme e9a42b02-d5df-448d-aa00-03f14749eb61 | Out-Null
 	$p = Get-CimInstance -Name root\cimv2\power -Class win32_PowerPlan -Filter "ElementName = 'Ultimate Performance'"      
     powercfg /setactive ([string]$p.InstanceID).Replace("Microsoft:PowerPlan\{","").Replace("}","")
+}
+
+#Notifying user to reboot!
+Function Finished {
+        Write-Output "Done! Please Reboot Your PC! and don't forget to follow me on Social Media."
+	@echo off
+        start "Social" "http://daddymadu.gg"
 }
 
 ##########
