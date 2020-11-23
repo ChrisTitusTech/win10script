@@ -27,7 +27,7 @@
 #       - Gaming Tweaks Optimizations
 #       - Disable HPET
 #       - Add Ultimate PowerPlan
-#
+#       - Install Microsoft Visual Studio Liberaries 2005-2017
 #
 ##########
 # Default preset
@@ -39,6 +39,7 @@ $tweaks = @(
 	### Chris Titus Tech Additions
 	#"TitusRegistryTweaks",
 	"InstallTitusProgs", #REQUIRED FOR OTHER PROGRAM INSTALLS!
+	"InstallMVC", #DaddyMadu install Microsoft Visualstudio required for HPET service!
 	"Install7Zip",
 	"InstallNotepadplusplus",
 	"InstallIrfanview",
@@ -261,6 +262,30 @@ Function InstallTitusProgs {
 	Start-BitsTransfer -Source "https://raw.githubusercontent.com/ChrisTitusTech/win10script/master/ooshutup10.cfg" -Destination ooshutup10.cfg
 	Start-BitsTransfer -Source "https://dl5.oo-software.com/files/ooshutup10/OOSU10.exe" -Destination OOSU10.exe
 	./OOSU10.exe ooshutup10.cfg /quiet
+}
+
+# Install Microsoft visual C++ Liberaries from 2005 to 2017
+Function InstallMVC {
+rem Microsoft Visual C++ 2005 SP1 Redistributable ( https://chocolatey.org/packages/vcredist2005 )
+rem choco install -y vcredist2005
+
+rem Microsoft Visual C++ 2008 SP1 Redistributable ( https://chocolatey.org/packages/vcredist2008 )
+rem choco install -y vcredist2008
+
+rem Microsoft Visual C++ 2010 Redistributable ( https://chocolatey.org/packages/vcredist2010 )
+rem choco install -y vcredist2010
+
+rem Microsoft Visual C++ 2012 Redistributable ( https://chocolatey.org/packages/vcredist2012 )
+rem choco install -y vcredist2012
+
+rem Visual C++ Redistributable Packages for Visual Studio 2013 ( https://chocolatey.org/packages/vcredist2013 )
+rem choco install -y vcredist2013
+
+rem Microsoft Visual C++ Redistributable for Visual Studio 2015 Update 3 (with hotfix 2016-09-14) ( https://chocolatey.org/packages/vcredist2015 )
+rem choco install -y vcredist2015
+
+rem Microsoft Visual C++ Redistributable for Visual Studio 2017 ( https://chocolatey.org/packages/vcredist2017 )
+rem choco install -y vcredist2017
 }
 
 Function InstallAdobe {
