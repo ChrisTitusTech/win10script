@@ -2620,7 +2620,7 @@ Function EnableUlimatePower {
 #Notifying user to reboot!
 Function Finished {
         Write-Output "Done! Please Reboot Your PC! and don't forget to follow me on Social Media."
-        start "Social" "http://daddymadu.gg"
+        Start "http://daddymadu.gg"
 }
 
 ##########
