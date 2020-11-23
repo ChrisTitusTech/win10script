@@ -25,7 +25,8 @@
 #       DaddyMadu Additions:
 #
 #       - Gaming Tweaks Optimizations
-#
+#       - Disable HPET
+#       - Add Ultimate PowerPlan
 #
 #
 ##########
@@ -198,7 +199,8 @@ $tweaks = @(
 	"DisableDVR2",
 	"FullscreenOptimizationFIX",
 	"GameOptimizationFIX",
-	"DisableHPET"
+	"DisableHPET",
+	"EnableUlimatePower"
 	### Auxiliary Functions ###
 )
 
@@ -2591,6 +2593,14 @@ Function DisableHPET {
         bcdedit /set disabledynamictick yes
         bcdedit /set useplatformtick Yes
         bcdedit /set tscsyncpolicy Enhanced
+}
+
+#Add Utimate Power Plan And Activate It
+Function EnableUlimatePower {
+	Write-Output "Enabling Ultimate Power Plan..."
+	powercfg -duplicatescheme e9a42b02-d5df-448d-aa00-03f14749eb61 | Out-Null
+	$p = Get-CimInstance -Name root\cimv2\power -Class win32_PowerPlan -Filter "ElementName = 'Ultimate Performance'"      
+    powercfg /setactive ([string]$p.InstanceID).Replace("Microsoft:PowerPlan\{","").Replace("}","")
 }
 
 ##########
