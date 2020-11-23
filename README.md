@@ -11,6 +11,9 @@ This is A FORK Based On ChrisTitusTech that's foucus on debloat and optimize win
 - Added Debloat Microsoft Store Apps
 - Added Gaming Optimization Tweaks
 - Disabling HPET
+- Add Ultimate PowerPlan and Activating. (dublicate might be found if script re-runs, just delete them!)
+- Install Microsoft Visual Studio Libraries 2005-2017
+- Disable FastBoot
 
 ## Modifications
 I encourage people to fork this project and comment out things they don't like! Here is a list of normal things people change:
