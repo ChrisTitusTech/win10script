@@ -2606,6 +2606,7 @@ Function DisableHPET {
         bcdedit /set usephysicaldestination No
         bcdedit /set usefirmwarepcisettings No
         bcdedit /deletevalue useplatformclock
+	bcdedit /set useplatformclock false
         bcdedit /set disabledynamictick yes
         bcdedit /set useplatformtick Yes
         bcdedit /set tscsyncpolicy Enhanced
