@@ -2625,7 +2625,7 @@ Function GameOptimizationFIX {
 
 #Forcing Raw Mouse Input
 Function RawMouseInput {
-        Write-Oputput "Forcing RAW Mouse Input and Disabling Enhance Pointer Precision..."
+        Write-Output "Forcing RAW Mouse Input and Disabling Enhance Pointer Precision..."
         Set-ItemProperty -Path "HKCU:\Control Panel\Mouse" -Name "MouseSpeed" -Type String -Value "0"
 	Set-ItemProperty -Path "HKCU:\Control Panel\Mouse" -Name "MouseThreshold1" -Type String -Value "0"
 	Set-ItemProperty -Path "HKCU:\Control Panel\Mouse" -Name "MouseThreshold2" -Type String -Value "0"
