@@ -27,7 +27,7 @@
 #       - Gaming Tweaks Optimizations
 #       - Disable HPET
 #       - Add Ultimate PowerPlan
-#       - Install Microsoft Visual Studio Liberaries 2005-2017
+#       - Install Microsoft Visual Studio Liberaries 2005-2019
 #       - Forcing Raw Mouse Input 1:1 and Disabling Enhance Pointer Precision. (some old games donot honor this and might need mouse acceleration fix from here! http://donewmouseaccel.blogspot.com/2010/03/markc-windows-7-mouse-acceleration-fix.html).
 #       - Enable Windows 10 Gaming Mode
 #       - Enable Hardware-accelerated GPU scheduling
@@ -273,16 +273,17 @@ Function InstallTitusProgs {
 	./OOSU10.exe ooshutup10.cfg /quiet
 }
 
-# Install Microsoft visual C++ Liberaries from 2005 to 2017
+# Install Microsoft visual C++ Liberaries from 2005 to 2019
 Function InstallMVC {
-Write-Output "Installing the latest Microsoft Visual C++ 2010-2017 Redistributable Packages..."
-choco install -y vcredist2005 | Out-Null
-choco install -y vcredist2008 | Out-Null
-choco install -y vcredist2010 | Out-Null
-choco install -y vcredist2012 | Out-Null
-choco install -y vcredist2013 | Out-Null
-choco install -y vcredist2015 | Out-Null
-choco install -y vcredist2017 | Out-Null
+Write-Output "Installing the latest Microsoft Visual C++ 2010-2019 Redistributable Packages..."
+choco install -y vcredist2005
+choco install -y vcredist2008
+choco install -y vcredist2010
+choco install -y vcredist2012
+choco install -y vcredist2013
+choco install -y vcredist2015
+choco install -y vcredist2017
+choco install -y vcredist140
 }
 
 Function InstallAdobe {
