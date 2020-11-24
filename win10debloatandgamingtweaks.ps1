@@ -50,6 +50,7 @@ $tweaks = @(
 	"InstallVLC",
 	"InstallAdobe",
 	"InstallChrome",
+	"InstallChocoGUI",
 	"ChoosePCOptimizations", # DaddyMadu PC Picker Don't Change!
 	# "ChangeDefaultApps", # Removed due to issues with steam and resetting default apps
 
@@ -283,6 +284,7 @@ choco install -y vcredist2010
 choco install -y vcredist2012
 choco install -y vcredist2013
 choco install -y vcredist140
+choco install -y silverlight
 }
 
 Function InstallAdobe {
@@ -306,6 +308,10 @@ Function InstallVLC {
 
 Function InstallIrfanview {
 	Show-Choco-Menu -Title "Do you want to install Irfanview?" -ChocoInstall "irfanview"
+}
+
+Function InstallChocoGUI {
+	Show-Choco-Menu -Title "Do you want to install Chocolatey GUI Software Manager?" -ChocoInstall "chocolateygui"
 }
 
 Function ChangeDefaultApps {
