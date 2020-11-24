@@ -2105,7 +2105,8 @@ Function UninstallMsftBloat {
 	Get-AppxPackage *MicrosoftOfficeHub* | Remove-AppxPackage
 	Get-AppxPackage *Microsoft.MixedReality.Portal* | Remove-AppxPackage
 	Get-AppxPackage *Microsoft.ScreenSketch* | Remove-AppxPackage
-	Get-AppxPackage *Microsoft.MSPaint* | Remove-AppxPackage	
+	Get-AppxPackage *Microsoft.MSPaint* | Remove-AppxPackage
+	Get-AppxPackage -allusers Microsoft.549981C3F5F10 | Remove-AppxPackage
 }
 
 # Install default Microsoft applications
