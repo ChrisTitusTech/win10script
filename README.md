@@ -12,7 +12,7 @@ This is A FORK Based On ChrisTitusTech that's foucus on debloat and optimize win
 - Added Gaming Optimization Tweaks
 - Disabling HPET
 - Add Ultimate PowerPlan and Activating. (dublicate might be found if script re-runs, just delete them!)
-- Install Microsoft Visual Studio Libraries 2005-2017
+- Install Microsoft Visual Studio Libraries 2005-2019
 - Disable FastBoot
 - Forcing Raw Mouse Input 1:1 and Disabling Enhance Pointer Precision. (some old games donot honor this and might need mouse acceleration fix from here! http://donewmouseaccel.blogspot.com/2010/03/markc-windows-7-mouse-acceleration-fix.html).
 - Enable Windows 10 Gaming Mode
