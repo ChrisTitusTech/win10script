@@ -28,6 +28,10 @@
 #       - Disable HPET
 #       - Add Ultimate PowerPlan
 #       - Install Microsoft Visual Studio Liberaries 2005-2017
+#       - Forcing Raw Mouse Input 1:1 and Disabling Enhance Pointer Precision. (some old games donot honor this and might need mouse acceleration fix from here! http://donewmouseaccel.blogspot.com/2010/03/markc-windows-7-mouse-acceleration-fix.html).
+#       - Enable Windows 10 Gaming Mode
+#       - Enable Hardware-accelerated GPU scheduling
+#       - Optimizing Network and applying Tweaks for no throttle and maximum speed!
 #
 ##########
 # Default preset
@@ -2610,7 +2614,7 @@ Function GameOptimizationFIX {
 
 #Forcing Raw Mouse Input
 Function RawMouseInput {
-        Write-Oputput "Forcing RAW Mouse Input Aand Disabling Enhance Pointer Precision..."
+        Write-Oputput "Forcing RAW Mouse Input and Disabling Enhance Pointer Precision..."
         Set-ItemProperty -Path "HKCU:\Control Panel\Mouse" -Name "MouseSpeed" -Type String -Value "0"
 	Set-ItemProperty -Path "HKCU:\Control Panel\Mouse" -Name "MouseThreshold1" -Type String -Value "0"
 	Set-ItemProperty -Path "HKCU:\Control Panel\Mouse" -Name "MouseThreshold2" -Type String -Value "0"
