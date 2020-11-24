@@ -210,6 +210,7 @@ $tweaks = @(
 	"EnableGameMode",
 	"EnableHAGS",
 	"NetworkOptimizations",
+	"RemoveEdit3D",
 	"Finished"
 	### Auxiliary Functions ###
 )
@@ -2121,6 +2122,9 @@ Function UninstallMsftBloat {
 	Get-AppxPackage "Microsoft.ZuneMusic" | Remove-AppxPackage
 	Get-AppxPackage "Microsoft.ZuneVideo" | Remove-AppxPackage
 	Get-AppxPackage *MicrosoftOfficeHub* | Remove-AppxPackage
+	Get-AppxPackage *Microsoft.MixedReality.Portal* | Remove-AppxPackage
+	Get-AppxPackage *Microsoft.ScreenSketch* | Remove-AppxPackage
+	Get-AppxPackage *Microsoft.MSPaint* | Remove-AppxPackage	
 }
 
 # Install default Microsoft applications
@@ -2699,6 +2703,22 @@ Function NetworkOptimizations {
        Set-NetOffloadGlobalSetting -ReceiveSideScaling enabled
        Disable-NetAdapterLso -Name *
        Disable-NetAdapterChecksumOffload -Name *
+}
+
+#Remove Edit with 3D Paint
+Function RemoveEdit3D {
+       Write-Output "Removing Edit with Paint 3D from context menu..."
+       Remove-ItemProperty -Path "HKCR:\SystemFileAssociations\.3mf\Shell\" -Name "3D Edit" -ErrorAction SilentlyContinue
+       Remove-ItemProperty -Path "HKCR:\SystemFileAssociations\.bmp\Shell\" -Name "3D Edit" -ErrorAction SilentlyContinue
+       Remove-ItemProperty -Path "HKCR:\SystemFileAssociations\.fbx\Shell\" -Name "3D Edit" -ErrorAction SilentlyContinue
+       Remove-ItemProperty -Path "HKCR:\SystemFileAssociations\.gif\Shell\" -Name "3D Edit" -ErrorAction SilentlyContinue
+       Remove-ItemProperty -Path "HKCR:\SystemFileAssociations\.jfif\Shell\" -Name "3D Edit" -ErrorAction SilentlyContinue
+       Remove-ItemProperty -Path "HKCR:\SystemFileAssociations\.jpe\Shell\" -Name "3D Edit" -ErrorAction SilentlyContinue
+       Remove-ItemProperty -Path "HKCR:\SystemFileAssociations\.jpeg\Shell\" -Name "3D Edit" -ErrorAction SilentlyContinue
+       Remove-ItemProperty -Path "HKCR:\SystemFileAssociations\.jpg\Shell\" -Name "3D Edit" -ErrorAction SilentlyContinue
+       Remove-ItemProperty -Path "HKCR:\SystemFileAssociations\.png\Shell\" -Name "3D Edit" -ErrorAction SilentlyContinue
+       Remove-ItemProperty -Path "HKCR:\SystemFileAssociations\.tif\Shell\" -Name "3D Edit" -ErrorAction SilentlyContinue
+       Remove-ItemProperty -Path "HKCR:\SystemFileAssociations\.tiff\Shell\" -Name "3D Edit" -ErrorAction SilentlyContinue
 }
 
 #Notifying user to reboot!
