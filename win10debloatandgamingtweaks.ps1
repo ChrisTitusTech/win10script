@@ -195,7 +195,7 @@ $tweaks = @(
 	#"UnpinTaskbarIcons",
 
 
-        ### Gaming Functions ###
+        ### DaddyMadu Gaming Tweaks ###
 	"DisableDVR1",
 	"DisableDVR2",
 	"FullscreenOptimizationFIX",
@@ -205,6 +205,7 @@ $tweaks = @(
 	"EnableUlimatePower",
 	"EnableGameMode",
 	"EnableHAGS",
+	"NetworkOptimizations",
 	"Finished"
 	### Auxiliary Functions ###
 )
@@ -2638,10 +2639,43 @@ Function EnableHAGS {
 
 #Add Utimate Power Plan And Activate It
 Function EnableUlimatePower {
-	Write-Output "Enabling Ultimate Power Plan..."
+	Write-Output "Enabling and Activating Ultimate Power Plan..."
 	powercfg -duplicatescheme e9a42b02-d5df-448d-aa00-03f14749eb61 | Out-Null
 	$p = Get-CimInstance -Name root\cimv2\power -Class win32_PowerPlan -Filter "ElementName = 'Ultimate Performance'"      
     powercfg /setactive ([string]$p.InstanceID).Replace("Microsoft:PowerPlan\{","").Replace("}","")
+}
+
+#Optimizing Network and applying Tweaks for no throttle and maximum speed!
+Function NetworkOptimizations {
+       Write-Output "Optimizing Network and applying Tweaks for no throttle and maximum speed!..."
+       Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Internet Explorer\MAIN\FeatureControl\FEATURE_MAXCONNECTIONSPER1_0SERVER" -Name "explorer.exe" -Type DWord -Value 10
+       Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Internet Explorer\MAIN\FeatureControl\FEATURE_MAXCONNECTIONSPERSERVER" -Name "explorer.exe" -Type DWord -Value 10
+       Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip\ServiceProvider" -Name "LocalPriority" -Type DWord -Value 4
+       Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip\ServiceProvider" -Name "HostsPriority" -Type DWord -Value 5
+       Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip\ServiceProvider" -Name "DnsPriority" -Type DWord -Value 6
+       Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip\ServiceProvider" -Name "NetbtPriority" -Type DWord -Value 7
+       Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Psched" -Name "NonBestEffortlimit" -Type DWord -Value 0
+       Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip\QoS" -Name "Do not use NLA" -Type String -Value "1"
+       Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters" -Name "Size" -Type DWord -Value 1
+       Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" -Name "LargeSystemCache" -Type DWord -Value 0
+       Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters" -Name "MaxUserPort" -Type DWord -Value 65534
+       Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters" -Name "TcpTimedWaitDelay" -Type DWord -Value 30
+       Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters" -Name "DefaultTTL" -Type DWord -Value 64
+       Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\MSMQ\Parameters" -Name "TCPNoDelay" -Type DWord -Value 1
+       Set-NetTCPSetting -SettingName internet -EcnCapability disabled
+       Set-NetOffloadGlobalSetting -Chimney disabled
+       Set-NetTCPSetting -SettingName internet -Timestamps disabled
+       Set-NetTCPSetting -SettingName internet -MaxSynRetransmissions 2
+       Set-NetTCPSetting -SettingName internet -NonSackRttResiliency disabled
+       Set-NetTCPSetting -SettingName internet -InitialRto 2000
+       Set-NetTCPSetting -SettingName internet -MinRto 300
+       Set-NetTCPSetting -SettingName Internet -AutoTuningLevelLocal normal
+       Set-NetTCPSetting -SettingName internet -ScalingHeuristics disabled
+       netsh int tcp set supplemental internet congestionprovider=ctcp
+       Set-NetOffloadGlobalSetting -ReceiveSegmentCoalescing enabled
+       Set-NetOffloadGlobalSetting -ReceiveSideScaling enabled
+       Disable-NetAdapterLso -Name *
+       Disable-NetAdapterChecksumOffload -Name *
 }
 
 #Notifying user to reboot!
