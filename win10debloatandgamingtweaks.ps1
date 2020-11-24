@@ -281,8 +281,6 @@ choco install -y vcredist2008
 choco install -y vcredist2010
 choco install -y vcredist2012
 choco install -y vcredist2013
-choco install -y vcredist2015
-choco install -y vcredist2017
 choco install -y vcredist140
 }
 
