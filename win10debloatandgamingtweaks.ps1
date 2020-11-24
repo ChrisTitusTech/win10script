@@ -1212,6 +1212,7 @@ Function SetBIOSTimeUTC {
 	w32tm /unregister
 	w32tm /register
 	sc.exe config w32time start= delayed-auto
+	schtasks /CREATE /TN "Set Time On Start" /SC ONSTART /RU SYSTEM /TR "w32tm /resync /nowait"
 	net start w32time
 	W32tm /resync /force
 }
@@ -1224,6 +1225,7 @@ Function SetBIOSTimeLocal {
 	w32tm /unregister
 	w32tm /register
 	sc.exe config w32time start= delayed-auto
+	schtasks /CREATE /TN "Set Time On Start" /SC ONSTART /RU SYSTEM /TR "w32tm /resync /nowait"
 	net start w32time
 	W32tm /resync /force
 }
