@@ -200,6 +200,7 @@ $tweaks = @(
 	"DisableDVR2",
 	"FullscreenOptimizationFIX",
 	"GameOptimizationFIX",
+	"RawMouseInput",
 	"DisableHPET",
 	"EnableUlimatePower",
 	"EnableGameMode",
@@ -2596,6 +2597,15 @@ Function GameOptimizationFIX {
 	Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games" -Name "SFIO Priority" -Type String -Value "High"
 }
 
+#Forcing Raw Mouse Input
+Function RawMouseInput {
+        Write-Oputput "Forcing RAW Mouse Input Aand Disabling Enhance Pointer Precision..."
+        Set-ItemProperty -Path "HKCU:\Control Panel\Mouse" -Name "MouseSpeed" -Type String -Value "0"
+	Set-ItemProperty -Path "HKCU:\Control Panel\Mouse" -Name "MouseThreshold1" -Type String -Value "0"
+	Set-ItemProperty -Path "HKCU:\Control Panel\Mouse" -Name "MouseThreshold2" -Type String -Value "0"
+	Set-ItemProperty -Path "HKCU:\Control Panel\Mouse" -Name "MouseSensitivity" -Type String -Value "10"
+	Set-ItemProperty -Path "HKCU:\Control Panel\Mouse" -Name "MouseTrails" -Type String -Value "0"
+}
 ### Disable HPET ###
 Function DisableHPET {
         Write-Output "Disabling High Precision Event Timer..."
