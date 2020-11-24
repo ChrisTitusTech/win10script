@@ -1211,6 +1211,7 @@ Function SetBIOSTimeUTC {
 	net stop w32time
 	w32tm /unregister
 	w32tm /register
+	sc.exe config w32time start= delayed-auto
 	net start w32time
 	W32tm /resync /force
 }
@@ -1222,6 +1223,7 @@ Function SetBIOSTimeLocal {
 	net stop w32time
 	w32tm /unregister
 	w32tm /register
+	sc.exe config w32time start= delayed-auto
 	net start w32time
 	W32tm /resync /force
 }
