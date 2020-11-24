@@ -106,7 +106,7 @@ $tweaks = @(
 	"DisableDefragmentation",     # "EnableDefragmentation",
 	"DisableSuperfetch",          # "EnableSuperfetch",
 	"EnableIndexing",
-	"SetBIOSTimeLocal",         # "SetBIOSTimeUTC",
+	"SetBIOSTimeUTC",         #"SetBIOSTimeUTC", #"SetBIOSTimeLocal",
 	"DisableHibernation",		# "EnableHibernation",
 	"EnableSleepButton",		# "DisableSleepButton",         
 	"DisableSleepTimeout",        # "EnableSleepTimeout",
@@ -202,6 +202,8 @@ $tweaks = @(
 	"GameOptimizationFIX",
 	"DisableHPET",
 	"EnableUlimatePower",
+	"EnableGameMode",
+	"EnableHAGS",
 	"Finished"
 	### Auxiliary Functions ###
 )
@@ -2607,6 +2609,19 @@ Function DisableHPET {
         bcdedit /set disabledynamictick yes
         bcdedit /set useplatformtick Yes
         bcdedit /set tscsyncpolicy Enhanced
+}
+
+#Enable Windows 10 Gaming Mode
+Function EnableGameMode {
+        Write-Output "Enabling Gaming Mode..."
+	Set-ItemProperty -Path "HKCU:\Software\Microsoft\GameBar" -Name "AllowAutoGameMode" -Type DWord -Value 0
+	Set-ItemProperty -Path "HKCU:\Software\Microsoft\GameBar" -Name "AutoGameModeEnabled" -Type DWord -Value 0
+}
+
+#Enable Hardware-accelerated GPU scheduling
+Function EnableHAGS {
+        Write-Output "Enabling HAGS..."
+	Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\GraphicsDrivers" -Name "HwSchMode" -Type DWord -Value 2
 }
 
 #Add Utimate Power Plan And Activate It
