@@ -1188,32 +1188,34 @@ Function EnableIndexing {
 Function SetBIOSTimeUTC {
 	Write-Output "Setting BIOS time to UTC..."
 	Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\TimeZoneInformation" -Name "RealTimeIsUniversal" -Type DWord -Value 1
-	net stop w32time
-	w32tm /unregister
-	w32tm /register
+	Push-Location
+        Set-Location HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\DateTime\Servers
+        Set-ItemProperty . 0 "time.google.com"
+        Set-ItemProperty . "(Default)" "0"
+        Set-Location HKLM:\SYSTEM\CurrentControlSet\services\W32Time\Parameters
+        Set-ItemProperty . NtpServer "time.google.com"
+        Pop-Location
+        Stop-Service w32time
 	sc.exe config w32time start= delayed-auto
-	net start w32time
-	W32tm /resync /nowait
-	w32tm /config /update /manualpeerlist:time.google.com
-	w32tm /config /update
-	w32tm /resync /rediscover
-	W32tm /resync /force
+        Start-Service w32time
+	W32tm /resync /force /nowait
 }
 
 # Set BIOS time to local time
 Function SetBIOSTimeLocal {
 	Write-Output "Setting BIOS time to Local time..."
 	Remove-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\TimeZoneInformation" -Name "RealTimeIsUniversal" -ErrorAction SilentlyContinue
-	net stop w32time
-	w32tm /unregister
-	w32tm /register
+	Push-Location
+        Set-Location HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\DateTime\Servers
+        Set-ItemProperty . 0 "time.google.com"
+        Set-ItemProperty . "(Default)" "0"
+        Set-Location HKLM:\SYSTEM\CurrentControlSet\services\W32Time\Parameters
+        Set-ItemProperty . NtpServer "time.google.com"
+        Pop-Location
+        Stop-Service w32time
 	sc.exe config w32time start= delayed-auto
-	net start w32time
-	W32tm /resync /nowait
-	w32tm /config /update /manualpeerlist:time.google.com
-	w32tm /config /update
-	w32tm /resync /rediscover
-	W32tm /resync /force
+        Start-Service w32time
+	W32tm /resync /force /nowait
 }
 
 # Enable Hibernation - Do not use on Server with automatically started Hyper-V hvboot service as it may lead to BSODs (Win10 with Hyper-V is fine)
