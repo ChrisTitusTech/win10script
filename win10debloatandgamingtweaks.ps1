@@ -547,6 +547,7 @@ Function DisableLocationTracking {
 	}
 	Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\location" -Name "Value" -Type String -Value "Deny"
 	Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Sensor\Overrides\{BFA794E4-F964-4FDB-90F6-51056BFE4B44}" -Name "SensorPermissionState" -Type DWord -Value 0
+	New-Item -Path "HKLM:\SYSTEM\CurrentControlSet\Services\lfsvc\Service\Configuration" -Force | Out-Null
 	Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\lfsvc\Service\Configuration" -Name "Status" -Type DWord -Value 0
 }
 
@@ -2653,18 +2654,18 @@ Function RawMouseInput {
 ### Disable HPET ###
 Function DisableHPET {
         Write-Output "Disabling High Precision Event Timer..."
-        Invoke-WebRequest -Uri "https://git.io/JkrLn" -OutFile "$Env:windir\system32\SetTimerResolutionService.exe"
-        New-Service -name "SetTimerResolutionService" -BinaryPathName "$Env:windir\system32\SetTimerResolutionService.exe" -StartupType Automatic | Out-Null
-        bcdedit /set x2apicpolicy Enable
-        bcdedit /set configaccesspolicy Default
-        bcdedit /set MSI Default
-        bcdedit /set usephysicaldestination No
-        bcdedit /set usefirmwarepcisettings No
-        bcdedit /deletevalue useplatformclock
-	bcdedit /set useplatformclock false
-        bcdedit /set disabledynamictick yes
-        bcdedit /set useplatformtick Yes
-        bcdedit /set tscsyncpolicy Enhanced
+        Invoke-WebRequest -Uri "https://git.io/JkrLn" -OutFile "$Env:windir\system32\SetTimerResolutionService.exe" -ErrorAction SilentlyContinue
+        New-Service -name "SetTimerResolutionService" -BinaryPathName "$Env:windir\system32\SetTimerResolutionService.exe" -StartupType Automatic -ErrorAction SilentlyContinue
+        bcdedit /set x2apicpolicy Enable | Out-Null
+        bcdedit /set configaccesspolicy Default | Out-Null
+        bcdedit /set MSI Default | Out-Null
+        bcdedit /set usephysicaldestination No | Out-Null
+        bcdedit /set usefirmwarepcisettings No | Out-Null
+        bcdedit /deletevalue useplatformclock | Out-Null
+	bcdedit /set useplatformclock false | Out-Null
+        bcdedit /set disabledynamictick yes | Out-Null
+        bcdedit /set useplatformtick Yes | Out-Null
+        bcdedit /set tscsyncpolicy Enhanced | Out-Null
 }
 
 #Enable Windows 10 Gaming Mode
@@ -2792,35 +2793,38 @@ Function Stop-EdgePDF {
     
     #Stops edge from taking over as the default .PDF viewer    
     Write-Output "Stopping Edge from taking over as the default .PDF viewer"
-    $NoPDF = "HKCR:\.pdf"
-    $NoProgids = "HKCR:\.pdf\OpenWithProgids"
-    $NoWithList = "HKCR:\.pdf\OpenWithList" 
-    If (!(Get-ItemProperty $NoPDF  NoOpenWith)) {
-        New-ItemProperty $NoPDF NoOpenWith 
-    }        
-    If (!(Get-ItemProperty $NoPDF  NoStaticDefaultVerb)) {
-        New-ItemProperty $NoPDF  NoStaticDefaultVerb 
-    }        
-    If (!(Get-ItemProperty $NoProgids  NoOpenWith)) {
-        New-ItemProperty $NoProgids  NoOpenWith 
-    }        
-    If (!(Get-ItemProperty $NoProgids  NoStaticDefaultVerb)) {
-        New-ItemProperty $NoProgids  NoStaticDefaultVerb 
-    }        
-    If (!(Get-ItemProperty $NoWithList  NoOpenWith)) {
-        New-ItemProperty $NoWithList  NoOpenWith
-    }        
-    If (!(Get-ItemProperty $NoWithList  NoStaticDefaultVerb)) {
-        New-ItemProperty $NoWithList  NoStaticDefaultVerb 
-    }
-            
-    #Appends an underscore '_' to the Registry key for Edge
-    $Edge = "HKCR:\AppXd4nrz8ff68srnhf9t5a8sbjyar1cr723_"
-    If (Test-Path $Edge) {
-        Set-Item $Edge AppXd4nrz8ff68srnhf9t5a8sbjyar1cr723_ 
-    }
+# Identify the edge application class 
+$Packages = "HKCU:SOFTWARE\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\AppModel\Repository\Packages" 
+$edge = Get-ChildItem $Packages -Recurse -include "MicrosoftEdge" 
+ 
+# Specify the paths to the file and URL associations 
+$FileAssocKey = Join-Path $edge.PSPath Capabilities\FileAssociations 
+$URLAssocKey = Join-Path $edge.PSPath Capabilities\URLAssociations 
+ 
+# get the software classes for the file and URL types that Edge will associate 
+$FileTypes = Get-Item $FileAssocKey 
+$URLTypes = Get-Item $URLAssocKey 
+ 
+$FileAssoc = Get-ItemProperty $FileAssocKey 
+$URLAssoc = Get-ItemProperty $URLAssocKey 
+ 
+$Associations = @() 
+$Filetypes.Property | foreach {$Associations += $FileAssoc.$_} 
+$URLTypes.Property | foreach {$Associations += $URLAssoc.$_} 
+ 
+# add registry values in each software class to stop edge from associating as the default 
+foreach ($Association in $Associations) 
+     { 
+     $Class = Join-Path HKCU:SOFTWARE\Classes $Association 
+     #if (Test-Path $class) 
+     #   {write-host $Association} 
+     # Get-Item $Class 
+     Set-ItemProperty $Class -Name NoOpenWith -Value "" 
+     Set-ItemProperty $Class -Name NoStaticDefaultVerb -Value "" 
+     } 
 }
 
+#Create Restore Point
 Function CreateRestorePoint {
   Write-Output "Creating Restore Point incase something bad happens"
   Enable-ComputerRestore -Drive "C:\"
