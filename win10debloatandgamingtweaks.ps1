@@ -2750,6 +2750,7 @@ Function RemoveEdit3D {
 
 #Notifying user to reboot!
 Function Finished {
+        Start-Sleep -s 5
         Write-Output "Done! Please Reboot Your PC! and don't forget to follow me on Social Media."
         Start "http://daddymadu.gg"
 }
