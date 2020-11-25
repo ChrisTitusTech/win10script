@@ -2678,9 +2678,9 @@ Function EnableHAGS {
 #Add Utimate Power Plan And Activate It
 Function EnableUlimatePower {
 	Write-Output "Enabling and Activating Ultimate Power Plan..."
-	powercfg -duplicatescheme e9a42b02-d5df-448d-aa00-03f14749eb61 | Out-Null
-	$p = Get-CimInstance -Name root\cimv2\power -Class win32_PowerPlan -Filter "ElementName = 'Ultimate Performance'"      
-    powercfg /setactive ([string]$p.InstanceID).Replace("Microsoft:PowerPlan\{","").Replace("}","")
+	powercfg -duplicatescheme e9a42b02-d5df-448d-aa00-03f14749eb61 e9a52b02-d5df-445d-aa00-03f14749eb65 | Out-Null
+	powercfg -setactive e9a52b02-d5df-445d-aa00-03f14749eb65 | Out-Null
+
 }
 
 #Optimizing Network and applying Tweaks for no throttle and maximum speed!
