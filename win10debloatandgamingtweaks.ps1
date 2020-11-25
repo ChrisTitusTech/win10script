@@ -2729,6 +2729,7 @@ Function NetworkOptimizations {
        Set-NetOffloadGlobalSetting -ReceiveSideScaling enabled
        Disable-NetAdapterLso -Name *
        Disable-NetAdapterChecksumOffload -Name *
+       Start-Sleep -s 5
 }
 
 #Remove Edit with 3D Paint
