@@ -1070,10 +1070,13 @@ Function EnableUpdateRestart {
 # Stop and disable Home Groups services - Not applicable to 1803 and newer or Server
 Function DisableHomeGroups {
 	Write-Output "Stopping and disabling Home Groups services..."
+	$errpref = $ErrorActionPreference #save actual preference
+        $ErrorActionPreference = "silentlycontinue"
 	Stop-Service "HomeGroupListener" -WarningAction SilentlyContinue
 	Set-Service "HomeGroupListener" -StartupType Disabled
 	Stop-Service "HomeGroupProvider" -WarningAction SilentlyContinue
 	Set-Service "HomeGroupProvider" -StartupType Disabled
+	$ErrorActionPreference = $errpref #restore previous preference
 }
 
 # Enable and start Home Groups services - Not applicable to 1803 and newer or Server
@@ -2654,6 +2657,8 @@ Function RawMouseInput {
 ### Disable HPET ###
 Function DisableHPET {
         Write-Output "Disabling High Precision Event Timer..."
+	$errpref = $ErrorActionPreference #save actual preference
+        $ErrorActionPreference = "silentlycontinue"
         Invoke-WebRequest -Uri "https://git.io/JkrLn" -OutFile "$Env:windir\system32\SetTimerResolutionService.exe" -ErrorAction SilentlyContinue
         New-Service -name "SetTimerResolutionService" -BinaryPathName "$Env:windir\system32\SetTimerResolutionService.exe" -StartupType Automatic -ErrorAction SilentlyContinue
         bcdedit /set x2apicpolicy Enable | Out-Null
@@ -2666,6 +2671,7 @@ Function DisableHPET {
         bcdedit /set disabledynamictick yes | Out-Null
         bcdedit /set useplatformtick Yes | Out-Null
         bcdedit /set tscsyncpolicy Enhanced | Out-Null
+	$ErrorActionPreference = $errpref #restore previous preference
 }
 
 #Enable Windows 10 Gaming Mode
