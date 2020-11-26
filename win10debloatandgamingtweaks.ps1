@@ -1234,7 +1234,7 @@ Function SetBIOSTimeUTC {
         Set-ItemProperty . NtpServer "time.google.com"
         Pop-Location
         Stop-Service w32time
-	Set-Service w32time -StartupType Automatic
+	sc.exe config w32time start= auto
         Start-Service w32time
 	W32tm /resync /force /nowait
 }
@@ -1251,7 +1251,7 @@ Function SetBIOSTimeLocal {
         Set-ItemProperty . NtpServer "time.google.com"
         Pop-Location
         Stop-Service w32time
-	Set-Service w32time -StartupType Automatic
+	sc.exe config w32time start= auto
         Start-Service w32time
 	W32tm /resync /force /nowait
 }
