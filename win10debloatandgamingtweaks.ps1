@@ -55,7 +55,6 @@ $tweaks = @(
 	"InstallAdobe",
 	"InstallChrome",
 	"InstallChocoGUI",
-	"ChoosePCOptimizations", # DaddyMadu PC Picker Don't Change!
 	"EnableUlimatePower",    # DaddyMadu don't change order it will break other functions! just disable if you want with #
 	# "ChangeDefaultApps", # Removed due to issues with steam and resetting default apps
 	
@@ -211,6 +210,7 @@ $tweaks = @(
 	"DisableDVR2",
 	"FullscreenOptimizationFIX",
 	"GameOptimizationFIX",
+	"ApplyPCOptimizations",
 	"RawMouseInput",
 	"DisableHPET",
 	"EnableGameMode",
@@ -348,34 +348,12 @@ Function ChangeDefaultApps {
 }
 
 
-#Low To Med PC SPECS Optimizations
-Function ChoosePCOptimizations {
-	do
- {
-    Clear-Host
-    Write-Host "================ Choose Your PC Specification to Optimize for! ================"
-    Write-Host "Y: Press 'Y' For Low To Med PC Specification."
-    Write-Host "N: Press 'N' For Med To High End PC Specification."
-	Write-Host "Q: Press 'Q' to stop the entire script."
-    $selection = Read-Host "Please make a selection"
-    switch ($selection)
-    {
-    'y' { 
-	Write-Output "Applying Low To Med PC SPECS Optimizations..."
-	Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile" -Name "SystemResponsiveness" -Type DWord -Value 1
-	Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile" -Name "NetworkThrottlingIndex" -Type DWord -Value 4294967295	
-	}
-    'n' {
-    Write-Output "Applying Med To High End PC SPECS Optimizations..."
+#Apply PC Optimizations
+Function ApplyPCOptimizations {
+        Write-Output "Applying PC Optimizations..."
 	Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile" -Name "SystemResponsiveness" -Type DWord -Value 0
 	Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile" -Name "NetworkThrottlingIndex" -Type DWord -Value 4294967295
-		}
-    'q' { Exit  }
-    }
  }
- until ($selection -match "y" -or $selection -match "n" -or $selection -match "q")
-	
-}
 
 ##########
 # Privacy Tweaks
