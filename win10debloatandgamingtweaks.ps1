@@ -2774,47 +2774,47 @@ Function RemoveEdit3D {
 #DaddyMadu Ultimate CLeaner
 Function UltimateCleaner {
     Write-Host "Running DaddyMadu Ultimate Cleaner => Temp folders & Flush DNS + Reset IP...."
-cmd /c netsh winsock reset > nul
+cmd /c netsh winsock reset >$null
 
-cmd /c netsh int ip reset > nul
+cmd /c netsh int ip reset >$null
 
-cmd /c ipconfig /release > nul
+cmd /c ipconfig /release >$null
 
-cmd /c ipconfig /renew > nul
+cmd /c ipconfig /renew >$null
 
-cmd /c ipconfig /flushdns > nul
+cmd /c ipconfig /flushdns >$null
 
 cmd /c echo Flush DNS + IP Reset Completed Successfully!
 
-cmd /c del /f /s /q %systemdrive%\*.tmp > nul
+cmd /c del /f /s /q %systemdrive%\*.tmp >$null
 
-cmd /c del /f /s /q %systemdrive%\*._mp > nul
+cmd /c del /f /s /q %systemdrive%\*._mp >$null
 
-cmd /c del /f /s /q %systemdrive%\*.log > nul
+cmd /c del /f /s /q %systemdrive%\*.log >$null
 
-cmd /c del /f /s /q %systemdrive%\*.gid > nul
+cmd /c del /f /s /q %systemdrive%\*.gid >$null
 
-cmd /c del /f /s /q %systemdrive%\*.chk > nul
+cmd /c del /f /s /q %systemdrive%\*.chk >$null
 
-cmd /c del /f /s /q %systemdrive%\*.old > nul
+cmd /c del /f /s /q %systemdrive%\*.old >$null
 
-cmd /c del /f /s /q %systemdrive%\recycled\*.* > nul
+cmd /c del /f /s /q %systemdrive%\recycled\*.* >$null
 
-cmd /c del /f /s /q %windir%\*.bak > nul
+cmd /c del /f /s /q %windir%\*.bak >$null
 
-cmd /c del /f /s /q %windir%\prefetch\*.* > nul
+cmd /c del /f /s /q %windir%\prefetch\*.* >$null
 
-cmd /c del /f /q %userprofile%\cookies\*.* > nul
+cmd /c del /f /q %userprofile%\cookies\*.* >$null
 
-cmd /c del /f /q %userprofile%\recent\*.* > nul
+cmd /c del /f /q %userprofile%\recent\*.* >$null
 
-cmd /c del /f /s /q "%userprofile%\Local Settings\Temporary Internet Files\*.*" > nul
+cmd /c del /f /s /q "%userprofile%\Local Settings\Temporary Internet Files\*.*" >$null
 
-cmd /c del /f /s /q "%userprofile%\Local Settings\Temp\*.*" > nul
+cmd /c del /f /s /q "%userprofile%\Local Settings\Temp\*.*" >$null
 
-cmd /c del /f /s /q "%userprofile%\recent\*.*" > nul
+cmd /c del /f /s /q "%userprofile%\recent\*.*" >$null
 
-cmd /c del /f /s /q "%windir%\Temp\*.*" > nul
+cmd /c del /f /s /q "%windir%\Temp\*.*" >$null
 
 cmd /c echo Temp folders Cleared Successfully!
 }
