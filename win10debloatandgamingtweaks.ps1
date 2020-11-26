@@ -172,7 +172,7 @@ $tweaks = @(
 	"EnableThumbsDB",              # "EnableThumbsDB", # "DisableThumbsDB", 
 
 	### Application Tweaks ###
-        #"DisableOneDrive",              # "EnableOneDrive".
+        "DisableOneDrive",              # "EnableOneDrive".
 	"UninstallOneDrive",            # "InstallOneDrive",
 	"UninstallMsftBloat",           # "InstallMsftBloat",
 	"UninstallThirdPartyBloat",     # "InstallThirdPartyBloat",
@@ -667,6 +667,7 @@ Function EnableCortana {
 Function DisableErrorReporting {
 	Write-Output "Disabling Error reporting..."
 	Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\Windows Error Reporting" -Name "Disabled" -Type DWord -Value 1
+	Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\Windows Error Reporting" -Name "Disabled" -Type DWord -Value 1
 	Disable-ScheduledTask -TaskName "Microsoft\Windows\Windows Error Reporting\QueueReporting" | Out-Null
 }
 
