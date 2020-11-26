@@ -101,8 +101,8 @@ $tweaks = @(
 	"DisableMeltdownCompatFlag", # "EnableMeltdownCompatFlag"    
 
 	### Service Tweaks ###
-	"DisableUpdateMSRT",          # "EnableUpdateMSRT",
-	#"DisableUpdateDriver",        # "EnableUpdateDriver",
+	"EnableUpdateMSRT",          # "EnableUpdateMSRT",    #"DisableUpdateMSRT",
+	"EnableUpdateDriver",        # "EnableUpdateDriver",  #"DisableUpdateDriver",
 	"DisableUpdateRestart",         # "EnableUpdateRestart",
 	"DisableHomeGroups",          # "EnableHomeGroups",
 	"DisableSharedExperiences",     # "EnableSharedExperiences",
@@ -302,7 +302,7 @@ Function InstallMVC {
         choco install -y silverlight	
 	}
     'n' {
-        Write-Output "Cancelled! Installing Required Only vcredist2010 for Timer Resolution service..."
+        Write-Output "Cancelled! Installing vcredist2010 only! it's Required for Timer Resolution service..."
 	choco install -y vcredist2010 | Out-Null
 		}
     'q' { Exit  }
@@ -895,7 +895,7 @@ Function EnableDefender {
 	If ([System.Environment]::OSVersion.Version.Build -eq 14393) {
 		Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" -Name "WindowsDefender" -Type ExpandString -Value "`"%ProgramFiles%\Windows Defender\MSASCuiL.exe`""
 	} ElseIf ([System.Environment]::OSVersion.Version.Build -ge 15063) {
-		Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" -Name "SecurityHealth" -Type ExpandString -Value "`"%ProgramFiles%\Windows Defender\MSASCuiL.exe`""
+		Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" -Name "SecurityHealth" -Type ExpandString -Value "%windir%\system32\SecurityHealthSystray.exe"
 	}
 }
 
