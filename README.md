@@ -9,7 +9,9 @@ This is A FORK Based On ChrisTitusTech that's foucus on debloat and optimize win
 - O&O Shutup10 CFG and Run
 - Added Install Programs
 - Added Debloat Microsoft Store Apps
+- Added Choose to Disable or Enable Microsoft Windows Security AKA Windows Defender
 - Added Gaming Optimization Tweaks
+- Added Quality of Life Tweaks
 - Disabling HPET
 - Add Ultimate PowerPlan and Activating. (dublicate might be found if script re-runs, just delete them!)
 - Install Microsoft Visual Studio Libraries 2005-2019
@@ -18,6 +20,7 @@ This is A FORK Based On ChrisTitusTech that's foucus on debloat and optimize win
 - Enable Windows 10 Gaming Mode
 - Enable Hardware-accelerated GPU scheduling
 - Optimizing Network and applying Tweaks for no throttle and maximum speed!
+- Added DaddyMadu Ultimate Cleaner Temp folders & Flush DNS + Reset IP!
 
 # How To Use!
 Simply Run cmd (Command Prompt) as Administrator and paste the following!
