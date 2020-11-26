@@ -91,7 +91,7 @@ $tweaks = @(
 	"SetCurrentNetworkPrivate",     # "SetCurrentNetworkPublic",
 	"SetUnknownNetworksPrivate",  # "SetUnknownNetworksPublic",
 	"DisableNetDevicesAutoInst",  # "EnableNetDevicesAutoInst",
-	"DisableCtrldFolderAccess",	# "EnableCtrldFolderAccess",
+	"EnableCtrldFolderAccess",	# "EnableCtrldFolderAccess", #"DisableCtrldFolderAccess",
 	"EnableFirewall",
 	"EnableDefender",
 	"EnableDefenderCloud",
