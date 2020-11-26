@@ -2773,49 +2773,50 @@ Function RemoveEdit3D {
 
 #DaddyMadu Ultimate CLeaner
 Function UltimateCleaner {
-	do
- {
-    Clear-Host
-    Write-Host "================ Do you want to Clear Temp folders & Flush DNS + Reset IP? ================"
-    Write-Host "Y: Press 'Y' to do this."
-    Write-Host "N: Press 'N' to skip this."
-	Write-Host "Q: Press 'Q' to stop the entire script."
-    $selection = Read-Host "Please make a selection"
-    switch ($selection)
-    {
-    'y' { 
-cmd
-netsh winsock reset
-netsh int ip reset
-ipconfig /release
-ipconfig /renew
-ipconfig /flushdns
-echo Processed Successfully!
-del /f /s /q %systemdrive%\*.tmp
-del /f /s /q %systemdrive%\*._mp
-del /f /s /q %systemdrive%\*.log
-del /f /s /q %systemdrive%\*.gid
-del /f /s /q %systemdrive%\*.chk
-del /f /s /q %systemdrive%\*.old
-del /f /s /q %systemdrive%\recycled\*.*
-del /f /s /q %windir%\*.bak
-del /f /s /q %windir%\prefetch\*.*
-rd /s /q %windir%\temp & md %windir%\temp
-del /f /q %userprofile%\cookies\*.*
-del /f /q %userprofile%\recent\*.*
-del /f /s /q "%userprofile%\Local Settings\Temporary Internet Files\*.*"
-del /f /s /q "%userprofile%\Local Settings\Temp\*.*"
-del /f /s /q "%userprofile%\recent\*.*"
-del /f /s /q %windir%\Temp\*.*"
-echo Processed Successfully!
-exit
-	}
-    'n' { Break }
-    'q' { Exit  }
-    }
- }
- until ($selection -match "y" -or $selection -match "n" -or $selection -match "q")
-	
+    Write-Host "Running DaddyMadu Ultimate Cleaner => Temp folders & Flush DNS + Reset IP...."
+cmd /c netsh winsock reset
+
+cmd /c netsh int ip reset
+
+cmd /c ipconfig /release
+
+cmd /c ipconfig /renew
+
+cmd /c ipconfig /flushdns
+
+cmd /c echo Processed Successfully!
+
+cmd /c del /f /s /q %systemdrive%\*.tmp
+
+cmd /c del /f /s /q %systemdrive%\*._mp
+
+cmd /c del /f /s /q %systemdrive%\*.log
+
+cmd /c del /f /s /q %systemdrive%\*.gid
+
+cmd /c del /f /s /q %systemdrive%\*.chk
+
+cmd /c del /f /s /q %systemdrive%\*.old
+
+cmd /c del /f /s /q %systemdrive%\recycled\*.*
+
+cmd /c del /f /s /q %windir%\*.bak
+
+cmd /c del /f /s /q %windir%\prefetch\*.*
+
+cmd /c del /f /q %userprofile%\cookies\*.*
+
+cmd /c del /f /q %userprofile%\recent\*.*
+
+cmd /c del /f /s /q "%userprofile%\Local Settings\Temporary Internet Files\*.*"
+
+cmd /c del /f /s /q "%userprofile%\Local Settings\Temp\*.*"
+
+cmd /c del /f /s /q "%userprofile%\recent\*.*"
+
+cmd /c del /f /s /q "%windir%\Temp\*.*"
+
+cmd /c echo Processed Successfully!
 }
 
 #Notifying user to reboot!
