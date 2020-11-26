@@ -2774,49 +2774,49 @@ Function RemoveEdit3D {
 #DaddyMadu Ultimate CLeaner
 Function UltimateCleaner {
     Write-Host "Running DaddyMadu Ultimate Cleaner => Temp folders & Flush DNS + Reset IP...."
-cmd /c netsh winsock reset
+cmd /c netsh winsock reset > nul
 
-cmd /c netsh int ip reset
+cmd /c netsh int ip reset > nul
 
-cmd /c ipconfig /release
+cmd /c ipconfig /release > nul
 
-cmd /c ipconfig /renew
+cmd /c ipconfig /renew > nul
 
-cmd /c ipconfig /flushdns
+cmd /c ipconfig /flushdns > nul
 
-cmd /c echo Processed Successfully!
+cmd /c echo Flush DNS + IP Reset Completed Successfully!
 
-cmd /c del /f /s /q %systemdrive%\*.tmp
+cmd /c del /f /s /q %systemdrive%\*.tmp > nul
 
-cmd /c del /f /s /q %systemdrive%\*._mp
+cmd /c del /f /s /q %systemdrive%\*._mp > nul
 
-cmd /c del /f /s /q %systemdrive%\*.log
+cmd /c del /f /s /q %systemdrive%\*.log > nul
 
-cmd /c del /f /s /q %systemdrive%\*.gid
+cmd /c del /f /s /q %systemdrive%\*.gid > nul
 
-cmd /c del /f /s /q %systemdrive%\*.chk
+cmd /c del /f /s /q %systemdrive%\*.chk > nul
 
-cmd /c del /f /s /q %systemdrive%\*.old
+cmd /c del /f /s /q %systemdrive%\*.old > nul
 
-cmd /c del /f /s /q %systemdrive%\recycled\*.*
+cmd /c del /f /s /q %systemdrive%\recycled\*.* > nul
 
-cmd /c del /f /s /q %windir%\*.bak
+cmd /c del /f /s /q %windir%\*.bak > nul
 
-cmd /c del /f /s /q %windir%\prefetch\*.*
+cmd /c del /f /s /q %windir%\prefetch\*.* > nul
 
-cmd /c del /f /q %userprofile%\cookies\*.*
+cmd /c del /f /q %userprofile%\cookies\*.* > nul
 
-cmd /c del /f /q %userprofile%\recent\*.*
+cmd /c del /f /q %userprofile%\recent\*.* > nul
 
-cmd /c del /f /s /q "%userprofile%\Local Settings\Temporary Internet Files\*.*"
+cmd /c del /f /s /q "%userprofile%\Local Settings\Temporary Internet Files\*.*" > nul
 
-cmd /c del /f /s /q "%userprofile%\Local Settings\Temp\*.*"
+cmd /c del /f /s /q "%userprofile%\Local Settings\Temp\*.*" > nul
 
-cmd /c del /f /s /q "%userprofile%\recent\*.*"
+cmd /c del /f /s /q "%userprofile%\recent\*.*" > nul
 
-cmd /c del /f /s /q "%windir%\Temp\*.*"
+cmd /c del /f /s /q "%windir%\Temp\*.*" > nul
 
-cmd /c echo Processed Successfully!
+cmd /c echo Temp folders Cleared Successfully!
 }
 
 #Notifying user to reboot!
