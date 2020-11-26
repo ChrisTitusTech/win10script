@@ -34,6 +34,7 @@
 #       - Enable Windows 10 Gaming Mode
 #       - Enable Hardware-accelerated GPU scheduling
 #       - Optimizing Network and applying Tweaks for no throttle and maximum speed!
+#       - Clean TEMP, Prefetchs, Logs, CHK, Bak Files
 #
 ##########
 $host.ui.RawUI.WindowTitle = "DaddyMadu Ultimate Windows 10 Debloater & Gaming Focus Tweaker"
@@ -217,6 +218,7 @@ $tweaks = @(
 	"EnableHAGS",
 	"NetworkOptimizations",
 	"RemoveEdit3D",
+	"UltimateCleaner",
 	"Finished"
 	### Auxiliary Functions ###
 )
@@ -2767,6 +2769,53 @@ Function RemoveEdit3D {
        Remove-ItemProperty -Path "HKCR:\SystemFileAssociations\.png\Shell\" -Name "3D Edit" -ErrorAction SilentlyContinue
        Remove-ItemProperty -Path "HKCR:\SystemFileAssociations\.tif\Shell\" -Name "3D Edit" -ErrorAction SilentlyContinue
        Remove-ItemProperty -Path "HKCR:\SystemFileAssociations\.tiff\Shell\" -Name "3D Edit" -ErrorAction SilentlyContinue
+}
+
+#DaddyMadu Ultimate CLeaner
+Function UltimateCleaner {
+	do
+ {
+    Clear-Host
+    Write-Host "================ Do you want to Clear Temp folders & Flush DNS + Reset IP? ================"
+    Write-Host "Y: Press 'Y' to do this."
+    Write-Host "N: Press 'N' to skip this."
+	Write-Host "Q: Press 'Q' to stop the entire script."
+    $selection = Read-Host "Please make a selection"
+    switch ($selection)
+    {
+    'y' { 
+cmd
+netsh winsock reset
+netsh int ip reset
+ipconfig /release
+ipconfig /renew
+ipconfig /flushdns
+echo Processed Successfully!
+del /f /s /q %systemdrive%\*.tmp
+del /f /s /q %systemdrive%\*._mp
+del /f /s /q %systemdrive%\*.log
+del /f /s /q %systemdrive%\*.gid
+del /f /s /q %systemdrive%\*.chk
+del /f /s /q %systemdrive%\*.old
+del /f /s /q %systemdrive%\recycled\*.*
+del /f /s /q %windir%\*.bak
+del /f /s /q %windir%\prefetch\*.*
+rd /s /q %windir%\temp & md %windir%\temp
+del /f /q %userprofile%\cookies\*.*
+del /f /q %userprofile%\recent\*.*
+del /f /s /q "%userprofile%\Local Settings\Temporary Internet Files\*.*"
+del /f /s /q "%userprofile%\Local Settings\Temp\*.*"
+del /f /s /q "%userprofile%\recent\*.*"
+del /f /s /q %windir%\Temp\*.*"
+echo Processed Successfully!
+exit
+	}
+    'n' { Break }
+    'q' { Exit  }
+    }
+ }
+ until ($selection -match "y" -or $selection -match "n" -or $selection -match "q")
+	
 }
 
 #Notifying user to reboot!
