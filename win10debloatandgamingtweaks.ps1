@@ -38,7 +38,8 @@
 #       - Added DaddyMadu Ultimate Cleaner Temp folders & Flush DNS + Reset IPes
 #
 ##########
-$host.ui.RawUI.WindowTitle = "DaddyMadu Ultimate Windows 10 Debloater & Gaming Focus Tweaker"
+$host.ui.RawUI.WindowTitle = "DaddyMadu Ultimate Windows 10 Debloater and Gaming Focus Tweaker"
+cmd /c 'title [DaddyMadu Ultimate Windows 10 Debloater and Gaming Focus Tweaker]'
 # Default preset
 $tweaks = @(
 	### Require administrator privileges ###
