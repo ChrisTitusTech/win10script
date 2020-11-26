@@ -58,6 +58,9 @@ $tweaks = @(
 	"ChoosePCOptimizations", # DaddyMadu PC Picker Don't Change!
 	"EnableUlimatePower",    # DaddyMadu don't change order it will break other functions! just disable if you want with #
 	# "ChangeDefaultApps", # Removed due to issues with steam and resetting default apps
+	
+	### DaddyMadu Windows Defender Settings! Don't Change Order Just Disable with # If You Don't want it ###
+	"askDefender",
 
 	### Windows Apps
 	"DebloatAll",
@@ -91,10 +94,6 @@ $tweaks = @(
 	"SetCurrentNetworkPrivate",     # "SetCurrentNetworkPublic",
 	"SetUnknownNetworksPrivate",  # "SetUnknownNetworksPublic",
 	"DisableNetDevicesAutoInst",  # "EnableNetDevicesAutoInst",
-	"EnableCtrldFolderAccess",	# "EnableCtrldFolderAccess", #"DisableCtrldFolderAccess",
-	"EnableFirewall",
-	"EnableDefender",
-	"EnableDefenderCloud",
 	"EnableF8BootMenu",             # "DisableF8BootMenu",
 	#"SetDEPOptOut",                 # "SetDEPOptIn",
 	# "EnableCIMemoryIntegrity",    # "DisableCIMemoryIntegrity",
@@ -851,36 +850,25 @@ Function EnableNetDevicesAutoInst {
 	Remove-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\NcdAutoSetup\Private" -Name "AutoSetup" -ErrorAction SilentlyContinue
 }
 
-# Enable Controlled Folder Access (Defender Exploit Guard feature) - Applicable to 1709 or newer, requires Windows Defender to be enabled
-Function EnableCtrldFolderAccess {
-	Write-Output "Enabling Controlled Folder Access..."
-	Set-MpPreference -EnableControlledFolderAccess Enabled
-}
-
-# Disable Controlled Folder Access (Defender Exploit Guard feature) - Applicable to 1709 or newer, requires Windows Defender to be enabled
-Function DisableCtrldFolderAccess {
-	Write-Output "Disabling Controlled Folder Access..."
-	Set-MpPreference -EnableControlledFolderAccess Disabled
-}
-
-# Disable Firewall
-Function DisableFirewall {
-	Write-Output "Disabling Firewall..."
-	If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\WindowsFirewall\StandardProfile")) {
+#Ask User If He Want to Enable Or Disable Windows Defender
+Function askDefender {
+	
+	do
+ {
+    Clear-Host
+    Write-Host "================ Do you want to Disable Microsoft Windows Defender? ================"
+    Write-Host "Y: Press 'Y' to do this."
+    Write-Host "N: Press 'N' to skip this."
+	Write-Host "Q: Press 'Q' to stop the entire script."
+    $selection = Read-Host "Please make a selection"
+    switch ($selection)
+    {
+    'y' { 
+	Write-Output "Disabling Microsoft Windows Defender and related Processes..."
+        If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\WindowsFirewall\StandardProfile")) {
 		New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\WindowsFirewall\StandardProfile" -Force | Out-Null
 	}
 	Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\WindowsFirewall\StandardProfile" -Name "EnableFirewall" -Type DWord -Value 0
-}
-
-# Enable Firewall
-Function EnableFirewall {
-	Write-Output "Enabling Firewall..."
-	Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\WindowsFirewall\StandardProfile" -Name "EnableFirewall" -ErrorAction SilentlyContinue
-}
-
-# Disable Windows Defender
-Function DisableDefender {
-	Write-Output "Disabling Windows Defender..."
 	If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender")) {
 		New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender" -Force | Out-Null
 	}
@@ -890,34 +878,31 @@ Function DisableDefender {
 	} ElseIf ([System.Environment]::OSVersion.Version.Build -ge 15063) {
 		Remove-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" -Name "SecurityHealth" -ErrorAction SilentlyContinue
 	}
-}
-
-# Enable Windows Defender
-Function EnableDefender {
-	Write-Output "Enabling Windows Defender..."
+	If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender\Spynet")) {
+		New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender\Spynet" -Force | Out-Null
+	}
+	Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender\Spynet" -Name "SpynetReporting" -Type DWord -Value 0
+	Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender\Spynet" -Name "SubmitSamplesConsent" -Type DWord -Value 2
+	Set-MpPreference -EnableControlledFolderAccess Disabled
+	}
+    'n' {
+        Write-Output "Enabling Microsoft Windows Defender and related Processes..."
+	Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\WindowsFirewall\StandardProfile" -Name "EnableFirewall" -ErrorAction SilentlyContinue
 	Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender" -Name "DisableAntiSpyware" -ErrorAction SilentlyContinue
 	If ([System.Environment]::OSVersion.Version.Build -eq 14393) {
 		Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" -Name "WindowsDefender" -Type ExpandString -Value "`"%ProgramFiles%\Windows Defender\MSASCuiL.exe`""
 	} ElseIf ([System.Environment]::OSVersion.Version.Build -ge 15063) {
 		Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" -Name "SecurityHealth" -Type ExpandString -Value "%windir%\system32\SecurityHealthSystray.exe"
 	}
-}
-
-# Disable Windows Defender Cloud
-Function DisableDefenderCloud {
-	Write-Output "Disabling Windows Defender Cloud..."
-	If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender\Spynet")) {
-		New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender\Spynet" -Force | Out-Null
-	}
-	Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender\Spynet" -Name "SpynetReporting" -Type DWord -Value 0
-	Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender\Spynet" -Name "SubmitSamplesConsent" -Type DWord -Value 2
-}
-
-# Enable Windows Defender Cloud
-Function EnableDefenderCloud {
-	Write-Output "Enabling Windows Defender Cloud..."
 	Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender\Spynet" -Name "SpynetReporting" -ErrorAction SilentlyContinue
 	Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender\Spynet" -Name "SubmitSamplesConsent" -ErrorAction SilentlyContinue
+	Set-MpPreference -EnableControlledFolderAccess Enabled
+		}
+    'q' { Exit  }
+    }
+ }
+ until ($selection -match "y" -or $selection -match "n" -or $selection -match "q")
+	
 }
 
 # Enable F8 boot menu options
