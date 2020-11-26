@@ -1085,9 +1085,12 @@ Function DisableHomeGroups {
 # Enable and start Home Groups services - Not applicable to 1803 and newer or Server
 Function EnableHomeGroups {
 	Write-Output "Starting and enabling Home Groups services..."
+	$errpref = $ErrorActionPreference #save actual preference
+        $ErrorActionPreference = "silentlycontinue"
 	Set-Service "HomeGroupListener" -StartupType Manual
 	Set-Service "HomeGroupProvider" -StartupType Manual
 	Start-Service "HomeGroupProvider" -WarningAction SilentlyContinue
+		$ErrorActionPreference = $errpref #restore previous preference
 }
 
 # Disable Shared Experiences - Not applicable to Server
@@ -1219,7 +1222,7 @@ Function EnableIndexing {
 	Start-Service "WSearch" -WarningAction SilentlyContinue
 }
 
-# Set BIOS time to UTC
+# Set BIOS time to UTC #sc.exe config w32time start= delayed-auto#
 Function SetBIOSTimeUTC {
 	Write-Output "Setting BIOS time to UTC..."
 	Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\TimeZoneInformation" -Name "RealTimeIsUniversal" -Type DWord -Value 1
@@ -1231,7 +1234,7 @@ Function SetBIOSTimeUTC {
         Set-ItemProperty . NtpServer "time.google.com"
         Pop-Location
         Stop-Service w32time
-	sc.exe config w32time start= delayed-auto
+	Set-Service w32time -StartupType Automatic
         Start-Service w32time
 	W32tm /resync /force /nowait
 }
@@ -1248,7 +1251,7 @@ Function SetBIOSTimeLocal {
         Set-ItemProperty . NtpServer "time.google.com"
         Pop-Location
         Stop-Service w32time
-	sc.exe config w32time start= delayed-auto
+	Set-Service w32time -StartupType Automatic
         Start-Service w32time
 	W32tm /resync /force /nowait
 }
