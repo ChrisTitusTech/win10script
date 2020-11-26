@@ -24,6 +24,7 @@
 #
 #       DaddyMadu Additions:
 #
+#       - Added Choose to Disable or Enable Microsoft Windows Security AKA Windows Defender
 #       - Gaming Tweaks Optimizations
 #       - Quality Of Life Tweaks
 #       - Increasing IRQ8 Priority
@@ -34,7 +35,7 @@
 #       - Enable Windows 10 Gaming Mode
 #       - Enable Hardware-accelerated GPU scheduling
 #       - Optimizing Network and applying Tweaks for no throttle and maximum speed!
-#       - Clean TEMP, Prefetchs, Logs, CHK, Bak Files
+#       - Added DaddyMadu Ultimate Cleaner Temp folders & Flush DNS + Reset IPes
 #
 ##########
 $host.ui.RawUI.WindowTitle = "DaddyMadu Ultimate Windows 10 Debloater & Gaming Focus Tweaker"
