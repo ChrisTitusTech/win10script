@@ -2043,6 +2043,8 @@ Function EnableOneDrive {
 # Uninstall OneDrive - Not applicable to Server
 Function UninstallOneDrive {
 	Write-Output "Uninstalling OneDrive..."
+	$errpref = $ErrorActionPreference #save actual preference
+        $ErrorActionPreference = "silentlycontinue"
 	Stop-Process -Name "OneDrive" -ErrorAction SilentlyContinue
 	Start-Sleep -s 2
 	$onedrive = "$env:SYSTEMROOT\SysWOW64\OneDriveSetup.exe"
@@ -2062,6 +2064,7 @@ Function UninstallOneDrive {
 	}
 	Remove-Item -Path "HKCR:\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" -Recurse -ErrorAction SilentlyContinue
 	Remove-Item -Path "HKCR:\Wow6432Node\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" -Recurse -ErrorAction SilentlyContinue
+	$ErrorActionPreference = $errpref #restore previous preference
 }
 
 # Install OneDrive - Not applicable to Server
@@ -2739,51 +2742,29 @@ Function RemoveEdit3D {
 #DaddyMadu Ultimate CLeaner
 Function UltimateCleaner {
     Write-Host "Running DaddyMadu Ultimate Cleaner => Temp folders & Flush DNS + Reset IP...."
-cmd /c netsh winsock reset >$null
-
-cmd /c netsh int ip reset >$null
-
-cmd /c ipconfig /release >$null
-
-cmd /c ipconfig /renew >$null
-
-cmd /c ipconfig /flushdns >$null
-
-cmd /c echo Flush DNS + IP Reset Completed Successfully!
-
-cmd /c del /f /s /q %systemdrive%\*.tmp >$null
-
-cmd /c del /f /s /q %systemdrive%\*._mp >$null
-
-cmd /c del /f /s /q %systemdrive%\*.log >$null
-
-cmd /c del /f /s /q %systemdrive%\*.gid >$null
-
-cmd /c del /f /s /q %systemdrive%\*.chk >$null
-
-cmd /c del /f /s /q %systemdrive%\*.old >$null
-
-cmd /c del /f /s /q %systemdrive%\recycled\*.* >$null
-
-cmd /c del /f /s /q %windir%\*.bak >$null
-
-cmd /c del /f /s /q %windir%\prefetch\*.* >$null
-
-cmd /c del /f /q %userprofile%\cookies\*.* >$null
-
-cmd /c del /f /q %userprofile%\recent\*.* >$null
-
-cmd /c del /f /s /q %userprofile%\Local Settings\Temporary Internet Files\*.* >$null
-
-cmd /c del /f /s /q %userprofile%\Local Settings\Temp\*.* >$null
-
-cmd /c del /f /s /q %userprofile%\recent\*.* >$null
-
-cmd /c del /f /s /q %userprofile%\AppData\Local\Temp\*.* >$null
-
-cmd /c del /f /s /q %windir%\Temp\*.* >$null
-
-cmd /c echo Temp folders Cleared Successfully!
+cmd /c 'netsh winsock reset 2>nul' >$null
+cmd /c 'netsh int ip reset 2>nul' >$null
+cmd /c 'ipconfig /release 2>nul' >$null
+cmd /c 'ipconfig /renew 2>nul' >$null
+cmd /c 'ipconfig /flushdns 2>nul' >$null
+cmd /c 'echo Flush DNS + IP Reset Completed Successfully!'
+cmd /c 'del /f /s /q %systemdrive%\*.tmp 2>nul' >$null
+cmd /c 'del /f /s /q %systemdrive%\*._mp 2>nul' >$null
+cmd /c 'del /f /s /q %systemdrive%\*.log 2>nul' >$null
+cmd /c 'del /f /s /q %systemdrive%\*.gid 2>nul' >$null
+cmd /c 'del /f /s /q %systemdrive%\*.chk 2>nul' >$null
+cmd /c 'del /f /s /q %systemdrive%\*.old 2>nul' >$null
+cmd /c 'del /f /s /q %systemdrive%\recycled\*.* 2>nul' >$null
+cmd /c 'del /f /s /q %windir%\*.bak 2>nul' >$null
+cmd /c 'del /f /s /q %windir%\prefetch\*.* 2>nul' >$null
+cmd /c 'del /f /q %userprofile%\cookies\*.* 2>nul' >$null
+cmd /c 'del /f /q %userprofile%\recent\*.* 2>nul' >$null
+cmd /c 'del /f /s /q %userprofile%\Local Settings\Temporary Internet Files\*.* 2>nul' >$null
+cmd /c 'del /f /s /q %userprofile%\Local Settings\Temp\*.* 2>nul' >$null
+cmd /c 'del /f /s /q %userprofile%\recent\*.* 2>nul' >$null
+cmd /c 'del /f /s /q %userprofile%\AppData\Local\Temp\*.* 2>nul' >$null
+cmd /c 'del /f /s /q %windir%\Temp\*.* 2>nul' >$null
+cmd /c 'echo Temp folders Cleared Successfully!'
 }
 
 #Notifying user to reboot!
