@@ -2808,13 +2808,15 @@ cmd /c del /f /q %userprofile%\cookies\*.* >$null
 
 cmd /c del /f /q %userprofile%\recent\*.* >$null
 
-cmd /c del /f /s /q "%userprofile%\Local Settings\Temporary Internet Files\*.*" >$null
+cmd /c del /f /s /q %userprofile%\Local Settings\Temporary Internet Files\*.* >$null
 
-cmd /c del /f /s /q "%userprofile%\Local Settings\Temp\*.*" >$null
+cmd /c del /f /s /q %userprofile%\Local Settings\Temp\*.* >$null
 
-cmd /c del /f /s /q "%userprofile%\recent\*.*" >$null
+cmd /c del /f /s /q %userprofile%\recent\*.* >$null
 
-cmd /c del /f /s /q "%windir%\Temp\*.*" >$null
+cmd /c del /f /s /q %userprofile%\AppData\Local\Temp\*.* >$null
+
+cmd /c del /f /s /q %windir%\Temp\*.* >$null
 
 cmd /c echo Temp folders Cleared Successfully!
 }
