@@ -864,7 +864,7 @@ Function askDefender {
 	Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender\Spynet" -Name "SpynetReporting" -Type DWord -Value 0
 	Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender\Spynet" -Name "SubmitSamplesConsent" -Type DWord -Value 2
 	Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender" -Name "PUAProtection" -ErrorAction SilentlyContinue
-	Set-MpPreference -EnableControlledFolderAccess Disabled
+	Set-MpPreference -EnableControlledFolderAccess Disabled -ErrorAction SilentlyContinue
 	}
     'n' {
         Write-Output "Enabling Microsoft Windows Defender and related Processes..."
@@ -2750,6 +2750,7 @@ cmd /c 'ipconfig /release 2>nul' >$null
 cmd /c 'ipconfig /renew 2>nul' >$null
 cmd /c 'ipconfig /flushdns 2>nul' >$null
 cmd /c 'echo Flush DNS + IP Reset Completed Successfully!'
+cmd /c 'echo Clearing Temp folders....'
 cmd /c 'del /f /s /q %systemdrive%\*.tmp 2>nul' >$null
 cmd /c 'del /f /s /q %systemdrive%\*._mp 2>nul' >$null
 cmd /c 'del /f /s /q %systemdrive%\*.log 2>nul' >$null
