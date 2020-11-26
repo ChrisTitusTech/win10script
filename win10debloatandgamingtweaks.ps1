@@ -25,6 +25,7 @@
 #       DaddyMadu Additions:
 #
 #       - Gaming Tweaks Optimizations
+#       - Quality Of Life Tweaks
 #       - Increasing IRQ8 Priority
 #       - Disable HPET
 #       - Add Ultimate PowerPlan
@@ -201,7 +202,9 @@ $tweaks = @(
 	#"UnpinStartMenuTiles",
 	#"UnpinTaskbarIcons",
 
-
+        ### DaddyMadu Quality Of Life Tweaks ###
+	"QOL",
+	
         ### DaddyMadu Gaming Tweaks ###
 	"DisableDVR1",
 	"DisableDVR2",
@@ -2609,6 +2612,19 @@ Function UnpinTaskbarIcons {
 }
 
 ##########
+# DaddyMadu Quality Of Life Tweaks
+##########
+# Enable Quality Of Life Tweaks
+Function QOL {
+       	Write-Output "Enabling DaddyMadu Quality of Life Tweaks..."
+	New-Item -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\UserProfileEngagement" -Force | Out-Null
+	Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\UserProfileEngagement" -Name "ScoobeSystemSettingEnabled" -Type DWord -Value 0 #disable annoying Get even more out of Windows
+	Set-ItemProperty -Path "HKCU:\Control Panel\Accessibility" -Name "DynamicScrollbars" -Type DWord -Value 0 #disable Hide Scroll bars
+	Set-ItemProperty -Path "HKCU:\Control Panel\Desktop" -Name "SmoothScroll" -Type DWord -Value 0 #disable smooth scrolling 
+	Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer" -Name "NoInstrumentation" -Type DWord -Value 1 #disable microsoft usertracking
+}
+
+##########
 # Gaming Tweaks Functions
 ##########
 # Disabling Game DVR1
@@ -2640,9 +2656,6 @@ Function GameOptimizationFIX {
 	Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games" -Name "Scheduling Category" -Type String -Value "High"
 	Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games" -Name "SFIO Priority" -Type String -Value "High"
 	Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\PriorityControl" -Name "IRQ8Priority" -Type DWord -Value 1
-	Set-ItemProperty -Path "HKCU:\Control Panel\Accessibility" -Name "DynamicScrollbars" -Type DWord -Value 0
-	Set-ItemProperty -Path "HKCU:\Control Panel\Desktop" -Name "SmoothScroll" -Type DWord -Value 0
-	Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer" -Name "NoInstrumentation" -Type DWord -Value 1
 }
 
 #Forcing Raw Mouse Input
