@@ -21,6 +21,9 @@
 #	- Added Confirm Menu for Adobe and Brave Browser
 #	- Changed Default Apps to Notepad++, Brave, Irfanview, and more using XML Import feature
 #
+#	DestroyerX Additions:
+#	- Options for installing programs
+
 ##########
 # Default preset
 $tweaks = @(
@@ -242,8 +245,8 @@ Function InstallTitusProgs {
 	Write-Output "Running O&O Shutup with Recommended Settings"
 	Import-Module BitsTransfer
 	Start-BitsTransfer -Source "https://raw.githubusercontent.com/ChrisTitusTech/win10script/master/ooshutup10.cfg" -Destination ooshutup10.cfg
-	Start-BitsTransfer -Source "https://dl5.oo-software.com/files/ooshutup10/OOSU10.exe" -Destination OOSU10.exe
-	./OOSU10.exe ooshutup10.cfg /quiet
+	choco install shutup10
+	OOSU10 ooshutup10.cfg /quiet
 }
 
 Function InstallBrowser {
@@ -280,7 +283,7 @@ Function InstallOfficeSuite {
     Write-Host "1: Press 'L' to install LibreOffice."
     Write-Host "2: Press 'O' to install OpenOffice."
     Write-Host "3: Press 'N' to skip this."
-	Write-Host "4: Press 'Q' to stop the entire script."
+    Write-Host "4: Press 'Q' to stop the entire script."
     $selection = Read-Host "Please make a selection"
     switch ($selection)
     {
