@@ -21,6 +21,9 @@
 #	- Added Confirm Menu for Adobe and Brave Browser
 #	- Changed Default Apps to Notepad++, Brave, Irfanview, and more using XML Import feature
 #
+#	DestroyerX Additions:
+#	- Options for installing programs
+
 ##########
 # Default preset
 $tweaks = @(
@@ -35,8 +38,9 @@ $tweaks = @(
 	"InstallNotepadplusplus",
 	"InstallIrfanview",
 	"InstallVLC",
+	"InstallBrowser",
+	"InstallOfficeSuite",
 	"InstallAdobe",
-	"InstallBrave",
 	"ChangeDefaultApps",
 
 	### Windows Apps
@@ -241,35 +245,64 @@ Function InstallTitusProgs {
 	Write-Output "Running O&O Shutup with Recommended Settings"
 	Import-Module BitsTransfer
 	Start-BitsTransfer -Source "https://raw.githubusercontent.com/ChrisTitusTech/win10script/master/ooshutup10.cfg" -Destination ooshutup10.cfg
-	Start-BitsTransfer -Source "https://dl5.oo-software.com/files/ooshutup10/OOSU10.exe" -Destination OOSU10.exe
-	./OOSU10.exe ooshutup10.cfg /quiet
+	choco install shutup10
+	OOSU10 ooshutup10.cfg /quiet
 }
 
-Function InstallAdobe {
-	Show-Choco-Menu -Title "Do you want to install Adobe Acrobat Reader?" -ChocoInstall "adobereader"
-}
-
-Function InstallBrave {
+Function InstallBrowser {
 	do
  {
     Clear-Host
-    Write-Host "================ Do You Want to Install Brave Browser? ================"
-    Write-Host "Y: Press 'Y' to do this."
-    Write-Host "2: Press 'N' to skip this."
-	Write-Host "Q: Press 'Q' to stop the entire script."
+    Write-Host "================ Do You Want to Install Brave Browser or Google Chrome? ================"
+    Write-Host "1: Press 'B' to install Brave Browser."
+    Write-Host "2: Press 'C' to install Google Chrome."
+    Write-Host "3: Press 'N' to skip this."
+	Write-Host "4: Press 'Q' to stop the entire script."
     $selection = Read-Host "Please make a selection"
     switch ($selection)
     {
-    'y' { 
-		Invoke-WebRequest -Uri "https://laptop-updates.brave.com/download/CHR253" -OutFile $env:USERPROFILE\Downloads\brave.exe
-		~/Downloads/brave.exe
+    'b' { choco install brave -y
+    	  -Browser "Brave"
+	}
+    'c' { choco install googlechrome -y 
+          -Browser "Chrome"
 	}
     'n' { Break }
     'q' { Exit  }
     }
  }
- until ($selection -match "y" -or $selection -match "n" -or $selection -match "q")
+ until ($selection -match "b" -or $selection -match "c" -or $selection -match "n" -or $selection -match "q")
 	
+}
+
+Function InstallOfficeSuite {
+	do
+ {
+    Clear-Host
+    Write-Host "================ Do You Want to Install LibreOffice or OpenOffice? ================"
+    Write-Host "1: Press 'L' to install LibreOffice."
+    Write-Host "2: Press 'O' to install OpenOffice."
+    Write-Host "3: Press 'N' to skip this."
+    Write-Host "4: Press 'Q' to stop the entire script."
+    $selection = Read-Host "Please make a selection"
+    switch ($selection)
+    {
+    'l' { choco install libreoffice-fresh -y
+    	  -Office "LibreOffice"
+	}
+    'o' { choco install openoffice -y 
+          -Office "OpenOffice"
+	}
+    'n' { Break }
+    'q' { Exit  }
+    }
+ }
+ until ($selection -match "l" -or $selection -match "o" -or $selection -match "n" -or $selection -match "q")
+	
+}
+
+Function InstallAdobe {
+	Show-Choco-Menu -Title "Do you want to install Adobe Acrobat Reader?" -ChocoInstall "adobereader"
 }
 Function Install7Zip {
 	Show-Choco-Menu -Title "Do you want to install 7-Zip?" -ChocoInstall "7zip"
@@ -288,7 +321,7 @@ Function InstallIrfanview {
 }
 
 Function ChangeDefaultApps {
-	Write-Output "Setting Default Programs - Notepad++ Brave VLC IrFanView"
+	Write-Output "Setting Default Programs - Notepad++ $Browser VLC IrFanView"
 	Start-BitsTransfer -Source "https://raw.githubusercontent.com/ChrisTitusTech/win10script/master/MyDefaultAppAssociations.xml" -Destination $HOME\Desktop\MyDefaultAppAssociations.xml
 	dism /online /Import-DefaultAppAssociations:"%UserProfile%\Desktop\MyDefaultAppAssociations.xml"
 }
