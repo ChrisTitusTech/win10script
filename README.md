@@ -3,14 +3,14 @@ This is A FORK Based On ChrisTitusTech that's foucus on debloat and optimize win
 
 ## My Additions
 
-- Dark Mode
-- One Command to launch and run
-- Chocolatey Install
-- O&O Shutup10 CFG and Run
-- Added Install Programs
-- Added Debloat Microsoft Store Apps
-- Disabling Or Enable Microsoft Windows Defender and related Processes.
+- Dark Mode.
+- One Command to launch and run.
+- Chocolatey Install.
+- O&O Shutup10 CFG and Run.
+- Added Install Programs.
+- Added Debloat Microsoft Store Apps.
 - Removing Bloadwares.
+- Disabling Or Enable Microsoft Windows Defender and related Processes.
 - Disabling Telemetry.
 - Disabling Wi-Fi Sense.
 - Disabling SmartScreen Filter.
@@ -85,8 +85,6 @@ This is A FORK Based On ChrisTitusTech that's foucus on debloat and optimize win
 - Enable creation of Thumbs.db.
 - Disabling OneDrive.
 - Uninstalling OneDrive.
-- Uninstalling default Microsoft applications.
-- Uninstalling default third party applications.
 - Disabling built-in Adobe Flash in IE and Edge.
 - Installing Windows Media Player.
 - Uninstalling Internet Explorer.
