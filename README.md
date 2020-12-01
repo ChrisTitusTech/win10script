@@ -49,8 +49,6 @@ This is A FORK Based On ChrisTitusTech that's foucus on debloat and optimize win
 - Stopping and disabling Superfetch service.
 - Starting and enabling Windows Search indexing service.
 - Setting BIOS time to UTC.
-- Sending resync command to local computer
-- The command completed successfully.
 - Disabling Hibernation.
 - Enabling Sleep start menu and keyboard button.
 - Disabling display and sleep mode timeouts.
@@ -95,7 +93,7 @@ This is A FORK Based On ChrisTitusTech that's foucus on debloat and optimize win
 - Uninstalling Work Folders Client.
 - Installing Linux Subsystem.
 - Setting Photo Viewer association for bmp, gif, jpg, png and tif.
-- Adding Photo Viewer to "Open with."
+- Adding Photo Viewer to "Open with.
 - Installing Microsoft Print to PDF.
 - Enabling DaddyMadu Quality of Life Tweaks.
 - Disabling GameDVR1.
