@@ -219,6 +219,7 @@ $tweaks = @(
 	"EnableHAGS",
 	"NetworkOptimizations",
 	"RemoveEdit3D",
+	"FixURLext",  # fix issue with games shortcut that created by games lunchers turned white!
 	"UltimateCleaner",
 	"Finished"
 	### Auxiliary Functions ###
@@ -2741,6 +2742,16 @@ Function RemoveEdit3D {
        Remove-ItemProperty -Path "HKCR:\SystemFileAssociations\.tiff\Shell\" -Name "3D Edit" -ErrorAction SilentlyContinue
 }
 
+#fix issue with games shortcut that created by games lunchers turned white!
+Function FixURLext {
+    Write-Host "Fixing White Games Shortcuts created by game launchers...."
+    choco install -y setuserfta | Out-Null
+    Start-Sleep -s 5
+    SetUserFTA.exe del .url | Out-Null
+    SetUserFTA.exe .url, InternetShortcut | Out-Null
+    choco uninstall -y setuserfta | Out-Null
+}
+    
 #DaddyMadu Ultimate CLeaner
 Function UltimateCleaner {
     Write-Host "Running DaddyMadu Ultimate Cleaner => Temp folders & Flush DNS + Reset IP...."
