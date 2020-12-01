@@ -9,18 +9,109 @@ This is A FORK Based On ChrisTitusTech that's foucus on debloat and optimize win
 - O&O Shutup10 CFG and Run
 - Added Install Programs
 - Added Debloat Microsoft Store Apps
-- Added Choose to Disable or Enable Microsoft Windows Security AKA Windows Defender
-- Added Gaming Optimization Tweaks
-- Added Quality of Life Tweaks
-- Disabling HPET
-- Add Ultimate PowerPlan and Activating. (dublicate might be found if script re-runs, just delete them!)
-- Install Microsoft Visual Studio Libraries 2005-2019
-- Disable FastBoot
+- Disabling Or Enable Microsoft Windows Defender and related Processes.
+- Removing Bloadwares.
+- Disabling Telemetry.
+- Disabling Wi-Fi Sense.
+- Disabling SmartScreen Filter.
+- Disabling Bing Search in Start Menu.
+- Disabling Application suggestions.
+- Disabling Activity History.
+- Disabling Background application access.
+- Disabling Location Tracking.
+- Disabling automatic Maps updates.
+- Disabling Feedback.
+- Disabling Tailored Experiences.
+- Disabling Advertising ID.
+- Disabling Cortana.
+- Disabling Error reporting.
+- Restricting Windows Update P2P only to local network.
+- Stopping and disabling Diagnostics Tracking Service.
+- Stopping and disabling WAP Push Service.
+- Lowering UAC level.
+- Disabling SMB 1.0 protocol.
+- Setting current network profile to private.
+- Setting unknown networks profile to private.
+- Disabling automatic installation of network devices.
+- Enabling F8 boot menu options.
+- Disabling Meltdown (CVE-2017-5754) compatibility flag.
+- Enabling Malicious Software Removal Tool offering.
+- Enabling driver offering through Windows Update.
+- Disabling Windows Update automatic restart.
+- Stopping and disabling Home Groups services.
+- Disabling Shared Experiences.
+- Disabling Remote Assistance.
+- Enabling Remote Desktop w/o Network Level Authentication.
+- Disabling Autoplay.
+- Disabling Autorun for all drives.
+- Disabling Storage Sense.
+- Disabling scheduled defragmentation.
+- Stopping and disabling Superfetch service.
+- Starting and enabling Windows Search indexing service.
+- Setting BIOS time to UTC.
+- Sending resync command to local computer
+- The command completed successfully.
+- Disabling Hibernation.
+- Enabling Sleep start menu and keyboard button.
+- Disabling display and sleep mode timeouts.
+- Disabling Fast Startup.
+- Disabling Action Center.
+- Enabling Lock screen.
+- Enabling Lock screen (removing scheduler workaround).
+- Disabling Sticky keys prompt.
+- Showing task manager details.
+- Showing file operations details.
+- Disabling file delete confirmation dialog.
+- Hiding Taskbar Search icon / box.
+- Hiding Task View button.
+- Hiding People icon.
+- Showing all tray icons.
+- Disabling search for app in store for unknown extensions.
+- Disabling 'How do you want to open this file?' prompt.
+- Adjusting visual effects for performance.
+- Enabling NumLock after startup.
+- Enabling Dark Mode
+- Stopping Edge from taking over as the default .PDF viewer 
+- Showing known file extensions.
+- Hiding hidden files.
+- Hiding sync provider notifications.
+- Hiding recent shortcuts.
+- Changing default Explorer view to This PC.
+- Hiding Music icon from This PC.
+- Hiding Music icon from Explorer namespace.
+- Hiding Videos icon from This PC.
+- Hiding Videos icon from Explorer namespace.
+- Hiding 3D Objects icon from This PC.
+- Hiding 3D Objects icon from Explorer namespace.
+- Enabling thumbnails.
+- Enable creation of Thumbs.db.
+- Disabling OneDrive.
+- Uninstalling OneDrive.
+- Uninstalling default Microsoft applications.
+- Uninstalling default third party applications.
+- Disabling built-in Adobe Flash in IE and Edge.
+- Installing Windows Media Player.
+- Uninstalling Internet Explorer.
+- Uninstalling Work Folders Client.
+- Installing Linux Subsystem.
+- Setting Photo Viewer association for bmp, gif, jpg, png and tif.
+- Adding Photo Viewer to "Open with."
+- Installing Microsoft Print to PDF.
+- Enabling DaddyMadu Quality of Life Tweaks.
+- Disabling GameDVR1.
+- Disabling GameDVR2.
+- Disabling Full ScreenOptimization.
+- Apply Gaming Optimization Fixs.
+- Applying PC Optimizations.
 - Forcing Raw Mouse Input 1:1 and Disabling Enhance Pointer Precision. (some old games donot honor this and might need mouse acceleration fix from here! http://donewmouseaccel.blogspot.com/2010/03/markc-windows-7-mouse-acceleration-fix.html).
-- Enable Windows 10 Gaming Mode
-- Enable Hardware-accelerated GPU scheduling
-- Optimizing Network and applying Tweaks for no throttle and maximum speed!
-- Added DaddyMadu Ultimate Cleaner Temp folders & Flush DNS + Reset IP!
+- Disabling High Precision Event Timer.
+- Enabling Gaming Mode.
+- Enabling HAGS.
+- Optimizing Network and applying Tweaks for no throttle and maximum speed!.
+- Removing Edit with Paint 3D from context menu.
+- Running DaddyMadu Ultimate Cleaner => Temp folders & Flush DNS + Reset IP.
+- Fix issue with games shortcut that created by games lunchers turned white.
+- Clearing Temp folders.
 
 # How To Use!
 Simply Run cmd (Command Prompt) as Administrator and paste the following!
