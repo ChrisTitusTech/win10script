@@ -383,7 +383,7 @@ $Label21.text                    = "- This will modify your system and I highly 
 $Label21.AutoSize                = $true
 $Label21.width                   = 150
 $Label21.height                  = 10
-$Label21.location                = New-Object System.Drawing.Point(390,509)
+$Label21.location                = New-Object System.Drawing.Point(390,507)
 $Label21.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
 
 $Label22                         = New-Object system.Windows.Forms.Label
@@ -399,7 +399,7 @@ $Label23.text                    = "- Need to Restore action center, cortana, et
 $Label23.AutoSize                = $true
 $Label23.width                   = 150
 $Label23.height                  = 10
-$Label23.location                = New-Object System.Drawing.Point(390,525)
+$Label23.location                = New-Object System.Drawing.Point(390,529)
 $Label23.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
 
 $PictureBox1                     = New-Object system.Windows.Forms.PictureBox
