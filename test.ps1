@@ -140,7 +140,7 @@ $Label2.text                     = "(Chocolatey Required for installs)"
 $Label2.AutoSize                 = $true
 $Label2.width                    = 25
 $Label2.height                   = 10
-$Label2.location                 = New-Object System.Drawing.Point(340,58)
+$Label2.location                 = New-Object System.Drawing.Point(477,5)
 $Label2.Font                     = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
 
 $Panel2                          = New-Object system.Windows.Forms.Panel
@@ -160,7 +160,7 @@ $essentialtweaks                 = New-Object system.Windows.Forms.Button
 $essentialtweaks.text            = "Essential Tweaks"
 $essentialtweaks.width           = 200
 $essentialtweaks.height          = 115
-$essentialtweaks.location        = New-Object System.Drawing.Point(15,21)
+$essentialtweaks.location        = New-Object System.Drawing.Point(24,40)
 $essentialtweaks.Font            = New-Object System.Drawing.Font('Microsoft Sans Serif',14)
 
 $backgroundapps                  = New-Object system.Windows.Forms.Button
@@ -303,20 +303,12 @@ $Label12.height                  = 10
 $Label12.location                = New-Object System.Drawing.Point(229,51)
 $Label12.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
 
-$Label14                         = New-Object system.Windows.Forms.Label
-$Label14.text                    = "- Enable Controlled Folder Access"
-$Label14.AutoSize                = $true
-$Label14.width                   = 25
-$Label14.height                  = 10
-$Label14.location                = New-Object System.Drawing.Point(229,73)
-$Label14.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
-
 $Label13                         = New-Object system.Windows.Forms.Label
 $Label13.text                    = "- Enable Meltdown Flag"
 $Label13.AutoSize                = $true
 $Label13.width                   = 25
 $Label13.height                  = 10
-$Label13.location                = New-Object System.Drawing.Point(229,94)
+$Label13.location                = New-Object System.Drawing.Point(229,73)
 $Label13.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
 
 $Label15                         = New-Object system.Windows.Forms.Label
@@ -399,7 +391,7 @@ $Label22.text                    = "(Unsure!?... Just apply Essential Tweaks)"
 $Label22.AutoSize                = $true
 $Label22.width                   = 150
 $Label22.height                  = 10
-$Label22.location                = New-Object System.Drawing.Point(212,263)
+$Label22.location                = New-Object System.Drawing.Point(3,17)
 $Label22.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
 
 $Label23                         = New-Object system.Windows.Forms.Label
@@ -423,12 +415,11 @@ $lightmode.height                = 30
 $lightmode.location              = New-Object System.Drawing.Point(417,49)
 $lightmode.Font                  = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
-$Form.controls.AddRange(@($Panel1,$Label1,$Label2,$Panel2,$Label3,$Panel3,$Label4,$Label15,$Panel4,$Label20,$Label21,$Label22,$Label23,$PictureBox1))
-$Panel1.controls.AddRange(@($installchoco,$brave,$firefox,$7zip,$irfanview,$adobereader,$notepad,$gchrome,$mpc,$vlc,$powertoys,$winterminal,$vscode))
-$Panel2.controls.AddRange(@($essentialtweaks,$backgroundapps,$cortana,$windowssearch,$actioncenter,$darkmode,$visualfx,$onedrive,$lightmode))
-$Panel3.controls.AddRange(@($securitylow,$securityhigh,$Label5,$Label6,$Label7,$Label8,$Label9,$Label10,$Label11,$Label12,$Label14,$Label13))
+$Form.controls.AddRange(@($Panel1,$Label1,$Panel2,$Label3,$Panel3,$Label4,$Label15,$Panel4,$Label20,$Label21,$Label23,$PictureBox1))
+$Panel1.controls.AddRange(@($installchoco,$brave,$firefox,$7zip,$irfanview,$adobereader,$notepad,$gchrome,$mpc,$vlc,$powertoys,$winterminal,$vscode,$Label2))
+$Panel2.controls.AddRange(@($essentialtweaks,$backgroundapps,$cortana,$windowssearch,$actioncenter,$darkmode,$visualfx,$onedrive,$Label22,$lightmode))
+$Panel3.controls.AddRange(@($securitylow,$securityhigh,$Label5,$Label6,$Label7,$Label8,$Label9,$Label10,$Label11,$Label12,$Label13))
 $Panel4.controls.AddRange(@($defaultwindowsupdate,$securitywindowsupdate,$Label16,$Label17,$Label18,$Label19))
-
 
 $installchoco.Add_Click({ 
     Write-Output "Installing Chocolatey"
