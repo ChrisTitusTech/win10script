@@ -140,7 +140,7 @@ $Label2.text                     = "(Chocolatey Required for installs)"
 $Label2.AutoSize                 = $true
 $Label2.width                    = 25
 $Label2.height                   = 10
-$Label2.location                 = New-Object System.Drawing.Point(477,5)
+$Label2.location                 = New-Object System.Drawing.Point(478,3)
 $Label2.Font                     = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
 
 $Panel2                          = New-Object system.Windows.Forms.Panel
@@ -150,10 +150,10 @@ $Panel2.location                 = New-Object System.Drawing.Point(9,262)
 
 $Label3                          = New-Object system.Windows.Forms.Label
 $Label3.text                     = "System Tweaks"
-$Label3.AutoSize                 = $true
-$Label3.width                    = 25
-$Label3.height                   = 10
-$Label3.location                 = New-Object System.Drawing.Point(192,9)
+$Label3.AutoSize                 = $false
+$Label3.width                    = 230
+$Label3.height                   = 25
+$Label3.location                 = New-Object System.Drawing.Point(188,4)
 $Label3.Font                     = New-Object System.Drawing.Font('Microsoft Sans Serif',24)
 
 $essentialtweaks                 = New-Object system.Windows.Forms.Button
@@ -219,10 +219,10 @@ $Panel3.location                 = New-Object System.Drawing.Point(602,261)
 
 $Label4                          = New-Object system.Windows.Forms.Label
 $Label4.text                     = "Security"
-$Label4.AutoSize                 = $true
-$Label4.width                    = 25
-$Label4.height                   = 10
-$Label4.location                 = New-Object System.Drawing.Point(156,10)
+$Label4.AutoSize                 = $false
+$Label4.width                    = 117
+$Label4.height                   = 25
+$Label4.location                 = New-Object System.Drawing.Point(157,5)
 $Label4.Font                     = New-Object System.Drawing.Font('Microsoft Sans Serif',24)
 
 $securitylow                     = New-Object system.Windows.Forms.Button
@@ -244,7 +244,7 @@ $Label5.text                     = "- Set UAC to Never Prompt"
 $Label5.AutoSize                 = $true
 $Label5.width                    = 150
 $Label5.height                   = 10
-$Label5.location                 = New-Object System.Drawing.Point(20,79)
+$Label5.location                 = New-Object System.Drawing.Point(20,80)
 $Label5.Font                     = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
 
 $Label6                          = New-Object system.Windows.Forms.Label
@@ -268,7 +268,7 @@ $Label8.text                     = "- Disable Windows Malware Scan"
 $Label8.AutoSize                 = $true
 $Label8.width                    = 150
 $Label8.height                   = 10
-$Label8.location                 = New-Object System.Drawing.Point(20,118)
+$Label8.location                 = New-Object System.Drawing.Point(20,116)
 $Label8.Font                     = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
 
 $Label9                          = New-Object system.Windows.Forms.Label
@@ -284,7 +284,7 @@ $Label10.text                    = "- Set UAC to Always Prompt"
 $Label10.AutoSize                = $true
 $Label10.width                   = 25
 $Label10.height                  = 10
-$Label10.location                = New-Object System.Drawing.Point(229,94)
+$Label10.location                = New-Object System.Drawing.Point(229,80)
 $Label10.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
 
 $Label11                         = New-Object system.Windows.Forms.Label
@@ -292,7 +292,7 @@ $Label11.text                    = "- Enable Windows Defender"
 $Label11.AutoSize                = $true
 $Label11.width                   = 25
 $Label11.height                  = 10
-$Label11.location                = New-Object System.Drawing.Point(229,116)
+$Label11.location                = New-Object System.Drawing.Point(229,98)
 $Label11.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
 
 $Label12                         = New-Object system.Windows.Forms.Label
@@ -300,7 +300,7 @@ $Label12.text                    = "- Enable Windows Malware Scan"
 $Label12.AutoSize                = $true
 $Label12.width                   = 25
 $Label12.height                  = 10
-$Label12.location                = New-Object System.Drawing.Point(229,51)
+$Label12.location                = New-Object System.Drawing.Point(229,45)
 $Label12.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
 
 $Label13                         = New-Object system.Windows.Forms.Label
@@ -308,7 +308,7 @@ $Label13.text                    = "- Enable Meltdown Flag"
 $Label13.AutoSize                = $true
 $Label13.width                   = 25
 $Label13.height                  = 10
-$Label13.location                = New-Object System.Drawing.Point(229,73)
+$Label13.location                = New-Object System.Drawing.Point(229,63)
 $Label13.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
 
 $Label15                         = New-Object system.Windows.Forms.Label
@@ -372,10 +372,10 @@ $Label19.Font                    = New-Object System.Drawing.Font('Microsoft San
 
 $Label20                         = New-Object system.Windows.Forms.Label
 $Label20.text                    = "Instructions"
-$Label20.AutoSize                = $true
-$Label20.width                   = 25
-$Label20.height                  = 8
-$Label20.location                = New-Object System.Drawing.Point(570,464)
+$Label20.AutoSize                = $false
+$Label20.width                   = 169
+$Label20.height                  = 23
+$Label20.location                = New-Object System.Drawing.Point(573,469)
 $Label20.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',24)
 
 $Label21                         = New-Object system.Windows.Forms.Label
@@ -383,7 +383,7 @@ $Label21.text                    = "- This will modify your system and I highly 
 $Label21.AutoSize                = $true
 $Label21.width                   = 150
 $Label21.height                  = 10
-$Label21.location                = New-Object System.Drawing.Point(391,512)
+$Label21.location                = New-Object System.Drawing.Point(390,509)
 $Label21.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
 
 $Label22                         = New-Object system.Windows.Forms.Label
@@ -399,7 +399,7 @@ $Label23.text                    = "- Need to Restore action center, cortana, et
 $Label23.AutoSize                = $true
 $Label23.width                   = 150
 $Label23.height                  = 10
-$Label23.location                = New-Object System.Drawing.Point(390,531)
+$Label23.location                = New-Object System.Drawing.Point(390,525)
 $Label23.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
 
 $PictureBox1                     = New-Object system.Windows.Forms.PictureBox
@@ -420,6 +420,8 @@ $Panel1.controls.AddRange(@($installchoco,$brave,$firefox,$7zip,$irfanview,$adob
 $Panel2.controls.AddRange(@($Label3,$essentialtweaks,$backgroundapps,$cortana,$windowssearch,$actioncenter,$darkmode,$visualfx,$onedrive,$Label22,$lightmode))
 $Panel3.controls.AddRange(@($Label4,$securitylow,$securityhigh,$Label5,$Label6,$Label7,$Label8,$Label9,$Label10,$Label11,$Label12,$Label13))
 $Panel4.controls.AddRange(@($defaultwindowsupdate,$securitywindowsupdate,$Label16,$Label17,$Label18,$Label19))
+
+
 
 $installchoco.Add_Click({ 
     Write-Output "Installing Chocolatey"
