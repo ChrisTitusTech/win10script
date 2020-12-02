@@ -2,7 +2,7 @@ Add-Type -AssemblyName System.Windows.Forms
 [System.Windows.Forms.Application]::EnableVisualStyles()
 
 $ErrorActionPreference = 'SilentlyContinue'
-
+$wshell = New-Object -ComObject Wscript.Shell
 $Button = [System.Windows.MessageBoxButton]::YesNoCancel
 $ErrorIco = [System.Windows.MessageBoxImage]::Error
 $Ask = 'Do you want to run this as an Administrator?
@@ -426,7 +426,7 @@ $installchoco.Add_Click({
     Write-Host "Installing Chocolatey"
 	Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
 	choco install chocolatey-core.extension -y
-	[System.Windows.MessageBox]::Show('Done Installing Chocolatey')
+	$wshell.Popup("Operation Completed",0,"Done",0x1)
 })
 
 $brave.Add_Click({ 
@@ -437,12 +437,13 @@ $brave.Add_Click({
 $firefox.Add_Click({ 
     Write-Host "Installing Firefox"
     choco install firefox -y
-	[System.Windows.MessageBox]::Show('Done Installing Firefox')
+	$wshell.Popup("Operation Completed",0,"Done",0x1)
 })
 
 $irfanview.Add_Click({ 
     Write-Host "Installing Irfanview (Image Viewer)"
     choco install irfanview -y
+	$wshell.Popup("Operation Completed",0,"Done",0x1)
 })
 
 $adobereader.Add_Click({ 
@@ -453,6 +454,7 @@ $adobereader.Add_Click({
 $notepad.Add_Click({ 
     Write-Host "Installing Notepad++"
     choco install notepadplusplus -y
+	$wshell.Popup("Operation Completed",0,"Done",0x1)
 })
 
 $vlc.Add_Click({ 
