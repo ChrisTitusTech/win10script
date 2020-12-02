@@ -4,6 +4,8 @@
 # Primary Author Source: https://github.com/Disassembler0/Win10-Initial-Setup-Script
 # Tweaked Source: https://gist.github.com/alirobe/7f3b34ad89a159e6daa1/
 # Master Branch : https://github.com/ChrisTitusTech/win10script
+# Current Author : Daddy Madu 
+# Current Author Source: https://github.com/DaddyMadu/Windows10GamingFocus
 #
 #    Note from author: Never run scripts without reading them & understanding what they do.
 #
@@ -11,31 +13,7 @@
 #
 #     > powershell -nop -c "iex(New-Object Net.WebClient).DownloadString('http://tweaks.daddymadu.gg')"
 #
-#	Chris Titus Tech Additions:
-#
-#	- Dark Mode
-#	- One Command to launch and run
-#	- Chocolatey Install
-#	- O&O Shutup10 CFG and Run
-#	- Added Install Programs
-#	- Added Debloat Microsoft Store Apps
-#	- Added Confirm Menu for Adobe and Brave Browser
-#	- Changed Default Apps to Notepad++, Brave, Irfanview, and more using XML Import feature
-#
-#       DaddyMadu Additions:
-#
-#       - Added Choose to Disable or Enable Microsoft Windows Security AKA Windows Defender
-#       - Gaming Tweaks Optimizations
-#       - Quality Of Life Tweaks
-#       - Increasing IRQ8 Priority
-#       - Disable HPET
-#       - Add Ultimate PowerPlan
-#       - Install Microsoft Visual Studio Liberaries 2005-2019
-#       - Forcing Raw Mouse Input 1:1 and Disabling Enhance Pointer Precision. (some old games donot honor this and might need mouse acceleration fix from here! http://donewmouseaccel.blogspot.com/2010/03/markc-windows-7-mouse-acceleration-fix.html).
-#       - Enable Windows 10 Gaming Mode
-#       - Enable Hardware-accelerated GPU scheduling
-#       - Optimizing Network and applying Tweaks for no throttle and maximum speed!
-#       - Added DaddyMadu Ultimate Cleaner Temp folders & Flush DNS + Reset IPes
+#     Changelogs Moved to ReadMe File for better mangement. 
 #
 ##########
 $host.ui.RawUI.WindowTitle = "DaddyMadu Ultimate Windows 10 Debloater and Gaming Focus Tweaker"
@@ -62,6 +40,7 @@ $tweaks = @(
 	
 	### DaddyMadu Windows Defender Settings! Don't Change Order Just Disable with # If You Don't want it ###
 	"askDefender",
+	"DorEOneDrive",                 # Option to Install Or Uninstall Microsoft One Drive!
 
 	### Windows Apps
 	"DebloatAll",
@@ -174,8 +153,6 @@ $tweaks = @(
 	"EnableThumbsDB",              # "EnableThumbsDB", # "DisableThumbsDB", 
 
 	### Application Tweaks ###
-        "DisableOneDrive",              # "EnableOneDrive".
-	"UninstallOneDrive",            # "InstallOneDrive",
 	"UninstallMsftBloat",           # "InstallMsftBloat",
 	"UninstallThirdPartyBloat",     # "InstallThirdPartyBloat",
 	# "UninstallWindowsStore",      # "InstallWindowsStore",
@@ -2027,24 +2004,29 @@ Function EnableThumbsDB {
 ##########
 # Application Tweaks
 ##########
-
-# Disable OneDrive
-Function DisableOneDrive {
+# Option To Uninstall Or install OneDrive 
+#Ask User If He Want to Enable Or Disable Windows Defender
+Function DorEOneDrive {
+	
+	do
+ {
+    Clear-Host
+    Write-Host "================ Do you want to Disable Microsoft OneDrive? ================"
+    Write-Host "Y: Press 'Y' to do this."
+    Write-Host "N: Press 'N' to skip this."
+	Write-Host "Q: Press 'Q' to stop the entire script."
+    $selection = Read-Host "Please make a selection"
+    switch ($selection)
+    {
+    'y' { 
+	Write-Output "Disabling Microsoft OneDrive and related Processes..."
+        # Disable OneDrive
 	Write-Output "Disabling OneDrive..."
 	If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\OneDrive")) {
 		New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\OneDrive" | Out-Null
 	}
 	Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\OneDrive" -Name "DisableFileSyncNGSC" -Type DWord -Value 1
-}
-
-# Enable OneDrive
-Function EnableOneDrive {
-	Write-Output "Enabling OneDrive..."
-	Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\OneDrive" -Name "DisableFileSyncNGSC" -ErrorAction SilentlyContinue
-}
-
 # Uninstall OneDrive - Not applicable to Server
-Function UninstallOneDrive {
 	Write-Output "Uninstalling OneDrive..."
 	$errpref = $ErrorActionPreference #save actual preference
         $ErrorActionPreference = "silentlycontinue"
@@ -2068,16 +2050,27 @@ Function UninstallOneDrive {
 	Remove-Item -Path "HKCR:\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" -Recurse -ErrorAction SilentlyContinue
 	Remove-Item -Path "HKCR:\Wow6432Node\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" -Recurse -ErrorAction SilentlyContinue
 	$ErrorActionPreference = $errpref #restore previous preference
+	}
+    'n' {
+        Write-Output "Enabling Microsoft OneDrive and related Processes..."
+	# Enable OneDrive
+	Write-Output "Enabling OneDrive..."
+	Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\OneDrive" -Name "DisableFileSyncNGSC" -ErrorAction SilentlyContinue
 }
 
 # Install OneDrive - Not applicable to Server
-Function InstallOneDrive {
 	Write-Output "Installing OneDrive..."
 	$onedrive = "$env:SYSTEMROOT\SysWOW64\OneDriveSetup.exe"
 	If (!(Test-Path $onedrive)) {
 		$onedrive = "$env:SYSTEMROOT\System32\OneDriveSetup.exe"
 	}
 	Start-Process $onedrive -NoNewWindow
+		}
+    'q' { Exit  }
+    }
+ }
+ until ($selection -match "y" -or $selection -match "n" -or $selection -match "q")
+	
 }
 
 # Uninstall default Microsoft applications
