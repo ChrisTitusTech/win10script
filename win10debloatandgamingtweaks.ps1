@@ -2005,7 +2005,6 @@ Function EnableThumbsDB {
 # Application Tweaks
 ##########
 # Option To Uninstall Or install OneDrive 
-#Ask User If He Want to Enable Or Disable Windows Defender
 Function DorEOneDrive {
 	
 	do
@@ -2022,7 +2021,7 @@ Function DorEOneDrive {
 	Write-Output "Disabling Microsoft OneDrive and related Processes..."
         # Disable OneDrive
 	$errpref = $ErrorActionPreference #save actual preference
-    $ErrorActionPreference = "silentlycontinue"
+        $ErrorActionPreference = "silentlycontinue"
 	If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\OneDrive")) {
 		New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\OneDrive" | Out-Null
 	}
@@ -2052,6 +2051,8 @@ Function DorEOneDrive {
     'n' {
         Write-Output "Enabling Microsoft OneDrive and related Processes..."
 	# Enable OneDrive
+	$errpref = $ErrorActionPreference #save actual preference
+        $ErrorActionPreference = "silentlycontinue"
 	Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\OneDrive" -Name "DisableFileSyncNGSC" -ErrorAction SilentlyContinue
 	
     # Install OneDrive - Not applicable to Server
@@ -2060,6 +2061,7 @@ Function DorEOneDrive {
 		$onedrive = "$env:SYSTEMROOT\System32\OneDriveSetup.exe"
 	}
 	Start-Process $onedrive -NoNewWindow
+	$ErrorActionPreference = $errpref #restore previous preference
 		}
     'q' { Exit  }
     }
