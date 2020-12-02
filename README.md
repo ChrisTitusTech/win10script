@@ -1,7 +1,10 @@
 # Windows10GamingFocus
 This is A FORK Based On ChrisTitusTech that's foucus on debloat and optimize windows 10 for the lowest latency and best gaming experience, the Ultimate Windows 10 Script is a creation from multiple debloat scripts and gists from github. I also added Chocolatey and other tools to the script that I install on every machine.
 
-## My Additions
+## Latest Changelog!
+Option to Enable & Install Or Disable & Uninstall Microsoft OneDrive
+
+## This Script Does The Following!
 
 - Dark Mode.
 - One Command to launch and run.
@@ -83,8 +86,7 @@ This is A FORK Based On ChrisTitusTech that's foucus on debloat and optimize win
 - Hiding 3D Objects icon from Explorer namespace.
 - Enabling thumbnails.
 - Enable creation of Thumbs.db.
-- Disabling OneDrive.
-- Uninstalling OneDrive.
+- Option to Enable & Install Or Disable & Uninstall Microsoft OneDrive.
 - Disabling built-in Adobe Flash in IE and Edge.
 - Installing Windows Media Player.
 - Uninstalling Internet Explorer.
