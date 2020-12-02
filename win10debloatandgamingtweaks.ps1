@@ -2021,15 +2021,13 @@ Function DorEOneDrive {
     'y' { 
 	Write-Output "Disabling Microsoft OneDrive and related Processes..."
         # Disable OneDrive
-	Write-Output "Disabling OneDrive..."
+	$errpref = $ErrorActionPreference #save actual preference
+    $ErrorActionPreference = "silentlycontinue"
 	If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\OneDrive")) {
 		New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\OneDrive" | Out-Null
 	}
-	Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\OneDrive" -Name "DisableFileSyncNGSC" -Type DWord -Value 1
+	Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\OneDrive" -Name "DisableFileSyncNGSC" -Type DWord -Value 1 -ErrorAction SilentlyContinue
 # Uninstall OneDrive - Not applicable to Server
-	Write-Output "Uninstalling OneDrive..."
-	$errpref = $ErrorActionPreference #save actual preference
-        $ErrorActionPreference = "silentlycontinue"
 	Stop-Process -Name "OneDrive" -ErrorAction SilentlyContinue
 	Start-Sleep -s 2
 	$onedrive = "$env:SYSTEMROOT\SysWOW64\OneDriveSetup.exe"
@@ -2054,12 +2052,9 @@ Function DorEOneDrive {
     'n' {
         Write-Output "Enabling Microsoft OneDrive and related Processes..."
 	# Enable OneDrive
-	Write-Output "Enabling OneDrive..."
 	Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\OneDrive" -Name "DisableFileSyncNGSC" -ErrorAction SilentlyContinue
-}
-
-# Install OneDrive - Not applicable to Server
-	Write-Output "Installing OneDrive..."
+	
+    # Install OneDrive - Not applicable to Server
 	$onedrive = "$env:SYSTEMROOT\SysWOW64\OneDriveSetup.exe"
 	If (!(Test-Path $onedrive)) {
 		$onedrive = "$env:SYSTEMROOT\System32\OneDriveSetup.exe"
