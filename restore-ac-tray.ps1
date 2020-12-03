@@ -28,56 +28,66 @@ If (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]:
     }
 }
 
+Add-Type -AssemblyName System.Windows.Forms
+[System.Windows.Forms.Application]::EnableVisualStyles()
+
 $Form                            = New-Object system.Windows.Forms.Form
-$Form.ClientSize                 = New-Object System.Drawing.Point(600,400)
-$Form.text                       = "Form"
+$Form.ClientSize                 = New-Object System.Drawing.Point(804,708)
+$Form.text                       = "CTT Restore Scripts"
 $Form.TopMost                    = $false
 
 $PictureBox1                     = New-Object system.Windows.Forms.PictureBox
 $PictureBox1.width               = 600
 $PictureBox1.height              = 45
-$PictureBox1.location            = New-Object System.Drawing.Point(0,14)
+$PictureBox1.location            = New-Object System.Drawing.Point(103,23)
 $PictureBox1.imageLocation       = "https://raw.githubusercontent.com/ChrisTitusTech/win10script/master/ctt-restore-scripts.png"
 $PictureBox1.SizeMode            = [System.Windows.Forms.PictureBoxSizeMode]::zoom
-$EActionCenter                  = New-Object system.Windows.Forms.Button
-$EActionCenter.text             = "Enable Action Center"
-$EActionCenter.width            = 200
-$EActionCenter.height           = 30
-$EActionCenter.location         = New-Object System.Drawing.Point(50,100)
-$EActionCenter.Font             = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
+$EActionCenter                   = New-Object system.Windows.Forms.Button
+$EActionCenter.text              = "Enable Action Center"
+$EActionCenter.width             = 200
+$EActionCenter.height            = 30
+$EActionCenter.location          = New-Object System.Drawing.Point(43,106)
+$EActionCenter.Font              = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
 
-$ECortana                       = New-Object system.Windows.Forms.Button
-$ECortana.text                  = "Enable Cortana"
-$ECortana.width                 = 200
-$ECortana.height                = 30
-$ECortana.location              = New-Object System.Drawing.Point(50,150)
-$ECortana.Font                  = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
+$ECortana                        = New-Object system.Windows.Forms.Button
+$ECortana.text                   = "Enable Cortana"
+$ECortana.width                  = 200
+$ECortana.height                 = 30
+$ECortana.location               = New-Object System.Drawing.Point(43,156)
+$ECortana.Font                   = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
 
-$HTrayIcons                     = New-Object system.Windows.Forms.Button
-$HTrayIcons.text                = "Hide Tray Icons"
-$HTrayIcons.width               = 200
-$HTrayIcons.height              = 30
-$HTrayIcons.location            = New-Object System.Drawing.Point(350,100)
-$HTrayIcons.Font                = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
+$HTrayIcons                      = New-Object system.Windows.Forms.Button
+$HTrayIcons.text                 = "Hide Tray Icons"
+$HTrayIcons.width                = 200
+$HTrayIcons.height               = 30
+$HTrayIcons.location             = New-Object System.Drawing.Point(407,106)
+$HTrayIcons.Font                 = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
 
-$Form.controls.AddRange(@($PictureBox1,$EActionCenter,$ECortana,$HTrayIcons))
+$EClipboardHistory               = New-Object system.Windows.Forms.Button
+$EClipboardHistory.text          = "Enable Clipboard History"
+$EClipboardHistory.width         = 200
+$EClipboardHistory.height        = 30
+$EClipboardHistory.location      = New-Object System.Drawing.Point(407,157)
+$EClipboardHistory.Font          = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
 
-$HTrayIcons.Add_Click({ 
-	$ErrorActionPreference = 'SilentlyContinue'
-	Write-Host "Hiding tray icons..."
-	Remove-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer" -Name "EnableAutoTray" -ErrorAction SilentlyContinue 
-	Write-Host "Done - Reverted to Stock Settings"
-})
-	
-$EActionCenter.Add_Click({ 
-	Write-Host "Enabling Action Center..."
+$RWDIcon                         = New-Object system.Windows.Forms.Button
+$RWDIcon.text                    = "Restore Windows Defender Icon"
+$RWDIcon.width                   = 200
+$RWDIcon.height                  = 45
+$RWDIcon.location                = New-Object System.Drawing.Point(43,204)
+$RWDIcon.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
+
+$Form.controls.AddRange(@($PictureBox1,$EActionCenter,$ECortana,$HTrayIcons,$EClipboardHistory,$RWDIcon))
+
+$EActionCenter.Add_Click({
+    Write-Host "Enabling Action Center..."
 	Remove-ItemProperty -Path "HKCU:\SOFTWARE\Policies\Microsoft\Windows\Explorer" -Name "DisableNotificationCenter" -ErrorAction SilentlyContinue
 	Remove-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\PushNotifications" -Name "ToastEnabled" -ErrorAction SilentlyContinue 
 	Write-Host "Done - Reverted to Stock Settings"
 })
 
-$ECortana.Add_Click({ 
-	Write-Host "Enabling Cortana..."
+$ECortana.Add_Click({
+    Write-Host "Enabling Cortana..."
 	Remove-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Personalization\Settings" -Name "AcceptedPrivacyPolicy" -ErrorAction SilentlyContinue
 	If (!(Test-Path "HKCU:\SOFTWARE\Microsoft\InputPersonalization\TrainedDataStore")) {
 		New-Item -Path "HKCU:\SOFTWARE\Microsoft\InputPersonalization\TrainedDataStore" -Force | Out-Null
@@ -86,6 +96,26 @@ $ECortana.Add_Click({
 	Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\InputPersonalization" -Name "RestrictImplicitInkCollection" -Type DWord -Value 0
 	Remove-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\InputPersonalization\TrainedDataStore" -Name "HarvestContacts" -ErrorAction SilentlyContinue
 	Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Windows Search" -Name "AllowCortana" -ErrorAction SilentlyContinue 
+	Write-Host "Done - Reverted to Stock Settings"
+})
+
+$RWDIcon.Add_Click({
+	Write-Host "Restoring Windows Defender Icon..."
+	Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" -Name "SecurityHealth" -Type ExpandString -Value "%windir%\system32\SecurityHealthSystray.exe" 
+	Write-Host "Done - Reverted to Stock Settings"
+})
+
+$HTrayIcons.Add_Click({
+	$ErrorActionPreference = 'SilentlyContinue'
+	Write-Host "Hiding tray icons..."
+	Remove-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer" -Name "EnableAutoTray" -ErrorAction SilentlyContinue 
+	Write-Host "Done - Reverted to Stock Settings"
+})
+
+$EClipboardHistory.Add_Click({
+	Write-Host "Restoring Clipboard History..."
+	Remove-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Clipboard" -Name "EnableClipboardHistory" -ErrorAction SilentlyContinue
+    Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\System" -Name "AllowClipboardHistory" -ErrorAction SilentlyContinue 
 	Write-Host "Done - Reverted to Stock Settings"
 })
 
