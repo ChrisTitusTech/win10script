@@ -2,12 +2,16 @@
 This is A FORK Based On ChrisTitusTech that's foucus on debloat and optimize windows 10 for the lowest latency and best gaming experience, the Ultimate Windows 10 Script is a creation from multiple debloat scripts and gists from github. I also added Chocolatey and other tools to the script that I install on every machine.
 
 ## Changelog!
+
 5 Dec 2020
+```
 fixed Restrict windows update p2p only to local
 added Disable Core Parking on current PowerPlan Ultimate Performance
+```
 2 Dec 2020
+```
 Option to Enable & Install Or Disable & Uninstall Microsoft OneDrive
-
+```
 ## This Script Does The Following!
 
 - Dark Mode.
