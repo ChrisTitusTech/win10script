@@ -7,6 +7,7 @@ This is A FORK Based On ChrisTitusTech that's foucus on debloat and optimize win
 ```
 fixed Restrict windows update p2p only to local
 added Disable Core Parking on current PowerPlan Ultimate Performance
+Now No Need To disable High precision event timer manually! script will do it for you!
 ```
 2 Dec 2020
 ```
@@ -121,7 +122,6 @@ Option to Enable & Install Or Disable & Uninstall Microsoft OneDrive
 - Clearing Temp folders.
 
 # How To Use!
-Please First Disable High Precision Event Timer Device under system Device In Device Manager if Found!
 Disable Any Power saving feature under your network Devices. ex: Lan card, Wifi Card etc!
 also under Network Power Management Untick all marks!
 Click OK and you are good to go!
