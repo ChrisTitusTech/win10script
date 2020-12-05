@@ -2663,6 +2663,7 @@ Function DisableHPET {
         bcdedit /set disabledynamictick yes | Out-Null
         bcdedit /set useplatformtick Yes | Out-Null
         bcdedit /set tscsyncpolicy Enhanced | Out-Null
+	wmic path Win32_PnPEntity where "name='High precision event timer'" call disable | Out-Null
 	$ErrorActionPreference = $errpref #restore previous preference
 }
 
