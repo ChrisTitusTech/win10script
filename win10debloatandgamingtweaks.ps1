@@ -194,6 +194,7 @@ $tweaks = @(
 	"DisableHPET",
 	"EnableGameMode",
 	"EnableHAGS",
+	"DisableCoreParking",
 	"NetworkOptimizations",
 	"RemoveEdit3D",
 	"FixURLext",  # fix issue with games shortcut that created by games lunchers turned white!
@@ -641,10 +642,14 @@ Function EnableErrorReporting {
 # Restrict Windows Update P2P only to local network - Needed only for 1507 as local P2P is the default since 1511
 Function SetP2PUpdateLocal {
 	Write-Output "Restricting Windows Update P2P only to local network..."
+	$errpref = $ErrorActionPreference #save actual preference
+        $ErrorActionPreference = "silentlycontinue"
 	If (!(Test-Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\DeliveryOptimization\Config")) {
 		New-Item -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\DeliveryOptimization\Config" | Out-Null
 	}
-	Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\DeliveryOptimization\Config" -Name "DODownloadMode" -Type DWord -Value 1
+	Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\DeliveryOptimization\Config" -Name "DODownloadMode" -Type DWord -Value 1 | Out-Null -ErrorAction SilentlyContinue
+	Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\DeliveryOptimization" -Name "DODownloadMode" -Type DWord -Value 1 -Force | Out-Null
+	$ErrorActionPreference = $errpref #restore previous preference
 }
 
 # Unrestrict Windows Update P2P
@@ -1071,9 +1076,12 @@ Function EnableRemoteAssistance {
 # Enable Remote Desktop w/o Network Level Authentication
 Function EnableRemoteDesktop {
 	Write-Output "Enabling Remote Desktop w/o Network Level Authentication..."
+	$errpref = $ErrorActionPreference #save actual preference
+        $ErrorActionPreference = "silentlycontinue"
 	Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Terminal Server" -Name "fDenyTSConnections" -Type DWord -Value 0
 	Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp" -Name "UserAuthentication" -Type DWord -Value 0
-	Enable-NetFirewallRule -Name "RemoteDesktop*"
+	Enable-NetFirewallRule -Name "RemoteDesktop*" | Out-Null
+	$ErrorActionPreference = $errpref #restore previous preference
 }
 
 # Disable Remote Desktop
@@ -2676,6 +2684,14 @@ Function EnableUlimatePower {
 	Write-Output "Enabling and Activating Ultimate Power Plan..."
 	powercfg -duplicatescheme e9a42b02-d5df-448d-aa00-03f14749eb61 e9a52b02-d5df-445d-aa00-03f14749eb65 | Out-Null
 	powercfg -setactive e9a52b02-d5df-445d-aa00-03f14749eb65 | Out-Null
+}
+
+#Disable Core Parking on current PowerPlan Ultimate Performance
+Function DisableCoreParking {
+        Write-Output "Disabling Core Parking on current PowerPlan Ultimate Performance..."
+	powercfg -attributes SUB_PROCESSOR CPMINCORES -ATTRIB_HIDE | Out-Null
+	Powercfg -setacvalueindex scheme_current sub_processor CPMINCORES 100 | Out-Null
+	Powercfg -setactive scheme_current | Out-Null
 }
 
 #Optimizing Network and applying Tweaks for no throttle and maximum speed!
