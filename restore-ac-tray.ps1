@@ -46,38 +46,59 @@ $EActionCenter                   = New-Object system.Windows.Forms.Button
 $EActionCenter.text              = "Enable Action Center"
 $EActionCenter.width             = 200
 $EActionCenter.height            = 30
-$EActionCenter.location          = New-Object System.Drawing.Point(43,106)
+$EActionCenter.location          = New-Object System.Drawing.Point(43,99)
 $EActionCenter.Font              = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
 
 $ECortana                        = New-Object system.Windows.Forms.Button
 $ECortana.text                   = "Enable Cortana"
 $ECortana.width                  = 200
 $ECortana.height                 = 30
-$ECortana.location               = New-Object System.Drawing.Point(43,156)
+$ECortana.location               = New-Object System.Drawing.Point(43,153)
 $ECortana.Font                   = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
 
 $HTrayIcons                      = New-Object system.Windows.Forms.Button
 $HTrayIcons.text                 = "Hide Tray Icons"
 $HTrayIcons.width                = 200
 $HTrayIcons.height               = 30
-$HTrayIcons.location             = New-Object System.Drawing.Point(407,106)
+$HTrayIcons.location             = New-Object System.Drawing.Point(407,99)
 $HTrayIcons.Font                 = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
 
 $EClipboardHistory               = New-Object system.Windows.Forms.Button
 $EClipboardHistory.text          = "Enable Clipboard History"
 $EClipboardHistory.width         = 200
 $EClipboardHistory.height        = 30
-$EClipboardHistory.location      = New-Object System.Drawing.Point(407,157)
+$EClipboardHistory.location      = New-Object System.Drawing.Point(407,151)
 $EClipboardHistory.Font          = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
 
 $RWDIcon                         = New-Object system.Windows.Forms.Button
 $RWDIcon.text                    = "Restore Windows Defender Icon"
 $RWDIcon.width                   = 200
 $RWDIcon.height                  = 45
-$RWDIcon.location                = New-Object System.Drawing.Point(43,204)
+$RWDIcon.location                = New-Object System.Drawing.Point(43,207)
 $RWDIcon.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
 
-$Form.controls.AddRange(@($PictureBox1,$EActionCenter,$ECortana,$HTrayIcons,$EClipboardHistory,$RWDIcon))
+$ELocation                       = New-Object system.Windows.Forms.Button
+$ELocation.text                  = "Enable Location"
+$ELocation.width                 = 200
+$ELocation.height                = 30
+$ELocation.location              = New-Object System.Drawing.Point(407,215)
+$ELocation.Font                  = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
+
+$RWindowsSearch                  = New-Object system.Windows.Forms.Button
+$RWindowsSearch.text             = "Restore Windows Search"
+$RWindowsSearch.width            = 200
+$RWindowsSearch.height           = 45
+$RWindowsSearch.location         = New-Object System.Drawing.Point(43,276)
+$RWindowsSearch.Font             = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
+
+$RBackgroundApps                 = New-Object system.Windows.Forms.Button
+$RBackgroundApps.text            = "Restore Background Apps"
+$RBackgroundApps.width           = 200
+$RBackgroundApps.height          = 45
+$RBackgroundApps.location        = New-Object System.Drawing.Point(407,279)
+$RBackgroundApps.Font            = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
+
+$Form.controls.AddRange(@($PictureBox1,$EActionCenter,$ECortana,$HTrayIcons,$EClipboardHistory,$RWDIcon,$ELocation,$RWindowsSearch,$RBackgroundApps))
 
 $EActionCenter.Add_Click({
     Write-Host "Enabling Action Center..."
@@ -105,6 +126,19 @@ $RWDIcon.Add_Click({
 	Write-Host "Done - Reverted to Stock Settings"
 })
 
+$RWindowsSearch.Add_Click({
+	Write-Host "Restoring Windows Search..."
+	Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Search" -Name "BingSearchEnabled" -Type DWord -Value "1"
+	Remove-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Search" -Name "CortanaConsent" -ErrorAction SilentlyContinue
+	Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Windows Search" -Name "DisableWebSearch" -ErrorAction SilentlyContinue
+	Write-Host "Restore and Starting Windows Search Service..."
+    Set-Service "WSearch" -StartupType Automatic
+    Start-Service "WSearch" -WarningAction SilentlyContinue
+    Write-Host "Restore Windows Search Icon..."
+	Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Search" -Name "SearchboxTaskbarMode" -Type DWord -Value 1 
+	Write-Host "Done - Reverted to Stock Settings"
+})
+
 $HTrayIcons.Add_Click({
 	$ErrorActionPreference = 'SilentlyContinue'
 	Write-Host "Hiding tray icons..."
@@ -118,5 +152,34 @@ $EClipboardHistory.Add_Click({
     Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\System" -Name "AllowClipboardHistory" -ErrorAction SilentlyContinue 
 	Write-Host "Done - Reverted to Stock Settings"
 })
+
+$ELocation.Add_Click({
+	Write-Host "Enabling Location Provider..."
+	Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\LocationAndSensors" -Name "DisableWindowsLocationProvider" -ErrorAction SilentlyContinue
+	Write-Host "Enabling Location Scripting..."
+    Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\LocationAndSensors" -Name "DisableLocationScripting" -ErrorAction SilentlyContinue
+	Write-Host "Enabling Location..."
+	Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\LocationAndSensors" -Name "DisableLocation" -ErrorAction SilentlyContinue
+	Remove-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Sensor\Overrides\{BFA794E4-F964-4FDB-90F6-51056BFE4B44}" -Name "SensorPermissionState" -ErrorAction SilentlyContinue
+    Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\DeviceAccess\Global\{BFA794E4-F964-4FDB-90F6-51056BFE4B44}" -Name "Value" -Type String -Value "Allow"
+	Write-Host "Allow access to Location..."
+	Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\location" -Name "Value" -Type String -Value "Allow"
+	Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\lfsvc\Service\Configuration" -Name "Status" -Type DWord -Value "1"
+	Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\AppPrivacy" -Name "LetAppsAccessLocation" -ErrorAction SilentlyContinue
+	Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\AppPrivacy" -Name "LetAppsAccessLocation_UserInControlOfTheseApps" -ErrorAction SilentlyContinue
+	Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\AppPrivacy" -Name "LetAppsAccessLocation_ForceAllowTheseApps" -ErrorAction SilentlyContinue
+	Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\AppPrivacy" -Name "LetAppsAccessLocation_ForceDenyTheseApps" -ErrorAction SilentlyContinue 
+	Write-Host "Done - Reverted to Stock Settings"
+})
+
+$RBackgroundApps.Add_Click({
+	Write-Host "Allowing Background Apps..."
+	Get-ChildItem -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\BackgroundAccessApplications" -Exclude "Microsoft.Windows.Cortana*" | ForEach {
+		Remove-ItemProperty -Path $_.PsPath -Name "Disabled" -ErrorAction SilentlyContinue
+		Remove-ItemProperty -Path $_.PsPath -Name "DisabledByUser" -ErrorAction SilentlyContinue
+	}
+	Write-Host "Done - Reverted to Stock Settings"
+})
+
 
 [void]$Form.ShowDialog()
