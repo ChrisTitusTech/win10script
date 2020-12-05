@@ -1,7 +1,11 @@
 # Windows10GamingFocus
 This is A FORK Based On ChrisTitusTech that's foucus on debloat and optimize windows 10 for the lowest latency and best gaming experience, the Ultimate Windows 10 Script is a creation from multiple debloat scripts and gists from github. I also added Chocolatey and other tools to the script that I install on every machine.
 
-## Latest Changelog!
+## Changelog!
+5 Dec 2020
+fixed Restrict windows update p2p only to local
+added Disable Core Parking on current PowerPlan Ultimate Performance
+2 Dec 2020
 Option to Enable & Install Or Disable & Uninstall Microsoft OneDrive
 
 ## This Script Does The Following!
@@ -105,6 +109,7 @@ Option to Enable & Install Or Disable & Uninstall Microsoft OneDrive
 - Disabling High Precision Event Timer.
 - Enabling Gaming Mode.
 - Enabling HAGS.
+- Disable Windows 10 Core Parking On Current PowerPlan "Ultimate Performance".
 - Optimizing Network and applying Tweaks for no throttle and maximum speed!.
 - Removing Edit with Paint 3D from context menu.
 - Running DaddyMadu Ultimate Cleaner => Temp folders & Flush DNS + Reset IP.
@@ -112,6 +117,10 @@ Option to Enable & Install Or Disable & Uninstall Microsoft OneDrive
 - Clearing Temp folders.
 
 # How To Use!
+Please First Disable High Precision Event Timer Device under system Device In Device Manager if Found!
+Disable Any Power saving feature under your network Devices. ex: Lan card, Wifi Card etc!
+also under Network Power Management Untick all marks!
+Click OK and you are good to go!
 Simply Run cmd (Command Prompt) as Administrator and paste the following!
 ```
 powershell -nop -c "iex(New-Object Net.WebClient).DownloadString('http://tweaks.daddymadu.gg')"
