@@ -917,19 +917,25 @@ Function askMSWSAPPX {
     {
     'y' { 
 	    Write-Output "Disabling Microsoft Store and WSAPPX Service..."
+	        $errpref = $ErrorActionPreference #save actual preference
+                $ErrorActionPreference = "silentlycontinue"
 		Get-AppxPackage "Microsoft.DesktopAppInstaller" | Remove-AppxPackage -ErrorAction SilentlyContinue
 		Get-AppxPackage "Microsoft.WindowsStore" | Remove-AppxPackage -ErrorAction SilentlyContinue
 		New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\WindowsStore" -Force | Out-Null
 		Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\WindowsStore" -Name "DisableStoreApps" -Type DWord -Value 1 -ErrorAction SilentlyContinue
 		Set-ItemProperty -Path "HKLM:\SYSTEM\ControlSet001\Services\AppXSvc" -Name "Start" -Type DWord -Value 4 -ErrorAction SilentlyContinue
+		$ErrorActionPreference = $errpref #restore previous preference
 	}
     'n' {
         Write-Output "Enabling Microsoft Store and WSAPPX Service..."
+		$errpref = $ErrorActionPreference #save actual preference
+                $ErrorActionPreference = "silentlycontinue"
 		Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\WindowsStore" -Name "DisableStoreApps" -ErrorAction SilentlyContinue
 		Remove-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\WindowsStore" -Force | Out-Null
 		Set-ItemProperty -Path "HKLM:\SYSTEM\ControlSet001\Services\AppXSvc" -Name "Start" -Type DWord -Value 3 -ErrorAction SilentlyContinue
 		Get-AppxPackage -AllUsers "Microsoft.DesktopAppInstaller" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"} -ErrorAction SilentlyContinue
 		Get-AppxPackage -AllUsers "Microsoft.WindowsStore" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"} -ErrorAction SilentlyContinue
+		$ErrorActionPreference = $errpref #restore previous preference
 		}
     'q' { Exit  }
     }
@@ -2317,20 +2323,6 @@ Function InstallThirdPartyBloat {
 	$ErrorActionPreference = $errpref #restore previous preference
 }
 
-# Uninstall Windows Store
-Function UninstallWindowsStore {
-	Write-Output "Uninstalling Windows Store..."
-	Get-AppxPackage "Microsoft.DesktopAppInstaller" | Remove-AppxPackage
-	Get-AppxPackage "Microsoft.WindowsStore" | Remove-AppxPackage
-}
-
-# Install Windows Store
-Function InstallWindowsStore {
-	Write-Output "Installing Windows Store..."
-	Get-AppxPackage -AllUsers "Microsoft.DesktopAppInstaller" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"}
-	Get-AppxPackage -AllUsers "Microsoft.WindowsStore" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"}
-}
-
 # Disable Xbox features
 Function DisableXboxFeatures {
 	Write-Output "Disabling Xbox features..."
@@ -2871,7 +2863,7 @@ cmd /c 'echo Temp folders Cleared Successfully!'
 #Notifying user to reboot!
 Function Finished {
         Start-Sleep -s 5
-        Write-Output "Done! Please Reboot Your PC! and don't forget to follow me on Social Media."
+        Write-Output "Done! Please Reboot Your PC! Kindly note that if you choose to disable Microsoft Store and WSAPPX Service and wanted to enable it again, you have to run the script then restart pc and rerun it again with the same settings to get Microsoft Store back! and don't forget to follow me on Social Media."
         Start "http://daddymadu.gg"
 }
 
