@@ -3,6 +3,12 @@ This is A FORK Based On ChrisTitusTech that's foucus on debloat and optimize win
 
 ## Changelog!
 
+6 Dec 2020
+```
+added Option to enable or disable Microsoft Software Protection Platform Service” Causing High CPU Usage in older systems
+added Option to enable or disable Microsoft Store and Wsappx to Fix 100% Disk Usage in Windows 10 in older systems
+```
+
 5 Dec 2020
 ```
 fixed Restrict windows update p2p only to local
@@ -22,7 +28,9 @@ Option to Enable & Install Or Disable & Uninstall Microsoft OneDrive
 - Added Install Programs.
 - Added Debloat Microsoft Store Apps.
 - Removing Bloadwares.
-- Disabling Or Enable Microsoft Windows Defender and related Processes.
+- Disable Or Enable Microsoft Windows Defender and related Processes.
+- Disable or Enable Microsoft Software Protection Platform Service” Causing High CPU Usage.
+- Disable or Enable Wsappx to Fix 100% Disk Usage in Windows 10 in older systems.
 - Disabling Telemetry.
 - Disabling Wi-Fi Sense.
 - Disabling SmartScreen Filter.
