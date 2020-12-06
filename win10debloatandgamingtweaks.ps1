@@ -3018,8 +3018,11 @@ Function DebloatAll {
         #"*Microsoft.WindowsStore*"
     )
     foreach ($Bloat in $Bloatware) {
-        Get-AppxPackage -Name $Bloat| Remove-AppxPackage
-        Get-AppxProvisionedPackage -Online | Where-Object DisplayName -like $Bloat | Remove-AppxProvisionedPackage -Online
+	    $errpref = $ErrorActionPreference #save actual preference
+        $ErrorActionPreference = "silentlycontinue"
+        Get-AppxPackage -Name $Bloat| Remove-AppxPackage -ErrorAction SilentlyContinue
+        Get-AppxProvisionedPackage -Online | Where-Object DisplayName -like $Bloat | Remove-AppxProvisionedPackage -Online -ErrorAction SilentlyContinue
+		$ErrorActionPreference = $errpref #restore previous preference
         Write-Output "Trying to remove $Bloat."
     }
 }
