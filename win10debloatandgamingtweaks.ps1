@@ -2151,45 +2151,45 @@ Function UninstallMsftBloat {
 	Write-Output "Uninstalling default Microsoft applications..."
 	$errpref = $ErrorActionPreference #save actual preference
         $ErrorActionPreference = "silentlycontinue"
-	Get-AppxPackage "Microsoft.3DBuilder" | Remove-AppxPackage | Out-Null
-	Get-AppxPackage "Microsoft.AppConnector" | Remove-AppxPackage | Out-Null
-	Get-AppxPackage "Microsoft.BingFinance" | Remove-AppxPackage | Out-Null
-	Get-AppxPackage "Microsoft.BingNews" | Remove-AppxPackage | Out-Null
-	Get-AppxPackage "Microsoft.BingSports" | Remove-AppxPackage | Out-Null
-	Get-AppxPackage "Microsoft.BingTranslator" | Remove-AppxPackage | Out-Null
-	Get-AppxPackage "Microsoft.BingWeather" | Remove-AppxPackage | Out-Null
-	#Get-AppxPackage "Microsoft.CommsPhone" | Remove-AppxPackage | Out-Null
-	#Get-AppxPackage "Microsoft.ConnectivityStore" | Remove-AppxPackage | Out-Null
-	Get-AppxPackage "Microsoft.GetHelp" | Remove-AppxPackage | Out-Null
-	Get-AppxPackage "Microsoft.Getstarted" | Remove-AppxPackage | Out-Null
-	Get-AppxPackage "Microsoft.Messaging" | Remove-AppxPackage | Out-Null
-	Get-AppxPackage "Microsoft.Microsoft3DViewer" | Remove-AppxPackage | Out-Null
-	Get-AppxPackage "Microsoft.MicrosoftPowerBIForWindows" | Remove-AppxPackage | Out-Null
-	Get-AppxPackage "Microsoft.MicrosoftSolitaireCollection" | Remove-AppxPackage | Out-Null
-	Get-AppxPackage "Microsoft.MicrosoftStickyNotes" | Remove-AppxPackage | Out-Null
-	Get-AppxPackage "Microsoft.NetworkSpeedTest" | Remove-AppxPackage | Out-Null
-	Get-AppxPackage "Microsoft.Office.OneNote" | Remove-AppxPackage | Out-Null
-	Get-AppxPackage "Microsoft.Office.Sway" | Remove-AppxPackage | Out-Null
-	Get-AppxPackage "Microsoft.OneConnect" | Remove-AppxPackage | Out-Null
-	Get-AppxPackage "Microsoft.People" | Remove-AppxPackage | Out-Null
-	Get-AppxPackage "Microsoft.Print3D" | Remove-AppxPackage | Out-Null
-	Get-AppxPackage "Microsoft.RemoteDesktop" | Remove-AppxPackage | Out-Null
-	Get-AppxPackage "Microsoft.Wallet" | Remove-AppxPackage | Out-Null
-	Get-AppxPackage "Microsoft.WindowsAlarms" | Remove-AppxPackage | Out-Null
-	Get-AppxPackage "Microsoft.WindowsCamera" | Remove-AppxPackage | Out-Null
-	#Get-AppxPackage "microsoft.windowscommunicationsapps" | Remove-AppxPackage | Out-Null
-	Get-AppxPackage "Microsoft.WindowsFeedbackHub" | Remove-AppxPackage | Out-Null
-	Get-AppxPackage "Microsoft.WindowsMaps" | Remove-AppxPackage | Out-Null
-	#Get-AppxPackage "Microsoft.WindowsPhone" | Remove-AppxPackage | Out-Null
-	Get-AppxPackage "Microsoft.Windows.Photos" | Remove-AppxPackage | Out-Null
-	Get-AppxPackage "Microsoft.WindowsSoundRecorder" | Remove-AppxPackage | Out-Null
-	Get-AppxPackage "Microsoft.ZuneMusic" | Remove-AppxPackage | Out-Null
-	Get-AppxPackage "Microsoft.ZuneVideo" | Remove-AppxPackage | Out-Null
-	Get-AppxPackage *MicrosoftOfficeHub* | Remove-AppxPackage | Out-Null
-	Get-AppxPackage *Microsoft.MixedReality.Portal* | Remove-AppxPackage | Out-Null
-	Get-AppxPackage *Microsoft.ScreenSketch* | Remove-AppxPackage | Out-Null
-	Get-AppxPackage *Microsoft.MSPaint* | Remove-AppxPackage | Out-Null
-	Get-AppxPackage -allusers Microsoft.549981C3F5F10 | Remove-AppxPackage | Out-Null
+	Get-AppxPackage "Microsoft.3DBuilder" | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage "Microsoft.AppConnector" | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage "Microsoft.BingFinance" | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage "Microsoft.BingNews" | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage "Microsoft.BingSports" | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage "Microsoft.BingTranslator" | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage "Microsoft.BingWeather" | Remove-AppxPackage -ErrorAction SilentlyContinue
+	#Get-AppxPackage "Microsoft.CommsPhone" | Remove-AppxPackage -ErrorAction SilentlyContinue
+	#Get-AppxPackage "Microsoft.ConnectivityStore" | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage "Microsoft.GetHelp" | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage "Microsoft.Getstarted" | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage "Microsoft.Messaging" | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage "Microsoft.Microsoft3DViewer" | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage "Microsoft.MicrosoftPowerBIForWindows" | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage "Microsoft.MicrosoftSolitaireCollection" | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage "Microsoft.MicrosoftStickyNotes" | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage "Microsoft.NetworkSpeedTest" | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage "Microsoft.Office.OneNote" | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage "Microsoft.Office.Sway" | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage "Microsoft.OneConnect" | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage "Microsoft.People" | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage "Microsoft.Print3D" | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage "Microsoft.RemoteDesktop" | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage "Microsoft.Wallet" | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage "Microsoft.WindowsAlarms" | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage "Microsoft.WindowsCamera" | Remove-AppxPackage -ErrorAction SilentlyContinue
+	#Get-AppxPackage "microsoft.windowscommunicationsapps" | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage "Microsoft.WindowsFeedbackHub" | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage "Microsoft.WindowsMaps" | Remove-AppxPackage -ErrorAction SilentlyContinue
+	#Get-AppxPackage "Microsoft.WindowsPhone" | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage "Microsoft.Windows.Photos" | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage "Microsoft.WindowsSoundRecorder" | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage "Microsoft.ZuneMusic" | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage "Microsoft.ZuneVideo" | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage *MicrosoftOfficeHub* | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage *Microsoft.MixedReality.Portal* | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage *Microsoft.ScreenSketch* | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage *Microsoft.MSPaint* | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage -allusers Microsoft.549981C3F5F10 | Remove-AppxPackage -ErrorAction SilentlyContinue
 	$ErrorActionPreference = $errpref #restore previous preference
 }
 
@@ -2198,42 +2198,42 @@ Function InstallMsftBloat {
 	Write-Output "Installing default Microsoft applications..."
 	$errpref = $ErrorActionPreference #save actual preference
         $ErrorActionPreference = "silentlycontinue"
-	Get-AppxPackage -AllUsers "Microsoft.3DBuilder" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"} | Out-Null
-	Get-AppxPackage -AllUsers "Microsoft.AppConnector" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"} | Out-Null
-	Get-AppxPackage -AllUsers "Microsoft.BingFinance" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"} | Out-Null
-	Get-AppxPackage -AllUsers "Microsoft.BingNews" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"} | Out-Null
-	Get-AppxPackage -AllUsers "Microsoft.BingSports" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"} | Out-Null
-	Get-AppxPackage -AllUsers "Microsoft.BingTranslator" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"} | Out-Null
-	Get-AppxPackage -AllUsers "Microsoft.BingWeather" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"} | Out-Null
-	Get-AppxPackage -AllUsers "Microsoft.CommsPhone" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"} | Out-Null
-	Get-AppxPackage -AllUsers "Microsoft.ConnectivityStore" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"} | Out-Null
-	Get-AppxPackage -AllUsers "Microsoft.GetHelp" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"} | Out-Null
-	Get-AppxPackage -AllUsers "Microsoft.Getstarted" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"} | Out-Null
-	Get-AppxPackage -AllUsers "Microsoft.Messaging" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"} | Out-Null
-	Get-AppxPackage -AllUsers "Microsoft.Microsoft3DViewer" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"} | Out-Null
-	Get-AppxPackage -AllUsers "Microsoft.MicrosoftPowerBIForWindows" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"} | Out-Null
-	Get-AppxPackage -AllUsers "Microsoft.MicrosoftSolitaireCollection" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"} | Out-Null
-	Get-AppxPackage -AllUsers "Microsoft.MicrosoftStickyNotes" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"} | Out-Null
-	Get-AppxPackage -AllUsers "Microsoft.MinecraftUWP" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"} | Out-Null
-	Get-AppxPackage -AllUsers "Microsoft.MSPaint" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"} | Out-Null
-	Get-AppxPackage -AllUsers "Microsoft.NetworkSpeedTest" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"} | Out-Null
-	Get-AppxPackage -AllUsers "Microsoft.Office.Sway" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"} | Out-Null
-	Get-AppxPackage -AllUsers "Microsoft.OneConnect" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"} | Out-Null
-	Get-AppxPackage -AllUsers "Microsoft.People" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"} | Out-Null
-	Get-AppxPackage -AllUsers "Microsoft.Print3D" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"} | Out-Null
-	Get-AppxPackage -AllUsers "Microsoft.RemoteDesktop" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"} | Out-Null
-	Get-AppxPackage -AllUsers "Microsoft.SkypeApp" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"} | Out-Null
-	Get-AppxPackage -AllUsers "Microsoft.Wallet" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"} | Out-Null
-	Get-AppxPackage -AllUsers "Microsoft.WindowsAlarms" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"} | Out-Null
-	Get-AppxPackage -AllUsers "Microsoft.WindowsCamera" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"} | Out-Null
-	Get-AppxPackage -AllUsers "Microsoft.windowscommunicationsapps" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml" | Out-Null}
-	Get-AppxPackage -AllUsers "Microsoft.WindowsFeedbackHub" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"} | Out-Null
-	Get-AppxPackage -AllUsers "Microsoft.WindowsMaps" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"} | Out-Null
-	Get-AppxPackage -AllUsers "Microsoft.WindowsPhone" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"} | Out-Null
-	Get-AppxPackage -AllUsers "Microsoft.Windows.Photos" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"} | Out-Null
-	Get-AppxPackage -AllUsers "Microsoft.WindowsSoundRecorder" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"} | Out-Null
-	Get-AppxPackage -AllUsers "Microsoft.ZuneMusic" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"} | Out-Null
-	Get-AppxPackage -AllUsers "Microsoft.ZuneVideo" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"} | Out-Null
+	Get-AppxPackage -AllUsers "Microsoft.3DBuilder" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"} -ErrorAction SilentlyContinue
+	Get-AppxPackage -AllUsers "Microsoft.AppConnector" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"} -ErrorAction SilentlyContinue
+	Get-AppxPackage -AllUsers "Microsoft.BingFinance" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"} -ErrorAction SilentlyContinue
+	Get-AppxPackage -AllUsers "Microsoft.BingNews" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"} -ErrorAction SilentlyContinue
+	Get-AppxPackage -AllUsers "Microsoft.BingSports" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"} -ErrorAction SilentlyContinue
+	Get-AppxPackage -AllUsers "Microsoft.BingTranslator" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"} -ErrorAction SilentlyContinue
+	Get-AppxPackage -AllUsers "Microsoft.BingWeather" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"} -ErrorAction SilentlyContinue
+	Get-AppxPackage -AllUsers "Microsoft.CommsPhone" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"} -ErrorAction SilentlyContinue
+	Get-AppxPackage -AllUsers "Microsoft.ConnectivityStore" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"} -ErrorAction SilentlyContinue
+	Get-AppxPackage -AllUsers "Microsoft.GetHelp" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"} -ErrorAction SilentlyContinue
+	Get-AppxPackage -AllUsers "Microsoft.Getstarted" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"} -ErrorAction SilentlyContinue
+	Get-AppxPackage -AllUsers "Microsoft.Messaging" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"} -ErrorAction SilentlyContinue
+	Get-AppxPackage -AllUsers "Microsoft.Microsoft3DViewer" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"} -ErrorAction SilentlyContinue
+	Get-AppxPackage -AllUsers "Microsoft.MicrosoftPowerBIForWindows" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"} -ErrorAction SilentlyContinue
+	Get-AppxPackage -AllUsers "Microsoft.MicrosoftSolitaireCollection" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"} -ErrorAction SilentlyContinue
+	Get-AppxPackage -AllUsers "Microsoft.MicrosoftStickyNotes" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"} -ErrorAction SilentlyContinue
+	Get-AppxPackage -AllUsers "Microsoft.MinecraftUWP" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"} -ErrorAction SilentlyContinue
+	Get-AppxPackage -AllUsers "Microsoft.MSPaint" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"} -ErrorAction SilentlyContinue
+	Get-AppxPackage -AllUsers "Microsoft.NetworkSpeedTest" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"} -ErrorAction SilentlyContinue
+	Get-AppxPackage -AllUsers "Microsoft.Office.Sway" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"} -ErrorAction SilentlyContinue
+	Get-AppxPackage -AllUsers "Microsoft.OneConnect" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"} -ErrorAction SilentlyContinue
+	Get-AppxPackage -AllUsers "Microsoft.People" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"} -ErrorAction SilentlyContinue
+	Get-AppxPackage -AllUsers "Microsoft.Print3D" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"} -ErrorAction SilentlyContinue
+	Get-AppxPackage -AllUsers "Microsoft.RemoteDesktop" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"} -ErrorAction SilentlyContinue
+	Get-AppxPackage -AllUsers "Microsoft.SkypeApp" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"} -ErrorAction SilentlyContinue
+	Get-AppxPackage -AllUsers "Microsoft.Wallet" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"} -ErrorAction SilentlyContinue
+	Get-AppxPackage -AllUsers "Microsoft.WindowsAlarms" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"} -ErrorAction SilentlyContinue
+	Get-AppxPackage -AllUsers "Microsoft.WindowsCamera" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"} -ErrorAction SilentlyContinue
+	Get-AppxPackage -AllUsers "Microsoft.windowscommunicationsapps" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml" -ErrorAction SilentlyContinue}
+	Get-AppxPackage -AllUsers "Microsoft.WindowsFeedbackHub" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"} -ErrorAction SilentlyContinue
+	Get-AppxPackage -AllUsers "Microsoft.WindowsMaps" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"} -ErrorAction SilentlyContinue
+	Get-AppxPackage -AllUsers "Microsoft.WindowsPhone" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"} -ErrorAction SilentlyContinue
+	Get-AppxPackage -AllUsers "Microsoft.Windows.Photos" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"} -ErrorAction SilentlyContinue
+	Get-AppxPackage -AllUsers "Microsoft.WindowsSoundRecorder" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"} -ErrorAction SilentlyContinue
+	Get-AppxPackage -AllUsers "Microsoft.ZuneMusic" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"} -ErrorAction SilentlyContinue
+	Get-AppxPackage -AllUsers "Microsoft.ZuneVideo" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"} -ErrorAction SilentlyContinue
 	$ErrorActionPreference = $errpref #restore previous preference
 }
 # In case you have removed them for good, you can try to restore the files using installation medium as follows
@@ -2248,35 +2248,35 @@ function UninstallThirdPartyBloat {
 	Write-Output "Uninstalling default third party applications..."
 	$errpref = $ErrorActionPreference #save actual preference
         $ErrorActionPreference = "silentlycontinue"
-	Get-AppxPackage "2414FC7A.Viber" | Remove-AppxPackage | Out-Null
-	Get-AppxPackage "41038Axilesoft.ACGMediaPlayer" | Remove-AppxPackage | Out-Null
-	Get-AppxPackage "46928bounde.EclipseManager" | Remove-AppxPackage | Out-Null
-	Get-AppxPackage "4DF9E0F8.Netflix" | Remove-AppxPackage | Out-Null
-	Get-AppxPackage "64885BlueEdge.OneCalendar" | Remove-AppxPackage | Out-Null
-	Get-AppxPackage "7EE7776C.LinkedInforWindows" | Remove-AppxPackage | Out-Null
-	Get-AppxPackage "828B5831.HiddenCityMysteryofShadows" | Remove-AppxPackage | Out-Null
-	Get-AppxPackage "89006A2E.AutodeskSketchBook" | Remove-AppxPackage | Out-Null
-	Get-AppxPackage "9E2F88E3.Twitter" | Remove-AppxPackage | Out-Null
-	Get-AppxPackage "A278AB0D.DisneyMagicKingdoms" | Remove-AppxPackage | Out-Null
-	Get-AppxPackage "A278AB0D.MarchofEmpires" | Remove-AppxPackage | Out-Null
-	Get-AppxPackage "ActiproSoftwareLLC.562882FEEB491" | Remove-AppxPackage | Out-Null
-	Get-AppxPackage "AdobeSystemsIncorporated.AdobePhotoshopExpress" | Remove-AppxPackage | Out-Null
-	Get-AppxPackage "CAF9E577.Plex" | Remove-AppxPackage | Out-Null
-	Get-AppxPackage "D52A8D61.FarmVille2CountryEscape" | Remove-AppxPackage | Out-Null
-	Get-AppxPackage "D5EA27B7.Duolingo-LearnLanguagesforFree" | Remove-AppxPackage | Out-Null
-	Get-AppxPackage "DB6EA5DB.CyberLinkMediaSuiteEssentials" | Remove-AppxPackage | Out-Null
-	Get-AppxPackage "DolbyLaboratories.DolbyAccess" | Remove-AppxPackage | Out-Null
-	Get-AppxPackage "Drawboard.DrawboardPDF" | Remove-AppxPackage | Out-Null
-	Get-AppxPackage "Facebook.Facebook" | Remove-AppxPackage | Out-Null
-	Get-AppxPackage "flaregamesGmbH.RoyalRevolt2" | Remove-AppxPackage | Out-Null
-	Get-AppxPackage "GAMELOFTSA.Asphalt8Airborne" | Remove-AppxPackage | Out-Null
-	Get-AppxPackage "KeeperSecurityInc.Keeper" | Remove-AppxPackage | Out-Null
-	Get-AppxPackage "king.com.BubbleWitch3Saga" | Remove-AppxPackage | Out-Null
-	Get-AppxPackage "king.com.CandyCrushSodaSaga" | Remove-AppxPackage | Out-Null
-	Get-AppxPackage "PandoraMediaInc.29680B314EFC2" | Remove-AppxPackage | Out-Null
-	Get-AppxPackage "SpotifyAB.SpotifyMusic" | Remove-AppxPackage | Out-Null
-	Get-AppxPackage "WinZipComputing.WinZipUniversal" | Remove-AppxPackage | Out-Null
-	Get-AppxPackage "XINGAG.XING" | Remove-AppxPackage | Out-Null
+	Get-AppxPackage "2414FC7A.Viber" | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage "41038Axilesoft.ACGMediaPlayer" | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage "46928bounde.EclipseManager" | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage "4DF9E0F8.Netflix" | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage "64885BlueEdge.OneCalendar" | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage "7EE7776C.LinkedInforWindows" | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage "828B5831.HiddenCityMysteryofShadows" | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage "89006A2E.AutodeskSketchBook" | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage "9E2F88E3.Twitter" | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage "A278AB0D.DisneyMagicKingdoms" | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage "A278AB0D.MarchofEmpires" | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage "ActiproSoftwareLLC.562882FEEB491" | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage "AdobeSystemsIncorporated.AdobePhotoshopExpress" | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage "CAF9E577.Plex" | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage "D52A8D61.FarmVille2CountryEscape" | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage "D5EA27B7.Duolingo-LearnLanguagesforFree" | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage "DB6EA5DB.CyberLinkMediaSuiteEssentials" | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage "DolbyLaboratories.DolbyAccess" | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage "Drawboard.DrawboardPDF" | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage "Facebook.Facebook" | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage "flaregamesGmbH.RoyalRevolt2" | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage "GAMELOFTSA.Asphalt8Airborne" | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage "KeeperSecurityInc.Keeper" | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage "king.com.BubbleWitch3Saga" | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage "king.com.CandyCrushSodaSaga" | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage "PandoraMediaInc.29680B314EFC2" | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage "SpotifyAB.SpotifyMusic" | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage "WinZipComputing.WinZipUniversal" | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage "XINGAG.XING" | Remove-AppxPackage -ErrorAction SilentlyContinue
 	$ErrorActionPreference = $errpref #restore previous preference
 }
 
@@ -2285,35 +2285,35 @@ Function InstallThirdPartyBloat {
 	Write-Output "Installing default third party applications..."
 	$errpref = $ErrorActionPreference #save actual preference
         $ErrorActionPreference = "silentlycontinue"
-	Get-AppxPackage -AllUsers "2414FC7A.Viber" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"} | Out-Null
-	Get-AppxPackage -AllUsers "41038Axilesoft.ACGMediaPlayer" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"} | Out-Null
-	Get-AppxPackage -AllUsers "46928bounde.EclipseManager" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"} | Out-Null
-	Get-AppxPackage -AllUsers "4DF9E0F8.Netflix" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"} | Out-Null
-	Get-AppxPackage -AllUsers "64885BlueEdge.OneCalendar" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"} | Out-Null
-	Get-AppxPackage -AllUsers "7EE7776C.LinkedInforWindows" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"} | Out-Null
-	Get-AppxPackage -AllUsers "828B5831.HiddenCityMysteryofShadows" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"} | Out-Null
-	Get-AppxPackage -AllUsers "89006A2E.AutodeskSketchBook" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"} | Out-Null
-	Get-AppxPackage -AllUsers "9E2F88E3.Twitter" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"} | Out-Null
-	Get-AppxPackage -AllUsers "A278AB0D.DisneyMagicKingdoms" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"} | Out-Null
-	Get-AppxPackage -AllUsers "A278AB0D.MarchofEmpires" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"} | Out-Null
-	Get-AppxPackage -AllUsers "ActiproSoftwareLLC.562882FEEB491" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"} | Out-Null
-	Get-AppxPackage -AllUsers "AdobeSystemsIncorporated.AdobePhotoshopExpress" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"} | Out-Null
-	Get-AppxPackage -AllUsers "CAF9E577.Plex" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"} | Out-Null
-	Get-AppxPackage -AllUsers "D52A8D61.FarmVille2CountryEscape" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"} | Out-Null
-	Get-AppxPackage -AllUsers "D5EA27B7.Duolingo-LearnLanguagesforFree" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"} | Out-Null
-	Get-AppxPackage -AllUsers "DB6EA5DB.CyberLinkMediaSuiteEssentials" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"} | Out-Null
-	Get-AppxPackage -AllUsers "DolbyLaboratories.DolbyAccess" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"} | Out-Null
-	Get-AppxPackage -AllUsers "Drawboard.DrawboardPDF" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"} | Out-Null
-	Get-AppxPackage -AllUsers "Facebook.Facebook" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"} | Out-Null
-	Get-AppxPackage -AllUsers "flaregamesGmbH.RoyalRevolt2" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"} | Out-Null
-	Get-AppxPackage -AllUsers "GAMELOFTSA.Asphalt8Airborne" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"} | Out-Null
-	Get-AppxPackage -AllUsers "KeeperSecurityInc.Keeper" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"} | Out-Null
-	Get-AppxPackage -AllUsers "king.com.BubbleWitch3Saga" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"} | Out-Null
-	Get-AppxPackage -AllUsers "king.com.CandyCrushSodaSaga" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"} | Out-Null
-	Get-AppxPackage -AllUsers "PandoraMediaInc.29680B314EFC2" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"} | Out-Null
-	Get-AppxPackage -AllUsers "SpotifyAB.SpotifyMusic" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"} | Out-Null
-	Get-AppxPackage -AllUsers "WinZipComputing.WinZipUniversal" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"} | Out-Null
-	Get-AppxPackage -AllUsers "XINGAG.XING" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"} | Out-Null
+	Get-AppxPackage -AllUsers "2414FC7A.Viber" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"} -ErrorAction SilentlyContinue
+	Get-AppxPackage -AllUsers "41038Axilesoft.ACGMediaPlayer" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"} -ErrorAction SilentlyContinue
+	Get-AppxPackage -AllUsers "46928bounde.EclipseManager" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"} -ErrorAction SilentlyContinue
+	Get-AppxPackage -AllUsers "4DF9E0F8.Netflix" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"} -ErrorAction SilentlyContinue
+	Get-AppxPackage -AllUsers "64885BlueEdge.OneCalendar" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"} -ErrorAction SilentlyContinue
+	Get-AppxPackage -AllUsers "7EE7776C.LinkedInforWindows" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"} -ErrorAction SilentlyContinue
+	Get-AppxPackage -AllUsers "828B5831.HiddenCityMysteryofShadows" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"} -ErrorAction SilentlyContinue
+	Get-AppxPackage -AllUsers "89006A2E.AutodeskSketchBook" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"} -ErrorAction SilentlyContinue
+	Get-AppxPackage -AllUsers "9E2F88E3.Twitter" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"} -ErrorAction SilentlyContinue
+	Get-AppxPackage -AllUsers "A278AB0D.DisneyMagicKingdoms" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"} -ErrorAction SilentlyContinue
+	Get-AppxPackage -AllUsers "A278AB0D.MarchofEmpires" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"} -ErrorAction SilentlyContinue
+	Get-AppxPackage -AllUsers "ActiproSoftwareLLC.562882FEEB491" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"} -ErrorAction SilentlyContinue
+	Get-AppxPackage -AllUsers "AdobeSystemsIncorporated.AdobePhotoshopExpress" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"} -ErrorAction SilentlyContinue
+	Get-AppxPackage -AllUsers "CAF9E577.Plex" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"} -ErrorAction SilentlyContinue
+	Get-AppxPackage -AllUsers "D52A8D61.FarmVille2CountryEscape" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"} -ErrorAction SilentlyContinue
+	Get-AppxPackage -AllUsers "D5EA27B7.Duolingo-LearnLanguagesforFree" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"} -ErrorAction SilentlyContinue
+	Get-AppxPackage -AllUsers "DB6EA5DB.CyberLinkMediaSuiteEssentials" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"} -ErrorAction SilentlyContinue
+	Get-AppxPackage -AllUsers "DolbyLaboratories.DolbyAccess" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"} -ErrorAction SilentlyContinue
+	Get-AppxPackage -AllUsers "Drawboard.DrawboardPDF" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"} -ErrorAction SilentlyContinue
+	Get-AppxPackage -AllUsers "Facebook.Facebook" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"} -ErrorAction SilentlyContinue
+	Get-AppxPackage -AllUsers "flaregamesGmbH.RoyalRevolt2" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"} -ErrorAction SilentlyContinue
+	Get-AppxPackage -AllUsers "GAMELOFTSA.Asphalt8Airborne" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"} -ErrorAction SilentlyContinue
+	Get-AppxPackage -AllUsers "KeeperSecurityInc.Keeper" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"} -ErrorAction SilentlyContinue
+	Get-AppxPackage -AllUsers "king.com.BubbleWitch3Saga" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"} -ErrorAction SilentlyContinue
+	Get-AppxPackage -AllUsers "king.com.CandyCrushSodaSaga" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"} -ErrorAction SilentlyContinue
+	Get-AppxPackage -AllUsers "PandoraMediaInc.29680B314EFC2" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"} -ErrorAction SilentlyContinue
+	Get-AppxPackage -AllUsers "SpotifyAB.SpotifyMusic" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"} -ErrorAction SilentlyContinue
+	Get-AppxPackage -AllUsers "WinZipComputing.WinZipUniversal" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"} -ErrorAction SilentlyContinue
+	Get-AppxPackage -AllUsers "XINGAG.XING" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"} -ErrorAction SilentlyContinue
 	$ErrorActionPreference = $errpref #restore previous preference
 }
 
