@@ -131,7 +131,8 @@ Option to Enable & Install Or Disable & Uninstall Microsoft OneDrive
 
 # Notice Before Use!
 
-Kindly note that if you choose to disable Microsoft Store and WSAPPX Service and wanted to enable it again, you have to run the script with this setting enabled then restart pc and rerun it again with the same settings to get Microsoft Store back! it a limitition of windows 10 as this registry tweak needs restart to take effect before script is trying to install microsoft store!
+- Kindly note that if you choose to disable Microsoft Store and WSAPPX Service and wanted to enable it again, you have to run the script with this setting enabled then restart pc and rerun it again with the same settings to get Microsoft Store back! it a limitition of windows 10 as this registry tweak needs restart to take effect before script is trying to install microsoft store!
+- When disabling Microsoft Store & WSAPPX Service and Microsoft Software Protection Platform Service, This PC Properties will only be accessible from File Explorer!
 
 # How To Use!
 Disable Any Power saving feature under your network Devices. ex: Lan card, Wifi Card etc!
