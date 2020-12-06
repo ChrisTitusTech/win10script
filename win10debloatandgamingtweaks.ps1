@@ -41,6 +41,8 @@ $tweaks = @(
 	### DaddyMadu Windows Defender Settings! Don't Change Order Just Disable with # If You Don't want it ###
 	"askDefender",
 	"DorEOneDrive",                 # Option to Install Or Uninstall Microsoft One Drive!
+	"askMSPPS",                      #Option to enable or disable Microsoft Software Protection Platform Service” Causing High CPU Usage
+	"askMSWSAPPX",                   #Option to enable or disable Wsappx to Fix 100% Disk Usage in Windows 10 in older systems
 
 	### Windows Apps
 	"DebloatAll",
@@ -862,6 +864,67 @@ Function askDefender {
 	Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender\Spynet" -Name "SubmitSamplesConsent" -ErrorAction SilentlyContinue
 	Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender" -Name "PUAProtection" -Type DWord -Value 1
 	Set-MpPreference -EnableControlledFolderAccess Enabled
+		}
+    'q' { Exit  }
+    }
+ }
+ until ($selection -match "y" -or $selection -match "n" -or $selection -match "q")
+	
+}
+
+#Ask User If He Want to Enable Or Disable Microsoft Software Protection Platform Service
+Function askMSPPS {
+	
+	do
+ {
+    Clear-Host
+    Write-Host "================ Do you have High CPU Usage from Microsoft Software Protection Platform Service? ================"
+    Write-Host "Y: Press 'Y' to do this."
+    Write-Host "N: Press 'N' to skip this."
+	Write-Host "Q: Press 'Q' to stop the entire script."
+    $selection = Read-Host "Please make a selection"
+    switch ($selection)
+    {
+    'y' { 
+	    Write-Output "Disabling Microsoft Software Protection Platform Service and related Processes..."
+		Disable-ScheduledTask -TaskName "\Microsoft\Windows\SoftwareProtectionPlatform\SvcRestartTask" | Out-Null
+		Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\sppsvc" -Name "Start" -Type DWord -Value 4 -ErrorAction SilentlyContinue
+	}
+    'n' {
+        Write-Output "Enabling Microsoft Software Protection Platform Service and related Processes..."
+	    Enable-ScheduledTask -TaskName "\Microsoft\Windows\SoftwareProtectionPlatform\SvcRestartTask" | Out-Null
+		Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\sppsvc" -Name "Start" -Type DWord -Value 2 -ErrorAction SilentlyContinue
+		}
+    'q' { Exit  }
+    }
+ }
+ until ($selection -match "y" -or $selection -match "n" -or $selection -match "q")
+	
+}
+
+#Ask User If He Want to Enable Or Disable Microsoft Store and WSAPPX Service
+Function askMSWSAPPX {
+	
+	do
+ {
+    Clear-Host
+    Write-Host "================ Do you want to disable Microsoft Store and Disable WSAPPX Service? ================"
+    Write-Host "Y: Press 'Y' to do this."
+    Write-Host "N: Press 'N' to skip this."
+	Write-Host "Q: Press 'Q' to stop the entire script."
+    $selection = Read-Host "Please make a selection"
+    switch ($selection)
+    {
+    'y' { 
+	    Write-Output "Disabling Microsoft Store and WSAPPX Service..."
+		New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\WindowsStore" -Force | Out-Null
+		Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\WindowsStore" -Name "DisableStoreApps" -Type DWord -Value 1 -ErrorAction SilentlyContinue
+		Set-ItemProperty -Path "HKLM:\SYSTEM\ControlSet001\Services\AppXSvc" -Name "Start" -Type DWord -Value 4 -ErrorAction SilentlyContinue
+	}
+    'n' {
+        Write-Output "Enabling Microsoft Store and WSAPPX Service..."
+		Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\WindowsStore" -Name "DisableStoreApps" -ErrorAction SilentlyContinue
+		Set-ItemProperty -Path "HKLM:\SYSTEM\ControlSet001\Services\AppXSvc" -Name "Start" -Type DWord -Value 3 -ErrorAction SilentlyContinue
 		}
     'q' { Exit  }
     }
