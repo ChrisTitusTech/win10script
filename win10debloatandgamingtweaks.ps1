@@ -32,7 +32,7 @@ $tweaks = @(
 	"InstallNotepadplusplus",
 	"InstallIrfanview",
 	"InstallVLC",
-	"InstallAdobe",
+	"InstallSumatra",
 	"InstallChrome",
 	"InstallChocoGUI",
 	"EnableUlimatePower",    # DaddyMadu don't change order it will break other functions! just disable if you want with #
@@ -297,8 +297,8 @@ Function InstallMVC {
 	
 }
 
-Function InstallAdobe {
-	Show-Choco-Menu -Title "Do you want to install Adobe Acrobat Reader?" -ChocoInstall "adobereader"
+Function InstallSumatra {
+	Show-Choco-Menu -Title "Do you want to install lightweight Sumatra PDF Reader?" -ChocoInstall "sumatrapdf"
 }
 
 Function InstallChrome {
