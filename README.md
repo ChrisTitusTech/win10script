@@ -32,7 +32,7 @@ Option to Enable & Install Or Disable & Uninstall Microsoft OneDrive
 - Added Debloat Microsoft Store Apps.
 - Removing Bloadwares.
 - Disable Or Enable Microsoft Windows Defender and related Processes.
-- Disable or Enable Microsoft Software Protection Platform Service” Causing High CPU Usage.
+- Disable or Enable "Microsoft Software Protection Platform Service” that Cause High CPU Usage in some older systems.
 - Disable or Enable Wsappx to Fix 100% Disk Usage in Windows 10 in older systems.
 - Disabling Telemetry.
 - Disabling Wi-Fi Sense.
@@ -136,6 +136,7 @@ Option to Enable & Install Or Disable & Uninstall Microsoft OneDrive
 
 - Kindly note that if you choose to disable Microsoft Store and WSAPPX Service and wanted to enable it again, you have to run the script with this setting enabled then restart pc and rerun it again with the same settings to get Microsoft Store back! it a limitition of windows 10 as this registry tweak needs restart to take effect before script is trying to install microsoft store!
 - When disabling Microsoft Store & WSAPPX Service, This PC Properties will only be accessible from File Explorer!
+- disabling "Microsoft Software Protection Platform Service" will render microsoft activation Service not active hence any microsoft apps, windows, office, etc will show not activated state! 
 
 # How To Use!
 Disable Any Power saving feature under your network Devices. ex: Lan card, Wifi Card etc!
