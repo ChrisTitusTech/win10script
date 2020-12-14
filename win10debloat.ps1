@@ -501,7 +501,7 @@ $essentialtweaks.Add_Click({
     Checkpoint-Computer -Description "RestorePoint1" -RestorePointType "MODIFY_SETTINGS"
 
     Write-Host "Running O&O Shutup with Recommended Settings"
-	choco install shutup10
+	choco install shutup10 -y
 	OOSU10 ooshutup10.cfg /quiet
 
     Write-Host "Disabling Telemetry..."
