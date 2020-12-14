@@ -440,6 +440,12 @@ $firefox.Add_Click({
 	$wshell.Popup("Operation Completed",0,"Done",0x0)
 })
 
+$gchrome.Add_Click({ 
+    Write-Host "Installing Google Chrome"
+    choco install googlechrome -y
+	$wshell.Popup("Operation Completed",0,"Done",0x0)
+})
+
 $irfanview.Add_Click({ 
     Write-Host "Installing Irfanview (Image Viewer)"
     choco install irfanview -y
