@@ -30,7 +30,7 @@ $tweaks = @(
 	"InstallMVC", #DaddyMadu install Microsoft Visualstudio required for HPET service!
 	"Install7Zip",
 	"InstallNotepadplusplus",
-	"InstallIrfanview",
+	"InstallHoneyview",
 	"InstallVLC",
 	"InstallSumatra",
 	"InstallChrome",
@@ -316,8 +316,8 @@ Function InstallVLC {
 	Show-Choco-Menu -Title "Do you want to install VLC?" -ChocoInstall "vlc"
 }
 
-Function InstallIrfanview {
-	Show-Choco-Menu -Title "Do you want to install Irfanview?" -ChocoInstall "irfanview"
+Function InstallHoneyview {
+	Show-Choco-Menu -Title "Do you want to install Honeyview PhotoViewer?" -ChocoInstall "honeyview"
 }
 
 Function InstallChocoGUI {
