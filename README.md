@@ -3,6 +3,10 @@ This is A FORK Based On ChrisTitusTech that's foucus on debloat and optimize win
 
 ## Changelog!
 
+16 Dec 2020
+```
+Fixed white shortcut for game lunchers for good.
+```
 7 Dec 2020
 ```
 Replaced Adobe Acrobat Reader With open source lightweight Sumatra PDF! only 4mb!
