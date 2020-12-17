@@ -2731,7 +2731,7 @@ Function DisableHPET {
 	$errpref = $ErrorActionPreference #save actual preference
         $ErrorActionPreference = "silentlycontinue"
         Invoke-WebRequest -Uri "https://git.io/JkrLn" -OutFile "$Env:windir\system32\SetTimerResolutionService.exe" -ErrorAction SilentlyContinue
-        New-Service -name "SetTimerResolutionService" -BinaryPathName "$Env:windir\system32\SetTimerResolutionService.exe" -StartupType Automatic -ErrorAction SilentlyContinue
+        New-Service -name "SetTimerResolutionService" -BinaryPathName "$Env:windir\system32\SetTimerResolutionService.exe" -StartupType Automatic | Out-Null -ErrorAction SilentlyContinue
         bcdedit /set x2apicpolicy Enable | Out-Null
         bcdedit /set configaccesspolicy Default | Out-Null
         bcdedit /set MSI Default | Out-Null
