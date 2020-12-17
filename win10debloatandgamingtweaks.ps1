@@ -2737,8 +2737,7 @@ Function DisableHPET {
         bcdedit /set MSI Default | Out-Null
         bcdedit /set usephysicaldestination No | Out-Null
         bcdedit /set usefirmwarepcisettings No | Out-Null
-        bcdedit /deletevalue useplatformclock | Out-Null
-	bcdedit /set useplatformclock No | Out-Null
+	bcdedit /deletevalue useplatformclock | Out-Null
         bcdedit /set disabledynamictick yes | Out-Null
         bcdedit /set useplatformtick Yes | Out-Null
         bcdedit /set tscsyncpolicy Enhanced | Out-Null
