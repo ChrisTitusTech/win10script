@@ -3,6 +3,16 @@ This is A FORK Based On ChrisTitusTech that's foucus on debloat and optimize win
 
 ## Changelog!
 
+19 Dec 2020
+```
+- Disable DMA memory protection and cores isolation ("virtualization-based protection").
+- Disable Process and Kernel Mitigations.
+- Disallow drivers to get paged into virtual memory.
+- Use big system memory caching to improve microstuttering.
+- Force contiguous memory allocation in the DirectX Graphics Kernel.
+- Tell Windows to stop tolerating high DPC/ISR latencies.
+- Decrease mouse and keyboard buffer sizes.
+```
 16 Dec 2020
 ```
 Fixed white shortcut for game lunchers for good.
@@ -124,6 +134,13 @@ Option to Enable & Install Or Disable & Uninstall Microsoft OneDrive
 - Disabling GameDVR2.
 - Disabling Full ScreenOptimization.
 - Apply Gaming Optimization Fixs.
+- Disable DMA memory protection and cores isolation ("virtualization-based protection").
+- Disable Process and Kernel Mitigations.
+- Disallow drivers to get paged into virtual memory.
+- Use big system memory caching to improve microstuttering.
+- Force contiguous memory allocation in the DirectX Graphics Kernel.
+- Tell Windows to stop tolerating high DPC/ISR latencies.
+- Decrease mouse and keyboard buffer sizes.
 - Applying PC Optimizations.
 - Forcing Raw Mouse Input 1:1 and Disabling Enhance Pointer Precision. (some old games donot honor this and might need mouse acceleration fix from here! http://donewmouseaccel.blogspot.com/2010/03/markc-windows-7-mouse-acceleration-fix.html).
 - Disabling High Precision Event Timer.
