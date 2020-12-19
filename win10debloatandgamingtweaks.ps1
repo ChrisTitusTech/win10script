@@ -2926,13 +2926,19 @@ Function NetworkOptimizations {
        Set-NetTCPSetting -SettingName internet -NonSackRttResiliency disabled
        Set-NetTCPSetting -SettingName internet -InitialRto 2000
        Set-NetTCPSetting -SettingName internet -MinRto 300
-       Set-NetTCPSetting -SettingName Internet -AutoTuningLevelLocal normal
-       Set-NetTCPSetting -SettingName internet -ScalingHeuristics disabled
-       netsh int tcp set supplemental internet congestionprovider=ctcp
-       Set-NetOffloadGlobalSetting -ReceiveSegmentCoalescing enabled
-       Set-NetOffloadGlobalSetting -ReceiveSideScaling enabled
-       Disable-NetAdapterLso -Name *
-       Disable-NetAdapterChecksumOffload -Name *
+       Set-NetTCPSetting -SettingName Internet -AutoTuningLevelLocal normal -ErrorAction SilentlyContinue
+       Set-NetTCPSetting -SettingName internet -ScalingHeuristics disabled -ErrorAction SilentlyContinue
+       netsh int tcp set supplemental internet congestionprovider=ctcp -ErrorAction SilentlyContinue
+       Set-NetOffloadGlobalSetting -ReceiveSegmentCoalescing enabled -ErrorAction SilentlyContinue
+       Set-NetOffloadGlobalSetting -ReceiveSideScaling enabled -ErrorAction SilentlyContinue
+       Disable-NetAdapterLso -Name * -ErrorAction SilentlyContinue
+       Disable-NetAdapterChecksumOffload -Name * -ErrorAction SilentlyContinue
+       Set-NetAdapterAdvancedProperty -Name * -DisplayName "Energy-Efficient Ethernet" -DisplayValue "Disabled" -ErrorAction SilentlyContinue
+       Set-NetAdapterAdvancedProperty -Name * -DisplayName "Green Ethernet" -DisplayValue "Disabled" -ErrorAction SilentlyContinue
+       Set-NetAdapterAdvancedProperty -Name * -DisplayName "Power Saving Mode" -DisplayValue "Disabled" -ErrorAction SilentlyContinue
+       Set-NetAdapterAdvancedProperty -Name * -DisplayName "Gigabit Lite" -DisplayValue "Disabled" -ErrorAction SilentlyContinue
+       Set-NetAdapterAdvancedProperty -Name * -DisplayName "EEE" -DisplayValue "Disabled" -ErrorAction SilentlyContinue
+       Set-NetAdapterAdvancedProperty -Name * -DisplayName "Advanced EEE" -DisplayValue "Disabled" -ErrorAction SilentlyContinue
        Start-Sleep -s 5
 }
 
