@@ -103,6 +103,25 @@ $tweaks = @(
 	"DisableSleepTimeout",        # "EnableSleepTimeout",
 	"DisableFastStartup",         # "EnableFastStartup",
 
+
+    ### Windows Tweaks ###
+	"PowerThrottlingOff",
+	"Win32PrioritySeparation",
+	"DisableAERO",
+	"BSODdetails",
+	"Disablelivetiles",
+	"wallpaperquality",
+	"DisableShistory",
+	"Disableshortcutword",
+	"DisableMouseKKS",
+	"DisableTransparency",
+	"TurnOffSafeSearch",
+	"DisableCloudSearch",
+	"DisableDeviceHistory",
+	"DisableRemoteAssistance",
+	"DisableSearchHistroy",
+	
+	
 	### UI Tweaks ###
 	"DisableActionCenter",          # "EnableActionCenter",
 	"EnableLockScreen",				# "DisableLockScreen",
@@ -158,7 +177,7 @@ $tweaks = @(
 	"UninstallMsftBloat",           # "InstallMsftBloat",
 	"UninstallThirdPartyBloat",     # "InstallThirdPartyBloat",
 	# "UninstallWindowsStore",      # "InstallWindowsStore",
-	# "DisableXboxFeatures",          # "EnableXboxFeatures",
+	"DisableXboxFeatures",          # "EnableXboxFeatures",
 	"DisableAdobeFlash",            # "EnableAdobeFlash",
 	"InstallMediaPlayer", 		# "UninstallMediaPlayer",
 	"UninstallInternetExplorer",  # "InstallInternetExplorer",
@@ -1359,6 +1378,101 @@ Function EnableFastStartup {
 }
 
 
+##########
+# Windows Tweaks
+##########
+#Disable power throttling.
+Function PowerThrottlingOff {
+	Write-Output "Disabling power throttling..."
+	Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Power\PowerThrottling" -Name "PowerThrottlingOff" -Type DWord -Value 1
+}
+
+#Setting Processor scheduling.
+Function Win32PrioritySeparation {
+	Write-Output "Setting Processor scheduling..."
+	Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\PriorityControl" -Name "Win32PrioritySeparation" -Type DWord -Value 26
+}
+
+#Disabling aero shake.
+Function DisableAERO {
+	Write-Output "Disabling aero shake..."
+	Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "DisallowShaking" -Type DWord -Value 0
+}
+
+#Show BSOD details instead of the sad smiley.
+Function BSODdetails {
+	Write-Output "Show BSOD details instead of the sad smiley..."
+	Set-ItemProperty -Path "HKLM:\System\CurrentControlSet\Control\CrashControl" -Name "DisplayParameters" -Type DWord -Value 1
+}
+
+#Disabling live tiles.
+Function Disablelivetiles {
+	Write-Output "Disabling live tiles..."
+	Set-ItemProperty -Path "HKCU:\SOFTWARE\Policies\Microsoft\Windows\CurrentVersion\PushNotifications" -Name "NoTileApplicationNotification" -Type DWord -Value 1
+}
+
+#Setting Wallpaper Quality to 100%.
+Function wallpaperquality {
+	Write-Output "Setting Wallpaper Quality to 100%..."
+	Set-ItemProperty -Path "HKCU:\Control Panel\Desktop" -Name "JPEGImportQuality" -Type DWord -Value 100
+}
+
+#Disabling search history.
+Function DisableShistory {
+	Write-Output "Disabling search history..."
+	Set-ItemProperty -Path "HKCU:\Software\Policies\Microsoft\Windows\Explorer" -Name "DisableSearchBoxSuggestions" -Type DWord -Value 1
+}
+
+#Disabling "- Shortcut" Word.
+Function Disableshortcutword {
+	Write-Output "Disabling - Shortcut Word..."
+	Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer" -Name "link" -Type Binary -Value ([byte[]](0,0,0,0))
+}
+
+#Disabling Mouse Keys Keyboard Shortcut.
+Function DisableMouseKKS {
+	Write-Output "Disabling Mouse Keys Keyboard Shortcut..."
+	Set-ItemProperty -Path "HKCU:\Control Panel\Accessibility\MouseKeys" -Name "Flags" -Type String -Value "186"
+	Set-ItemProperty -Path "HKCU:\Control Panel\Accessibility\MouseKeys" -Name "MaximumSpeed" -Type String -Value "40"
+	Set-ItemProperty -Path "HKCU:\Control Panel\Accessibility\MouseKeys" -Name "TimeToMaximumSpeed" -Type String -Value "3000"
+}
+
+#Disabling Windows Transparency.
+Function DisableTransparency {
+	Write-Output "Disabling Windows Transparency..."
+	Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize" -Name "EnableTransparency" -Type DWord -Value 0
+}
+
+#Turning Off Safe Search.
+Function TurnOffSafeSearch {
+	Write-Output "Turning Off Safe Search..."
+	Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\SearchSettings" -Name "SafeSearchMode" -Type DWord -Value 0
+}
+
+#Disabling Cloud Search.
+Function DisableCloudSearch {
+	Write-Output "Disabling Cloud Search..."
+	Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Windows Search" -Name "AllowCloudSearch" -Type DWord -Value 0
+}
+
+#Disabling Device History.
+Function DisableDeviceHistory {
+	Write-Output "Disabling Device History..."
+	Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Search" -Name "DeviceHistoryEnabled" -Type DWord -Value 0
+}
+
+#Disabling Windows Remote Assistance.
+Function DisableRemoteAssistance {
+	Write-Output "Disabling Windows Remote Assistance..."
+	Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Remote Assistance" -Name "fAllowFullControl" -Type DWord -Value 0
+	Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Remote Assistance" -Name "fAllowToGetHelp" -Type DWord -Value 0
+}
+
+#Disabling Search Histroy.
+Function DisableSearchHistroy {
+	Write-Output "Disabling Search Histroy..."
+	Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\SearchSettings" -Name "IsDeviceSearchHistoryEnabled" -Type DWord -Value 0
+}
 
 ##########
 # UI Tweaks
@@ -2598,6 +2712,9 @@ Function FullscreenOptimizationFIX {
 	Set-ItemProperty -Path "HKCU:\System\GameConfigStore" -Name "GameDVR_HonorUserFSEBehaviorMode" -Type DWord -Value 1
 	Set-ItemProperty -Path "HKCU:\System\GameConfigStore" -Name "GameDVR_FSEBehavior" -Type DWord -Value 2
 	Set-ItemProperty -Path "HKCU:\System\GameConfigStore" -Name "GameDVR_DXGIHonorFSEWindowsCompatible" -Type DWord -Value 1
+	Set-ItemProperty -Path "HKCU:\System\GameConfigStore" -Name "GameDVR_EFSEFeatureFlags" -Type DWord -Value 0
+	Set-ItemProperty -Path "HKCU:\System\GameConfigStore" -Name "GameDVR_DSEBehavior" -Type DWord -Value 2
+	Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\GameDVR" -Name "AppCaptureEnabled" -Type DWord -Value 0
 }
 
 #Game Optimizations Priority Tweaks -Type String -Value "Deny"
@@ -2612,11 +2729,12 @@ Function GameOptimizationFIX {
 
 #Forcing Raw Mouse Input
 Function RawMouseInput {
-        Write-Output "Forcing RAW Mouse Input and Disabling Enhance Pointer Precision..."
-        Set-ItemProperty -Path "HKCU:\Control Panel\Mouse" -Name "MouseSpeed" -Type String -Value "0"
+    Write-Output "Forcing RAW Mouse Input and Disabling Enhance Pointer Precision..."
+    Set-ItemProperty -Path "HKCU:\Control Panel\Mouse" -Name "MouseSpeed" -Type String -Value "0"
 	Set-ItemProperty -Path "HKCU:\Control Panel\Mouse" -Name "MouseThreshold1" -Type String -Value "0"
 	Set-ItemProperty -Path "HKCU:\Control Panel\Mouse" -Name "MouseThreshold2" -Type String -Value "0"
 	Set-ItemProperty -Path "HKCU:\Control Panel\Mouse" -Name "MouseSensitivity" -Type String -Value "10"
+	Set-ItemProperty -Path "HKCU:\Control Panel\Mouse" -Name "MouseHoverTime" -Type String -Value "0"
 	Set-ItemProperty -Path "HKCU:\Control Panel\Mouse" -Name "MouseTrails" -Type String -Value "0"
 }
 ### Disable HPET ###
@@ -2652,6 +2770,9 @@ Function EnableGameMode {
         Write-Output "Enabling Gaming Mode..."
 	Set-ItemProperty -Path "HKCU:\Software\Microsoft\GameBar" -Name "AllowAutoGameMode" -Type DWord -Value 1
 	Set-ItemProperty -Path "HKCU:\Software\Microsoft\GameBar" -Name "AutoGameModeEnabled" -Type DWord -Value 1
+	Set-ItemProperty -Path "HKCU:\Software\Microsoft\GameBar" -Name "ShowStartupPanel" -Type DWord -Value 0
+	Set-ItemProperty -Path "HKCU:\Software\Microsoft\GameBar" -Name "GamePanelStartupTipIndex" -Type DWord -Value 3
+	Set-ItemProperty -Path "HKCU:\Software\Microsoft\GameBar" -Name "UseNexusForGameBarEnabled" -Type DWord -Value 0
 }
 
 #Enable Hardware-accelerated GPU scheduling
