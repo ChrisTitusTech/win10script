@@ -2635,6 +2635,14 @@ Function DisableHPET {
         bcdedit /set disabledynamictick yes | Out-Null
         bcdedit /set useplatformtick Yes | Out-Null
         bcdedit /set tscsyncpolicy Enhanced | Out-Null
+	bcdedit /timeout 10 | Out-Null
+	bcdedit /set nx optout | Out-Null
+	bcdedit /set bootux disabled | Out-Null
+	bcdedit /set bootmenupolicy standard | Out-Null
+	bcdedit /set quietboot yes | Out-Null
+	bcdedit /set {globalsettings} custom:16000067 true | Out-Null
+	bcdedit /set {globalsettings} custom:16000069 true | Out-Null
+	bcdedit /set {globalsettings} custom:16000068 true | Out-Null
 	wmic path Win32_PnPEntity where "name='High precision event timer'" call disable | Out-Null
 	$ErrorActionPreference = $errpref #restore previous preference
 }
