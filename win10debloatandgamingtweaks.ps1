@@ -1381,9 +1381,10 @@ Function EnableFastStartup {
 ##########
 # Windows Tweaks
 ##########
-#Disable power throttling.
+#Disabling power throttling.
 Function PowerThrottlingOff {
 	Write-Output "Disabling power throttling..."
+	New-Item -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Power\PowerThrottling" -Force | Out-Null
 	Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Power\PowerThrottling" -Name "PowerThrottlingOff" -Type DWord -Value 1
 }
 
