@@ -2939,6 +2939,15 @@ Function NetworkOptimizations {
        Set-NetAdapterAdvancedProperty -Name * -DisplayName "Gigabit Lite" -DisplayValue "Disabled" -ErrorAction SilentlyContinue
        Set-NetAdapterAdvancedProperty -Name * -DisplayName "EEE" -DisplayValue "Disabled" -ErrorAction SilentlyContinue
        Set-NetAdapterAdvancedProperty -Name * -DisplayName "Advanced EEE" -DisplayValue "Disabled" -ErrorAction SilentlyContinue
+       if ((Get-CimInstance -ClassName Win32_ComputerSystem).PCSystemType -ne 2)
+{
+    $adapters = Get-NetAdapter -Physical | Get-NetAdapterPowerManagement | Where-Object -FilterScript {$_.AllowComputerToTurnOffDevice -ne "Unsupported"}
+    foreach ($adapter in $adapters)
+    {
+        $adapter.AllowComputerToTurnOffDevice = "Disabled"
+        $adapter | Set-NetAdapterPowerManagement
+    }
+}
        Start-Sleep -s 5
 }
 
