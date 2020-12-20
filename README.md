@@ -3,6 +3,24 @@ This is A FORK Based On ChrisTitusTech that's foucus on debloat and optimize win
 
 ## Changelog!
 
+20 Dec 2020
+```
+- Disabling power throttling(Laptop).
+- Setting Processor scheduling for Best Performance.
+- Disabling aero shake.
+- Show BSOD details instead of the sad smiley.
+- Disabling start menu live tiles.
+- Setting Wallpaper Quality to 100%.
+- Disabling search history.
+- Disabling "- Shortcut" Word.
+- Disabling Mouse Keys Keyboard Shortcut.
+- Disabling Windows Transparency.
+- Turning Off Safe Search.
+- Disabling Cloud Search.
+- Disabling Device History.
+- Disabling Windows Remote Assistance.
+- Disabling Search Histroy.
+```
 19 Dec 2020
 ```
 - Disable DMA memory protection and cores isolation ("virtualization-based protection").
@@ -129,6 +147,21 @@ Option to Enable & Install Or Disable & Uninstall Microsoft OneDrive
 - Setting Photo Viewer association for bmp, gif, jpg, png and tif.
 - Adding Photo Viewer to "Open with.
 - Installing Microsoft Print to PDF.
+- Disabling power throttling(Laptop).
+- Setting Processor scheduling for Best Performance.
+- Disabling aero shake.
+- Show BSOD details instead of the sad smiley.
+- Disabling start menu live tiles.
+- Setting Wallpaper Quality to 100%.
+- Disabling search history.
+- Disabling "- Shortcut" Word.
+- Disabling Mouse Keys Keyboard Shortcut.
+- Disabling Windows Transparency.
+- Turning Off Safe Search.
+- Disabling Cloud Search.
+- Disabling Device History.
+- Disabling Windows Remote Assistance.
+- Disabling Search Histroy.
 - Enabling DaddyMadu Quality of Life Tweaks.
 - Disabling GameDVR1.
 - Disabling GameDVR2.
