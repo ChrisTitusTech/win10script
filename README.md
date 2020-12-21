@@ -30,6 +30,8 @@ This is A FORK Based On ChrisTitusTech that's foucus on debloat and optimize win
 - Force contiguous memory allocation in the DirectX Graphics Kernel.
 - Tell Windows to stop tolerating high DPC/ISR latencies.
 - Decrease mouse and keyboard buffer sizes.
+- disabled any power saving option under any network device.
+- disabled offloading, Green Ethernet, Giga Lite, EEE, Advanced EEE, Energy Efficient from all network devices.
 ```
 16 Dec 2020
 ```
