@@ -143,7 +143,7 @@ Option to Enable & Install Or Disable & Uninstall Microsoft OneDrive
 - Installing Windows Media Player.
 - Uninstalling Internet Explorer.
 - Uninstalling Work Folders Client.
-- Installing Linux Subsystem.
+- Uninstalling Linux Subsystem.
 - Setting Photo Viewer association for bmp, gif, jpg, png and tif.
 - Adding Photo Viewer to "Open with.
 - Installing Microsoft Print to PDF.
