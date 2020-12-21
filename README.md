@@ -3,10 +3,10 @@ This is A FORK Based On ChrisTitusTech that's foucus on debloat and optimize win
 
 ## Changelog!
 
-20 Dec 2020
+20 Dec 2020 ( thanks to Fr33thy those tweaks from his registry version https://youtube.com/c/FR33THY )
 ```
 - Disabling power throttling(Laptop).
-- Setting Processor scheduling for Best Performance.
+- Setting Processor scheduling to programms priority for Best Performance.
 - Disabling aero shake.
 - Show BSOD details instead of the sad smiley.
 - Disabling start menu live tiles.
