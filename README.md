@@ -164,7 +164,11 @@ Option to Enable & Install Or Disable & Uninstall Microsoft OneDrive
 - Disabling Device History.
 - Disabling Windows Remote Assistance.
 - Disabling Search Histroy.
-- Enabling DaddyMadu Quality of Life Tweaks.
+- Disabling annoying Get even more out of Windows.
+- Disabling Hide Scroll bars.
+- Disabling smooth scrolling.
+- Disabling microsoft usertracking.
+- Show taskbar buttons only on taskbar where window is open.
 - Disabling GameDVR1.
 - Disabling GameDVR2.
 - Disabling Full ScreenOptimization.
@@ -176,13 +180,15 @@ Option to Enable & Install Or Disable & Uninstall Microsoft OneDrive
 - Force contiguous memory allocation in the DirectX Graphics Kernel.
 - Tell Windows to stop tolerating high DPC/ISR latencies.
 - Decrease mouse and keyboard buffer sizes.
-- Applying PC Optimizations.
+- Applying PC Optimizations (SystemResponsiveness & NetworkThrottlingIndex).
 - Forcing Raw Mouse Input 1:1 and Disabling Enhance Pointer Precision. (some old games donot honor this and might need mouse acceleration fix from here! http://donewmouseaccel.blogspot.com/2010/03/markc-windows-7-mouse-acceleration-fix.html).
 - Disabling High Precision Event Timer.
 - Enabling Gaming Mode.
 - Enabling HAGS.
 - Disable Windows 10 Core Parking On Current PowerPlan "Ultimate Performance".
 - Optimizing Network and applying Tweaks for no throttle and maximum speed!.
+- disabled any power saving option under any network device.
+- disabled offloading, Green Ethernet, Giga Lite, EEE, Advanced EEE, Energy Efficient from all network devices.
 - Removing Edit with Paint 3D from context menu.
 - Running DaddyMadu Ultimate Cleaner => Temp folders & Flush DNS + Reset IP.
 - Fix issue with games shortcut that created by games lunchers turned white.
@@ -195,9 +201,7 @@ Option to Enable & Install Or Disable & Uninstall Microsoft OneDrive
 - disabling "Microsoft Software Protection Platform Service" will render microsoft activation Service not active hence any microsoft apps, windows, office, etc will show not activated state! 
 
 # How To Use!
-Disable Any Power saving feature under your network Devices. ex: Lan card, Wifi Card etc!
-also under Network Power Management Untick all marks!
-Click OK and you are good to go!
+
 Simply Run cmd (Command Prompt) as Administrator and paste the following!
 ```
 powershell -nop -c "iex(New-Object Net.WebClient).DownloadString('http://tweaks.daddymadu.gg')"
