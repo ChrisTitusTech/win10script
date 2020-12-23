@@ -215,6 +215,7 @@ $tweaks = @(
 	"ForceContiguousM",
 	"DecreaseMKBuffer",
 	"StophighDPC",
+	"NvidiaTweaks",
 	"NetworkOptimizations",
 	"RemoveEdit3D",
 	"FixURLext",  # fix issue with games shortcut that created by games lunchers turned white!
@@ -2899,6 +2900,17 @@ Function DecreaseMKBuffer {
        New-Item -Path "HKLM:\SYSTEM\CurrentControlSet\Services\kbdclass\Parameters" | Out-Null -ErrorAction SilentlyContinue
        Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\kbdclass\Parameters" -Name "KeyboardDataQueueSize" -Type DWord -Value 0x00000010
        $ErrorActionPreference = $errpref #restore previous preference
+}
+
+#Applying Nvidia Tweaks!
+Function NvidiaTweaks {
+       Write-Output "Applying Nvidia Tweaks..."
+       Invoke-WebRequest -Uri "https://git.io/JLP93" -OutFile "$Env:windir\system32\BaseProfile.nip" -ErrorAction SilentlyContinue
+       Invoke-WebRequest -Uri "https://git.io/JLP9n" -OutFile "$Env:windir\system32\nvidiaProfileInspector.exe" -ErrorAction SilentlyContinue
+       Push-Location
+       set-location "$Env:windir\system32\"
+       nvidiaProfileInspector.exe /s -load "BaseProfile.nip"
+       Pop-Location
 }
 
 #Optimizing Network and applying Tweaks for no throttle and maximum speed!
