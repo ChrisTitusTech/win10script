@@ -3,6 +3,10 @@ This is A FORK Based On ChrisTitusTech that's foucus on debloat and optimize win
 
 ## Changelog!
 
+23 Dec 2020
+```
+- Applying Nvidia Tweaks.
+```
 20 Dec 2020 ( thanks to Fr33thy those tweaks from his registry version https://youtube.com/c/FR33THY )
 ```
 - Disabling power throttling(Laptop).
