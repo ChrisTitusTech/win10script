@@ -430,8 +430,9 @@ $installchoco.Add_Click({
 })
 
 $brave.Add_Click({ 
-    Invoke-WebRequest -Uri "https://laptop-updates.brave.com/download/CHR253" -OutFile $env:USERPROFILE\Downloads\brave.exe
-	~/Downloads/brave.exe
+	Write-Host "Installing Brave Browser"
+	choco install brave -y
+	    $wshell.Popup("Operation Completed",0,"Done",0x0)	
 })
 
 $firefox.Add_Click({ 
@@ -506,10 +507,8 @@ $essentialtweaks.Add_Click({
     Checkpoint-Computer -Description "RestorePoint1" -RestorePointType "MODIFY_SETTINGS"
 
     Write-Host "Running O&O Shutup with Recommended Settings"
-	Import-Module BitsTransfer
-	Start-BitsTransfer -Source "https://raw.githubusercontent.com/ChrisTitusTech/win10script/master/ooshutup10.cfg" -Destination ooshutup10.cfg
-	Start-BitsTransfer -Source "https://dl5.oo-software.com/files/ooshutup10/OOSU10.exe" -Destination OOSU10.exe
-	./OOSU10.exe ooshutup10.cfg /quiet
+	choco install shutup10 -y
+	OOSU10 ooshutup10.cfg /quiet
 
     Write-Host "Disabling Telemetry..."
 	Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\DataCollection" -Name "AllowTelemetry" -Type DWord -Value 0
