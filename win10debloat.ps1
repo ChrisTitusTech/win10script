@@ -753,6 +753,29 @@ $Bloatware = @(
     If (Test-Path $Edge) {
         Set-Item $Edge AppXd4nrz8ff68srnhf9t5a8sbjyar1cr723_ 
     }
+    
+    #Removes Paint3D stuff from context menu
+$Paint3Dstuff = @(
+        "HKCR:\SystemFileAssociations\.3mf\Shell\3D Edit"
+	"HKCR:\SystemFileAssociations\.bmp\Shell\3D Edit"
+	"HKCR:\SystemFileAssociations\.fbx\Shell\3D Edit"
+	"HKCR:\SystemFileAssociations\.gif\Shell\3D Edit"
+	"HKCR:\SystemFileAssociations\.jfif\Shell\3D Edit"
+	"HKCR:\SystemFileAssociations\.jpe\Shell\3D Edit"
+	"HKCR:\SystemFileAssociations\.jpeg\Shell\3D Edit"
+	"HKCR:\SystemFileAssociations\.jpg\Shell\3D Edit"
+	"HKCR:\SystemFileAssociations\.png\Shell\3D Edit"
+	"HKCR:\SystemFileAssociations\.tif\Shell\3D Edit"
+	"HKCR:\SystemFileAssociations\.tiff\Shell\3D Edit"
+    )
+    #Rename reg key to remove it, so it's revertible
+    foreach ($Paint3D in $Paint3Dstuff) {
+        If (Test-Path $Paint3D) {
+	    $rmPaint3D = $Paint3D + "_"
+	    Set-Item $Paint3D $rmPaint3D
+	}
+    }
+    
 	$wshell.Popup("Operation Completed",0,"Done",0x0)
 })
 
