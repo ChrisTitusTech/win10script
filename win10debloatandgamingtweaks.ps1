@@ -3020,13 +3020,18 @@ Function DecreaseMKBuffer {
 
 #Applying Nvidia Tweaks!
 Function NvidiaTweaks {
-       Write-Output "Applying Nvidia Tweaks..."
+       $CheckGPU = wmic path win32_VideoController get name
+       if($CheckGPU -like "*nvidia*"){
+       Write-Output "NVIDIA Card Detected! Applying Nvidia Tweaks..."
        Invoke-WebRequest -Uri "https://git.io/JLP93" -OutFile "$Env:windir\system32\BaseProfile.nip" -ErrorAction SilentlyContinue
        Invoke-WebRequest -Uri "https://git.io/JLP9n" -OutFile "$Env:windir\system32\nvidiaProfileInspector.exe" -ErrorAction SilentlyContinue
        Push-Location
        set-location "$Env:windir\system32\"
        nvidiaProfileInspector.exe /s -load "BaseProfile.nip"
        Pop-Location
+       } else {
+       Write-Output "Nvidia GPU Not Detected! Skipping..."
+       }  
 }
 
 #Optimizing Network and applying Tweaks for no throttle and maximum speed!
