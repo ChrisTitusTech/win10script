@@ -1,5 +1,18 @@
 # Windows10GamingFocus
 This is A FORK Based On ChrisTitusTech that's foucus on debloat and optimize windows 10 for the lowest latency and best gaming experience, the Ultimate Windows 10 Script is a creation from multiple debloat scripts and gists from github. I also added Chocolatey and other tools to the script that I install on every machine.
+[
+  timestamp, // timestamp from when this data was retrieved
+  [
+    {
+      id, // unique identifier derived from filename 
+      s, // repo stars
+      fk, // repo forks
+      i, // repo issues
+      f, // Twitter followers
+    },
+    ...
+  ],
+]
 
 ## Changelog!
 
