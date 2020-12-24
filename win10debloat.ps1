@@ -501,6 +501,8 @@ $essentialtweaks.Add_Click({
     Checkpoint-Computer -Description "RestorePoint1" -RestorePointType "MODIFY_SETTINGS"
 
     Write-Host "Running O&O Shutup with Recommended Settings"
+    	Import-Module BitsTransfer
+	Start-BitsTransfer -Source "https://raw.githubusercontent.com/ChrisTitusTech/win10script/master/ooshutup10.cfg" -Destination ooshutup10.cfg
 	choco install shutup10 -y
 	OOSU10 ooshutup10.cfg /quiet
 
