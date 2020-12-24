@@ -3,6 +3,12 @@ This is A FORK Based On ChrisTitusTech that's foucus on debloat and optimize win
 
 ## Changelog!
 
+24 Dec 2020 Big Update!
+```
+- Auto detect Windows screen Scale setting and apply Mouse fix accordingly for 100% Raw Mouse Input No Need For this fix now already auto detect and implemented (http://donewmouseaccel.blogspot.com/2010/03/markc-windows-7-mouse-acceleration-fix.html).
+- Auto detect Nvidia GPU and Apply Power and Latency Tweaks.
+- Auto Detect AMD GPU and Apply Latency Tweaks.
+```
 23 Dec 2020
 ```
 - Applying Nvidia Tweaks.
@@ -185,7 +191,9 @@ Option to Enable & Install Or Disable & Uninstall Microsoft OneDrive
 - Tell Windows to stop tolerating high DPC/ISR latencies.
 - Decrease mouse and keyboard buffer sizes.
 - Applying PC Optimizations (SystemResponsiveness & NetworkThrottlingIndex).
-- Forcing Raw Mouse Input 1:1 and Disabling Enhance Pointer Precision. (some old games donot honor this and might need mouse acceleration fix from here! http://donewmouseaccel.blogspot.com/2010/03/markc-windows-7-mouse-acceleration-fix.html).
+- Auto detect Windows screen Scale setting and apply Mouse fix accordingly for 100% Raw Mouse Input No Need For this fix now already auto detect and implemented (http://donewmouseaccel.blogspot.com/2010/03/markc-windows-7-mouse-acceleration-fix.html).
+- Auto detect Nvidia GPU and Apply Power and Latency Tweaks.
+- Auto Detect AMD GPU and Apply Latency Tweaks.
 - Disabling High Precision Event Timer.
 - Enabling Gaming Mode.
 - Enabling HAGS.
