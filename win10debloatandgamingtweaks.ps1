@@ -1412,6 +1412,7 @@ Function BSODdetails {
 #Disabling live tiles.
 Function Disablelivetiles {
 	Write-Output "Disabling live tiles..."
+	New-Item -Path "HKCU:\SOFTWARE\Policies\Microsoft\Windows\CurrentVersion\PushNotifications" -ErrorAction SilentlyContinue
 	Set-ItemProperty -Path "HKCU:\SOFTWARE\Policies\Microsoft\Windows\CurrentVersion\PushNotifications" -Name "NoTileApplicationNotification" -Type DWord -Value 1
 }
 
