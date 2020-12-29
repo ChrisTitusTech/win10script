@@ -1425,6 +1425,7 @@ Function wallpaperquality {
 #Disabling search history.
 Function DisableShistory {
 	Write-Output "Disabling search history..."
+	New-Item -Path "HKCU:\Software\Policies\Microsoft\Windows\Explorer" -ErrorAction SilentlyContinue | Out-Null
 	Set-ItemProperty -Path "HKCU:\Software\Policies\Microsoft\Windows\Explorer" -Name "DisableSearchBoxSuggestions" -Type DWord -Value 1
 }
 
