@@ -3,6 +3,11 @@ This is A FORK Based On ChrisTitusTech that's foucus on debloat and optimize win
 
 ## Changelog!
 
+229 Dec 2020
+```
+- Hopfully fixed GPU Tweaks Issues on dual GPU laptops, GPU Tweaks is Now Applied only on GTX/RTX/AMD Cards Only!
+- Minor Tweaks and fixes in code.
+```
 24 Dec 2020 Big Update!
 ```
 - Auto detect Windows screen Scale setting and apply Mouse fix accordingly for 100% Raw Mouse Input No Need For this fix now already auto detect and implemented (http://donewmouseaccel.blogspot.com/2010/03/markc-windows-7-mouse-acceleration-fix.html).
