@@ -506,11 +506,7 @@ $essentialtweaks.Add_Click({
     Enable-ComputerRestore -Drive "C:\"
     Checkpoint-Computer -Description "RestorePoint1" -RestorePointType "MODIFY_SETTINGS"
 
-	Write-Host "Installing Chocolatey"
-	Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
-	choco install chocolatey-core.extension -y
-
-    Write-Host "Running O&O Shutup with Recommended Settings"
+	Write-Host "Running O&O Shutup with Recommended Settings"
     Import-Module BitsTransfer		choco install shutup10 -y
 	Start-BitsTransfer -Source "https://raw.githubusercontent.com/ChrisTitusTech/win10script/master/ooshutup10.cfg" -Destination ooshutup10.cfg		OOSU10 ooshutup10.cfg /quiet
 	Start-BitsTransfer -Source "https://dl5.oo-software.com/files/ooshutup10/OOSU10.exe" -Destination OOSU10.exe	
@@ -729,33 +725,36 @@ $Bloatware = @(
 
     #Stops edge from taking over as the default .PDF viewer    
     Write-Host "Stopping Edge from taking over as the default .PDF viewer"
-    $NoPDF = "HKCR:\.pdf"
-    $NoProgids = "HKCR:\.pdf\OpenWithProgids"
-    $NoWithList = "HKCR:\.pdf\OpenWithList" 
-    If (!(Get-ItemProperty $NoPDF  NoOpenWith)) {
-        New-ItemProperty $NoPDF NoOpenWith 
-    }        
-    If (!(Get-ItemProperty $NoPDF  NoStaticDefaultVerb)) {
-        New-ItemProperty $NoPDF  NoStaticDefaultVerb 
-    }        
-    If (!(Get-ItemProperty $NoProgids  NoOpenWith)) {
-        New-ItemProperty $NoProgids  NoOpenWith 
-    }        
-    If (!(Get-ItemProperty $NoProgids  NoStaticDefaultVerb)) {
-        New-ItemProperty $NoProgids  NoStaticDefaultVerb 
-    }        
-    If (!(Get-ItemProperty $NoWithList  NoOpenWith)) {
-        New-ItemProperty $NoWithList  NoOpenWith
-    }        
-    If (!(Get-ItemProperty $NoWithList  NoStaticDefaultVerb)) {
-        New-ItemProperty $NoWithList  NoStaticDefaultVerb 
-    }
+	# Identify the edge application class 
+	$Packages = "HKCU:SOFTWARE\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\AppModel\Repository\Packages" 
+	$edge = Get-ChildItem $Packages -Recurse -include "MicrosoftEdge" 
+		
+	# Specify the paths to the file and URL associations 
+	$FileAssocKey = Join-Path $edge.PSPath Capabilities\FileAssociations 
+	$URLAssocKey = Join-Path $edge.PSPath Capabilities\URLAssociations 
+		
+	# get the software classes for the file and URL types that Edge will associate 
+	$FileTypes = Get-Item $FileAssocKey 
+	$URLTypes = Get-Item $URLAssocKey 
+		
+	$FileAssoc = Get-ItemProperty $FileAssocKey 
+	$URLAssoc = Get-ItemProperty $URLAssocKey 
+		
+	$Associations = @() 
+	$Filetypes.Property | foreach {$Associations += $FileAssoc.$_} 
+	$URLTypes.Property | foreach {$Associations += $URLAssoc.$_} 
+		
+	# add registry values in each software class to stop edge from associating as the default 
+	foreach ($Association in $Associations) 
+			{ 
+			$Class = Join-Path HKCU:SOFTWARE\Classes $Association 
+			#if (Test-Path $class) 
+			#   {write-host $Association} 
+			# Get-Item $Class 
+			Set-ItemProperty $Class -Name NoOpenWith -Value "" 
+			Set-ItemProperty $Class -Name NoStaticDefaultVerb -Value "" 
+			} 
             
-    #Appends an underscore '_' to the Registry key for Edge
-    $Edge = "HKCR:\AppXd4nrz8ff68srnhf9t5a8sbjyar1cr723_"
-    If (Test-Path $Edge) {
-        Set-Item $Edge AppXd4nrz8ff68srnhf9t5a8sbjyar1cr723_ 
-    }
     
     #Removes Paint3D stuff from context menu
 $Paint3Dstuff = @(
