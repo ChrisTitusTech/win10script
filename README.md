@@ -3,7 +3,7 @@ This is A FORK Based On ChrisTitusTech that's foucus on debloat and optimize win
 
 ## Changelog!
 
-229 Dec 2020
+29 Dec 2020
 ```
 - Hopfully fixed GPU Tweaks Issues on dual GPU laptops, GPU Tweaks is Now Applied only on GTX/RTX/AMD Cards Only!
 - Minor Tweaks and fixes in code.
