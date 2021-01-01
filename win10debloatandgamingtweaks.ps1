@@ -2276,45 +2276,62 @@ Function UninstallMsftBloat {
 	Write-Output "Uninstalling default Microsoft applications..."
 	$errpref = $ErrorActionPreference #save actual preference
         $ErrorActionPreference = "silentlycontinue"
-	Get-AppxPackage "Microsoft.3DBuilder" | Remove-AppxPackage -ErrorAction SilentlyContinue
-	Get-AppxPackage "Microsoft.AppConnector" | Remove-AppxPackage -ErrorAction SilentlyContinue
-	Get-AppxPackage "Microsoft.BingFinance" | Remove-AppxPackage -ErrorAction SilentlyContinue
-	Get-AppxPackage "Microsoft.BingNews" | Remove-AppxPackage -ErrorAction SilentlyContinue
-	Get-AppxPackage "Microsoft.BingSports" | Remove-AppxPackage -ErrorAction SilentlyContinue
-	Get-AppxPackage "Microsoft.BingTranslator" | Remove-AppxPackage -ErrorAction SilentlyContinue
-	Get-AppxPackage "Microsoft.BingWeather" | Remove-AppxPackage -ErrorAction SilentlyContinue
-	#Get-AppxPackage "Microsoft.CommsPhone" | Remove-AppxPackage -ErrorAction SilentlyContinue
-	#Get-AppxPackage "Microsoft.ConnectivityStore" | Remove-AppxPackage -ErrorAction SilentlyContinue
-	Get-AppxPackage "Microsoft.GetHelp" | Remove-AppxPackage -ErrorAction SilentlyContinue
-	Get-AppxPackage "Microsoft.Getstarted" | Remove-AppxPackage -ErrorAction SilentlyContinue
-	Get-AppxPackage "Microsoft.Messaging" | Remove-AppxPackage -ErrorAction SilentlyContinue
-	Get-AppxPackage "Microsoft.Microsoft3DViewer" | Remove-AppxPackage -ErrorAction SilentlyContinue
-	Get-AppxPackage "Microsoft.MicrosoftPowerBIForWindows" | Remove-AppxPackage -ErrorAction SilentlyContinue
-	Get-AppxPackage "Microsoft.MicrosoftSolitaireCollection" | Remove-AppxPackage -ErrorAction SilentlyContinue
-	Get-AppxPackage "Microsoft.MicrosoftStickyNotes" | Remove-AppxPackage -ErrorAction SilentlyContinue
-	Get-AppxPackage "Microsoft.NetworkSpeedTest" | Remove-AppxPackage -ErrorAction SilentlyContinue
-	Get-AppxPackage "Microsoft.Office.OneNote" | Remove-AppxPackage -ErrorAction SilentlyContinue
-	Get-AppxPackage "Microsoft.Office.Sway" | Remove-AppxPackage -ErrorAction SilentlyContinue
-	Get-AppxPackage "Microsoft.OneConnect" | Remove-AppxPackage -ErrorAction SilentlyContinue
-	Get-AppxPackage "Microsoft.People" | Remove-AppxPackage -ErrorAction SilentlyContinue
-	Get-AppxPackage "Microsoft.Print3D" | Remove-AppxPackage -ErrorAction SilentlyContinue
-	Get-AppxPackage "Microsoft.RemoteDesktop" | Remove-AppxPackage -ErrorAction SilentlyContinue
-	Get-AppxPackage "Microsoft.Wallet" | Remove-AppxPackage -ErrorAction SilentlyContinue
-	Get-AppxPackage "Microsoft.WindowsAlarms" | Remove-AppxPackage -ErrorAction SilentlyContinue
-	Get-AppxPackage "Microsoft.WindowsCamera" | Remove-AppxPackage -ErrorAction SilentlyContinue
-	#Get-AppxPackage "microsoft.windowscommunicationsapps" | Remove-AppxPackage -ErrorAction SilentlyContinue
-	Get-AppxPackage "Microsoft.WindowsFeedbackHub" | Remove-AppxPackage -ErrorAction SilentlyContinue
-	Get-AppxPackage "Microsoft.WindowsMaps" | Remove-AppxPackage -ErrorAction SilentlyContinue
-	#Get-AppxPackage "Microsoft.WindowsPhone" | Remove-AppxPackage -ErrorAction SilentlyContinue
-	Get-AppxPackage "Microsoft.Windows.Photos" | Remove-AppxPackage -ErrorAction SilentlyContinue
-	Get-AppxPackage "Microsoft.WindowsSoundRecorder" | Remove-AppxPackage -ErrorAction SilentlyContinue
-	Get-AppxPackage "Microsoft.ZuneMusic" | Remove-AppxPackage -ErrorAction SilentlyContinue
-	Get-AppxPackage "Microsoft.ZuneVideo" | Remove-AppxPackage -ErrorAction SilentlyContinue
-	Get-AppxPackage *MicrosoftOfficeHub* | Remove-AppxPackage -ErrorAction SilentlyContinue
-	Get-AppxPackage *Microsoft.MixedReality.Portal* | Remove-AppxPackage -ErrorAction SilentlyContinue
-	Get-AppxPackage *Microsoft.ScreenSketch* | Remove-AppxPackage -ErrorAction SilentlyContinue
-	Get-AppxPackage *Microsoft.MSPaint* | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage -allusers *3DBuilder* | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage -allusers *AppConnector* | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage -allusers *BingFinance* | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage -allusers *BingNews* | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage -allusers *BingSports* | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage -allusers *Translator* | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage -allusers *Weather* | Remove-AppxPackage -ErrorAction SilentlyContinue
+	#Get-AppxPackage -allusers *CommsPhone* | Remove-AppxPackage -ErrorAction SilentlyContinue
+	#Get-AppxPackage -allusers *ConnectivityStore* | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage -allusers *GetHelp* | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage -allusers *Getstarted* | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage -allusers *Messaging* | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage -allusers *Microsoft3DViewer* | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage -allusers *MicrosoftPowerBIForWindows* | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage -allusers *MicrosoftSolitaireCollection* | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage -allusers *MicrosoftStickyNotes* | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage -allusers *NetworkSpeedTest* | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage -allusers *Office.OneNote* | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage -allusers *Office.Sway* | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage -allusers *OneConnect* | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage -allusers *People* | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage -allusers *Print3D* | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage -allusers *RemoteDesktop* | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage -allusers *Wallet* | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage -allusers *WindowsAlarms* | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage -allusers *WindowsCamera* | Remove-AppxPackage -ErrorAction SilentlyContinue
+	#Get-AppxPackage -allusers *windowscommunicationsapps* | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage -allusers *WindowsFeedbackHub* | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage -allusers *WindowsMaps* | Remove-AppxPackage -ErrorAction SilentlyContinue
+	#Get-AppxPackage -allusers *WindowsPhone* | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage -allusers *Windows.Photos* | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage -allusers *WindowsSoundRecorder* | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage -allusers *ZuneMusic* | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage -allusers *ZuneVideo* | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage -allusers *MicrosoftOfficeHub* | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage -allusers *Microsoft.MixedReality.Portal* | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage -allusers *Microsoft.ScreenSketch* | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage -allusers *Microsoft.MSPaint* | Remove-AppxPackage -ErrorAction SilentlyContinue
 	Get-AppxPackage -allusers Microsoft.549981C3F5F10 | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage -allusers *XboxGameOverlay* | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage -allusers *XboxSpeechToTextOverlay* | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage -allusers *.Xbox.TCUI* | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage -allusers *Advertising.Xaml* | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage -allusers *XboxIdentityProvider* | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage -allusers *ScreenSketch* | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage -allusers *SolitaireCollection* | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage -allusers *XboxGamingOverlay* | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage -allusers *MixedReality.Portal* | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage -allusers ** | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage -allusers ** | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage -allusers ** | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage -allusers ** | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage -allusers ** | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage -allusers ** | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage -allusers ** | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage -allusers ** | Remove-AppxPackage -ErrorAction SilentlyContinue
 	$ErrorActionPreference = $errpref #restore previous preference
 }
 
@@ -2373,35 +2390,35 @@ function UninstallThirdPartyBloat {
 	Write-Output "Uninstalling default third party applications..."
 	$errpref = $ErrorActionPreference #save actual preference
         $ErrorActionPreference = "silentlycontinue"
-	Get-AppxPackage "2414FC7A.Viber" | Remove-AppxPackage -ErrorAction SilentlyContinue
-	Get-AppxPackage "41038Axilesoft.ACGMediaPlayer" | Remove-AppxPackage -ErrorAction SilentlyContinue
-	Get-AppxPackage "46928bounde.EclipseManager" | Remove-AppxPackage -ErrorAction SilentlyContinue
-	Get-AppxPackage "4DF9E0F8.Netflix" | Remove-AppxPackage -ErrorAction SilentlyContinue
-	Get-AppxPackage "64885BlueEdge.OneCalendar" | Remove-AppxPackage -ErrorAction SilentlyContinue
-	Get-AppxPackage "7EE7776C.LinkedInforWindows" | Remove-AppxPackage -ErrorAction SilentlyContinue
-	Get-AppxPackage "828B5831.HiddenCityMysteryofShadows" | Remove-AppxPackage -ErrorAction SilentlyContinue
-	Get-AppxPackage "89006A2E.AutodeskSketchBook" | Remove-AppxPackage -ErrorAction SilentlyContinue
-	Get-AppxPackage "9E2F88E3.Twitter" | Remove-AppxPackage -ErrorAction SilentlyContinue
-	Get-AppxPackage "A278AB0D.DisneyMagicKingdoms" | Remove-AppxPackage -ErrorAction SilentlyContinue
-	Get-AppxPackage "A278AB0D.MarchofEmpires" | Remove-AppxPackage -ErrorAction SilentlyContinue
-	Get-AppxPackage "ActiproSoftwareLLC.562882FEEB491" | Remove-AppxPackage -ErrorAction SilentlyContinue
-	Get-AppxPackage "AdobeSystemsIncorporated.AdobePhotoshopExpress" | Remove-AppxPackage -ErrorAction SilentlyContinue
-	Get-AppxPackage "CAF9E577.Plex" | Remove-AppxPackage -ErrorAction SilentlyContinue
-	Get-AppxPackage "D52A8D61.FarmVille2CountryEscape" | Remove-AppxPackage -ErrorAction SilentlyContinue
-	Get-AppxPackage "D5EA27B7.Duolingo-LearnLanguagesforFree" | Remove-AppxPackage -ErrorAction SilentlyContinue
-	Get-AppxPackage "DB6EA5DB.CyberLinkMediaSuiteEssentials" | Remove-AppxPackage -ErrorAction SilentlyContinue
-	Get-AppxPackage "DolbyLaboratories.DolbyAccess" | Remove-AppxPackage -ErrorAction SilentlyContinue
-	Get-AppxPackage "Drawboard.DrawboardPDF" | Remove-AppxPackage -ErrorAction SilentlyContinue
-	Get-AppxPackage "Facebook.Facebook" | Remove-AppxPackage -ErrorAction SilentlyContinue
-	Get-AppxPackage "flaregamesGmbH.RoyalRevolt2" | Remove-AppxPackage -ErrorAction SilentlyContinue
-	Get-AppxPackage "GAMELOFTSA.Asphalt8Airborne" | Remove-AppxPackage -ErrorAction SilentlyContinue
-	Get-AppxPackage "KeeperSecurityInc.Keeper" | Remove-AppxPackage -ErrorAction SilentlyContinue
-	Get-AppxPackage "king.com.BubbleWitch3Saga" | Remove-AppxPackage -ErrorAction SilentlyContinue
-	Get-AppxPackage "king.com.CandyCrushSodaSaga" | Remove-AppxPackage -ErrorAction SilentlyContinue
-	Get-AppxPackage "PandoraMediaInc.29680B314EFC2" | Remove-AppxPackage -ErrorAction SilentlyContinue
-	Get-AppxPackage "SpotifyAB.SpotifyMusic" | Remove-AppxPackage -ErrorAction SilentlyContinue
-	Get-AppxPackage "WinZipComputing.WinZipUniversal" | Remove-AppxPackage -ErrorAction SilentlyContinue
-	Get-AppxPackage "XINGAG.XING" | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage -allusers *Viber* | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage -allusers *ACGMediaPlayer* | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage -allusers *EclipseManager* | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage -allusers *Netflix* | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage -allusers *OneCalendar* | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage -allusers *LinkedInforWindows* | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage -allusers *HiddenCityMysteryofShadows* | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage -allusers *AutodeskSketchBook* | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage -allusers *Twitter* | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage -allusers *DisneyMagicKingdoms* | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage -allusers *MarchofEmpires* | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage -allusers *ActiproSoftwareLLC* | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage -allusers *AdobePhotoshopExpress* | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage -allusers *Plex* | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage -allusers *FarmVille2CountryEscape* | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage -allusers *Duolingo-LearnLanguagesforFree* | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage -allusers *CyberLinkMediaSuiteEssentials* | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage -allusers *DolbyAccess* | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage -allusers *DrawboardPDF* | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage -allusers *Facebook* | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage -allusers *RoyalRevolt2* | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage -allusers *Asphalt8Airborne* | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage -allusers *Keeper* | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage -allusers *BubbleWitch3Saga* | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage -allusers *CandyCrushSodaSaga* | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage -allusers *PandoraMediaInc* | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage -allusers *SpotifyMusic* | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage -allusers *WinZipUniversal* | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage -allusers *XING* | Remove-AppxPackage -ErrorAction SilentlyContinue
 	$ErrorActionPreference = $errpref #restore previous preference
 }
 
