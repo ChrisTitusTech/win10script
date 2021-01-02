@@ -8,6 +8,7 @@ This is A FORK Based On ChrisTitusTech that's foucus on debloat and optimize win
 - Disabling more of Un nessessary Services For Gaming.
 - Improved removal of default microsoft apps and bloatware.
 - Disabling New Microsoft MeetNow.
+- Unbinned StartMenu Titles and forced apps only view.
 ```
 29 Dec 2020
 ```
@@ -189,6 +190,9 @@ Option to Enable & Install Or Disable & Uninstall Microsoft OneDrive
 - Disabling Hide Scroll bars.
 - Disabling smooth scrolling.
 - Disabling microsoft usertracking.
+- Disabling more of Un nessessary Services For Gaming.
+- Disabling New Microsoft MeetNow.
+- Unbinned StartMenu Titles and forced apps only view.
 - Show taskbar buttons only on taskbar where window is open.
 - Disabling GameDVR1.
 - Disabling GameDVR2.
