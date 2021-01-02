@@ -120,6 +120,7 @@ $tweaks = @(
 	"DisableDeviceHistory",
 	"DisableRemoteAssistance",
 	"DisableSearchHistroy",
+	"RemoveMeet",
 	
 	
 	### UI Tweaks ###
@@ -1480,6 +1481,15 @@ Function DisableSearchHistroy {
 	Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\SearchSettings" -Name "IsDeviceSearchHistoryEnabled" -Type DWord -Value 0
 }
 
+#Removing Microsoft MeetNow
+Function RemoveMeet {
+        Write-Output "Disabling Microsoft MeetNow..."
+	$errpref = $ErrorActionPreference #save actual preference
+        $ErrorActionPreference = "silentlycontinue"
+	Remove-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" -Name "HideSCAMeetNow" -ErrorAction SilentlyContinue
+	Remove-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer" -Name "HideSCAMeetNow" -ErrorAction SilentlyContinue
+	$ErrorActionPreference = $errpref #restore previous preference
+}
 ##########
 # UI Tweaks
 ##########
@@ -2283,7 +2293,7 @@ Function UninstallMsftBloat {
 	Get-AppxPackage -allusers *BingSports* | Remove-AppxPackage -ErrorAction SilentlyContinue
 	Get-AppxPackage -allusers *Translator* | Remove-AppxPackage -ErrorAction SilentlyContinue
 	Get-AppxPackage -allusers *Weather* | Remove-AppxPackage -ErrorAction SilentlyContinue
-	#Get-AppxPackage -allusers *CommsPhone* | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage -allusers *CommsPhone* | Remove-AppxPackage -ErrorAction SilentlyContinue
 	#Get-AppxPackage -allusers *ConnectivityStore* | Remove-AppxPackage -ErrorAction SilentlyContinue
 	Get-AppxPackage -allusers *GetHelp* | Remove-AppxPackage -ErrorAction SilentlyContinue
 	Get-AppxPackage -allusers *Getstarted* | Remove-AppxPackage -ErrorAction SilentlyContinue
@@ -2302,10 +2312,10 @@ Function UninstallMsftBloat {
 	Get-AppxPackage -allusers *Wallet* | Remove-AppxPackage -ErrorAction SilentlyContinue
 	Get-AppxPackage -allusers *WindowsAlarms* | Remove-AppxPackage -ErrorAction SilentlyContinue
 	Get-AppxPackage -allusers *WindowsCamera* | Remove-AppxPackage -ErrorAction SilentlyContinue
-	#Get-AppxPackage -allusers *windowscommunicationsapps* | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage -allusers *windowscommunicationsapps* | Remove-AppxPackage -ErrorAction SilentlyContinue
 	Get-AppxPackage -allusers *WindowsFeedbackHub* | Remove-AppxPackage -ErrorAction SilentlyContinue
 	Get-AppxPackage -allusers *WindowsMaps* | Remove-AppxPackage -ErrorAction SilentlyContinue
-	#Get-AppxPackage -allusers *WindowsPhone* | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage -allusers *WindowsPhone* | Remove-AppxPackage -ErrorAction SilentlyContinue
 	Get-AppxPackage -allusers *Windows.Photos* | Remove-AppxPackage -ErrorAction SilentlyContinue
 	Get-AppxPackage -allusers *WindowsSoundRecorder* | Remove-AppxPackage -ErrorAction SilentlyContinue
 	Get-AppxPackage -allusers *ZuneMusic* | Remove-AppxPackage -ErrorAction SilentlyContinue
