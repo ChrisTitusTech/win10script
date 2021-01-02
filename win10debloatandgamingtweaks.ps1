@@ -98,6 +98,7 @@ $tweaks = @(
 	"EnableSleepButton",		# "DisableSleepButton",         
 	"DisableSleepTimeout",        # "EnableSleepTimeout",
 	"DisableFastStartup",         # "EnableFastStartup",
+	"DISGaming",
 
 
     ### Windows Tweaks ###
