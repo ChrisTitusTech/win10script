@@ -2702,7 +2702,7 @@ Function UnpinStartMenuTiles {
 	$errpref = $ErrorActionPreference #save actual preference
         $ErrorActionPreference = "silentlycontinue"
 	Invoke-WebRequest -Uri "https://git.io/JL54C" -OutFile "$env:UserProfile\StartLayout.xml" -ErrorAction SilentlyContinue
-	Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Explorer" -Name "LockedStartLayout" -Type DWord -Value 0 | Out-Null -ErrorAction SilentlyContinue
+	Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Explorer" -Name "LockedStartLayout" -Type DWord -Value 1 | Out-Null -ErrorAction SilentlyContinue
 	Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Explorer" -Name "StartLayoutFile" -Type ExpandString -Value "%USERPROFILE%\StartLayout.xml" | Out-Null -ErrorAction SilentlyContinue
 	$ErrorActionPreference = $errpref #restore previous preference
 }
