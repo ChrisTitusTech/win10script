@@ -2324,14 +2324,6 @@ Function UninstallMsftBloat {
 	Get-AppxPackage -allusers *SolitaireCollection* | Remove-AppxPackage -ErrorAction SilentlyContinue
 	Get-AppxPackage -allusers *XboxGamingOverlay* | Remove-AppxPackage -ErrorAction SilentlyContinue
 	Get-AppxPackage -allusers *MixedReality.Portal* | Remove-AppxPackage -ErrorAction SilentlyContinue
-	Get-AppxPackage -allusers ** | Remove-AppxPackage -ErrorAction SilentlyContinue
-	Get-AppxPackage -allusers ** | Remove-AppxPackage -ErrorAction SilentlyContinue
-	Get-AppxPackage -allusers ** | Remove-AppxPackage -ErrorAction SilentlyContinue
-	Get-AppxPackage -allusers ** | Remove-AppxPackage -ErrorAction SilentlyContinue
-	Get-AppxPackage -allusers ** | Remove-AppxPackage -ErrorAction SilentlyContinue
-	Get-AppxPackage -allusers ** | Remove-AppxPackage -ErrorAction SilentlyContinue
-	Get-AppxPackage -allusers ** | Remove-AppxPackage -ErrorAction SilentlyContinue
-	Get-AppxPackage -allusers ** | Remove-AppxPackage -ErrorAction SilentlyContinue
 	$ErrorActionPreference = $errpref #restore previous preference
 }
 
