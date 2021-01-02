@@ -1,8 +1,4 @@
 ##########
-# Tweaked Win10 Initial Setup Script
-# Primary Author: Disassembler <disassembler@dasm.cz>
-# Primary Author Source: https://github.com/Disassembler0/Win10-Initial-Setup-Script
-# Tweaked Source: https://gist.github.com/alirobe/7f3b34ad89a159e6daa1/
 # Master Branch : https://github.com/ChrisTitusTech/win10script
 # Current Author : Daddy Madu 
 # Current Author Source: https://github.com/DaddyMadu/Windows10GamingFocus
@@ -1055,6 +1051,25 @@ Function DisableMeltdownCompatFlag {
 ##########
 # Service Tweaks
 ##########
+#Disabling Un nessessary Services For Gaming
+Function DISGaming {
+	Write-Output "Stopping and disabling Un nessessary Services For Gaming..."
+	$errpref = $ErrorActionPreference #save actual preference
+    $ErrorActionPreference = "silentlycontinue"
+	Stop-Service "wisvc" -WarningAction SilentlyContinue
+	Set-Service "wisvc" -StartupType Disabled
+	Stop-Service "MapsBroker" -WarningAction SilentlyContinue
+	Set-Service "MapsBroker" -StartupType Disabled
+	Stop-Service "UmRdpService" -WarningAction SilentlyContinue
+	Set-Service "UmRdpService" -StartupType Disabled
+	Stop-Service "TrkWks" -WarningAction SilentlyContinue
+	Set-Service "TrkWks" -StartupType Disabled
+	Stop-Service "TermService" -WarningAction SilentlyContinue
+	Set-Service "TermService" -StartupType Disabled
+	Stop-Service "PcaSvc" -WarningAction SilentlyContinue
+	Set-Service "PcaSvc" -StartupType Disabled
+	$ErrorActionPreference = $errpref #restore previous preference
+}
 
 # Disable offering of Malicious Software Removal Tool through Windows Update
 Function DisableUpdateMSRT {
