@@ -3,6 +3,12 @@ This is A FORK Based On ChrisTitusTech that's foucus on debloat and optimize win
 
 ## Changelog!
 
+2 Jan 2021
+```
+- Disabling more of Un nessessary Services For Gaming.
+- Improved removal of default microsoft apps and bloatware.
+- Disabling New Microsoft MeetNow.
+```
 29 Dec 2020
 ```
 - Hopfully fixed GPU Tweaks Issues on dual GPU laptops, GPU Tweaks is Now Applied only on GTX/RTX/AMD Cards Only!
