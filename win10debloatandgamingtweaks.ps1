@@ -3364,8 +3364,11 @@ Function DebloatAll {
 		"*SolitaireCollection*"
 		"*XboxGamingOverlay*"
 		"*MixedReality.Portal*"
+		"*YourPhone*"
+		
         #Sponsored Windows 10 AppX Apps
         #Add sponsored/featured apps to remove in the "*AppName*" format
+		
         "*EclipseManager*"
         "*ActiproSoftwareLLC*"
         "*AdobePhotoshopExpress*"
