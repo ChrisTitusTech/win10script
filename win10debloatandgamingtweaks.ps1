@@ -3358,7 +3358,7 @@ Function DebloatAll {
 		"Microsoft.549981C3F5F10"
 		"*XboxGameOverlay*"
 		"*XboxSpeechToTextOverlay*"
-		"*.Xbox.TCUI*"
+		"*Xbox.TCUI*"
 		"*Advertising.Xaml*"
 		"*XboxIdentityProvider*"
 		"*SolitaireCollection*"
