@@ -3,6 +3,10 @@ This is A FORK Based On ChrisTitusTech that's foucus on debloat and optimize win
 
 ## Changelog!
 
+3 Jan 2021
+```
+- Fixed Start Menu Search (no need for power toys now!).
+```
 2 Jan 2021
 ```
 - Disabling more of Un nessessary Services For Gaming.
