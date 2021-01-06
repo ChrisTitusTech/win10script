@@ -3330,7 +3330,6 @@ Function DebloatAll {
 	"*MicrosoftStickyNotes*"
         "*NetworkSpeedTest*"
 	"*OneNote*"
-        "*News*"
         "*Lens*"
         "*Sway*"
         "*OneConnect*"
