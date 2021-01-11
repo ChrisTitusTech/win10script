@@ -3403,8 +3403,10 @@ foreach ($Association in $Associations)
 #Create Restore Point
 Function CreateRestorePoint {
   Write-Output "Creating Restore Point incase something bad happens"
-  Enable-ComputerRestore -Drive "C:\"
-  Checkpoint-Computer -Description "RestorePoint1" -RestorePointType "MODIFY_SETTINGS"
+  Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore" -Name "SystemRestorePointCreationFrequency" -Value 0
+  vssadmin Resize ShadowStorage /on="$env:SystemDrive\" /For="$env:SystemDrive\" /MaxSize=5GB | Out-Null
+  Enable-ComputerRestore -Drive "$env:SystemDrive\"
+  Checkpoint-Computer -Description "BeforeDaddyMaduScript" -RestorePointType "MODIFY_SETTINGS"
 }
 
 # In case you have removed them for good, you can try to restore the files using installation medium as follows
