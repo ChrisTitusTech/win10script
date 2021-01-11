@@ -407,7 +407,6 @@ Function ApplyPCOptimizations {
 Function MSIMode {
 	do
  {
-    ColorRed
     Clear-Host
     Write-Host "================ Do You Want To Enable MSI Mode? ================"
 	Write-ColorOutput "WARRNING: MSI MODE MIGHT CRUSH YOUR SYSTEM IF IT'S OLD, IF SO, PLEASE RESTORE LAST WORKING RESTORE POING AND DON'T ENABLE MSI MODE ON THIS SYSTEM AGAIN" Red
