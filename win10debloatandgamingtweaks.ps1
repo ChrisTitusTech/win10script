@@ -22,6 +22,7 @@ $tweaks = @(
 	
 	### Chris Titus Tech Additions
 	#"TitusRegistryTweaks",
+	"Write-ColorOutput", #Utilizing Colors for better warrning messages!
 	"InstallTitusProgs", #REQUIRED FOR OTHER PROGRAM INSTALLS!
 	"InstallMVC", #DaddyMadu install Microsoft Visualstudio required for HPET service!
 	"Install7Zip",
@@ -36,9 +37,10 @@ $tweaks = @(
 	
 	### DaddyMadu Windows Defender Settings! Don't Change Order Just Disable with # If You Don't want it ###
 	"askDefender",
-	"DorEOneDrive",                 # Option to Install Or Uninstall Microsoft One Drive!
+	"DorEOneDrive",                  #Option to Install Or Uninstall Microsoft One Drive!
 	"askMSPPS",                      #Option to enable or disable Microsoft Software Protection Platform Service” Causing High CPU Usage
 	"askMSWSAPPX",                   #Option to enable or disable Wsappx to Fix 100% Disk Usage in Windows 10 in older systems
+	"MSIMode",                       #Enable Or Disable MSI Mode For Supported Cards, WARRNING ENABLING MSI MODE MIGHT CRUSH YOUR SYSTEM! IF IT HAPPENS PLEASE RESTORE LAST WORKING SYSTEM RESTORE POINT AND DON'T ENABLE MSI MODE ON THIS SYSTEM AGAIN!
 
 	### Windows Apps
 	"DebloatAll",
@@ -221,7 +223,7 @@ $tweaks = @(
 )
 
 #########
-# Recommended Titus Customizations
+# Pre Customizations
 #########
 
 function Show-Choco-Menu {
@@ -268,6 +270,54 @@ Function TitusRegistryTweaks {
 	If (!(Get-ItemProperty $UpdatesPath  DeferQualityUpdatesPeriodInDays)) { New-ItemProperty -Path $UpdatesPath -Name "ActiveHoursStart" -Type DWord -Value 8 }
 	Set-ItemProperty -Path $UpdatesPath -Name "ActiveHoursStart" -Type DWord -Value 8
 }
+
+#Utilizing Clolors For Better Warning Messages!
+function Write-ColorOutput
+{
+    [CmdletBinding()]
+    Param(
+         [Parameter(Mandatory=$False,Position=1,ValueFromPipeline=$True,ValueFromPipelinebyPropertyName=$True)][Object] $Object,
+         [Parameter(Mandatory=$False,Position=2,ValueFromPipeline=$True,ValueFromPipelinebyPropertyName=$True)][ConsoleColor] $ForegroundColor,
+         [Parameter(Mandatory=$False,Position=3,ValueFromPipeline=$True,ValueFromPipelinebyPropertyName=$True)][ConsoleColor] $BackgroundColor,
+         [Switch]$NoNewline
+    )    
+
+    # Save previous colors
+    $previousForegroundColor = $host.UI.RawUI.ForegroundColor
+    $previousBackgroundColor = $host.UI.RawUI.BackgroundColor
+
+    # Set BackgroundColor if available
+    if($BackgroundColor -ne $null)
+    { 
+       $host.UI.RawUI.BackgroundColor = $BackgroundColor
+    }
+
+    # Set $ForegroundColor if available
+    if($ForegroundColor -ne $null)
+    {
+        $host.UI.RawUI.ForegroundColor = $ForegroundColor
+    }
+
+    # Always write (if we want just a NewLine)
+    if($Object -eq $null)
+    {
+        $Object = ""
+    }
+
+    if($NoNewline)
+    {
+        [Console]::Write($Object)
+    }
+    else
+    {
+        Write-Output $Object
+    }
+
+    # Restore previous colors
+    $host.UI.RawUI.ForegroundColor = $previousForegroundColor
+    $host.UI.RawUI.BackgroundColor = $previousBackgroundColor
+}
+
 Function InstallTitusProgs {
 	Write-Output "Installing Chocolatey"
 	Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
@@ -352,6 +402,59 @@ Function ApplyPCOptimizations {
 	Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile" -Name "SystemResponsiveness" -Type DWord -Value 0
 	Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile" -Name "NetworkThrottlingIndex" -Type DWord -Value 4294967295
  }
+
+#Enable Or Disable MSI Mode For Supported Cards, WARRNING ENABLING MSI MODE MIGHT CRUSH YOUR SYSTEM! IF IT HAPPENS PLEASE RESTORE LAST WORKING SYSTEM RESTORE POINT AND DON'T ENABLE MSI MODE ON THIS SYSTEM AGAIN!
+Function MSIMode {
+	do
+ {
+    ColorRed
+    Clear-Host
+    Write-Host "================ Do You Want To Enable MSI Mode? ================"
+	Write-ColorOutput "WARRNING: MSI MODE MIGHT CRUSH YOUR SYSTEM IF IT'S OLD, IF SO, PLEASE RESTORE LAST WORKING RESTORE POING AND DON'T ENABLE MSI MODE ON THIS SYSTEM AGAIN" Red
+    Write-Host "Y: Press 'Y' to Enable MSI Mode."
+    Write-Host "N: Press 'N' to Disable MSI Mode."
+	Write-Host "Q: Press 'Q' to stop the entire script."
+    $selection = Read-Host "Please make a selection"
+    switch ($selection)
+    {
+    'y' { 
+	$errpref = $ErrorActionPreference #save actual preference
+$ErrorActionPreference = "silentlycontinue"
+$GPUIDS = @(
+(wmic path win32_VideoController get PNPDeviceID | Select-Object -Skip 2 | Format-List | Out-String).Trim()
+    )
+    foreach ($GPUID in $GPUIDS) {
+$CheckDeviceDes = (Get-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Enum\$GPUID").DeviceDesc
+    } if(($CheckDeviceDes -like "*GTX*") -or ($CheckDeviceDes -like "*RTX*") -or ($CheckDeviceDes -like "*AMD*")) {
+  'GTX/RTX/AMD Compatible Card Found! Enabling MSI Mode...'
+  Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Enum\$GPUID\Device Parameters\Interrupt Management\MessageSignaledInterruptProperties\" -Name "MSISupported" -Type DWord -Value 1
+} else {
+  'No GTX/RTX/AMD Compatible Card Found! Skiping...'
+}
+$ErrorActionPreference = $errpref #restore previous preference
+	}
+    'n' {
+        $errpref = $ErrorActionPreference #save actual preference
+$ErrorActionPreference = "silentlycontinue"
+$GPUIDS = @(
+(wmic path win32_VideoController get PNPDeviceID | Select-Object -Skip 2 | Format-List | Out-String).Trim()
+    )
+    foreach ($GPUID in $GPUIDS) {
+$CheckDeviceDes = (Get-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Enum\$GPUID").DeviceDesc
+    } if(($CheckDeviceDes -like "*GTX*") -or ($CheckDeviceDes -like "*RTX*") -or ($CheckDeviceDes -like "*AMD*")) {
+  'GTX/RTX/AMD Compatible Card Found! Disabling MSI Mode...'
+  Remove-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Enum\$GPUID\Device Parameters\Interrupt Management\MessageSignaledInterruptProperties\" -Name "MSISupported" -ErrorAction SilentlyContinue
+} else {
+  'No GTX/RTX/AMD Compatible Card Found! Skiping...'
+}
+$ErrorActionPreference = $errpref #restore previous preference
+		}
+    'q' { Exit  }
+    }
+ }
+ until ($selection -match "y" -or $selection -match "n" -or $selection -match "q")
+	
+}
 
 ##########
 # Privacy Tweaks
@@ -894,6 +997,7 @@ Function askMSPPS {
  {
     Clear-Host
     Write-Host "================ Do you have High CPU Usage from Microsoft Software Protection Platform Service? ================"
+	Write-ColorOutput "Warrning: Windows Default is ENABLED, if you Disabled it, Windows 10/Office will show not activated state but you can use it as normal" Red
     Write-Host "Y: Press 'Y' to do this."
     Write-Host "N: Press 'N' to skip this."
 	Write-Host "Q: Press 'Q' to stop the entire script."
@@ -924,8 +1028,9 @@ Function askMSWSAPPX {
  {
     Clear-Host
     Write-Host "================ Do you want to disable Microsoft Store and Disable WSAPPX Service? ================"
-    Write-Host "Y: Press 'Y' to do this."
-    Write-Host "N: Press 'N' to skip this."
+	Write-ColorOutput "Warrning: Windows Default is ENABLED, if you Disabled it and wanted to enable it again and restore Microsoft Store Please run the script twise and choose N" Red
+    Write-Host "Y: Press 'Y' to Disable this."
+    Write-Host "N: Press 'N' to Enable this."
 	Write-Host "Q: Press 'Q' to stop the entire script."
     $selection = Read-Host "Please make a selection"
     switch ($selection)
