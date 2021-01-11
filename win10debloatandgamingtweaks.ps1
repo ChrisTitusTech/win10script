@@ -998,8 +998,8 @@ Function askMSPPS {
     Clear-Host
     Write-Host "================ Do you have High CPU Usage from Microsoft Software Protection Platform Service? ================"
 	Write-ColorOutput "Warrning: Windows Default is ENABLED, if you Disabled it, Windows 10/Office will show not activated state but you can use it as normal" Red
-    Write-Host "Y: Press 'Y' to do this."
-    Write-Host "N: Press 'N' to skip this."
+    Write-Host "Y: Press 'Y' to Disable this."
+    Write-Host "N: Press 'N' to Enable this."
 	Write-Host "Q: Press 'Q' to stop the entire script."
     $selection = Read-Host "Please make a selection"
     switch ($selection)
