@@ -1,8 +1,18 @@
 # Windows10GamingFocus
 This is A FORK Based On ChrisTitusTech that's foucus on debloat and optimize windows 10 for the lowest latency and best gaming experience, the Ultimate Windows 10 Script is a creation from multiple debloat scripts and gists from github. I also added Chocolatey and other tools to the script that I install on every machine.
+```
+Warrning: I am NOT responsible for what you do to your Devices/Systems, so follow these instructions at your own risk. Make sure you know what you're doing, it's best to understand the process rather than just copy and paste commands and such.
+```
 
 ## Changelog!
 
+11 Jan 2021
+```
+- Fixed system restore was not created if runs before 24h of last point created.
+- Setting system restore maximum size to 5GB.
+- Adding option to enable or disable MSI Mode (Please read the WARNNINGS First!) .
+- Better warrning messages regarding critical options.
+```
 3 Jan 2021
 ```
 - Fixed Start Menu Search (no need for power toys now!).
@@ -210,9 +220,10 @@ Option to Enable & Install Or Disable & Uninstall Microsoft OneDrive
 - Tell Windows to stop tolerating high DPC/ISR latencies.
 - Decrease mouse and keyboard buffer sizes.
 - Applying PC Optimizations (SystemResponsiveness & NetworkThrottlingIndex).
-- Auto detect Windows screen Scale setting and apply Mouse fix accordingly for 100% Raw Mouse Input No Need For this fix now already auto detect and implemented (http://donewmouseaccel.blogspot.com/2010/03/markc-windows-7-mouse-acceleration-fix.html).
+- Auto detect Windows screen Scale setting and apply Mouse fix accordingly for 100% Raw Mouse Input, Thanks To (http://donewmouseaccel.blogspot.com/2010/03/markc-windows-7-mouse-acceleration-fix.html).
 - Auto detect Nvidia GPU and Apply Power and Latency Tweaks.
 - Auto Detect AMD GPU and Apply Latency Tweaks.
+- Adding option to enable or disable MSI Mode (Please read the WARNNINGS First!) .
 - Disabling High Precision Event Timer.
 - Enabling Gaming Mode.
 - Enabling HAGS.
