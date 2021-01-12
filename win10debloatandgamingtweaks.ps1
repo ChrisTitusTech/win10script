@@ -2680,7 +2680,9 @@ Function QOL {
 	Remove-ItemProperty -Path "HKCU:\Software\Policies\Microsoft\Windows\Explorer" -Name "TaskbarNoMultimon" -ErrorAction SilentlyContinue
 	Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Explorer" -Name "TaskbarNoMultimon" -ErrorAction SilentlyContinue
 	Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "MMTaskbarMode" -Type DWord -Value 2 #Show taskbar buttons only on taskbar where window is open
-	Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Edge" -Name "AutofillAddressEnabled" -Type DWord -Value 0
+	Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Edge" -Name "AutofillAddressEnabled" -Type DWord -Value 0 -Force -ErrorAction SilentlyContinue
+	Set-ItemProperty -Path "HKLM:\Software\Policies\Microsoft\MicrosoftEdge\ServiceUI" -Name "ShowOneBox" -Type DWord -Value 1 -Force -ErrorAction SilentlyContinue
+	Set-ItemProperty -Path "HKLM:\Software\Policies\Microsoft\MicrosoftEdge\SearchScopes" -Name "ShowSearchSuggestionsGlobal" -Type DWord -Value 1 -Force -ErrorAction SilentlyContinue
 	$ErrorActionPreference = $errpref #restore previous preference
 }
 
