@@ -158,10 +158,17 @@ $Label3.Font                     = New-Object System.Drawing.Font('Microsoft San
 
 $essentialtweaks                 = New-Object system.Windows.Forms.Button
 $essentialtweaks.text            = "Essential Tweaks"
-$essentialtweaks.width           = 200
+$essentialtweaks.width           = 100
 $essentialtweaks.height          = 115
 $essentialtweaks.location        = New-Object System.Drawing.Point(24,34)
 $essentialtweaks.Font            = New-Object System.Drawing.Font('Microsoft Sans Serif',14)
+
+$adobecccleanertool              = New-Object system.Windows.Forms.Button
+$adobecccleanertool.text         = "Remove All Adobe Apps"
+$adobecccleanertool.width        = 100
+$adobecccleanertool.height       = 115
+$adobecccleanertool.location     = New-Object System.Drawing.Point(134,34)
+$adobecccleanertool.Font         = New-Object System.Drawing.Font('Microsoft Sans Serif',14)
 
 $backgroundapps                  = New-Object system.Windows.Forms.Button
 $backgroundapps.text             = "Background Apps"
@@ -417,7 +424,7 @@ $lightmode.Font                  = New-Object System.Drawing.Font('Microsoft San
 
 $Form.controls.AddRange(@($Panel1,$Label1,$Panel2,$Label3,$Panel3,$Label4,$Label15,$Panel4,$Label20,$Label21,$Label23,$PictureBox1))
 $Panel1.controls.AddRange(@($installchoco,$brave,$firefox,$7zip,$irfanview,$adobereader,$notepad,$gchrome,$mpc,$vlc,$powertoys,$winterminal,$vscode,$Label2))
-$Panel2.controls.AddRange(@($essentialtweaks,$backgroundapps,$cortana,$windowssearch,$actioncenter,$darkmode,$visualfx,$onedrive,$Label22,$lightmode))
+$Panel2.controls.AddRange(@($adobecccleanertool,$essentialtweaks,$backgroundapps,$cortana,$windowssearch,$actioncenter,$darkmode,$visualfx,$onedrive,$Label22,$lightmode))
 $Panel3.controls.AddRange(@($securitylow,$securityhigh,$Label5,$Label6,$Label7,$Label8,$Label9,$Label10,$Label11,$Label12,$Label13))
 $Panel4.controls.AddRange(@($defaultwindowsupdate,$securitywindowsupdate,$Label16,$Label17,$Label18,$Label19))
 
@@ -779,6 +786,12 @@ $Paint3Dstuff = @(
     }
     
 	$wshell.Popup("Operation Completed",0,"Done",0x0)
+})
+
+$adobecccleanertool.Add_Click({
+    Write-Host "Removing all Adobe CC software from your computer..."
+    Start-BitsTransfer -Source "https://swupmf.adobe.com/webfeed/CleanerTool/win/AdobeCreativeCloudCleanerTool.exe" -Destination AdobeCreativeCloudCleanerTool.exe
+    .\AdobeCreativeCloudCleanerTool.exe --removeAll=ALL | Out-Null
 })
 
 $windowssearch.Add_Click({ 
