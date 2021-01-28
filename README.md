@@ -256,7 +256,13 @@ Or Run Powershell As Administrator and paste the following!
 ```
 iex(New-Object Net.WebClient).DownloadString('http://tweaks.daddymadu.gg')
 ```
-
+To enable Action Center, put the following into Powershell run As Administrator!
+```
+Write-Host "Enabling Action Center..."
+	Remove-ItemProperty -Path "HKCU:\SOFTWARE\Policies\Microsoft\Windows\Explorer" -Name "DisableNotificationCenter" -ErrorAction SilentlyContinue
+	Remove-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\PushNotifications" -Name "ToastEnabled" -ErrorAction SilentlyContinue 
+	Write-Host "Done - Reverted to Stock Settings"
+```
 ## Modifications
 I encourage people to fork this project and comment out things they don't like! Here is a list of normal things people change:
 - Uninstalling OneDrive (This is on in my script)
