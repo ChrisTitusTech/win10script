@@ -406,7 +406,7 @@ $PictureBox1                     = New-Object system.Windows.Forms.PictureBox
 $PictureBox1.width               = 412
 $PictureBox1.height              = 125
 $PictureBox1.location            = New-Object System.Drawing.Point(449,541)
-$PictureBox1.imageLocation       = "https://github.com/ChrisTitusTech/win10script/blob/master/titus-toolbox.png?raw=true"
+$PictureBox1.imageLocation       = "https://christitus.com/images/titus-toolbox.png"
 $PictureBox1.SizeMode            = [System.Windows.Forms.PictureBoxSizeMode]::zoom
 $lightmode                       = New-Object system.Windows.Forms.Button
 $lightmode.text                  = "Light Mode"
@@ -438,6 +438,12 @@ $brave.Add_Click({
 $firefox.Add_Click({ 
     Write-Host "Installing Firefox"
     choco install firefox -y
+	$wshell.Popup("Operation Completed",0,"Done",0x0)
+})
+
+$gchrome.Add_Click({ 
+    Write-Host "Installing Google Chrome"
+    choco install googlechrome -y
 	$wshell.Popup("Operation Completed",0,"Done",0x0)
 })
 
@@ -500,11 +506,11 @@ $essentialtweaks.Add_Click({
     Enable-ComputerRestore -Drive "C:\"
     Checkpoint-Computer -Description "RestorePoint1" -RestorePointType "MODIFY_SETTINGS"
 
-    Write-Host "Running O&O Shutup with Recommended Settings"
-    	Import-Module BitsTransfer
-	Start-BitsTransfer -Source "https://raw.githubusercontent.com/ChrisTitusTech/win10script/master/ooshutup10.cfg" -Destination ooshutup10.cfg
-	choco install shutup10 -y
-	OOSU10 ooshutup10.cfg /quiet
+	Write-Host "Running O&O Shutup with Recommended Settings"
+    Import-Module BitsTransfer		choco install shutup10 -y
+	Start-BitsTransfer -Source "https://raw.githubusercontent.com/ChrisTitusTech/win10script/master/ooshutup10.cfg" -Destination ooshutup10.cfg		OOSU10 ooshutup10.cfg /quiet
+	Start-BitsTransfer -Source "https://dl5.oo-software.com/files/ooshutup10/OOSU10.exe" -Destination OOSU10.exe	
+	./OOSU10.exe ooshutup10.cfg /quiet
 
     Write-Host "Disabling Telemetry..."
 	Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\DataCollection" -Name "AllowTelemetry" -Type DWord -Value 0
@@ -583,9 +589,6 @@ $essentialtweaks.Add_Click({
 	Set-Service "HomeGroupListener" -StartupType Disabled
 	Stop-Service "HomeGroupProvider" -WarningAction SilentlyContinue
 	Set-Service "HomeGroupProvider" -StartupType Disabled
-    Write-Host "Disabling Shared Experiences..."
-	Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\System" -Name "EnableCdp" -Type DWord -Value 0
-	Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\System" -Name "EnableMmx" -Type DWord -Value 0
     Write-Host "Disabling Remote Assistance..."
 	Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Remote Assistance" -Name "fAllowToGetHelp" -Type DWord -Value 0
     Write-Host "Disabling Storage Sense..."
@@ -722,33 +725,59 @@ $Bloatware = @(
 
     #Stops edge from taking over as the default .PDF viewer    
     Write-Host "Stopping Edge from taking over as the default .PDF viewer"
-    $NoPDF = "HKCR:\.pdf"
-    $NoProgids = "HKCR:\.pdf\OpenWithProgids"
-    $NoWithList = "HKCR:\.pdf\OpenWithList" 
-    If (!(Get-ItemProperty $NoPDF  NoOpenWith)) {
-        New-ItemProperty $NoPDF NoOpenWith 
-    }        
-    If (!(Get-ItemProperty $NoPDF  NoStaticDefaultVerb)) {
-        New-ItemProperty $NoPDF  NoStaticDefaultVerb 
-    }        
-    If (!(Get-ItemProperty $NoProgids  NoOpenWith)) {
-        New-ItemProperty $NoProgids  NoOpenWith 
-    }        
-    If (!(Get-ItemProperty $NoProgids  NoStaticDefaultVerb)) {
-        New-ItemProperty $NoProgids  NoStaticDefaultVerb 
-    }        
-    If (!(Get-ItemProperty $NoWithList  NoOpenWith)) {
-        New-ItemProperty $NoWithList  NoOpenWith
-    }        
-    If (!(Get-ItemProperty $NoWithList  NoStaticDefaultVerb)) {
-        New-ItemProperty $NoWithList  NoStaticDefaultVerb 
-    }
+	# Identify the edge application class 
+	$Packages = "HKCU:SOFTWARE\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\AppModel\Repository\Packages" 
+	$edge = Get-ChildItem $Packages -Recurse -include "MicrosoftEdge" 
+		
+	# Specify the paths to the file and URL associations 
+	$FileAssocKey = Join-Path $edge.PSPath Capabilities\FileAssociations 
+	$URLAssocKey = Join-Path $edge.PSPath Capabilities\URLAssociations 
+		
+	# get the software classes for the file and URL types that Edge will associate 
+	$FileTypes = Get-Item $FileAssocKey 
+	$URLTypes = Get-Item $URLAssocKey 
+		
+	$FileAssoc = Get-ItemProperty $FileAssocKey 
+	$URLAssoc = Get-ItemProperty $URLAssocKey 
+		
+	$Associations = @() 
+	$Filetypes.Property | foreach {$Associations += $FileAssoc.$_} 
+	$URLTypes.Property | foreach {$Associations += $URLAssoc.$_} 
+		
+	# add registry values in each software class to stop edge from associating as the default 
+	foreach ($Association in $Associations) 
+			{ 
+			$Class = Join-Path HKCU:SOFTWARE\Classes $Association 
+			#if (Test-Path $class) 
+			#   {write-host $Association} 
+			# Get-Item $Class 
+			Set-ItemProperty $Class -Name NoOpenWith -Value "" 
+			Set-ItemProperty $Class -Name NoStaticDefaultVerb -Value "" 
+			} 
             
-    #Appends an underscore '_' to the Registry key for Edge
-    $Edge = "HKCR:\AppXd4nrz8ff68srnhf9t5a8sbjyar1cr723_"
-    If (Test-Path $Edge) {
-        Set-Item $Edge AppXd4nrz8ff68srnhf9t5a8sbjyar1cr723_ 
+    
+    #Removes Paint3D stuff from context menu
+$Paint3Dstuff = @(
+        "HKCR:\SystemFileAssociations\.3mf\Shell\3D Edit"
+	"HKCR:\SystemFileAssociations\.bmp\Shell\3D Edit"
+	"HKCR:\SystemFileAssociations\.fbx\Shell\3D Edit"
+	"HKCR:\SystemFileAssociations\.gif\Shell\3D Edit"
+	"HKCR:\SystemFileAssociations\.jfif\Shell\3D Edit"
+	"HKCR:\SystemFileAssociations\.jpe\Shell\3D Edit"
+	"HKCR:\SystemFileAssociations\.jpeg\Shell\3D Edit"
+	"HKCR:\SystemFileAssociations\.jpg\Shell\3D Edit"
+	"HKCR:\SystemFileAssociations\.png\Shell\3D Edit"
+	"HKCR:\SystemFileAssociations\.tif\Shell\3D Edit"
+	"HKCR:\SystemFileAssociations\.tiff\Shell\3D Edit"
+    )
+    #Rename reg key to remove it, so it's revertible
+    foreach ($Paint3D in $Paint3Dstuff) {
+        If (Test-Path $Paint3D) {
+	    $rmPaint3D = $Paint3D + "_"
+	    Set-Item $Paint3D $rmPaint3D
+	}
     }
+    
 	$wshell.Popup("Operation Completed",0,"Done",0x0)
 })
 
@@ -908,7 +937,7 @@ $actioncenter.Add_Click({
 $visualfx.Add_Click({ 
     Write-Host "Adjusting visual effects for performance..."
 	Set-ItemProperty -Path "HKCU:\Control Panel\Desktop" -Name "DragFullWindows" -Type String -Value 0
-	Set-ItemProperty -Path "HKCU:\Control Panel\Desktop" -Name "MenuShowDelay" -Type String -Value 0
+	Set-ItemProperty -Path "HKCU:\Control Panel\Desktop" -Name "MenuShowDelay" -Type String -Value 200
 	Set-ItemProperty -Path "HKCU:\Control Panel\Desktop" -Name "UserPreferencesMask" -Type Binary -Value ([byte[]](144,18,3,128,16,0,0,0))
 	Set-ItemProperty -Path "HKCU:\Control Panel\Desktop\WindowMetrics" -Name "MinAnimate" -Type String -Value 0
 	Set-ItemProperty -Path "HKCU:\Control Panel\Keyboard" -Name "KeyboardDelay" -Type DWord -Value 0
