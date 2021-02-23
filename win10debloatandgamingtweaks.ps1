@@ -988,7 +988,7 @@ Function askDefender {
     Enable-ScheduledTask -TaskName "\Microsoft\Windows\Windows Defender\Windows Defender Cleanup" | Out-Null
     Enable-ScheduledTask -TaskName "\Microsoft\Windows\Windows Defender\Windows Defender Scheduled Scan" | Out-Null
     Enable-ScheduledTask -TaskName "\Microsoft\Windows\Windows Defender\Windows Defender Verification" | Out-Null
-	Set-MpPreference -EnableControlledFolderAccess Enabled
+	Set-MpPreference -EnableControlledFolderAccess Disabled -ErrorAction SilentlyContinue
 		}
     'q' { Exit  }
     }
