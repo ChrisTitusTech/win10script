@@ -6,6 +6,10 @@ Warrning: I am NOT responsible for what you do to your Devices/Systems, so follo
 
 ## Changelog!
 
+23 Feb 2021
+```
+- Disable Controlled Folder Access in Windows 10 Windows Defender!
+```
 11 Jan 2021
 ```
 - Fixed system restore was not created if runs before 24h of last point created.
