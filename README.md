@@ -8,6 +8,7 @@ Warrning: I am NOT responsible for what you do to your Devices/Systems, so follo
 
 28 Feb 2021
 ```
+- Fixing MSI Mode not applying correctly!
 - Keeping Dolby and Dolby Access removing as requested.
 ```
 23 Feb 2021
