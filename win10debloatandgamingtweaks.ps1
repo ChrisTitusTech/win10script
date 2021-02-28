@@ -3496,8 +3496,6 @@ Function DebloatAll {
         "*Royal Revolt*"
         "*Sway*"
         "*Speed Test*"
-        "*Dolby*"
-	"*DolbyAccess*"
         "*Viber*"
         "*ACGMediaPlayer*"
         "*Netflix*"
