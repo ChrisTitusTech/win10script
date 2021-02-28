@@ -8,6 +8,7 @@ Warrning: I am NOT responsible for what you do to your Devices/Systems, so follo
 
 28 Feb 2021
 ```
+- Adding Disabling Nagle’s Algorithm to Network Optimizations.
 - Fixing MSI Mode not applying correctly!
 - Keeping Dolby and Dolby Access removing as requested.
 ```
@@ -238,6 +239,7 @@ Option to Enable & Install Or Disable & Uninstall Microsoft OneDrive
 - Enabling HAGS.
 - Disable Windows 10 Core Parking On Current PowerPlan "Ultimate Performance".
 - Optimizing Network and applying Tweaks for no throttle and maximum speed!.
+- Disabling Nagle’s Algorithm.
 - disabled any power saving option under any network device.
 - disabled offloading, Green Ethernet, Giga Lite, EEE, Advanced EEE, Energy Efficient from all network devices.
 - Removing Edit with Paint 3D from context menu.
