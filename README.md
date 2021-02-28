@@ -6,6 +6,10 @@ Warrning: I am NOT responsible for what you do to your Devices/Systems, so follo
 
 ## Changelog!
 
+28 Feb 2021
+```
+- Keeping Dolby and Dolby Access removing as requested.
+```
 23 Feb 2021
 ```
 - Disable Controlled Folder Access in Windows 10 Windows Defender!
