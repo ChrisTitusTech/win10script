@@ -36,11 +36,12 @@ $tweaks = @(
 	# "ChangeDefaultApps", # Removed due to issues with steam and resetting default apps
 	
 	### DaddyMadu Windows Defender Settings! Don't Change Order Just Disable with # If You Don't want it ###
+	"MSIMode",                       #Enable Or Disable MSI Mode For Supported Cards, WARRNING ENABLING MSI MODE MIGHT CRUSH YOUR SYSTEM! IF IT HAPPENS PLEASE RESTORE LAST WORKING SYSTEM RESTORE POINT AND DON'T ENABLE MSI MODE ON THIS SYSTEM AGAIN!
+	"DisableNagle",
 	"askDefender",
 	"DorEOneDrive",                  #Option to Install Or Uninstall Microsoft One Drive!
 	"askMSPPS",                      #Option to enable or disable Microsoft Software Protection Platform Service” Causing High CPU Usage
 	"askMSWSAPPX",                   #Option to enable or disable Wsappx to Fix 100% Disk Usage in Windows 10 in older systems
-	"MSIMode",                       #Enable Or Disable MSI Mode For Supported Cards, WARRNING ENABLING MSI MODE MIGHT CRUSH YOUR SYSTEM! IF IT HAPPENS PLEASE RESTORE LAST WORKING SYSTEM RESTORE POINT AND DON'T ENABLE MSI MODE ON THIS SYSTEM AGAIN!
 
 	### Windows Apps
 	"DebloatAll",
@@ -3263,7 +3264,24 @@ Function NetworkOptimizations {
         $adapter | Set-NetAdapterPowerManagement
     }
 }
-      $errpref = $ErrorActionPreference #save actual preference
+       Start-Sleep -s 5
+}
+
+# Disable Nagle's Algorithm
+Function DisableNagle {
+	do
+ {
+    Clear-Host
+    Write-Host "================ Do You Want To Disable Nagle’s Algorithm? ================"
+	Write-ColorOutput "WARRNING: Nagle’s Algorithm will optimize your ping on online games but you network might not be stable! if any issues happens just run the script again and choose NO" Red
+    Write-Host "Y: Press 'Y' to Disable Nagle’s Algorithm."
+    Write-Host "N: Press 'N' to Enable Nagle’s Algorithm."
+	Write-Host "Q: Press 'Q' to stop the entire script."
+    $selection = Read-Host "Please make a selection"
+    switch ($selection)
+    {
+    'y' { 
+$errpref = $ErrorActionPreference #save actual preference
 $ErrorActionPreference = "silentlycontinue"
 $NetworkIDS = @(
 (Get-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\Interfaces\*").PSChildName
@@ -3274,7 +3292,25 @@ Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters
 Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\Interfaces\$NetworkID" -Name "TCPNoDelay" -Type DWord -Value 1
 }
 $ErrorActionPreference = $errpref #restore previous preference
-       Start-Sleep -s 5
+	}
+    'n' {
+$errpref = $ErrorActionPreference #save actual preference
+$ErrorActionPreference = "silentlycontinue"
+$NetworkIDS = @(
+(Get-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\Interfaces\*").PSChildName
+)
+    foreach ($NetworkID in $NetworkIDS) {
+	Write-Output "Enabling Nagle’s Algorithm..."
+Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\Interfaces\$NetworkID" -Name "TcpAckFrequency" -Type DWord -Value 0
+Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\Interfaces\$NetworkID" -Name "TCPNoDelay" -Type DWord -Value 0
+}
+$ErrorActionPreference = $errpref #restore previous preference
+		}
+    'q' { Exit  }
+    }
+ }
+ until ($selection -match "y" -or $selection -match "n" -or $selection -match "q")
+	
 }
 
 #Remove Edit with 3D Paint
