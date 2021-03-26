@@ -432,7 +432,7 @@ $installchoco.Add_Click({
 $brave.Add_Click({
     Write-Host "Installing Brave Browser"
     choco install brave -y
-        $wshell.Popup("Operation Completed",0,"Done",0x0)
+    $wshell.Popup("Operation Completed",0,"Done",0x0)
 })
 
 $firefox.Add_Click({
@@ -758,7 +758,7 @@ $Bloatware = @(
 
     #Removes Paint3D stuff from context menu
 $Paint3Dstuff = @(
-        "HKCR:\SystemFileAssociations\.3mf\Shell\3D Edit"
+    "HKCR:\SystemFileAssociations\.3mf\Shell\3D Edit"
     "HKCR:\SystemFileAssociations\.bmp\Shell\3D Edit"
     "HKCR:\SystemFileAssociations\.fbx\Shell\3D Edit"
     "HKCR:\SystemFileAssociations\.gif\Shell\3D Edit"
