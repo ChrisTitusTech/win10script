@@ -8,11 +8,11 @@ $ErrorIco = [System.Windows.MessageBoxImage]::Error
 $Ask = 'Do you want to run this as an Administrator?
         Select "Yes" to Run as an Administrator
         Select "No" to not run this as an Administrator
-        
+
         Select "Cancel" to stop the script.'
 
 If (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]'Administrator')) {
-    $Prompt = [System.Windows.MessageBox]::Show($Ask, "Run as an Administrator or not?", $Button, $ErrorIco) 
+    $Prompt = [System.Windows.MessageBox]::Show($Ask, "Run as an Administrator or not?", $Button, $ErrorIco)
     Switch ($Prompt) {
         #This will debloat Windows 10
         Yes {
@@ -422,86 +422,86 @@ $Panel3.controls.AddRange(@($securitylow,$securityhigh,$Label5,$Label6,$Label7,$
 $Panel4.controls.AddRange(@($defaultwindowsupdate,$securitywindowsupdate,$Label16,$Label17,$Label18,$Label19))
 
 
-$installchoco.Add_Click({ 
+$installchoco.Add_Click({
     Write-Host "Installing Chocolatey"
     Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
     choco install chocolatey-core.extension -y
     $wshell.Popup("Operation Completed",0,"Done",0x0)
 })
 
-$brave.Add_Click({ 
+$brave.Add_Click({
     Write-Host "Installing Brave Browser"
     choco install brave -y
-        $wshell.Popup("Operation Completed",0,"Done",0x0)    
+        $wshell.Popup("Operation Completed",0,"Done",0x0)
 })
 
-$firefox.Add_Click({ 
+$firefox.Add_Click({
     Write-Host "Installing Firefox"
     choco install firefox -y
     $wshell.Popup("Operation Completed",0,"Done",0x0)
 })
 
-$gchrome.Add_Click({ 
+$gchrome.Add_Click({
     Write-Host "Installing Google Chrome"
     choco install googlechrome -y
     $wshell.Popup("Operation Completed",0,"Done",0x0)
 })
 
-$irfanview.Add_Click({ 
+$irfanview.Add_Click({
     Write-Host "Installing Irfanview (Image Viewer)"
     choco install irfanview -y
     $wshell.Popup("Operation Completed",0,"Done",0x0)
 })
 
-$adobereader.Add_Click({ 
+$adobereader.Add_Click({
     Write-Host "Installing Adobe Reader DC"
     choco install adobereader -y
     $wshell.Popup("Operation Completed",0,"Done",0x0)
 })
 
-$notepad.Add_Click({ 
+$notepad.Add_Click({
     Write-Host "Installing Notepad++"
     choco install notepadplusplus -y
     $wshell.Popup("Operation Completed",0,"Done",0x0)
 })
 
-$vlc.Add_Click({ 
+$vlc.Add_Click({
     Write-Host "Installing VLC Media Player"
     choco install vlc -y
     $wshell.Popup("Operation Completed",0,"Done",0x0)
 })
 
-$mpc.Add_Click({ 
+$mpc.Add_Click({
     Write-Host "Installing Media Player Classic"
     choco install mpc-be -y
     $wshell.Popup("Operation Completed",0,"Done",0x0)
 })
 
-$7zip.Add_Click({ 
+$7zip.Add_Click({
     Write-Host "Installing 7-Zip Compression Tool"
     choco install 7zip -y
     $wshell.Popup("Operation Completed",0,"Done",0x0)
 })
 
-$vscode.Add_Click({ 
+$vscode.Add_Click({
     Write-Host "Installing Visual Studio Code"
     choco install vscode -y
     $wshell.Popup("Operation Completed",0,"Done",0x0)
 })
 
-$winterminal.Add_Click({ 
+$winterminal.Add_Click({
     Write-Host "Installing New Windows Terminal"
     choco install microsoft-windows-terminal -y
     $wshell.Popup("Operation Completed",0,"Done",0x0)
 })
 
-$powertoys.Add_Click({ 
+$powertoys.Add_Click({
     Write-Host "Installing Microsoft PowerToys"
     choco install powertoys -y
     $wshell.Popup("Operation Completed",0,"Done",0x0)
 })
 
-$essentialtweaks.Add_Click({ 
+$essentialtweaks.Add_Click({
     Write-Host "Creating Restore Point incase something bad happens"
     Enable-ComputerRestore -Drive "C:\"
     Checkpoint-Computer -Description "RestorePoint1" -RestorePointType "MODIFY_SETTINGS"
@@ -509,7 +509,7 @@ $essentialtweaks.Add_Click({
     Write-Host "Running O&O Shutup with Recommended Settings"
     Import-Module BitsTransfer		choco install shutup10 -y
     Start-BitsTransfer -Source "https://raw.githubusercontent.com/ChrisTitusTech/win10script/master/ooshutup10.cfg" -Destination ooshutup10.cfg        OOSU10 ooshutup10.cfg /quiet
-    Start-BitsTransfer -Source "https://dl5.oo-software.com/files/ooshutup10/OOSU10.exe" -Destination OOSU10.exe    
+    Start-BitsTransfer -Source "https://dl5.oo-software.com/files/ooshutup10/OOSU10.exe" -Destination OOSU10.exe
     ./OOSU10.exe ooshutup10.cfg /quiet
 
     Write-Host "Disabling Telemetry..."
@@ -703,7 +703,7 @@ $Bloatware = @(
         "*Hulu*"
         "*HiddenCity*"
         "*AdobePhotoshopExpress*"
-                     
+
         #Optional: Typically not removed but you can if you need to for some reason
         #"*Microsoft.Advertising.Xaml_10.1712.5.0_x64__8wekyb3d8bbwe*"
         #"*Microsoft.Advertising.Xaml_10.1712.5.0_x86__8wekyb3d8bbwe*"
@@ -723,39 +723,39 @@ $Bloatware = @(
     Write-Host "Installing Windows Media Player..."
     Enable-WindowsOptionalFeature -Online -FeatureName "WindowsMediaPlayer" -NoRestart -WarningAction SilentlyContinue | Out-Null
 
-    #Stops edge from taking over as the default .PDF viewer    
+    #Stops edge from taking over as the default .PDF viewer
     Write-Host "Stopping Edge from taking over as the default .PDF viewer"
-    # Identify the edge application class 
-    $Packages = "HKCU:SOFTWARE\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\AppModel\Repository\Packages" 
-    $edge = Get-ChildItem $Packages -Recurse -include "MicrosoftEdge" 
-        
-    # Specify the paths to the file and URL associations 
-    $FileAssocKey = Join-Path $edge.PSPath Capabilities\FileAssociations 
-    $URLAssocKey = Join-Path $edge.PSPath Capabilities\URLAssociations 
-        
-    # get the software classes for the file and URL types that Edge will associate 
-    $FileTypes = Get-Item $FileAssocKey 
-    $URLTypes = Get-Item $URLAssocKey 
-        
-    $FileAssoc = Get-ItemProperty $FileAssocKey 
-    $URLAssoc = Get-ItemProperty $URLAssocKey 
-        
-    $Associations = @() 
-    $Filetypes.Property | foreach {$Associations += $FileAssoc.$_} 
-    $URLTypes.Property | foreach {$Associations += $URLAssoc.$_} 
-        
-    # add registry values in each software class to stop edge from associating as the default 
-    foreach ($Association in $Associations) 
-            { 
-            $Class = Join-Path HKCU:SOFTWARE\Classes $Association 
-            #if (Test-Path $class) 
-            #   {write-host $Association} 
-            # Get-Item $Class 
-            Set-ItemProperty $Class -Name NoOpenWith -Value "" 
-            Set-ItemProperty $Class -Name NoStaticDefaultVerb -Value "" 
-            } 
-            
-    
+    # Identify the edge application class
+    $Packages = "HKCU:SOFTWARE\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\AppModel\Repository\Packages"
+    $edge = Get-ChildItem $Packages -Recurse -include "MicrosoftEdge"
+
+    # Specify the paths to the file and URL associations
+    $FileAssocKey = Join-Path $edge.PSPath Capabilities\FileAssociations
+    $URLAssocKey = Join-Path $edge.PSPath Capabilities\URLAssociations
+
+    # get the software classes for the file and URL types that Edge will associate
+    $FileTypes = Get-Item $FileAssocKey
+    $URLTypes = Get-Item $URLAssocKey
+
+    $FileAssoc = Get-ItemProperty $FileAssocKey
+    $URLAssoc = Get-ItemProperty $URLAssocKey
+
+    $Associations = @()
+    $Filetypes.Property | foreach {$Associations += $FileAssoc.$_}
+    $URLTypes.Property | foreach {$Associations += $URLAssoc.$_}
+
+    # add registry values in each software class to stop edge from associating as the default
+    foreach ($Association in $Associations)
+            {
+            $Class = Join-Path HKCU:SOFTWARE\Classes $Association
+            #if (Test-Path $class)
+            #   {write-host $Association}
+            # Get-Item $Class
+            Set-ItemProperty $Class -Name NoOpenWith -Value ""
+            Set-ItemProperty $Class -Name NoStaticDefaultVerb -Value ""
+            }
+
+
     #Removes Paint3D stuff from context menu
 $Paint3Dstuff = @(
         "HKCR:\SystemFileAssociations\.3mf\Shell\3D Edit"
@@ -777,11 +777,11 @@ $Paint3Dstuff = @(
         Set-Item $Paint3D $rmPaint3D
     }
     }
-    
+
     $wshell.Popup("Operation Completed",0,"Done",0x0)
 })
 
-$windowssearch.Add_Click({ 
+$windowssearch.Add_Click({
     Write-Host "Disabling Bing Search in Start Menu..."
     Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Search" -Name "BingSearchEnabled" -Type DWord -Value 0
     Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Search" -Name "CortanaConsent" -Type DWord -Value 0
@@ -797,7 +797,7 @@ $windowssearch.Add_Click({
     $wshell.Popup("Operation Completed",0,"Done",0x0)
 })
 
-$backgroundapps.Add_Click({ 
+$backgroundapps.Add_Click({
     Write-Host "Disabling Background application access..."
     Get-ChildItem -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\BackgroundAccessApplications" -Exclude "Microsoft.Windows.Cortana*" | ForEach {
         Set-ItemProperty -Path $_.PsPath -Name "Disabled" -Type DWord -Value 1
@@ -806,7 +806,7 @@ $backgroundapps.Add_Click({
     $wshell.Popup("Operation Completed",0,"Done",0x0)
 })
 
-$cortana.Add_Click({ 
+$cortana.Add_Click({
     Write-Host "Disabling Cortana..."
     If (!(Test-Path "HKCU:\SOFTWARE\Microsoft\Personalization\Settings")) {
         New-Item -Path "HKCU:\SOFTWARE\Microsoft\Personalization\Settings" -Force | Out-Null
@@ -828,7 +828,7 @@ $cortana.Add_Click({
     $wshell.Popup("Operation Completed",0,"Done",0x0)
 })
 
-$securitylow.Add_Click({ 
+$securitylow.Add_Click({
     Write-Host "Lowering UAC level..."
     Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" -Name "ConsentPromptBehaviorAdmin" -Type DWord -Value 0
     Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" -Name "PromptOnSecureDesktop" -Type DWord -Value 0
@@ -858,7 +858,7 @@ $securitylow.Add_Click({
     $wshell.Popup("Operation Completed",0,"Done",0x0)
 })
 
-$securityhigh.Add_Click({ 
+$securityhigh.Add_Click({
     Write-Host "Raising UAC level..."
     Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" -Name "ConsentPromptBehaviorAdmin" -Type DWord -Value 5
     Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" -Name "PromptOnSecureDesktop" -Type DWord -Value 1
@@ -886,7 +886,7 @@ $securityhigh.Add_Click({
     $wshell.Popup("Operation Completed",0,"Done",0x0)
 })
 
-$defaultwindowsupdate.Add_Click({ 
+$defaultwindowsupdate.Add_Click({
     Write-Host "Enabling driver offering through Windows Update..."
     Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Device Metadata" -Name "PreventDeviceMetadataFromNetwork" -ErrorAction SilentlyContinue
     Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DriverSearching" -Name "DontPromptForWindowsUpdate" -ErrorAction SilentlyContinue
@@ -899,7 +899,7 @@ $defaultwindowsupdate.Add_Click({
     $wshell.Popup("Operation Completed",0,"Done",0x0)
 })
 
-$securitywindowsupdate.Add_Click({ 
+$securitywindowsupdate.Add_Click({
     Write-Host "Disabling driver offering through Windows Update..."
     If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Device Metadata")) {
         New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Device Metadata" -Force | Out-Null
@@ -924,7 +924,7 @@ $securitywindowsupdate.Add_Click({
     $wshell.Popup("Operation Completed",0,"Done",0x0)
 })
 
-$actioncenter.Add_Click({ 
+$actioncenter.Add_Click({
     Write-Host "Disabling Action Center..."
     If (!(Test-Path "HKCU:\SOFTWARE\Policies\Microsoft\Windows\Explorer")) {
         New-Item -Path "HKCU:\SOFTWARE\Policies\Microsoft\Windows\Explorer" | Out-Null
@@ -934,7 +934,7 @@ $actioncenter.Add_Click({
     $wshell.Popup("Operation Completed",0,"Done",0x0)
 })
 
-$visualfx.Add_Click({ 
+$visualfx.Add_Click({
     Write-Host "Adjusting visual effects for performance..."
     Set-ItemProperty -Path "HKCU:\Control Panel\Desktop" -Name "DragFullWindows" -Type String -Value 0
     Set-ItemProperty -Path "HKCU:\Control Panel\Desktop" -Name "MenuShowDelay" -Type String -Value 200
@@ -949,7 +949,7 @@ $visualfx.Add_Click({
     $wshell.Popup("Operation Completed",0,"Done",0x0)
 })
 
-$onedrive.Add_Click({ 
+$onedrive.Add_Click({
     Write-Host "Disabling OneDrive..."
     If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\OneDrive")) {
         New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\OneDrive" | Out-Null
@@ -978,13 +978,13 @@ $onedrive.Add_Click({
     $wshell.Popup("Operation Completed",0,"Done",0x0)
 })
 
-$darkmode.Add_Click({ 
+$darkmode.Add_Click({
     Write-Host "Enabling Dark Mode"
     Set-ItemProperty -Path HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize -Name AppsUseLightTheme -Value 0
     $wshell.Popup("Operation Completed",0,"Done",0x0)
 })
 
-$lightmode.Add_Click({ 
+$lightmode.Add_Click({
     Write-Host "Switching Back to Light Mode"
     Remove-ItemProperty -Path HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize -Name AppsUseLightTheme
     $wshell.Popup("Operation Completed",0,"Done",0x0)
