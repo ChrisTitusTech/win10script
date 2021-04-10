@@ -3365,9 +3365,15 @@ cmd /c 'del /f /s /q %windir%\prefetch\*.* 2>nul' >$null
 cmd /c 'del /f /q %userprofile%\cookies\*.* 2>nul' >$null
 cmd /c 'del /f /q %userprofile%\recent\*.* 2>nul' >$null
 cmd /c 'del /f /s /q %userprofile%\Local Settings\Temporary Internet Files\*.* 2>nul' >$null
-cmd /c 'del /f /s /q %userprofile%\Local Settings\Temp\*.* 2>nul' >$null
+$errpref = $ErrorActionPreference #save actual preference
+$ErrorActionPreference = "silentlycontinue"
+Get-ChildItem -Path "$env:temp" -Exclude "ytmp" | foreach ($_) {
+       "CLEANING :" + $_.fullname
+       Remove-Item $_.fullname -Force -Recurse
+       "CLEANED... :" + $_.fullname
+   }
+$ErrorActionPreference = $errpref #restore previous preference
 cmd /c 'del /f /s /q %userprofile%\recent\*.* 2>nul' >$null
-cmd /c 'del /f /s /q %userprofile%\AppData\Local\Temp\*.* 2>nul' >$null
 cmd /c 'del /f /s /q %windir%\Temp\*.* 2>nul' >$null
 cmd /c 'echo Temp folders Cleared Successfully!'
 }
