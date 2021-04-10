@@ -1076,25 +1076,25 @@ Function askMSWSAPPX {
 # Enable F8 boot menu options
 Function EnableF8BootMenu {
 	Write-Output "Enabling F8 boot menu options..."
-	bcdedit /set `{current`} bootmenupolicy Legacy | Out-Null
+	bcdedit /set {current} bootmenupolicy Legacy | Out-Null
 }
 
 # Disable F8 boot menu options
 Function DisableF8BootMenu {
 	Write-Output "Disabling F8 boot menu options..."
-	bcdedit /set `{current`} bootmenupolicy Standard | Out-Null
+	bcdedit /set {current} bootmenupolicy Standard | Out-Null
 }
 
 # Set Data Execution Prevention (DEP) policy to OptOut
 Function SetDEPOptOut {
 	Write-Output "Setting Data Execution Prevention (DEP) policy to OptOut..."
-	bcdedit /set `{current`} nx OptOut | Out-Null
+	bcdedit /set {current} nx OptOut | Out-Null
 }
 
 # Set Data Execution Prevention (DEP) policy to OptIn
 Function SetDEPOptIn {
 	Write-Output "Setting Data Execution Prevention (DEP) policy to OptIn..."
-	bcdedit /set `{current`} nx OptIn | Out-Null
+	bcdedit /set {current} nx OptIn | Out-Null
 }
 
 # Enable Core Isolation Memory Integrity - Part of Windows Defender System Guard virtualization-based security - Supported from 1803
@@ -2867,7 +2867,6 @@ Function DisableHPET {
 	bcdedit /timeout 10 | Out-Null
 	bcdedit /set nx optout | Out-Null
 	bcdedit /set bootux disabled | Out-Null
-	bcdedit /set bootmenupolicy standard | Out-Null
 	bcdedit /set quietboot yes | Out-Null
 	bcdedit /set {globalsettings} custom:16000067 true | Out-Null
 	bcdedit /set {globalsettings} custom:16000069 true | Out-Null
