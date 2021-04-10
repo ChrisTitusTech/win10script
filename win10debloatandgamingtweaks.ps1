@@ -29,19 +29,19 @@ $tweaks = @(
 	"InstallNotepadplusplus",
 	"InstallIrfanview",
 	"InstallVLC",
-	"InstallSumatra",
+	#"InstallSumatra",
 	"InstallChrome",
-	"InstallChocoGUI",
+	#"InstallChocoGUI",
 	"EnableUlimatePower",    # DaddyMadu don't change order it will break other functions! just disable if you want with #
 	# "ChangeDefaultApps", # Removed due to issues with steam and resetting default apps
 	
 	### DaddyMadu Windows Defender Settings! Don't Change Order Just Disable with # If You Don't want it ###
 	"MSIMode",                       #Enable Or Disable MSI Mode For Supported Cards, WARRNING ENABLING MSI MODE MIGHT CRUSH YOUR SYSTEM! IF IT HAPPENS PLEASE RESTORE LAST WORKING SYSTEM RESTORE POINT AND DON'T ENABLE MSI MODE ON THIS SYSTEM AGAIN!
 	"DisableNagle",
-	"askDefender",
+	#"askDefender",
 	"DorEOneDrive",                  #Option to Install Or Uninstall Microsoft One Drive!
-	"askMSPPS",                      #Option to enable or disable Microsoft Software Protection Platform Service” Causing High CPU Usage
-	"askMSWSAPPX",                   #Option to enable or disable Wsappx to Fix 100% Disk Usage in Windows 10 in older systems
+	#"askMSPPS",                      #Option to enable or disable Microsoft Software Protection Platform Service” Causing High CPU Usage
+	#"askMSWSAPPX",                   #Option to enable or disable Wsappx to Fix 100% Disk Usage in Windows 10 in older systems
 
 	### Windows Apps
 	"DebloatAll",
@@ -1919,6 +1919,7 @@ Function SetVisualFXPerformance {
 	Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "ListviewShadow" -Type DWord -Value 0
 	Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "TaskbarAnimations" -Type DWord -Value 0
 	Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects" -Name "VisualFXSetting" -Type DWord -Value 3
+	Set-ItemProperty -Path "HKCU:\Control Panel\Desktop" -Name "FontSmoothing" -Type String -Value 2
 	Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\DWM" -Name "EnableAeroPeek" -Type DWord -Value 0
 }
 
@@ -3517,14 +3518,8 @@ Function DebloatAll {
 	"*MicrosoftOfficeHub*"
 	"*Microsoft.MSPaint*"
 	"Microsoft.549981C3F5F10"
-	"*XboxGameOverlay*"
-	"*XboxSpeechToTextOverlay*"
-	"*Xbox.TCUI*"
 	"*Advertising.Xaml*"
-	"*XboxIdentityProvider*"
 	"*SolitaireCollection*"
-	"*XboxGamingOverlay*"
-	"*MixedReality.Portal*"
 	"*YourPhone*"
 		
         #Sponsored Windows 10 AppX Apps
