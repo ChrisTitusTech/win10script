@@ -1078,25 +1078,25 @@ Function askMSWSAPPX {
 # Enable F8 boot menu options
 Function EnableF8BootMenu {
 	Write-Output "Enabling F8 boot menu options..."
-	bcdedit /set {current} bootmenupolicy Legacy | Out-Null
+	bcdedit /set bootmenupolicy Legacy | Out-Null
 }
 
 # Disable F8 boot menu options
 Function DisableF8BootMenu {
 	Write-Output "Disabling F8 boot menu options..."
-	bcdedit /set {current} bootmenupolicy Standard | Out-Null
+	bcdedit /set bootmenupolicy Standard | Out-Null
 }
 
 # Set Data Execution Prevention (DEP) policy to OptOut
 Function SetDEPOptOut {
 	Write-Output "Setting Data Execution Prevention (DEP) policy to OptOut..."
-	bcdedit /set {current} nx OptOut | Out-Null
+	bcdedit /set nx OptOut | Out-Null
 }
 
 # Set Data Execution Prevention (DEP) policy to OptIn
 Function SetDEPOptIn {
 	Write-Output "Setting Data Execution Prevention (DEP) policy to OptIn..."
-	bcdedit /set {current} nx OptIn | Out-Null
+	bcdedit /set nx OptIn | Out-Null
 }
 
 # Enable Core Isolation Memory Integrity - Part of Windows Defender System Guard virtualization-based security - Supported from 1803
@@ -3467,7 +3467,7 @@ foreach ($Association in $Associations)
 Function CreateRestorePoint {
   Write-Output "Creating Restore Point incase something bad happens"
   Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore" -Name "SystemRestorePointCreationFrequency" -Value 0
-  vssadmin Resize ShadowStorage /on="$env:SystemDrive\" /For="$env:SystemDrive\" /MaxSize=5GB | Out-Null
+  cmd /c '"%SYSTEMROOT%\System32\vssadmin.exe" resize shadowstorage /on="%SystemDrive%" /For="%SystemDrive%" /MaxSize=5GB 2>nul' >$null
   Enable-ComputerRestore -Drive "$env:SystemDrive\"
   Checkpoint-Computer -Description "BeforeDaddyMaduScript" -RestorePointType "MODIFY_SETTINGS"
 }
