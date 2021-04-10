@@ -6,6 +6,12 @@ Warrning: I am NOT responsible for what you do to your Devices/Systems, so follo
 
 ## Changelog!
 
+10 April 2021
+```
+- Reverting removal of XBOX as it's required by some Amd system for recording!
+- Removing installation of Sumatra, ChocoGUI, disable Microsoft Software Protection Platform Service, disable Wsappx to Fix 100% Disk Usage, as they cause issue with alot of people.
+- Fixing some issues with code and cleaning it to be prepaired with upcomming windows 10 21h1.
+```
 28 Feb 2021
 ```
 - Adding Disabling Nagle’s Algorithm to Network Optimizations.
