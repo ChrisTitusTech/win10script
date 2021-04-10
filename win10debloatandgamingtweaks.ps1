@@ -328,8 +328,9 @@ Function InstallTitusProgs {
 	Start-BitsTransfer -Source "https://raw.githubusercontent.com/DaddyMadu/Windows10GamingFocus/master/ooshutup10.cfg" -Destination ooshutup10.cfg
 	Start-BitsTransfer -Source "https://dl5.oo-software.com/files/ooshutup10/OOSU10.exe" -Destination OOSU10.exe
 	./OOSU10.exe ooshutup10.cfg /quiet
-	remove-item ooshutup10.cfg -force
-	remove-item OOSU10.exe -force
+	Start-Sleep -Second 10
+	remove-item ooshutup10.cfg -force -Recurse -ErrorAction SilentlyContinue
+	remove-item OOSU10.exe -force -Recurse -ErrorAction SilentlyContinue
 }
 
 # Install the latest Microsoft Visual C++ 2010-2019 Redistributable Packages and Silverlight
