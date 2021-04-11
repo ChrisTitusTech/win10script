@@ -12,12 +12,13 @@
 #     Changelogs Moved to ReadMe File for better mangement. 
 #
 ##########
+if (!(net session)) {$path =  "& '" + $myinvocation.mycommand.definition + "'" ; Start-Process powershell -Verb runAs -ArgumentList $path ; exit}
 $host.ui.RawUI.WindowTitle = "DaddyMadu Ultimate Windows 10 Debloater and Gaming Focus Tweaker"
 cmd /c 'title [DaddyMadu Ultimate Windows 10 Debloater and Gaming Focus Tweaker]'
 # Default preset
 $tweaks = @(
 	### Require administrator privileges ###
-	"RequireAdmin",
+	#"RequireAdmin",
 	"CreateRestorePoint",
 	
 	### Chris Titus Tech Additions
