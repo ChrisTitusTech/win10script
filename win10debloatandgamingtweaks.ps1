@@ -14,7 +14,6 @@
 ##########
 $host.ui.RawUI.WindowTitle = "DaddyMadu Ultimate Windows 10 Debloater and Gaming Focus Tweaker"
 cmd /c 'title [DaddyMadu Ultimate Windows 10 Debloater and Gaming Focus Tweaker]'
-cd "$env:SystemRoot/system32"
 # Default preset
 $tweaks = @(
 	### Require administrator privileges ###
