@@ -2409,7 +2409,7 @@ Function DorEOneDrive {
 	Start-Process $onedrive -NoNewWindow
 	$ErrorActionPreference = $errpref #restore previous preference
 		}
-    'q' { Exit  }
+    'q' {  }
     }
  }
  until ($selection -match "y" -or $selection -match "n" -or $selection -match "q")
