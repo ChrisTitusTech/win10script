@@ -3369,7 +3369,7 @@ cmd /c 'del /f /q %userprofile%\recent\*.* 2>nul' >$null
 cmd /c 'del /f /s /q %userprofile%\Local Settings\Temporary Internet Files\*.* 2>nul' >$null
 $errpref = $ErrorActionPreference #save actual preference
 $ErrorActionPreference = "silentlycontinue"
-Get-ChildItem -Path "$env:temp" -Exclude "ytmp" | foreach ($_) {
+Get-ChildItem -Path "$env:temp" -Exclude "dmtmp" | foreach ($_) {
        "CLEANING :" + $_.fullname
        Remove-Item $_.fullname -Force -Recurse
        "CLEANED... :" + $_.fullname
