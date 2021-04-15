@@ -3507,9 +3507,8 @@ Function CreateRestorePoint {
 # Remove-Item -Path C:\Mnt -Recurse
 
 Function DebloatAll {
-
+cls
     $Bloatware = @(
-
         #Unnecessary Windows 10 AppX Apps
         "*3DBuilder*"
         "*AppConnector*"
@@ -3534,7 +3533,6 @@ Function DebloatAll {
         "*Print3D*"
 	"*RemoteDesktop*"
         "*SkypeApp*"
-        "*StorePurchaseApp*"
         "*Wallet*"
         "*Whiteboard*"
         "*WindowsAlarms*"
