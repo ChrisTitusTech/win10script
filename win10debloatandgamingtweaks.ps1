@@ -16,6 +16,7 @@ $host.ui.RawUI.WindowTitle = "DaddyMadu Ultimate Windows 10 Debloater and Gaming
 cmd /c 'title [DaddyMadu Ultimate Windows 10 Debloater and Gaming Focus Tweaker]'
 Write-Host -NoNewLine 'Welcome to DaddyMadu Ultimate Windows 10 Debloater and Gaming Focus Tweaker, Please PRESS any KEY to Continue!';
 $null = $Host.UI.RawUI.ReadKey('NoEcho,IncludeKeyDown');
+Clear-Host
 # Default preset
 $tweaks = @(
 	### Require administrator privileges ###
