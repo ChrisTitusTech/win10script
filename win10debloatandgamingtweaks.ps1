@@ -29,8 +29,8 @@ $tweaks = @(
 	"InstallTitusProgs", #REQUIRED FOR OTHER PROGRAM INSTALLS!
 	"InstallMVC", #DaddyMadu install Microsoft Visualstudio required for HPET service!
 	"Install7Zip",
-	"InstallNotepadplusplus",
-	"InstallIrfanview",
+	#"InstallNotepadplusplus",
+	#"InstallIrfanview",
 	"InstallVLC",
 	#"InstallSumatra",
 	"InstallChrome",
@@ -41,7 +41,7 @@ $tweaks = @(
 	### DaddyMadu Windows Defender Settings! Don't Change Order Just Disable with # If You Don't want it ###
 	"MSIMode",                       #Enable Or Disable MSI Mode For Supported Cards, WARRNING ENABLING MSI MODE MIGHT CRUSH YOUR SYSTEM! IF IT HAPPENS PLEASE RESTORE LAST WORKING SYSTEM RESTORE POINT AND DON'T ENABLE MSI MODE ON THIS SYSTEM AGAIN!
 	"DisableNagle",
-	#"askDefender",
+	"askDefender",
 	"DorEOneDrive",                  #Option to Install Or Uninstall Microsoft One Drive!
 	#"askMSPPS",                      #Option to enable or disable Microsoft Software Protection Platform Service” Causing High CPU Usage
 	#"askMSWSAPPX",                   #Option to enable or disable Wsappx to Fix 100% Disk Usage in Windows 10 in older systems
@@ -180,7 +180,7 @@ $tweaks = @(
 	### Application Tweaks ###
 	"DisableXboxFeatures",          # "EnableXboxFeatures",
 	"DisableAdobeFlash",            # "EnableAdobeFlash",
-	"InstallMediaPlayer", 		# "UninstallMediaPlayer",
+	"UninstallMediaPlayer",         #"InstallMediaPlayer",
 	"UninstallInternetExplorer",  # "InstallInternetExplorer",
 	"UninstallWorkFolders",       # "InstallWorkFolders",
 	"UninstallLinuxSubsystem",      # "UninstallLinuxSubsystem",     #"InstallLinuxSubsystem",
@@ -947,9 +947,9 @@ Function askDefender {
  {
     Clear-Host
     Write-Host "================ Do you want to Disable Microsoft Windows Defender? ================"
-    Write-Host "Y: Press 'Y' to Disable this."
-    Write-Host "N: Press 'N' to Enable this."
-	Write-Host "Q: Press 'Q' to stop the entire script."
+    Write-Host "Y: Press 'Y' to Disable Microsoft Windows Defender."
+    Write-Host "N: Press 'N' to Enable Microsoft Windows Defender."
+	Write-Host "Q: Press 'Q' to Skip this."
     $selection = Read-Host "Please make a selection"
     switch ($selection)
     {
@@ -998,7 +998,7 @@ Function askDefender {
     Enable-ScheduledTask -TaskName "\Microsoft\Windows\Windows Defender\Windows Defender Verification" | Out-Null
 	Set-MpPreference -EnableControlledFolderAccess Disabled -ErrorAction SilentlyContinue
 		}
-    'q' { Exit  }
+    'q' {  }
     }
  }
  until ($selection -match "y" -or $selection -match "n" -or $selection -match "q")
@@ -2355,9 +2355,9 @@ Function DorEOneDrive {
  {
     Clear-Host
     Write-Host "================ Do you want to Disable Microsoft OneDrive? ================"
-    Write-Host "Y: Press 'Y' to do this."
-    Write-Host "N: Press 'N' to skip this."
-	Write-Host "Q: Press 'Q' to stop the entire script."
+    Write-Host "Y: Press 'Y' to Disable OneDrive."
+    Write-Host "N: Press 'N' to Enable OneDrive."
+	Write-Host "Q: Press 'Q' to Skip this."
     $selection = Read-Host "Please make a selection"
     switch ($selection)
     {
@@ -3519,10 +3519,7 @@ Function DebloatAll {
         "*WindowsFeedbackHub*"
         "*WindowsMaps*"
 	"*WindowsPhone*"
-	"*Windows.Photos*"
         "*WindowsSoundRecorder*"
-        "*ZuneMusic*"
-        "*ZuneVideo*"
 	"*MicrosoftOfficeHub*"
 	"*MixedReality.Portal*"
 	"*ScreenSketch*"
@@ -3532,6 +3529,8 @@ Function DebloatAll {
 	"*Advertising.Xaml*"
 	"*SolitaireCollection*"
 	"*YourPhone*"
+	"*Windows.Photos*"
+	"*ZuneMusic*"
 		
         #Sponsored Windows 10 AppX Apps
         #Add sponsored/featured apps to remove in the "*AppName*" format
