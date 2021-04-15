@@ -198,8 +198,6 @@ $tweaks = @(
 	"QOL",
 	
         ### DaddyMadu Gaming Tweaks ###
-	"DisableDVR1",
-	"DisableDVR2",
 	"FullscreenOptimizationFIX",
 	"GameOptimizationFIX",
 	"ApplyPCOptimizations",
@@ -2717,17 +2715,6 @@ Function QOL {
 ##########
 # Gaming Tweaks Functions
 ##########
-# Disabling Game DVR1
-Function DisableDVR1 {
-	Write-Output "Disabling GameDVR1..."
-	Set-ItemProperty -Path "HKCU:\System\GameConfigStore" -Name "GameDVR_Enabled" -Type DWord -Value 0
-}
-
-#Disabling Game DVR2
-Function DisableDVR2 {
-	Write-Output "Disabling GameDVR2..."
-	Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\PolicyManager\default\ApplicationManagement\AllowGameDVR" -Name "value" -Type DWord -Value 0
-}
 
 #Disable Fullscreen Optimizations
 Function FullscreenOptimizationFIX {
