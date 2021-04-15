@@ -436,6 +436,7 @@ Function askXBOX {
 	}
 	Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\GameDVR" -Name "AllowGameDVR" -Type DWord -Value 0
         $ErrorActionPreference = $errpref #restore previous preference
+	Clear-Host
 	}
     'n' {
         $errpref = $ErrorActionPreference #save actual preference
@@ -449,6 +450,7 @@ Function askXBOX {
 	Set-ItemProperty -Path "HKCU:\System\GameConfigStore" -Name "GameDVR_Enabled" -Type DWord -Value 1
 	Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\GameDVR" -Name "AllowGameDVR" -ErrorAction SilentlyContinue
         $ErrorActionPreference = $errpref #restore previous preference
+	Clear-Host
 		}
     'q' { }
     }
@@ -486,6 +488,7 @@ $CheckDeviceDes = (Get-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Enum\$
   'No GTX/RTX/AMD Compatible Card Found! Skiping...'
 }
 $ErrorActionPreference = $errpref #restore previous preference
+Clear-Host
 	}
     'n' {
         $errpref = $ErrorActionPreference #save actual preference
@@ -502,6 +505,7 @@ $CheckDeviceDes = (Get-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Enum\$
   'No GTX/RTX/AMD Compatible Card Found! Skiping...'
 }
 $ErrorActionPreference = $errpref #restore previous preference
+Clear-Host
 		}
     'q' { Exit  }
     }
@@ -1026,6 +1030,7 @@ Function askDefender {
     Disable-ScheduledTask -TaskName "\Microsoft\Windows\Windows Defender\Windows Defender Cleanup" | Out-Null
     Disable-ScheduledTask -TaskName "\Microsoft\Windows\Windows Defender\Windows Defender Scheduled Scan" | Out-Null
     Disable-ScheduledTask -TaskName "\Microsoft\Windows\Windows Defender\Windows Defender Verification" | Out-Null
+    Clear-Host
 	}
     'n' {
         Write-Output "Enabling Microsoft Windows Defender and related Processes..."
@@ -1044,6 +1049,7 @@ Function askDefender {
     Enable-ScheduledTask -TaskName "\Microsoft\Windows\Windows Defender\Windows Defender Scheduled Scan" | Out-Null
     Enable-ScheduledTask -TaskName "\Microsoft\Windows\Windows Defender\Windows Defender Verification" | Out-Null
 	Set-MpPreference -EnableControlledFolderAccess Disabled -ErrorAction SilentlyContinue
+	Clear-Host
 		}
     'q' {  }
     }
@@ -1070,11 +1076,13 @@ Function askMSPPS {
 	    Write-Output "Disabling Microsoft Software Protection Platform Service and related Processes..."
 		Disable-ScheduledTask -TaskName "\Microsoft\Windows\SoftwareProtectionPlatform\SvcRestartTask" | Out-Null
 		Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\sppsvc" -Name "Start" -Type DWord -Value 4 -ErrorAction SilentlyContinue
+		Clear-Host
 	}
     'n' {
         Write-Output "Enabling Microsoft Software Protection Platform Service and related Processes..."
 	    Enable-ScheduledTask -TaskName "\Microsoft\Windows\SoftwareProtectionPlatform\SvcRestartTask" | Out-Null
 		Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\sppsvc" -Name "Start" -Type DWord -Value 2 -ErrorAction SilentlyContinue
+		Clear-Host
 		}
     'q' { Exit  }
     }
@@ -1107,6 +1115,7 @@ Function askMSWSAPPX {
 		Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\WindowsStore" -Name "DisableStoreApps" -Type DWord -Value 1 -ErrorAction SilentlyContinue
 		Set-ItemProperty -Path "HKLM:\SYSTEM\ControlSet001\Services\AppXSvc" -Name "Start" -Type DWord -Value 4 -ErrorAction SilentlyContinue
 		$ErrorActionPreference = $errpref #restore previous preference
+		Clear-Host
 	}
     'n' {
         Write-Output "Enabling Microsoft Store and WSAPPX Service..."
@@ -1118,6 +1127,7 @@ Function askMSWSAPPX {
 		Get-AppxPackage -AllUsers "Microsoft.DesktopAppInstaller" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"} -ErrorAction SilentlyContinue
 		Get-AppxPackage -AllUsers "Microsoft.WindowsStore" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"} -ErrorAction SilentlyContinue
 		$ErrorActionPreference = $errpref #restore previous preference
+		Clear-Host
 		}
     'q' { Exit  }
     }
@@ -2443,6 +2453,7 @@ Function DorEOneDrive {
 	Remove-Item -Force -ErrorAction SilentlyContinue "$env:userprofile\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\OneDrive.lnk"
 	Get-ScheduledTask -TaskPath '\' -TaskName 'OneDrive*' -ea SilentlyContinue | Unregister-ScheduledTask -Confirm:$false
 	$ErrorActionPreference = $errpref #restore previous preference
+	Clear-Host
 	}
     'n' {
         Write-Output "Enabling Microsoft OneDrive and related Processes..."
@@ -2458,6 +2469,7 @@ Function DorEOneDrive {
 	}
 	Start-Process $onedrive -NoNewWindow
 	$ErrorActionPreference = $errpref #restore previous preference
+	Clear-Host
 		}
     'q' {  }
     }
@@ -3307,6 +3319,7 @@ Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters
 Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\Interfaces\$NetworkID" -Name "TCPNoDelay" -Type DWord -Value 1
 }
 $ErrorActionPreference = $errpref #restore previous preference
+Clear-Host
 	}
     'n' {
 $errpref = $ErrorActionPreference #save actual preference
@@ -3320,6 +3333,7 @@ Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters
 Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\Interfaces\$NetworkID" -Name "TCPNoDelay" -Type DWord -Value 0
 }
 $ErrorActionPreference = $errpref #restore previous preference
+Clear-Host
 		}
     'q' { Exit  }
     }
