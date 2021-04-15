@@ -3299,10 +3299,10 @@ Function DisableNagle {
 	do
  {
     cls
-    Write-Host "================ Do You Want To Disable Nagle’s Algorithm? ================"
-	Write-ColorOutput "WARRNING: Nagle’s Algorithm will optimize your ping on online games but you network might not be stable! if any issues happens just run the script again and choose NO" Red
-    Write-Host "Y: Press 'Y' to Disable Nagle’s Algorithm."
-    Write-Host "N: Press 'N' to Enable Nagle’s Algorithm."
+    Write-Host "================ Do You Want To Disable Nagles Algorithm? ================"
+	Write-ColorOutput "WARRNING: Nagles Algorithm will optimize your ping on online games but you network might not be stable! if any issues happens just run the script again and choose NO" Red
+    Write-Host "Y: Press 'Y' to Disable Nagles Algorithm."
+    Write-Host "N: Press 'N' to Enable Nagles Algorithm."
 	Write-Host "Q: Press 'Q' to stop the entire script."
     $selection = Read-Host "Please make a selection"
     switch ($selection)
@@ -3314,7 +3314,7 @@ $NetworkIDS = @(
 (Get-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\Interfaces\*").PSChildName
 )
     foreach ($NetworkID in $NetworkIDS) {
-	Write-Output "Disabling Nagle’s Algorithm..."
+	Write-Output "Disabling Nagles Algorithm..."
 Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\Interfaces\$NetworkID" -Name "TcpAckFrequency" -Type DWord -Value 1
 Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\Interfaces\$NetworkID" -Name "TCPNoDelay" -Type DWord -Value 1
 }
@@ -3328,7 +3328,7 @@ $NetworkIDS = @(
 (Get-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\Interfaces\*").PSChildName
 )
     foreach ($NetworkID in $NetworkIDS) {
-	Write-Output "Enabling Nagle’s Algorithm..."
+	Write-Output "Enabling Nagles Algorithm..."
 Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\Interfaces\$NetworkID" -Name "TcpAckFrequency" -Type DWord -Value 0
 Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\Interfaces\$NetworkID" -Name "TCPNoDelay" -Type DWord -Value 0
 }
