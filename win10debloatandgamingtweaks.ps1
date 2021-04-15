@@ -39,6 +39,7 @@ $tweaks = @(
 	# "ChangeDefaultApps", # Removed due to issues with steam and resetting default apps
 	
 	### DaddyMadu Windows Defender Settings! Don't Change Order Just Disable with # If You Don't want it ###
+	"askXBOX",
 	"MSIMode",                       #Enable Or Disable MSI Mode For Supported Cards, WARRNING ENABLING MSI MODE MIGHT CRUSH YOUR SYSTEM! IF IT HAPPENS PLEASE RESTORE LAST WORKING SYSTEM RESTORE POINT AND DON'T ENABLE MSI MODE ON THIS SYSTEM AGAIN!
 	"DisableNagle",
 	"askDefender",
@@ -178,7 +179,6 @@ $tweaks = @(
 	"EnableThumbsDB",              # "EnableThumbsDB", # "DisableThumbsDB", 
 
 	### Application Tweaks ###
-	"DisableXboxFeatures",          # "EnableXboxFeatures",
 	"DisableAdobeFlash",            # "EnableAdobeFlash",
 	"UninstallMediaPlayer",         #"InstallMediaPlayer",
 	"UninstallInternetExplorer",  # "InstallInternetExplorer",
@@ -409,6 +409,55 @@ Function ApplyPCOptimizations {
 	Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile" -Name "SystemResponsiveness" -Type DWord -Value 0
 	Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile" -Name "NetworkThrottlingIndex" -Type DWord -Value 4294967295
  }
+
+#Enable or Disable and remove xbox related apps
+Function askXBOX {
+	do
+ {
+    Clear-Host
+    Write-Host "================ Do You Want To Disable XBOX features and all related APPS? ================"
+	Write-ColorOutput "WARRNING: REMOVING XBOX APPS will make Win+G do nothing!" Red
+    Write-Host "Y: Press 'Y' to Disable XBOX features."
+    Write-Host "N: Press 'N' to Enable XBOX features."
+    Write-Host "Q: Press 'Q' to Skip this."
+    $selection = Read-Host "Please make a selection"
+    switch ($selection)
+    {
+    'y' { 
+	$errpref = $ErrorActionPreference #save actual preference
+        $ErrorActionPreference = "silentlycontinue"
+        Write-Output "Disabling Xbox features..."
+	Get-AppxPackage "Microsoft.XboxApp" | Remove-AppxPackage
+	Get-AppxPackage "Microsoft.XboxIdentityProvider" | Remove-AppxPackage -ErrorAction SilentlyContinue
+	Get-AppxPackage "Microsoft.XboxSpeechToTextOverlay" | Remove-AppxPackage
+	Get-AppxPackage "Microsoft.XboxGameOverlay" | Remove-AppxPackage
+	Get-AppxPackage "Microsoft.Xbox.TCUI" | Remove-AppxPackage
+	Set-ItemProperty -Path "HKCU:\System\GameConfigStore" -Name "GameDVR_Enabled" -Type DWord -Value 0
+	If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\GameDVR")) {
+		New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\GameDVR" | Out-Null
+	}
+	Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\GameDVR" -Name "AllowGameDVR" -Type DWord -Value 0
+        $ErrorActionPreference = $errpref #restore previous preference
+	}
+    'n' {
+        $errpref = $ErrorActionPreference #save actual preference
+        $ErrorActionPreference = "silentlycontinue"
+        Write-Output "Enabling Xbox features..."
+	Get-AppxPackage -AllUsers "Microsoft.XboxApp" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"}
+	Get-AppxPackage -AllUsers "Microsoft.XboxIdentityProvider" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"}
+	Get-AppxPackage -AllUsers "Microsoft.XboxSpeechToTextOverlay" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"}
+	Get-AppxPackage -AllUsers "Microsoft.XboxGameOverlay" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"}
+	Get-AppxPackage -AllUsers "Microsoft.Xbox.TCUI" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"}
+	Set-ItemProperty -Path "HKCU:\System\GameConfigStore" -Name "GameDVR_Enabled" -Type DWord -Value 1
+	Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\GameDVR" -Name "AllowGameDVR" -ErrorAction SilentlyContinue
+        $ErrorActionPreference = $errpref #restore previous preference
+		}
+    'q' { }
+    }
+ }
+ until ($selection -match "y" -or $selection -match "n" -or $selection -match "q")
+	
+}
 
 #Enable Or Disable MSI Mode For Supported Cards, WARRNING ENABLING MSI MODE MIGHT CRUSH YOUR SYSTEM! IF IT HAPPENS PLEASE RESTORE LAST WORKING SYSTEM RESTORE POINT AND DON'T ENABLE MSI MODE ON THIS SYSTEM AGAIN!
 Function MSIMode {
@@ -2417,33 +2466,6 @@ Function DorEOneDrive {
  }
  until ($selection -match "y" -or $selection -match "n" -or $selection -match "q")
 	
-}
-
-# Disable Xbox features
-Function DisableXboxFeatures {
-	Write-Output "Disabling Xbox features..."
-	Get-AppxPackage "Microsoft.XboxApp" | Remove-AppxPackage
-	Get-AppxPackage "Microsoft.XboxIdentityProvider" | Remove-AppxPackage -ErrorAction SilentlyContinue
-	Get-AppxPackage "Microsoft.XboxSpeechToTextOverlay" | Remove-AppxPackage
-	Get-AppxPackage "Microsoft.XboxGameOverlay" | Remove-AppxPackage
-	Get-AppxPackage "Microsoft.Xbox.TCUI" | Remove-AppxPackage
-	Set-ItemProperty -Path "HKCU:\System\GameConfigStore" -Name "GameDVR_Enabled" -Type DWord -Value 0
-	If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\GameDVR")) {
-		New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\GameDVR" | Out-Null
-	}
-	Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\GameDVR" -Name "AllowGameDVR" -Type DWord -Value 0
-}
-
-# Enable Xbox features
-Function EnableXboxFeatures {
-	Write-Output "Enabling Xbox features..."
-	Get-AppxPackage -AllUsers "Microsoft.XboxApp" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"}
-	Get-AppxPackage -AllUsers "Microsoft.XboxIdentityProvider" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"}
-	Get-AppxPackage -AllUsers "Microsoft.XboxSpeechToTextOverlay" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"}
-	Get-AppxPackage -AllUsers "Microsoft.XboxGameOverlay" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"}
-	Get-AppxPackage -AllUsers "Microsoft.Xbox.TCUI" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"}
-	Set-ItemProperty -Path "HKCU:\System\GameConfigStore" -Name "GameDVR_Enabled" -Type DWord -Value 1
-	Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\GameDVR" -Name "AllowGameDVR" -ErrorAction SilentlyContinue
 }
 
 # Disable built-in Adobe Flash in IE and Edge
