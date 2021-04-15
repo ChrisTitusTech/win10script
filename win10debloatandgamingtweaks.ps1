@@ -16,7 +16,7 @@ $host.ui.RawUI.WindowTitle = "DaddyMadu Ultimate Windows 10 Debloater and Gaming
 cmd /c 'title [DaddyMadu Ultimate Windows 10 Debloater and Gaming Focus Tweaker]'
 Write-Host -NoNewLine 'Welcome to DaddyMadu Ultimate Windows 10 Debloater and Gaming Focus Tweaker, Please PRESS any KEY to Continue!';
 $null = $Host.UI.RawUI.ReadKey('NoEcho,IncludeKeyDown');
-Clear-Host
+cls
 # Default preset
 $tweaks = @(
 	### Require administrator privileges ###
@@ -241,7 +241,7 @@ function Show-Choco-Menu {
    
  do
  {
-    Clear-Host
+    cls
     Write-Host "================ $Title ================"
     Write-Host "Y: Press 'Y' to do this."
     Write-Host "2: Press 'N' to skip this."
@@ -338,7 +338,7 @@ Function InstallTitusProgs {
 Function InstallMVC {
 	do
  {
-    Clear-Host
+    cls
     Write-Host "================ Do you want to Install the latest Microsoft Visual C++ 2005-2019 Redistributable Packages and Silverlight? ================"
     Write-Host "Y: Press 'Y' to do this."
     Write-Host "N: Press 'N' to skip this."
@@ -412,7 +412,7 @@ Function ApplyPCOptimizations {
 Function askXBOX {
 	do
  {
-    Clear-Host
+    cls
     Write-Host "================ Do You Want To Disable XBOX features and all related APPS? ================"
 	Write-ColorOutput "WARRNING: REMOVING XBOX APPS will make Win+G do nothing!" Red
     Write-Host "Y: Press 'Y' to Disable XBOX features."
@@ -436,7 +436,7 @@ Function askXBOX {
 	}
 	Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\GameDVR" -Name "AllowGameDVR" -Type DWord -Value 0
         $ErrorActionPreference = $errpref #restore previous preference
-	Clear-Host
+	cls
 	}
     'n' {
         $errpref = $ErrorActionPreference #save actual preference
@@ -450,7 +450,7 @@ Function askXBOX {
 	Set-ItemProperty -Path "HKCU:\System\GameConfigStore" -Name "GameDVR_Enabled" -Type DWord -Value 1
 	Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\GameDVR" -Name "AllowGameDVR" -ErrorAction SilentlyContinue
         $ErrorActionPreference = $errpref #restore previous preference
-	Clear-Host
+	cls
 		}
     'q' { }
     }
@@ -463,7 +463,7 @@ Function askXBOX {
 Function MSIMode {
 	do
  {
-    Clear-Host
+    cls
     Write-Host "================ Do You Want To Enable MSI Mode? ================"
 	Write-ColorOutput "WARRNING: MSI MODE MIGHT CRUSH YOUR SYSTEM IF IT'S OLD, IF SO, PLEASE RESTORE LAST WORKING RESTORE POING AND DON'T ENABLE MSI MODE ON THIS SYSTEM AGAIN" Red
     Write-Host "Y: Press 'Y' to Enable MSI Mode."
@@ -488,7 +488,7 @@ $CheckDeviceDes = (Get-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Enum\$
   'No GTX/RTX/AMD Compatible Card Found! Skiping...'
 }
 $ErrorActionPreference = $errpref #restore previous preference
-Clear-Host
+cls
 	}
     'n' {
         $errpref = $ErrorActionPreference #save actual preference
@@ -505,7 +505,7 @@ $CheckDeviceDes = (Get-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Enum\$
   'No GTX/RTX/AMD Compatible Card Found! Skiping...'
 }
 $ErrorActionPreference = $errpref #restore previous preference
-Clear-Host
+cls
 		}
     'q' { Exit  }
     }
@@ -996,7 +996,7 @@ Function askDefender {
 	
 	do
  {
-    Clear-Host
+    cls
     Write-Host "================ Do you want to Disable Microsoft Windows Defender? ================"
     Write-Host "Y: Press 'Y' to Disable Microsoft Windows Defender."
     Write-Host "N: Press 'N' to Enable Microsoft Windows Defender."
@@ -1030,7 +1030,7 @@ Function askDefender {
     Disable-ScheduledTask -TaskName "\Microsoft\Windows\Windows Defender\Windows Defender Cleanup" | Out-Null
     Disable-ScheduledTask -TaskName "\Microsoft\Windows\Windows Defender\Windows Defender Scheduled Scan" | Out-Null
     Disable-ScheduledTask -TaskName "\Microsoft\Windows\Windows Defender\Windows Defender Verification" | Out-Null
-    Clear-Host
+    cls
 	}
     'n' {
         Write-Output "Enabling Microsoft Windows Defender and related Processes..."
@@ -1049,7 +1049,7 @@ Function askDefender {
     Enable-ScheduledTask -TaskName "\Microsoft\Windows\Windows Defender\Windows Defender Scheduled Scan" | Out-Null
     Enable-ScheduledTask -TaskName "\Microsoft\Windows\Windows Defender\Windows Defender Verification" | Out-Null
 	Set-MpPreference -EnableControlledFolderAccess Disabled -ErrorAction SilentlyContinue
-	Clear-Host
+	cls
 		}
     'q' {  }
     }
@@ -1063,7 +1063,7 @@ Function askMSPPS {
 	
 	do
  {
-    Clear-Host
+    cls
     Write-Host "================ Do you have High CPU Usage from Microsoft Software Protection Platform Service? ================"
 	Write-ColorOutput "Warrning: Windows Default is ENABLED, if you Disabled it, Windows 10/Office will show not activated state but you can use it as normal" Red
     Write-Host "Y: Press 'Y' to Disable this."
@@ -1076,13 +1076,13 @@ Function askMSPPS {
 	    Write-Output "Disabling Microsoft Software Protection Platform Service and related Processes..."
 		Disable-ScheduledTask -TaskName "\Microsoft\Windows\SoftwareProtectionPlatform\SvcRestartTask" | Out-Null
 		Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\sppsvc" -Name "Start" -Type DWord -Value 4 -ErrorAction SilentlyContinue
-		Clear-Host
+		cls
 	}
     'n' {
         Write-Output "Enabling Microsoft Software Protection Platform Service and related Processes..."
 	    Enable-ScheduledTask -TaskName "\Microsoft\Windows\SoftwareProtectionPlatform\SvcRestartTask" | Out-Null
 		Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\sppsvc" -Name "Start" -Type DWord -Value 2 -ErrorAction SilentlyContinue
-		Clear-Host
+		cls
 		}
     'q' { Exit  }
     }
@@ -1096,7 +1096,7 @@ Function askMSWSAPPX {
 	
 	do
  {
-    Clear-Host
+    cls
     Write-Host "================ Do you want to disable Microsoft Store and Disable WSAPPX Service? ================"
 	Write-ColorOutput "Warrning: Windows Default is ENABLED, if you Disabled it and wanted to enable it again and restore Microsoft Store Please run the script twise and choose N" Red
     Write-Host "Y: Press 'Y' to Disable this."
@@ -1115,7 +1115,7 @@ Function askMSWSAPPX {
 		Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\WindowsStore" -Name "DisableStoreApps" -Type DWord -Value 1 -ErrorAction SilentlyContinue
 		Set-ItemProperty -Path "HKLM:\SYSTEM\ControlSet001\Services\AppXSvc" -Name "Start" -Type DWord -Value 4 -ErrorAction SilentlyContinue
 		$ErrorActionPreference = $errpref #restore previous preference
-		Clear-Host
+		cls
 	}
     'n' {
         Write-Output "Enabling Microsoft Store and WSAPPX Service..."
@@ -1127,7 +1127,7 @@ Function askMSWSAPPX {
 		Get-AppxPackage -AllUsers "Microsoft.DesktopAppInstaller" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"} -ErrorAction SilentlyContinue
 		Get-AppxPackage -AllUsers "Microsoft.WindowsStore" | ForEach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"} -ErrorAction SilentlyContinue
 		$ErrorActionPreference = $errpref #restore previous preference
-		Clear-Host
+		cls
 		}
     'q' { Exit  }
     }
@@ -2410,7 +2410,7 @@ Function DorEOneDrive {
 	
 	do
  {
-    Clear-Host
+    cls
     Write-Host "================ Do you want to Disable Microsoft OneDrive? ================"
     Write-Host "Y: Press 'Y' to Disable OneDrive."
     Write-Host "N: Press 'N' to Enable OneDrive."
@@ -2453,7 +2453,7 @@ Function DorEOneDrive {
 	Remove-Item -Force -ErrorAction SilentlyContinue "$env:userprofile\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\OneDrive.lnk"
 	Get-ScheduledTask -TaskPath '\' -TaskName 'OneDrive*' -ea SilentlyContinue | Unregister-ScheduledTask -Confirm:$false
 	$ErrorActionPreference = $errpref #restore previous preference
-	Clear-Host
+	cls
 	}
     'n' {
         Write-Output "Enabling Microsoft OneDrive and related Processes..."
@@ -2469,7 +2469,7 @@ Function DorEOneDrive {
 	}
 	Start-Process $onedrive -NoNewWindow
 	$ErrorActionPreference = $errpref #restore previous preference
-	Clear-Host
+	cls
 		}
     'q' {  }
     }
@@ -3298,7 +3298,7 @@ Function NetworkOptimizations {
 Function DisableNagle {
 	do
  {
-    Clear-Host
+    cls
     Write-Host "================ Do You Want To Disable Nagle’s Algorithm? ================"
 	Write-ColorOutput "WARRNING: Nagle’s Algorithm will optimize your ping on online games but you network might not be stable! if any issues happens just run the script again and choose NO" Red
     Write-Host "Y: Press 'Y' to Disable Nagle’s Algorithm."
@@ -3319,7 +3319,7 @@ Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters
 Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\Interfaces\$NetworkID" -Name "TCPNoDelay" -Type DWord -Value 1
 }
 $ErrorActionPreference = $errpref #restore previous preference
-Clear-Host
+cls
 	}
     'n' {
 $errpref = $ErrorActionPreference #save actual preference
@@ -3333,7 +3333,7 @@ Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters
 Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\Interfaces\$NetworkID" -Name "TCPNoDelay" -Type DWord -Value 0
 }
 $ErrorActionPreference = $errpref #restore previous preference
-Clear-Host
+cls
 		}
     'q' { Exit  }
     }
