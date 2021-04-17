@@ -391,6 +391,7 @@ Function InstallIrfanview {
 }
 
 Function InstallChocoUpdates {
+        cls
 	choco upgrade all -y
 }
 
