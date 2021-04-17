@@ -16,6 +16,8 @@ $host.ui.RawUI.WindowTitle = "DaddyMadu Ultimate Windows 10 Debloater and Gaming
 cmd /c 'title [DaddyMadu Ultimate Windows 10 Debloater and Gaming Focus Tweaker]'
 Write-Host -NoNewLine 'Welcome to DaddyMadu Ultimate Windows 10 Debloater and Gaming Focus Tweaker, Please PRESS any KEY to Continue!';
 $null = $Host.UI.RawUI.ReadKey('NoEcho,IncludeKeyDown');
+New-PSDrive -Name HKCR -PSProvider Registry -Root HKEY_CLASSES_ROOT | Out-Null
+New-PSDrive -Name HKU -PSProvider Registry -Root HKEY_USERS | Out-Null
 cls
 # Default preset
 $tweaks = @(
