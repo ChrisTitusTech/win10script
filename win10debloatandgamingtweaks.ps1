@@ -19,8 +19,6 @@ Write-Host "Please DISABLE your ANTIVIRUS to prevent any issues and PRESS any KE
 $null = $Host.UI.RawUI.ReadKey('NoEcho,IncludeKeyDown');
 New-PSDrive -Name HKCR -PSProvider Registry -Root HKEY_CLASSES_ROOT | Out-Null
 New-PSDrive -Name HKU -PSProvider Registry -Root HKEY_USERS | Out-Null
-cmd /c 'REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\OEMInformation" /v "Manufacturer" /t REG_SZ /d "This PC is Optimized by DaddyMadu" /f 2>nul' >$null
-cmd /c 'REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\OEMInformation" /v "SupportURL" /t REG_SZ /d "http://daddymadu.gg" /f 2>nul' >$null
 cls
 # Default preset
 $tweaks = @(
@@ -3423,8 +3421,10 @@ cmd /c 'echo Temp folders Cleared Successfully!'
 
 #Notifying user to reboot!
 Function Finished {
-        Start-Sleep -s 5
-        Write-Output "Done! Please Reboot Your PC! Kindly note that if you choose to disable Microsoft Store and WSAPPX Service and wanted to enable it again, you have to run the script then restart pc and rerun it again with the same settings to get Microsoft Store back! and don't forget to follow me on Social Media."
+        cmd /c 'REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\OEMInformation" /v "Manufacturer" /t REG_SZ /d "This PC is Optimized by DaddyMadu" /f 2>nul' >$null
+        cmd /c 'REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\OEMInformation" /v "SupportURL" /t REG_SZ /d "http://daddymadu.gg" /f 2>nul' >$null
+	Start-Sleep -s 5
+        Write-Output "Done! Please Reboot Your PC! Don't forget to follow me on Social Media."
         Start "http://daddymadu.gg"
 }
 
