@@ -34,9 +34,9 @@ $tweaks = @(
 	"Install7Zip",
 	#"InstallNotepadplusplus",
 	#"InstallIrfanview",
-	"InstallVLC",
+	#"InstallVLC",
 	#"InstallSumatra",
-	"InstallChrome",
+	#"InstallChrome",
 	"InstallChocoUpdates",
 	"EnableUlimatePower",    # DaddyMadu don't change order it will break other functions! just disable if you want with #
 	# "ChangeDefaultApps", # Removed due to issues with steam and resetting default apps
@@ -378,7 +378,7 @@ Function InstallChrome {
 	Show-Choco-Menu -Title "Do you want to install Google Chrome Browser?" -ChocoInstall "googlechrome"
 }
 Function Install7Zip {
-	Show-Choco-Menu -Title "Do you want to install 7-Zip?" -ChocoInstall "7zip"
+	Choco Install 7zip -y
 }
 
 Function InstallNotepadplusplus {
@@ -465,19 +465,7 @@ Function askXBOX {
 
 #Enable Or Disable MSI Mode For Supported Cards, WARRNING ENABLING MSI MODE MIGHT CRUSH YOUR SYSTEM! IF IT HAPPENS PLEASE RESTORE LAST WORKING SYSTEM RESTORE POINT AND DON'T ENABLE MSI MODE ON THIS SYSTEM AGAIN!
 Function MSIMode {
-	do
- {
-    cls
-    Write-Host "================ Do You Want To Enable MSI Mode? ================"
-	Write-ColorOutput "WARRNING: MSI MODE MIGHT CRUSH YOUR SYSTEM IF IT'S OLD, IF SO, PLEASE RESTORE LAST WORKING RESTORE POING AND DON'T ENABLE MSI MODE ON THIS SYSTEM AGAIN" Red
-    Write-Host "Y: Press 'Y' to Enable MSI Mode."
-    Write-Host "N: Press 'N' to Disable MSI Mode."
-	Write-Host "Q: Press 'Q' to stop the entire script."
-    $selection = Read-Host "Please make a selection"
-    switch ($selection)
-    {
-    'y' { 
-	$errpref = $ErrorActionPreference #save actual preference
+$errpref = $ErrorActionPreference #save actual preference
 $ErrorActionPreference = "silentlycontinue"
 $GPUIDS = @(
 (wmic path win32_VideoController get PNPDeviceID | Select-Object -Skip 2 | Format-List | Out-String).Trim()
@@ -491,31 +479,7 @@ $CheckDeviceDes = (Get-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Enum\$
 } else {
   'No GTX/RTX/AMD Compatible Card Found! Skiping...'
 }
-$ErrorActionPreference = $errpref #restore previous preference
-cls
-	}
-    'n' {
-        $errpref = $ErrorActionPreference #save actual preference
-$ErrorActionPreference = "silentlycontinue"
-$GPUIDS = @(
-(wmic path win32_VideoController get PNPDeviceID | Select-Object -Skip 2 | Format-List | Out-String).Trim()
-    )
-    foreach ($GPUID in $GPUIDS) {
-$CheckDeviceDes = (Get-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Enum\$GPUID").DeviceDesc
-    } if(($CheckDeviceDes -like "*GTX*") -or ($CheckDeviceDes -like "*RTX*") -or ($CheckDeviceDes -like "*AMD*")) {
-  'GTX/RTX/AMD Compatible Card Found! Disabling MSI Mode...'
-  Remove-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Enum\$GPUID\Device Parameters\Interrupt Management\MessageSignaledInterruptProperties\" -Name "MSISupported" -ErrorAction SilentlyContinue
-} else {
-  'No GTX/RTX/AMD Compatible Card Found! Skiping...'
-}
-$ErrorActionPreference = $errpref #restore previous preference
-cls
-		}
-    'q' { Exit  }
-    }
- }
- until ($selection -match "y" -or $selection -match "n" -or $selection -match "q")
-	
+$ErrorActionPreference = $errpref #restore previous preference	
 }
 
 ##########
@@ -3309,18 +3273,6 @@ Function NetworkOptimizations {
 
 # Disable Nagle's Algorithm
 Function DisableNagle {
-	do
- {
-    cls
-    Write-Host "================ Do You Want To Disable Nagles Algorithm? ================"
-	Write-ColorOutput "WARRNING: Nagles Algorithm will optimize your ping on online games but you network might not be stable! if any issues happens just run the script again and choose NO" Red
-    Write-Host "Y: Press 'Y' to Disable Nagles Algorithm."
-    Write-Host "N: Press 'N' to Enable Nagles Algorithm."
-	Write-Host "Q: Press 'Q' to stop the entire script."
-    $selection = Read-Host "Please make a selection"
-    switch ($selection)
-    {
-    'y' { 
 $errpref = $ErrorActionPreference #save actual preference
 $ErrorActionPreference = "silentlycontinue"
 $NetworkIDS = @(
@@ -3332,27 +3284,6 @@ Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters
 Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\Interfaces\$NetworkID" -Name "TCPNoDelay" -Type DWord -Value 1
 }
 $ErrorActionPreference = $errpref #restore previous preference
-cls
-	}
-    'n' {
-$errpref = $ErrorActionPreference #save actual preference
-$ErrorActionPreference = "silentlycontinue"
-$NetworkIDS = @(
-(Get-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\Interfaces\*").PSChildName
-)
-    foreach ($NetworkID in $NetworkIDS) {
-	Write-Output "Enabling Nagles Algorithm..."
-Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\Interfaces\$NetworkID" -Name "TcpAckFrequency" -Type DWord -Value 0
-Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\Interfaces\$NetworkID" -Name "TCPNoDelay" -Type DWord -Value 0
-}
-$ErrorActionPreference = $errpref #restore previous preference
-cls
-		}
-    'q' { Exit  }
-    }
- }
- until ($selection -match "y" -or $selection -match "n" -or $selection -match "q")
-	
 }
 
 #Remove Edit with 3D Paint
