@@ -339,35 +339,7 @@ Function InstallTitusProgs {
 
 # Install the latest Microsoft Visual C++ 2010-2019 Redistributable Packages and Silverlight
 Function InstallMVC {
-	do
- {
-    cls
-    Write-Host "================ Do you want to Install the latest Microsoft Visual C++ 2005-2019 Redistributable Packages and Silverlight? ================"
-    Write-Host "Y: Press 'Y' to do this."
-    Write-Host "N: Press 'N' to skip this."
-	Write-Host "Q: Press 'Q' to stop the entire script."
-    $selection = Read-Host "Please make a selection"
-    switch ($selection)
-    {
-    'y' { 
-	Write-Output "Installing the latest Microsoft Visual C++ 2010-2019 Redistributable Packages and Silverlight..."
-        choco install -y vcredist2005
-        choco install -y vcredist2008
-        choco install -y vcredist2010
-        choco install -y vcredist2012
-        choco install -y vcredist2013
-        choco install -y vcredist140
-        choco install -y silverlight	
-	}
-    'n' {
-        Write-Output "Cancelled! Installing vcredist2010 only! it's Required for Timer Resolution service..."
 	choco install -y vcredist2010 | Out-Null
-		}
-    'q' { Exit  }
-    }
- }
- until ($selection -match "y" -or $selection -match "n" -or $selection -match "q")
-	
 }
 
 Function InstallSumatra {
