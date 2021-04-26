@@ -240,7 +240,7 @@ $securityhigh.location           = New-Object System.Drawing.Point(244,119)
 $securityhigh.Font               = New-Object System.Drawing.Font('Microsoft Sans Serif',15,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Bold))
 
 $Label5                          = New-Object system.Windows.Forms.Label
-$Label5.text                     = "- Set UAC to Never Prompt"
+$Label5.text                     = ""
 $Label5.AutoSize                 = $true
 $Label5.width                    = 150
 $Label5.height                   = 10
@@ -248,7 +248,7 @@ $Label5.location                 = New-Object System.Drawing.Point(24,40)
 $Label5.Font                     = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
 
 $Label6                          = New-Object system.Windows.Forms.Label
-$Label6.text                     = "- Disable Windows Defender"
+$Label6.text                     = "- Disable Meltdown Flag"
 $Label6.AutoSize                 = $true
 $Label6.width                    = 150
 $Label6.height                   = 10
@@ -256,7 +256,7 @@ $Label6.location                 = New-Object System.Drawing.Point(24,6)
 $Label6.Font                     = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
 
 $Label7                          = New-Object system.Windows.Forms.Label
-$Label7.text                     = "- Disable Defender Updates"
+$Label7.text                     = "- Set UAC to Never Prompt"
 $Label7.AutoSize                 = $true
 $Label7.width                    = 150
 $Label7.height                   = 10
@@ -264,7 +264,7 @@ $Label7.location                 = New-Object System.Drawing.Point(24,23)
 $Label7.Font                     = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
 
 $Label8                          = New-Object system.Windows.Forms.Label
-$Label8.text                     = "- Disable Windows Malware Scan"
+$Label8.text                     = ""
 $Label8.AutoSize                 = $true
 $Label8.width                    = 150
 $Label8.height                   = 10
@@ -272,7 +272,7 @@ $Label8.location                 = New-Object System.Drawing.Point(24,75)
 $Label8.Font                     = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
 
 $Label9                          = New-Object system.Windows.Forms.Label
-$Label9.text                     = "- Disable Meltdown Flag"
+$Label9.text                     = ""
 $Label9.AutoSize                 = $true
 $Label9.width                    = 150
 $Label9.height                   = 10
@@ -646,6 +646,11 @@ $essentialtweaks.Add_Click({
 	# Network Tweaks
 	Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters" -Name "IRPStackSize" -Type DWord -Value 20
 
+	# SVCHost Tweak
+	Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control" -Name "SvcHostSplitThresholdInKB" -Type DWord -Value 4194304
+
+
+
 $Bloatware = @(
 
         #Unnecessary Windows 10 AppX Apps
@@ -723,8 +728,8 @@ $Bloatware = @(
         Write-Host "Trying to remove $Bloat."
     }
 
-    Write-Host "Installing Windows Media Player..."
-	Enable-WindowsOptionalFeature -Online -FeatureName "WindowsMediaPlayer" -NoRestart -WarningAction SilentlyContinue | Out-Null
+    #Write-Host "Installing Windows Media Player..."
+	#Enable-WindowsOptionalFeature -Online -FeatureName "WindowsMediaPlayer" -NoRestart -WarningAction SilentlyContinue | Out-Null
 
     #Stops edge from taking over as the default .PDF viewer    
     Write-Host "Stopping Edge from taking over as the default .PDF viewer"
@@ -835,30 +840,11 @@ $securitylow.Add_Click({
     Write-Host "Lowering UAC level..."
 	Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" -Name "ConsentPromptBehaviorAdmin" -Type DWord -Value 0
 	Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" -Name "PromptOnSecureDesktop" -Type DWord -Value 0
-    Write-Host "Disabling Windows Defender..."
-	If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender")) {
-		New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender" -Force | Out-Null
-	}
-	Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender" -Name "DisableAntiSpyware" -Type DWord -Value 1
-	If ([System.Environment]::OSVersion.Version.Build -eq 14393) {
-		Remove-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" -Name "WindowsDefender" -ErrorAction SilentlyContinue
-	} ElseIf ([System.Environment]::OSVersion.Version.Build -ge 15063) {
-		Remove-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" -Name "SecurityHealth" -ErrorAction SilentlyContinue
-	}
-    Write-Host "Disabling Windows Defender Cloud..."
-	If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender\Spynet")) {
-		New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender\Spynet" -Force | Out-Null
-	}
-	Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender\Spynet" -Name "SpynetReporting" -Type DWord -Value 0
+    Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender\Spynet" -Name "SpynetReporting" -Type DWord -Value 0
 	Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender\Spynet" -Name "SubmitSamplesConsent" -Type DWord -Value 2
     Write-Host "Disabling Meltdown (CVE-2017-5754) compatibility flag..."
 	Remove-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\QualityCompat" -Name "cadca5fe-87d3-4b96-b7fb-a231484277cc" -ErrorAction SilentlyContinue
-    Write-Host "Disabling Malicious Software Removal Tool offering..."
-	If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\MRT")) {
-		New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\MRT" | Out-Null
-	}
-	Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\MRT" -Name "DontOfferThroughWUAU" -Type DWord -Value 1
-	$wshell.Popup("Operation Completed",0,"Done",0x0)
+    $wshell.Popup("Operation Completed",0,"Done",0x0)
 })
 
 $securityhigh.Add_Click({ 
