@@ -3227,6 +3227,7 @@ Function NetworkOptimizations {
        Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters" -Name "DefaultTTL" -Type DWord -Value 64
        Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\MSMQ\Parameters" -Name "TCPNoDelay" -Type DWord -Value 1
        Set-ItemProperty -Path "HKLM:\SYSTEM\ControlSet001\Control\Lsa" -Name "LmCompatibilityLevel" -Type DWord -Value 1
+       Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\Dnscache\Parameters" -Name "EnableAutoDoh" -Type DWord -Value 2
        Set-NetTCPSetting -SettingName internet -EcnCapability disabled | Out-Null
        Set-NetOffloadGlobalSetting -Chimney disabled | Out-Null
        Set-NetTCPSetting -SettingName internet -Timestamps disabled | Out-Null
