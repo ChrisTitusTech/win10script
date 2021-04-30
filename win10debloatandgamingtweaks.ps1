@@ -170,12 +170,12 @@ $tweaks = @(
 	# "HideDocumentsFromExplorer",  # "ShowDocumentsInExplorer",
 	# "HideDownloadsFromThisPC",      # "ShowDownloadsInThisPC",
 	# "HideDownloadsFromExplorer",  # "ShowDownloadsInExplorer",
-	"ShowMusicInThisPC",          #"HideMusicFromThisPC",
-	"ShowMusicInExplorer",       #"HideMusicFromExplorer",
+	#"ShowMusicInThisPC",          #"HideMusicFromThisPC",
+	#"ShowMusicInExplorer",       #"HideMusicFromExplorer",
 	# "HidePicturesFromThisPC",       # "ShowPicturesInThisPC",
 	# "HidePicturesFromExplorer",   # "ShowPicturesInExplorer",
-	"ShowVideosInThisPC",         #"HideVideosFromThisPC",
-	"ShowVideosInExplorer",        #"HideVideosFromExplorer",
+	#"ShowVideosInThisPC",         #"HideVideosFromThisPC",
+	#"ShowVideosInExplorer",        #"HideVideosFromExplorer",
 	"Hide3DObjectsFromThisPC",      # "Show3DObjectsInThisPC",
 	"Hide3DObjectsFromExplorer",  # "Show3DObjectsInExplorer",
 	"EnableThumbnails",          # "EnableThumbnails", # "DisableThumbnails",
@@ -183,7 +183,7 @@ $tweaks = @(
 
 	### Application Tweaks ###
 	"DisableAdobeFlash",            # "EnableAdobeFlash",
-	"UninstallMediaPlayer",         #"InstallMediaPlayer",
+	#"UninstallMediaPlayer",         #"InstallMediaPlayer",
 	"UninstallInternetExplorer",  # "InstallInternetExplorer",
 	"UninstallWorkFolders",       # "InstallWorkFolders",
 	"UninstallLinuxSubsystem",      # "UninstallLinuxSubsystem",     #"InstallLinuxSubsystem",
@@ -193,6 +193,7 @@ $tweaks = @(
 	"InstallPDFPrinter",		# "UninstallPDFPrinter",
 	# "UninstallXPSPrinter",          # "InstallXPSPrinter",
 	# "RemoveFaxPrinter",             # "AddFaxPrinter",
+	"SVCHostTweak",
 
 	### Unpinning ###
 	"UnpinStartMenuTiles",
@@ -2627,6 +2628,12 @@ Function AddFaxPrinter {
 	Write-Output "Adding Default Fax Printer..."
 	Add-Printer -Name "Fax" -DriverName "Microsoft Shared Fax Driver" -PortName "SHRFAX:" -ErrorAction SilentlyContinue
 }
+
+# Add SVCHost Tweak
+Function SVCHostTweak {
+        Write-Output "Adding SVCHost Tweak..."
+        Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control" -Name "SvcHostSplitThresholdInKB" -Type DWord -Value 4194304
+	}
 
 ##########
 # Unpinning
