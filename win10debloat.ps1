@@ -118,7 +118,7 @@ $powertoys                       = New-Object system.Windows.Forms.Button
 $powertoys.text                  = "PowerToys"
 $powertoys.width                 = 150
 $powertoys.height                = 30
-$powertoys.location              = New-Object System.Drawing.Point(324,110)
+$powertoys.location              = New-Object System.Drawing.Point(322,110)
 $powertoys.Font                  = New-Object System.Drawing.Font('Arial',11)
 
 $winterminal                     = New-Object system.Windows.Forms.Button
@@ -209,7 +209,7 @@ $onedrive                        = New-Object system.Windows.Forms.Button
 $onedrive.text                   = "OneDrive"
 $onedrive.width                  = 150
 $onedrive.height                 = 30
-$onedrive.location               = New-Object System.Drawing.Point(324,234)
+$onedrive.location               = New-Object System.Drawing.Point(322,95)
 $onedrive.Font                   = New-Object System.Drawing.Font('Arial',11)
 
 $Panel3                          = New-Object system.Windows.Forms.Panel
