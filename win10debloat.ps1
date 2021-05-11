@@ -429,7 +429,7 @@ $installchoco.Add_Click({
     Write-Host "Installing Chocolatey"
 	Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
 	choco install chocolatey-core.extension -y
-	$wshell.Popup("Operation Completed",0,"Done",0x0)
+	$wshell.Popup("Chocolatey installed",0,"Done",0x0)
 })
 
 $brave.Add_Click({ 
@@ -511,7 +511,7 @@ $essentialtweaks.Add_Click({
 
 	Write-Host "Running O&O Shutup with Recommended Settings"
     Import-Module BitsTransfer		choco install shutup10 -y
-	Start-BitsTransfer -Source "https://raw.githubusercontent.com/ChrisTitusTech/win10script/master/ooshutup10.cfg" -Destination ooshutup10.cfg		OOSU10 ooshutup10.cfg /quiet
+	Start-BitsTransfer -Source "https://raw.githubusercontent.com/Bloc67/win10script/master/ooshutup10.cfg" -Destination ooshutup10.cfg		OOSU10 ooshutup10.cfg /quiet
 	Start-BitsTransfer -Source "https://dl5.oo-software.com/files/ooshutup10/OOSU10.exe" -Destination OOSU10.exe	
 	./OOSU10.exe ooshutup10.cfg /quiet
 
