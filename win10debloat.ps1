@@ -52,7 +52,7 @@ $installchoco.location           = New-Object System.Drawing.Point(16,0)
 $installchoco.Font               = New-Object System.Drawing.Font('Arial',12,[System.Drawing.FontStyle]::Bold)
 
 $brave                           = New-Object system.Windows.Forms.Button
-$brave.text                      = "Brave Browser"
+$brave.text                      = "Coretemp"
 $brave.width                     = 150
 $brave.height                    = 30
 $brave.location                  = New-Object System.Drawing.Point(16,40)
@@ -73,11 +73,11 @@ $7zip.location                   = New-Object System.Drawing.Point(170,110)
 $7zip.Font                       = New-Object System.Drawing.Font('Arial',11)
 
 $irfanview                       = New-Object system.Windows.Forms.Button
-$irfanview.text                  = "Irfanview"
+$irfanview.text                  = "Lenovo"
 $irfanview.width                 = 150
 $irfanview.height                = 30
 $irfanview.location              = New-Object System.Drawing.Point(170,40)
-$irfanview.Font                  = New-Object System.Drawing.Font('Microsoft Sans Serif',11)
+$irfanview.Font                  = New-Object System.Drawing.Font('Arial',11)
 
 $adobereader                     = New-Object system.Windows.Forms.Button
 $adobereader.text                = "Adobe Reader DC"
@@ -209,7 +209,7 @@ $onedrive                        = New-Object system.Windows.Forms.Button
 $onedrive.text                   = "OneDrive"
 $onedrive.width                  = 150
 $onedrive.height                 = 30
-$onedrive.location               = New-Object System.Drawing.Point(16,165)
+$onedrive.location               = New-Object System.Drawing.Point(324,234)
 $onedrive.Font                   = New-Object System.Drawing.Font('Arial',11)
 
 $Panel3                          = New-Object system.Windows.Forms.Panel
@@ -418,7 +418,7 @@ $lightmode.height                = 30
 $lightmode.location              = New-Object System.Drawing.Point(322,60)
 $lightmode.Font                  = New-Object System.Drawing.Font('Arial',11)
 
-$Form.controls.AddRange(@($Panel1,$Label1,$Label2,$Panel2,$Label3,$Panel3,$Label4,$Label15,$Panel4,$Label20,$Label21,$Label23,$PictureBox1))
+$Form.controls.AddRange(@($Panel1,$Label1,$Label2,$Panel2,$Label3,$Panel3,$Label4,$Label15,$Panel4,$Label20,$Label21,$Label23))
 $Panel1.controls.AddRange(@($installchoco,$brave,$firefox,$7zip,$irfanview,$adobereader,$notepad,$gchrome,$mpc,$vlc,$powertoys,$winterminal,$vscode))
 $Panel2.controls.AddRange(@($essentialtweaks,$backgroundapps,$cortana,$windowssearch,$actioncenter,$darkmode,$visualfx,$onedrive,$Label22,$lightmode))
 $Panel3.controls.AddRange(@($securitylow,$securityhigh,$Label5,$Label6,$Label7,$Label8,$Label9,$Label10,$Label11,$Label12,$Label13))
@@ -433,9 +433,9 @@ $installchoco.Add_Click({
 })
 
 $brave.Add_Click({ 
-	Write-Host "Installing Brave Browser"
-	choco install brave -y
-	    $wshell.Popup("Operation Completed",0,"Done",0x0)	
+	Write-Host "Installing CoreTemp"
+	choco install coretemp -y
+	    $wshell.Popup("Coretemp installed.",0,"Done",0x0)	
 })
 
 $firefox.Add_Click({ 
@@ -451,9 +451,9 @@ $gchrome.Add_Click({
 })
 
 $irfanview.Add_Click({ 
-    Write-Host "Installing Irfanview (Image Viewer)"
-    choco install irfanview -y
-	$wshell.Popup("Operation Completed",0,"Done",0x0)
+    Write-Host "Installing Lenovo System Update"
+    choco install lenovo-thinkvantage-system-update -y
+	$wshell.Popup("Lenovo System Update installed",0,"Done",0x0)
 })
 
 $adobereader.Add_Click({ 
