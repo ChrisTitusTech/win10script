@@ -2900,9 +2900,10 @@ Function EnableHAGS {
 
 #Add Utimate Power Plan And Activate It
 Function EnableUlimatePower {
-	Write-Output "Enabling and Activating Ultimate Power Plan..."
-	powercfg -duplicatescheme e9a42b02-d5df-448d-aa00-03f14749eb61 e9a52b02-d5df-445d-aa00-03f14749eb65 | Out-Null
-	powercfg -setactive e9a52b02-d5df-445d-aa00-03f14749eb65 | Out-Null
+	Write-Output "Enabling and Activating Bitsum Highest Performance Power Plan..."
+	Invoke-WebRequest -Uri "https://git.io/JsWhn" -OutFile "$Env:windir\system32\Bitsum-Highest-Performance.pow" -ErrorAction SilentlyContinue
+	powercfg -import "$Env:windir\system32\Bitsum-Highest-Performance.pow" e6a66b66-d6df-666d-aa66-66f66666eb66 | Out-Null
+	powercfg -setactive e6a66b66-d6df-666d-aa66-66f66666eb66 | Out-Null
 }
 
 #Disable Core Parking on current PowerPlan Ultimate Performance
