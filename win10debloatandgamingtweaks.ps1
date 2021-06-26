@@ -71,6 +71,7 @@ $tweaks = @(
 	"SetP2PUpdateLocal",          # "SetP2PUpdateInternet",
 	"DisableDiagTrack",             # "EnableDiagTrack",
 	"DisableWAPPush",               # "EnableWAPPush",
+	"DisableNewsFeed",
 
 	### Security Tweaks ###
 	"SetUACLow",                  # "SetUACHigh",
@@ -819,7 +820,11 @@ Function EnableWAPPush {
 	Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\dmwappushservice" -Name "DelayedAutoStart" -Type DWord -Value 1
 }
 
-
+# Disable New Windows 10 21h1 News Feed
+Function DisableNewsFeed {
+        Write-Output "Disabling Windows 10 News and Interests Feed..."
+	Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Windows Feeds" -Name "EnableFeeds" -Type DWord -Value 0
+	)
 
 ##########
 # Security Tweaks
