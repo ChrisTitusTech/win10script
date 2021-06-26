@@ -6,6 +6,15 @@ Warrning: I am NOT responsible for what you do to your Devices/Systems, so follo
 
 ## Changelog!
 
+27 June 2021
+```
+- Getting Ready for Windows 11 yay!
+- Disabling New Windows 10 News and Interests Feed.
+- Movilng Updates to slower release ring.
+- Delaying Windows Feature Updates by 45 Days to Ensure a Bug Free Build.
+- Delaying Windows Quality Updates by 7 Days to Ensure a Bug Free security updates.
+- much more fixes forget to remember!
+```
 10 April 2021
 ```
 - Reverting removal of XBOX as it's required by some Amd system for recording!
