@@ -824,7 +824,7 @@ Function EnableWAPPush {
 Function DisableNewsFeed {
         Write-Output "Disabling Windows 10 News and Interests Feed..."
 	Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Windows Feeds" -Name "EnableFeeds" -Type DWord -Value 0
-	)
+	}
 
 ##########
 # Security Tweaks
