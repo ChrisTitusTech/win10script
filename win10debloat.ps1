@@ -39,15 +39,7 @@ Catch{
 	# winget is not installed. Install it from the Github release
 	Write-Host "winget is not found, installing it right now."
 	
-	$repo = "microsoft/winget-cli"
-	$releases = "https://api.github.com/repos/$repo/releases"
-	
-	Write-Host "Determining latest release"
-	$json = Invoke-WebRequest $releases
-	$tag = ($json | ConvertFrom-Json)[0].tag_name
-	$file = ($json | ConvertFrom-Json)[0].assets[0].name
-	
-	$download = "https://github.com/$repo/releases/download/$tag/$file"
+	$download = "https://github.com/microsoft/winget-cli/releases/download/v1.0.11692/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle"
 	$output = $PSScriptRoot + "\winget-latest.appxbundle"
 	Write-Host "Dowloading latest release"
 	Invoke-WebRequest -Uri $download -OutFile $output
