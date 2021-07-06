@@ -26,6 +26,41 @@ If (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]:
     }
 }
 
+Write-Host "Checking winget..."
+
+Try{
+	# Check if winget is already installed
+	$er = (invoke-expression "winget -v") 2>&1
+	if ($lastexitcode) {throw $er}
+	Write-Host "winget is already installed."
+}
+Catch{
+	# winget is not installed. Install it from the Github release
+	Write-Host "winget is not found, installing it right now."
+	
+	$repo = "microsoft/winget-cli"
+	$releases = "https://api.github.com/repos/$repo/releases"
+	
+	Write-Host "Determining latest release"
+	$json = Invoke-WebRequest $releases
+	$tag = ($json | ConvertFrom-Json)[0].tag_name
+	$file = ($json | ConvertFrom-Json)[0].assets[0].name
+	
+	$download = "https://github.com/$repo/releases/download/$tag/$file"
+	$output = $PSScriptRoot + "\winget-latest.appxbundle"
+	Write-Host "Dowloading latest release"
+	Invoke-WebRequest -Uri $download -OutFile $output
+	
+	Write-Host "Installing the package"
+	Add-AppxPackage -Path $output
+}
+Finally {
+	# Start installing the packages with winget
+	#Get-Content .\winget.txt | ForEach-Object {
+	#	iex ("winget install -e " + $_)
+	#}
+}
+
 $Form                            = New-Object system.Windows.Forms.Form
 $Form.ClientSize                 = New-Object System.Drawing.Point(1050,700)
 $Form.text                       = "Form"
@@ -111,7 +146,7 @@ $winterminal                     = New-Object system.Windows.Forms.Button
 $winterminal.text                = "Windows Terminal"
 $winterminal.width               = 211
 $winterminal.height              = 30
-$winterminal.location            = New-Object System.Drawing.Point(4,27)
+$winterminal.location            = New-Object System.Drawing.Point(4,26)
 $winterminal.Font                = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
 $vscode                          = New-Object system.Windows.Forms.Button
@@ -126,7 +161,7 @@ $Label2.text                     = "(Windows 1809+ Required)"
 $Label2.AutoSize                 = $true
 $Label2.width                    = 25
 $Label2.height                   = 10
-$Label2.location                 = New-Object System.Drawing.Point(30,6)
+$Label2.location                 = New-Object System.Drawing.Point(26,5)
 $Label2.Font                     = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
 
 $Panel2                          = New-Object system.Windows.Forms.Panel
@@ -351,7 +386,7 @@ $sumatrapdf                      = New-Object system.Windows.Forms.Button
 $sumatrapdf.text                 = "Sumatra PDF"
 $sumatrapdf.width                = 212
 $sumatrapdf.height               = 30
-$sumatrapdf.location             = New-Object System.Drawing.Point(3,559)
+$sumatrapdf.location             = New-Object System.Drawing.Point(3,561)
 $sumatrapdf.Font                 = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
 $vscodium                        = New-Object system.Windows.Forms.Button
@@ -390,103 +425,105 @@ $Panel3.controls.AddRange(@($essentialundo,$EActionCenter,$ECortana,$RBackground
 
 $brave.Add_Click({
     Write-Host "Installing Brave Browser"
-    winget install BraveSoftware.BraveBrowser
+    winget install BraveSoftware.BraveBrowser | Out-Host
     Write-Host "Installed Brave Browser"
 })
 
 $firefox.Add_Click({
     Write-Host "Installing Firefox"
-    winget install Mozilla.Firefox
+    winget install Mozilla.Firefox | Out-Host
     Write-Host "Installed Firefox"
 })
 
 $gchrome.Add_Click({
     Write-Host "Installing Google Chrome"
-    winget install Google.Chrome
+    winget install Google.Chrome | Out-Host
     Write-Host "Installed Google Chrome"
 })
 
 $irfanview.Add_Click({
     Write-Host "Installing Irfanview (Image Viewer)"
-    winget install IrfanSkiljan.IrfanView
+    winget install IrfanSkiljan.IrfanView | Out-Host
     Write-Host "Installed Irfanview (Image Viewer)"
 })
 $imageglass.Add_Click({
     Write-Host "Installing Image Glass (Image Viewer)"
-    winget install DuongDieuPhap.ImageGlass
+    winget install DuongDieuPhap.ImageGlass | Out-Host
     Write-Host "Installed Image Glass (Image Viewer)"
 })
 $honeyview.Add_Click({
     Write-Host "Installing Bandisoft Honeyview (Image Viewer)"
-    winget install Bandisoft.Honeyview
+    winget install Bandisoft.Honeyview | Out-Host
     Write-Host "Installed Honeyview (Image Viewer)"
 })
 
 $adobereader.Add_Click({
     Write-Host "Installing Adobe Reader DC"
-    winget install Adobe.AdobeAcrobatReaderDC
+    winget install Adobe.AdobeAcrobatReaderDC | Out-Host
     Write-Host "Installed Adobe Reader DC"
 })
 
 $notepad.Add_Click({
     Write-Host "Installing Notepad++"
-    winget install Notepad++.Notepad++
+    winget install Notepad++.Notepad++ | Out-Host
     Write-Host "Installed Notepad++"
 })
 
 $vlc.Add_Click({
     Write-Host "Installing VLC Media Player"
-    winget install VideoLAN.VLC
+    winget install VideoLAN.VLC | Out-Host
     Write-Host "Installed VLC Media Player"
 })
 
 $mpc.Add_Click({
     Write-Host "Installing Media Player Classic"
-    winget install clsid2.mpc-hc
+    winget install clsid2.mpc-hc | Out-Host
     Write-Host "Installed Media Player Classic"
 })
 
 $7zip.Add_Click({
     Write-Host "Installing 7-Zip Compression Tool"
-    winget install 7zip.7zip
+    winget install 7zip.7zip | Out-Host
     Write-Host "Installed 7-Zip Compression Tool"
 })
 
 $vscode.Add_Click({
     Write-Host "Installing Visual Studio Code"
-    winget install Microsoft.VisualStudioCode
+    winget install Microsoft.VisualStudioCode | Out-Host
     Write-Host "Installed Visual Studio Code"
 })
 
 $vscodium.Add_Click({
     Write-Host "Installing VS Codium"
-    winget install Microsoft.VSCodium.VSCodium
+    winget install Microsoft.VSCodium.VSCodium | Out-Host
     Write-Host "Installed VS Codium"
 })
 
 $winterminal.Add_Click({
     Write-Host "Installing New Windows Terminal"
-    winget install Microsoft.WindowsTerminal
+    winget install Microsoft.WindowsTerminal | Out-Host
     Write-Host "Installed New Windows Terminal"
 })
 
 $powertoys.Add_Click({
     Write-Host "Installing Microsoft PowerToys"
-    winget install Microsoft.PowerToys
+    winget install Microsoft.PowerToys | Out-Host
     Write-Host "Installed Microsoft PowerToys"
 })
 
 $everythingsearch.Add_Click({
     Write-Host "Installing Voidtools Everything Search"
-    winget install voidtools.Everything
+    winget install voidtools.Everything | Out-Host
     Write-Host "Installed Everything Search"
 })
 
 $sumatrapdf.Add_Click({
     Write-Host "Installing Sumatra PDF"
-    winget install SumatraPDF.SumatraPDF
+    winget install SumatraPDF.SumatraPDF | Out-Host
     Write-Host "Installed Sumatra PDF"
 })
+
+
 
 $essentialtweaks.Add_Click({
     Write-Host "Creating Restore Point incase something bad happens"
