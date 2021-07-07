@@ -440,9 +440,6 @@ $sdi.height                 = 30
 $sdi.location               = New-Object System.Drawing.Point(3,631)
 $sdi.Font                   =  New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
-
-https://github.com/ChrisAnd1998/sdi/releases/download/1.7.0.0/sdi_1.7.0.0_x64.zip
-
 $Form.controls.AddRange(@($Panel1,$Panel2,$Label3,$Label15,$Panel4,$PictureBox1,$Label1,$Label4,$Panel3))
 $Panel1.controls.AddRange(@($brave,$firefox,$7zip,$irfanview,$adobereader,$notepad,$gchrome,$mpc,$vlc,$powertoys,$winterminal,$vscode,$Label2,$everythingsearch,$sumatrapdf,$vscodium,$imageglass,$honeyview,$nvcleanstall,$sdi))
 $Panel2.controls.AddRange(@($essentialtweaks,$backgroundapps,$cortana,$actioncenter,$darkmode,$visualfx,$onedrive,$lightmode))
@@ -566,7 +563,10 @@ $sdi.Add_Click({
     $output = "$PSScriptRoot/dump/sdi.zip"
     Invoke-WebRequest $url -OutFile $output
     New-Item -ItemType directory -Path "$PSScriptRoot/dump/sdi"
-    Expand-Archive "$PSScriptRoot/dump/sdi.zip" -DestinationPath "$PSScriptRoot/dump/sdi"
+    Start-Job -Name download {
+        Expand-Archive "$PSScriptRoot/dump/sdi.zip" -DestinationPath "$PSScriptRoot/dump/sdi"
+    }
+    Wait-Job -Name download
     Start "$PSScriptRoot/dump/sdi"
 })
 
