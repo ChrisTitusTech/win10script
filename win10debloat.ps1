@@ -1,6 +1,7 @@
 Add-Type -AssemblyName System.Windows.Forms
 [System.Windows.Forms.Application]::EnableVisualStyles()
 
+$ErrorActionPreference = 'SilentlyContinue'
 $wshell = New-Object -ComObject Wscript.Shell
 $Button = [System.Windows.MessageBoxButton]::YesNoCancel
 $ErrorIco = [System.Windows.MessageBoxImage]::Error
@@ -539,7 +540,7 @@ $essentialtweaks.Add_Click({
     Checkpoint-Computer -Description "RestorePoint1" -RestorePointType "MODIFY_SETTINGS"
 
     Write-Host "Updating Powershell Help cmds - I recommend doing a full Update-Help if missing commands"
-    Update-Help -Module "Microsoft.PowerShell*" -ErrorAction SilentlyContinue
+    Update-Help -Module "Microsoft.PowerShell*"
 
     Write-Host "Running O&O Shutup with Recommended Settings"
     Import-Module BitsTransfer
