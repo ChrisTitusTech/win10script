@@ -5,25 +5,7 @@ $ErrorActionPreference = 'SilentlyContinue'
 $wshell = New-Object -ComObject Wscript.Shell
 $Button = [System.Windows.MessageBoxButton]::YesNoCancel
 $ErrorIco = [System.Windows.MessageBoxImage]::Error
-#$Ask = 'Do you want to run this as an Administrator?
-#        Select "Yes" to Run as an Administrator
-#        Select "No" to not run this as an Administrator
-#
-#        Select "Cancel" to stop the script.'
-
 If (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]'Administrator')) {
-#    $Prompt = [System.Windows.MessageBox]::Show($Ask, "Run as an Administrator or not?", $Button, $ErrorIco)
-#    Switch ($Prompt) {
-#        #This will debloat Windows 10
-#        Yes {
-#            Write-Host "You didn't run this script as an Administrator. This script will self elevate to run as an Administrator and continue."
-#            Start-Process PowerShell.exe -ArgumentList ("-NoProfile -ExecutionPolicy Bypass -File `"{0}`"" -f $PSCommandPath) -Verb RunAs
-#            Exit
-#        }
-#        No {
-#            Exit
-#        }
-#    }
 	Start-Process powershell.exe "-NoProfile -ExecutionPolicy Bypass -File `"$PSCommandPath`"" -Verb RunAs
 	Exit
 }
@@ -506,7 +488,7 @@ $vscode.Add_Click({
 
 $vscodium.Add_Click({
     Write-Host "Installing VS Codium"
-    winget install Microsoft.VSCodium.VSCodium | Out-Host
+    winget install VSCodium.VSCodium | Out-Host
     if($?) { Write-Host "Installed VS Codium" }
 })
 
@@ -533,7 +515,10 @@ $sumatrapdf.Add_Click({
     winget install SumatraPDF.SumatraPDF | Out-Host
     if($?) { Write-Host "Installed Sumatra PDF" }
 })
-
+$openshell.Add_Click({
+    Write-Host "Installing OpenShell (Old Windows menu)"
+    winget install openshellmenu | Out-Host
+    Write-Host "Installed OpenShell"
 
 
 $essentialtweaks.Add_Click({
@@ -542,7 +527,7 @@ $essentialtweaks.Add_Click({
     Checkpoint-Computer -Description "RestorePoint1" -RestorePointType "MODIFY_SETTINGS"
 
     Write-Host "Updating Powershell Help cmds - I recommend doing a full Update-Help if missing commands"
-    Update-Help -Module "Microsoft.PowerShell*"
+    Update-Help -Module "Microsoft.PowerShell*" -ErrorAction SilentlyContinue
 
     Write-Host "Running O&O Shutup with Recommended Settings"
     Import-Module BitsTransfer
