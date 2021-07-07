@@ -504,7 +504,7 @@ $vscode.Add_Click({
 
 $vscodium.Add_Click({
     Write-Host "Installing VS Codium"
-    winget install Microsoft.VSCodium.VSCodium | Out-Host
+    winget install VSCodium.VSCodium | Out-Host
     Write-Host "Installed VS Codium"
 })
 
