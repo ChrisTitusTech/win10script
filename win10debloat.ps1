@@ -527,9 +527,6 @@ $essentialtweaks.Add_Click({
     Enable-ComputerRestore -Drive "C:\"
     Checkpoint-Computer -Description "RestorePoint1" -RestorePointType "MODIFY_SETTINGS"
 
-    Write-Host "Updating Powershell Help cmds - I recommend doing a full Update-Help if missing commands"
-    Update-Help -Module "Microsoft.PowerShell*" -ErrorAction SilentlyContinue
-
     Write-Host "Running O&O Shutup with Recommended Settings"
     Import-Module BitsTransfer
     Start-BitsTransfer -Source "https://raw.githubusercontent.com/ChrisTitusTech/win10script/master/ooshutup10.cfg" -Destination ooshutup10.cfg
