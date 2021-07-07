@@ -539,7 +539,7 @@ $essentialtweaks.Add_Click({
     Checkpoint-Computer -Description "RestorePoint1" -RestorePointType "MODIFY_SETTINGS"
 
     Write-Host "Updating Powershell Help cmds - I recommend doing a full Update-Help if missing commands"
-    Update-Help -Module "Microsoft.PowerShell*"
+    Update-Help -Module "Microsoft.PowerShell*" -ErrorAction SilentlyContinue
 
     Write-Host "Running O&O Shutup with Recommended Settings"
     Import-Module BitsTransfer
