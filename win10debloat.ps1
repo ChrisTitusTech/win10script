@@ -515,11 +515,12 @@ $sumatrapdf.Add_Click({
     winget install SumatraPDF.SumatraPDF | Out-Host
     if($?) { Write-Host "Installed Sumatra PDF" }
 })
+
 $openshell.Add_Click({
     Write-Host "Installing OpenShell (Old Windows menu)"
     winget install openshellmenu | Out-Host
     Write-Host "Installed OpenShell"
-
+})
 
 $essentialtweaks.Add_Click({
     Write-Host "Creating Restore Point incase something bad happens"
