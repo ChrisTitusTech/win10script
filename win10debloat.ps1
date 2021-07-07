@@ -561,7 +561,7 @@ $sdi.Add_Click({
     # if you find a better way of not hardcoding this url hmu ngl
     $url = "http://sdi-tool.org/releases/sdi_R2102.zip"
     $output = "$PSScriptRoot/dump/sdi_R2102.zip"
-    Invoke-WebRequest $url -OutFile $output
+    Invoke-WebRequest -Uri $url -OutFile $output
     New-Item -ItemType directory -Path "$PSScriptRoot/dump/sdi"
     Start-Job -Name download {
         Expand-Archive "$PSScriptRoot/dump/sdi.zip" -DestinationPath "$PSScriptRoot/dump/sdi"
