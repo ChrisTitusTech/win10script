@@ -426,6 +426,13 @@ $yourphonefix.height             = 30
 $yourphonefix.location           = New-Object System.Drawing.Point(4,344)
 $yourphonefix.Font               = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
+$nvcleanstall                 = New-Object system.Windows.Forms.Button
+$nvcleanstall.text               = "NvCleanStall"
+$nvcleanstall.width              = 211
+$nvcleanstall.height             = 30
+$nvcleanstall.location           = New-Object System.Drawing.Point(4,344)
+$nvcleanstall.Font               = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
+
 $Form.controls.AddRange(@($Panel1,$Panel2,$Label3,$Label15,$Panel4,$PictureBox1,$Label1,$Label4,$Panel3))
 $Panel1.controls.AddRange(@($brave,$firefox,$7zip,$irfanview,$adobereader,$notepad,$gchrome,$mpc,$vlc,$powertoys,$winterminal,$vscode,$Label2,$everythingsearch,$sumatrapdf,$vscodium,$imageglass,$honeyview))
 $Panel2.controls.AddRange(@($essentialtweaks,$backgroundapps,$cortana,$actioncenter,$darkmode,$visualfx,$onedrive,$lightmode))
@@ -1065,5 +1072,14 @@ $yourphonefix.Add_Click({
 	}
     Write-Host "You may need to Reboot and right-click Your Phone app and select repair"
 })
+
+$nvcleanstall.Add_Click {
+    Write-Host "Download NVCleanstall for NvidiaDrivers"
+    # if you find a better way of not hardcoding this url hmu ngl
+    $nvcleanstall = "https://de1-dl.techpowerup.com/files/1ItYqFmM0DsIFYwi6weD4Q/1625669076/NVCleanstall_1.10.0.exe"
+    $output = "$PSScriptRoot/NVCleanstall_1.10.0.exe"
+    Invoke-WebRequest -Uri $download -OutFile $output
+    Start-Process -FilePath $output
+}
 
 [void]$Form.ShowDialog()
