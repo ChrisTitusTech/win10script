@@ -562,7 +562,9 @@ $sdi.Add_Click({
     $url = "http://sdi-tool.org/releases/sdi_R2102.zip"
     $output = "$PSScriptRoot/dump/sdi_R2102.zip"
     Start-Job -Name down {
-        (New-Object System.Net.WebClient).DownloadFile($url, $output)
+        $url = "http://sdi-tool.org/releases/sdi_R2102.zip"
+        $output = "$PSScriptRoot/dump/sdi_R2102.zip"
+        Invoke-WebRequest $url -OutFile $output
     }
     Wait-Job -Name down
     New-Item -ItemType directory -Path "$PSScriptRoot/dump/sdi"
