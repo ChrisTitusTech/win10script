@@ -559,7 +559,7 @@ $nvcleanstall.Add_Click({
     Start-Process -FilePath $output
 })
 
-$nvcleanstall.Add_Click({
+$taskbarx.Add_Click({
     Write-Host "Download NVCleanstall for NvidiaDrivers"
     # if you find a better way of not hardcoding this url hmu ngl
     $url = "https://github.com/ChrisAnd1998/TaskbarX/releases/download/1.7.0.0/TaskbarX_1.7.0.0_x64.zip"
