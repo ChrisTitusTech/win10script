@@ -430,11 +430,21 @@ $nvcleanstall                    = New-Object system.Windows.Forms.Button
 $nvcleanstall.text               = "NvCleanStall"
 $nvcleanstall.width              = 212
 $nvcleanstall.height             = 30
-$nvcleanstall.location           = New-Object System.Drawing.Point(3,591)
+$nvcleanstall.location           = New-Object System.Drawing.Point(3,595)
 $nvcleanstall.Font               = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
+$taskbarx                        = New-Object system.Windows.Forms.Button
+$taskbarx.text                   = "TaskbarX"
+$taskbarx.width                  = 212
+$taskbarx.height                 = 30
+$taskbarx.location               = New-Object System.Drawing.Point(3,631)
+$taskbarx.Font                   =  New-Object System.Drawing.Font('Microsoft Sans Serif',12)
+
+
+https://github.com/ChrisAnd1998/TaskbarX/releases/download/1.7.0.0/TaskbarX_1.7.0.0_x64.zip
+
 $Form.controls.AddRange(@($Panel1,$Panel2,$Label3,$Label15,$Panel4,$PictureBox1,$Label1,$Label4,$Panel3))
-$Panel1.controls.AddRange(@($brave,$firefox,$7zip,$irfanview,$adobereader,$notepad,$gchrome,$mpc,$vlc,$powertoys,$winterminal,$vscode,$Label2,$everythingsearch,$sumatrapdf,$vscodium,$imageglass,$honeyview,$nvcleanstall))
+$Panel1.controls.AddRange(@($brave,$firefox,$7zip,$irfanview,$adobereader,$notepad,$gchrome,$mpc,$vlc,$powertoys,$winterminal,$vscode,$Label2,$everythingsearch,$sumatrapdf,$vscodium,$imageglass,$honeyview,$nvcleanstall,$taskbarx))
 $Panel2.controls.AddRange(@($essentialtweaks,$backgroundapps,$cortana,$actioncenter,$darkmode,$visualfx,$onedrive,$lightmode))
 $Panel4.controls.AddRange(@($defaultwindowsupdate,$securitywindowsupdate,$Label16,$Label17,$Label18,$Label19))
 $Panel3.controls.AddRange(@($essentialundo,$EActionCenter,$ECortana,$RBackgroundApps,$HTrayIcons,$EClipboardHistory,$ELocation,$InstallOneDrive,$yourphonefix))
@@ -543,8 +553,17 @@ $nvcleanstall.Add_Click({
     Write-Host "Download NVCleanstall for NvidiaDrivers"
     # if you find a better way of not hardcoding this url hmu ngl
     $url = "https://de1-dl.techpowerup.com/files/1ItYqFmM0DsIFYwi6weD4Q/1625669076/NVCleanstall_1.10.0.exe"
-    $output = "$PSScriptRoot/NVCleanstall_1.10.0.exe"
+    $output = "$PSScriptRoot/dump/NVCleanstall_1.10.0.exe"
 
+    Invoke-WebRequest $url -OutFile $output
+    Start-Process -FilePath $output
+})
+
+$nvcleanstall.Add_Click({
+    Write-Host "Download NVCleanstall for NvidiaDrivers"
+    # if you find a better way of not hardcoding this url hmu ngl
+    $url = "https://github.com/ChrisAnd1998/TaskbarX/releases/download/1.7.0.0/TaskbarX_1.7.0.0_x64.zip"
+    $output = "$PSScriptRoot/dump/taskbarx.zip"
     Invoke-WebRequest $url -OutFile $output
     Start-Process -FilePath $output
 })
