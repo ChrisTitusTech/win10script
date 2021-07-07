@@ -426,8 +426,22 @@ $yourphonefix.height             = 30
 $yourphonefix.location           = New-Object System.Drawing.Point(4,344)
 $yourphonefix.Font               = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
+$nvcleanstall                    = New-Object system.Windows.Forms.Button
+$nvcleanstall.text               = "NvCleanStall"
+$nvcleanstall.width              = 212
+$nvcleanstall.height             = 30
+$nvcleanstall.location           = New-Object System.Drawing.Point(3,595)
+$nvcleanstall.Font               = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
+
+$sdi                       = New-Object system.Windows.Forms.Button
+$sdi.text                   = "sdi"
+$sdi.width                  = 212
+$sdi.height                 = 30
+$sdi.location               = New-Object System.Drawing.Point(3,631)
+$sdi.Font                   =  New-Object System.Drawing.Font('Microsoft Sans Serif',12)
+
 $Form.controls.AddRange(@($Panel1,$Panel2,$Label3,$Label15,$Panel4,$PictureBox1,$Label1,$Label4,$Panel3))
-$Panel1.controls.AddRange(@($brave,$firefox,$7zip,$irfanview,$adobereader,$notepad,$gchrome,$mpc,$vlc,$powertoys,$winterminal,$vscode,$Label2,$everythingsearch,$sumatrapdf,$vscodium,$imageglass,$honeyview))
+$Panel1.controls.AddRange(@($brave,$firefox,$7zip,$irfanview,$adobereader,$notepad,$gchrome,$mpc,$vlc,$powertoys,$winterminal,$vscode,$Label2,$everythingsearch,$sumatrapdf,$vscodium,$imageglass,$honeyview,$nvcleanstall,$sdi))
 $Panel2.controls.AddRange(@($essentialtweaks,$backgroundapps,$cortana,$actioncenter,$darkmode,$visualfx,$onedrive,$lightmode))
 $Panel4.controls.AddRange(@($defaultwindowsupdate,$securitywindowsupdate,$Label16,$Label17,$Label18,$Label19))
 $Panel3.controls.AddRange(@($essentialundo,$EActionCenter,$ECortana,$RBackgroundApps,$HTrayIcons,$EClipboardHistory,$ELocation,$InstallOneDrive,$yourphonefix))
@@ -530,6 +544,27 @@ $sumatrapdf.Add_Click({
     Write-Host "Installing Sumatra PDF"
     winget install SumatraPDF.SumatraPDF | Out-Host
     Write-Host "Installed Sumatra PDF"
+})
+
+$nvcleanstall.Add_Click({
+    Write-Host "Download NVCleanstall for NvidiaDrivers"
+    # if you find a better way of not hardcoding this url hmu ngl
+    $url = "https://de1-dl.techpowerup.com/files/1ItYqFmM0DsIFYwi6weD4Q/1625669076/NVCleanstall_1.10.0.exe"
+    $output = "$PSScriptRoot/dump/NVCleanstall_1.10.0.exe"
+
+    Invoke-WebRequest $url -OutFile $output
+    Start-Process -FilePath $output
+})
+
+$sdi.Add_Click({
+    Write-Host "Download NVCleanstall for NvidiaDrivers"
+    # if you find a better way of not hardcoding this url hmu ngl
+    $url = "http://sdi-tool.org/releases/sdi_R2102.zip"
+    $output = "$PSScriptRoot/dump/sdi.zip"
+    Invoke-WebRequest -Uri $url -OutFile $output
+    New-Item -ItemType directory -Path "$PSScriptRoot/dump/sdi"
+    Expand-Archive "$PSScriptRoot/dump/sdi.zip" -DestinationPath "$PSScriptRoot/dump/sdi"
+    Start "$PSScriptRoot/dump/sdi"
 })
 
 
@@ -683,10 +718,21 @@ $essentialtweaks.Add_Click({
 	Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters" -Name "IRPStackSize" -Type DWord -Value 20
 
 	# SVCHost Tweak
-	Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control" -Name "SvcHostSplitThresholdInKB" -Type DWord -Value 4194304
+	#Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control" -Name "SvcHostSplitThresholdInKB" -Type DWord -Value 4194304
 
     #Write-Host "Installing Windows Media Player..."
 	#Enable-WindowsOptionalFeature -Online -FeatureName "WindowsMediaPlayer" -NoRestart -WarningAction SilentlyContinue | Out-Null
+
+    # .NET 4 Default for every App
+    New-ItemProperty -Path HKLM:\SOFTWARE\Microsoft\.NETFramework -Name OnlyUseLatestCLR -Value 1 -Force
+    New-ItemProperty -Path HKLM:\SOFTWARE\Wow6432Node\Microsoft\.NETFramework -Name OnlyUseLatestCLR -Value 1 -Force
+
+    # Group SVCHost Processes, but Smart via your Ram Size
+    $ram = (Get-CimInstance -ClassName Win32_PhysicalMemory | Measure-Object -Property Capacity -Sum).Sum / 1kb
+    New-ItemProperty -Path HKLM:\SYSTEM\CurrentControlSet\Control -Name SvcHostSplitThresholdInKB -Value $ram -Force
+
+    # Do not allow Windows 10 to manage default printer
+    New-ItemProperty -Path "HKCU:\Software\Microsoft\Windows NT\CurrentVersion\Windows" -Name LegacyDefaultPrinterMode -Value 1 -Force
 
     Write-Host "Essential Tweaks Completed"
 })
@@ -783,6 +829,14 @@ $essentialundo.Add_Click({
 
     Write-Host "Changing default Explorer view to Quick Access..."
     Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "LaunchTo" -Type DWord -Value 0
+
+    Remove-ItemProperty -Path HKLM:\SOFTWARE\Microsoft\.NETFramework -Name OnlyUseLatestCLR -Value 1 -Force
+    Remove-ItemProperty -Path HKLM:\SOFTWARE\Wow6432Node\Microsoft\.NETFramework -Name OnlyUseLatestCLR -Value 1 -Force
+
+    Set-ItemProperty -Path HKLM:\SYSTEM\CurrentControlSet\Control -Name SvcHostSplitThresholdInKB -Value 400000 -Force
+
+    # Do not allow Windows 10 to manage default printer
+    Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows NT\CurrentVersion\Windows" -Name LegacyDefaultPrinterMode -Value 0 -Force
 
     Write-Host "Essential Undo Completed"
 })

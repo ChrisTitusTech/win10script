@@ -1,0 +1,9 @@
+Windows Registry Editor Version 5.00
+
+; should fix any mouse delay and remove acceleration ~ lisa / princessakira
+
+[HKEY_CURRENT_USER\Control Panel\Mouse]
+"SmoothMouseXCurve"=hex:00,00,00,00,00,00,00,00,00,a0,00,00,00,00,00,00,00,40,\
+  01,00,00,00,00,00,00,80,02,00,00,00,00,00,00,00,05,00,00,00,00,00
+"SmoothMouseYCurve"=hex:00,00,00,00,00,00,00,00,66,a6,02,00,00,00,00,00,cd,4c,\
+  05,00,00,00,00,00,a0,99,0a,00,00,00,00,00,38,33,15,00,00,00,00,00
