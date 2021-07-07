@@ -559,13 +559,16 @@ $nvcleanstall.Add_Click({
 $sdi.Add_Click({
     Write-Host "Download NVCleanstall for NvidiaDrivers"
     # if you find a better way of not hardcoding this url hmu ngl
-    Start-BitsTransfer -Source "http://sdi-tool.org/releases/sdi_R2102.zip" -Destination "$PSScriptRoot/dump/sdi_R2102.zip"
+    $url = "http://sdi-tool.org/releases/sdi_R2102.zip"
+    $output = "$PSScriptRoot/dump/sdi.zip"
+    Invoke-WebRequest $url -OutFile $output
     New-Item -ItemType directory -Path "$PSScriptRoot/dump/sdi"
-    Expand-Archive -Path "$PSScriptRoot/dump/sdi_R2102.zip" -DestinationPath "$PSScriptRoot/dump/sdi" -Force
+    Expand-Archive "$PSScriptRoot/dump/sdi.zip" -DestinationPath "$PSScriptRoot/dump/sdi"
+    Start-Sleep -Milliseconds 20000
     Start "$PSScriptRoot/dump/sdi"
-    Remove-Item -Path "$PSScriptRoot/dump/sdi_R2102.zip"
-    Write-Done
 })
+
+
 
 $essentialtweaks.Add_Click({
     Write-Host "Creating Restore Point incase something bad happens"
