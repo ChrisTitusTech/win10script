@@ -563,10 +563,7 @@ $sdi.Add_Click({
     $output = "$PSScriptRoot/dump/sdi_R2102.zip"
     Invoke-WebRequest -Uri $url -OutFile $output
     New-Item -ItemType directory -Path "$PSScriptRoot/dump/sdi"
-    Start-Job -Name download {
-        Expand-Archive "$PSScriptRoot/dump/sdi.zip" -DestinationPath "$PSScriptRoot/dump/sdi"
-    }
-    Wait-Job -Name download
+    Expand-Archive "$PSScriptRoot/dump/sdi.zip" -DestinationPath "$PSScriptRoot/dump/sdi"
     Start "$PSScriptRoot/dump/sdi"
 })
 
