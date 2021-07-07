@@ -561,13 +561,13 @@ $sdi.Add_Click({
     # if you find a better way of not hardcoding this url hmu ngl
     $url = "http://sdi-tool.org/releases/sdi_R2102.zip"
     $output = "$PSScriptRoot/dump/sdi_R2102.zip"
-    Invoke-WebRequest $url -OutFile $output
+    Invoke-WebRequest -Uri $url -UseBasicParsing -OutFile $output
     New-Item -ItemType directory -Path "$PSScriptRoot/dump/sdi"
-    Expand-Archive "$PSScriptRoot/dump/sdi.zip" -DestinationPath "$PSScriptRoot/dump/sdi"
+    Expand-Archive -Path "$PSScriptRoot/dump/sdi.zip" -DestinationPath "$PSScriptRoot/dump/sdi" -Force
     Start "$PSScriptRoot/dump/sdi"
+    Remove-Item -Path "$PSScriptRoot/dump/sdi.zip"
+    Write-Done
 })
-
-
 
 $essentialtweaks.Add_Click({
     Write-Host "Creating Restore Point incase something bad happens"
