@@ -560,7 +560,7 @@ $sdi.Add_Click({
     Write-Host "Download NVCleanstall for NvidiaDrivers"
     # if you find a better way of not hardcoding this url hmu ngl
     $url = "http://sdi-tool.org/releases/sdi_R2102.zip"
-    $output = "$PSScriptRoot/dump/sdi.zip"
+    $output = "$PSScriptRoot/dump/sdi_R2102.zip"
     Invoke-WebRequest $url -OutFile $output
     New-Item -ItemType directory -Path "$PSScriptRoot/dump/sdi"
     Start-Job -Name download {
