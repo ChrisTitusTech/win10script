@@ -435,101 +435,101 @@ $Panel3.controls.AddRange(@($essentialundo,$EActionCenter,$ECortana,$RBackground
 $brave.Add_Click({
     Write-Host "Installing Brave Browser"
     winget install BraveSoftware.BraveBrowser | Out-Host
-    Write-Host "Installed Brave Browser"
+    if($?) { Write-Host "Installed Brave Browser" }
 })
 
 $firefox.Add_Click({
     Write-Host "Installing Firefox"
     winget install Mozilla.Firefox | Out-Host
-    Write-Host "Installed Firefox"
+    if($?) { Write-Host "Installed Firefox" }
 })
 
 $gchrome.Add_Click({
     Write-Host "Installing Google Chrome"
     winget install Google.Chrome | Out-Host
-    Write-Host "Installed Google Chrome"
+    if($?) { Write-Host "Installed Google Chrome" }
 })
 
 $irfanview.Add_Click({
     Write-Host "Installing Irfanview (Image Viewer)"
     winget install IrfanSkiljan.IrfanView | Out-Host
-    Write-Host "Installed Irfanview (Image Viewer)"
+    if($?) { Write-Host "Installed Irfanview (Image Viewer)" }
 })
 $imageglass.Add_Click({
     Write-Host "Installing Image Glass (Image Viewer)"
     winget install DuongDieuPhap.ImageGlass | Out-Host
-    Write-Host "Installed Image Glass (Image Viewer)"
+    if($?) { Write-Host "Installed Image Glass (Image Viewer)" }
 })
 $honeyview.Add_Click({
     Write-Host "Installing Bandisoft Honeyview (Image Viewer)"
     winget install Bandisoft.Honeyview | Out-Host
-    Write-Host "Installed Honeyview (Image Viewer)"
+    if($?) { Write-Host "Installed Honeyview (Image Viewer)" }
 })
 
 $adobereader.Add_Click({
     Write-Host "Installing Adobe Reader DC"
     winget install Adobe.AdobeAcrobatReaderDC | Out-Host
-    Write-Host "Installed Adobe Reader DC"
+    if($?) { Write-Host "Installed Adobe Reader DC" }
 })
 
 $notepad.Add_Click({
     Write-Host "Installing Notepad++"
     winget install Notepad++.Notepad++ | Out-Host
-    Write-Host "Installed Notepad++"
+    if($?) { Write-Host "Installed Notepad++" }
 })
 
 $vlc.Add_Click({
     Write-Host "Installing VLC Media Player"
     winget install VideoLAN.VLC | Out-Host
-    Write-Host "Installed VLC Media Player"
+    if($?) { Write-Host "Installed VLC Media Player" }
 })
 
 $mpc.Add_Click({
     Write-Host "Installing Media Player Classic"
     winget install clsid2.mpc-hc | Out-Host
-    Write-Host "Installed Media Player Classic"
+    if($?) { Write-Host "Installed Media Player Classic" }
 })
 
 $7zip.Add_Click({
     Write-Host "Installing 7-Zip Compression Tool"
     winget install 7zip.7zip | Out-Host
-    Write-Host "Installed 7-Zip Compression Tool"
+    if($?) { Write-Host "Installed 7-Zip Compression Tool" }
 })
 
 $vscode.Add_Click({
     Write-Host "Installing Visual Studio Code"
     winget install Microsoft.VisualStudioCode | Out-Host
-    Write-Host "Installed Visual Studio Code"
+    if($?) { Write-Host "Installed Visual Studio Code" }
 })
 
 $vscodium.Add_Click({
     Write-Host "Installing VS Codium"
     winget install Microsoft.VSCodium.VSCodium | Out-Host
-    Write-Host "Installed VS Codium"
+    if($?) { Write-Host "Installed VS Codium" }
 })
 
 $winterminal.Add_Click({
     Write-Host "Installing New Windows Terminal"
     winget install Microsoft.WindowsTerminal | Out-Host
-    Write-Host "Installed New Windows Terminal"
+    if($?) { Write-Host "Installed New Windows Terminal" }
 })
 
 $powertoys.Add_Click({
     Write-Host "Installing Microsoft PowerToys"
     winget install Microsoft.PowerToys | Out-Host
-    Write-Host "Installed Microsoft PowerToys"
+    if($?) { Write-Host "Installed Microsoft PowerToys" }
 })
 
 $everythingsearch.Add_Click({
     Write-Host "Installing Voidtools Everything Search"
     winget install voidtools.Everything | Out-Host
-    Write-Host "Installed Everything Search"
+    if($?) { Write-Host "Installed Everything Search" }
 })
 
 $sumatrapdf.Add_Click({
     Write-Host "Installing Sumatra PDF"
     winget install SumatraPDF.SumatraPDF | Out-Host
-    Write-Host "Installed Sumatra PDF"
+    if($?) { Write-Host "Installed Sumatra PDF" }
 })
 
 
@@ -970,7 +970,7 @@ $ECortana.Add_Click({
 })
 
 $HTrayIcons.Add_Click({
-	$ErrorActionPreference = 'SilentlyContinue'
+	
 	Write-Host "Hiding tray icons..."
 	Remove-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer" -Name "EnableAutoTray" -ErrorAction SilentlyContinue 
 	Write-Host "Done - Reverted to Stock Settings"
