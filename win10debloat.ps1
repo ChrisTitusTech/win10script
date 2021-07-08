@@ -182,14 +182,7 @@ $Label4 = Create-Label -Text "Undo" -AutoSize $True -Width 230 -Height 25 -Locat
 
 $Panel3 = Create-Panel -Height 387 -Width 220 -LocationX 464 -LocationY 54
 
-$essentialundo                   = New-Object system.Windows.Forms.Button
-$essentialundo.text              = "Undo All"
-$essentialundo.width             = 211
-$essentialundo.height            = 75
-$essentialundo.location          = New-Object System.Drawing.Point(4,25)
-$essentialundo.Font              = New-Object System.Drawing.Font('Microsoft Sans Serif',14)
-
-
+$essentialundo = Create-Button -Text "Undo All" -Width 211 -Height 75 -LocationX 4 -LocationY 25 -FontName $MSSansSerif -FontSize 14
 $EActionCenter = Create-Button -Text "Enable Action Center" -Width 211 -Height 30 -LocationX 4 -LocationY 105 -FontName $MSSansSerif -FontSize 12
 $ECortana = Create-Button -Text "Enable Cortana (Search)" -Width 212 -Height 30 -LocationX 4 -LocationY 173 -FontName $MSSansSerif -FontSize 12
 $RBackgroundApps = Create-Button -Text "Allow Background Apps" -Width 212 -Height 30 -LocationX 4 -LocationY 139 -FontName $MSSansSerif -FontSize 12
