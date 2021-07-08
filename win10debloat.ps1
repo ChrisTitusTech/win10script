@@ -23,7 +23,7 @@ Catch{
 	# winget is not installed. Install it from the Github release
 	Write-Host "winget is not found, installing it right now."
 	$download = "https://github.com/microsoft/winget-cli/releases/download/v1.0.11692/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle"
-	$output = $PSScriptRoot + "\winget-latest.appxbundle"
+	$output = "$PSScriptRoot/dump/" + "winget-latest.appxbundle"
 	Write-Host "Dowloading latest release"
 	Invoke-WebRequest -Uri $download -OutFile $output
 	Write-Host "Installing the package"
