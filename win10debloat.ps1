@@ -1,4 +1,4 @@
-Add-Type -AssemblyName System.Windows.Forms
+﻿Add-Type -AssemblyName System.Windows.Forms
 [System.Windows.Forms.Application]::EnableVisualStyles()
 
 $ErrorActionPreference = 'SilentlyContinue'
@@ -22,12 +22,12 @@ Try{
 Catch{
 	# winget is not installed. Install it from the Github release
 	Write-Host "winget is not found, installing it right now."
-	
+
 	$download = "https://github.com/microsoft/winget-cli/releases/download/v1.0.11692/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle"
 	$output = $PSScriptRoot + "\winget-latest.appxbundle"
 	Write-Host "Dowloading latest release"
 	Invoke-WebRequest -Uri $download -OutFile $output
-	
+
 	Write-Host "Installing the package"
 	Add-AppxPackage -Path $output
 }
@@ -60,223 +60,113 @@ $Form.Icon                    = [System.Drawing.Icon]::FromHandle((New-Object Sy
 $Form.Width                   = $objImage.Width
 $Form.Height                  = $objImage.Height
 
-$Panel1                          = New-Object system.Windows.Forms.Panel
-$Panel1.height                   = 639
-$Panel1.width                    = 219
-$Panel1.location                 = New-Object System.Drawing.Point(6,54)
+$MSSansSerif = "Microsoft Sans Serif"
 
-$brave                           = New-Object system.Windows.Forms.Button
-$brave.text                      = "Brave Browser"
-$brave.width                     = 212
-$brave.height                    = 30
-$brave.location                  = New-Object System.Drawing.Point(3,94)
-$brave.Font                      = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
+function Create-Panel {
+	param (
+		[int] $Height,
+		[int] $Width,
+		[int] $LocationX,
+		[int] $LocationY
+	)
 
-$firefox                         = New-Object system.Windows.Forms.Button
-$firefox.text                    = "Firefox"
-$firefox.width                   = 212
-$firefox.height                  = 30
-$firefox.location                = New-Object System.Drawing.Point(4,127)
-$firefox.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
+	$Pnl = New-Object System.Windows.Forms.Panel
+    	$location = New-Object System.Drawing.Point($LocationX, $LocationY)
 
-$7zip                            = New-Object system.Windows.Forms.Button
-$7zip.text                       = "7-Zip"
-$7zip.width                      = 211
-$7zip.height                     = 30
-$7zip.location                   = New-Object System.Drawing.Point(4,363)
-$7zip.Font                       = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
+	$Pnl.Height = $Height
+	$Pnl.Width = $Width
+	$Pnl.Location = $location
+	return $Pnl
+}
 
-$irfanview                       = New-Object system.Windows.Forms.Button
-$irfanview.text                  = "Irfanview (Image Viewer)"
-$irfanview.width                 = 212
-$irfanview.height                = 30
-$irfanview.location              = New-Object System.Drawing.Point(3,195)
-$irfanview.Font                  = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
+function Create-Button {
+    param (
+        [string] $Text,
+        [int] $Width,
+        [int] $Height,
+        [int] $LocationX,
+        [int] $LocationY,
+        [string] $FontName,
+        [int] $FontSize
+    )
 
-$adobereader                     = New-Object system.Windows.Forms.Button
-$adobereader.text                = "Adobe Reader DC"
-$adobereader.width               = 212
-$adobereader.height              = 30
-$adobereader.location            = New-Object System.Drawing.Point(4,528)
-$adobereader.Font                = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
+    $location = New-Object System.Drawing.Point($LocationX, $LocationY)
+    $font = New-Object System.Drawing.Font($FontName, $FontSize)
 
-$notepad                         = New-Object system.Windows.Forms.Button
-$notepad.text                    = "Notepad++"
-$notepad.width                   = 212
-$notepad.height                  = 30
-$notepad.location                = New-Object System.Drawing.Point(4,461)
-$notepad.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
+    $Btn = New-Object System.Windows.Forms.Button
+    $Btn.Text = $Text
+    $Btn.Width = $Width
+    $Btn.Height = $Height
+    $Btn.Location = $location
+    $Btn.Font = $font
+    return $Btn
+}
 
-$gchrome                         = New-Object system.Windows.Forms.Button
-$gchrome.text                    = "Google Chrome"
-$gchrome.width                   = 212
-$gchrome.height                  = 30
-$gchrome.location                = New-Object System.Drawing.Point(4,161)
-$gchrome.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
+function Create-Label {
+    param (
+        [string] $Text,
+        [bool] $AutoSize,
+        [int] $Width,
+        [int] $Height,
+        [int] $LocationX,
+        [int] $LocationY,
+        [string] $FontName,
+        [int] $FontSize
+    )
 
-$mpc                             = New-Object system.Windows.Forms.Button
-$mpc.text                        = "Media Player Classic"
-$mpc.width                       = 211
-$mpc.height                      = 30
-$mpc.location                    = New-Object System.Drawing.Point(4,329)
-$mpc.Font                        = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
+    $location = New-Object System.Drawing.Point($LocationX, $LocationY)
+    $font = New-Object System.Drawing.Font($FontName, $FontSize)
 
-$vlc                             = New-Object system.Windows.Forms.Button
-$vlc.text                        = "VLC"
-$vlc.width                       = 212
-$vlc.height                      = 30
-$vlc.location                    = New-Object System.Drawing.Point(4,296)
-$vlc.Font                        = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
+    $Lbl = New-Object System.Windows.Forms.Label
+    $Lbl.Text = $Text
+    $Lbl.AutoSize = $AutoSize
+    $Lbl.Width = $Width
+    $Lbl.Height = $Height
+    $Lbl.Location = $location
+    $Lbl.Font = $font
+    return $Lbl
+}
 
-$powertoys                       = New-Object system.Windows.Forms.Button
-$powertoys.text                  = "PowerToys"
-$powertoys.width                 = 211
-$powertoys.height                = 30
-$powertoys.location              = New-Object System.Drawing.Point(4,60)
-$powertoys.Font                  = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
+$Panel1 = Create-Panel -Height 639 -Width 219 -LocationX 6 -LocationY 54
 
-$winterminal                     = New-Object system.Windows.Forms.Button
-$winterminal.text                = "Windows Terminal"
-$winterminal.width               = 211
-$winterminal.height              = 30
-$winterminal.location            = New-Object System.Drawing.Point(4,26)
-$winterminal.Font                = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
+$brave = Create-Button -Text "Brave Browser" -Width 212 -Height 30 -LocationX 3 -LocationY 94 -FontName $MSSansSerif -FontSize 12
+$firefox = Create-Button -Text "Firefox" -Width 212 -Height 30 -LocationX 4 -LocationY 127 -FontName $MSSansSerif -FontSize 12
+$7zip = Create-Button -Text "7-Zip" -Width 211 -Height 30 -LocationX 4 -LocationY 363 -FontName $MSSansSerif -FontSize 12
+$irfanview = Create-Button -Text "Irfanview (Image Viewer)" -Width 212 -Height 30 -LocationX 3 -LocationY 195 -FontName $MSSansSerif -FontSize 12
+$adobereader = Create-Button -Text "Adobe Reader DC" -Width 212 -Height 30 -LocationX 4 -LocationY 528 -FontName $MSSansSerif -FontSize 12
+$notepad = Create-Button -Text "Notepad++" -Width 211 -Height 30 -LocationX 4 -LocationY 461 -FontName $MSSansSerif -FontSize 12
+$gchrome = Create-Button -Text "Google Chrome" -Width 211 -Height 30 -LocationX 4 -LocationY 161 -FontName $MSSansSerif -FontSize 12
+$mpc = Create-Button -Text "Media Player Classic" -Width 211 -Height 30 -LocationX 4 -LocationY 329 -FontName $MSSansSerif -FontSize 12
+$vlc = Create-Button -Text "VLC" -Width 212 -Height 30 -LocationX 4 -LocationY 296 -FontName $MSSansSerif -FontSize 12
+$powertoys = Create-Button -Text "PowerToys" -Width 211 -Height 30 -LocationX 4 -LocationY 60 -FontName $MSSansSerif -FontSize 12
+$winterminal = Create-Button -Text "Windows Terminal" -Width 211 -Height 30 -LocationX 4 -LocationY 26 -FontName $MSSansSerif -FontSize 12
+$vscode = Create-Button -Text "VS Code" -Width 211 -Height 30 -LocationX 4 -LocationY 396 -FontName $MSSansSerif -FontSize 12
 
-$vscode                          = New-Object system.Windows.Forms.Button
-$vscode.text                     = "VS Code"
-$vscode.width                    = 211
-$vscode.height                   = 30
-$vscode.location                 = New-Object System.Drawing.Point(4,396)
-$vscode.Font                     = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
+$Label2 = Create-Label -Text "(Windows 1809+ Required)" -AutoSize $True -Width 25 -Height 10 -LocationX 26 -LocationY 5 -FontName $MSSansSerif -FontSize 10
 
-$Label2                          = New-Object system.Windows.Forms.Label
-$Label2.text                     = "(Windows 1809+ Required)"
-$Label2.AutoSize                 = $true
-$Label2.width                    = 25
-$Label2.height                   = 10
-$Label2.location                 = New-Object System.Drawing.Point(26,5)
-$Label2.Font                     = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
+$Panel2 = Create-Panel -Height 386 -Width 211 -LocationX 239 -LocationY 54
 
-$Panel2                          = New-Object system.Windows.Forms.Panel
-$Panel2.height                   = 386
-$Panel2.width                    = 211
-$Panel2.location                 = New-Object System.Drawing.Point(239,54)
+$Label3 = Create-Label -Text "System Tweaks" -AutoSize $True -Width 230 -Height 25 -LocationX 230 -LocationY 12 -FontName $MSSansSerif -FontSize 24
 
-$Label3                          = New-Object system.Windows.Forms.Label
-$Label3.text                     = "System Tweaks"
-$Label3.AutoSize                 = $true
-$Label3.width                    = 230
-$Label3.height                   = 25
-$Label3.location                 = New-Object System.Drawing.Point(230,12)
-$Label3.Font                     = New-Object System.Drawing.Font('Microsoft Sans Serif',24)
+$essentialtweaks = Create-Button -Text "Essential Tweaks" -Width 204 -Height 75 -LocationX 4 -LocationY 25 -FontName $MSSansSerif -FontSize 14
+$backgroundapps = Create-Button -Text "Disable Background Apps" -Width 205 -Height 30 -LocationX 3 -LocationY 139 -FontName $MSSansSerif -FontSize 12
+$cortana = Create-Button -Text "Disable Cortana (Search)" -Width 204 -Height 30 -LocationX 4 -LocationY 174 -FontName $MSSansSerif -FontSize 12
+$actioncenter = Create-Button -Text "Disable Action Center" -Width 203 -Height 30 -LocationX 4 -LocationY 105 -FontName $MSSansSerif -FontSize 12
+$darkmode = Create-Button -Text "Dark mode" -Width 204 -Height 30 -LocationX 4 -LocationY 244 -FontName $MSSansSerif -FontSize 12
+$visualfx = Create-Button -Text "Basic Visual FX" -Width 204 -Height 30 -LocationX 4 -LocationY 313 -FontName $MSSansSerif -FontSize 12
+$onedrive = Create-Button -Text "Uninstall OneDrive" -Width 204 -Height 30 -LocationX 4 -LocationY 209 -FontName $MSSansSerif -FontSize 12
 
-$essentialtweaks                 = New-Object system.Windows.Forms.Button
-$essentialtweaks.text            = "Essential Tweaks"
-$essentialtweaks.width           = 204
-$essentialtweaks.height          = 75
-$essentialtweaks.location        = New-Object System.Drawing.Point(4,25)
-$essentialtweaks.Font            = New-Object System.Drawing.Font('Microsoft Sans Serif',14)
+$Label15 = Create-Label -Text "Windows Update" -AutoSize $True -Width 25 -Height 10 -LocationX 739 -LocationY 11 -FontName $MSSansSerif -FontSize 24
 
-$backgroundapps                  = New-Object system.Windows.Forms.Button
-$backgroundapps.text             = "Disable Background Apps"
-$backgroundapps.width            = 205
-$backgroundapps.height           = 30
-$backgroundapps.location         = New-Object System.Drawing.Point(3,139)
-$backgroundapps.Font             = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
+$Panel4 = Create-Panel -Height 179 -Width 340 -LocationX 699 -LocationY 55
 
-$cortana                         = New-Object system.Windows.Forms.Button
-$cortana.text                    = "Disable Cortana (Search)"
-$cortana.width                   = 204
-$cortana.height                  = 30
-$cortana.location                = New-Object System.Drawing.Point(4,174)
-$cortana.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
+$defaultwindowsupdate = Create-Button -Text "Default Settings" -Width 300 -Height 30 -LocationX 24 -LocationY 26 -FontName $MSSansSerif -FontSize 14
+$securitywindowsupdate = Create-Button -Text "Security Updates Only" -Width 300 -Height 30 -LocationX 24 -LocationY 142 -FontName $MSSansSerif -FontSize 14
 
-$actioncenter                    = New-Object system.Windows.Forms.Button
-$actioncenter.text               = "Disable Action Center"
-$actioncenter.width              = 203
-$actioncenter.height             = 30
-$actioncenter.location           = New-Object System.Drawing.Point(4,105)
-$actioncenter.Font               = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
-
-$darkmode                        = New-Object system.Windows.Forms.Button
-$darkmode.text                   = "Dark Mode"
-$darkmode.width                  = 204
-$darkmode.height                 = 30
-$darkmode.location               = New-Object System.Drawing.Point(4,244)
-$darkmode.Font                   = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
-
-$visualfx                        = New-Object system.Windows.Forms.Button
-$visualfx.text                   = "Basic Visual FX"
-$visualfx.width                  = 204
-$visualfx.height                 = 30
-$visualfx.location               = New-Object System.Drawing.Point(4,313)
-$visualfx.Font                   = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
-
-$onedrive                        = New-Object system.Windows.Forms.Button
-$onedrive.text                   = "Uninstall OneDrive"
-$onedrive.width                  = 204
-$onedrive.height                 = 30
-$onedrive.location               = New-Object System.Drawing.Point(4,209)
-$onedrive.Font                   = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
-
-$Label15                         = New-Object system.Windows.Forms.Label
-$Label15.text                    = "Windows Update"
-$Label15.AutoSize                = $true
-$Label15.width                   = 25
-$Label15.height                  = 10
-$Label15.location                = New-Object System.Drawing.Point(739,11)
-$Label15.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',24)
-
-$Panel4                          = New-Object system.Windows.Forms.Panel
-$Panel4.height                   = 179
-$Panel4.width                    = 340
-$Panel4.location                 = New-Object System.Drawing.Point(699,55)
-
-$defaultwindowsupdate            = New-Object system.Windows.Forms.Button
-$defaultwindowsupdate.text       = "Default Settings"
-$defaultwindowsupdate.width      = 300
-$defaultwindowsupdate.height     = 30
-$defaultwindowsupdate.location   = New-Object System.Drawing.Point(24,26)
-$defaultwindowsupdate.Font       = New-Object System.Drawing.Font('Microsoft Sans Serif',14)
-
-$securitywindowsupdate           = New-Object system.Windows.Forms.Button
-$securitywindowsupdate.text      = "Security Updates Only"
-$securitywindowsupdate.width     = 300
-$securitywindowsupdate.height    = 30
-$securitywindowsupdate.location  = New-Object System.Drawing.Point(24,142)
-$securitywindowsupdate.Font      = New-Object System.Drawing.Font('Microsoft Sans Serif',14)
-
-$Label16                         = New-Object system.Windows.Forms.Label
-$Label16.text                    = "I recommend doing security updates only."
-$Label16.AutoSize                = $true
-$Label16.width                   = 25
-$Label16.height                  = 10
-$Label16.location                = New-Object System.Drawing.Point(62,65)
-$Label16.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
-
-$Label17                         = New-Object system.Windows.Forms.Label
-$Label17.text                    = "- Delays Features updates up to 3 years"
-$Label17.AutoSize                = $true
-$Label17.width                   = 25
-$Label17.height                  = 10
-$Label17.location                = New-Object System.Drawing.Point(63,84)
-$Label17.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
-
-$Label18                         = New-Object system.Windows.Forms.Label
-$Label18.text                    = "- Delays Security updates 4 days"
-$Label18.AutoSize                = $true
-$Label18.width                   = 25
-$Label18.height                  = 10
-$Label18.location                = New-Object System.Drawing.Point(63,105)
-$Label18.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
-
-$Label19                         = New-Object system.Windows.Forms.Label
-$Label19.text                    = "- Sets Maximum Active Time"
-$Label19.AutoSize                = $true
-$Label19.width                   = 25
-$Label19.height                  = 10
-$Label19.location                = New-Object System.Drawing.Point(63,126)
-$Label19.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
+$Label16 = Create-Label -Text "I recommend doing security updates only" -AutoSize $True -Width 25 -Height 10 -LocationX 62 -LocationY 65 -FontName $MSSansSerif -FontSize 10
+$Label17 = Create-Label -Text "- Delays Features updates up to 3 years" -AutoSize $True -Width 25 -Height 10 -LocationX 63 -LocationY 84 -FontName $MSSansSerif -FontSize 10
+$Label18 = Create-Label -Text "- Delays security updates 4 days" -AutoSize $True -Width 25 -Height 10 -LocationX 63 -LocationY 105 -FontName $MSSansSerif -FontSize 10
+$Label19 = Create-Label -Text "- Sets Maximum Active Time" -AutoSize $True -Width 25 -Height 10 -LocationX 63 -LocationY 126 -FontName $MSSansSerif -FontSize 10
 
 $PictureBox1                     = New-Object system.Windows.Forms.PictureBox
 $PictureBox1.width               = 412
@@ -284,33 +174,13 @@ $PictureBox1.height              = 125
 $PictureBox1.location            = New-Object System.Drawing.Point(247,500)
 $PictureBox1.imageLocation       = "https://github.com/ChrisTitusTech/win10script/blob/master/titus-toolbox.png?raw=true"
 $PictureBox1.SizeMode            = [System.Windows.Forms.PictureBoxSizeMode]::zoom
-$lightmode                       = New-Object system.Windows.Forms.Button
-$lightmode.text                  = "Light Mode"
-$lightmode.width                 = 204
-$lightmode.height                = 30
-$lightmode.location              = New-Object System.Drawing.Point(4,279)
-$lightmode.Font                  = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
-$Label1                          = New-Object system.Windows.Forms.Label
-$Label1.text                     = "Install"
-$Label1.AutoSize                 = $true
-$Label1.width                    = 230
-$Label1.height                   = 25
-$Label1.location                 = New-Object System.Drawing.Point(76,11)
-$Label1.Font                     = New-Object System.Drawing.Font('Microsoft Sans Serif',24)
+$lightmode = Create-Button -Text "Light Mode" -Width 204 -Height 30 -LocationX 4 -LocationY 279 -FontName $MSSansSerif -FontSize 12
 
-$Label4                          = New-Object system.Windows.Forms.Label
-$Label4.text                     = "Undo"
-$Label4.AutoSize                 = $true
-$Label4.width                    = 230
-$Label4.height                   = 25
-$Label4.location                 = New-Object System.Drawing.Point(534,12)
-$Label4.Font                     = New-Object System.Drawing.Font('Microsoft Sans Serif',24)
+$Label1 = Create-Label -Text "Install" -AutoSize $True -Width 230 -Height 25 -LocationX 76 -LocationY 11 -FontName $MSSansSerif -FontSize 24
+$Label4 = Create-Label -Text "Undo" -AutoSize $True -Width 230 -Height 25 -LocationX 534 -LocationY 12 -FontName $MSSansSerif -FontSize 24
 
-$Panel3                          = New-Object system.Windows.Forms.Panel
-$Panel3.height                   = 387
-$Panel3.width                    = 220
-$Panel3.location                 = New-Object System.Drawing.Point(464,54)
+$Panel3 = Create-Panel -Height 387 -Width 220 -LocationX 464 -LocationY 54
 
 $essentialundo                   = New-Object system.Windows.Forms.Button
 $essentialundo.text              = "Undo All"
@@ -319,96 +189,20 @@ $essentialundo.height            = 75
 $essentialundo.location          = New-Object System.Drawing.Point(4,25)
 $essentialundo.Font              = New-Object System.Drawing.Font('Microsoft Sans Serif',14)
 
-$EActionCenter                   = New-Object system.Windows.Forms.Button
-$EActionCenter.text              = "Enable Action Center"
-$EActionCenter.width             = 211
-$EActionCenter.height            = 30
-$EActionCenter.location          = New-Object System.Drawing.Point(4,105)
-$EActionCenter.Font              = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
-$ECortana                        = New-Object system.Windows.Forms.Button
-$ECortana.text                   = "Enable Cortana (Search)"
-$ECortana.width                  = 212
-$ECortana.height                 = 30
-$ECortana.location               = New-Object System.Drawing.Point(4,173)
-$ECortana.Font                   = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
-
-$RBackgroundApps                 = New-Object system.Windows.Forms.Button
-$RBackgroundApps.text            = "Allow Background Apps"
-$RBackgroundApps.width           = 212
-$RBackgroundApps.height          = 30
-$RBackgroundApps.location        = New-Object System.Drawing.Point(4,139)
-$RBackgroundApps.Font            = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
-
-$HTrayIcons                      = New-Object system.Windows.Forms.Button
-$HTrayIcons.text                 = "Hide Tray Icons"
-$HTrayIcons.width                = 212
-$HTrayIcons.height               = 30
-$HTrayIcons.location             = New-Object System.Drawing.Point(4,242)
-$HTrayIcons.Font                 = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
-
-$EClipboardHistory               = New-Object system.Windows.Forms.Button
-$EClipboardHistory.text          = "Enable Clipboard History"
-$EClipboardHistory.width         = 212
-$EClipboardHistory.height        = 30
-$EClipboardHistory.location      = New-Object System.Drawing.Point(4,276)
-$EClipboardHistory.Font          = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
-
-$ELocation                       = New-Object system.Windows.Forms.Button
-$ELocation.text                  = "Enable Location Tracking"
-$ELocation.width                 = 211
-$ELocation.height                = 30
-$ELocation.location              = New-Object System.Drawing.Point(4,310)
-$ELocation.Font                  = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
-
-$InstallOneDrive                 = New-Object system.Windows.Forms.Button
-$InstallOneDrive.text            = "Install OneDrive"
-$InstallOneDrive.width           = 212
-$InstallOneDrive.height          = 30
-$InstallOneDrive.location        = New-Object System.Drawing.Point(4,208)
-$InstallOneDrive.Font            = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
-
-$everythingsearch                = New-Object system.Windows.Forms.Button
-$everythingsearch.text           = "Everything Search"
-$everythingsearch.width          = 211
-$everythingsearch.height         = 30
-$everythingsearch.location       = New-Object System.Drawing.Point(4,495)
-$everythingsearch.Font           = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
-
-$sumatrapdf                      = New-Object system.Windows.Forms.Button
-$sumatrapdf.text                 = "Sumatra PDF"
-$sumatrapdf.width                = 212
-$sumatrapdf.height               = 30
-$sumatrapdf.location             = New-Object System.Drawing.Point(3,561)
-$sumatrapdf.Font                 = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
-
-$vscodium                        = New-Object system.Windows.Forms.Button
-$vscodium.text                   = "VS Codium"
-$vscodium.width                  = 211
-$vscodium.height                 = 30
-$vscodium.location               = New-Object System.Drawing.Point(4,429)
-$vscodium.Font                   = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
-
-$imageglass                      = New-Object system.Windows.Forms.Button
-$imageglass.text                 = "ImageGlass (Image Viewer)"
-$imageglass.width                = 212
-$imageglass.height               = 30
-$imageglass.location             = New-Object System.Drawing.Point(4,228)
-$imageglass.Font                 = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
-
-$honeyview                       = New-Object system.Windows.Forms.Button
-$honeyview.text                  = "Honeyview (Image Viewer)"
-$honeyview.width                 = 212
-$honeyview.height                = 30
-$honeyview.location              = New-Object System.Drawing.Point(4,261)
-$honeyview.Font                  = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
-
-$yourphonefix                    = New-Object system.Windows.Forms.Button
-$yourphonefix.text               = "Your Phone App Fix"
-$yourphonefix.width              = 211
-$yourphonefix.height             = 30
-$yourphonefix.location           = New-Object System.Drawing.Point(4,344)
-$yourphonefix.Font               = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
+$EActionCenter = Create-Button -Text "Enable Action Center" -Width 211 -Height 30 -LocationX 4 -LocationY 105 -FontName $MSSansSerif -FontSize 12
+$ECortana = Create-Button -Text "Enable Cortana (Search)" -Width 212 -Height 30 -LocationX 4 -LocationY 173 -FontName $MSSansSerif -FontSize 12
+$RBackgroundApps = Create-Button -Text "Allow Background Apps" -Width 212 -Height 30 -LocationX 4 -LocationY 139 -FontName $MSSansSerif -FontSize 12
+$HTrayIcons = Create-Button -Text "Hide Tray Icons" -Width 212 -Height 30 -LocationX 4 -LocationY 242 -FontName $MSSansSerif -FontSize 12
+$EClipboardHistory = Create-Button -Text "Enable Clipboard History" -Width 212 -Height 30 -LocationX 4 -LocationY 276 -FontName $MSSansSerif -FontSize 12
+$ELocation = Create-Button -Text "Enable Location Tracking" -Width 211 -Height 30 -LocationX 4 -LocationY 310 -FontName $MSSansSerif -FontSize 12
+$InstallOneDrive = Create-Button -Text "Install OneDrive" -Width 212 -Height 30 -LocationX 4 -LocationY 208 -FontName $MSSansSerif -FontSize 12
+$everythingsearch = Create-Button -Text "Everything Search" -Width 211 -Height 30 -LocationX 4 -LocationY 495 -FontName $MSSansSerif -FontSize 12
+$sumatrapdf = Create-Button -Text "Sumatra PDF" -Width 212 -Height 30 -LocationX 3 -LocationY 561 -FontName $MSSansSerif -FontSize 12
+$vscodium = Create-Button -Text "VS Codium" -Width 211 -Height 30 -LocationX 4 -LocationY 429 -FontName $MSSansSerif -FontSize 12
+$imageglass = Create-Button -Text "ImageGlass (Image Viewer)" -Width 212 -Height 30 -LocationX 4 -LocationY 228 -FontName $MSSansSerif -FontSize 12
+$honeyview = Create-Button -Text "HoneyView (Image Viewer)" -Width 212 -Height 30 -LocationX 4 -LocationY 261 -FontName $MSSansSerif -FontSize 12
+$yourphonefix = Create-Button -Text "Your Phone App Fix" -Width 211 -Height 30 -LocationX 4 -LocationY 344 -FontName $MSSansSerif -FontSize 12
 
 $Form.controls.AddRange(@($Panel1,$Panel2,$Label3,$Label15,$Panel4,$PictureBox1,$Label1,$Label4,$Panel3))
 $Panel1.controls.AddRange(@($brave,$firefox,$7zip,$irfanview,$adobereader,$notepad,$gchrome,$mpc,$vlc,$powertoys,$winterminal,$vscode,$Label2,$everythingsearch,$sumatrapdf,$vscodium,$imageglass,$honeyview))
@@ -764,7 +558,7 @@ $essentialundo.Add_Click({
     Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced\People" -Name "PeopleBand" -Type DWord -Value 1
     Write-Host "Hiding tray icons..."
     Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer" -Name "EnableAutoTray" -Type DWord -Value 1
-    
+
 
     Write-Host "Changing default Explorer view to Quick Access..."
     Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "LaunchTo" -Type DWord -Value 0
@@ -928,7 +722,7 @@ $lightmode.Add_Click({
 $EActionCenter.Add_Click({
     Write-Host "Enabling Action Center..."
 	Remove-ItemProperty -Path "HKCU:\SOFTWARE\Policies\Microsoft\Windows\Explorer" -Name "DisableNotificationCenter" -ErrorAction SilentlyContinue
-	Remove-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\PushNotifications" -Name "ToastEnabled" -ErrorAction SilentlyContinue 
+	Remove-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\PushNotifications" -Name "ToastEnabled" -ErrorAction SilentlyContinue
 	Write-Host "Done - Reverted to Stock Settings"
 })
 
@@ -941,7 +735,7 @@ $ECortana.Add_Click({
 	Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\InputPersonalization" -Name "RestrictImplicitTextCollection" -Type DWord -Value 0
 	Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\InputPersonalization" -Name "RestrictImplicitInkCollection" -Type DWord -Value 0
 	Remove-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\InputPersonalization\TrainedDataStore" -Name "HarvestContacts" -ErrorAction SilentlyContinue
-	Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Windows Search" -Name "AllowCortana" -ErrorAction SilentlyContinue 
+	Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Windows Search" -Name "AllowCortana" -ErrorAction SilentlyContinue
 	Write-Host "Restoring Windows Search..."
 	Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Search" -Name "BingSearchEnabled" -Type DWord -Value "1"
 	Remove-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Search" -Name "CortanaConsent" -ErrorAction SilentlyContinue
@@ -950,21 +744,21 @@ $ECortana.Add_Click({
     Set-Service "WSearch" -StartupType Automatic
     Start-Service "WSearch" -WarningAction SilentlyContinue
     Write-Host "Restore Windows Search Icon..."
-	Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Search" -Name "SearchboxTaskbarMode" -Type DWord -Value 1 
+	Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Search" -Name "SearchboxTaskbarMode" -Type DWord -Value 1
 	Write-Host "Done - Reverted to Stock Settings"
 })
 
 $HTrayIcons.Add_Click({
-	
+
 	Write-Host "Hiding tray icons..."
-	Remove-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer" -Name "EnableAutoTray" -ErrorAction SilentlyContinue 
+	Remove-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer" -Name "EnableAutoTray" -ErrorAction SilentlyContinue
 	Write-Host "Done - Reverted to Stock Settings"
 })
 
 $EClipboardHistory.Add_Click({
 	Write-Host "Restoring Clipboard History..."
 	Remove-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Clipboard" -Name "EnableClipboardHistory" -ErrorAction SilentlyContinue
-    Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\System" -Name "AllowClipboardHistory" -ErrorAction SilentlyContinue 
+    Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\System" -Name "AllowClipboardHistory" -ErrorAction SilentlyContinue
 	Write-Host "Done - Reverted to Stock Settings"
 })
 
@@ -983,7 +777,7 @@ $ELocation.Add_Click({
 	Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\AppPrivacy" -Name "LetAppsAccessLocation" -ErrorAction SilentlyContinue
 	Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\AppPrivacy" -Name "LetAppsAccessLocation_UserInControlOfTheseApps" -ErrorAction SilentlyContinue
 	Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\AppPrivacy" -Name "LetAppsAccessLocation_ForceAllowTheseApps" -ErrorAction SilentlyContinue
-	Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\AppPrivacy" -Name "LetAppsAccessLocation_ForceDenyTheseApps" -ErrorAction SilentlyContinue 
+	Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\AppPrivacy" -Name "LetAppsAccessLocation_ForceDenyTheseApps" -ErrorAction SilentlyContinue
 	Write-Host "Done - Reverted to Stock Settings"
 })
 
