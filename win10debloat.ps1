@@ -1,4 +1,4 @@
-﻿Add-Type -AssemblyName System.Windows.Forms
+Add-Type -AssemblyName System.Windows.Forms
 [System.Windows.Forms.Application]::EnableVisualStyles()
 
 $ErrorActionPreference = 'SilentlyContinue'
@@ -71,7 +71,7 @@ function Create-Panel {
 	)
 
 	$Pnl = New-Object System.Windows.Forms.Panel
-    	$location = New-Object System.Drawing.Point($LocationX, $LocationY)
+    $location = New-Object System.Drawing.Point($LocationX, $LocationY)
 
 	$Pnl.Height = $Height
 	$Pnl.Width = $Width
@@ -127,46 +127,71 @@ function Create-Label {
     return $Lbl
 }
 
+# Panels
 $Panel1 = Create-Panel -Height 639 -Width 219 -LocationX 6 -LocationY 54
-
-$brave = Create-Button -Text "Brave Browser" -Width 212 -Height 30 -LocationX 3 -LocationY 94 -FontName $MSSansSerif -FontSize 12
-$firefox = Create-Button -Text "Firefox" -Width 212 -Height 30 -LocationX 4 -LocationY 127 -FontName $MSSansSerif -FontSize 12
-$7zip = Create-Button -Text "7-Zip" -Width 211 -Height 30 -LocationX 4 -LocationY 363 -FontName $MSSansSerif -FontSize 12
-$irfanview = Create-Button -Text "Irfanview (Image Viewer)" -Width 212 -Height 30 -LocationX 3 -LocationY 195 -FontName $MSSansSerif -FontSize 12
-$adobereader = Create-Button -Text "Adobe Reader DC" -Width 212 -Height 30 -LocationX 4 -LocationY 528 -FontName $MSSansSerif -FontSize 12
-$notepad = Create-Button -Text "Notepad++" -Width 211 -Height 30 -LocationX 4 -LocationY 461 -FontName $MSSansSerif -FontSize 12
-$gchrome = Create-Button -Text "Google Chrome" -Width 211 -Height 30 -LocationX 4 -LocationY 161 -FontName $MSSansSerif -FontSize 12
-$mpc = Create-Button -Text "Media Player Classic" -Width 211 -Height 30 -LocationX 4 -LocationY 329 -FontName $MSSansSerif -FontSize 12
-$vlc = Create-Button -Text "VLC" -Width 212 -Height 30 -LocationX 4 -LocationY 296 -FontName $MSSansSerif -FontSize 12
-$powertoys = Create-Button -Text "PowerToys" -Width 211 -Height 30 -LocationX 4 -LocationY 60 -FontName $MSSansSerif -FontSize 12
-$winterminal = Create-Button -Text "Windows Terminal" -Width 211 -Height 30 -LocationX 4 -LocationY 26 -FontName $MSSansSerif -FontSize 12
-$vscode = Create-Button -Text "VS Code" -Width 211 -Height 30 -LocationX 4 -LocationY 396 -FontName $MSSansSerif -FontSize 12
-
-$Label2 = Create-Label -Text "(Windows 1809+ Required)" -AutoSize $True -Width 25 -Height 10 -LocationX 26 -LocationY 5 -FontName $MSSansSerif -FontSize 10
-
 $Panel2 = Create-Panel -Height 386 -Width 211 -LocationX 239 -LocationY 54
-
-$Label3 = Create-Label -Text "System Tweaks" -AutoSize $True -Width 230 -Height 25 -LocationX 230 -LocationY 12 -FontName $MSSansSerif -FontSize 24
-
-$essentialtweaks = Create-Button -Text "Essential Tweaks" -Width 204 -Height 75 -LocationX 4 -LocationY 25 -FontName $MSSansSerif -FontSize 14
-$backgroundapps = Create-Button -Text "Disable Background Apps" -Width 205 -Height 30 -LocationX 3 -LocationY 139 -FontName $MSSansSerif -FontSize 12
-$cortana = Create-Button -Text "Disable Cortana (Search)" -Width 204 -Height 30 -LocationX 4 -LocationY 174 -FontName $MSSansSerif -FontSize 12
-$actioncenter = Create-Button -Text "Disable Action Center" -Width 203 -Height 30 -LocationX 4 -LocationY 105 -FontName $MSSansSerif -FontSize 12
-$darkmode = Create-Button -Text "Dark mode" -Width 204 -Height 30 -LocationX 4 -LocationY 244 -FontName $MSSansSerif -FontSize 12
-$visualfx = Create-Button -Text "Basic Visual FX" -Width 204 -Height 30 -LocationX 4 -LocationY 313 -FontName $MSSansSerif -FontSize 12
-$onedrive = Create-Button -Text "Uninstall OneDrive" -Width 204 -Height 30 -LocationX 4 -LocationY 209 -FontName $MSSansSerif -FontSize 12
-
-$Label15 = Create-Label -Text "Windows Update" -AutoSize $True -Width 25 -Height 10 -LocationX 739 -LocationY 11 -FontName $MSSansSerif -FontSize 24
-
+$Panel3 = Create-Panel -Height 387 -Width 220 -LocationX 464 -LocationY 54
 $Panel4 = Create-Panel -Height 179 -Width 340 -LocationX 699 -LocationY 55
 
-$defaultwindowsupdate = Create-Button -Text "Default Settings" -Width 300 -Height 30 -LocationX 24 -LocationY 26 -FontName $MSSansSerif -FontSize 14
-$securitywindowsupdate = Create-Button -Text "Security Updates Only" -Width 300 -Height 30 -LocationX 24 -LocationY 142 -FontName $MSSansSerif -FontSize 14
-
+# Labels
+$Label1 = Create-Label -Text "Install" -AutoSize $True -Width 230 -Height 25 -LocationX 76 -LocationY 11 -FontName $MSSansSerif -FontSize 24
+$Label2 = Create-Label -Text "(Windows 1809+ Required)" -AutoSize $True -Width 25 -Height 10 -LocationX 26 -LocationY 5 -FontName $MSSansSerif -FontSize 10
+$Label3 = Create-Label -Text "System Tweaks" -AutoSize $True -Width 230 -Height 25 -LocationX 230 -LocationY 12 -FontName $MSSansSerif -FontSize 24
+$Label4 = Create-Label -Text "Undo" -AutoSize $True -Width 230 -Height 25 -LocationX 534 -LocationY 12 -FontName $MSSansSerif -FontSize 24
+$Label15 = Create-Label -Text "Windows Update" -AutoSize $True -Width 25 -Height 10 -LocationX 739 -LocationY 11 -FontName $MSSansSerif -FontSize 24
 $Label16 = Create-Label -Text "I recommend doing security updates only" -AutoSize $True -Width 25 -Height 10 -LocationX 62 -LocationY 65 -FontName $MSSansSerif -FontSize 10
 $Label17 = Create-Label -Text "- Delays Features updates up to 3 years" -AutoSize $True -Width 25 -Height 10 -LocationX 63 -LocationY 84 -FontName $MSSansSerif -FontSize 10
 $Label18 = Create-Label -Text "- Delays security updates 4 days" -AutoSize $True -Width 25 -Height 10 -LocationX 63 -LocationY 105 -FontName $MSSansSerif -FontSize 10
 $Label19 = Create-Label -Text "- Sets Maximum Active Time" -AutoSize $True -Width 25 -Height 10 -LocationX 63 -LocationY 126 -FontName $MSSansSerif -FontSize 10
+
+# Install Buttons (In order of appearance)
+$winterminal = Create-Button -Text "Windows Terminal" -Width 211 -Height 30 -LocationX 4 -LocationY 26 -FontName $MSSansSerif -FontSize 12
+$powertoys = Create-Button -Text "PowerToys" -Width 211 -Height 30 -LocationX 4 -LocationY 60 -FontName $MSSansSerif -FontSize 12
+$brave = Create-Button -Text "Brave Browser" -Width 212 -Height 30 -LocationX 3 -LocationY 94 -FontName $MSSansSerif -FontSize 12
+$firefox = Create-Button -Text "Firefox" -Width 212 -Height 30 -LocationX 4 -LocationY 127 -FontName $MSSansSerif -FontSize 12
+$gchrome = Create-Button -Text "Google Chrome" -Width 211 -Height 30 -LocationX 4 -LocationY 161 -FontName $MSSansSerif -FontSize 12
+$irfanview = Create-Button -Text "Irfanview (Image Viewer)" -Width 212 -Height 30 -LocationX 3 -LocationY 195 -FontName $MSSansSerif -FontSize 12
+$imageglass = Create-Button -Text "ImageGlass (Image Viewer)" -Width 212 -Height 30 -LocationX 4 -LocationY 228 -FontName $MSSansSerif -FontSize 12
+$honeyview = Create-Button -Text "HoneyView (Image Viewer)" -Width 212 -Height 30 -LocationX 4 -LocationY 261 -FontName $MSSansSerif -FontSize 12
+$vlc = Create-Button -Text "VLC" -Width 212 -Height 30 -LocationX 4 -LocationY 296 -FontName $MSSansSerif -FontSize 12
+$mpc = Create-Button -Text "Media Player Classic" -Width 211 -Height 30 -LocationX 4 -LocationY 329 -FontName $MSSansSerif -FontSize 12
+$7zip = Create-Button -Text "7-Zip" -Width 211 -Height 30 -LocationX 4 -LocationY 363 -FontName $MSSansSerif -FontSize 12
+$vscode = Create-Button -Text "VS Code" -Width 211 -Height 30 -LocationX 4 -LocationY 396 -FontName $MSSansSerif -FontSize 12
+$vscodium = Create-Button -Text "VS Codium" -Width 211 -Height 30 -LocationX 4 -LocationY 429 -FontName $MSSansSerif -FontSize 12
+$notepad = Create-Button -Text "Notepad++" -Width 211 -Height 30 -LocationX 4 -LocationY 461 -FontName $MSSansSerif -FontSize 12
+$everythingsearch = Create-Button -Text "Everything Search" -Width 211 -Height 30 -LocationX 4 -LocationY 495 -FontName $MSSansSerif -FontSize 12
+$adobereader = Create-Button -Text "Adobe Reader DC" -Width 212 -Height 30 -LocationX 4 -LocationY 528 -FontName $MSSansSerif -FontSize 12
+$sumatrapdf = Create-Button -Text "Sumatra PDF" -Width 212 -Height 30 -LocationX 3 -LocationY 561 -FontName $MSSansSerif -FontSize 12
+
+# System Tweak Buttons (In order of appearance)
+$essentialtweaks = Create-Button -Text "Essential Tweaks" -Width 204 -Height 75 -LocationX 4 -LocationY 25 -FontName $MSSansSerif -FontSize 14
+$actioncenter = Create-Button -Text "Disable Action Center" -Width 203 -Height 30 -LocationX 4 -LocationY 105 -FontName $MSSansSerif -FontSize 12
+$backgroundapps = Create-Button -Text "Disable Background Apps" -Width 205 -Height 30 -LocationX 3 -LocationY 139 -FontName $MSSansSerif -FontSize 12
+$cortana = Create-Button -Text "Disable Cortana (Search)" -Width 204 -Height 30 -LocationX 4 -LocationY 174 -FontName $MSSansSerif -FontSize 12
+$onedrive = Create-Button -Text "Uninstall OneDrive" -Width 204 -Height 30 -LocationX 4 -LocationY 209 -FontName $MSSansSerif -FontSize 12
+$darkmode = Create-Button -Text "Dark mode" -Width 204 -Height 30 -LocationX 4 -LocationY 244 -FontName $MSSansSerif -FontSize 12
+$lightmode = Create-Button -Text "Light Mode" -Width 204 -Height 30 -LocationX 4 -LocationY 279 -FontName $MSSansSerif -FontSize 12
+$visualfx = Create-Button -Text "Basic Visual FX" -Width 204 -Height 30 -LocationX 4 -LocationY 313 -FontName $MSSansSerif -FontSize 12
+
+# Undo Buttons (In order of appearance)
+$essentialundo = Create-Button -Text "Undo All" -Width 211 -Height 75 -LocationX 4 -LocationY 25 -FontName $MSSansSerif -FontSize 14
+$EActionCenter = Create-Button -Text "Enable Action Center" -Width 211 -Height 30 -LocationX 4 -LocationY 105 -FontName $MSSansSerif -FontSize 12
+$RBackgroundApps = Create-Button -Text "Allow Background Apps" -Width 212 -Height 30 -LocationX 4 -LocationY 139 -FontName $MSSansSerif -FontSize 12
+$ECortana = Create-Button -Text "Enable Cortana (Search)" -Width 212 -Height 30 -LocationX 4 -LocationY 173 -FontName $MSSansSerif -FontSize 12
+$InstallOneDrive = Create-Button -Text "Install OneDrive" -Width 212 -Height 30 -LocationX 4 -LocationY 208 -FontName $MSSansSerif -FontSize 12
+$HTrayIcons = Create-Button -Text "Hide Tray Icons" -Width 212 -Height 30 -LocationX 4 -LocationY 242 -FontName $MSSansSerif -FontSize 12
+$EClipboardHistory = Create-Button -Text "Enable Clipboard History" -Width 212 -Height 30 -LocationX 4 -LocationY 276 -FontName $MSSansSerif -FontSize 12
+$ELocation = Create-Button -Text "Enable Location Tracking" -Width 211 -Height 30 -LocationX 4 -LocationY 310 -FontName $MSSansSerif -FontSize 12
+$yourphonefix = Create-Button -Text "Your Phone App Fix" -Width 211 -Height 30 -LocationX 4 -LocationY 344 -FontName $MSSansSerif -FontSize 12
+
+# Windows Update Buttons (In order of appearance)
+$defaultwindowsupdate = Create-Button -Text "Default Settings" -Width 300 -Height 30 -LocationX 24 -LocationY 26 -FontName $MSSansSerif -FontSize 14
+$securitywindowsupdate = Create-Button -Text "Security Updates Only" -Width 300 -Height 30 -LocationX 24 -LocationY 142 -FontName $MSSansSerif -FontSize 14
+
+
+
+
+
 
 $PictureBox1                     = New-Object system.Windows.Forms.PictureBox
 $PictureBox1.width               = 412
@@ -175,27 +200,9 @@ $PictureBox1.location            = New-Object System.Drawing.Point(247,500)
 $PictureBox1.imageLocation       = "https://github.com/ChrisTitusTech/win10script/blob/master/titus-toolbox.png?raw=true"
 $PictureBox1.SizeMode            = [System.Windows.Forms.PictureBoxSizeMode]::zoom
 
-$lightmode = Create-Button -Text "Light Mode" -Width 204 -Height 30 -LocationX 4 -LocationY 279 -FontName $MSSansSerif -FontSize 12
 
-$Label1 = Create-Label -Text "Install" -AutoSize $True -Width 230 -Height 25 -LocationX 76 -LocationY 11 -FontName $MSSansSerif -FontSize 24
-$Label4 = Create-Label -Text "Undo" -AutoSize $True -Width 230 -Height 25 -LocationX 534 -LocationY 12 -FontName $MSSansSerif -FontSize 24
 
-$Panel3 = Create-Panel -Height 387 -Width 220 -LocationX 464 -LocationY 54
 
-$essentialundo = Create-Button -Text "Undo All" -Width 211 -Height 75 -LocationX 4 -LocationY 25 -FontName $MSSansSerif -FontSize 14
-$EActionCenter = Create-Button -Text "Enable Action Center" -Width 211 -Height 30 -LocationX 4 -LocationY 105 -FontName $MSSansSerif -FontSize 12
-$ECortana = Create-Button -Text "Enable Cortana (Search)" -Width 212 -Height 30 -LocationX 4 -LocationY 173 -FontName $MSSansSerif -FontSize 12
-$RBackgroundApps = Create-Button -Text "Allow Background Apps" -Width 212 -Height 30 -LocationX 4 -LocationY 139 -FontName $MSSansSerif -FontSize 12
-$HTrayIcons = Create-Button -Text "Hide Tray Icons" -Width 212 -Height 30 -LocationX 4 -LocationY 242 -FontName $MSSansSerif -FontSize 12
-$EClipboardHistory = Create-Button -Text "Enable Clipboard History" -Width 212 -Height 30 -LocationX 4 -LocationY 276 -FontName $MSSansSerif -FontSize 12
-$ELocation = Create-Button -Text "Enable Location Tracking" -Width 211 -Height 30 -LocationX 4 -LocationY 310 -FontName $MSSansSerif -FontSize 12
-$InstallOneDrive = Create-Button -Text "Install OneDrive" -Width 212 -Height 30 -LocationX 4 -LocationY 208 -FontName $MSSansSerif -FontSize 12
-$everythingsearch = Create-Button -Text "Everything Search" -Width 211 -Height 30 -LocationX 4 -LocationY 495 -FontName $MSSansSerif -FontSize 12
-$sumatrapdf = Create-Button -Text "Sumatra PDF" -Width 212 -Height 30 -LocationX 3 -LocationY 561 -FontName $MSSansSerif -FontSize 12
-$vscodium = Create-Button -Text "VS Codium" -Width 211 -Height 30 -LocationX 4 -LocationY 429 -FontName $MSSansSerif -FontSize 12
-$imageglass = Create-Button -Text "ImageGlass (Image Viewer)" -Width 212 -Height 30 -LocationX 4 -LocationY 228 -FontName $MSSansSerif -FontSize 12
-$honeyview = Create-Button -Text "HoneyView (Image Viewer)" -Width 212 -Height 30 -LocationX 4 -LocationY 261 -FontName $MSSansSerif -FontSize 12
-$yourphonefix = Create-Button -Text "Your Phone App Fix" -Width 211 -Height 30 -LocationX 4 -LocationY 344 -FontName $MSSansSerif -FontSize 12
 
 $Form.controls.AddRange(@($Panel1,$Panel2,$Label3,$Label15,$Panel4,$PictureBox1,$Label1,$Label4,$Panel3))
 $Panel1.controls.AddRange(@($brave,$firefox,$7zip,$irfanview,$adobereader,$notepad,$gchrome,$mpc,$vlc,$powertoys,$winterminal,$vscode,$Label2,$everythingsearch,$sumatrapdf,$vscodium,$imageglass,$honeyview))
