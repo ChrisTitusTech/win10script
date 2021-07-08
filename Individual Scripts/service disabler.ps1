@@ -16,7 +16,7 @@ $services = @(
     "WbioSrvc"                                     # Windows Biometric Service (required for Fingerprint reader / facial detection)
     #"WlanSvc"                                      # WLAN AutoConfig
     "WMPNetworkSvc"                                # Windows Media Player Network Sharing Service
-    "wscsvc"                                       # Windows Security Center Service
+    #"wscsvc"                                       # Windows Security Center Service
     "WSearch"                                      # Windows Search
     "XblAuthManager"                               # Xbox Live Auth Manager
     "XblGameSave"                                  # Xbox Live Game Save Service
@@ -37,7 +37,7 @@ $services = @(
     "PrintNotify"                                  #Disables Windows printer notifications and extentions
     "PcaSvc"                                       #Disables Program Compatibility Assistant Service
     "WPDBusEnum"                                   #Disables Portable Device Enumerator Service
-    "LicenseManager"                               #Disable LicenseManager(Windows store may not work properly)
+    #"LicenseManager"                               #Disable LicenseManager(Windows store may not work properly)
     "seclogon"                                     #Disables  Secondary Logon(disables other credentials only password will work)
     "SysMain"                                      #Disables sysmain
     "lmhosts"                                      #Disables TCP/IP NetBIOS Helper
@@ -106,9 +106,9 @@ Get-Service RemoteAccess | Where {$_.status –eq 'running'} |  Stop-Service
 Get-Service RemoteRegistry | Where {$_.status –eq 'running'} |  Stop-Service 
 Get-Service TrkWk | Where {$_.status –eq 'running'} |  Stop-Service
 Get-Service WbioSrvc | Where {$_.status –eq 'running'} |  Stop-Service
-Get-Service WlanSvc | Where {$_.status –eq 'running'} |  Stop-Service
+#Get-Service WlanSvc | Where {$_.status –eq 'running'} |  Stop-Service
 Get-Service WMPNetworkSvc | Where {$_.status –eq 'running'} |  Stop-Service
-Get-Service wscsvc | Where {$_.status –eq 'running'} |  Stop-Service
+#Get-Service wscsvc | Where {$_.status –eq 'running'} |  Stop-Service
 Get-Service WSearch | Where {$_.status –eq 'running'} |  Stop-Service
 Get-Service XblAuthManager | Where {$_.status –eq 'running'} |  Stop-Service
 Get-Service XblGameSave | Where {$_.status –eq 'running'} |  Stop-Service 
@@ -129,7 +129,7 @@ Get-Service PhoneSvc | Where {$_.status –eq 'running'} |  Stop-Service
 Get-Service PrintNotify | Where {$_.status –eq 'running'} |  Stop-Service 
 Get-Service PcaSvc | Where {$_.status –eq 'running'} |  Stop-Service 
 Get-Service WPDBusEnum | Where {$_.status –eq 'running'} |  Stop-Service 
-Get-Service LicenseManager | Where {$_.status –eq 'running'} |  Stop-Service 
+#Get-Service LicenseManager | Where {$_.status –eq 'running'} |  Stop-Service 
 Get-Service seclogon | Where {$_.status –eq 'running'} |  Stop-Service   
 Get-Service SysMain | Where {$_.status –eq 'running'} |  Stop-Service 
 Get-Service lmhosts | Where {$_.status –eq 'running'} |  Stop-Service 
