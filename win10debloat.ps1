@@ -22,20 +22,20 @@ Try{
 Catch{
 	# winget is not installed. Install it from the Github release
 	Write-Host "winget is not found, installing it right now."
-
 	$download = "https://github.com/microsoft/winget-cli/releases/download/v1.0.11692/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle"
 	$output = $PSScriptRoot + "\winget-latest.appxbundle"
 	Write-Host "Dowloading latest release"
 	Invoke-WebRequest -Uri $download -OutFile $output
-
 	Write-Host "Installing the package"
 	Add-AppxPackage -Path $output
 }
 Finally {
 	# Start installing the packages with winget
-	#Get-Content .\winget.txt | ForEach-Object {
+	# Get-Content .\winget.txt | ForEach-Object {
 	#	iex ("winget install -e " + $_)
-	#}
+	# }
+    # Create the App Dump Folder
+    New-Item -ItemType directory -Path "$PSScriptRoot/dump/sdi"
 }
 
 $Form                            = New-Object system.Windows.Forms.Form
@@ -317,7 +317,6 @@ $nvcleanstall.Add_Click({
     # if you find a better way of not hardcoding this url hmu ngl
     $url = "https://de1-dl.techpowerup.com/files/1ItYqFmM0DsIFYwi6weD4Q/1625669076/NVCleanstall_1.10.0.exe"
     $output = "$PSScriptRoot/dump/NVCleanstall_1.10.0.exe"
-
     Invoke-WebRequest $url -OutFile $output
     Start-Process -FilePath $output
 })
@@ -328,7 +327,6 @@ $sdi.Add_Click({
     $url = "http://sdi-tool.org/releases/sdi_R2102.zip"
     $output = "$PSScriptRoot/dump/sdi.zip"
     Invoke-WebRequest -Uri $url -OutFile $output
-    New-Item -ItemType directory -Path "$PSScriptRoot/dump/sdi"
     Expand-Archive "$PSScriptRoot/dump/sdi.zip" -DestinationPath "$PSScriptRoot/dump/sdi"
     Start "$PSScriptRoot/dump/sdi"
 })
@@ -636,8 +634,6 @@ $cortana.Add_Click({
     Write-Host "Disabled Cortana"
 })
 
-
-
 $defaultwindowsupdate.Add_Click({
     Write-Host "Enabling driver offering through Windows Update..."
     Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Device Metadata" -Name "PreventDeviceMetadataFromNetwork" -ErrorAction SilentlyContinue
@@ -772,7 +768,6 @@ $ECortana.Add_Click({
 })
 
 $HTrayIcons.Add_Click({
-
 	Write-Host "Hiding tray icons..."
 	Remove-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer" -Name "EnableAutoTray" -ErrorAction SilentlyContinue
 	Write-Host "Done - Reverted to Stock Settings"
