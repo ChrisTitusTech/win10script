@@ -162,8 +162,8 @@ $notepad = Create-Button -Text "Notepad++" -Width 211 -Height 30 -LocationX 4 -L
 $everythingsearch = Create-Button -Text "Everything Search" -Width 211 -Height 30 -LocationX 4 -LocationY 495 -FontName $MSSansSerif -FontSize 12
 $adobereader = Create-Button -Text "Adobe Reader DC" -Width 212 -Height 30 -LocationX 4 -LocationY 528 -FontName $MSSansSerif -FontSize 12
 $sumatrapdf = Create-Button -Text "Sumatra PDF" -Width 212 -Height 30 -LocationX 3 -LocationY 561 -FontName $MSSansSerif -FontSize 12
-$nvcleanstall = Create-Button -Text "NVCleanstall" -Width 204 -Height 30 -LocationX 4 -LocationY 596 -FontName $MSSansSerif -FontSize 12
-$sdi = Create-Button -Text "SnappyDriverInstaller" -Width 204 -Height 30 -LocationX 4 -LocationY 635 -FontName $MSSansSerif -FontSize 12
+$nvcleanstall = Create-Button -Text "NVCleanstall" -Width 212 -Height 30 -LocationX 4 -LocationY 592 -FontName $MSSansSerif -FontSize 12
+$sdi = Create-Button -Text "SnappyDriverInstaller" -Width 212 -Height 30 -LocationX 4 -LocationY 621 -FontName $MSSansSerif -FontSize 12
 
 # System Tweak Buttons (In order of appearance)
 $essentialtweaks = Create-Button -Text "Essential Tweaks" -Width 204 -Height 75 -LocationX 4 -LocationY 25 -FontName $MSSansSerif -FontSize 14
@@ -314,16 +314,15 @@ $sumatrapdf.Add_Click({
 
 $nvcleanstall.Add_Click({
     Write-Host "Download NVCleanstall for NvidiaDrivers"
-    # if you find a better way of not hardcoding this url hmu ngl
-    $url = "https://de1-dl.techpowerup.com/files/1ItYqFmM0DsIFYwi6weD4Q/1625669076/NVCleanstall_1.10.0.exe"
+    # Put the URL on my own Upload Server, since NVCleanstall is hosted via Techpowerup and they dont have Permalinks
+    $url = "https://files.thicc-thighs.de/?r=/download&path=L1NjcmlwdHMvTnZDbGVhbnN0YWxsLmV4ZQ%3D%3D"
     $output = "$PSScriptRoot/dump/NVCleanstall_1.10.0.exe"
-    Invoke-WebRequest $url -OutFile $output
+    Invoke-WebRequest -Uri $url -OutFile $output
     Start-Process -FilePath $output
 })
 
 $sdi.Add_Click({
-    Write-Host "Download NVCleanstall for NvidiaDrivers"
-    # if you find a better way of not hardcoding this url hmu ngl
+    Write-Host "Downloading SnappyDriverInstaller"
     $url = "https://sdi-tool.org/releases/SDI_R2102.zip"
     $output = "$PSScriptRoot/dump/sdi.zip"
     New-Item -ItemType directory -Path "$PSScriptRoot/dump/sdi"
