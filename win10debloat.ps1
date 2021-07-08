@@ -14,6 +14,8 @@ If (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]:
 Write-Host "Checking winget..."
 
 Try{
+    # Im just gonna sneak this in here bc why not lmao 
+    New-Item -ItemType directory -Path "$PSScriptRoot/dump"
 	# Check if winget is already installed
 	$er = (invoke-expression "winget -v") 2>&1
 	if ($lastexitcode) {throw $er}
@@ -35,7 +37,6 @@ Finally {
 	#	iex ("winget install -e " + $_)
 	# }
     # Create the App Dump Folder
-    New-Item -ItemType directory -Path "$PSScriptRoot/dump"
 }
 
 $Form                            = New-Object system.Windows.Forms.Form
