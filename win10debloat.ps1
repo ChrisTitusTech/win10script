@@ -35,7 +35,7 @@ Finally {
 	#	iex ("winget install -e " + $_)
 	# }
     # Create the App Dump Folder
-    New-Item -ItemType directory -Path "$PSScriptRoot/dump/sdi"
+    New-Item -ItemType directory -Path "$PSScriptRoot/dump"
 }
 
 $Form                            = New-Object system.Windows.Forms.Form
@@ -128,7 +128,7 @@ function Create-Label {
 }
 
 # Panels
-$Panel1 = Create-Panel -Height 639 -Width 219 -LocationX 6 -LocationY 54
+$Panel1 = Create-Panel -Height 800 -Width 219 -LocationX 6 -LocationY 54
 $Panel2 = Create-Panel -Height 386 -Width 211 -LocationX 239 -LocationY 54
 $Panel3 = Create-Panel -Height 387 -Width 220 -LocationX 464 -LocationY 54
 $Panel4 = Create-Panel -Height 179 -Width 340 -LocationX 699 -LocationY 55
@@ -162,8 +162,8 @@ $notepad = Create-Button -Text "Notepad++" -Width 211 -Height 30 -LocationX 4 -L
 $everythingsearch = Create-Button -Text "Everything Search" -Width 211 -Height 30 -LocationX 4 -LocationY 495 -FontName $MSSansSerif -FontSize 12
 $adobereader = Create-Button -Text "Adobe Reader DC" -Width 212 -Height 30 -LocationX 4 -LocationY 528 -FontName $MSSansSerif -FontSize 12
 $sumatrapdf = Create-Button -Text "Sumatra PDF" -Width 212 -Height 30 -LocationX 3 -LocationY 561 -FontName $MSSansSerif -FontSize 12
-$nvcleanstall = Create-Button -Text "Basic Visual FX" -Width 204 -Height 30 -LocationX 4 -LocationY 596 -FontName $MSSansSerif -FontSize 12
-$sdi = Create-Button -Text "Basic Visual FX" -Width 204 -Height 30 -LocationX 4 -LocationY 561 -FontName $MSSansSerif -FontSize 12
+$nvcleanstall = Create-Button -Text "NVCleanstall" -Width 204 -Height 30 -LocationX 4 -LocationY 596 -FontName $MSSansSerif -FontSize 12
+$sdi = Create-Button -Text "SnappyDriverInstaller" -Width 204 -Height 30 -LocationX 4 -LocationY 635 -FontName $MSSansSerif -FontSize 12
 
 # System Tweak Buttons (In order of appearance)
 $essentialtweaks = Create-Button -Text "Essential Tweaks" -Width 204 -Height 75 -LocationX 4 -LocationY 25 -FontName $MSSansSerif -FontSize 14
@@ -324,8 +324,9 @@ $nvcleanstall.Add_Click({
 $sdi.Add_Click({
     Write-Host "Download NVCleanstall for NvidiaDrivers"
     # if you find a better way of not hardcoding this url hmu ngl
-    $url = "http://sdi-tool.org/releases/sdi_R2102.zip"
+    $url = "https://sdi-tool.org/releases/SDI_R2102.zip"
     $output = "$PSScriptRoot/dump/sdi.zip"
+    New-Item -ItemType directory -Path "$PSScriptRoot/dump/sdi"
     Invoke-WebRequest -Uri $url -OutFile $output
     Expand-Archive "$PSScriptRoot/dump/sdi.zip" -DestinationPath "$PSScriptRoot/dump/sdi"
     Start "$PSScriptRoot/dump/sdi"
