@@ -673,6 +673,9 @@ $essentialtweaks.Add_Click({
     #Write-Host "Installing Windows Media Player..."
 	#Enable-WindowsOptionalFeature -Online -FeatureName "WindowsMediaPlayer" -NoRestart -WarningAction SilentlyContinue | Out-Null
 
+    Write-Host "Disable News and Interests"
+    Set-ItemProperty -Path "HKCU:\SOFTWARE\Policies\Microsoft\Windows\Windows Feeds" -Name "EnableFeeds" -Type DWord -Value 0
+
     Write-Host "Essential Tweaks Completed"
 })
 
