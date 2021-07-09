@@ -219,6 +219,13 @@ $onedrive.height                 = 30
 $onedrive.location               = New-Object System.Drawing.Point(4,209)
 $onedrive.Font                   = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
+$removemsbloat                   = New-Object system.Windows.Forms.Button
+$removemsbloat.text              = "Remove MS Bloat"
+$removemsbloat.width             = 204
+$removemsbloat.height            = 30
+$removemsbloat.location          = New-Object System.Drawing.Point(4, 350)
+$removemsbloat.Font              = New-Object System.Drawing.Font("Microsoft Sans Serif",12)
+
 $Label15                         = New-Object system.Windows.Forms.Label
 $Label15.text                    = "Windows Update"
 $Label15.AutoSize                = $true
@@ -308,7 +315,7 @@ $Label4.location                 = New-Object System.Drawing.Point(534,12)
 $Label4.Font                     = New-Object System.Drawing.Font('Microsoft Sans Serif',24)
 
 $Panel3                          = New-Object system.Windows.Forms.Panel
-$Panel3.height                   = 387
+$Panel3.height                   = 500
 $Panel3.width                    = 220
 $Panel3.location                 = New-Object System.Drawing.Point(464,54)
 
@@ -410,11 +417,18 @@ $yourphonefix.height             = 30
 $yourphonefix.location           = New-Object System.Drawing.Point(4,344)
 $yourphonefix.Font               = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
+$reinstallmsbloat                = New-Object system.Windows.Forms.Button
+$reinstallmsbloat.text           = "Reinstall MS Bloat"
+$reinstallmsbloat.width          = 211
+$reinstallmsbloat.height         = 30
+$reinstallmsbloat.location       = New-Object System.Drawing.Point(4, 374)
+$reinstallmsbloat.Font           = New-Object System.Drawing.Font("Microsoft Sans Serif",12)
+
 $Form.controls.AddRange(@($Panel1,$Panel2,$Label3,$Label15,$Panel4,$PictureBox1,$Label1,$Label4,$Panel3))
 $Panel1.controls.AddRange(@($brave,$firefox,$7zip,$irfanview,$adobereader,$notepad,$gchrome,$mpc,$vlc,$powertoys,$winterminal,$vscode,$Label2,$everythingsearch,$sumatrapdf,$vscodium,$imageglass,$honeyview))
-$Panel2.controls.AddRange(@($essentialtweaks,$backgroundapps,$cortana,$actioncenter,$darkmode,$visualfx,$onedrive,$lightmode))
+$Panel2.controls.AddRange(@($essentialtweaks,$backgroundapps,$cortana,$actioncenter,$darkmode,$visualfx,$onedrive,$lightmode,$removemsbloat))
 $Panel4.controls.AddRange(@($defaultwindowsupdate,$securitywindowsupdate,$Label16,$Label17,$Label18,$Label19))
-$Panel3.controls.AddRange(@($essentialundo,$EActionCenter,$ECortana,$RBackgroundApps,$HTrayIcons,$EClipboardHistory,$ELocation,$InstallOneDrive,$yourphonefix))
+$Panel3.controls.AddRange(@($essentialundo,$EActionCenter,$ECortana,$RBackgroundApps,$HTrayIcons,$EClipboardHistory,$ELocation,$InstallOneDrive,$yourphonefix,$reinstallmsbloat))
 
 $brave.Add_Click({
     Write-Host "Installing Brave Browser"
@@ -822,7 +836,166 @@ $cortana.Add_Click({
     Write-Host "Disabled Cortana"
 })
 
+$removemsbloat.Add_Click({
+    Write-Host "Uninstalling Microsoft Bloatware..."
+    Get-AppxPackage "Microsoft.3DBuilder" | Remove-AppxPackage
+    Get-AppxPackage "Microsoft.BingFinance" | Remove-AppxPackage
+    Get-AppxPackage "Microsoft.BingNews" | Remove-AppxPackage
+    Get-AppxPackage "Microsoft.BingSports" | Remove-AppxPackage
+    Get-AppxPackage "Microsoft.BingWeather" | Remove-AppxPackage
+    Get-AppxPackage "Microsoft.Getstarted" | Remove-AppxPackage
+    Get-AppxPackage "Microsoft.MicrosoftOfficeHub" | Remove-AppxPackage
+    Get-AppxPackage "Microsoft.MicrosoftSolitaireCollection" | Remove-AppxPackage
+    Get-AppxPackage "Microsoft.Office.OneNote" | Remove-AppxPackage
+    Get-AppxPackage "Microsoft.People" | Remove-AppxPackage
+    Get-AppxPackage "Microsoft.SkypeApp" | Remove-AppxPackage
+    Get-AppxPackage "Microsoft.Windows.Photos" | Remove-AppxPackage
+    Get-AppxPackage "Microsoft.WindowsAlarms" | Remove-AppxPackage
+    Get-AppxPackage "Microsoft.WindowsCamera" | Remove-AppxPackage
+    Get-AppxPackage "microsoft.windowscommunicationsapps" | Remove-AppxPackage
+    Get-AppxPackage "Microsoft.WindowsMaps" | Remove-AppxPackage
+    Get-AppxPackage "Microsoft.WindowsPhone" | Remove-AppxPackage
+    Get-AppxPackage "Microsoft.WindowsSoundRecorder" | Remove-AppxPackage
+    Get-AppxPackage "Microsoft.XboxApp" | Remove-AppxPackage
+    Get-AppxPackage "Microsoft.ZuneMusic" | Remove-AppxPackage
+    Get-AppxPackage "Microsoft.ZuneVideo" | Remove-AppxPackage
+    Get-AppxPackage "Microsoft.AppConnector" | Remove-AppxPackage
+    Get-AppxPackage "Microsoft.ConnectivityStore" | Remove-AppxPackage
+    Get-AppxPackage "Microsoft.Office.Sway" | Remove-AppxPackage
+    Get-AppxPackage "Microsoft.Messaging" | Remove-AppxPackage
+    Get-AppxPackage "Microsoft.YourPhone" | Remove-AppxPackage
+    Get-AppxPackage "9E2F88E3.Twitter" | Remove-AppxPackage
+    Get-AppxPackage "king.com.CandyCrushSodaSaga" | Remove-AppxPackage
+    Get-AppxPackage "Microsoft.WindowsFeedbackHub" | Remove-AppxPackage
+    Get-AppxPackage "Microsoft.Wallet" | Remove-AppxPackage
+    Get-AppxPackage "Microsoft.ScreenSketch" | Remove-AppxPackage
+    Get-AppxPackage "Microsoft.GetHelp" | Remove-AppxPackage
+    Get-AppxPackage "Microsoft.Xbox.TCUI" | Remove-AppxPackage
+    Get-AppxPackage "Microsoft.XboxGameOverlay" | Remove-AppxPackage
+    Get-AppxPackage "Microsoft.XboxSpeechToTextOverlay" | Remove-AppxPackage
+    Get-AppxPackage "Microsoft.MixedReality.Portal" | Remove-AppxPackage
+    Get-AppBackgroundTask "Microsoft.XboxIdentityProvider" | Remove-AppxPackage
 
+    $apps = @(
+        # default Windows 10 apps
+        "Microsoft.3DBuilder"
+        "Microsoft.Advertising.Xaml"
+        "Microsoft.Appconnector"
+        "Microsoft.BingFinance"
+        "Microsoft.BingNews"
+        "Microsoft.BingSports"
+        "Microsoft.BingTranslator"
+        "Microsoft.BingWeather"
+        "Microsoft.FreshPaint"
+        "Microsoft.GamingServices"
+        "Microsoft.Microsoft3DViewer"
+        "Microsoft.WindowsFeedbackHub"
+        "Microsoft.MicrosoftOfficeHub"
+        "Microsoft.MixedReality.Portal"
+        "Microsoft.MicrosoftPowerBIForWindows"
+        "Microsoft.MicrosoftSolitaireCollection"
+        "Microsoft.MicrosoftStickyNotes"
+        "Microsoft.MinecraftUWP"
+        "Microsoft.NetworkSpeedTest"
+        "Microsoft.Office.OneNote"
+        "Microsoft.People"
+        "Microsoft.Print3D"
+        "Microsoft.SkypeApp"
+        "Microsoft.Wallet"
+        "Microsoft.Windows.Photos"
+        "Microsoft.WindowsAlarms"
+        "Microsoft.WindowsCalculator"
+        "Microsoft.WindowsCamera"
+        "microsoft.windowscommunicationsapps"
+        "Microsoft.WindowsMaps"
+        "Microsoft.WindowsPhone"
+        "Microsoft.WindowsSoundRecorder"
+        # "Microsoft.WindowsStore"   # can't be re-installed
+        "Microsoft.Xbox.TCUI"
+        "Microsoft.XboxApp"
+        "Microsoft.XboxGameOverlay"
+        "Microsoft.XboxGamingOverlay"
+        "Microsoft.XboxSpeechToTextOverlay"
+        "Microsoft.YourPhone"
+        "Microsoft.ZuneMusic"
+        "Microsoft.ZuneVideo"
+        "Microsoft.Windows.CloudExperienceHost"
+        "Microsoft.Windows.ContentDeliveryManager"
+        "Microsoft.Windows.PeopleExperienceHost"
+        "Microsoft.XboxGameCallableUI"
+        "Microsoft.CommsPhone"
+        # "Microsoft.ConnectivityStore"
+        "Microsoft.GetHelp"
+        "Microsoft.Getstarted"
+        "Microsoft.Messaging"
+        "Microsoft.Office.Sway"
+        "Microsoft.OneConnect"
+        "Microsoft.WindowsFeedbackHub"
+        "Microsoft.Microsoft3DViewer"
+        "Microsoft.MSPaint"
+        "Microsoft.BingFoodAndDrink"
+        "Microsoft.BingHealthAndFitness"
+        "Microsoft.BingTravel"
+        # "Microsoft.WindowsReadingList"
+        "Microsoft.MixedReality.Portal"
+        "Microsoft.ScreenSketch"
+        "Microsoft.XboxGamingOverlay"
+        "Microsoft.YourPhone"
+
+        # non-Microsoft
+        "2FE3CB00.PicsArt-PhotoStudio"
+        "46928bounde.EclipseManager"
+        "4DF9E0F8.Netflix"
+        "613EBCEA.PolarrPhotoEditorAcademicEdition"
+        "6Wunderkinder.Wunderlist"
+        "7EE7776C.LinkedInforWindows"
+        "89006A2E.AutodeskSketchBook"
+        "9E2F88E3.Twitter"
+        "A278AB0D.DisneyMagicKingdoms"
+        "A278AB0D.MarchofEmpires"
+        "ActiproSoftwareLLC.562882FEEB491"
+        "CAF9E577.Plex"  
+        "ClearChannelRadioDigital.iHeartRadio"
+        "D52A8D61.FarmVille2CountryEscape"
+        "D5EA27B7.Duolingo-LearnLanguagesforFree"
+        "DB6EA5DB.CyberLinkMediaSuiteEssentials"
+        "DolbyLaboratories.DolbyAccess"
+        "DolbyLaboratories.DolbyAccess"
+        "Drawboard.DrawboardPDF"
+        "Facebook.Facebook"
+        "Fitbit.FitbitCoach"
+        "Flipboard.Flipboard"
+        "GAMELOFTSA.Asphalt8Airborne"
+        "KeeperSecurityInc.Keeper"
+        "NORDCURRENT.COOKINGFEVER"
+        "PandoraMediaInc.29680B314EFC2"
+        "Playtika.CaesarsSlotsFreeCasino"
+        "ShazamEntertainmentLtd.Shazam"
+        "SlingTVLLC.SlingTV"
+        "SpotifyAB.SpotifyMusic"
+        "TheNewYorkTimes.NYTCrossword"
+        "ThumbmunkeysLtd.PhototasticCollage"
+        "TuneIn.TuneInRadio"
+        "WinZipComputing.WinZipUniversal"
+        "XINGAG.XING"
+        "flaregamesGmbH.RoyalRevolt2"
+        "king.com.*"
+        "king.com.BubbleWitch3Saga"
+        "king.com.CandyCrushSaga"
+        "king.com.CandyCrushSodaSaga"
+    )
+
+    foreach ($app in $apps) {
+        Write-Output "Trying to remove $app"
+
+        Get-AppxPackage -Name $app -AllUsers | Remove-AppxPackage -AllUsers
+
+        Get-AppxProvisionedPackage -Online |
+            Where-Object DisplayName -EQ $app |
+            Remove-AppxProvisionedPackage -Online
+    }
+
+})
 
 $defaultwindowsupdate.Add_Click({
     Write-Host "Enabling driver offering through Windows Update..."
@@ -957,6 +1130,163 @@ $ECortana.Add_Click({
 	Write-Host "Done - Reverted to Stock Settings"
 })
 
+$reinstallmsbloat.Add_Click({
+    Write-Host "Reinstalling MS Bloat"
+    Add-AppxPackage -DisableDevelopmentMode -Register "$($(Get-AppxPackage -AllUsers "Microsoft.3DBuilder").InstallLocation)\AppXManifest.xml"
+    Add-AppxPackage -DisableDevelopmentMode -Register "$($(Get-AppxPackage -AllUsers "Microsoft.BingFinance").InstallLocation)\AppXManifest.xml"
+    Add-AppxPackage -DisableDevelopmentMode -Register "$($(Get-AppxPackage -AllUsers "Microsoft.BingNews").InstallLocation)\AppXManifest.xml"
+    Add-AppxPackage -DisableDevelopmentMode -Register "$($(Get-AppxPackage -AllUsers "Microsoft.BingSports").InstallLocation)\AppXManifest.xml"
+    Add-AppxPackage -DisableDevelopmentMode -Register "$($(Get-AppxPackage -AllUsers "Microsoft.BingWeather").InstallLocation)\AppXManifest.xml"
+    Add-AppxPackage -DisableDevelopmentMode -Register "$($(Get-AppxPackage -AllUsers "Microsoft.Getstarted").InstallLocation)\AppXManifest.xml"
+    Add-AppxPackage -DisableDevelopmentMode -Register "$($(Get-AppxPackage -AllUsers "Microsoft.MicrosoftOfficeHub").InstallLocation)\AppXManifest.xml"
+    Add-AppxPackage -DisableDevelopmentMode -Register "$($(Get-AppxPackage -AllUsers "Microsoft.MicrosoftSolitaireCollection").InstallLocation)\AppXManifest.xml"
+    Add-AppxPackage -DisableDevelopmentMode -Register "$($(Get-AppxPackage -AllUsers "Microsoft.Office.OneNote").InstallLocation)\AppXManifest.xml"
+    Add-AppxPackage -DisableDevelopmentMode -Register "$($(Get-AppxPackage -AllUsers "Microsoft.People").InstallLocation)\AppXManifest.xml"
+    Add-AppxPackage -DisableDevelopmentMode -Register "$($(Get-AppxPackage -AllUsers "Microsoft.SkypeApp").InstallLocation)\AppXManifest.xml"
+    Add-AppxPackage -DisableDevelopmentMode -Register "$($(Get-AppxPackage -AllUsers "Microsoft.Windows.Photos").InstallLocation)\AppXManifest.xml"
+    Add-AppxPackage -DisableDevelopmentMode -Register "$($(Get-AppxPackage -AllUsers "Microsoft.WindowsAlarms").InstallLocation)\AppXManifest.xml"
+    Add-AppxPackage -DisableDevelopmentMode -Register "$($(Get-AppxPackage -AllUsers "Microsoft.WindowsCamera").InstallLocation)\AppXManifest.xml"
+    Add-AppxPackage -DisableDevelopmentMode -Register "$($(Get-AppxPackage -AllUsers "Microsoft.windowscommunicationsapps").InstallLocation)\AppXManifest.xml"
+    Add-AppxPackage -DisableDevelopmentMode -Register "$($(Get-AppxPackage -AllUsers "Microsoft.WindowsMaps").InstallLocation)\AppXManifest.xml"
+    Add-AppxPackage -DisableDevelopmentMode -Register "$($(Get-AppxPackage -AllUsers "Microsoft.WindowsPhone").InstallLocation)\AppXManifest.xml"
+    Add-AppxPackage -DisableDevelopmentMode -Register "$($(Get-AppxPackage -AllUsers "Microsoft.WindowsSoundRecorder").InstallLocation)\AppXManifest.xml"
+    Add-AppxPackage -DisableDevelopmentMode -Register "$($(Get-AppxPackage -AllUsers "Microsoft.XboxApp").InstallLocation)\AppXManifest.xml"
+    Add-AppxPackage -DisableDevelopmentMode -Register "$($(Get-AppxPackage -AllUsers "Microsoft.ZuneMusic").InstallLocation)\AppXManifest.xml"
+    Add-AppxPackage -DisableDevelopmentMode -Register "$($(Get-AppxPackage -AllUsers "Microsoft.ZuneVideo").InstallLocation)\AppXManifest.xml"
+    Add-AppxPackage -DisableDevelopmentMode -Register "$($(Get-AppxPackage -AllUsers "Microsoft.AppConnector").InstallLocation)\AppXManifest.xml"
+    Add-AppxPackage -DisableDevelopmentMode -Register "$($(Get-AppxPackage -AllUsers "Microsoft.ConnectivityStore").InstallLocation)\AppXManifest.xml"
+    Add-AppxPackage -DisableDevelopmentMode -Register "$($(Get-AppxPackage -AllUsers "Microsoft.Office.Sway").InstallLocation)\AppXManifest.xml"
+    Add-AppxPackage -DisableDevelopmentMode -Register "$($(Get-AppxPackage -AllUsers "Microsoft.Messaging").InstallLocation)\AppXManifest.xml"
+    Add-AppxPackage -DisableDevelopmentMode -Register "$($(Get-AppxPackage -AllUsers "Microsoft.YourPhone").InstallLocation)\AppXManifest.xml"
+    Add-AppxPackage -DisableDevelopmentMode -Register "$($(Get-AppxPackage -AllUsers "9E2F88E3.Twitter").InstallLocation)\AppXManifest.xml"
+    Add-AppxPackage -DisableDevelopmentMode -Register "$($(Get-AppxPackage -AllUsers "king.com.CandyCrushSodaSaga").InstallLocation)\AppXManifest.xml"
+    Add-AppxPackage -DisableDevelopmentMode -Register "$($(Get-AppxPackage -AllUsers "Microsoft.WindowsFeedbackHub").InstallLocation)\AppXManifest.xml"
+    Add-AppxPackage -DisableDevelopmentMode -Register "$($(Get-AppxPackage -AllUsers "Microsoft.Wallet").InstallLocation)\AppXManifest.xml"
+    Add-AppxPackage -DisableDevelopmentMode -Register "$($(Get-AppxPackage -AllUsers "Microsoft.ScreenSketch").InstallLocation)\AppXManifest.xml"
+    Add-AppxPackage -DisableDevelopmentMode -Register "$($(Get-AppxPackage -AllUsers "Microsoft.GetHelp").InstallLocation)\AppXManifest.xml"
+    Add-AppxPackage -DisableDevelopmentMode -Register "$($(Get-AppxPackage -AllUsers "Microsoft.Xbox.TCUI").InstallLocation)\AppXManifest.xml"
+    Add-AppxPackage -DisableDevelopmentMode -Register "$($(Get-AppxPackage -AllUsers "Microsoft.XboxGameOverlay").InstallLocation)\AppXManifest.xml"
+    Add-AppxPackage -DisableDevelopmentMode -Register "$($(Get-AppxPackage -AllUsers "Microsoft.XboxSpeechToTextOverlay").InstallLocation)\AppXManifest.xml"
+    Add-AppxPackage -DisableDevelopmentMode -Register "$($(Get-AppxPackage -AllUsers "Microsoft.MixedReality.Portal").InstallLocation)\AppXManifest.xml"
+    Add-AppxPackage -DisableDevelopmentMode -Register "$($(Get-AppBackgroundTask -AllUsers "Microsoft.XboxIdentityProvider").InstallLocation)\AppXManifest.xml"
+
+    $reinstallmsbloatapps = @(
+        # default Windows 10 apps
+        "Microsoft.3DBuilder"
+        "Microsoft.Advertising.Xaml"
+        "Microsoft.Appconnector"
+        "Microsoft.BingFinance"
+        "Microsoft.BingNews"
+        "Microsoft.BingSports"
+        "Microsoft.BingTranslator"
+        "Microsoft.BingWeather"
+        "Microsoft.FreshPaint"
+        "Microsoft.GamingServices"
+        "Microsoft.Microsoft3DViewer"
+        "Microsoft.WindowsFeedbackHub"
+        "Microsoft.MicrosoftOfficeHub"
+        "Microsoft.MixedReality.Portal"
+        "Microsoft.MicrosoftPowerBIForWindows"
+        "Microsoft.MicrosoftSolitaireCollection"
+        "Microsoft.MicrosoftStickyNotes"
+        "Microsoft.MinecraftUWP"
+        "Microsoft.NetworkSpeedTest"
+        "Microsoft.Office.OneNote"
+        "Microsoft.People"
+        "Microsoft.Print3D"
+        "Microsoft.SkypeApp"
+        "Microsoft.Wallet"
+        "Microsoft.Windows.Photos"
+        "Microsoft.WindowsAlarms"
+        "Microsoft.WindowsCalculator"
+        "Microsoft.WindowsCamera"
+        "microsoft.windowscommunicationsapps"
+        "Microsoft.WindowsMaps"
+        "Microsoft.WindowsPhone"
+        "Microsoft.WindowsSoundRecorder"
+        # "Microsoft.WindowsStore"   # can't be re-installed
+        "Microsoft.Xbox.TCUI"
+        "Microsoft.XboxApp"
+        "Microsoft.XboxGameOverlay"
+        "Microsoft.XboxGamingOverlay"
+        "Microsoft.XboxSpeechToTextOverlay"
+        "Microsoft.YourPhone"
+        "Microsoft.ZuneMusic"
+        "Microsoft.ZuneVideo"
+        "Microsoft.Windows.CloudExperienceHost"
+        "Microsoft.Windows.ContentDeliveryManager"
+        "Microsoft.Windows.PeopleExperienceHost"
+        "Microsoft.XboxGameCallableUI"
+        "Microsoft.CommsPhone"
+        # "Microsoft.ConnectivityStore"
+        "Microsoft.GetHelp"
+        "Microsoft.Getstarted"
+        "Microsoft.Messaging"
+        "Microsoft.Office.Sway"
+        "Microsoft.OneConnect"
+        "Microsoft.WindowsFeedbackHub"
+        "Microsoft.Microsoft3DViewer"
+        "Microsoft.MSPaint"
+        "Microsoft.BingFoodAndDrink"
+        "Microsoft.BingHealthAndFitness"
+        "Microsoft.BingTravel"
+        # "Microsoft.WindowsReadingList"
+        "Microsoft.MixedReality.Portal"
+        "Microsoft.ScreenSketch"
+        "Microsoft.XboxGamingOverlay"
+        "Microsoft.YourPhone"
+
+        # non-Microsoft
+        "2FE3CB00.PicsArt-PhotoStudio"
+        "46928bounde.EclipseManager"
+        "4DF9E0F8.Netflix"
+        "613EBCEA.PolarrPhotoEditorAcademicEdition"
+        "6Wunderkinder.Wunderlist"
+        "7EE7776C.LinkedInforWindows"
+        "89006A2E.AutodeskSketchBook"
+        "9E2F88E3.Twitter"
+        "A278AB0D.DisneyMagicKingdoms"
+        "A278AB0D.MarchofEmpires"
+        "ActiproSoftwareLLC.562882FEEB491"
+        "CAF9E577.Plex"  
+        "ClearChannelRadioDigital.iHeartRadio"
+        "D52A8D61.FarmVille2CountryEscape"
+        "D5EA27B7.Duolingo-LearnLanguagesforFree"
+        "DB6EA5DB.CyberLinkMediaSuiteEssentials"
+        "DolbyLaboratories.DolbyAccess"
+        "DolbyLaboratories.DolbyAccess"
+        "Drawboard.DrawboardPDF"
+        "Facebook.Facebook"
+        "Fitbit.FitbitCoach"
+        "Flipboard.Flipboard"
+        "GAMELOFTSA.Asphalt8Airborne"
+        "KeeperSecurityInc.Keeper"
+        "NORDCURRENT.COOKINGFEVER"
+        "PandoraMediaInc.29680B314EFC2"
+        "Playtika.CaesarsSlotsFreeCasino"
+        "ShazamEntertainmentLtd.Shazam"
+        "SlingTVLLC.SlingTV"
+        "SpotifyAB.SpotifyMusic"
+        "TheNewYorkTimes.NYTCrossword"
+        "ThumbmunkeysLtd.PhototasticCollage"
+        "TuneIn.TuneInRadio"
+        "WinZipComputing.WinZipUniversal"
+        "XINGAG.XING"
+        "flaregamesGmbH.RoyalRevolt2"
+        "king.com.*"
+        "king.com.BubbleWitch3Saga"
+        "king.com.CandyCrushSaga"
+        "king.com.CandyCrushSodaSaga"
+    )
+
+    foreach ($app in $apps) {
+        Write-Output "Trying to add $app"
+
+        Add-AppxPackage -DisableDevelopmentMode -Register "$($(Get-AppxPackage -AllUsers $app).InstallLocation)\AppXManifest.xml"
+    }
+
+})
+
 $HTrayIcons.Add_Click({
 	
 	Write-Host "Hiding tray icons..."
@@ -1023,6 +1353,8 @@ $DisableNumLock.Add_Click({
 })
 
 $yourphonefix.Add_Click({
+    Write-Host "Reinstalling Your Phone App"
+    Add-AppxPackage -DisableDevelopmentMode -Register "$($(Get-AppXPackage -AllUsers "Microsoft.YourPhone").InstallLocation)\AppXManifest.xml"
     Write-Host "Enable needed data collection for Your Phone..."
     Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\System" -Name "EnableMmx" -Type DWord -Value 1
     Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\System" -Name "EnableCdp" -Type DWord -Value 1
