@@ -219,12 +219,12 @@ $onedrive.height                 = 30
 $onedrive.location               = New-Object System.Drawing.Point(4,209)
 $onedrive.Font                   = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
-$removemsbloat                   = New-Object system.Windows.Forms.Button
-$removemsbloat.text              = "Remove MS Bloat"
-$removemsbloat.width             = 204
-$removemsbloat.height            = 30
-$removemsbloat.location          = New-Object System.Drawing.Point(4, 350)
-$removemsbloat.Font              = New-Object System.Drawing.Font("Microsoft Sans Serif",12)
+$removebloat                     = New-Object system.Windows.Forms.Button
+$removebloat.text                = "Remove Bloatware"
+$removebloat.width               = 204
+$removebloat.height              = 30
+$removebloat.location            = New-Object System.Drawing.Point(4, 350)
+$removebloat.Font                = New-Object System.Drawing.Font("Microsoft Sans Serif",12)
 
 $Label15                         = New-Object system.Windows.Forms.Label
 $Label15.text                    = "Windows Update"
@@ -417,18 +417,18 @@ $yourphonefix.height             = 30
 $yourphonefix.location           = New-Object System.Drawing.Point(4,344)
 $yourphonefix.Font               = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
-$reinstallmsbloat                = New-Object system.Windows.Forms.Button
-$reinstallmsbloat.text           = "Reinstall MS Bloat"
-$reinstallmsbloat.width          = 211
-$reinstallmsbloat.height         = 30
-$reinstallmsbloat.location       = New-Object System.Drawing.Point(4, 374)
-$reinstallmsbloat.Font           = New-Object System.Drawing.Font("Microsoft Sans Serif",12)
+$reinstallbloat                  = New-Object system.Windows.Forms.Button
+$reinstallbloat.text             = "Reinstall Bloatware"
+$reinstallbloat.width            = 211
+$reinstallbloat.height           = 30
+$reinstallbloat.location         = New-Object System.Drawing.Point(4, 374)
+$reinstallbloat.Font             = New-Object System.Drawing.Font("Microsoft Sans Serif",12)
 
 $Form.controls.AddRange(@($Panel1,$Panel2,$Label3,$Label15,$Panel4,$PictureBox1,$Label1,$Label4,$Panel3))
 $Panel1.controls.AddRange(@($brave,$firefox,$7zip,$irfanview,$adobereader,$notepad,$gchrome,$mpc,$vlc,$powertoys,$winterminal,$vscode,$Label2,$everythingsearch,$sumatrapdf,$vscodium,$imageglass,$honeyview))
-$Panel2.controls.AddRange(@($essentialtweaks,$backgroundapps,$cortana,$actioncenter,$darkmode,$visualfx,$onedrive,$lightmode,$removemsbloat))
+$Panel2.controls.AddRange(@($essentialtweaks,$backgroundapps,$cortana,$actioncenter,$darkmode,$visualfx,$onedrive,$lightmode,$removebloat))
 $Panel4.controls.AddRange(@($defaultwindowsupdate,$securitywindowsupdate,$Label16,$Label17,$Label18,$Label19))
-$Panel3.controls.AddRange(@($essentialundo,$EActionCenter,$ECortana,$RBackgroundApps,$HTrayIcons,$EClipboardHistory,$ELocation,$InstallOneDrive,$yourphonefix,$reinstallmsbloat))
+$Panel3.controls.AddRange(@($essentialundo,$EActionCenter,$ECortana,$RBackgroundApps,$HTrayIcons,$EClipboardHistory,$ELocation,$InstallOneDrive,$yourphonefix,$reinstallbloat))
 
 $brave.Add_Click({
     Write-Host "Installing Brave Browser"
@@ -836,8 +836,8 @@ $cortana.Add_Click({
     Write-Host "Disabled Cortana"
 })
 
-$removemsbloat.Add_Click({
-    Write-Host "Uninstalling Microsoft Bloatware..."
+$removebloat.Add_Click({
+    Write-Host "Uninstalling Bloatware..."
     Get-AppxPackage "Microsoft.3DBuilder" | Remove-AppxPackage
     Get-AppxPackage "Microsoft.BingFinance" | Remove-AppxPackage
     Get-AppxPackage "Microsoft.BingNews" | Remove-AppxPackage
@@ -1130,8 +1130,8 @@ $ECortana.Add_Click({
 	Write-Host "Done - Reverted to Stock Settings"
 })
 
-$reinstallmsbloat.Add_Click({
-    Write-Host "Reinstalling MS Bloat"
+$reinstallbloat.Add_Click({
+    Write-Host "Reinstalling Bloatware"
     Add-AppxPackage -DisableDevelopmentMode -Register "$($(Get-AppxPackage -AllUsers "Microsoft.3DBuilder").InstallLocation)\AppXManifest.xml"
     Add-AppxPackage -DisableDevelopmentMode -Register "$($(Get-AppxPackage -AllUsers "Microsoft.BingFinance").InstallLocation)\AppXManifest.xml"
     Add-AppxPackage -DisableDevelopmentMode -Register "$($(Get-AppxPackage -AllUsers "Microsoft.BingNews").InstallLocation)\AppXManifest.xml"
@@ -1170,7 +1170,7 @@ $reinstallmsbloat.Add_Click({
     Add-AppxPackage -DisableDevelopmentMode -Register "$($(Get-AppxPackage -AllUsers "Microsoft.MixedReality.Portal").InstallLocation)\AppXManifest.xml"
     Add-AppxPackage -DisableDevelopmentMode -Register "$($(Get-AppBackgroundTask -AllUsers "Microsoft.XboxIdentityProvider").InstallLocation)\AppXManifest.xml"
 
-    $reinstallmsbloatapps = @(
+    $reinstallbloatapps = @(
         # default Windows 10 apps
         "Microsoft.3DBuilder"
         "Microsoft.Advertising.Xaml"
