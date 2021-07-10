@@ -93,6 +93,20 @@ $irfanview.height                = 30
 $irfanview.location              = New-Object System.Drawing.Point(3,195)
 $irfanview.Font                  = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
+$XnViewClassic                   = New-Object system.Windows.Forms.Button
+$XnViewClassic.text              = "XnView Classic (Image Viewer)"
+$XnViewClassic.width             = 212
+$XnViewClassic.height            = 30
+$XnViewClassic.location          = New-Object System.Drawing.Point(3,195)
+$XnViewClassic.Font              = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
+
+$XnViewMP                        = New-Object system.Windows.Forms.Button
+$XnViewMP.text                   = "XnView MP (Image Viewer)"
+$XnViewMP.width             	 = 212
+$XnViewMP.height           	 = 30
+$XnViewMP.location        	 = New-Object System.Drawing.Point(3,195)
+$XnViewMP.Font             	 = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
+
 $adobereader                     = New-Object system.Windows.Forms.Button
 $adobereader.text                = "Adobe Reader DC"
 $adobereader.width               = 212
@@ -115,7 +129,7 @@ $gchrome.location                = New-Object System.Drawing.Point(4,161)
 $gchrome.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
 $mpc                             = New-Object system.Windows.Forms.Button
-$mpc.text                        = "Media Player Classic"
+$mpc.text                        = "K-Lite Codec Pack (Media Player Classic + codecs)"
 $mpc.width                       = 211
 $mpc.height                      = 30
 $mpc.location                    = New-Object System.Drawing.Point(4,329)
@@ -439,6 +453,16 @@ $irfanview.Add_Click({
     winget install IrfanSkiljan.IrfanView | Out-Host
     if($?) { Write-Host "Installed Irfanview (Image Viewer)" }
 })
+$XnViewClassic.Add_Click({
+    Write-Host "Installing XnView Classic (Image Viewer)"
+    winget install XnSoft.XnViewClassic | Out-Host
+    if($?) { Write-Host "Installed XnView Classic (Image Viewer)" }
+})
+$XnViewMP.Add_Click({
+    Write-Host "Installing XnView MP (Image Viewer)"
+    winget install XnSoft.XnViewMP | Out-Host
+    if($?) { Write-Host "Installed XnView MP (Image Viewer)" }
+})
 $imageglass.Add_Click({
     Write-Host "Installing Image Glass (Image Viewer)"
     winget install DuongDieuPhap.ImageGlass | Out-Host
@@ -469,8 +493,8 @@ $vlc.Add_Click({
 })
 
 $mpc.Add_Click({
-    Write-Host "Installing Media Player Classic"
-    winget install clsid2.mpc-hc | Out-Host
+    Write-Host "Installing K-Lite Codec Pack"
+    winget install CodecGuide.K-LiteCodecPackMega | Out-Host
     if($?) { Write-Host "Installed Media Player Classic" }
 })
 
