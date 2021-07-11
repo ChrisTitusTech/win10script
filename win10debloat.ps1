@@ -842,6 +842,9 @@ $windowssearch.Add_Click({
     Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Windows Search" -Name "DisableWebSearch" -Type DWord -Value 1
     Write-Host "Hiding Taskbar Search icon / box..."
     Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Search" -Name "SearchboxTaskbarMode" -Type DWord -Value 0
+    Write-Host "Stopping and disabling Windows Search indexing service..."
+    Stop-Service "WSearch" -WarningAction SilentlyContinue
+    Set-Service "WSearch" -StartupType Disabled
     Write-Host "Hiding Titles in Taskbar"
     Remove-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "TaskbarGlomLevel"
 
