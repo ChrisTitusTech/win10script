@@ -833,20 +833,16 @@ $essentialundo.Add_Click({
 
 $windowssearch.Add_Click({
     Write-Host "Disabling Bing Search in Start Menu..."
-    Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Search" -Name "BingSearchEnabled" -Type DWord -Value 0
+    Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Search" -Name "BingSearchEnabled" -Type DWord -Value 0
+    <#
     Write-Host "Disabling Cortana"
     Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Search" -Name "CortanaConsent" -Type DWord -Value 0
     If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Windows Search")) {
         New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Windows Search" -Force | Out-Null
     }
-    Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Windows Search" -Name "DisableWebSearch" -Type DWord -Value 1
-    Write-Host "Hiding Taskbar Search icon / box..."
-    Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Search" -Name "SearchboxTaskbarMode" -Type DWord -Value 0
-    Write-Host "Stopping and disabling Windows Search indexing service..."
-    Stop-Service "WSearch" -WarningAction SilentlyContinue
-    Set-Service "WSearch" -StartupType Disabled
-    Write-Host "Hiding Titles in Taskbar"
-    Remove-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "TaskbarGlomLevel"
+    #>
+    Write-Host "Hiding Search Box / Button..."
+    Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Search" -Name "SearchboxTaskbarMode" -Type DWord -Value 0
 
     Write-Host "Removing Start Menu Tiles"
 
@@ -913,16 +909,8 @@ $windowssearch.Add_Click({
         $basePath = $regAlias + ":\SOFTWARE\Policies\Microsoft\Windows"
         $keyPath = $basePath + "\Explorer" 
         Set-ItemProperty -Path $keyPath -Name "LockedStartLayout" -Value 0
-    }
-
-    #Restart Explorer and delete the layout file
-    Stop-Process -name explorer
-
-    # Uncomment the next line to make clean start menu default for all new users
-    # Import-StartLayout -LayoutPath $layoutFile -MountPath $env:SystemDrive\
-
-    Remove-Item $layoutFile
     
+    Write-Host "Search and Start Menu Tweaks Complete"
 })
 
 $backgroundapps.Add_Click({
@@ -1147,6 +1135,7 @@ $removebloat.Add_Click({
     New-FolderForced -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\CloudContent"
     Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\CloudContent" "DisableWindowsConsumerFeatures" 1
 
+    Write-Host "Finished Removing Bloatware Apps"
 })
 
 $defaultwindowsupdate.Add_Click({
@@ -1437,6 +1426,7 @@ $reinstallbloat.Add_Click({
         Add-AppxPackage -DisableDevelopmentMode -Register "$($(Get-AppxPackage -AllUsers $app).InstallLocation)\AppXManifest.xml"
     }
 
+    Write-Host "Finished Reinstalling Bloatware Apps"
 })
 
 $HTrayIcons.Add_Click({
