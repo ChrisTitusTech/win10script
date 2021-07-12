@@ -158,7 +158,7 @@ $Label2.location                 = New-Object System.Drawing.Point(26,5)
 $Label2.Font                     = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
 
 $Panel2                          = New-Object system.Windows.Forms.Panel
-$Panel2.height                   = 386
+$Panel2.height                   = 450
 $Panel2.width                    = 211
 $Panel2.location                 = New-Object System.Drawing.Point(239,54)
 
@@ -218,6 +218,20 @@ $onedrive.width                  = 204
 $onedrive.height                 = 30
 $onedrive.location               = New-Object System.Drawing.Point(4,209)
 $onedrive.Font                   = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
+
+$removebloat                     = New-Object system.Windows.Forms.Button
+$removebloat.text                = "Remove Bloatware"
+$removebloat.width               = 204
+$removebloat.height              = 30
+$removebloat.location            = New-Object System.Drawing.Point(4,374)
+$removebloat.Font                = New-Object System.Drawing.Font("Microsoft Sans Serif",12)
+
+$windowssearch                   = New-Object system.Windows.Forms.Button
+$windowssearch.text               = "Search Tweaks"
+$windowssearch.width             = 204
+$windowssearch.height            = 30
+$windowssearch.location          = New-Object System.Drawing.Point(4,345)
+$windowssearch.Font              = New-Object System.Drawing.Font("Microsoft Sans Serif",12)
 
 $Label15                         = New-Object system.Windows.Forms.Label
 $Label15.text                    = "Windows Update"
@@ -284,6 +298,7 @@ $PictureBox1.height              = 125
 $PictureBox1.location            = New-Object System.Drawing.Point(247,500)
 $PictureBox1.imageLocation       = "https://github.com/ChrisTitusTech/win10script/blob/master/titus-toolbox.png?raw=true"
 $PictureBox1.SizeMode            = [System.Windows.Forms.PictureBoxSizeMode]::zoom
+
 $lightmode                       = New-Object system.Windows.Forms.Button
 $lightmode.text                  = "Light Mode"
 $lightmode.width                 = 204
@@ -308,7 +323,7 @@ $Label4.location                 = New-Object System.Drawing.Point(534,12)
 $Label4.Font                     = New-Object System.Drawing.Font('Microsoft Sans Serif',24)
 
 $Panel3                          = New-Object system.Windows.Forms.Panel
-$Panel3.height                   = 387
+$Panel3.height                   = 500
 $Panel3.width                    = 220
 $Panel3.location                 = New-Object System.Drawing.Point(464,54)
 
@@ -410,11 +425,18 @@ $yourphonefix.height             = 30
 $yourphonefix.location           = New-Object System.Drawing.Point(4,344)
 $yourphonefix.Font               = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
+$reinstallbloat                  = New-Object system.Windows.Forms.Button
+$reinstallbloat.text             = "Reinstall Bloatware"
+$reinstallbloat.width            = 211
+$reinstallbloat.height           = 30
+$reinstallbloat.location         = New-Object System.Drawing.Point(4, 374)
+$reinstallbloat.Font             = New-Object System.Drawing.Font("Microsoft Sans Serif",12)
+
 $Form.controls.AddRange(@($Panel1,$Panel2,$Label3,$Label15,$Panel4,$PictureBox1,$Label1,$Label4,$Panel3))
 $Panel1.controls.AddRange(@($brave,$firefox,$7zip,$irfanview,$adobereader,$notepad,$gchrome,$mpc,$vlc,$powertoys,$winterminal,$vscode,$Label2,$everythingsearch,$sumatrapdf,$vscodium,$imageglass,$honeyview))
-$Panel2.controls.AddRange(@($essentialtweaks,$backgroundapps,$cortana,$actioncenter,$darkmode,$visualfx,$onedrive,$lightmode))
+$Panel2.controls.AddRange(@($essentialtweaks,$backgroundapps,$cortana,$actioncenter,$darkmode,$visualfx,$onedrive,$lightmode,$removebloat,$windowssearch))
 $Panel4.controls.AddRange(@($defaultwindowsupdate,$securitywindowsupdate,$Label16,$Label17,$Label18,$Label19))
-$Panel3.controls.AddRange(@($essentialundo,$EActionCenter,$ECortana,$RBackgroundApps,$HTrayIcons,$EClipboardHistory,$ELocation,$InstallOneDrive,$yourphonefix))
+$Panel3.controls.AddRange(@($essentialundo,$EActionCenter,$ECortana,$RBackgroundApps,$HTrayIcons,$EClipboardHistory,$ELocation,$InstallOneDrive,$yourphonefix,$reinstallbloat))
 
 $brave.Add_Click({
     Write-Host "Installing Brave Browser"
@@ -529,13 +551,12 @@ $essentialtweaks.Add_Click({
 
     Write-Host "Running O&O Shutup with Recommended Settings"
     Import-Module BitsTransfer
-    Start-BitsTransfer -Source "https://raw.githubusercontent.com/ChrisTitusTech/win10script/master/ooshutup10.cfg" -Destination ooshutup10.cfg
+    Start-BitsTransfer -Source "https://raw.githubusercontent.com/ChrisTitustech/win10script/master/ooshutup10.cfg" -Destination ooshutup10.cfg
     Start-BitsTransfer -Source "https://dl5.oo-software.com/files/ooshutup10/OOSU10.exe" -Destination OOSU10.exe
     ./OOSU10.exe ooshutup10.cfg /quiet
 
     Write-Host "Disabling Telemetry..."
     Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\DataCollection" -Name "AllowTelemetry" -Type DWord -Value 0
-    Set-ItemProperty -Path "HKLM:\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Policies\DataCollection" -Name "AllowTelemetry" -Type DWord -Value 0
     Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DataCollection" -Name "AllowTelemetry" -Type DWord -Value 0
     Disable-ScheduledTask -TaskName "Microsoft\Windows\Application Experience\Microsoft Compatibility Appraiser" | Out-Null
     Disable-ScheduledTask -TaskName "Microsoft\Windows\Application Experience\ProgramDataUpdater" | Out-Null
@@ -543,6 +564,12 @@ $essentialtweaks.Add_Click({
     Disable-ScheduledTask -TaskName "Microsoft\Windows\Customer Experience Improvement Program\Consolidator" | Out-Null
     Disable-ScheduledTask -TaskName "Microsoft\Windows\Customer Experience Improvement Program\UsbCeip" | Out-Null
     Disable-ScheduledTask -TaskName "Microsoft\Windows\DiskDiagnostic\Microsoft-Windows-DiskDiagnosticDataCollector" | Out-Null
+    Write-Host "Disabling Wi-Fi Sense..."
+    If (!(Test-Path "HKLM:\Software\Microsoft\PolicyManager\default\WiFi\AllowWiFiHotSpotReporting")) {
+        New-Item -Path "HKLM:\Software\Microsoft\PolicyManager\default\WiFi\AllowWiFiHotSpotReporting" -Force | Out-Null
+    }
+    Set-ItemProperty -Path "HKLM:\Software\Microsoft\PolicyManager\default\WiFi\AllowWiFiHotSpotReporting" -Name "Value" -Type DWord -Value 0
+    Set-ItemProperty -Path "HKLM:\Software\Microsoft\PolicyManager\default\WiFi\AllowAutoConnectToWiFiSenseHotspots" -Name "Value" -Type DWord -Value 0
     Write-Host "Disabling Application suggestions..."
     Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" -Name "ContentDeliveryAllowed" -Type DWord -Value 0
     Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" -Name "OemPreInstalledAppsEnabled" -Type DWord -Value 0
@@ -562,6 +589,7 @@ $essentialtweaks.Add_Click({
     Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\System" -Name "EnableActivityFeed" -Type DWord -Value 0
     Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\System" -Name "PublishUserActivities" -Type DWord -Value 0
     Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\System" -Name "UploadUserActivities" -Type DWord -Value 0
+    # Keep Location Tracking commented out if you want the ability to locate your device
     Write-Host "Disabling Location Tracking..."
     If (!(Test-Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\location")) {
         New-Item -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\location" -Force | Out-Null
@@ -661,6 +689,7 @@ $essentialtweaks.Add_Click({
 
     Write-Host "Changing default Explorer view to This PC..."
     Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "LaunchTo" -Type DWord -Value 1
+
     Write-Host "Hiding 3D Objects icon from This PC..."
     Remove-Item -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{0DB7E03F-FC29-4DC6-9020-FF41B59E513A}" -Recurse -ErrorAction SilentlyContinue
 
@@ -676,6 +705,20 @@ $essentialtweaks.Add_Click({
     Write-Host "Disable News and Interests"
     Set-ItemProperty -Path "HKCU:\SOFTWARE\Policies\Microsoft\Windows\Windows Feeds" -Name "EnableFeeds" -Type DWord -Value 0
 
+    Write-Host "Removing AutoLogger file and restricting directory..."
+    $autoLoggerDir = "$env:PROGRAMDATA\Microsoft\Diagnosis\ETLLogs\AutoLogger"
+    If (Test-Path "$autoLoggerDir\AutoLogger-Diagtrack-Listener.etl") {
+        Remove-Item "$autoLoggerDir\AutoLogger-Diagtrack-Listener.etl"
+    }
+    icacls $autoLoggerDir /deny SYSTEM:`(OI`)`(CI`)F | Out-Null
+
+    Write-Host "Stopping and disabling Diagnostics Tracking Service..."
+    Stop-Service "DiagTrack"
+    Set-Service "DiagTrack" -StartupType Disabled
+
+    Write-Host "Showing known file extensions..."
+    Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "HideFileExt" -Type DWord -Value 0
+
     Write-Host "Essential Tweaks Completed"
 })
 
@@ -686,8 +729,10 @@ $essentialundo.Add_Click({
 
     Write-Host "Enabling Telemetry..."
     Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\DataCollection" -Name "AllowTelemetry" -Type DWord -Value 1
-    Set-ItemProperty -Path "HKLM:\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Policies\DataCollection" -Name "AllowTelemetry" -Type DWord -Value 1
     Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DataCollection" -Name "AllowTelemetry" -Type DWord -Value 1
+    Write-Host "Enabling Wi-Fi Sense"
+    Set-ItemProperty -Path "HKLM:\Software\Microsoft\PolicyManager\default\WiFi\AllowWiFiHotSpotReporting" -Name "Value" -Type DWord -Value 1
+    Set-ItemProperty -Path "HKLM:\Software\Microsoft\PolicyManager\default\WiFi\AllowAutoConnectToWiFiSenseHotspots" -Name "Value" -Type DWord -Value 1
     Write-Host "Enabling Application suggestions..."
     Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" -Name "ContentDeliveryAllowed" -Type DWord -Value 1
     Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" -Name "OemPreInstalledAppsEnabled" -Type DWord -Value 1
@@ -772,23 +817,112 @@ $essentialundo.Add_Click({
     Write-Host "Changing default Explorer view to Quick Access..."
     Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "LaunchTo" -Type DWord -Value 0
 
+    Write-Host "Unrestricting AutoLogger directory"
+    $autoLoggerDir = "$env:PROGRAMDATA\Microsoft\Diagnosis\ETLLogs\AutoLogger"
+    icacls $autoLoggerDir /grant:r SYSTEM:`(OI`)`(CI`)F | Out-Null
+
+    Write-Host "Enabling and starting Diagnostics Tracking Service"
+    Set-Service "DiagTrack" -StartupType Automatic
+    Start-Service "DiagTrack"
+
+    Write-Host "Hiding known file extensions"
+    Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "HideFileExt" -Type DWord -Value 1
+
     Write-Host "Essential Undo Completed"
 })
 
 $windowssearch.Add_Click({
     Write-Host "Disabling Bing Search in Start Menu..."
     Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Search" -Name "BingSearchEnabled" -Type DWord -Value 0
+    Write-Host "Disabling Cortana"
     Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Search" -Name "CortanaConsent" -Type DWord -Value 0
     If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Windows Search")) {
         New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Windows Search" -Force | Out-Null
     }
     Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Windows Search" -Name "DisableWebSearch" -Type DWord -Value 1
+    Write-Host "Hiding Taskbar Search icon / box..."
+    Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Search" -Name "SearchboxTaskbarMode" -Type DWord -Value 0
     Write-Host "Stopping and disabling Windows Search indexing service..."
     Stop-Service "WSearch" -WarningAction SilentlyContinue
     Set-Service "WSearch" -StartupType Disabled
-    Write-Host "Hiding Taskbar Search icon / box..."
-    Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Search" -Name "SearchboxTaskbarMode" -Type DWord -Value 0
-    Write-Host "Search tweaks completed"
+    Write-Host "Hiding Titles in Taskbar"
+    Remove-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "TaskbarGlomLevel"
+
+    Write-Host "Removing Start Menu Tiles"
+
+    Set-Content -Path 'C:\Users\Default\AppData\Local\Microsoft\Windows\Shell\DefaultLayouts.xml' -Value '<LayoutModificationTemplate xmlns:defaultlayout="http://schemas.microsoft.com/Start/2014/FullDefaultLayout" xmlns:start="http://schemas.microsoft.com/Start/2014/StartLayout" Version="1" xmlns="http://schemas.microsoft.com/Start/2014/LayoutModification">'
+    Add-Content -Path 'C:\Users\Default\AppData\Local\Microsoft\Windows\Shell\DefaultLayouts.xml' -value '  <LayoutOptions StartTileGroupCellWidth="6" />'
+    Add-Content -Path 'C:\Users\Default\AppData\Local\Microsoft\Windows\Shell\DefaultLayouts.xml' -value '  <DefaultLayoutOverride>'
+    Add-Content -Path 'C:\Users\Default\AppData\Local\Microsoft\Windows\Shell\DefaultLayouts.xml' -value '    <StartLayoutCollection>'
+    Add-Content -Path 'C:\Users\Default\AppData\Local\Microsoft\Windows\Shell\DefaultLayouts.xml' -value '      <defaultlayout:StartLayout GroupCellWidth="6" />'
+    Add-Content -Path 'C:\Users\Default\AppData\Local\Microsoft\Windows\Shell\DefaultLayouts.xml' -value '    </StartLayoutCollection>'
+    Add-Content -Path 'C:\Users\Default\AppData\Local\Microsoft\Windows\Shell\DefaultLayouts.xml' -value '  </DefaultLayoutOverride>'
+    Add-Content -Path 'C:\Users\Default\AppData\Local\Microsoft\Windows\Shell\DefaultLayouts.xml' -value '    <CustomTaskbarLayoutCollection>'
+    Add-Content -Path 'C:\Users\Default\AppData\Local\Microsoft\Windows\Shell\DefaultLayouts.xml' -value '      <defaultlayout:TaskbarLayout>'
+    Add-Content -Path 'C:\Users\Default\AppData\Local\Microsoft\Windows\Shell\DefaultLayouts.xml' -value '        <taskbar:TaskbarPinList>'
+    Add-Content -Path 'C:\Users\Default\AppData\Local\Microsoft\Windows\Shell\DefaultLayouts.xml' -value '          <taskbar:UWA AppUserModelID="Microsoft.MicrosoftEdge_8wekyb3d8bbwe!MicrosoftEdge" />'
+    Add-Content -Path 'C:\Users\Default\AppData\Local\Microsoft\Windows\Shell\DefaultLayouts.xml' -value '          <taskbar:DesktopApp DesktopApplicationLinkPath="%APPDATA%\Microsoft\Windows\Start Menu\Programs\System Tools\File Explorer.lnk" />'
+    Add-Content -Path 'C:\Users\Default\AppData\Local\Microsoft\Windows\Shell\DefaultLayouts.xml' -value '        </taskbar:TaskbarPinList>'
+    Add-Content -Path 'C:\Users\Default\AppData\Local\Microsoft\Windows\Shell\DefaultLayouts.xml' -value '      </defaultlayout:TaskbarLayout>'
+    Add-Content -Path 'C:\Users\Default\AppData\Local\Microsoft\Windows\Shell\DefaultLayouts.xml' -value '    </CustomTaskbarLayoutCollection>'
+    Add-Content -Path 'C:\Users\Default\AppData\Local\Microsoft\Windows\Shell\DefaultLayouts.xml' -value '</LayoutModificationTemplate>'
+
+    $START_MENU_LAYOUT = @"
+    <LayoutModificationTemplate xmlns:defaultlayout="http://schemas.microsoft.com/Start/2014/FullDefaultLayout" xmlns:start="http://schemas.microsoft.com/Start/2014/StartLayout" Version="1" xmlns:taskbar="http://schemas.microsoft.com/Start/2014/TaskbarLayout" xmlns="http://schemas.microsoft.com/Start/2014/LayoutModification">
+        <LayoutOptions StartTileGroupCellWidth="6" />
+        <DefaultLayoutOverride>
+            <StartLayoutCollection>
+                <defaultlayout:StartLayout GroupCellWidth="6" />
+            </StartLayoutCollection>
+        </DefaultLayoutOverride>
+    </LayoutModificationTemplate>
+"@
+
+    $layoutFile="C:\Windows\StartMenuLayout.xml"
+
+    #Delete layout file if it already exists
+    If(Test-Path $layoutFile)
+    {
+        Remove-Item $layoutFile
+    }
+
+    #Creates the blank layout file
+    $START_MENU_LAYOUT | Out-File $layoutFile -Encoding ASCII
+
+    $regAliases = @("HKLM", "HKCU")
+
+    #Assign the start layout and force it to apply with "LockedStartLayout" at both the machine and user level
+    foreach ($regAlias in $regAliases){
+        $basePath = $regAlias + ":\SOFTWARE\Policies\Microsoft\Windows"
+        $keyPath = $basePath + "\Explorer" 
+        IF(!(Test-Path -Path $keyPath)) { 
+            New-Item -Path $basePath -Name "Explorer"
+        }
+        Set-ItemProperty -Path $keyPath -Name "LockedStartLayout" -Value 1
+        Set-ItemProperty -Path $keyPath -Name "StartLayoutFile" -Value $layoutFile
+    }
+
+    #Restart Explorer, open the start menu (necessary to load the new layout), and give it a few seconds to process
+    Stop-Process -name explorer
+    Start-Sleep -s 5
+    $wshell = New-Object -ComObject wscript.shell; $wshell.SendKeys('^{ESCAPE}')
+    Start-Sleep -s 5
+
+    #Enable the ability to pin items again by disabling "LockedStartLayout"
+    foreach ($regAlias in $regAliases){
+        $basePath = $regAlias + ":\SOFTWARE\Policies\Microsoft\Windows"
+        $keyPath = $basePath + "\Explorer" 
+        Set-ItemProperty -Path $keyPath -Name "LockedStartLayout" -Value 0
+    }
+
+    #Restart Explorer and delete the layout file
+    Stop-Process -name explorer
+
+    # Uncomment the next line to make clean start menu default for all new users
+    # Import-StartLayout -LayoutPath $layoutFile -MountPath $env:SystemDrive\
+
+    Remove-Item $layoutFile
+    
 })
 
 $backgroundapps.Add_Click({
@@ -822,7 +956,198 @@ $cortana.Add_Click({
     Write-Host "Disabled Cortana"
 })
 
+$removebloat.Add_Click({
+    Write-Host "Uninstalling Bloatware..."
+    Get-AppxPackage "Microsoft.3DBuilder" | Remove-AppxPackage
+    Get-AppxPackage "Microsoft.BingFinance" | Remove-AppxPackage
+    Get-AppxPackage "Microsoft.BingNews" | Remove-AppxPackage
+    Get-AppxPackage "Microsoft.BingSports" | Remove-AppxPackage
+    Get-AppxPackage "Microsoft.BingWeather" | Remove-AppxPackage
+    Get-AppxPackage "Microsoft.Getstarted" | Remove-AppxPackage
+    Get-AppxPackage "Microsoft.MicrosoftOfficeHub" | Remove-AppxPackage
+    Get-AppxPackage "Microsoft.MicrosoftSolitaireCollection" | Remove-AppxPackage
+    Get-AppxPackage "Microsoft.Office.OneNote" | Remove-AppxPackage
+    Get-AppxPackage "Microsoft.People" | Remove-AppxPackage
+    Get-AppxPackage "Microsoft.SkypeApp" | Remove-AppxPackage
+    # Get-AppxPackage "Microsoft.Windows.Photos" | Remove-AppxPackage
+    # Get-AppxPackage "Microsoft.WindowsAlarms" | Remove-AppxPackage
+    # Get-AppxPackage "Microsoft.WindowsCamera" | Remove-AppxPackage
+    Get-AppxPackage "microsoft.windowscommunicationsapps" | Remove-AppxPackage
+    Get-AppxPackage "Microsoft.WindowsMaps" | Remove-AppxPackage
+    Get-AppxPackage "Microsoft.WindowsPhone" | Remove-AppxPackage
+    # Get-AppxPackage "Microsoft.WindowsSoundRecorder" | Remove-AppxPackage
+    Get-AppxPackage "Microsoft.XboxApp" | Remove-AppxPackage
+    # Get-AppxPackage "Microsoft.ZuneMusic" | Remove-AppxPackage
+    # Get-AppxPackage "Microsoft.ZuneVideo" | Remove-AppxPackage
+    Get-AppxPackage "Microsoft.AppConnector" | Remove-AppxPackage
+    Get-AppxPackage "Microsoft.ConnectivityStore" | Remove-AppxPackage
+    Get-AppxPackage "Microsoft.Office.Sway" | Remove-AppxPackage
+    Get-AppxPackage "Microsoft.Messaging" | Remove-AppxPackage
+    Get-AppxPackage "Microsoft.YourPhone" | Remove-AppxPackage
+    Get-AppxPackage "9E2F88E3.Twitter" | Remove-AppxPackage
+    Get-AppxPackage "king.com.CandyCrushSodaSaga" | Remove-AppxPackage
+    Get-AppxPackage "Microsoft.WindowsFeedbackHub" | Remove-AppxPackage
+    Get-AppxPackage "Microsoft.Wallet" | Remove-AppxPackage
+    Get-AppxPackage "Microsoft.ScreenSketch" | Remove-AppxPackage
+    Get-AppxPackage "Microsoft.GetHelp" | Remove-AppxPackage
+    Get-AppxPackage "Microsoft.Xbox.TCUI" | Remove-AppxPackage
+    Get-AppxPackage "Microsoft.XboxGameOverlay" | Remove-AppxPackage
+    Get-AppxPackage "Microsoft.XboxSpeechToTextOverlay" | Remove-AppxPackage
+    Get-AppxPackage "Microsoft.MixedReality.Portal" | Remove-AppxPackage
+    Get-AppBackgroundTask "Microsoft.XboxIdentityProvider" | Remove-AppxPackage
 
+    Import-Module -DisableNameChecking $PSScriptRoot\..\lib\take-own.psm1
+    Import-Module -DisableNameChecking $PSScriptRoot\..\lib\New-FolderForced.psm1
+
+    $apps = @(
+        # default Windows 10 apps
+        "Microsoft.3DBuilder"
+        "Microsoft.Advertising.Xaml"
+        "Microsoft.Appconnector"
+        "Microsoft.BingFinance"
+        "Microsoft.BingNews"
+        "Microsoft.BingSports"
+        "Microsoft.BingTranslator"
+        "Microsoft.BingWeather"
+        "Microsoft.FreshPaint"
+        "Microsoft.GamingServices"
+        "Microsoft.Microsoft3DViewer"
+        "Microsoft.WindowsFeedbackHub"
+        "Microsoft.MicrosoftOfficeHub"
+        "Microsoft.MixedReality.Portal"
+        "Microsoft.MicrosoftPowerBIForWindows"
+        "Microsoft.MicrosoftSolitaireCollection"
+        "Microsoft.MicrosoftStickyNotes"
+        "Microsoft.MinecraftUWP"
+        "Microsoft.NetworkSpeedTest"
+        "Microsoft.Office.OneNote"
+        "Microsoft.People"
+        "Microsoft.Print3D"
+        "Microsoft.SkypeApp"
+        "Microsoft.Wallet"
+        # "Microsoft.Windows.Photos"
+        "Microsoft.WindowsAlarms"
+        # "Microsoft.WindowsCalculator"
+        # "Microsoft.WindowsCamera"
+        "microsoft.windowscommunicationsapps"
+        "Microsoft.WindowsMaps"
+        "Microsoft.WindowsPhone"
+        # "Microsoft.WindowsSoundRecorder"
+        # "Microsoft.WindowsStore"   # can't be re-installed
+        "Microsoft.Xbox.TCUI"
+        "Microsoft.XboxApp"
+        "Microsoft.XboxGameOverlay"
+        "Microsoft.XboxGamingOverlay"
+        "Microsoft.XboxSpeechToTextOverlay"
+        "Microsoft.YourPhone"
+        # "Microsoft.ZuneMusic"
+        # "Microsoft.ZuneVideo"
+        "Microsoft.Windows.CloudExperienceHost"
+        "Microsoft.Windows.ContentDeliveryManager"
+        "Microsoft.Windows.PeopleExperienceHost"
+        "Microsoft.XboxGameCallableUI"
+        "Microsoft.CommsPhone"
+        # "Microsoft.ConnectivityStore"
+        "Microsoft.GetHelp"
+        "Microsoft.Getstarted"
+        "Microsoft.Messaging"
+        "Microsoft.Office.Sway"
+        "Microsoft.OneConnect"
+        "Microsoft.WindowsFeedbackHub"
+        "Microsoft.Microsoft3DViewer"
+        "Microsoft.MSPaint"
+        "Microsoft.BingFoodAndDrink"
+        "Microsoft.BingHealthAndFitness"
+        "Microsoft.BingTravel"
+        # "Microsoft.WindowsReadingList"
+        "Microsoft.MixedReality.Portal"
+        "Microsoft.ScreenSketch"
+        "Microsoft.XboxGamingOverlay"
+        "Microsoft.YourPhone"
+
+        # non-Microsoft
+        "2FE3CB00.PicsArt-PhotoStudio"
+        "46928bounde.EclipseManager"
+        "4DF9E0F8.Netflix"
+        "613EBCEA.PolarrPhotoEditorAcademicEdition"
+        "6Wunderkinder.Wunderlist"
+        "7EE7776C.LinkedInforWindows"
+        "89006A2E.AutodeskSketchBook"
+        "9E2F88E3.Twitter"
+        "A278AB0D.DisneyMagicKingdoms"
+        "A278AB0D.MarchofEmpires"
+        "ActiproSoftwareLLC.562882FEEB491"
+        "CAF9E577.Plex"  
+        "ClearChannelRadioDigital.iHeartRadio"
+        "D52A8D61.FarmVille2CountryEscape"
+        "D5EA27B7.Duolingo-LearnLanguagesforFree"
+        "DB6EA5DB.CyberLinkMediaSuiteEssentials"
+        "DolbyLaboratories.DolbyAccess"
+        "DolbyLaboratories.DolbyAccess"
+        "Drawboard.DrawboardPDF"
+        "Facebook.Facebook"
+        "Fitbit.FitbitCoach"
+        "Flipboard.Flipboard"
+        "GAMELOFTSA.Asphalt8Airborne"
+        "KeeperSecurityInc.Keeper"
+        "NORDCURRENT.COOKINGFEVER"
+        "PandoraMediaInc.29680B314EFC2"
+        "Playtika.CaesarsSlotsFreeCasino"
+        "ShazamEntertainmentLtd.Shazam"
+        "SlingTVLLC.SlingTV"
+        "SpotifyAB.SpotifyMusic"
+        "TheNewYorkTimes.NYTCrossword"
+        "ThumbmunkeysLtd.PhototasticCollage"
+        "TuneIn.TuneInRadio"
+        "WinZipComputing.WinZipUniversal"
+        "XINGAG.XING"
+        "flaregamesGmbH.RoyalRevolt2"
+        "king.com.*"
+        "king.com.BubbleWitch3Saga"
+        "king.com.CandyCrushSaga"
+        "king.com.CandyCrushSodaSaga"
+    )
+
+    foreach ($app in $apps) {
+        Write-Output "Trying to remove $app"
+
+        Get-AppxPackage -Name $app -AllUsers | Remove-AppxPackage -AllUsers
+
+        Get-AppxProvisionedPackage -Online |
+            Where-Object DisplayName -EQ $app |
+            Remove-AppxProvisionedPackage -Online
+    }
+
+    # Prevents Apps from re-installing
+    $cdm = @(
+        "ContentDeliveryAllowed"
+        "FeatureManagementEnabled"
+        "OemPreInstalledAppsEnabled"
+        "PreInstalledAppsEnabled"
+        "PreInstalledAppsEverEnabled"
+        "SilentInstalledAppsEnabled"
+        "SubscribedContent-314559Enabled"
+        "SubscribedContent-338387Enabled"
+        "SubscribedContent-338388Enabled"
+        "SubscribedContent-338389Enabled"
+        "SubscribedContent-338393Enabled"
+        "SubscribedContentEnabled"
+        "SystemPaneSuggestionsEnabled"
+    )
+
+    New-FolderForced -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager"
+    foreach ($key in $cdm) {
+        Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" $key 0
+    }
+
+    New-FolderForced -Path "HKLM:\SOFTWARE\Policies\Microsoft\WindowsStore"
+    Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\WindowsStore" "AutoDownload" 2
+
+    # Prevents "Suggested Applications" returning
+    New-FolderForced -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\CloudContent"
+    Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\CloudContent" "DisableWindowsConsumerFeatures" 1
+
+})
 
 $defaultwindowsupdate.Add_Click({
     Write-Host "Enabling driver offering through Windows Update..."
@@ -957,6 +1282,163 @@ $ECortana.Add_Click({
 	Write-Host "Done - Reverted to Stock Settings"
 })
 
+$reinstallbloat.Add_Click({
+    Write-Host "Reinstalling Bloatware"
+    Add-AppxPackage -DisableDevelopmentMode -Register "$($(Get-AppxPackage -AllUsers "Microsoft.3DBuilder").InstallLocation)\AppXManifest.xml"
+    Add-AppxPackage -DisableDevelopmentMode -Register "$($(Get-AppxPackage -AllUsers "Microsoft.BingFinance").InstallLocation)\AppXManifest.xml"
+    Add-AppxPackage -DisableDevelopmentMode -Register "$($(Get-AppxPackage -AllUsers "Microsoft.BingNews").InstallLocation)\AppXManifest.xml"
+    Add-AppxPackage -DisableDevelopmentMode -Register "$($(Get-AppxPackage -AllUsers "Microsoft.BingSports").InstallLocation)\AppXManifest.xml"
+    Add-AppxPackage -DisableDevelopmentMode -Register "$($(Get-AppxPackage -AllUsers "Microsoft.BingWeather").InstallLocation)\AppXManifest.xml"
+    Add-AppxPackage -DisableDevelopmentMode -Register "$($(Get-AppxPackage -AllUsers "Microsoft.Getstarted").InstallLocation)\AppXManifest.xml"
+    Add-AppxPackage -DisableDevelopmentMode -Register "$($(Get-AppxPackage -AllUsers "Microsoft.MicrosoftOfficeHub").InstallLocation)\AppXManifest.xml"
+    Add-AppxPackage -DisableDevelopmentMode -Register "$($(Get-AppxPackage -AllUsers "Microsoft.MicrosoftSolitaireCollection").InstallLocation)\AppXManifest.xml"
+    Add-AppxPackage -DisableDevelopmentMode -Register "$($(Get-AppxPackage -AllUsers "Microsoft.Office.OneNote").InstallLocation)\AppXManifest.xml"
+    Add-AppxPackage -DisableDevelopmentMode -Register "$($(Get-AppxPackage -AllUsers "Microsoft.People").InstallLocation)\AppXManifest.xml"
+    Add-AppxPackage -DisableDevelopmentMode -Register "$($(Get-AppxPackage -AllUsers "Microsoft.SkypeApp").InstallLocation)\AppXManifest.xml"
+    Add-AppxPackage -DisableDevelopmentMode -Register "$($(Get-AppxPackage -AllUsers "Microsoft.Windows.Photos").InstallLocation)\AppXManifest.xml"
+    Add-AppxPackage -DisableDevelopmentMode -Register "$($(Get-AppxPackage -AllUsers "Microsoft.WindowsAlarms").InstallLocation)\AppXManifest.xml"
+    Add-AppxPackage -DisableDevelopmentMode -Register "$($(Get-AppxPackage -AllUsers "Microsoft.WindowsCamera").InstallLocation)\AppXManifest.xml"
+    Add-AppxPackage -DisableDevelopmentMode -Register "$($(Get-AppxPackage -AllUsers "Microsoft.windowscommunicationsapps").InstallLocation)\AppXManifest.xml"
+    Add-AppxPackage -DisableDevelopmentMode -Register "$($(Get-AppxPackage -AllUsers "Microsoft.WindowsMaps").InstallLocation)\AppXManifest.xml"
+    Add-AppxPackage -DisableDevelopmentMode -Register "$($(Get-AppxPackage -AllUsers "Microsoft.WindowsPhone").InstallLocation)\AppXManifest.xml"
+    Add-AppxPackage -DisableDevelopmentMode -Register "$($(Get-AppxPackage -AllUsers "Microsoft.WindowsSoundRecorder").InstallLocation)\AppXManifest.xml"
+    Add-AppxPackage -DisableDevelopmentMode -Register "$($(Get-AppxPackage -AllUsers "Microsoft.XboxApp").InstallLocation)\AppXManifest.xml"
+    Add-AppxPackage -DisableDevelopmentMode -Register "$($(Get-AppxPackage -AllUsers "Microsoft.ZuneMusic").InstallLocation)\AppXManifest.xml"
+    Add-AppxPackage -DisableDevelopmentMode -Register "$($(Get-AppxPackage -AllUsers "Microsoft.ZuneVideo").InstallLocation)\AppXManifest.xml"
+    Add-AppxPackage -DisableDevelopmentMode -Register "$($(Get-AppxPackage -AllUsers "Microsoft.AppConnector").InstallLocation)\AppXManifest.xml"
+    Add-AppxPackage -DisableDevelopmentMode -Register "$($(Get-AppxPackage -AllUsers "Microsoft.ConnectivityStore").InstallLocation)\AppXManifest.xml"
+    Add-AppxPackage -DisableDevelopmentMode -Register "$($(Get-AppxPackage -AllUsers "Microsoft.Office.Sway").InstallLocation)\AppXManifest.xml"
+    Add-AppxPackage -DisableDevelopmentMode -Register "$($(Get-AppxPackage -AllUsers "Microsoft.Messaging").InstallLocation)\AppXManifest.xml"
+    Add-AppxPackage -DisableDevelopmentMode -Register "$($(Get-AppxPackage -AllUsers "Microsoft.YourPhone").InstallLocation)\AppXManifest.xml"
+    Add-AppxPackage -DisableDevelopmentMode -Register "$($(Get-AppxPackage -AllUsers "9E2F88E3.Twitter").InstallLocation)\AppXManifest.xml"
+    Add-AppxPackage -DisableDevelopmentMode -Register "$($(Get-AppxPackage -AllUsers "king.com.CandyCrushSodaSaga").InstallLocation)\AppXManifest.xml"
+    Add-AppxPackage -DisableDevelopmentMode -Register "$($(Get-AppxPackage -AllUsers "Microsoft.WindowsFeedbackHub").InstallLocation)\AppXManifest.xml"
+    Add-AppxPackage -DisableDevelopmentMode -Register "$($(Get-AppxPackage -AllUsers "Microsoft.Wallet").InstallLocation)\AppXManifest.xml"
+    Add-AppxPackage -DisableDevelopmentMode -Register "$($(Get-AppxPackage -AllUsers "Microsoft.ScreenSketch").InstallLocation)\AppXManifest.xml"
+    Add-AppxPackage -DisableDevelopmentMode -Register "$($(Get-AppxPackage -AllUsers "Microsoft.GetHelp").InstallLocation)\AppXManifest.xml"
+    Add-AppxPackage -DisableDevelopmentMode -Register "$($(Get-AppxPackage -AllUsers "Microsoft.Xbox.TCUI").InstallLocation)\AppXManifest.xml"
+    Add-AppxPackage -DisableDevelopmentMode -Register "$($(Get-AppxPackage -AllUsers "Microsoft.XboxGameOverlay").InstallLocation)\AppXManifest.xml"
+    Add-AppxPackage -DisableDevelopmentMode -Register "$($(Get-AppxPackage -AllUsers "Microsoft.XboxSpeechToTextOverlay").InstallLocation)\AppXManifest.xml"
+    Add-AppxPackage -DisableDevelopmentMode -Register "$($(Get-AppxPackage -AllUsers "Microsoft.MixedReality.Portal").InstallLocation)\AppXManifest.xml"
+    Add-AppxPackage -DisableDevelopmentMode -Register "$($(Get-AppBackgroundTask -AllUsers "Microsoft.XboxIdentityProvider").InstallLocation)\AppXManifest.xml"
+
+    $reinstallbloatapps = @(
+        # default Windows 10 apps
+        "Microsoft.3DBuilder"
+        "Microsoft.Advertising.Xaml"
+        "Microsoft.Appconnector"
+        "Microsoft.BingFinance"
+        "Microsoft.BingNews"
+        "Microsoft.BingSports"
+        "Microsoft.BingTranslator"
+        "Microsoft.BingWeather"
+        "Microsoft.FreshPaint"
+        "Microsoft.GamingServices"
+        "Microsoft.Microsoft3DViewer"
+        "Microsoft.WindowsFeedbackHub"
+        "Microsoft.MicrosoftOfficeHub"
+        "Microsoft.MixedReality.Portal"
+        "Microsoft.MicrosoftPowerBIForWindows"
+        "Microsoft.MicrosoftSolitaireCollection"
+        "Microsoft.MicrosoftStickyNotes"
+        "Microsoft.MinecraftUWP"
+        "Microsoft.NetworkSpeedTest"
+        "Microsoft.Office.OneNote"
+        "Microsoft.People"
+        "Microsoft.Print3D"
+        "Microsoft.SkypeApp"
+        "Microsoft.Wallet"
+        "Microsoft.Windows.Photos"
+        "Microsoft.WindowsAlarms"
+        "Microsoft.WindowsCalculator"
+        "Microsoft.WindowsCamera"
+        "microsoft.windowscommunicationsapps"
+        "Microsoft.WindowsMaps"
+        "Microsoft.WindowsPhone"
+        "Microsoft.WindowsSoundRecorder"
+        # "Microsoft.WindowsStore"   # can't be re-installed
+        "Microsoft.Xbox.TCUI"
+        "Microsoft.XboxApp"
+        "Microsoft.XboxGameOverlay"
+        "Microsoft.XboxGamingOverlay"
+        "Microsoft.XboxSpeechToTextOverlay"
+        "Microsoft.YourPhone"
+        "Microsoft.ZuneMusic"
+        "Microsoft.ZuneVideo"
+        "Microsoft.Windows.CloudExperienceHost"
+        "Microsoft.Windows.ContentDeliveryManager"
+        "Microsoft.Windows.PeopleExperienceHost"
+        "Microsoft.XboxGameCallableUI"
+        "Microsoft.CommsPhone"
+        # "Microsoft.ConnectivityStore"
+        "Microsoft.GetHelp"
+        "Microsoft.Getstarted"
+        "Microsoft.Messaging"
+        "Microsoft.Office.Sway"
+        "Microsoft.OneConnect"
+        "Microsoft.WindowsFeedbackHub"
+        "Microsoft.Microsoft3DViewer"
+        "Microsoft.MSPaint"
+        "Microsoft.BingFoodAndDrink"
+        "Microsoft.BingHealthAndFitness"
+        "Microsoft.BingTravel"
+        # "Microsoft.WindowsReadingList"
+        "Microsoft.MixedReality.Portal"
+        "Microsoft.ScreenSketch"
+        "Microsoft.XboxGamingOverlay"
+        "Microsoft.YourPhone"
+
+        # non-Microsoft
+        "2FE3CB00.PicsArt-PhotoStudio"
+        "46928bounde.EclipseManager"
+        "4DF9E0F8.Netflix"
+        "613EBCEA.PolarrPhotoEditorAcademicEdition"
+        "6Wunderkinder.Wunderlist"
+        "7EE7776C.LinkedInforWindows"
+        "89006A2E.AutodeskSketchBook"
+        "9E2F88E3.Twitter"
+        "A278AB0D.DisneyMagicKingdoms"
+        "A278AB0D.MarchofEmpires"
+        "ActiproSoftwareLLC.562882FEEB491"
+        "CAF9E577.Plex"  
+        "ClearChannelRadioDigital.iHeartRadio"
+        "D52A8D61.FarmVille2CountryEscape"
+        "D5EA27B7.Duolingo-LearnLanguagesforFree"
+        "DB6EA5DB.CyberLinkMediaSuiteEssentials"
+        "DolbyLaboratories.DolbyAccess"
+        "DolbyLaboratories.DolbyAccess"
+        "Drawboard.DrawboardPDF"
+        "Facebook.Facebook"
+        "Fitbit.FitbitCoach"
+        "Flipboard.Flipboard"
+        "GAMELOFTSA.Asphalt8Airborne"
+        "KeeperSecurityInc.Keeper"
+        "NORDCURRENT.COOKINGFEVER"
+        "PandoraMediaInc.29680B314EFC2"
+        "Playtika.CaesarsSlotsFreeCasino"
+        "ShazamEntertainmentLtd.Shazam"
+        "SlingTVLLC.SlingTV"
+        "SpotifyAB.SpotifyMusic"
+        "TheNewYorkTimes.NYTCrossword"
+        "ThumbmunkeysLtd.PhototasticCollage"
+        "TuneIn.TuneInRadio"
+        "WinZipComputing.WinZipUniversal"
+        "XINGAG.XING"
+        "flaregamesGmbH.RoyalRevolt2"
+        "king.com.*"
+        "king.com.BubbleWitch3Saga"
+        "king.com.CandyCrushSaga"
+        "king.com.CandyCrushSodaSaga"
+    )
+
+    foreach ($app in $apps) {
+        Write-Output "Trying to add $app"
+
+        Add-AppxPackage -DisableDevelopmentMode -Register "$($(Get-AppxPackage -AllUsers $app).InstallLocation)\AppXManifest.xml"
+    }
+
+})
+
 $HTrayIcons.Add_Click({
 	
 	Write-Host "Hiding tray icons..."
@@ -1023,6 +1505,8 @@ $DisableNumLock.Add_Click({
 })
 
 $yourphonefix.Add_Click({
+    Write-Host "Reinstalling Your Phone App"
+    Add-AppxPackage -DisableDevelopmentMode -Register "$($(Get-AppXPackage -AllUsers "Microsoft.YourPhone").InstallLocation)\AppXManifest.xml"
     Write-Host "Enable needed data collection for Your Phone..."
     Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\System" -Name "EnableMmx" -Type DWord -Value 1
     Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\System" -Name "EnableCdp" -Type DWord -Value 1
