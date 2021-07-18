@@ -911,6 +911,7 @@ $windowssearch.Add_Click({
         Set-ItemProperty -Path $keyPath -Name "LockedStartLayout" -Value 0
     
     Write-Host "Search and Start Menu Tweaks Complete"
+    }
 })
 
 $backgroundapps.Add_Click({
@@ -1420,7 +1421,7 @@ $reinstallbloat.Add_Click({
         "king.com.CandyCrushSodaSaga"
     )
 
-    foreach ($app in $apps) {
+    foreach ($app in $reinstallbloatapps) {
         Write-Output "Trying to add $app"
 
         Add-AppxPackage -DisableDevelopmentMode -Register "$($(Get-AppxPackage -AllUsers $app).InstallLocation)\AppXManifest.xml"
