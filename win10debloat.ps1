@@ -22,14 +22,19 @@ Try{
 Catch{
 	# winget is not installed. Install it from the Github release
 	Write-Host "winget is not found, installing it right now."
-	
-	$download = "https://github.com/microsoft/winget-cli/releases/download/v1.0.11692/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle"
+
+	$asset = Invoke-RestMethod -Method Get -Uri 'https://api.github.com/repos/microsoft/winget-cli/releases/latest' | ForEach-Object assets | Where-Object name -like "*.msixbundle"
 	$output = $PSScriptRoot + "\winget-latest.appxbundle"
-	Write-Host "Dowloading latest release"
-	Invoke-WebRequest -Uri $download -OutFile $output
-	
-	Write-Host "Installing the package"
+	Write-Host "Downloading latest winget release"
+	Invoke-WebRequest -Uri $asset.browser_download_url -OutFile $output
+
+	Write-Host "Installing the winget package"
 	Add-AppxPackage -Path $output
+
+    Write-Host "Cleanup winget install package"
+    if (Test-Path -Path $output) {
+        Remove-Item $output -Force -ErrorAction SilentlyContinue
+    }
 }
 Finally {
 	# Start installing the packages with winget
@@ -812,7 +817,7 @@ $essentialundo.Add_Click({
     Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced\People" -Name "PeopleBand" -Type DWord -Value 1
     Write-Host "Hiding tray icons..."
     Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer" -Name "EnableAutoTray" -Type DWord -Value 1
-    
+
 
     Write-Host "Changing default Explorer view to Quick Access..."
     Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "LaunchTo" -Type DWord -Value 0
@@ -890,8 +895,8 @@ $windowssearch.Add_Click({
     #Assign the start layout and force it to apply with "LockedStartLayout" at both the machine and user level
     foreach ($regAlias in $regAliases){
         $basePath = $regAlias + ":\SOFTWARE\Policies\Microsoft\Windows"
-        $keyPath = $basePath + "\Explorer" 
-        IF(!(Test-Path -Path $keyPath)) { 
+        $keyPath = $basePath + "\Explorer"
+        IF(!(Test-Path -Path $keyPath)) {
             New-Item -Path $basePath -Name "Explorer"
         }
         Set-ItemProperty -Path $keyPath -Name "LockedStartLayout" -Value 1
@@ -907,9 +912,9 @@ $windowssearch.Add_Click({
     #Enable the ability to pin items again by disabling "LockedStartLayout"
     foreach ($regAlias in $regAliases){
         $basePath = $regAlias + ":\SOFTWARE\Policies\Microsoft\Windows"
-        $keyPath = $basePath + "\Explorer" 
+        $keyPath = $basePath + "\Explorer"
         Set-ItemProperty -Path $keyPath -Name "LockedStartLayout" -Value 0
-    
+
     Write-Host "Search and Start Menu Tweaks Complete"
     }
 })
@@ -1165,7 +1170,7 @@ $lightmode.Add_Click({
 $EActionCenter.Add_Click({
     Write-Host "Enabling Action Center..."
 	Remove-ItemProperty -Path "HKCU:\SOFTWARE\Policies\Microsoft\Windows\Explorer" -Name "DisableNotificationCenter" -ErrorAction SilentlyContinue
-	Remove-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\PushNotifications" -Name "ToastEnabled" -ErrorAction SilentlyContinue 
+	Remove-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\PushNotifications" -Name "ToastEnabled" -ErrorAction SilentlyContinue
 	Write-Host "Done - Reverted to Stock Settings"
 })
 
@@ -1178,7 +1183,7 @@ $ECortana.Add_Click({
 	Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\InputPersonalization" -Name "RestrictImplicitTextCollection" -Type DWord -Value 0
 	Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\InputPersonalization" -Name "RestrictImplicitInkCollection" -Type DWord -Value 0
 	Remove-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\InputPersonalization\TrainedDataStore" -Name "HarvestContacts" -ErrorAction SilentlyContinue
-	Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Windows Search" -Name "AllowCortana" -ErrorAction SilentlyContinue 
+	Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Windows Search" -Name "AllowCortana" -ErrorAction SilentlyContinue
 	Write-Host "Restoring Windows Search..."
 	Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Search" -Name "BingSearchEnabled" -Type DWord -Value "1"
 	Remove-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Search" -Name "CortanaConsent" -ErrorAction SilentlyContinue
@@ -1187,21 +1192,21 @@ $ECortana.Add_Click({
     Set-Service "WSearch" -StartupType Automatic
     Start-Service "WSearch" -WarningAction SilentlyContinue
     Write-Host "Restore Windows Search Icon..."
-	Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Search" -Name "SearchboxTaskbarMode" -Type DWord -Value 1 
+	Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Search" -Name "SearchboxTaskbarMode" -Type DWord -Value 1
 	Write-Host "Done - Reverted to Stock Settings"
 })
 
 $HTrayIcons.Add_Click({
-	
+
 	Write-Host "Hiding tray icons..."
-	Remove-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer" -Name "EnableAutoTray" -ErrorAction SilentlyContinue 
+	Remove-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer" -Name "EnableAutoTray" -ErrorAction SilentlyContinue
 	Write-Host "Done - Reverted to Stock Settings"
 })
 
 $EClipboardHistory.Add_Click({
 	Write-Host "Restoring Clipboard History..."
 	Remove-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Clipboard" -Name "EnableClipboardHistory" -ErrorAction SilentlyContinue
-    Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\System" -Name "AllowClipboardHistory" -ErrorAction SilentlyContinue 
+    Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\System" -Name "AllowClipboardHistory" -ErrorAction SilentlyContinue
 	Write-Host "Done - Reverted to Stock Settings"
 })
 
@@ -1220,7 +1225,7 @@ $ELocation.Add_Click({
 	Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\AppPrivacy" -Name "LetAppsAccessLocation" -ErrorAction SilentlyContinue
 	Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\AppPrivacy" -Name "LetAppsAccessLocation_UserInControlOfTheseApps" -ErrorAction SilentlyContinue
 	Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\AppPrivacy" -Name "LetAppsAccessLocation_ForceAllowTheseApps" -ErrorAction SilentlyContinue
-	Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\AppPrivacy" -Name "LetAppsAccessLocation_ForceDenyTheseApps" -ErrorAction SilentlyContinue 
+	Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\AppPrivacy" -Name "LetAppsAccessLocation_ForceDenyTheseApps" -ErrorAction SilentlyContinue
 	Write-Host "Done - Reverted to Stock Settings"
 })
 
