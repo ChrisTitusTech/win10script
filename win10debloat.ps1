@@ -163,9 +163,9 @@ $Label2.location                 = New-Object System.Drawing.Point(26,5)
 $Label2.Font                     = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
 
 $Panel2                          = New-Object system.Windows.Forms.Panel
-$Panel2.height                   = 450
+$Panel2.height                   = 637
 $Panel2.width                    = 211
-$Panel2.location                 = New-Object System.Drawing.Point(239,54)
+$Panel2.location                 = New-Object System.Drawing.Point(239,53)
 
 $Label3                          = New-Object system.Windows.Forms.Label
 $Label3.text                     = "System Tweaks"
@@ -223,20 +223,6 @@ $onedrive.width                  = 204
 $onedrive.height                 = 30
 $onedrive.location               = New-Object System.Drawing.Point(4,209)
 $onedrive.Font                   = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
-
-$removebloat                     = New-Object system.Windows.Forms.Button
-$removebloat.text                = "Remove Bloatware (Breaks Sysprep)"
-$removebloat.width               = 204
-$removebloat.height              = 50
-$removebloat.location            = New-Object System.Drawing.Point(4,374)
-$removebloat.Font                = New-Object System.Drawing.Font("Microsoft Sans Serif",12)
-
-$windowssearch                   = New-Object system.Windows.Forms.Button
-$windowssearch.text               = "Search Tweaks"
-$windowssearch.width             = 204
-$windowssearch.height            = 30
-$windowssearch.location          = New-Object System.Drawing.Point(4,345)
-$windowssearch.Font              = New-Object System.Drawing.Font("Microsoft Sans Serif",12)
 
 $Label15                         = New-Object system.Windows.Forms.Label
 $Label15.text                    = "Windows Update"
@@ -298,12 +284,11 @@ $Label19.location                = New-Object System.Drawing.Point(63,126)
 $Label19.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
 
 $PictureBox1                     = New-Object system.Windows.Forms.PictureBox
-$PictureBox1.width               = 412
-$PictureBox1.height              = 125
-$PictureBox1.location            = New-Object System.Drawing.Point(247,500)
+$PictureBox1.width               = 330
+$PictureBox1.height              = 174
+$PictureBox1.location            = New-Object System.Drawing.Point(703,252)
 $PictureBox1.imageLocation       = "https://github.com/ChrisTitusTech/win10script/blob/master/titus-toolbox.png?raw=true"
 $PictureBox1.SizeMode            = [System.Windows.Forms.PictureBoxSizeMode]::zoom
-
 $lightmode                       = New-Object system.Windows.Forms.Button
 $lightmode.text                  = "Light Mode"
 $lightmode.width                 = 204
@@ -328,7 +313,7 @@ $Label4.location                 = New-Object System.Drawing.Point(534,12)
 $Label4.Font                     = New-Object System.Drawing.Font('Microsoft Sans Serif',24)
 
 $Panel3                          = New-Object system.Windows.Forms.Panel
-$Panel3.height                   = 500
+$Panel3.height                   = 635
 $Panel3.width                    = 220
 $Panel3.location                 = New-Object System.Drawing.Point(464,54)
 
@@ -430,16 +415,39 @@ $yourphonefix.height             = 30
 $yourphonefix.location           = New-Object System.Drawing.Point(4,344)
 $yourphonefix.Font               = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
+$removebloat                     = New-Object system.Windows.Forms.Button
+$removebloat.text                = "Remove MS Store Apps"
+$removebloat.width               = 204
+$removebloat.height              = 34
+$removebloat.location            = New-Object System.Drawing.Point(3,560)
+$removebloat.Font                = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
+
 $reinstallbloat                  = New-Object system.Windows.Forms.Button
-$reinstallbloat.text             = "Reinstall Bloatware"
+$reinstallbloat.text             = "Reinstall MS Store Apps"
 $reinstallbloat.width            = 211
 $reinstallbloat.height           = 30
-$reinstallbloat.location         = New-Object System.Drawing.Point(4, 374)
-$reinstallbloat.Font             = New-Object System.Drawing.Font("Microsoft Sans Serif",12)
+$reinstallbloat.location         = New-Object System.Drawing.Point(4,560)
+$reinstallbloat.Font             = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
+
+$WarningLabel                    = New-Object system.Windows.Forms.Label
+$WarningLabel.text               = "Warning! This will break Microsoft Store"
+$WarningLabel.AutoSize           = $true
+$WarningLabel.width              = 25
+$WarningLabel.height             = 10
+$WarningLabel.location           = New-Object System.Drawing.Point(12,522)
+$WarningLabel.Font               = New-Object System.Drawing.Font('Microsoft Sans Serif',8)
+
+$Label5                          = New-Object system.Windows.Forms.Label
+$Label5.text                     = "Games, Apps, Sysprep, etc."
+$Label5.AutoSize                 = $true
+$Label5.width                    = 25
+$Label5.height                   = 10
+$Label5.location                 = New-Object System.Drawing.Point(61,544)
+$Label5.Font                     = New-Object System.Drawing.Font('Microsoft Sans Serif',8)
 
 $Form.controls.AddRange(@($Panel1,$Panel2,$Label3,$Label15,$Panel4,$PictureBox1,$Label1,$Label4,$Panel3))
 $Panel1.controls.AddRange(@($brave,$firefox,$7zip,$irfanview,$adobereader,$notepad,$gchrome,$mpc,$vlc,$powertoys,$winterminal,$vscode,$Label2,$everythingsearch,$sumatrapdf,$vscodium,$imageglass,$honeyview))
-$Panel2.controls.AddRange(@($essentialtweaks,$backgroundapps,$cortana,$actioncenter,$darkmode,$visualfx,$onedrive,$lightmode,$removebloat,$windowssearch))
+$Panel2.controls.AddRange(@($essentialtweaks,$backgroundapps,$cortana,$actioncenter,$darkmode,$visualfx,$onedrive,$lightmode,$removebloat,$WarningLabel,$Label5))
 $Panel4.controls.AddRange(@($defaultwindowsupdate,$securitywindowsupdate,$Label16,$Label17,$Label18,$Label19))
 $Panel3.controls.AddRange(@($essentialundo,$EActionCenter,$ECortana,$RBackgroundApps,$HTrayIcons,$EClipboardHistory,$ELocation,$InstallOneDrive,$yourphonefix,$reinstallbloat))
 
