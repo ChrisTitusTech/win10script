@@ -854,8 +854,8 @@ $essentialundo.Add_Click({
     Write-Host "Hiding known file extensions"
     Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "HideFileExt" -Type DWord -Value 1
 
-    Write-Host "Reset All Security and Local Group Policies to Stock Defaults"
-    cmd /c secedit /configure /cfg %windir%\inf\defltbase.inf /db defltbase.sdb /verbose
+    Write-Host "Reset Local Group Policies to Stock Defaults"
+    # cmd /c secedit /configure /cfg %windir%\inf\defltbase.inf /db defltbase.sdb /verbose
     cmd /c RD /S /Q "%WinDir%\System32\GroupPolicyUsers"
     cmd /c RD /S /Q "%WinDir%\System32\GroupPolicy"
     cmd /c gpupdate /force
