@@ -4,7 +4,8 @@ Add-Type -AssemblyName System.Windows.Forms
 $ErrorActionPreference = 'SilentlyContinue'
 $wshell = New-Object -ComObject Wscript.Shell
 $Button = [System.Windows.MessageBoxButton]::YesNoCancel
-$ErrorIco = [System.Windows.MessageBoxImage]::Error
+$ScriptDir = Split-Path $script:MyInvocation.MyCommand.Path
+
 If (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]'Administrator')) {
 	Start-Process powershell.exe "-NoProfile -ExecutionPolicy Bypass -File `"$PSCommandPath`"" -Verb RunAs
 	Exit
@@ -48,11 +49,11 @@ $Form.ClientSize                 = New-Object System.Drawing.Point(1050,700)
 $Form.text                       = "Windows 10 Debloat By Chris Titus"
 $Form.StartPosition              = "CenterScreen"
 $Form.TopMost                    = $false
-$Form.BackColor                  = [System.Drawing.ColorTranslator]::FromHtml("#b8b8b8")
+$Form.BackColor                  = "white"
 $Form.AutoScaleDimensions     = '192, 192'
 $Form.AutoScaleMode           = "Dpi"
 $Form.AutoSize                = $True
-$Form.ClientSize              = '1050, 700'
+$Form.ClientSize              = '1050, 734'
 $Form.FormBorderStyle         = 'FixedSingle'
 
 # GUI Icon
@@ -66,7 +67,7 @@ $Form.Width                   = $objImage.Width
 $Form.Height                  = $objImage.Height
 
 $Panel1                          = New-Object system.Windows.Forms.Panel
-$Panel1.height                   = 639
+$Panel1.height                   = 673
 $Panel1.width                    = 219
 $Panel1.location                 = New-Object System.Drawing.Point(6,54)
 
@@ -153,6 +154,13 @@ $vscode.width                    = 211
 $vscode.height                   = 30
 $vscode.location                 = New-Object System.Drawing.Point(4,396)
 $vscode.Font                     = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
+
+$gimp                            = New-Object system.Windows.Forms.Button
+$gimp.text                       = "GIMP"
+$gimp.width                      = 211
+$gimp.height                     = 30
+$gimp.location                   = New-Object System.Drawing.Point(4,595)
+$gimp.Font                       = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
 $Label2                          = New-Object system.Windows.Forms.Label
 $Label2.text                     = "(Windows 1809+ Required)"
@@ -289,6 +297,7 @@ $PictureBox1.height              = 174
 $PictureBox1.location            = New-Object System.Drawing.Point(703,252)
 $PictureBox1.imageLocation       = "https://github.com/ChrisTitusTech/win10script/blob/master/titus-toolbox.png?raw=true"
 $PictureBox1.SizeMode            = [System.Windows.Forms.PictureBoxSizeMode]::zoom
+
 $lightmode                       = New-Object system.Windows.Forms.Button
 $lightmode.text                  = "Light Mode"
 $lightmode.width                 = 204
@@ -417,16 +426,16 @@ $yourphonefix.Font               = New-Object System.Drawing.Font('Microsoft San
 
 $removebloat                     = New-Object system.Windows.Forms.Button
 $removebloat.text                = "Remove MS Store Apps"
-$removebloat.width               = 204
-$removebloat.height              = 34
-$removebloat.location            = New-Object System.Drawing.Point(3,560)
+$removebloat.width               = 209
+$removebloat.height              = 30
+$removebloat.location            = New-Object System.Drawing.Point(3,595)
 $removebloat.Font                = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
 $reinstallbloat                  = New-Object system.Windows.Forms.Button
 $reinstallbloat.text             = "Reinstall MS Store Apps"
 $reinstallbloat.width            = 211
 $reinstallbloat.height           = 30
-$reinstallbloat.location         = New-Object System.Drawing.Point(4,560)
+$reinstallbloat.location         = New-Object System.Drawing.Point(4,595)
 $reinstallbloat.Font             = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
 $WarningLabel                    = New-Object system.Windows.Forms.Label
@@ -434,7 +443,7 @@ $WarningLabel.text               = "Warning! This will break Microsoft Store"
 $WarningLabel.AutoSize           = $true
 $WarningLabel.width              = 25
 $WarningLabel.height             = 10
-$WarningLabel.location           = New-Object System.Drawing.Point(12,522)
+$WarningLabel.location           = New-Object System.Drawing.Point(12,556)
 $WarningLabel.Font               = New-Object System.Drawing.Font('Microsoft Sans Serif',8)
 
 $Label5                          = New-Object system.Windows.Forms.Label
@@ -442,11 +451,11 @@ $Label5.text                     = "Games, Apps, Sysprep, etc."
 $Label5.AutoSize                 = $true
 $Label5.width                    = 25
 $Label5.height                   = 10
-$Label5.location                 = New-Object System.Drawing.Point(61,544)
+$Label5.location                 = New-Object System.Drawing.Point(61,578)
 $Label5.Font                     = New-Object System.Drawing.Font('Microsoft Sans Serif',8)
 
 $Form.controls.AddRange(@($Panel1,$Panel2,$Label3,$Label15,$Panel4,$PictureBox1,$Label1,$Label4,$Panel3))
-$Panel1.controls.AddRange(@($brave,$firefox,$7zip,$irfanview,$adobereader,$notepad,$gchrome,$mpc,$vlc,$powertoys,$winterminal,$vscode,$Label2,$everythingsearch,$sumatrapdf,$vscodium,$imageglass,$honeyview))
+$Panel1.controls.AddRange(@($brave,$firefox,$7zip,$irfanview,$adobereader,$notepad,$gchrome,$mpc,$vlc,$powertoys,$winterminal,$vscode,$Label2,$everythingsearch,$sumatrapdf,$vscodium,$imageglass,$honeyview,$gimp))
 $Panel2.controls.AddRange(@($essentialtweaks,$backgroundapps,$cortana,$actioncenter,$darkmode,$visualfx,$onedrive,$lightmode,$removebloat,$WarningLabel,$Label5))
 $Panel4.controls.AddRange(@($defaultwindowsupdate,$securitywindowsupdate,$Label16,$Label17,$Label18,$Label19))
 $Panel3.controls.AddRange(@($essentialundo,$EActionCenter,$ECortana,$RBackgroundApps,$HTrayIcons,$EClipboardHistory,$ELocation,$InstallOneDrive,$yourphonefix,$reinstallbloat))
@@ -454,111 +463,153 @@ $Panel3.controls.AddRange(@($essentialundo,$EActionCenter,$ECortana,$RBackground
 $brave.Add_Click({
     Write-Host "Installing Brave Browser"
     winget install BraveSoftware.BraveBrowser | Out-Host
-    if($?) { Write-Host "Installed Brave Browser" }
+    if($?) { Write-Host "Installed Brave Browser"
+    [System.Windows.Forms.MessageBox]::Show( "Brave Browser has been installed ", "Installation completed", "OK", "Information" ) }
 })
 
 $firefox.Add_Click({
     Write-Host "Installing Firefox"
     winget install Mozilla.Firefox | Out-Host
-    if($?) { Write-Host "Installed Firefox" }
+    if($?) { Write-Host "Installed Firefox"
+    [System.Windows.Forms.MessageBox]::Show( "Firefox has been installed ", "Installation completed", "OK", "Information" ) 
+    }
 })
 
 $gchrome.Add_Click({
     Write-Host "Installing Google Chrome"
     winget install Google.Chrome | Out-Host
-    if($?) { Write-Host "Installed Google Chrome" }
+    if($?) { Write-Host "Installed Google Chrome" 
+    [System.Windows.Forms.MessageBox]::Show( "Google Chrome has been installed ", "Installation completed", "OK", "Information" )
+    }
 })
 
 $irfanview.Add_Click({
     Write-Host "Installing Irfanview (Image Viewer)"
     winget install IrfanSkiljan.IrfanView | Out-Host
-    if($?) { Write-Host "Installed Irfanview (Image Viewer)" }
+    if($?) { Write-Host "Installed Irfanview (Image Viewer)"
+    [System.Windows.Forms.MessageBox]::Show( "Irfanview has been installed ", "Installation completed", "OK", "Information" )
+    }
 })
 $imageglass.Add_Click({
     Write-Host "Installing Image Glass (Image Viewer)"
     winget install DuongDieuPhap.ImageGlass | Out-Host
-    if($?) { Write-Host "Installed Image Glass (Image Viewer)" }
+    if($?) { Write-Host "Installed Image Glass (Image Viewer)" 
+    [System.Windows.Forms.MessageBox]::Show( "Image Glass has been installed ", "Installation completed", "OK", "Information" )
+    }
 })
 $honeyview.Add_Click({
     Write-Host "Installing Bandisoft Honeyview (Image Viewer)"
     winget install Bandisoft.Honeyview | Out-Host
-    if($?) { Write-Host "Installed Honeyview (Image Viewer)" }
+    if($?) { Write-Host "Installed Honeyview (Image Viewer)" 
+    [System.Windows.Forms.MessageBox]::Show( "Honeyview has been installed ", "Installation completed", "OK", "Information" )}
 })
 
 $adobereader.Add_Click({
     Write-Host "Installing Adobe Reader DC"
     winget install Adobe.AdobeAcrobatReaderDC | Out-Host
-    if($?) { Write-Host "Installed Adobe Reader DC" }
+    if($?) { Write-Host "Installed Adobe Reader DC"
+    [System.Windows.Forms.MessageBox]::Show( "Adobe Reader DC has been installed ", "Installation completed", "OK", "Information" )
+    }
 })
 
 $notepad.Add_Click({
     Write-Host "Installing Notepad++"
     winget install Notepad++.Notepad++ | Out-Host
-    if($?) { Write-Host "Installed Notepad++" }
+    if($?) { Write-Host "Installed Notepad++" 
+    [System.Windows.Forms.MessageBox]::Show( "Notepad++ has been installed ", "Installation completed", "OK", "Information" )
+    }
 })
 
 $vlc.Add_Click({
     Write-Host "Installing VLC Media Player"
     winget install VideoLAN.VLC | Out-Host
-    if($?) { Write-Host "Installed VLC Media Player" }
+    if($?) { Write-Host "Installed VLC Media Player" 
+    [System.Windows.Forms.MessageBox]::Show( "VLC Media Player has been installed ", "Installation completed", "OK", "Information" )
+    }
 })
 
 $mpc.Add_Click({
     Write-Host "Installing Media Player Classic"
     winget install clsid2.mpc-hc | Out-Host
-    if($?) { Write-Host "Installed Media Player Classic" }
+    if($?) { Write-Host "Installed Media Player Classic" 
+    [System.Windows.Forms.MessageBox]::Show( "Media Player Classic has been installed ", "Installation completed", "OK", "Information" )}
 })
 
 $7zip.Add_Click({
     Write-Host "Installing 7-Zip Compression Tool"
     winget install 7zip.7zip | Out-Host
-    if($?) { Write-Host "Installed 7-Zip Compression Tool" }
+    if($?) { Write-Host "Installed 7-Zip Compression Tool" 
+    [System.Windows.Forms.MessageBox]::Show( "7-Zip has been installed ", "Installation completed", "OK", "Information" )}
 })
 
 $vscode.Add_Click({
     Write-Host "Installing Visual Studio Code"
     winget install Microsoft.VisualStudioCode | Out-Host
-    if($?) { Write-Host "Installed Visual Studio Code" }
+    if($?) { Write-Host "Installed Visual Studio Code" 
+    [System.Windows.Forms.MessageBox]::Show( "Visual Studio Code has been installed ", "Installation completed", "OK", "Information" )
+    }
 })
 
 $vscodium.Add_Click({
     Write-Host "Installing VS Codium"
     winget install VSCodium.VSCodium | Out-Host
-    if($?) { Write-Host "Installed VS Codium" }
+    if($?) { Write-Host "Installed VS Codium" 
+    [System.Windows.Forms.MessageBox]::Show( "VS Codium has been installed ", "Installation completed", "OK", "Information" )
+    }
 })
 
 $winterminal.Add_Click({
     Write-Host "Installing New Windows Terminal"
     winget install Microsoft.WindowsTerminal | Out-Host
-    if($?) { Write-Host "Installed New Windows Terminal" }
+    if($?) { Write-Host "Installed New Windows Terminal" 
+    [System.Windows.Forms.MessageBox]::Show( "Windows Terminal has been installed ", "Installation completed", "OK", "Information" )
+    }
 })
 
 $powertoys.Add_Click({
     Write-Host "Installing Microsoft PowerToys"
     winget install Microsoft.PowerToys | Out-Host
-    if($?) { Write-Host "Installed Microsoft PowerToys" }
+    if($?) { Write-Host "Installed Microsoft PowerToys" 
+    [System.Windows.Forms.MessageBox]::Show( "Microsoft PowerToys has been installed ", "Installation completed", "OK", "Information" )
+    }
 })
 
 $everythingsearch.Add_Click({
     Write-Host "Installing Voidtools Everything Search"
     winget install voidtools.Everything | Out-Host
-    if($?) { Write-Host "Installed Everything Search" }
+    if($?) { Write-Host "Installed Everything Search" 
+    [System.Windows.Forms.MessageBox]::Show( "Everything Search has been installed ", "Installation completed", "OK", "Information" )
+    }
 })
 
 $sumatrapdf.Add_Click({
     Write-Host "Installing Sumatra PDF"
     winget install SumatraPDF.SumatraPDF | Out-Host
-    if($?) { Write-Host "Installed Sumatra PDF" }
+    if($?) { Write-Host "Installed Sumatra PDF" 
+    [System.Windows.Forms.MessageBox]::Show( "Sumatra PDF has been installed ", "Installation completed", "OK", "Information" )
+    }
 })
 
 $openshell.Add_Click({
     Write-Host "Installing OpenShell (Old Windows menu)"
     winget install openshellmenu | Out-Host
     Write-Host "Installed OpenShell"
+    [System.Windows.Forms.MessageBox]::Show( "OpenShell has been installed ", "Installation completed", "OK", "Information" )
+})
+
+$gimp.Add_Click({
+      Write-Host "Installing GIMP"
+    winget install gimp | Out-Host
+    if($?) { Write-Host "Installed GIMP" 
+    [System.Windows.Forms.MessageBox]::Show( "GIMP has been installed ", "Installation completed", "OK", "Information" )
+    }
 })
 
 $essentialtweaks.Add_Click({
-    Write-Host "Creating Restore Point incase something bad happens"
+    $result = [System.Windows.Forms.MessageBox]::Show( "Essential Tweaks has been known to cause Windows Insiders to leave the program due to privacy changes this script makes. Do you want to contiune? ", "Installation completed", "YesNo", "Warning" )
+    switch ($result){
+    "Yes" {
+       Write-Host "Creating Restore Point incase something bad happens"
     Enable-ComputerRestore -Drive "C:\"
     Checkpoint-Computer -Description "RestorePoint1" -RestorePointType "MODIFY_SETTINGS"
 
@@ -740,8 +791,16 @@ Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Policies
     Write-Host "Showing known file extensions..."
     Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "HideFileExt" -Type DWord -Value 0
 
-    Write-Host "Essential Tweaks Completed"
+    Write-Host "Essential Tweaks Completed" 
+    [System.Windows.Forms.MessageBox]::Show( "Essential Tweaks Completed", "Windows 10 Debloat", "OK", "Information" )    
+    } 
+    "No" {
+        
+    } 
+}
+    
 })
+
 
 $dualboottime.Add_Click({
 Write-Host "Setting BIOS time to UTC..."
@@ -862,6 +921,7 @@ $essentialundo.Add_Click({
     # Considered using Invoke-GPUpdate but requires module most people won't have installed
 
     Write-Host "Essential Undo Completed"
+    [System.Windows.Forms.MessageBox]::Show( "Essential Undo Completed", "Windows 10 Debloat", "OK", "Information" )    
 })
 
 $windowssearch.Add_Click({
@@ -944,6 +1004,7 @@ $windowssearch.Add_Click({
         Set-ItemProperty -Path $keyPath -Name "LockedStartLayout" -Value 0
 
     Write-Host "Search and Start Menu Tweaks Complete"
+    [System.Windows.Forms.MessageBox]::Show( "Search and Start Menu Tweaks Completed", "Windows 10 Debloat", "OK", "Information" )    
     }
 })
 
@@ -954,6 +1015,7 @@ $backgroundapps.Add_Click({
         Set-ItemProperty -Path $_.PsPath -Name "DisabledByUser" -Type DWord -Value 1
     }
     Write-Host "Disabled Background application access"
+    [System.Windows.Forms.MessageBox]::Show( "Disabled Background application access", "Windows 10 Debloat", "OK", "Information" )
 })
 
 $cortana.Add_Click({
@@ -976,6 +1038,7 @@ $cortana.Add_Click({
     }
     Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Windows Search" -Name "AllowCortana" -Type DWord -Value 0
     Write-Host "Disabled Cortana"
+    [System.Windows.Forms.MessageBox]::Show( "Cortana disabled", "Windows 10 Debloat", "OK", "Information" )
 })
 
 $Bloatware = @(
@@ -1078,6 +1141,7 @@ $removebloat.Add_Click({
     }
 
     Write-Host "Finished Removing Bloatware Apps"
+    [System.Windows.Forms.MessageBox]::Show( "Bloatware apps removed", "Windows 10 Debloat", "OK", "Information" )
 })
 
 $reinstallbloat.Add_Click({
@@ -1089,6 +1153,7 @@ $reinstallbloat.Add_Click({
     }
 
     Write-Host "Finished Reinstalling Bloatware Apps"
+    [System.Windows.Forms.MessageBox]::Show( "Bloatware Apps reinstalled", "Windows 10 Debloat", "OK", "Information" )
 })
 
 $defaultwindowsupdate.Add_Click({
@@ -1102,6 +1167,7 @@ $defaultwindowsupdate.Add_Click({
     Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" -Name "NoAutoRebootWithLoggedOnUsers" -ErrorAction SilentlyContinue
     Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" -Name "AUPowerManagement" -ErrorAction SilentlyContinue
     Write-Host "Enabled driver offering through Windows Update"
+    [System.Windows.Forms.MessageBox]::Show( "Windows Update set to Default", "Windows 10 Debloat", "OK", "Information" )
 })
 
 $securitywindowsupdate.Add_Click({
@@ -1127,6 +1193,7 @@ $securitywindowsupdate.Add_Click({
     Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" -Name "NoAutoRebootWithLoggedOnUsers" -Type DWord -Value 1
     Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" -Name "AUPowerManagement" -Type DWord -Value 0
     Write-Host "Disabled driver offering through Windows Update"
+    [System.Windows.Forms.MessageBox]::Show( "Windows Update set to Security Only", "Windows 10 Debloat", "OK", "Information" )
 })
 
 $actioncenter.Add_Click({
@@ -1137,6 +1204,7 @@ $actioncenter.Add_Click({
     Set-ItemProperty -Path "HKCU:\SOFTWARE\Policies\Microsoft\Windows\Explorer" -Name "DisableNotificationCenter" -Type DWord -Value 1
     Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\PushNotifications" -Name "ToastEnabled" -Type DWord -Value 0
     Write-Host "Disabled Action Center"
+    [System.Windows.Forms.MessageBox]::Show( "Action Center disabled", "Windows 10 Debloat", "OK", "Information" )
 })
 
 $visualfx.Add_Click({
@@ -1152,6 +1220,7 @@ $visualfx.Add_Click({
     Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects" -Name "VisualFXSetting" -Type DWord -Value 3
     Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\DWM" -Name "EnableAeroPeek" -Type DWord -Value 0
     Write-Host "Adjusted visual effects for performance"
+    [System.Windows.Forms.MessageBox]::Show( "Adjusted visual effects for performance", "Windows 10 Debloat", "OK", "Information" )
 })
 
 $onedrive.Add_Click({
@@ -1181,18 +1250,21 @@ $onedrive.Add_Click({
     Remove-Item -Path "HKCR:\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" -Recurse -ErrorAction SilentlyContinue
     Remove-Item -Path "HKCR:\Wow6432Node\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" -Recurse -ErrorAction SilentlyContinue
     Write-Host "Disabled OneDrive"
+    [System.Windows.Forms.MessageBox]::Show( "OneDrive disabled", "Windows 10 Debloat", "OK", "Information" )
 })
 
 $darkmode.Add_Click({
     Write-Host "Enabling Dark Mode"
     Set-ItemProperty -Path HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize -Name AppsUseLightTheme -Value 0
     Write-Host "Enabled Dark Mode"
+    [System.Windows.Forms.MessageBox]::Show( "Dark Mode enabled", "Windows 10 Debloat", "OK", "Information" )
 })
 
 $lightmode.Add_Click({
     Write-Host "Switching Back to Light Mode"
     Remove-ItemProperty -Path HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize -Name AppsUseLightTheme
     Write-Host "Switched Back to Light Mode"
+    [System.Windows.Forms.MessageBox]::Show( "Light Mode enabled", "Windows 10 Debloat", "OK", "Information" )
 })
 
 $EActionCenter.Add_Click({
@@ -1200,6 +1272,7 @@ $EActionCenter.Add_Click({
 	Remove-ItemProperty -Path "HKCU:\SOFTWARE\Policies\Microsoft\Windows\Explorer" -Name "DisableNotificationCenter" -ErrorAction SilentlyContinue
 	Remove-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\PushNotifications" -Name "ToastEnabled" -ErrorAction SilentlyContinue
 	Write-Host "Done - Reverted to Stock Settings"
+[System.Windows.Forms.MessageBox]::Show( "Action Center enabled", "Windows 10 Debloat", "OK", "Information" )
 })
 
 $ECortana.Add_Click({
@@ -1222,13 +1295,15 @@ $ECortana.Add_Click({
     Write-Host "Restore Windows Search Icon..."
 	Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Search" -Name "SearchboxTaskbarMode" -Type DWord -Value 1
 	Write-Host "Done - Reverted to Stock Settings"
+[System.Windows.Forms.MessageBox]::Show( "Cortana enabled", "Windows 10 Debloat", "OK", "Information" )
 })
 
 $HTrayIcons.Add_Click({
 
 	Write-Host "Hiding tray icons..."
 	Remove-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer" -Name "EnableAutoTray" -ErrorAction SilentlyContinue
-	Write-Host "Done - Reverted to Stock Settings"
+	Write-Host "Tray icons disabled"
+[System.Windows.Forms.MessageBox]::Show( "Tray icons disabled", "Windows 10 Debloat", "OK", "Information" )
 })
 
 $EClipboardHistory.Add_Click({
@@ -1236,6 +1311,7 @@ $EClipboardHistory.Add_Click({
 	Remove-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Clipboard" -Name "EnableClipboardHistory" -ErrorAction SilentlyContinue
     Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\System" -Name "AllowClipboardHistory" -ErrorAction SilentlyContinue
 	Write-Host "Done - Reverted to Stock Settings"
+[System.Windows.Forms.MessageBox]::Show( "Clipboard history enabled", "Windows 10 Debloat", "OK", "Information" )
 })
 
 $ELocation.Add_Click({
@@ -1255,6 +1331,7 @@ $ELocation.Add_Click({
 	Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\AppPrivacy" -Name "LetAppsAccessLocation_ForceAllowTheseApps" -ErrorAction SilentlyContinue
 	Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\AppPrivacy" -Name "LetAppsAccessLocation_ForceDenyTheseApps" -ErrorAction SilentlyContinue
 	Write-Host "Done - Reverted to Stock Settings"
+[System.Windows.Forms.MessageBox]::Show( "Location enabled", "Windows 10 Debloat", "OK", "Information" )
 })
 
 $RBackgroundApps.Add_Click({
@@ -1264,6 +1341,7 @@ $RBackgroundApps.Add_Click({
 		Remove-ItemProperty -Path $_.PsPath -Name "DisabledByUser" -ErrorAction SilentlyContinue
 	}
 	Write-Host "Done - Reverted to Stock Settings"
+[System.Windows.Forms.MessageBox]::Show( "Background Apps enabled", "Windows 10 Debloat", "OK", "Information" )
 })
 
 $EHibernation.Add_Click({
@@ -1271,12 +1349,14 @@ $EHibernation.Add_Click({
     Set-ItemProperty -Path "HKLM:\System\CurrentControlSet\Control\Session Manager\Power" -Name "HibernteEnabled" -Type Dword -Value 1
     Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FlyoutMenuSettings" -Name "ShowHibernateOption" -Type Dword -Value 1
     Write-Host "Done - Reverted to Stock Settings"
+    [System.Windows.Forms.MessageBox]::Show( "Hibrernation enabled", "Windows 10 Debloat", "OK", "Information" )
 })
 
 $InstallOneDrive.Add_Click({
     Write-Host "Installing Onedrive. Please Wait..."
     Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\OneDrive" -Name "DisableFileSyncNGSC" -ErrorAction SilentlyContinue
     %systemroot%\SysWOW64\OneDriveSetup.exe
+    [System.Windows.Forms.MessageBox]::Show( "OneDrive installed", "Windows 10 Debloat", "OK", "Information" )
 })
 
 $DisableNumLock.Add_Click({
@@ -1287,6 +1367,7 @@ $DisableNumLock.Add_Click({
         $wsh = New-Object -ComObject WScript.Shell
         $wsh.SendKeys('{NUMLOCK}')
     }
+    [System.Windows.Forms.MessageBox]::Show( "NumLock after startup disabled", "Windows 10 Debloat", "OK", "Information" )
 })
 
 $yourphonefix.Add_Click({
@@ -1302,6 +1383,19 @@ $yourphonefix.Add_Click({
 		Remove-ItemProperty -Path $_.PsPath -Name "DisabledByUser" -ErrorAction SilentlyContinue
 	}
     Write-Host "You may need to Reboot and right-click Your Phone app and select repair"
+    [System.Windows.Forms.MessageBox]::Show( "Your Phone app fix applied", "Windows 10 Debloat", "OK", "Information" )
+    [System.Windows.Forms.MessageBox]::Show( "You may need to Reboot and right-click Your Phone app and select Repair", "Windows 10 Debloat", "OK", "Warning" )
 })
 
+$PictureBox1.Add_Click({
+Start-Process "https://github.com/ChrisTitusTech/win10script"
+})
+
+$gimp.Add_Click({
+    Write-Host "Installing GIMP"
+    winget install gimp | Out-Host
+    if($?) { Write-Host "Installed GIMP" } 
+    [System.Windows.Forms.MessageBox]::Show( "GIMP has been installed", "Installation complete", "OK", "Information" )
+})
+  
 [void]$Form.ShowDialog()
