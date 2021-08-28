@@ -20,7 +20,7 @@ Try{
 	Write-Host "winget is already installed."
 }
 Catch{
-	# winget is not installed. Install it from the Github release
+	# winget is not installed. Install it from the Microsoft Store
 	Write-Host "winget is not found, installing it right now."
 
 	Start-Process "ms-appinstaller:?source=https://aka.ms/getwinget"
