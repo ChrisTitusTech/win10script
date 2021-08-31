@@ -13,27 +13,17 @@ If (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]:
 # GUI Specs
 Write-Host "Checking winget..."
 
-Try{
-	# Check if winget is already installed
-	$er = (invoke-expression "winget -v") 2>&1
-	if ($lastexitcode) {throw $er}
-	Write-Host "winget is already installed."
-}
-Catch{
-	# winget is not installed. Install it from the Microsoft Store
-	Write-Host "winget is not found, installing it right now."
-
-	Start-Process "ms-appinstaller:?source=https://aka.ms/getwinget"
-	$nid = (Get-Process AppInstaller).id
-	Wait-Process -Id $nid
-	Write-Host Winget instlled
-	
-}
-Finally {
-	# Start installing the packages with winget
-	#Get-Content .\winget.txt | ForEach-Object {
-	#	iex ("winget install -e " + $_)
-	#}
+# Check if winget is installed
+if (Test-Path ~\AppData\Local\Microsoft\WindowsApps\winget.exe){
+    'Winget Already Installed'
+}  
+else{
+    # Winget is not installed. Install it from the Microsoft Store
+	Write-Host "Winget not found, installing it right now."
+    Start-Process "ms-appinstaller:?source=https://aka.ms/getwinget"
+    $nid = (Get-Process AppInstaller).Id
+    Wait-Process -Id $nid
+    Write-Host Winget Installed
 }
 
 $Form                            = New-Object system.Windows.Forms.Form
