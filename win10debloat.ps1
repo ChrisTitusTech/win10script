@@ -20,22 +20,24 @@ if (Test-Path ~\AppData\Local\Microsoft\WindowsApps\winget.exe){
 else{
     # Installing winget from the Microsoft Store
 	Write-Host "Winget not found, installing it now."
+    $ResultText.text = "`r`n" +"`r`n" + "Installing Winget... Please Wait"
 	Start-Process "ms-appinstaller:?source=https://aka.ms/getwinget"
 	$nid = (Get-Process AppInstaller).Id
 	Wait-Process -Id $nid
 	Write-Host Winget Installed
+    $ResultText.text = "`r`n" +"`r`n" + "Winget Installed - Ready for Next Task"
 }
 
 $Form                            = New-Object system.Windows.Forms.Form
-$Form.ClientSize                 = New-Object System.Drawing.Point(1050,700)
+$Form.ClientSize                 = New-Object System.Drawing.Point(1050,1000)
 $Form.text                       = "Windows 10 Debloat By Chris Titus"
 $Form.StartPosition              = "CenterScreen"
 $Form.TopMost                    = $false
-$Form.BackColor                  = [System.Drawing.ColorTranslator]::FromHtml("#b8b8b8")
+$Form.BackColor                  = [System.Drawing.ColorTranslator]::FromHtml("#e9e9e9")
 $Form.AutoScaleDimensions     = '192, 192'
 $Form.AutoScaleMode           = "Dpi"
 $Form.AutoSize                = $True
-$Form.ClientSize              = '1050, 700'
+$Form.ClientSize              = '1050, 1000'
 $Form.FormBorderStyle         = 'FixedSingle'
 
 # GUI Icon
@@ -49,7 +51,7 @@ $Form.Width                   = $objImage.Width
 $Form.Height                  = $objImage.Height
 
 $Panel1                          = New-Object system.Windows.Forms.Panel
-$Panel1.height                   = 639
+$Panel1.height                   = 939
 $Panel1.width                    = 219
 $Panel1.location                 = New-Object System.Drawing.Point(6,54)
 
@@ -57,98 +59,98 @@ $brave                           = New-Object system.Windows.Forms.Button
 $brave.text                      = "Brave Browser"
 $brave.width                     = 212
 $brave.height                    = 30
-$brave.location                  = New-Object System.Drawing.Point(3,94)
+$brave.location                  = New-Object System.Drawing.Point(4,426)
 $brave.Font                      = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
 $firefox                         = New-Object system.Windows.Forms.Button
 $firefox.text                    = "Firefox"
 $firefox.width                   = 212
 $firefox.height                  = 30
-$firefox.location                = New-Object System.Drawing.Point(4,127)
+$firefox.location                = New-Object System.Drawing.Point(4,461)
 $firefox.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
 $7zip                            = New-Object system.Windows.Forms.Button
 $7zip.text                       = "7-Zip"
 $7zip.width                      = 211
 $7zip.height                     = 30
-$7zip.location                   = New-Object System.Drawing.Point(4,363)
+$7zip.location                   = New-Object System.Drawing.Point(4,102)
 $7zip.Font                       = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
-$irfanview                       = New-Object system.Windows.Forms.Button
-$irfanview.text                  = "Irfanview (Image Viewer)"
-$irfanview.width                 = 212
-$irfanview.height                = 30
-$irfanview.location              = New-Object System.Drawing.Point(3,195)
-$irfanview.Font                  = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
+$sharex                          = New-Object system.Windows.Forms.Button
+$sharex.text                     = "ShareX (Screenshots)"
+$sharex.width                    = 212
+$sharex.height                   = 30
+$sharex.location                 = New-Object System.Drawing.Point(3,561)
+$sharex.Font                     = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
 $adobereader                     = New-Object system.Windows.Forms.Button
 $adobereader.text                = "Adobe Reader DC"
 $adobereader.width               = 212
 $adobereader.height              = 30
-$adobereader.location            = New-Object System.Drawing.Point(4,528)
+$adobereader.location            = New-Object System.Drawing.Point(3,865)
 $adobereader.Font                = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
 $notepad                         = New-Object system.Windows.Forms.Button
 $notepad.text                    = "Notepad++"
 $notepad.width                   = 212
 $notepad.height                  = 30
-$notepad.location                = New-Object System.Drawing.Point(4,461)
+$notepad.location                = New-Object System.Drawing.Point(3,831)
 $notepad.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
 $gchrome                         = New-Object system.Windows.Forms.Button
 $gchrome.text                    = "Google Chrome"
 $gchrome.width                   = 212
 $gchrome.height                  = 30
-$gchrome.location                = New-Object System.Drawing.Point(4,161)
+$gchrome.location                = New-Object System.Drawing.Point(3,494)
 $gchrome.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
 $mpc                             = New-Object system.Windows.Forms.Button
 $mpc.text                        = "Media Player Classic"
 $mpc.width                       = 211
 $mpc.height                      = 30
-$mpc.location                    = New-Object System.Drawing.Point(4,329)
+$mpc.location                    = New-Object System.Drawing.Point(3,697)
 $mpc.Font                        = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
 $vlc                             = New-Object system.Windows.Forms.Button
 $vlc.text                        = "VLC"
 $vlc.width                       = 212
 $vlc.height                      = 30
-$vlc.location                    = New-Object System.Drawing.Point(4,296)
+$vlc.location                    = New-Object System.Drawing.Point(3,663)
 $vlc.Font                        = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
 $powertoys                       = New-Object system.Windows.Forms.Button
 $powertoys.text                  = "PowerToys"
 $powertoys.width                 = 211
 $powertoys.height                = 30
-$powertoys.location              = New-Object System.Drawing.Point(4,60)
+$powertoys.location              = New-Object System.Drawing.Point(4,67)
 $powertoys.Font                  = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
 $winterminal                     = New-Object system.Windows.Forms.Button
 $winterminal.text                = "Windows Terminal"
 $winterminal.width               = 211
 $winterminal.height              = 30
-$winterminal.location            = New-Object System.Drawing.Point(4,26)
+$winterminal.location            = New-Object System.Drawing.Point(3,32)
 $winterminal.Font                = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
 $vscode                          = New-Object system.Windows.Forms.Button
 $vscode.text                     = "VS Code"
 $vscode.width                    = 211
 $vscode.height                   = 30
-$vscode.location                 = New-Object System.Drawing.Point(4,396)
+$vscode.location                 = New-Object System.Drawing.Point(4,797)
 $vscode.Font                     = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
 $Label2                          = New-Object system.Windows.Forms.Label
-$Label2.text                     = "(Windows 1809+ Required)"
+$Label2.text                     = "Utilities"
 $Label2.AutoSize                 = $true
 $Label2.width                    = 25
 $Label2.height                   = 10
-$Label2.location                 = New-Object System.Drawing.Point(26,5)
-$Label2.Font                     = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
+$Label2.location                 = New-Object System.Drawing.Point(89,11)
+$Label2.Font                     = New-Object System.Drawing.Font('Microsoft Sans Serif',10,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Bold))
 
 $Panel2                          = New-Object system.Windows.Forms.Panel
-$Panel2.height                   = 637
+$Panel2.height                   = 938
 $Panel2.width                    = 211
-$Panel2.location                 = New-Object System.Drawing.Point(239,53)
+$Panel2.location                 = New-Object System.Drawing.Point(240,54)
 
 $Label3                          = New-Object system.Windows.Forms.Label
 $Label3.text                     = "System Tweaks"
@@ -160,51 +162,51 @@ $Label3.Font                     = New-Object System.Drawing.Font('Microsoft San
 
 $essentialtweaks                 = New-Object system.Windows.Forms.Button
 $essentialtweaks.text            = "Essential Tweaks"
-$essentialtweaks.width           = 204
+$essentialtweaks.width           = 205
 $essentialtweaks.height          = 75
-$essentialtweaks.location        = New-Object System.Drawing.Point(4,25)
+$essentialtweaks.location        = New-Object System.Drawing.Point(3,24)
 $essentialtweaks.Font            = New-Object System.Drawing.Font('Microsoft Sans Serif',14)
 
 $backgroundapps                  = New-Object system.Windows.Forms.Button
 $backgroundapps.text             = "Disable Background Apps"
 $backgroundapps.width            = 205
 $backgroundapps.height           = 30
-$backgroundapps.location         = New-Object System.Drawing.Point(3,139)
+$backgroundapps.location         = New-Object System.Drawing.Point(3,453)
 $backgroundapps.Font             = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
 $cortana                         = New-Object system.Windows.Forms.Button
 $cortana.text                    = "Disable Cortana (Search)"
-$cortana.width                   = 204
+$cortana.width                   = 205
 $cortana.height                  = 30
-$cortana.location                = New-Object System.Drawing.Point(4,174)
+$cortana.location                = New-Object System.Drawing.Point(2,588)
 $cortana.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
 $actioncenter                    = New-Object system.Windows.Forms.Button
 $actioncenter.text               = "Disable Action Center"
-$actioncenter.width              = 203
+$actioncenter.width              = 205
 $actioncenter.height             = 30
-$actioncenter.location           = New-Object System.Drawing.Point(4,105)
+$actioncenter.location           = New-Object System.Drawing.Point(3,176)
 $actioncenter.Font               = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
 $darkmode                        = New-Object system.Windows.Forms.Button
 $darkmode.text                   = "Dark Mode"
-$darkmode.width                  = 204
+$darkmode.width                  = 205
 $darkmode.height                 = 30
-$darkmode.location               = New-Object System.Drawing.Point(4,244)
+$darkmode.location               = New-Object System.Drawing.Point(4,315)
 $darkmode.Font                   = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
-$visualfx                        = New-Object system.Windows.Forms.Button
-$visualfx.text                   = "Basic Visual FX"
-$visualfx.width                  = 204
-$visualfx.height                 = 30
-$visualfx.location               = New-Object System.Drawing.Point(4,313)
-$visualfx.Font                   = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
+$performancefx                   = New-Object system.Windows.Forms.Button
+$performancefx.text              = "Performance Visual FX"
+$performancefx.width             = 205
+$performancefx.height            = 30
+$performancefx.location          = New-Object System.Drawing.Point(3,419)
+$performancefx.Font              = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
 $onedrive                        = New-Object system.Windows.Forms.Button
-$onedrive.text                   = "Uninstall OneDrive"
-$onedrive.width                  = 204
+$onedrive.text                   = "Delete & Disable  OneDrive"
+$onedrive.width                  = 205
 $onedrive.height                 = 30
-$onedrive.location               = New-Object System.Drawing.Point(4,209)
+$onedrive.location               = New-Object System.Drawing.Point(3,521)
 $onedrive.Font                   = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
 $Label15                         = New-Object system.Windows.Forms.Label
@@ -212,7 +214,7 @@ $Label15.text                    = "Windows Update"
 $Label15.AutoSize                = $true
 $Label15.width                   = 25
 $Label15.height                  = 10
-$Label15.location                = New-Object System.Drawing.Point(739,11)
+$Label15.location                = New-Object System.Drawing.Point(732,11)
 $Label15.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',24)
 
 $Panel4                          = New-Object system.Windows.Forms.Panel
@@ -267,16 +269,16 @@ $Label19.location                = New-Object System.Drawing.Point(63,126)
 $Label19.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
 
 $PictureBox1                     = New-Object system.Windows.Forms.PictureBox
-$PictureBox1.width               = 330
-$PictureBox1.height              = 174
-$PictureBox1.location            = New-Object System.Drawing.Point(703,252)
+$PictureBox1.width               = 366
+$PictureBox1.height              = 130
+$PictureBox1.location            = New-Object System.Drawing.Point(571,274)
 $PictureBox1.imageLocation       = "https://github.com/ChrisTitusTech/win10script/blob/master/titus-toolbox.png?raw=true"
 $PictureBox1.SizeMode            = [System.Windows.Forms.PictureBoxSizeMode]::zoom
 $lightmode                       = New-Object system.Windows.Forms.Button
 $lightmode.text                  = "Light Mode"
-$lightmode.width                 = 204
+$lightmode.width                 = 205
 $lightmode.height                = 30
-$lightmode.location              = New-Object System.Drawing.Point(4,279)
+$lightmode.location              = New-Object System.Drawing.Point(3,350)
 $lightmode.Font                  = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
 $Label1                          = New-Object system.Windows.Forms.Label
@@ -288,128 +290,128 @@ $Label1.location                 = New-Object System.Drawing.Point(76,11)
 $Label1.Font                     = New-Object System.Drawing.Font('Microsoft Sans Serif',24)
 
 $Label4                          = New-Object system.Windows.Forms.Label
-$Label4.text                     = "Undo"
+$Label4.text                     = "Troubleshoot"
 $Label4.AutoSize                 = $true
 $Label4.width                    = 230
 $Label4.height                   = 25
-$Label4.location                 = New-Object System.Drawing.Point(534,12)
+$Label4.location                 = New-Object System.Drawing.Point(482,12)
 $Label4.Font                     = New-Object System.Drawing.Font('Microsoft Sans Serif',24)
 
 $Panel3                          = New-Object system.Windows.Forms.Panel
-$Panel3.height                   = 635
+$Panel3.height                   = 179
 $Panel3.width                    = 220
 $Panel3.location                 = New-Object System.Drawing.Point(464,54)
 
 $essentialundo                   = New-Object system.Windows.Forms.Button
-$essentialundo.text              = "Undo All"
-$essentialundo.width             = 211
-$essentialundo.height            = 75
-$essentialundo.location          = New-Object System.Drawing.Point(4,25)
+$essentialundo.text              = "Undo Essential Tweaks"
+$essentialundo.width             = 205
+$essentialundo.height            = 70
+$essentialundo.location          = New-Object System.Drawing.Point(3,102)
 $essentialundo.Font              = New-Object System.Drawing.Font('Microsoft Sans Serif',14)
 
 $EActionCenter                   = New-Object system.Windows.Forms.Button
 $EActionCenter.text              = "Enable Action Center"
-$EActionCenter.width             = 211
+$EActionCenter.width             = 205
 $EActionCenter.height            = 30
-$EActionCenter.location          = New-Object System.Drawing.Point(4,105)
+$EActionCenter.location          = New-Object System.Drawing.Point(3,210)
 $EActionCenter.Font              = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
 $ECortana                        = New-Object system.Windows.Forms.Button
 $ECortana.text                   = "Enable Cortana (Search)"
-$ECortana.width                  = 212
+$ECortana.width                  = 205
 $ECortana.height                 = 30
-$ECortana.location               = New-Object System.Drawing.Point(4,173)
+$ECortana.location               = New-Object System.Drawing.Point(3,622)
 $ECortana.Font                   = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
 $RBackgroundApps                 = New-Object system.Windows.Forms.Button
 $RBackgroundApps.text            = "Allow Background Apps"
-$RBackgroundApps.width           = 212
+$RBackgroundApps.width           = 205
 $RBackgroundApps.height          = 30
-$RBackgroundApps.location        = New-Object System.Drawing.Point(4,139)
+$RBackgroundApps.location        = New-Object System.Drawing.Point(3,487)
 $RBackgroundApps.Font            = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
 $HTrayIcons                      = New-Object system.Windows.Forms.Button
 $HTrayIcons.text                 = "Hide Tray Icons"
-$HTrayIcons.width                = 212
+$HTrayIcons.width                = 205
 $HTrayIcons.height               = 30
-$HTrayIcons.location             = New-Object System.Drawing.Point(4,242)
+$HTrayIcons.location             = New-Object System.Drawing.Point(3,278)
 $HTrayIcons.Font                 = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
 $EClipboardHistory               = New-Object system.Windows.Forms.Button
 $EClipboardHistory.text          = "Enable Clipboard History"
-$EClipboardHistory.width         = 212
+$EClipboardHistory.width         = 205
 $EClipboardHistory.height        = 30
-$EClipboardHistory.location      = New-Object System.Drawing.Point(4,276)
+$EClipboardHistory.location      = New-Object System.Drawing.Point(3,688)
 $EClipboardHistory.Font          = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
 $ELocation                       = New-Object system.Windows.Forms.Button
 $ELocation.text                  = "Enable Location Tracking"
-$ELocation.width                 = 211
+$ELocation.width                 = 205
 $ELocation.height                = 30
-$ELocation.location              = New-Object System.Drawing.Point(4,310)
+$ELocation.location              = New-Object System.Drawing.Point(2,655)
 $ELocation.Font                  = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
 $InstallOneDrive                 = New-Object system.Windows.Forms.Button
-$InstallOneDrive.text            = "Install OneDrive"
-$InstallOneDrive.width           = 212
+$InstallOneDrive.text            = "Install & Enable OneDrive"
+$InstallOneDrive.width           = 205
 $InstallOneDrive.height          = 30
-$InstallOneDrive.location        = New-Object System.Drawing.Point(4,208)
+$InstallOneDrive.location        = New-Object System.Drawing.Point(2,554)
 $InstallOneDrive.Font            = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
 $everythingsearch                = New-Object system.Windows.Forms.Button
 $everythingsearch.text           = "Everything Search"
 $everythingsearch.width          = 211
 $everythingsearch.height         = 30
-$everythingsearch.location       = New-Object System.Drawing.Point(4,495)
+$everythingsearch.location       = New-Object System.Drawing.Point(3,368)
 $everythingsearch.Font           = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
 $sumatrapdf                      = New-Object system.Windows.Forms.Button
 $sumatrapdf.text                 = "Sumatra PDF"
 $sumatrapdf.width                = 212
 $sumatrapdf.height               = 30
-$sumatrapdf.location             = New-Object System.Drawing.Point(3,561)
+$sumatrapdf.location             = New-Object System.Drawing.Point(4,900)
 $sumatrapdf.Font                 = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
 $vscodium                        = New-Object system.Windows.Forms.Button
 $vscodium.text                   = "VS Codium"
 $vscodium.width                  = 211
 $vscodium.height                 = 30
-$vscodium.location               = New-Object System.Drawing.Point(4,429)
+$vscodium.location               = New-Object System.Drawing.Point(4,763)
 $vscodium.Font                   = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
 $imageglass                      = New-Object system.Windows.Forms.Button
 $imageglass.text                 = "ImageGlass (Image Viewer)"
 $imageglass.width                = 212
 $imageglass.height               = 30
-$imageglass.location             = New-Object System.Drawing.Point(4,228)
+$imageglass.location             = New-Object System.Drawing.Point(4,595)
 $imageglass.Font                 = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
-$honeyview                       = New-Object system.Windows.Forms.Button
-$honeyview.text                  = "Honeyview (Image Viewer)"
-$honeyview.width                 = 212
-$honeyview.height                = 30
-$honeyview.location              = New-Object System.Drawing.Point(4,261)
-$honeyview.Font                  = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
+$gimp                            = New-Object system.Windows.Forms.Button
+$gimp.text                       = "GIMP (Image Editor)"
+$gimp.width                      = 212
+$gimp.height                     = 30
+$gimp.location                   = New-Object System.Drawing.Point(4,629)
+$gimp.Font                       = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
 $yourphonefix                    = New-Object system.Windows.Forms.Button
 $yourphonefix.text               = "Your Phone App Fix"
 $yourphonefix.width              = 211
 $yourphonefix.height             = 30
-$yourphonefix.location           = New-Object System.Drawing.Point(4,344)
+$yourphonefix.location           = New-Object System.Drawing.Point(4,25)
 $yourphonefix.Font               = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
 $removebloat                     = New-Object system.Windows.Forms.Button
 $removebloat.text                = "Remove MS Store Apps"
 $removebloat.width               = 204
 $removebloat.height              = 34
-$removebloat.location            = New-Object System.Drawing.Point(3,560)
+$removebloat.location            = New-Object System.Drawing.Point(3,898)
 $removebloat.Font                = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
 $reinstallbloat                  = New-Object system.Windows.Forms.Button
 $reinstallbloat.text             = "Reinstall MS Store Apps"
-$reinstallbloat.width            = 211
+$reinstallbloat.width            = 205
 $reinstallbloat.height           = 30
-$reinstallbloat.location         = New-Object System.Drawing.Point(4,560)
+$reinstallbloat.location         = New-Object System.Drawing.Point(3,813)
 $reinstallbloat.Font             = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
 $WarningLabel                    = New-Object system.Windows.Forms.Label
@@ -417,7 +419,7 @@ $WarningLabel.text               = "Warning! This will break Microsoft Store"
 $WarningLabel.AutoSize           = $true
 $WarningLabel.width              = 25
 $WarningLabel.height             = 10
-$WarningLabel.location           = New-Object System.Drawing.Point(12,522)
+$WarningLabel.location           = New-Object System.Drawing.Point(12,856)
 $WarningLabel.Font               = New-Object System.Drawing.Font('Microsoft Sans Serif',8)
 
 $Label5                          = New-Object system.Windows.Forms.Label
@@ -425,133 +427,352 @@ $Label5.text                     = "Games, Apps, Sysprep, etc."
 $Label5.AutoSize                 = $true
 $Label5.width                    = 25
 $Label5.height                   = 10
-$Label5.location                 = New-Object System.Drawing.Point(61,544)
+$Label5.location                 = New-Object System.Drawing.Point(44,877)
 $Label5.Font                     = New-Object System.Drawing.Font('Microsoft Sans Serif',8)
 
-$Form.controls.AddRange(@($Panel1,$Panel2,$Label3,$Label15,$Panel4,$PictureBox1,$Label1,$Label4,$Panel3))
-$Panel1.controls.AddRange(@($brave,$firefox,$7zip,$irfanview,$adobereader,$notepad,$gchrome,$mpc,$vlc,$powertoys,$winterminal,$vscode,$Label2,$everythingsearch,$sumatrapdf,$vscodium,$imageglass,$honeyview))
-$Panel2.controls.AddRange(@($essentialtweaks,$backgroundapps,$cortana,$actioncenter,$darkmode,$visualfx,$onedrive,$lightmode,$removebloat,$WarningLabel,$Label5))
+$Label6                          = New-Object system.Windows.Forms.Label
+$Label6.text                     = "Misc. Fixes"
+$Label6.AutoSize                 = $true
+$Label6.width                    = 25
+$Label6.height                   = 10
+$Label6.location                 = New-Object System.Drawing.Point(78,7)
+$Label6.Font                     = New-Object System.Drawing.Font('Microsoft Sans Serif',10,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Bold))
+
+$Label7                          = New-Object system.Windows.Forms.Label
+$Label7.text                     = "Document Tools"
+$Label7.AutoSize                 = $true
+$Label7.width                    = 25
+$Label7.height                   = 10
+$Label7.location                 = New-Object System.Drawing.Point(60,740)
+$Label7.Font                     = New-Object System.Drawing.Font('Microsoft Sans Serif',10,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Bold))
+
+$Label8                          = New-Object system.Windows.Forms.Label
+$Label8.text                     = "Video and Image Tools"
+$Label8.AutoSize                 = $true
+$Label8.width                    = 25
+$Label8.height                   = 10
+$Label8.location                 = New-Object System.Drawing.Point(41,537)
+$Label8.Font                     = New-Object System.Drawing.Font('Microsoft Sans Serif',10,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Bold))
+
+$Label9                          = New-Object system.Windows.Forms.Label
+$Label9.text                     = "Web Browsers"
+$Label9.AutoSize                 = $true
+$Label9.width                    = 25
+$Label9.height                   = 10
+$Label9.location                 = New-Object System.Drawing.Point(67,406)
+$Label9.Font                     = New-Object System.Drawing.Font('Microsoft Sans Serif',10,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Bold))
+
+$advancedipscanner               = New-Object system.Windows.Forms.Button
+$advancedipscanner.text          = "Advanced IP Scanner"
+$advancedipscanner.width         = 211
+$advancedipscanner.height        = 30
+$advancedipscanner.location      = New-Object System.Drawing.Point(3,335)
+$advancedipscanner.Font          = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
+
+$putty                           = New-Object system.Windows.Forms.Button
+$putty.text                      = "PuTTY & WinSCP"
+$putty.width                     = 211
+$putty.height                    = 30
+$putty.location                  = New-Object System.Drawing.Point(3,302)
+$putty.Font                      = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
+
+$etcher                          = New-Object system.Windows.Forms.Button
+$etcher.text                     = "Etcher USB Creator"
+$etcher.width                    = 211
+$etcher.height                   = 30
+$etcher.location                 = New-Object System.Drawing.Point(3,269)
+$etcher.Font                     = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
+
+$translucenttb                   = New-Object system.Windows.Forms.Button
+$translucenttb.text              = "Translucent Taskbar"
+$translucenttb.width             = 211
+$translucenttb.height            = 30
+$translucenttb.location          = New-Object System.Drawing.Point(3,236)
+$translucenttb.Font              = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
+
+$githubdesktop                   = New-Object system.Windows.Forms.Button
+$githubdesktop.text              = "Github Desktop"
+$githubdesktop.width             = 211
+$githubdesktop.height            = 30
+$githubdesktop.location          = New-Object System.Drawing.Point(3,203)
+$githubdesktop.Font              = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
+
+$discord                         = New-Object system.Windows.Forms.Button
+$discord.text                    = "Discord"
+$discord.width                   = 211
+$discord.height                  = 30
+$discord.location                = New-Object System.Drawing.Point(4,170)
+$discord.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
+
+$autohotkey                      = New-Object system.Windows.Forms.Button
+$autohotkey.text                 = "AutoHotkey"
+$autohotkey.width                = 211
+$autohotkey.height               = 30
+$autohotkey.location             = New-Object System.Drawing.Point(4,136)
+$autohotkey.Font                 = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
+
+$appearancefx                    = New-Object system.Windows.Forms.Button
+$appearancefx.text               = "Appearance Visual FX"
+$appearancefx.width              = 205
+$appearancefx.height             = 30
+$appearancefx.location           = New-Object System.Drawing.Point(4,385)
+$appearancefx.Font               = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
+
+$STrayIcons                      = New-Object system.Windows.Forms.Button
+$STrayIcons.text                 = "Show Tray Icons"
+$STrayIcons.width                = 205
+$STrayIcons.height               = 30
+$STrayIcons.location             = New-Object System.Drawing.Point(2,244)
+$STrayIcons.Font                 = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
+
+$windowsupdatefix                = New-Object system.Windows.Forms.Button
+$windowsupdatefix.text           = "Windows Update Reset"
+$windowsupdatefix.width          = 211
+$windowsupdatefix.height         = 30
+$windowsupdatefix.location       = New-Object System.Drawing.Point(4,59)
+$windowsupdatefix.Font           = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
+
+$ResultText                      = New-Object system.Windows.Forms.TextBox
+$ResultText.multiline            = $true
+$ResultText.width                = 338
+$ResultText.height               = 126
+$ResultText.location             = New-Object System.Drawing.Point(581,489)
+$ResultText.Font                 = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
+
+$Label10                         = New-Object system.Windows.Forms.Label
+$Label10.text                    = "Current Status:"
+$Label10.AutoSize                = $true
+$Label10.width                   = 25
+$Label10.height                  = 10
+$Label10.location                = New-Object System.Drawing.Point(639,440)
+$Label10.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',24)
+
+$EHibernation                    = New-Object system.Windows.Forms.Button
+$EHibernation.text               = "Enable Hibernation"
+$EHibernation.width              = 205
+$EHibernation.height             = 30
+$EHibernation.location           = New-Object System.Drawing.Point(3,721)
+$EHibernation.Font               = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
+
+$dualboottime                    = New-Object system.Windows.Forms.Button
+$dualboottime.text               = "Set Time to UTC (Dual Boot)"
+$dualboottime.width              = 205
+$dualboottime.height             = 30
+$dualboottime.location           = New-Object System.Drawing.Point(3,754)
+$dualboottime.Font               = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
+
+$Form.controls.AddRange(@($Panel1,$Panel2,$Label3,$Label15,$Panel4,$PictureBox1,$Label1,$Label4,$Panel3,$ResultText,$Label10))
+$Panel1.controls.AddRange(@($brave,$firefox,$7zip,$sharex,$adobereader,$notepad,$gchrome,$mpc,$vlc,$powertoys,$winterminal,$vscode,$Label2,$everythingsearch,$sumatrapdf,$vscodium,$imageglass,$gimp,$Label7,$Label8,$Label9,$advancedipscanner,$putty,$etcher,$translucenttb,$githubdesktop,$discord,$autohotkey))
+$Panel2.controls.AddRange(@($essentialtweaks,$backgroundapps,$cortana,$actioncenter,$darkmode,$performancefx,$onedrive,$lightmode,$essentialundo,$EActionCenter,$ECortana,$RBackgroundApps,$HTrayIcons,$EClipboardHistory,$ELocation,$InstallOneDrive,$removebloat,$reinstallbloat,$WarningLabel,$Label5,$appearancefx,$STrayIcons,$EHibernation,$dualboottime))
 $Panel4.controls.AddRange(@($defaultwindowsupdate,$securitywindowsupdate,$Label16,$Label17,$Label18,$Label19))
-$Panel3.controls.AddRange(@($essentialundo,$EActionCenter,$ECortana,$RBackgroundApps,$HTrayIcons,$EClipboardHistory,$ELocation,$InstallOneDrive,$yourphonefix,$reinstallbloat))
+$Panel3.controls.AddRange(@($yourphonefix,$Label6,$windowsupdatefix))
 
 $brave.Add_Click({
     Write-Host "Installing Brave Browser"
+    $ResultText.text = "`r`n" +"`r`n" + "Installing Brave... Please Wait" 
     winget install BraveSoftware.BraveBrowser | Out-Host
     if($?) { Write-Host "Installed Brave Browser" }
+    $ResultText.text = "`r`n" + "Finished Installing Brave" + "`r`n" + "`r`n" + "Ready for Next Task"
 })
 
 $firefox.Add_Click({
     Write-Host "Installing Firefox"
+    $ResultText.text = "`r`n" +"`r`n" + "Installing Firefox... Please Wait" 
     winget install Mozilla.Firefox | Out-Host
     if($?) { Write-Host "Installed Firefox" }
+    $ResultText.text = "`r`n" + "Finished Installing Firefox" + "`r`n" + "`r`n" + "Ready for Next Task"
 })
 
 $gchrome.Add_Click({
     Write-Host "Installing Google Chrome"
+    $ResultText.text = "`r`n" +"`r`n" + "Installing Google Chrome... Please Wait" 
     winget install Google.Chrome | Out-Host
     if($?) { Write-Host "Installed Google Chrome" }
+    $ResultText.text = "`r`n" + "Finished Installing Google Chrome" + "`r`n" + "`r`n" + "Ready for Next Task"
 })
 
-$irfanview.Add_Click({
-    Write-Host "Installing Irfanview (Image Viewer)"
-    winget install IrfanSkiljan.IrfanView | Out-Host
-    if($?) { Write-Host "Installed Irfanview (Image Viewer)" }
+$autohotkey.Add_Click({
+    Write-Host "Installing AutoHotkey"
+    $ResultText.text = "`r`n" +"`r`n" + "Installing AutoHotkey... Please Wait" 
+    winget install Lexikos.AutoHotkey | Out-Host
+    if($?) { Write-Host "Installed AutoHotkey" }
+    $ResultText.text = "`r`n" + "Finished Installing Autohotkey" + "`r`n" + "`r`n" + "Ready for Next Task"
 })
 $imageglass.Add_Click({
     Write-Host "Installing Image Glass (Image Viewer)"
+    $ResultText.text = "`r`n" +"`r`n" + "Installing Image Glass... Please Wait" 
     winget install DuongDieuPhap.ImageGlass | Out-Host
     if($?) { Write-Host "Installed Image Glass (Image Viewer)" }
+    $ResultText.text = "`r`n" + "Finished Installing Image Glass" + "`r`n" + "`r`n" + "Ready for Next Task"
 })
-$honeyview.Add_Click({
-    Write-Host "Installing Bandisoft Honeyview (Image Viewer)"
-    winget install Bandisoft.Honeyview | Out-Host
-    if($?) { Write-Host "Installed Honeyview (Image Viewer)" }
+$discord.Add_Click({
+    Write-Host "Installing Discord"
+    $ResultText.text = "`r`n" +"`r`n" + "Discord... Please Wait" 
+    winget install Discord.Discord | Out-Host
+    if($?) { Write-Host "Installed Discord" }
+    $ResultText.text = "`r`n" + "Finished Installing Discord" + "`r`n" + "`r`n" + "Ready for Next Task"
 })
 
 $adobereader.Add_Click({
     Write-Host "Installing Adobe Reader DC"
+    $ResultText.text = "`r`n" +"`r`n" + "Installing Adobe Reader DC... Please Wait" 
     winget install Adobe.AdobeAcrobatReaderDC | Out-Host
     if($?) { Write-Host "Installed Adobe Reader DC" }
+    $ResultText.text = "`r`n" + "Finished Installing Adobe Reader DC" + "`r`n" + "`r`n" + "Ready for Next Task"
 })
 
 $notepad.Add_Click({
     Write-Host "Installing Notepad++"
+    $ResultText.text = "`r`n" +"`r`n" + "Installing Notepad++... Please Wait" 
     winget install Notepad++.Notepad++ | Out-Host
     if($?) { Write-Host "Installed Notepad++" }
+    $ResultText.text = "`r`n" + "Finished Installing NotePad++" + "`r`n" + "`r`n" + "Ready for Next Task"
 })
 
 $vlc.Add_Click({
     Write-Host "Installing VLC Media Player"
+    $ResultText.text = "`r`n" +"`r`n" + "VLC Media Player... Please Wait" 
     winget install VideoLAN.VLC | Out-Host
     if($?) { Write-Host "Installed VLC Media Player" }
+    $ResultText.text = "`r`n" + "Finished Installing NotePad++" + "`r`n" + "`r`n" + "Ready for Next Task"
 })
 
 $mpc.Add_Click({
     Write-Host "Installing Media Player Classic"
+    $ResultText.text = "`r`n" +"`r`n" + "Installing Media Player Classic... Please Wait" 
     winget install clsid2.mpc-hc | Out-Host
     if($?) { Write-Host "Installed Media Player Classic" }
+    $ResultText.text = "`r`n" + "Finished Installing Media Player Classic" + "`r`n" + "`r`n" + "Ready for Next Task"
 })
 
 $7zip.Add_Click({
     Write-Host "Installing 7-Zip Compression Tool"
+    $ResultText.text = "`r`n" +"`r`n" + "Installing 7-Zip Compression Tool... Please Wait" 
     winget install 7zip.7zip | Out-Host
     if($?) { Write-Host "Installed 7-Zip Compression Tool" }
+    $ResultText.text = "`r`n" + "Finished Installing 7-Zip Compression Tool" + "`r`n" + "`r`n" + "Ready for Next Task"
 })
 
 $vscode.Add_Click({
     Write-Host "Installing Visual Studio Code"
+    $ResultText.text = "`r`n" +"`r`n" + "Installing Visual Studio Code... Please Wait" 
     winget install Microsoft.VisualStudioCode | Out-Host
     if($?) { Write-Host "Installed Visual Studio Code" }
+    $ResultText.text = "`r`n" + "Finished Installing Visual Studio Code" + "`r`n" + "`r`n" + "Ready for Next Task"
 })
 
 $vscodium.Add_Click({
     Write-Host "Installing VS Codium"
+    $ResultText.text = "`r`n" +"`r`n" + "Installing VS Codium... Please Wait" 
     winget install VSCodium.VSCodium | Out-Host
     if($?) { Write-Host "Installed VS Codium" }
+    $ResultText.text = "`r`n" + "Finished Installing VS Codium" + "`r`n" + "`r`n" + "Ready for Next Task"
 })
 
 $winterminal.Add_Click({
     Write-Host "Installing New Windows Terminal"
+    $ResultText.text = "`r`n" +"`r`n" + "Installing New Windows Terminal... Please Wait" 
     winget install Microsoft.WindowsTerminal | Out-Host
     if($?) { Write-Host "Installed New Windows Terminal" }
+    $ResultText.text = "`r`n" + "Finished Installing New Windows Terminal" + "`r`n" + "`r`n" + "Ready for Next Task"
 })
 
 $powertoys.Add_Click({
     Write-Host "Installing Microsoft PowerToys"
+    $ResultText.text = "`r`n" +"`r`n" + "Installing Microsoft PowerToys... Please Wait" 
     winget install Microsoft.PowerToys | Out-Host
     if($?) { Write-Host "Installed Microsoft PowerToys" }
+    $ResultText.text = "`r`n" + "Finished Installing Microsoft PowerToys" + "`r`n" + "`r`n" + "Ready for Next Task"
 })
 
 $everythingsearch.Add_Click({
     Write-Host "Installing Voidtools Everything Search"
+    $ResultText.text = "`r`n" +"`r`n" + "Installing Voidtools Everything Search... Please Wait" 
     winget install voidtools.Everything | Out-Host
     if($?) { Write-Host "Installed Everything Search" }
+    $ResultText.text = "`r`n" + "Finished Installing Voidtools Everything Search" + "`r`n" + "`r`n" + "Ready for Next Task"
 })
 
 $sumatrapdf.Add_Click({
     Write-Host "Installing Sumatra PDF"
+    $ResultText.text = "`r`n" +"`r`n" + "Installing Sumatra PDF... Please Wait" 
     winget install SumatraPDF.SumatraPDF | Out-Host
     if($?) { Write-Host "Installed Sumatra PDF" }
+    $ResultText.text = "`r`n" + "Finished Installing Sumatra PDF" + "`r`n" + "`r`n" + "Ready for Next Task"
 })
 
-$openshell.Add_Click({
-    Write-Host "Installing OpenShell (Old Windows menu)"
-    winget install openshellmenu | Out-Host
-    Write-Host "Installed OpenShell"
+$githubdesktop.Add_Click({
+    Write-Host "Installing GitHub Desktop"
+    $ResultText.text = "`r`n" +"`r`n" + "Installing GitHub Desktop... Please Wait" 
+    winget install GitHub.GitHubDesktop | Out-Host
+    Write-Host "Installed Github Desktop"
+    $ResultText.text = "`r`n" + "Finished Installing GitHub Desktop" + "`r`n" + "`r`n" + "Ready for Next Task"
+})
+
+$translucenttb.Add_Click({
+    Write-Host "Installing Translucent Taskbar"
+    $ResultText.text = "`r`n" +"`r`n" + "Installing Translucent Taskbar... Please Wait" 
+    winget install TranslucentTB.TranslucentTB | Out-Host
+    Write-Host "Installed Translucent Taskbar"
+    $ResultText.text = "`r`n" + "Finished Installing Translucent Taskbar" + "`r`n" + "`r`n" + "Ready for Next Task"
+})
+
+$etcher.Add_Click({
+    Write-Host "Installing Etcher USB Imager"
+    $ResultText.text = "`r`n" +"`r`n" + "Installing Etcher USB Imager... Please Wait" 
+    winget install Balena.Etcher | Out-Host
+    Write-Host "Installed Etcher USB Imager"
+    $ResultText.text = "`r`n" + "Finished Installing Etcher USB Imager" + "`r`n" + "`r`n" + "Ready for Next Task"
+})
+
+$putty.Add_Click({
+    Write-Host "Installing PuTTY & WinSCP"
+    $ResultText.text = "`r`n" +"`r`n" + "Installing PuTTY & WinSCP... Please Wait" 
+    winget install PuTTY.PuTTY | Out-Host
+    winget install WinSCP.WinSCP | Out-Host
+    Write-Host "Installed PuTTY & WinSCP"
+    $ResultText.text = "`r`n" + "Finished Installing PuTTY & WinSCP" + "`r`n" + "`r`n" + "Ready for Next Task"
+})
+
+$advancedipscanner.Add_Click({
+    Write-Host "Installing Advanced IP Scanner"
+    $ResultText.text = "`r`n" +"`r`n" + "Installing Advanced IP Scanner... Please Wait" 
+    winget install Famatech.AdvancedIPScanner | Out-Host
+    Write-Host "Installed Advanced IP Scanner"
+    $ResultText.text = "`r`n" + "Finished Installing Advanced IP Scanner" + "`r`n" + "`r`n" + "Ready for Next Task"
+})
+
+$sharex.Add_Click({
+    Write-Host "Installing ShareX Screenshot Tool"
+    $ResultText.text = "`r`n" +"`r`n" + "Installing ShareX Screenshot Tool... Please Wait" 
+    winget install ShareX.ShareX | Out-Host
+    Write-Host "Installed ShareX Screenshot Tool"
+    $ResultText.text = "`r`n" + "Finished Installing ShareX Screenshot Tool" + "`r`n" + "`r`n" + "Ready for Next Task"
+})
+
+$gimp.Add_Click({
+    Write-Host "Installing Gimp Image Editor"
+    $ResultText.text = "`r`n" +"`r`n" + "Installing Gimp Image Editor... Please Wait" 
+    winget install GIMP.GIMP | Out-Host
+    Write-Host "Installed Gimp Image Editor"
+    $ResultText.text = "`r`n" + "Finished Installing Gimp Image Editor" + "`r`n" + "`r`n" + "Ready for Next Task"
 })
 
 $essentialtweaks.Add_Click({
     Write-Host "Creating Restore Point incase something bad happens"
+    $ResultText.text = "`r`n" +"`r`n" + "Installing Essential Tools... Please Wait" 
     Enable-ComputerRestore -Drive "C:\"
     Checkpoint-Computer -Description "RestorePoint1" -RestorePointType "MODIFY_SETTINGS"
 
     Write-Host "Running O&O Shutup with Recommended Settings"
+    $ResultText.text += "`r`n" +"Running O&O Shutup with Recommended Settings"
     Import-Module BitsTransfer
     Start-BitsTransfer -Source "https://raw.githubusercontent.com/ChrisTitusTech/win10script/master/ooshutup10.cfg" -Destination ooshutup10.cfg
     Start-BitsTransfer -Source "https://dl5.oo-software.com/files/ooshutup10/OOSU10.exe" -Destination OOSU10.exe
     ./OOSU10.exe ooshutup10.cfg /quiet
 
     Write-Host "Disabling Telemetry..."
+    $ResultText.text += "`r`n" +"Disabling Telemetry..."
     Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\DataCollection" -Name "AllowTelemetry" -Type DWord -Value 0
     Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DataCollection" -Name "AllowTelemetry" -Type DWord -Value 0
     Disable-ScheduledTask -TaskName "Microsoft\Windows\Application Experience\Microsoft Compatibility Appraiser" | Out-Null
@@ -668,8 +889,8 @@ $essentialtweaks.Add_Click({
         New-Item -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced\People" | Out-Null
     }
     Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced\People" -Name "PeopleBand" -Type DWord -Value 0
-    Write-Host "Showing all tray icons..."
-    Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer" -Name "EnableAutoTray" -Type DWord -Value 0
+    Write-Host "Hide tray icons..."
+    Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer" -Name "EnableAutoTray" -Type DWord -Value 1
     Write-Host "Enabling NumLock after startup..."
     If (!(Test-Path "HKU:")) {
         New-PSDrive -Name HKU -PSProvider Registry -Root HKEY_USERS | Out-Null
@@ -682,6 +903,7 @@ $essentialtweaks.Add_Click({
     }
 
     Write-Host "Changing default Explorer view to This PC..."
+    $ResultText.text += "`r`n" +"Quality of Life Tweaks"
     Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "LaunchTo" -Type DWord -Value 1
 
     Write-Host "Hiding 3D Objects icon from This PC..."
@@ -697,6 +919,7 @@ $essentialtweaks.Add_Click({
 	#Enable-WindowsOptionalFeature -Online -FeatureName "WindowsMediaPlayer" -NoRestart -WarningAction SilentlyContinue | Out-Null
 
     Write-Host "Disable News and Interests"
+    $ResultText.text += "`r`n" +"Disabling Extra Junk"
     Set-ItemProperty -Path "HKCU:\SOFTWARE\Policies\Microsoft\Windows\Windows Feeds" -Name "EnableFeeds" -Type DWord -Value 0
     # Remove "News and Interest" from taskbar
     Set-ItemProperty -Path  "HKCU:\Software\Microsoft\Windows\CurrentVersion\Feeds" -Name "ShellFeedsTaskbarViewMode" -Type DWord -Value 2
@@ -724,15 +947,18 @@ Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Policies
     Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "HideFileExt" -Type DWord -Value 0
 
     Write-Host "Essential Tweaks Completed"
+    $ResultText.text = "`r`n" + "Essential Tweaks Done" + "`r`n" + "`r`n" + "Ready for Next Task"
 })
 
 $dualboottime.Add_Click({
 Write-Host "Setting BIOS time to UTC..."
     Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\TimeZoneInformation" -Name "RealTimeIsUniversal" -Type DWord -Value 1
+    $ResultText.text = "`r`n" + "Time set to UTC for consistent time in Dual Boot Systems" + "`r`n" + "`r`n" + "Ready for Next Task"
 })
 
 $essentialundo.Add_Click({
     Write-Host "Creating Restore Point incase something bad happens"
+    $ResultText.text = "`r`n" +"`r`n" + "Creating Restore Point and Reverting Settings... Please Wait"
     Enable-ComputerRestore -Drive "C:\"
     Checkpoint-Computer -Description "RestorePoint1" -RestorePointType "MODIFY_SETTINGS"
 
@@ -819,9 +1045,6 @@ $essentialundo.Add_Click({
     Write-Host "Showing Task View button..."
     Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "ShowTaskViewButton" -Type DWord -Value 1
     Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced\People" -Name "PeopleBand" -Type DWord -Value 1
-    Write-Host "Hiding tray icons..."
-    Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer" -Name "EnableAutoTray" -Type DWord -Value 1
-
 
     Write-Host "Changing default Explorer view to Quick Access..."
     Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "LaunchTo" -Type DWord -Value 0
@@ -845,10 +1068,12 @@ $essentialundo.Add_Click({
     # Considered using Invoke-GPUpdate but requires module most people won't have installed
 
     Write-Host "Essential Undo Completed"
+    $ResultText.text = "`r`n" +"`r`n" + "Essential Undo Completed - Ready for next task"
 })
 
 $windowssearch.Add_Click({
     Write-Host "Disabling Bing Search in Start Menu..."
+    $ResultText.text = "`r`n" +"`r`n" + "Disabling Search, Cortana, Start menu search... Please Wait"
     Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Search" -Name "BingSearchEnabled" -Type DWord -Value 0
     <#
     Write-Host "Disabling Cortana"
@@ -927,6 +1152,7 @@ $windowssearch.Add_Click({
         Set-ItemProperty -Path $keyPath -Name "LockedStartLayout" -Value 0
 
     Write-Host "Search and Start Menu Tweaks Complete"
+    $ResultText.text = "`r`n" +"`r`n" + "Search and Start Menu Tweaks Complete"
     }
 })
 
@@ -937,6 +1163,7 @@ $backgroundapps.Add_Click({
         Set-ItemProperty -Path $_.PsPath -Name "DisabledByUser" -Type DWord -Value 1
     }
     Write-Host "Disabled Background application access"
+    $ResultText.text = "`r`n" +"`r`n" + "Disabled Background application access"
 })
 
 $cortana.Add_Click({
@@ -959,6 +1186,7 @@ $cortana.Add_Click({
     }
     Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Windows Search" -Name "AllowCortana" -Type DWord -Value 0
     Write-Host "Disabled Cortana"
+    $ResultText.text = "`r`n" +"`r`n" + "Disabled Cortana"
 })
 
 $Bloatware = @(
@@ -1058,9 +1286,11 @@ $removebloat.Add_Click({
         Get-AppxPackage -Name $Bloat| Remove-AppxPackage
         Get-AppxProvisionedPackage -Online | Where-Object DisplayName -like $Bloat | Remove-AppxProvisionedPackage -Online
         Write-Host "Trying to remove $Bloat."
+        $ResultText.text = "`r`n" +"`r`n" + "Trying to remove $Bloat."
     }
 
     Write-Host "Finished Removing Bloatware Apps"
+    $ResultText.text = "`r`n" +"`r`n" + "Finished Removing Bloatware Apps"
 })
 
 $reinstallbloat.Add_Click({
@@ -1068,10 +1298,12 @@ $reinstallbloat.Add_Click({
 
     foreach ($app in $Bloatware) {
         Write-Output "Trying to add $app"
+        $ResultText.text = "`r`n" +"`r`n" + "Trying to add $app"
         Add-AppxPackage -DisableDevelopmentMode -Register "$($(Get-AppxPackage -AllUsers $app).InstallLocation)\AppXManifest.xml"
     }
 
     Write-Host "Finished Reinstalling Bloatware Apps"
+    $ResultText.text = "`r`n" +"`r`n" + "Finished Reinstalling Bloatware Apps"
 })
 
 $defaultwindowsupdate.Add_Click({
@@ -1085,6 +1317,7 @@ $defaultwindowsupdate.Add_Click({
     Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" -Name "NoAutoRebootWithLoggedOnUsers" -ErrorAction SilentlyContinue
     Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" -Name "AUPowerManagement" -ErrorAction SilentlyContinue
     Write-Host "Enabled driver offering through Windows Update"
+    $ResultText.text = "`r`n" +"`r`n" + "Set Windows Updates to Stock Settings"
 })
 
 $securitywindowsupdate.Add_Click({
@@ -1110,6 +1343,7 @@ $securitywindowsupdate.Add_Click({
     Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" -Name "NoAutoRebootWithLoggedOnUsers" -Type DWord -Value 1
     Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" -Name "AUPowerManagement" -Type DWord -Value 0
     Write-Host "Disabled driver offering through Windows Update"
+    $ResultText.text = "`r`n" +"`r`n" + "Set Windows Update to Sane Settings"
 })
 
 $actioncenter.Add_Click({
@@ -1120,9 +1354,10 @@ $actioncenter.Add_Click({
     Set-ItemProperty -Path "HKCU:\SOFTWARE\Policies\Microsoft\Windows\Explorer" -Name "DisableNotificationCenter" -Type DWord -Value 1
     Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\PushNotifications" -Name "ToastEnabled" -Type DWord -Value 0
     Write-Host "Disabled Action Center"
+    $ResultText.text = "`r`n" +"`r`n" + "Disabled Action Center"
 })
 
-$visualfx.Add_Click({
+$performancefx.Add_Click({
     Write-Host "Adjusting visual effects for performance..."
     Set-ItemProperty -Path "HKCU:\Control Panel\Desktop" -Name "DragFullWindows" -Type String -Value 0
     Set-ItemProperty -Path "HKCU:\Control Panel\Desktop" -Name "MenuShowDelay" -Type String -Value 200
@@ -1135,6 +1370,22 @@ $visualfx.Add_Click({
     Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects" -Name "VisualFXSetting" -Type DWord -Value 3
     Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\DWM" -Name "EnableAeroPeek" -Type DWord -Value 0
     Write-Host "Adjusted visual effects for performance"
+    $ResultText.text = "`r`n" +"`r`n" + "Adjusted VFX for performance"
+})
+
+$appearancefx.Add_Click({
+	Write-Output "Adjusting visual effects for appearance..."
+	Set-ItemProperty -Path "HKCU:\Control Panel\Desktop" -Name "DragFullWindows" -Type String -Value 1
+	Set-ItemProperty -Path "HKCU:\Control Panel\Desktop" -Name "MenuShowDelay" -Type String -Value 400
+	Set-ItemProperty -Path "HKCU:\Control Panel\Desktop" -Name "UserPreferencesMask" -Type Binary -Value ([byte[]](158,30,7,128,18,0,0,0))
+	Set-ItemProperty -Path "HKCU:\Control Panel\Desktop\WindowMetrics" -Name "MinAnimate" -Type String -Value 1
+	Set-ItemProperty -Path "HKCU:\Control Panel\Keyboard" -Name "KeyboardDelay" -Type DWord -Value 1
+	Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "ListviewAlphaSelect" -Type DWord -Value 1
+	Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "ListviewShadow" -Type DWord -Value 1
+	Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "TaskbarAnimations" -Type DWord -Value 1
+	Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects" -Name "VisualFXSetting" -Type DWord -Value 3
+	Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\DWM" -Name "EnableAeroPeek" -Type DWord -Value 1
+    $ResultText.text = "`r`n" +"`r`n" + "Visual effects are set for appearance (Defaults)"
 })
 
 $onedrive.Add_Click({
@@ -1164,18 +1415,21 @@ $onedrive.Add_Click({
     Remove-Item -Path "HKCR:\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" -Recurse -ErrorAction SilentlyContinue
     Remove-Item -Path "HKCR:\Wow6432Node\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" -Recurse -ErrorAction SilentlyContinue
     Write-Host "Disabled OneDrive"
+    $ResultText.text = "`r`n" +"`r`n" + "Deleted and Disabled OneDrive"
 })
 
 $darkmode.Add_Click({
     Write-Host "Enabling Dark Mode"
     Set-ItemProperty -Path HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize -Name AppsUseLightTheme -Value 0
     Write-Host "Enabled Dark Mode"
+    $ResultText.text = "`r`n" +"`r`n" + "Enabled Dark Mode"
 })
 
 $lightmode.Add_Click({
     Write-Host "Switching Back to Light Mode"
     Remove-ItemProperty -Path HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize -Name AppsUseLightTheme
     Write-Host "Switched Back to Light Mode"
+    $ResultText.text = "`r`n" +"`r`n" + "Enabled Light Mode"
 })
 
 $EActionCenter.Add_Click({
@@ -1183,6 +1437,7 @@ $EActionCenter.Add_Click({
 	Remove-ItemProperty -Path "HKCU:\SOFTWARE\Policies\Microsoft\Windows\Explorer" -Name "DisableNotificationCenter" -ErrorAction SilentlyContinue
 	Remove-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\PushNotifications" -Name "ToastEnabled" -ErrorAction SilentlyContinue
 	Write-Host "Done - Reverted to Stock Settings"
+    $ResultText.text = "`r`n" +"`r`n" + "Enabled Action Center"
 })
 
 $ECortana.Add_Click({
@@ -1205,13 +1460,24 @@ $ECortana.Add_Click({
     Write-Host "Restore Windows Search Icon..."
 	Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Search" -Name "SearchboxTaskbarMode" -Type DWord -Value 1
 	Write-Host "Done - Reverted to Stock Settings"
+    $ResultText.text = "`r`n" +"`r`n" + "Enabled Cortana and Restored Search"
 })
 
 $HTrayIcons.Add_Click({
 
 	Write-Host "Hiding tray icons..."
-	Remove-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer" -Name "EnableAutoTray" -ErrorAction SilentlyContinue
-	Write-Host "Done - Reverted to Stock Settings"
+	Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer" -Name "EnableAutoTray" -Type DWord -Value 1
+	Write-Host "Done - Hid Tray Icons"
+    $ResultText.text = "`r`n" +"`r`n" + "Tray icons are now factory defaults"
+})
+
+
+$STrayIcons.Add_Click({
+
+	Write-Host "Showing tray icons..."
+	Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer" -Name "EnableAutoTray" -Type DWord -Value 0
+	Write-Host "Done - Now showing all tray icons"
+    $ResultText.text = "`r`n" +"`r`n" + "Tray Icons now set to show all"
 })
 
 $EClipboardHistory.Add_Click({
@@ -1219,6 +1485,7 @@ $EClipboardHistory.Add_Click({
 	Remove-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Clipboard" -Name "EnableClipboardHistory" -ErrorAction SilentlyContinue
     Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\System" -Name "AllowClipboardHistory" -ErrorAction SilentlyContinue
 	Write-Host "Done - Reverted to Stock Settings"
+    $ResultText.text = "`r`n" +"`r`n" + "Enabled Clipboard History"
 })
 
 $ELocation.Add_Click({
@@ -1238,6 +1505,7 @@ $ELocation.Add_Click({
 	Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\AppPrivacy" -Name "LetAppsAccessLocation_ForceAllowTheseApps" -ErrorAction SilentlyContinue
 	Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\AppPrivacy" -Name "LetAppsAccessLocation_ForceDenyTheseApps" -ErrorAction SilentlyContinue
 	Write-Host "Done - Reverted to Stock Settings"
+    $ResultText.text = "`r`n" +"`r`n" + "Location Tracking now on... Reboot to check."
 })
 
 $RBackgroundApps.Add_Click({
@@ -1247,6 +1515,7 @@ $RBackgroundApps.Add_Click({
 		Remove-ItemProperty -Path $_.PsPath -Name "DisabledByUser" -ErrorAction SilentlyContinue
 	}
 	Write-Host "Done - Reverted to Stock Settings"
+    $ResultText.text = "`r`n" +"`r`n" + "Enabled Background Apps"
 })
 
 $EHibernation.Add_Click({
@@ -1254,12 +1523,14 @@ $EHibernation.Add_Click({
     Set-ItemProperty -Path "HKLM:\System\CurrentControlSet\Control\Session Manager\Power" -Name "HibernteEnabled" -Type Dword -Value 1
     Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FlyoutMenuSettings" -Name "ShowHibernateOption" -Type Dword -Value 1
     Write-Host "Done - Reverted to Stock Settings"
+    $ResultText.text = "`r`n" +"`r`n" + "Enabled Hibernation"
 })
 
 $InstallOneDrive.Add_Click({
     Write-Host "Installing Onedrive. Please Wait..."
     Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\OneDrive" -Name "DisableFileSyncNGSC" -ErrorAction SilentlyContinue
     %systemroot%\SysWOW64\OneDriveSetup.exe
+    $ResultText.text = "`r`n" +"`r`n" + "Finished Reinstalling OneDrive"
 })
 
 $DisableNumLock.Add_Click({
@@ -1270,6 +1541,7 @@ $DisableNumLock.Add_Click({
         $wsh = New-Object -ComObject WScript.Shell
         $wsh.SendKeys('{NUMLOCK}')
     }
+    $ResultText.text = "`r`n" +"`r`n" + "NUMLOCK Disabled"
 })
 
 $yourphonefix.Add_Click({
@@ -1285,6 +1557,102 @@ $yourphonefix.Add_Click({
 		Remove-ItemProperty -Path $_.PsPath -Name "DisabledByUser" -ErrorAction SilentlyContinue
 	}
     Write-Host "You may need to Reboot and right-click Your Phone app and select repair"
+    $ResultText.text = "`r`n" +"`r`n" + "You may need to Reboot and right-click Your Phone app and select repair"
+})
+
+$windowsupdatefix.Add_Click({
+    Write-Host "1. Stopping Windows Update Services..." 
+    Stop-Service -Name BITS 
+    Stop-Service -Name wuauserv 
+    Stop-Service -Name appidsvc 
+    Stop-Service -Name cryptsvc 
+    
+    Write-Host "2. Remove QMGR Data file..." 
+    Remove-Item "$env:allusersprofile\Application Data\Microsoft\Network\Downloader\qmgr*.dat" -ErrorAction SilentlyContinue 
+    
+    Write-Host "3. Renaming the Software Distribution and CatRoot Folder..." 
+    Rename-Item $env:systemroot\SoftwareDistribution SoftwareDistribution.bak -ErrorAction SilentlyContinue 
+    Rename-Item $env:systemroot\System32\Catroot2 catroot2.bak -ErrorAction SilentlyContinue 
+    
+    Write-Host "4. Removing old Windows Update log..." 
+    Remove-Item $env:systemroot\WindowsUpdate.log -ErrorAction SilentlyContinue 
+    
+    Write-Host "5. Resetting the Windows Update Services to defualt settings..." 
+    "sc.exe sdset bits D:(A;;CCLCSWRPWPDTLOCRRC;;;SY)(A;;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;BA)(A;;CCLCSWLOCRRC;;;AU)(A;;CCLCSWRPWPDTLOCRRC;;;PU)" 
+    "sc.exe sdset wuauserv D:(A;;CCLCSWRPWPDTLOCRRC;;;SY)(A;;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;BA)(A;;CCLCSWLOCRRC;;;AU)(A;;CCLCSWRPWPDTLOCRRC;;;PU)" 
+    
+    Set-Location $env:systemroot\system32 
+    
+    Write-Host "6. Registering some DLLs..." 
+    regsvr32.exe /s atl.dll 
+    regsvr32.exe /s urlmon.dll 
+    regsvr32.exe /s mshtml.dll 
+    regsvr32.exe /s shdocvw.dll 
+    regsvr32.exe /s browseui.dll 
+    regsvr32.exe /s jscript.dll 
+    regsvr32.exe /s vbscript.dll 
+    regsvr32.exe /s scrrun.dll 
+    regsvr32.exe /s msxml.dll 
+    regsvr32.exe /s msxml3.dll 
+    regsvr32.exe /s msxml6.dll 
+    regsvr32.exe /s actxprxy.dll 
+    regsvr32.exe /s softpub.dll 
+    regsvr32.exe /s wintrust.dll 
+    regsvr32.exe /s dssenh.dll 
+    regsvr32.exe /s rsaenh.dll 
+    regsvr32.exe /s gpkcsp.dll 
+    regsvr32.exe /s sccbase.dll 
+    regsvr32.exe /s slbcsp.dll 
+    regsvr32.exe /s cryptdlg.dll 
+    regsvr32.exe /s oleaut32.dll 
+    regsvr32.exe /s ole32.dll 
+    regsvr32.exe /s shell32.dll 
+    regsvr32.exe /s initpki.dll 
+    regsvr32.exe /s wuapi.dll 
+    regsvr32.exe /s wuaueng.dll 
+    regsvr32.exe /s wuaueng1.dll 
+    regsvr32.exe /s wucltui.dll 
+    regsvr32.exe /s wups.dll 
+    regsvr32.exe /s wups2.dll 
+    regsvr32.exe /s wuweb.dll 
+    regsvr32.exe /s qmgr.dll 
+    regsvr32.exe /s qmgrprxy.dll 
+    regsvr32.exe /s wucltux.dll 
+    regsvr32.exe /s muweb.dll 
+    regsvr32.exe /s wuwebv.dll 
+    
+    Write-Host "7) Removing WSUS client settings..." 
+    REG DELETE "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\WindowsUpdate" /v AccountDomainSid /f 
+    REG DELETE "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\WindowsUpdate" /v PingID /f 
+    REG DELETE "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\WindowsUpdate" /v SusClientId /f 
+    
+    Write-Host "8) Resetting the WinSock..." 
+    netsh winsock reset 
+    netsh winhttp reset proxy 
+    
+    Write-Host "9) Delete all BITS jobs..." 
+    Get-BitsTransfer | Remove-BitsTransfer 
+    
+    Write-Host "10) Attempting to install the Windows Update Agent..." 
+    if($arch -eq 64){ 
+        wusa Windows8-RT-KB2937636-x64 /quiet 
+    } 
+    else{ 
+        wusa Windows8-RT-KB2937636-x86 /quiet 
+    } 
+    
+    Write-Host "11) Starting Windows Update Services..." 
+    Start-Service -Name BITS 
+    Start-Service -Name wuauserv 
+    Start-Service -Name appidsvc 
+    Start-Service -Name cryptsvc 
+    
+    Write-Host "12) Forcing discovery..." 
+    wuauclt /resetauthorization /detectnow 
+    
+    Write-Host "Process complete. Please reboot your computer."
+    $ResultText.text = "`r`n" +"`r`n" + "Process complete. Please reboot your computer."
+
 })
 
 [void]$Form.ShowDialog()
