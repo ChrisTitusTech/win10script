@@ -13,34 +13,17 @@ If (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]:
 # GUI Specs
 Write-Host "Checking winget..."
 
-Try{
-	# Check if winget is already installed
-	$er = (invoke-expression "winget -v") 2>&1
-	if ($lastexitcode) {throw $er}
-	Write-Host "winget is already installed."
-}
-Catch{
-	# winget is not installed. Install it from the Github release
-	Write-Host "winget is not found, installing it right now."
-
-	$asset = Invoke-RestMethod -Method Get -Uri 'https://api.github.com/repos/microsoft/winget-cli/releases/latest' | ForEach-Object assets | Where-Object name -like "*.msixbundle"
-	$output = $PSScriptRoot + "\winget-latest.appxbundle"
-	Write-Host "Downloading latest winget release"
-	Invoke-WebRequest -Uri $asset.browser_download_url -OutFile $output
-
-	Write-Host "Installing the winget package"
-	Add-AppxPackage -Path $output
-
-    Write-Host "Cleanup winget install package"
-    if (Test-Path -Path $output) {
-        Remove-Item $output -Force -ErrorAction SilentlyContinue
-    }
-}
-Finally {
-	# Start installing the packages with winget
-	#Get-Content .\winget.txt | ForEach-Object {
-	#	iex ("winget install -e " + $_)
-	#}
+# Check if winget is installed
+if (Test-Path ~\AppData\Local\Microsoft\WindowsApps\winget.exe){
+    'Winget Already Installed'
+}  
+else{
+    # Installing winget from the Microsoft Store
+	Write-Host "Winget not found, installing it now."
+	Start-Process "ms-appinstaller:?source=https://aka.ms/getwinget"
+	$nid = (Get-Process AppInstaller).Id
+	Wait-Process -Id $nid
+	Write-Host Winget Installed
 }
 
 $Form                            = New-Object system.Windows.Forms.Form
