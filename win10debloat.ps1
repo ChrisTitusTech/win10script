@@ -271,7 +271,7 @@ $Label19.Font                    = New-Object System.Drawing.Font('Microsoft San
 $PictureBox1                     = New-Object system.Windows.Forms.PictureBox
 $PictureBox1.width               = 366
 $PictureBox1.height              = 130
-$PictureBox1.location            = New-Object System.Drawing.Point(571,274)
+$PictureBox1.location            = New-Object System.Drawing.Point(554,420)
 $PictureBox1.imageLocation       = "https://github.com/ChrisTitusTech/win10script/blob/master/titus-toolbox.png?raw=true"
 $PictureBox1.SizeMode            = [System.Windows.Forms.PictureBoxSizeMode]::zoom
 $lightmode                       = New-Object system.Windows.Forms.Button
@@ -536,7 +536,7 @@ $ResultText                      = New-Object system.Windows.Forms.TextBox
 $ResultText.multiline            = $true
 $ResultText.width                = 338
 $ResultText.height               = 126
-$ResultText.location             = New-Object System.Drawing.Point(581,489)
+$ResultText.location             = New-Object System.Drawing.Point(565,284)
 $ResultText.Font                 = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
 
 $Label10                         = New-Object system.Windows.Forms.Label
@@ -544,7 +544,7 @@ $Label10.text                    = "Current Status:"
 $Label10.AutoSize                = $true
 $Label10.width                   = 25
 $Label10.height                  = 10
-$Label10.location                = New-Object System.Drawing.Point(639,440)
+$Label10.location                = New-Object System.Drawing.Point(643,244)
 $Label10.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',24)
 
 $EHibernation                    = New-Object system.Windows.Forms.Button
@@ -561,7 +561,36 @@ $dualboottime.height             = 30
 $dualboottime.location           = New-Object System.Drawing.Point(3,754)
 $dualboottime.Font               = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
-$Form.controls.AddRange(@($Panel1,$Panel2,$Label3,$Label15,$Panel4,$PictureBox1,$Label1,$Label4,$Panel3,$ResultText,$Label10))
+$Label11                         = New-Object system.Windows.Forms.Label
+$Label11.text                    = "Videos to Fix Windows"
+$Label11.AutoSize                = $true
+$Label11.width                   = 25
+$Label11.height                  = 10
+$Label11.location                = New-Object System.Drawing.Point(652,565)
+$Label11.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
+
+$urlfixwinstartup                = New-Object system.Windows.Forms.Button
+$urlfixwinstartup.text           = "Repair Windows Startup"
+$urlfixwinstartup.width          = 232
+$urlfixwinstartup.height         = 30
+$urlfixwinstartup.location       = New-Object System.Drawing.Point(615,594)
+$urlfixwinstartup.Font           = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
+
+$urlremovevirus                  = New-Object system.Windows.Forms.Button
+$urlremovevirus.text             = "Clean Viruses"
+$urlremovevirus.width            = 232
+$urlremovevirus.height           = 30
+$urlremovevirus.location         = New-Object System.Drawing.Point(615,632)
+$urlremovevirus.Font             = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
+
+$urlcreateiso                    = New-Object system.Windows.Forms.Button
+$urlcreateiso.text               = "Create Custom ISO"
+$urlcreateiso.width              = 232
+$urlcreateiso.height             = 30
+$urlcreateiso.location           = New-Object System.Drawing.Point(615,672)
+$urlcreateiso.Font               = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
+
+$Form.controls.AddRange(@($Panel1,$Panel2,$Label3,$Label15,$Panel4,$PictureBox1,$Label1,$Label4,$Panel3,$ResultText,$Label10,$Label11,$urlfixwinstartup,$urlremovevirus,$urlcreateiso))
 $Panel1.controls.AddRange(@($brave,$firefox,$7zip,$sharex,$adobereader,$notepad,$gchrome,$mpc,$vlc,$powertoys,$winterminal,$vscode,$Label2,$everythingsearch,$sumatrapdf,$vscodium,$imageglass,$gimp,$Label7,$Label8,$Label9,$advancedipscanner,$putty,$etcher,$translucenttb,$githubdesktop,$discord,$autohotkey))
 $Panel2.controls.AddRange(@($essentialtweaks,$backgroundapps,$cortana,$actioncenter,$darkmode,$performancefx,$onedrive,$lightmode,$essentialundo,$EActionCenter,$ECortana,$RBackgroundApps,$HTrayIcons,$EClipboardHistory,$ELocation,$InstallOneDrive,$removebloat,$reinstallbloat,$WarningLabel,$Label5,$appearancefx,$STrayIcons,$EHibernation,$dualboottime))
 $Panel4.controls.AddRange(@($defaultwindowsupdate,$securitywindowsupdate,$Label16,$Label17,$Label18,$Label19))
@@ -667,6 +696,18 @@ $vscodium.Add_Click({
     winget install VSCodium.VSCodium | Out-Host
     if($?) { Write-Host "Installed VS Codium" }
     $ResultText.text = "`r`n" + "Finished Installing VS Codium" + "`r`n" + "`r`n" + "Ready for Next Task"
+})
+
+$urlremovevirus.Add_Click({
+    Start-Process "https://youtu.be/CHtZ9-9ch2w"
+})
+
+$urlfixwinstartup.Add_Click({
+    Start-Process "https://youtu.be/sOihh4ZNOf4"
+})
+
+$urlcreateiso.Add_Click({
+    Start-Process "https://youtu.be/R6XPff38iSc"
 })
 
 $winterminal.Add_Click({
