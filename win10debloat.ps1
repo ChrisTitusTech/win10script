@@ -37,6 +37,7 @@ $Form.BackColor                  = [System.Drawing.ColorTranslator]::FromHtml("#
 $Form.AutoScaleDimensions     = '192, 192'
 $Form.AutoScaleMode           = "Dpi"
 $Form.AutoSize                = $True
+$Form.AutoScroll              = $True
 $Form.ClientSize              = '1050, 1000'
 $Form.FormBorderStyle         = 'FixedSingle'
 
