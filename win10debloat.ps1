@@ -686,7 +686,7 @@ $7zip.Add_Click({
 $vscode.Add_Click({
     Write-Host "Installing Visual Studio Code"
     $ResultText.text = "`r`n" +"`r`n" + "Installing Visual Studio Code... Please Wait" 
-    winget install Microsoft.VisualStudioCode | Out-Host
+    winget install Microsoft.VisualStudioCode --source winget | Out-Host
     if($?) { Write-Host "Installed Visual Studio Code" }
     $ResultText.text = "`r`n" + "Finished Installing Visual Studio Code" + "`r`n" + "`r`n" + "Ready for Next Task"
 })
@@ -730,7 +730,7 @@ $powertoys.Add_Click({
 $everythingsearch.Add_Click({
     Write-Host "Installing Voidtools Everything Search"
     $ResultText.text = "`r`n" +"`r`n" + "Installing Voidtools Everything Search... Please Wait" 
-    winget install voidtools.Everything | Out-Host
+    winget install voidtools.Everything --source winget | Out-Host
     if($?) { Write-Host "Installed Everything Search" }
     $ResultText.text = "`r`n" + "Finished Installing Voidtools Everything Search" + "`r`n" + "`r`n" + "Ready for Next Task"
 })
