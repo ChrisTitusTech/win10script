@@ -678,7 +678,7 @@ $mpc.Add_Click({
 $7zip.Add_Click({
     Write-Host "Installing 7-Zip Compression Tool"
     $ResultText.text = "`r`n" +"`r`n" + "Installing 7-Zip Compression Tool... Please Wait" 
-    winget install 7zip.7zip | Out-Host
+    winget install --id 7zip.7zip | Out-Host
     if($?) { Write-Host "Installed 7-Zip Compression Tool" }
     $ResultText.text = "`r`n" + "Finished Installing 7-Zip Compression Tool" + "`r`n" + "`r`n" + "Ready for Next Task"
 })
