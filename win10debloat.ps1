@@ -537,125 +537,11 @@ $Panel2.controls.AddRange(@($essentialtweaks,$disableedge,$backgroundapps,$corta
 $Panel4.controls.AddRange(@($defaultwindowsupdate,$securitywindowsupdate,$Label16,$Label17,$Label18,$Label19))
 $Panel3.controls.AddRange(@($yourphonefix,$Label6,$windowsupdatefix))
 
-$brave.Add_Click({
-    Write-Host "Installing Brave Browser"
-    $ResultText.text = "`r`n" +"`r`n" + "Installing Brave... Please Wait" 
-    winget install -e BraveSoftware.BraveBrowser | Out-Host
-    if($?) { Write-Host "Installed Brave Browser" }
-    $ResultText.text = "`r`n" + "Finished Installing Brave" + "`r`n" + "`r`n" + "Ready for Next Task"
-})
-
-$firefox.Add_Click({
-    Write-Host "Installing Firefox"
-    $ResultText.text = "`r`n" +"`r`n" + "Installing Firefox... Please Wait" 
-    winget install -e Mozilla.Firefox | Out-Host
-    if($?) { Write-Host "Installed Firefox" }
-    $ResultText.text = "`r`n" + "Finished Installing Firefox" + "`r`n" + "`r`n" + "Ready for Next Task"
-})
-
-$gchrome.Add_Click({
-    Write-Host "Installing Google Chrome"
-    $ResultText.text = "`r`n" +"`r`n" + "Installing Google Chrome... Please Wait" 
-    winget install -e Google.Chrome | Out-Host
-    if($?) { Write-Host "Installed Google Chrome" }
-    $ResultText.text = "`r`n" + "Finished Installing Google Chrome" + "`r`n" + "`r`n" + "Ready for Next Task"
-})
-
-$autohotkey.Add_Click({
-    Write-Host "Installing AutoHotkey"
-    $ResultText.text = "`r`n" +"`r`n" + "Installing AutoHotkey... Please Wait" 
-    winget install -e Lexikos.AutoHotkey | Out-Host
-    if($?) { Write-Host "Installed AutoHotkey" }
-    $ResultText.text = "`r`n" + "Finished Installing Autohotkey" + "`r`n" + "`r`n" + "Ready for Next Task"
-})
-
-$imageglass.Add_Click({
-    Write-Host "Installing Image Glass (Image Viewer)"
-    $ResultText.text = "`r`n" +"`r`n" + "Installing Image Glass... Please Wait" 
-    winget install -e DuongDieuPhap.ImageGlass | Out-Host
-    if($?) { Write-Host "Installed Image Glass (Image Viewer)" }
-    $ResultText.text = "`r`n" + "Finished Installing Image Glass" + "`r`n" + "`r`n" + "Ready for Next Task"
-})
-$discord.Add_Click({
-    Write-Host "Installing Discord"
-    $ResultText.text = "`r`n" +"`r`n" + "Discord... Please Wait" 
-    winget install -e Discord.Discord | Out-Host
-    if($?) { Write-Host "Installed Discord" }
-    $ResultText.text = "`r`n" + "Finished Installing Discord" + "`r`n" + "`r`n" + "Ready for Next Task"
-})
-
-$adobereader.Add_Click({
-    Write-Host "Installing Adobe Reader DC"
-    $ResultText.text = "`r`n" +"`r`n" + "Installing Adobe Reader DC... Please Wait" 
-    winget install -e Adobe.AdobeAcrobatReaderDC | Out-Host
-    if($?) { Write-Host "Installed Adobe Reader DC" }
-    $ResultText.text = "`r`n" + "Finished Installing Adobe Reader DC" + "`r`n" + "`r`n" + "Ready for Next Task"
-})
-
-$notepad.Add_Click({
-    Write-Host "Installing Notepad++"
-    $ResultText.text = "`r`n" +"`r`n" + "Installing Notepad++... Please Wait" 
-    winget install -e Notepad++.Notepad++ | Out-Host
-    if($?) { Write-Host "Installed Notepad++" }
-    $ResultText.text = "`r`n" + "Finished Installing NotePad++" + "`r`n" + "`r`n" + "Ready for Next Task"
-})
-
-$vlc.Add_Click({
-    Write-Host "Installing VLC Media Player"
-    $ResultText.text = "`r`n" +"`r`n" + "VLC Media Player... Please Wait" 
-    winget install -e VideoLAN.VLC | Out-Host
-    if($?) { Write-Host "Installed VLC Media Player" }
-    $ResultText.text = "`r`n" + "Finished Installing NotePad++" + "`r`n" + "`r`n" + "Ready for Next Task"
-})
-
-$mpc.Add_Click({
-    Write-Host "Installing Media Player Classic"
-    $ResultText.text = "`r`n" +"`r`n" + "Installing Media Player Classic... Please Wait" 
-    winget install -e clsid2.mpc-hc | Out-Host
-    if($?) { Write-Host "Installed Media Player Classic" }
-    $ResultText.text = "`r`n" + "Finished Installing Media Player Classic" + "`r`n" + "`r`n" + "Ready for Next Task"
-})
-
-$7zip.Add_Click({
-    Write-Host "Installing 7-Zip Compression Tool"
-    $ResultText.text = "`r`n" +"`r`n" + "Installing 7-Zip Compression Tool... Please Wait" 
-    winget install -e 7zip.7zip | Out-Host
-    if($?) { Write-Host "Installed 7-Zip Compression Tool" }
-    $ResultText.text = "`r`n" + "Finished Installing 7-Zip Compression Tool" + "`r`n" + "`r`n" + "Ready for Next Task"
-})
-
-$vscode.Add_Click({
-    Write-Host "Installing Visual Studio Code"
-    $ResultText.text = "`r`n" +"`r`n" + "Installing Visual Studio Code... Please Wait" 
-    winget install -e Microsoft.VisualStudioCode --source winget | Out-Host
-    if($?) { Write-Host "Installed Visual Studio Code" }
-    $ResultText.text = "`r`n" + "Finished Installing Visual Studio Code" + "`r`n" + "`r`n" + "Ready for Next Task"
-})
-
-$vscodium.Add_Click({
-    Write-Host "Installing VS Codium"
-    $ResultText.text = "`r`n" +"`r`n" + "Installing VS Codium... Please Wait" 
-    winget install -e VSCodium.VSCodium | Out-Host
-    if($?) { Write-Host "Installed VS Codium" }
-    $ResultText.text = "`r`n" + "Finished Installing VS Codium" + "`r`n" + "`r`n" + "Ready for Next Task"
-})
-
-$urlremovevirus.Add_Click({
-    Start-Process "https://youtu.be/CHtZ9-9ch2w"
-})
-
-$urlfixwinstartup.Add_Click({
-    Start-Process "https://youtu.be/sOihh4ZNOf4"
-})
-
-$urlcreateiso.Add_Click({
-    Start-Process "https://youtu.be/R6XPff38iSc"
-})
-
+# Application Button Functions
 $winterminal.Add_Click({
     Write-Host "Installing New Windows Terminal"
     $ResultText.text = "`r`n" +"`r`n" + "Installing New Windows Terminal... Please Wait" 
-    winget -e install Microsoft.WindowsTerminal | Out-Host
+    winget install Microsoft.WindowsTerminal -s winget | Out-Host
     if($?) { Write-Host "Installed New Windows Terminal" }
     $ResultText.text = "`r`n" + "Finished Installing New Windows Terminal" + "`r`n" + "`r`n" + "Ready for Next Task"
 })
@@ -663,31 +549,39 @@ $winterminal.Add_Click({
 $powertoys.Add_Click({
     Write-Host "Installing Microsoft PowerToys"
     $ResultText.text = "`r`n" +"`r`n" + "Installing Microsoft PowerToys... Please Wait" 
-    winget -e install Microsoft.PowerToys | Out-Host
+    winget install Microsoft.PowerToys -s winget | Out-Host
     if($?) { Write-Host "Installed Microsoft PowerToys" }
     $ResultText.text = "`r`n" + "Finished Installing Microsoft PowerToys" + "`r`n" + "`r`n" + "Ready for Next Task"
 })
 
-$everythingsearch.Add_Click({
-    Write-Host "Installing Voidtools Everything Search"
-    $ResultText.text = "`r`n" +"`r`n" + "Installing Voidtools Everything Search... Please Wait" 
-    winget install -e voidtools.Everything --source winget | Out-Host
-    if($?) { Write-Host "Installed Everything Search" }
-    $ResultText.text = "`r`n" + "Finished Installing Voidtools Everything Search" + "`r`n" + "`r`n" + "Ready for Next Task"
+$7zip.Add_Click({
+    Write-Host "Installing 7-Zip Compression Tool"
+    $ResultText.text = "`r`n" +"`r`n" + "Installing 7-Zip Compression Tool... Please Wait" 
+    winget install 7zip.7zip -s winget | Out-Host
+    if($?) { Write-Host "Installed 7-Zip Compression Tool" }
+    $ResultText.text = "`r`n" + "Finished Installing 7-Zip Compression Tool" + "`r`n" + "`r`n" + "Ready for Next Task"
 })
 
-$sumatrapdf.Add_Click({
-    Write-Host "Installing Sumatra PDF"
-    $ResultText.text = "`r`n" +"`r`n" + "Installing Sumatra PDF... Please Wait" 
-    winget install -e SumatraPDF.SumatraPDF | Out-Host
-    if($?) { Write-Host "Installed Sumatra PDF" }
-    $ResultText.text = "`r`n" + "Finished Installing Sumatra PDF" + "`r`n" + "`r`n" + "Ready for Next Task"
+$autohotkey.Add_Click({
+    Write-Host "Installing AutoHotkey"
+    $ResultText.text = "`r`n" +"`r`n" + "Installing AutoHotkey... Please Wait" 
+    winget install Lexikos.AutoHotkey -s winget | Out-Host
+    if($?) { Write-Host "Installed AutoHotkey" }
+    $ResultText.text = "`r`n" + "Finished Installing Autohotkey" + "`r`n" + "`r`n" + "Ready for Next Task"
+})
+
+$discord.Add_Click({
+    Write-Host "Installing Discord"
+    $ResultText.text = "`r`n" +"`r`n" + "Discord... Please Wait" 
+    winget install Discord.Discord -s winget | Out-Host
+    if($?) { Write-Host "Installed Discord" }
+    $ResultText.text = "`r`n" + "Finished Installing Discord" + "`r`n" + "`r`n" + "Ready for Next Task"
 })
 
 $githubdesktop.Add_Click({
     Write-Host "Installing GitHub Desktop"
     $ResultText.text = "`r`n" +"`r`n" + "Installing GitHub Desktop... Please Wait" 
-    winget install -e GitHub.GitHubDesktop | Out-Host
+    winget install GitHub.GitHubDesktop -s winget | Out-Host
     Write-Host "Installed Github Desktop"
     $ResultText.text = "`r`n" + "Finished Installing GitHub Desktop" + "`r`n" + "`r`n" + "Ready for Next Task"
 })
@@ -695,24 +589,24 @@ $githubdesktop.Add_Click({
 $translucenttb.Add_Click({
     Write-Host "Installing Translucent Taskbar"
     $ResultText.text = "`r`n" +"`r`n" + "Installing Translucent Taskbar... Please Wait" 
-    winget install -e TranslucentTB.TranslucentTB | Out-Host
+    winget install TranslucentTB.TranslucentTB -s winget | Out-Host
     Write-Host "Installed Translucent Taskbar"
     $ResultText.text = "`r`n" + "Finished Installing Translucent Taskbar" + "`r`n" + "`r`n" + "Ready for Next Task"
 })
 
 $etcher.Add_Click({
-    Write-Host "Installing Etcher USB Imager"
-    $ResultText.text = "`r`n" +"`r`n" + "Installing Etcher USB Imager... Please Wait" 
-    winget install -e Balena.Etcher | Out-Host
-    Write-Host "Installed Etcher USB Imager"
-    $ResultText.text = "`r`n" + "Finished Installing Etcher USB Imager" + "`r`n" + "`r`n" + "Ready for Next Task"
+    Write-Host "Installing Etcher"
+    $ResultText.text = "`r`n" +"`r`n" + "Installing Etcher... Please Wait" 
+    winget install Balena.Etcher -s winget | Out-Host
+    Write-Host "Installed Etcher"
+    $ResultText.text = "`r`n" + "Finished Installing Etcher" + "`r`n" + "`r`n" + "Ready for Next Task"
 })
 
 $putty.Add_Click({
     Write-Host "Installing PuTTY & WinSCP"
     $ResultText.text = "`r`n" +"`r`n" + "Installing PuTTY & WinSCP... Please Wait" 
-    winget install -e PuTTY.PuTTY | Out-Host
-    winget install -e WinSCP.WinSCP | Out-Host
+    winget install PuTTY.PuTTY -s winget | Out-Host
+    winget install WinSCP.WinSCP -s winget | Out-Host
     Write-Host "Installed PuTTY & WinSCP"
     $ResultText.text = "`r`n" + "Finished Installing PuTTY & WinSCP" + "`r`n" + "`r`n" + "Ready for Next Task"
 })
@@ -720,27 +614,124 @@ $putty.Add_Click({
 $advancedipscanner.Add_Click({
     Write-Host "Installing Advanced IP Scanner"
     $ResultText.text = "`r`n" +"`r`n" + "Installing Advanced IP Scanner... Please Wait" 
-    winget install -e Famatech.AdvancedIPScanner | Out-Host
+    winget install Famatech.AdvancedIPScanner -s winget | Out-Host
     Write-Host "Installed Advanced IP Scanner"
     $ResultText.text = "`r`n" + "Finished Installing Advanced IP Scanner" + "`r`n" + "`r`n" + "Ready for Next Task"
+})
+
+$everythingsearch.Add_Click({
+    Write-Host "Installing Voidtools Everything Search"
+    $ResultText.text = "`r`n" +"`r`n" + "Installing Voidtools Everything Search... Please Wait" 
+    winget install voidtools.Everything -s winget | Out-Host
+    if($?) { Write-Host "Installed Everything Search" }
+    $ResultText.text = "`r`n" + "Finished Installing Voidtools Everything Search" + "`r`n" + "`r`n" + "Ready for Next Task"
+})
+
+$brave.Add_Click({
+    Write-Host "Installing Brave Browser"
+    $ResultText.text = "`r`n" +"`r`n" + "Installing Brave... Please Wait" 
+    winget install BraveSoftware.BraveBrowser -s winget | Out-Host
+    if($?) { Write-Host "Installed Brave Browser" }
+    $ResultText.text = "`r`n" + "Finished Installing Brave" + "`r`n" + "`r`n" + "Ready for Next Task"
+})
+
+$firefox.Add_Click({
+    Write-Host "Installing Firefox"
+    $ResultText.text = "`r`n" +"`r`n" + "Installing Firefox... Please Wait" 
+    winget install Mozilla.Firefox -s winget | Out-Host
+    if($?) { Write-Host "Installed Firefox" }
+    $ResultText.text = "`r`n" + "Finished Installing Firefox" + "`r`n" + "`r`n" + "Ready for Next Task"
+})
+
+$gchrome.Add_Click({
+    Write-Host "Installing Google Chrome"
+    $ResultText.text = "`r`n" +"`r`n" + "Installing Google Chrome... Please Wait" 
+    winget install Google.Chrome -s winget | Out-Host
+    if($?) { Write-Host "Installed Google Chrome" }
+    $ResultText.text = "`r`n" + "Finished Installing Google Chrome" + "`r`n" + "`r`n" + "Ready for Next Task"
 })
 
 $sharex.Add_Click({
     Write-Host "Installing ShareX Screenshot Tool"
     $ResultText.text = "`r`n" +"`r`n" + "Installing ShareX Screenshot Tool... Please Wait" 
-    winget install -e ShareX.ShareX | Out-Host
+    winget install ShareX.ShareX -s winget | Out-Host
     Write-Host "Installed ShareX Screenshot Tool"
     $ResultText.text = "`r`n" + "Finished Installing ShareX Screenshot Tool" + "`r`n" + "`r`n" + "Ready for Next Task"
+})
+
+$imageglass.Add_Click({
+    Write-Host "Installing Image Glass (Image Viewer)"
+    $ResultText.text = "`r`n" +"`r`n" + "Installing Image Glass... Please Wait" 
+    winget install DuongDieuPhap.ImageGlass -s winget | Out-Host
+    if($?) { Write-Host "Installed Image Glass (Image Viewer)" }
+    $ResultText.text = "`r`n" + "Finished Installing Image Glass" + "`r`n" + "`r`n" + "Ready for Next Task"
 })
 
 $gimp.Add_Click({
     Write-Host "Installing Gimp Image Editor"
     $ResultText.text = "`r`n" +"`r`n" + "Installing Gimp Image Editor... Please Wait" 
-    winget install -e GIMP.GIMP | Out-Host
+    winget install GIMP.GIMP -s winget | Out-Host
     Write-Host "Installed Gimp Image Editor"
     $ResultText.text = "`r`n" + "Finished Installing Gimp Image Editor" + "`r`n" + "`r`n" + "Ready for Next Task"
 })
 
+$vlc.Add_Click({
+    Write-Host "Installing VLC Media Player"
+    $ResultText.text = "`r`n" +"`r`n" + "VLC Media Player... Please Wait" 
+    winget install VideoLAN.VLC -s winget | Out-Host
+    if($?) { Write-Host "Installed VLC Media Player" }
+    $ResultText.text = "`r`n" + "Finished Installing NotePad++" + "`r`n" + "`r`n" + "Ready for Next Task"
+})
+
+$mpc.Add_Click({
+    Write-Host "Installing Media Player Classic"
+    $ResultText.text = "`r`n" +"`r`n" + "Installing Media Player Classic... Please Wait" 
+    winget install clsid2.mpc-hc -s winget | Out-Host
+    if($?) { Write-Host "Installed Media Player Classic" }
+    $ResultText.text = "`r`n" + "Finished Installing Media Player Classic" + "`r`n" + "`r`n" + "Ready for Next Task"
+})
+
+$vscodium.Add_Click({
+    Write-Host "Installing VS Codium"
+    $ResultText.text = "`r`n" +"`r`n" + "Installing VS Codium... Please Wait" 
+    winget install VSCodium.VSCodium -s winget | Out-Host
+    if($?) { Write-Host "Installed VS Codium" }
+    $ResultText.text = "`r`n" + "Finished Installing VS Codium" + "`r`n" + "`r`n" + "Ready for Next Task"
+})
+
+$vscode.Add_Click({
+    Write-Host "Installing Visual Studio Code"
+    $ResultText.text = "`r`n" +"`r`n" + "Installing Visual Studio Code... Please Wait" 
+    winget install Microsoft.VisualStudioCode -s winget | Out-Host
+    if($?) { Write-Host "Installed Visual Studio Code" }
+    $ResultText.text = "`r`n" + "Finished Installing Visual Studio Code" + "`r`n" + "`r`n" + "Ready for Next Task"
+})
+
+$notepad.Add_Click({
+    Write-Host "Installing Notepad++"
+    $ResultText.text = "`r`n" +"`r`n" + "Installing Notepad++... Please Wait" 
+    winget install Notepad++.Notepad++ -s winget | Out-Host
+    if($?) { Write-Host "Installed Notepad++" }
+    $ResultText.text = "`r`n" + "Finished Installing NotePad++" + "`r`n" + "`r`n" + "Ready for Next Task"
+})
+
+$adobereader.Add_Click({
+    Write-Host "Installing Adobe Reader DC"
+    $ResultText.text = "`r`n" +"`r`n" + "Installing Adobe Reader DC... Please Wait" 
+    winget install Adobe.AdobeAcrobatReaderDC -s winget | Out-Host
+    if($?) { Write-Host "Installed Adobe Reader DC" }
+    $ResultText.text = "`r`n" + "Finished Installing Adobe Reader DC" + "`r`n" + "`r`n" + "Ready for Next Task"
+})
+
+$sumatrapdf.Add_Click({
+    Write-Host "Installing Sumatra PDF"
+    $ResultText.text = "`r`n" +"`r`n" + "Installing Sumatra PDF... Please Wait" 
+    winget install SumatraPDF.SumatraPDF -s winget | Out-Host
+    if($?) { Write-Host "Installed Sumatra PDF" }
+    $ResultText.text = "`r`n" + "Finished Installing Sumatra PDF" + "`r`n" + "`r`n" + "Ready for Next Task"
+})
+
+# System Tweaks Button Functions
 $essentialtweaks.Add_Click({
     Write-Host "Creating Restore Point incase something bad happens"
     $ResultText.text = "`r`n" +"`r`n" + "Installing Essential Tools... Please Wait" 
@@ -936,22 +927,6 @@ Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Policies
     $ResultText.text = "`r`n" + "Essential Tweaks Done" + "`r`n" + "`r`n" + "Ready for Next Task"
 })
 
-$dualboottime.Add_Click({
-    Write-Host "Setting BIOS time to UTC..."
-    Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\TimeZoneInformation" -Name "RealTimeIsUniversal" -Type DWord -Value 1
-    $ResultText.text = "`r`n" + "Time set to UTC for consistent time in Dual Boot Systems" + "`r`n" + "`r`n" + "Ready for Next Task"
-})
-
-$disableedge.Add_Click({
-    Write-Host "Disabling Edge"
-    & 'C:\Program Files (x86)\Microsoft\Edge\Application\*\Installer\setup.exe' --uninstall --system-level --verbose-logging --force-uninstall
-    Set-Location HKLM:\SOFTWARE\Microsoft\
-    Get-Item .\ | New-Item 'EdgeUpdate' -Force
-    New-ItemProperty .\EdgeUpdate\ -Name 'DoNotUpdateToEdgeWithChromium' -Value "1" -PropertyType DWORD -Force
-    Write-Host "Disabled Edge"
-    $ResultText.text = "`r`n" + "Disabled Edge" + "`r`n" + "`r`n" + "Ready for Next Task"
-})
-
 $essentialundo.Add_Click({
     Write-Host "Creating Restore Point incase something bad happens"
     $ResultText.text = "`r`n" +"`r`n" + "Creating Restore Point and Reverting Settings... Please Wait"
@@ -1065,6 +1040,22 @@ $essentialundo.Add_Click({
 
     Write-Host "Essential Undo Completed"
     $ResultText.text = "`r`n" +"`r`n" + "Essential Undo Completed - Ready for next task"
+})
+
+$dualboottime.Add_Click({
+    Write-Host "Setting BIOS time to UTC..."
+    Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\TimeZoneInformation" -Name "RealTimeIsUniversal" -Type DWord -Value 1
+    $ResultText.text = "`r`n" + "Time set to UTC for consistent time in Dual Boot Systems" + "`r`n" + "`r`n" + "Ready for Next Task"
+})
+
+$disableedge.Add_Click({
+    Write-Host "Disabling Edge"
+    & 'C:\Program Files (x86)\Microsoft\Edge\Application\*\Installer\setup.exe' --uninstall --system-level --verbose-logging --force-uninstall
+    Set-Location HKLM:\SOFTWARE\Microsoft\
+    Get-Item .\ | New-Item 'EdgeUpdate' -Force
+    New-ItemProperty .\EdgeUpdate\ -Name 'DoNotUpdateToEdgeWithChromium' -Value "1" -PropertyType DWORD -Force
+    Write-Host "Disabled Edge"
+    $ResultText.text = "`r`n" + "Disabled Edge" + "`r`n" + "`r`n" + "Ready for Next Task"
 })
 
 $windowssearch.Add_Click({
@@ -1302,46 +1293,6 @@ $reinstallbloat.Add_Click({
     $ResultText.text = "`r`n" +"`r`n" + "Finished Reinstalling Bloatware Apps"
 })
 
-$defaultwindowsupdate.Add_Click({
-    Write-Host "Enabling driver offering through Windows Update..."
-    Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Device Metadata" -Name "PreventDeviceMetadataFromNetwork" -ErrorAction SilentlyContinue
-    Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DriverSearching" -Name "DontPromptForWindowsUpdate" -ErrorAction SilentlyContinue
-    Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DriverSearching" -Name "DontSearchWindowsUpdate" -ErrorAction SilentlyContinue
-    Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DriverSearching" -Name "DriverUpdateWizardWuSearchEnabled" -ErrorAction SilentlyContinue
-    Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate" -Name "ExcludeWUDriversInQualityUpdate" -ErrorAction SilentlyContinue
-    Write-Host "Enabling Windows Update automatic restart..."
-    Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" -Name "NoAutoRebootWithLoggedOnUsers" -ErrorAction SilentlyContinue
-    Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" -Name "AUPowerManagement" -ErrorAction SilentlyContinue
-    Write-Host "Enabled driver offering through Windows Update"
-    $ResultText.text = "`r`n" +"`r`n" + "Set Windows Updates to Stock Settings"
-})
-
-$securitywindowsupdate.Add_Click({
-    Write-Host "Disabling driver offering through Windows Update..."
-    If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Device Metadata")) {
-        New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Device Metadata" -Force | Out-Null
-    }
-    Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Device Metadata" -Name "PreventDeviceMetadataFromNetwork" -Type DWord -Value 1
-    If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DriverSearching")) {
-        New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DriverSearching" -Force | Out-Null
-    }
-    Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DriverSearching" -Name "DontPromptForWindowsUpdate" -Type DWord -Value 1
-    Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DriverSearching" -Name "DontSearchWindowsUpdate" -Type DWord -Value 1
-    Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DriverSearching" -Name "DriverUpdateWizardWuSearchEnabled" -Type DWord -Value 0
-    If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate")) {
-        New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate" | Out-Null
-    }
-    Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate" -Name "ExcludeWUDriversInQualityUpdate" -Type DWord -Value 1
-    Write-Host "Disabling Windows Update automatic restart..."
-    If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU")) {
-        New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" -Force | Out-Null
-    }
-    Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" -Name "NoAutoRebootWithLoggedOnUsers" -Type DWord -Value 1
-    Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" -Name "AUPowerManagement" -Type DWord -Value 0
-    Write-Host "Disabled driver offering through Windows Update"
-    $ResultText.text = "`r`n" +"`r`n" + "Set Windows Update to Sane Settings"
-})
-
 $actioncenter.Add_Click({
     Write-Host "Disabling Action Center..."
     If (!(Test-Path "HKCU:\SOFTWARE\Policies\Microsoft\Windows\Explorer")) {
@@ -1467,7 +1418,6 @@ $HTrayIcons.Add_Click({
     $ResultText.text = "`r`n" +"`r`n" + "Tray icons are now factory defaults"
 })
 
-
 $STrayIcons.Add_Click({
 
 	Write-Host "Showing tray icons..."
@@ -1540,6 +1490,7 @@ $DisableNumLock.Add_Click({
     $ResultText.text = "`r`n" +"`r`n" + "NUMLOCK Disabled"
 })
 
+# Troubleshoot Button Functions
 $yourphonefix.Add_Click({
     Write-Host "Reinstalling Your Phone App"
     Add-AppxPackage -DisableDevelopmentMode -Register "$($(Get-AppXPackage -AllUsers "Microsoft.YourPhone").InstallLocation)\AppXManifest.xml"
@@ -1649,6 +1600,61 @@ $windowsupdatefix.Add_Click({
     Write-Host "Process complete. Please reboot your computer."
     $ResultText.text = "`r`n" +"`r`n" + "Process complete. Please reboot your computer."
 
+})
+
+# Windows Update Button Functions
+$defaultwindowsupdate.Add_Click({
+    Write-Host "Enabling driver offering through Windows Update..."
+    Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Device Metadata" -Name "PreventDeviceMetadataFromNetwork" -ErrorAction SilentlyContinue
+    Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DriverSearching" -Name "DontPromptForWindowsUpdate" -ErrorAction SilentlyContinue
+    Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DriverSearching" -Name "DontSearchWindowsUpdate" -ErrorAction SilentlyContinue
+    Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DriverSearching" -Name "DriverUpdateWizardWuSearchEnabled" -ErrorAction SilentlyContinue
+    Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate" -Name "ExcludeWUDriversInQualityUpdate" -ErrorAction SilentlyContinue
+    Write-Host "Enabling Windows Update automatic restart..."
+    Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" -Name "NoAutoRebootWithLoggedOnUsers" -ErrorAction SilentlyContinue
+    Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" -Name "AUPowerManagement" -ErrorAction SilentlyContinue
+    Write-Host "Enabled driver offering through Windows Update"
+    $ResultText.text = "`r`n" +"`r`n" + "Set Windows Updates to Stock Settings"
+})
+
+$securitywindowsupdate.Add_Click({
+    Write-Host "Disabling driver offering through Windows Update..."
+    If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Device Metadata")) {
+        New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Device Metadata" -Force | Out-Null
+    }
+    Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Device Metadata" -Name "PreventDeviceMetadataFromNetwork" -Type DWord -Value 1
+    If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DriverSearching")) {
+        New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DriverSearching" -Force | Out-Null
+    }
+    Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DriverSearching" -Name "DontPromptForWindowsUpdate" -Type DWord -Value 1
+    Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DriverSearching" -Name "DontSearchWindowsUpdate" -Type DWord -Value 1
+    Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DriverSearching" -Name "DriverUpdateWizardWuSearchEnabled" -Type DWord -Value 0
+    If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate")) {
+        New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate" | Out-Null
+    }
+    Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate" -Name "ExcludeWUDriversInQualityUpdate" -Type DWord -Value 1
+    Write-Host "Disabling Windows Update automatic restart..."
+    If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU")) {
+        New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" -Force | Out-Null
+    }
+    Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" -Name "NoAutoRebootWithLoggedOnUsers" -Type DWord -Value 1
+    Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" -Name "AUPowerManagement" -Type DWord -Value 0
+    Write-Host "Disabled driver offering through Windows Update"
+    $ResultText.text = "`r`n" +"`r`n" + "Set Windows Update to Sane Settings"
+})
+
+
+# Videos to Fix Windows Button Functions
+$urlremovevirus.Add_Click({
+    Start-Process "https://youtu.be/CHtZ9-9ch2w"
+})
+
+$urlfixwinstartup.Add_Click({
+    Start-Process "https://youtu.be/sOihh4ZNOf4"
+})
+
+$urlcreateiso.Add_Click({
+    Start-Process "https://youtu.be/R6XPff38iSc"
 })
 
 [void]$Form.ShowDialog()
