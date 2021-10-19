@@ -655,7 +655,7 @@ $urlcreateiso.Add_Click({
 $winterminal.Add_Click({
     Write-Host "Installing New Windows Terminal"
     $ResultText.text = "`r`n" +"`r`n" + "Installing New Windows Terminal... Please Wait" 
-    winget install Microsoft.WindowsTerminal | Out-Host
+    winget -e install Microsoft.WindowsTerminal | Out-Host
     if($?) { Write-Host "Installed New Windows Terminal" }
     $ResultText.text = "`r`n" + "Finished Installing New Windows Terminal" + "`r`n" + "`r`n" + "Ready for Next Task"
 })
