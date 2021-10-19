@@ -627,7 +627,7 @@ $7zip.Add_Click({
 $vscode.Add_Click({
     Write-Host "Installing Visual Studio Code"
     $ResultText.text = "`r`n" +"`r`n" + "Installing Visual Studio Code... Please Wait" 
-    winget install -e Microsoft.VisualStudioCode | Out-Host
+    winget install -e Microsoft.VisualStudioCode --source winget | Out-Host
     if($?) { Write-Host "Installed Visual Studio Code" }
     $ResultText.text = "`r`n" + "Finished Installing Visual Studio Code" + "`r`n" + "`r`n" + "Ready for Next Task"
 })
@@ -663,7 +663,7 @@ $winterminal.Add_Click({
 $powertoys.Add_Click({
     Write-Host "Installing Microsoft PowerToys"
     $ResultText.text = "`r`n" +"`r`n" + "Installing Microsoft PowerToys... Please Wait" 
-    winget install -e Microsoft.PowerToys | Out-Host
+    winget -e install Microsoft.PowerToys | Out-Host
     if($?) { Write-Host "Installed Microsoft PowerToys" }
     $ResultText.text = "`r`n" + "Finished Installing Microsoft PowerToys" + "`r`n" + "`r`n" + "Ready for Next Task"
 })
@@ -671,7 +671,7 @@ $powertoys.Add_Click({
 $everythingsearch.Add_Click({
     Write-Host "Installing Voidtools Everything Search"
     $ResultText.text = "`r`n" +"`r`n" + "Installing Voidtools Everything Search... Please Wait" 
-    winget install -e voidtools.Everything | Out-Host
+    winget install -e voidtools.Everything --source winget | Out-Host
     if($?) { Write-Host "Installed Everything Search" }
     $ResultText.text = "`r`n" + "Finished Installing Voidtools Everything Search" + "`r`n" + "`r`n" + "Ready for Next Task"
 })
@@ -701,11 +701,11 @@ $translucenttb.Add_Click({
 })
 
 $etcher.Add_Click({
-    Write-Host "Installing Etcher"
-    $ResultText.text = "`r`n" +"`r`n" + "Installing Etcher... Please Wait" 
+    Write-Host "Installing Etcher USB Imager"
+    $ResultText.text = "`r`n" +"`r`n" + "Installing Etcher USB Imager... Please Wait" 
     winget install -e Balena.Etcher | Out-Host
-    Write-Host "Installed Etcher"
-    $ResultText.text = "`r`n" + "Finished Installing Etcher" + "`r`n" + "`r`n" + "Ready for Next Task"
+    Write-Host "Installed Etcher USB Imager"
+    $ResultText.text = "`r`n" + "Finished Installing Etcher USB Imager" + "`r`n" + "`r`n" + "Ready for Next Task"
 })
 
 $putty.Add_Click({
