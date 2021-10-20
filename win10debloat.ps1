@@ -714,7 +714,7 @@ $urlcreateiso.Add_Click({
 $winterminal.Add_Click({
     Write-Host "Installing New Windows Terminal"
     $ResultText.text = "`r`n" +"`r`n" + "Installing New Windows Terminal... Please Wait" 
-    winget -e install Microsoft.WindowsTerminal | Out-Host
+    winget install -e Microsoft.WindowsTerminal | Out-Host
     if($?) { Write-Host "Installed New Windows Terminal" }
     $ResultText.text = "`r`n" + "Finished Installing New Windows Terminal" + "`r`n" + "`r`n" + "Ready for Next Task"
 })
@@ -722,7 +722,7 @@ $winterminal.Add_Click({
 $powertoys.Add_Click({
     Write-Host "Installing Microsoft PowerToys"
     $ResultText.text = "`r`n" +"`r`n" + "Installing Microsoft PowerToys... Please Wait" 
-    winget -e install Microsoft.PowerToys | Out-Host
+    winget install -e Microsoft.PowerToys | Out-Host
     if($?) { Write-Host "Installed Microsoft PowerToys" }
     $ResultText.text = "`r`n" + "Finished Installing Microsoft PowerToys" + "`r`n" + "`r`n" + "Ready for Next Task"
 })
