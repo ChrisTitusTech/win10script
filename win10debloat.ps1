@@ -158,14 +158,14 @@ $Label3.text                     = "System Tweaks"
 $Label3.AutoSize                 = $true
 $Label3.width                    = 230
 $Label3.height                   = 25
-$Label3.location                 = New-Object System.Drawing.Point(230,12)
+$Label3.location                 = New-Object System.Drawing.Point(229,11)
 $Label3.Font                     = New-Object System.Drawing.Font('Microsoft Sans Serif',24)
 
 $essentialtweaks                 = New-Object system.Windows.Forms.Button
 $essentialtweaks.text            = "Essential Tweaks"
 $essentialtweaks.width           = 205
 $essentialtweaks.height          = 75
-$essentialtweaks.location        = New-Object System.Drawing.Point(3,24)
+$essentialtweaks.location        = New-Object System.Drawing.Point(0,17)
 $essentialtweaks.Font            = New-Object System.Drawing.Font('Microsoft Sans Serif',14)
 
 $backgroundapps                  = New-Object system.Windows.Forms.Button
@@ -270,9 +270,9 @@ $Label19.location                = New-Object System.Drawing.Point(63,126)
 $Label19.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
 
 $PictureBox1                     = New-Object system.Windows.Forms.PictureBox
-$PictureBox1.width               = 366
-$PictureBox1.height              = 130
-$PictureBox1.location            = New-Object System.Drawing.Point(554,420)
+$PictureBox1.width               = 343
+$PictureBox1.height              = 136
+$PictureBox1.location            = New-Object System.Drawing.Point(580,850)
 $PictureBox1.imageLocation       = "https://github.com/ChrisTitusTech/win10script/blob/master/titus-toolbox.png?raw=true"
 $PictureBox1.SizeMode            = [System.Windows.Forms.PictureBoxSizeMode]::zoom
 $lightmode                       = New-Object system.Windows.Forms.Button
@@ -299,7 +299,7 @@ $Label4.location                 = New-Object System.Drawing.Point(482,12)
 $Label4.Font                     = New-Object System.Drawing.Font('Microsoft Sans Serif',24)
 
 $Panel3                          = New-Object system.Windows.Forms.Panel
-$Panel3.height                   = 179
+$Panel3.height                   = 234
 $Panel3.width                    = 220
 $Panel3.location                 = New-Object System.Drawing.Point(464,54)
 
@@ -535,9 +535,9 @@ $windowsupdatefix.Font           = New-Object System.Drawing.Font('Microsoft San
 
 $ResultText                      = New-Object system.Windows.Forms.TextBox
 $ResultText.multiline            = $true
-$ResultText.width                = 338
-$ResultText.height               = 126
-$ResultText.location             = New-Object System.Drawing.Point(565,284)
+$ResultText.width                = 382
+$ResultText.height               = 130
+$ResultText.location             = New-Object System.Drawing.Point(576,491)
 $ResultText.Font                 = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
 
 $Label10                         = New-Object system.Windows.Forms.Label
@@ -545,7 +545,7 @@ $Label10.text                    = "Current Status:"
 $Label10.AutoSize                = $true
 $Label10.width                   = 25
 $Label10.height                  = 10
-$Label10.location                = New-Object System.Drawing.Point(643,244)
+$Label10.location                = New-Object System.Drawing.Point(657,430)
 $Label10.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',24)
 
 $EHibernation                    = New-Object system.Windows.Forms.Button
@@ -567,35 +567,63 @@ $Label11.text                    = "Videos to Fix Windows"
 $Label11.AutoSize                = $true
 $Label11.width                   = 25
 $Label11.height                  = 10
-$Label11.location                = New-Object System.Drawing.Point(652,565)
+$Label11.location                = New-Object System.Drawing.Point(687,659)
 $Label11.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
 $urlfixwinstartup                = New-Object system.Windows.Forms.Button
 $urlfixwinstartup.text           = "Repair Windows Startup"
 $urlfixwinstartup.width          = 232
 $urlfixwinstartup.height         = 30
-$urlfixwinstartup.location       = New-Object System.Drawing.Point(615,594)
+$urlfixwinstartup.location       = New-Object System.Drawing.Point(646,702)
 $urlfixwinstartup.Font           = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
 
 $urlremovevirus                  = New-Object system.Windows.Forms.Button
 $urlremovevirus.text             = "Clean Viruses"
 $urlremovevirus.width            = 232
 $urlremovevirus.height           = 30
-$urlremovevirus.location         = New-Object System.Drawing.Point(615,632)
+$urlremovevirus.location         = New-Object System.Drawing.Point(646,745)
 $urlremovevirus.Font             = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
 
 $urlcreateiso                    = New-Object system.Windows.Forms.Button
 $urlcreateiso.text               = "Create Custom ISO"
 $urlcreateiso.width              = 232
 $urlcreateiso.height             = 30
-$urlcreateiso.location           = New-Object System.Drawing.Point(615,672)
+$urlcreateiso.location           = New-Object System.Drawing.Point(646,790)
 $urlcreateiso.Font               = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
+
+$ncpa                            = New-Object system.Windows.Forms.Button
+$ncpa.text                       = "Network Connections"
+$ncpa.width                      = 211
+$ncpa.height                     = 30
+$ncpa.location                   = New-Object System.Drawing.Point(4,94)
+$ncpa.Font                       = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
+
+$oldcontrolpanel                 = New-Object system.Windows.Forms.Button
+$oldcontrolpanel.text            = "Old Control Panel"
+$oldcontrolpanel.width           = 211
+$oldcontrolpanel.height          = 30
+$oldcontrolpanel.location        = New-Object System.Drawing.Point(4,128)
+$oldcontrolpanel.Font            = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
+
+$oldsoundpanel                   = New-Object system.Windows.Forms.Button
+$oldsoundpanel.text              = "Old Sound Panel"
+$oldsoundpanel.width             = 211
+$oldsoundpanel.height            = 30
+$oldsoundpanel.location          = New-Object System.Drawing.Point(4,163)
+$oldsoundpanel.Font              = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
+
+$Button1                         = New-Object system.Windows.Forms.Button
+$Button1.text                    = "Old System Panel"
+$Button1.width                   = 211
+$Button1.height                  = 30
+$Button1.location                = New-Object System.Drawing.Point(4,197)
+$Button1.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
 $Form.controls.AddRange(@($Panel1,$Panel2,$Label3,$Label15,$Panel4,$PictureBox1,$Label1,$Label4,$Panel3,$ResultText,$Label10,$Label11,$urlfixwinstartup,$urlremovevirus,$urlcreateiso))
 $Panel1.controls.AddRange(@($brave,$firefox,$7zip,$sharex,$adobereader,$notepad,$gchrome,$mpc,$vlc,$powertoys,$winterminal,$vscode,$Label2,$everythingsearch,$sumatrapdf,$vscodium,$imageglass,$gimp,$Label7,$Label8,$Label9,$advancedipscanner,$putty,$etcher,$translucenttb,$githubdesktop,$discord,$autohotkey))
 $Panel2.controls.AddRange(@($essentialtweaks,$backgroundapps,$cortana,$actioncenter,$darkmode,$performancefx,$onedrive,$lightmode,$essentialundo,$EActionCenter,$ECortana,$RBackgroundApps,$HTrayIcons,$EClipboardHistory,$ELocation,$InstallOneDrive,$removebloat,$reinstallbloat,$WarningLabel,$Label5,$appearancefx,$STrayIcons,$EHibernation,$dualboottime))
 $Panel4.controls.AddRange(@($defaultwindowsupdate,$securitywindowsupdate,$Label16,$Label17,$Label18,$Label19))
-$Panel3.controls.AddRange(@($yourphonefix,$Label6,$windowsupdatefix))
+$Panel3.controls.AddRange(@($yourphonefix,$Label6,$windowsupdatefix,$ncpa,$oldcontrolpanel,$oldsoundpanel,$Button1))
 
 $brave.Add_Click({
     Write-Host "Installing Brave Browser"
@@ -988,7 +1016,105 @@ Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Policies
     Write-Host "Showing known file extensions..."
     Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "HideFileExt" -Type DWord -Value 0
 
-    Write-Host "Essential Tweaks Completed"
+    # Service tweaks to Manual 
+
+    $services = @(
+    "diagnosticshub.standardcollector.service"     # Microsoft (R) Diagnostics Hub Standard Collector Service
+    "DiagTrack"                                    # Diagnostics Tracking Service
+    "DPS"
+    "dmwappushservice"                             # WAP Push Message Routing Service (see known issues)
+    "lfsvc"                                        # Geolocation Service
+    "MapsBroker"                                   # Downloaded Maps Manager
+    "NetTcpPortSharing"                            # Net.Tcp Port Sharing Service
+    "RemoteAccess"                                 # Routing and Remote Access
+    "RemoteRegistry"                               # Remote Registry
+    "SharedAccess"                                 # Internet Connection Sharing (ICS)
+    "TrkWks"                                       # Distributed Link Tracking Client
+    #"WbioSrvc"                                     # Windows Biometric Service (required for Fingerprint reader / facial detection)
+    #"WlanSvc"                                      # WLAN AutoConfig
+    "WMPNetworkSvc"                                # Windows Media Player Network Sharing Service
+    #"wscsvc"                                       # Windows Security Center Service
+    "WSearch"                                      # Windows Search
+    "XblAuthManager"                               # Xbox Live Auth Manager
+    "XblGameSave"                                  # Xbox Live Game Save Service
+    "XboxNetApiSvc"                                # Xbox Live Networking Service
+    "XboxGipSvc"                                   #Disables Xbox Accessory Management Service
+    "ndu"                                          # Windows Network Data Usage Monitor
+    "WerSvc"                                       #disables windows error reporting
+    #"Spooler"                                      #Disables your printer
+    "Fax"                                          #Disables fax
+    "fhsvc"                                        #Disables fax histroy
+    "gupdate"                                      #Disables google update
+    "gupdatem"                                     #Disable another google update
+    "stisvc"                                       #Disables Windows Image Acquisition (WIA)
+    "AJRouter"                                     #Disables (needed for AllJoyn Router Service)
+    "MSDTC"                                        # Disables Distributed Transaction Coordinator
+    "WpcMonSvc"                                    #Disables Parental Controls
+    "PhoneSvc"                                     #Disables Phone Service(Manages the telephony state on the device)
+    "PrintNotify"                                  #Disables Windows printer notifications and extentions
+    "PcaSvc"                                       #Disables Program Compatibility Assistant Service
+    "WPDBusEnum"                                   #Disables Portable Device Enumerator Service
+    #"LicenseManager"                               #Disable LicenseManager(Windows store may not work properly)
+    "seclogon"                                     #Disables  Secondary Logon(disables other credentials only password will work)
+    "SysMain"                                      #Disables sysmain
+    "lmhosts"                                      #Disables TCP/IP NetBIOS Helper
+    "wisvc"                                        #Disables Windows Insider program(Windows Insider will not work)
+    "FontCache"                                    #Disables Windows font cache
+    "RetailDemo"                                   #Disables RetailDemo whic is often used when showing your device
+    "ALG"                                          # Disables Application Layer Gateway Service(Provides support for 3rd party protocol plug-ins for Internet Connection Sharing)
+    #"BFE"                                         #Disables Base Filtering Engine (BFE) (is a service that manages firewall and Internet Protocol security)
+    #"BrokerInfrastructure"                         #Disables Windows infrastructure service that controls which background tasks can run on the system.
+    "SCardSvr"                                      #Disables Windows smart card
+    "EntAppSvc"                                     #Disables enterprise application management.
+    "BthAvctpSvc"                                   #Disables AVCTP service (if you use  Bluetooth Audio Device or Wireless Headphones. then don't disable this)
+    #"FrameServer"                                   #Disables Windows Camera Frame Server(this allows multiple clients to access video frames from camera devices.)
+    "Browser"                                       #Disables computer browser
+    "BthAvctpSvc"                                   #AVCTP service (This is Audio Video Control Transport Protocol service.)
+    #"BDESVC"                                        #Disables bitlocker
+    "iphlpsvc"                                      #Disables ipv6 but most websites don't use ipv6 they use ipv4     
+    "edgeupdate"                                    # Disables one of edge update service  
+    "MicrosoftEdgeElevationService"                 # Disables one of edge  service 
+    "edgeupdatem"                                   # disbales another one of update service (disables edgeupdatem)                          
+    "SEMgrSvc"                                      #Disables Payments and NFC/SE Manager (Manages payments and Near Field Communication (NFC) based secure elements)
+    #"PNRPsvc"                                      # Disables peer Name Resolution Protocol ( some peer-to-peer and collaborative applications, such as Remote Assistance, may not function, Discord will still work)
+    #"p2psvc"                                       # Disbales Peer Name Resolution Protocol(nables multi-party communication using Peer-to-Peer Grouping.  If disabled, some applications, such as HomeGroup, may not function. Discord will still work)
+    #"p2pimsvc"                                     # Disables Peer Networking Identity Manager (Peer-to-Peer Grouping services may not function, and some applications, such as HomeGroup and Remote Assistance, may not function correctly.Discord will still work)
+    "PerfHost"                                      #Disables  remote users and 64-bit processes to query performance .
+    "BcastDVRUserService_48486de"                   #Disables GameDVR and Broadcast   is used for Game Recordings and Live Broadcasts
+    "CaptureService_48486de"                        #Disables ptional screen capture functionality for applications that call the Windows.Graphics.Capture API.  
+    "cbdhsvc_48486de"                               #Disables   cbdhsvc_48486de (clipboard service it disables)
+    #"BluetoothUserService_48486de"                  #disbales BluetoothUserService_48486de (The Bluetooth user service supports proper functionality of Bluetooth features relevant to each user session.)
+    "WpnService"                                    #Disables WpnService (Push Notifications may not work )
+    #"StorSvc"                                       #Disables StorSvc (usb external hard drive will not be reconised by windows)
+    "RtkBtManServ"                                  #Disables Realtek Bluetooth Device Manager Service
+    "QWAVE"                                         #Disables Quality Windows Audio Video Experience (audio and video might sound worse)
+     #Hp services
+    "HPAppHelperCap"
+    "HPDiagsCap"
+    "HPNetworkCap"
+    "HPSysInfoCap"
+    "HpTouchpointAnalyticsService"
+    #hyper-v services
+     "HvHost"                          
+    "vmickvpexchange"
+    "vmicguestinterface"
+    "vmicshutdown"
+    "vmicheartbeat"
+    "vmicvmsession"
+    "vmicrdv"
+    "vmictimesync" 
+    # Services which cannot be disabled
+    #"WdNisSvc"
+)
+
+foreach ($service in $services) {
+    # -ErrorAction SilentlyContinue is so it doesn't write an error to stdout if a service doesn't exist
+
+    Write-Host "Setting $service StartupType to Manual"
+    Get-Service -Name $service -ErrorAction SilentlyContinue | Set-Service -StartupType Manual
+}
+
+    Write-Host "Essential Tweaks Completed - Please Reboot"
     $ResultText.text = "`r`n" + "Essential Tweaks Done" + "`r`n" + "`r`n" + "Ready for Next Task"
 })
 
@@ -1600,6 +1726,19 @@ $yourphonefix.Add_Click({
 	}
     Write-Host "You may need to Reboot and right-click Your Phone app and select repair"
     $ResultText.text = "`r`n" +"`r`n" + "You may need to Reboot and right-click Your Phone app and select repair"
+})
+
+$ncpa.Add_Click({
+    cmd /c ncpa.cpl
+})
+$oldsoundpanel.Add_Click({
+    cmd /c mmsys.cpl
+})
+$oldcontrolpanel.Add_Click({
+    cmd /c control
+})
+$oldsystempanel.Add_Click({
+    cmd /c sysdm.cpl
 })
 
 $windowsupdatefix.Add_Click({
