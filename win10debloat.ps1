@@ -52,7 +52,7 @@ $Form.Width                   = $objImage.Width
 $Form.Height                  = $objImage.Height
 
 $Panel1                          = New-Object system.Windows.Forms.Panel
-$Panel1.height                   = 939
+$Panel1.height                   = 1050
 $Panel1.width                    = 219
 $Panel1.location                 = New-Object System.Drawing.Point(6,54)
 
@@ -157,9 +157,9 @@ $Label3                          = New-Object system.Windows.Forms.Label
 $Label3.text                     = "System Tweaks"
 $Label3.AutoSize                 = $true
 $Label3.width                    = 230
-$Label3.height                   = 25
-$Label3.location                 = New-Object System.Drawing.Point(229,11)
-$Label3.Font                     = New-Object System.Drawing.Font('Microsoft Sans Serif',24)
+$Label3.height                   = 30
+$Label3.location                 = New-Object System.Drawing.Point(229,27)
+$Label3.Font                     = New-Object System.Drawing.Font('Microsoft Sans Serif',18)
 
 $essentialtweaks                 = New-Object system.Windows.Forms.Button
 $essentialtweaks.text            = "Essential Tweaks"
@@ -215,8 +215,8 @@ $Label15.text                    = "Windows Update"
 $Label15.AutoSize                = $true
 $Label15.width                   = 25
 $Label15.height                  = 10
-$Label15.location                = New-Object System.Drawing.Point(732,11)
-$Label15.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',24)
+$Label15.location                = New-Object System.Drawing.Point(732,30)
+$Label15.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',18)
 
 $Panel4                          = New-Object system.Windows.Forms.Panel
 $Panel4.height                   = 179
@@ -234,7 +234,7 @@ $securitywindowsupdate           = New-Object system.Windows.Forms.Button
 $securitywindowsupdate.text      = "Security Updates Only"
 $securitywindowsupdate.width     = 300
 $securitywindowsupdate.height    = 30
-$securitywindowsupdate.location  = New-Object System.Drawing.Point(24,142)
+$securitywindowsupdate.location  = New-Object System.Drawing.Point(24,145)
 $securitywindowsupdate.Font      = New-Object System.Drawing.Font('Microsoft Sans Serif',14)
 
 $Label16                         = New-Object system.Windows.Forms.Label
@@ -287,15 +287,15 @@ $Label1.text                     = "Install"
 $Label1.AutoSize                 = $true
 $Label1.width                    = 230
 $Label1.height                   = 25
-$Label1.location                 = New-Object System.Drawing.Point(76,11)
-$Label1.Font                     = New-Object System.Drawing.Font('Microsoft Sans Serif',24)
+$Label1.location                 = New-Object System.Drawing.Point(76,30)
+$Label1.Font                     = New-Object System.Drawing.Font('Microsoft Sans Serif',18)
 
 $Label4                          = New-Object system.Windows.Forms.Label
 $Label4.text                     = "Troubleshoot"
 $Label4.AutoSize                 = $true
 $Label4.width                    = 230
 $Label4.height                   = 25
-$Label4.location                 = New-Object System.Drawing.Point(482,12)
+$Label4.location                 = New-Object System.Drawing.Point(482,35)
 $Label4.Font                     = New-Object System.Drawing.Font('Microsoft Sans Serif',24)
 
 $Panel3                          = New-Object system.Windows.Forms.Panel
