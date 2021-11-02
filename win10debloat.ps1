@@ -6,7 +6,7 @@ If (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]:
 	Exit
 }
 
-# Check if winget is installed, if Not Install From MS Store
+# Check if Winget is Installed, if not Install From MS Store
 Write-Host "Checking Winget..."
 if (Test-Path ~\AppData\Local\Microsoft\WindowsApps\winget.exe){
     Write-Host "Winget Already Installed"
@@ -269,6 +269,7 @@ $PictureBox1.height              = 136
 $PictureBox1.location            = New-Object System.Drawing.Point(580,850)
 $PictureBox1.imageLocation       = "https://github.com/ChrisTitusTech/win10script/blob/master/titus-toolbox.png?raw=true"
 $PictureBox1.SizeMode            = [System.Windows.Forms.PictureBoxSizeMode]::zoom
+
 $lightmode                       = New-Object system.Windows.Forms.Button
 $lightmode.text                  = "Light Mode"
 $lightmode.width                 = 205
@@ -820,6 +821,18 @@ $gimp.Add_Click({
     winget install -e GIMP.GIMP | Out-Host
     Write-Host "Installed Gimp Image Editor"
     $ResultText.text = "`r`n" + "Finished Installing Gimp Image Editor" + "`r`n" + "`r`n" + "Ready for Next Task"
+})
+
+$disableedge.Add_Click({
+    Write-Host "Disabling Microsoft Edge"
+    $ResultText.text = "`r`n" +"`r`n" + "Disabling Edge... Please Wait"
+    $edge = @(Get-ChildItem 'C:\Program Files (x86)\Microsoft\Edge\Application\*\Installer\setup.exe')
+    & $edge[0] --uninstall --system-level --verbose-logging --force-uninstall
+    Set-Location HKLM:\SOFTWARE\Microsoft\
+    Get-Item .\ | New-Item 'EdgeUpdate' -Force
+    New-ItemProperty .\EdgeUpdate\ -Name 'DoNotUpdateToEdgeWithChromium' -Value "1" -PropertyType DWORD -Force
+    Write-Host "Disabled Microsoft Edge"
+    $ResultText.text = "`r`n" + "Disabled Edge" + "`r`n" + "`r`n" + "Ready for Next Task"
 })
 
 $essentialtweaks.Add_Click({
