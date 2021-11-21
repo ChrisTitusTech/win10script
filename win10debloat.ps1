@@ -836,18 +836,19 @@ $disableedge.Add_Click({
 })
 
 $essentialtweaks.Add_Click({
-    Write-Host "Creating Restore Point incase something bad happens"
+    Write-Host "Creating Restore Point..."
     $ResultText.text = "`r`n" +"`r`n" + "Installing Essential Tools... Please Wait" 
     Enable-ComputerRestore -Drive "C:\"
-    Checkpoint-Computer -Description "RestorePoint1" -RestorePointType "MODIFY_SETTINGS"
-
+    Checkpoint-Computer -Description "Before Tweaks" -RestorePointType "MODIFY_SETTINGS"
+    
+    
     Write-Host "Running O&O Shutup with Recommended Settings"
     $ResultText.text += "`r`n" +"Running O&O Shutup with Recommended Settings"
-    Import-Module BitsTransfer
     Start-BitsTransfer -Source "https://raw.githubusercontent.com/ChrisTitusTech/win10script/master/ooshutup10.cfg" -Destination ooshutup10.cfg
     Start-BitsTransfer -Source "https://dl5.oo-software.com/files/ooshutup10/OOSU10.exe" -Destination OOSU10.exe
     ./OOSU10.exe ooshutup10.cfg /quiet
-
+    
+    
     Write-Host "Disabling Telemetry..."
     $ResultText.text += "`r`n" +"Disabling Telemetry..."
     Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\DataCollection" -Name "AllowTelemetry" -Type DWord -Value 0
@@ -883,7 +884,6 @@ $essentialtweaks.Add_Click({
     Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\System" -Name "EnableActivityFeed" -Type DWord -Value 0
     Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\System" -Name "PublishUserActivities" -Type DWord -Value 0
     Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\System" -Name "UploadUserActivities" -Type DWord -Value 0
-    # Keep Location Tracking commented out if you want the ability to locate your device
     Write-Host "Disabling Location Tracking..."
     If (!(Test-Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\location")) {
         New-Item -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\location" -Force | Out-Null
@@ -906,37 +906,40 @@ $essentialtweaks.Add_Click({
         New-Item -Path "HKCU:\SOFTWARE\Policies\Microsoft\Windows\CloudContent" -Force | Out-Null
     }
     Set-ItemProperty -Path "HKCU:\SOFTWARE\Policies\Microsoft\Windows\CloudContent" -Name "DisableTailoredExperiencesWithDiagnosticData" -Type DWord -Value 1
+    Write-Host "Disabling Suggestions on Setting Up Your Device"
+    If (!(Test-Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\UserProfileEngagement")) {
+        New-Item -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\UserProfileEngagement" -Force | Out-Null
+    }
+    New-ItemProperty "HKCU:\Software\Microsoft\Windows\CurrentVersion\UserProfileEngagement\" -Name 'ScoobeSystemSettingEnabled' -Value "0" -PropertyType DWORD -Force | Out-Null
     Write-Host "Disabling Advertising ID..."
     If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\AdvertisingInfo")) {
         New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\AdvertisingInfo" | Out-Null
     }
     Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\AdvertisingInfo" -Name "DisabledByGroupPolicy" -Type DWord -Value 1
-    Write-Host "Disabling Error reporting..."
+    Write-Host "Disabling Error Reporting..."
     Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\Windows Error Reporting" -Name "Disabled" -Type DWord -Value 1
     Disable-ScheduledTask -TaskName "Microsoft\Windows\Windows Error Reporting\QueueReporting" | Out-Null
-    Write-Host "Restricting Windows Update P2P only to local network..."
+    Write-Host "Restricting Windows Update P2P Only to Local Network..."
     If (!(Test-Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\DeliveryOptimization\Config")) {
         New-Item -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\DeliveryOptimization\Config" | Out-Null
     }
     Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\DeliveryOptimization\Config" -Name "DODownloadMode" -Type DWord -Value 1
-    Write-Host "Stopping and disabling Diagnostics Tracking Service..."
+    Write-Host "Stopping and Disabling Diagnostics Tracking Service..."
     Stop-Service "DiagTrack" -WarningAction SilentlyContinue
     Set-Service "DiagTrack" -StartupType Disabled
-    Write-Host "Stopping and disabling WAP Push Service..."
+    Write-Host "Stopping and Disabling WAP Push Service..."
     Stop-Service "dmwappushservice" -WarningAction SilentlyContinue
     Set-Service "dmwappushservice" -StartupType Disabled
-    Write-Host "Enabling F8 boot menu options..."
+    Write-Host "Enabling F8 Boot Menu Options..."
     bcdedit /set `{current`} bootmenupolicy Legacy | Out-Null
-    Write-Host "Stopping and disabling Home Groups services..."
+    Write-Host "Stopping and Disabling Home Groups Services..."
     Stop-Service "HomeGroupListener" -WarningAction SilentlyContinue
     Set-Service "HomeGroupListener" -StartupType Disabled
     Stop-Service "HomeGroupProvider" -WarningAction SilentlyContinue
     Set-Service "HomeGroupProvider" -StartupType Disabled
     Write-Host "Disabling Remote Assistance..."
     Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Remote Assistance" -Name "fAllowToGetHelp" -Type DWord -Value 0
-    Write-Host "Disabling Storage Sense..."
-    Remove-Item -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\StorageSense\Parameters\StoragePolicy" -Recurse -ErrorAction SilentlyContinue
-    Write-Host "Stopping and disabling Superfetch service..."
+    Write-Host "Stopping and Disabling Superfetch Service..."
     Stop-Service "SysMain" -WarningAction SilentlyContinue
     Set-Service "SysMain" -StartupType Disabled
     Write-Host "Disabling Hibernation..."
@@ -945,7 +948,7 @@ $essentialtweaks.Add_Click({
         New-Item -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FlyoutMenuSettings" | Out-Null
     }
     Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FlyoutMenuSettings" -Name "ShowHibernateOption" -Type Dword -Value 0
-    Write-Host "Showing task manager details..."
+    Write-Host "Showing Task Manager Details..."
     $taskmgr = Start-Process -WindowStyle Hidden -FilePath taskmgr.exe -PassThru
     Do {
         Start-Sleep -Milliseconds 100
@@ -954,78 +957,80 @@ $essentialtweaks.Add_Click({
     Stop-Process $taskmgr
     $preferences.Preferences[28] = 0
     Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\TaskManager" -Name "Preferences" -Type Binary -Value $preferences.Preferences
-    Write-Host "Showing file operations details..."
+    Write-Host "Showing File Operations Details..."
     If (!(Test-Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\OperationStatusManager")) {
         New-Item -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\OperationStatusManager" | Out-Null
     }
     Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\OperationStatusManager" -Name "EnthusiastMode" -Type DWord -Value 1
-    Write-Host "Hiding Task View button..."
+    Write-Host "Hiding Task View Button..."
     Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "ShowTaskViewButton" -Type DWord -Value 0
-    Write-Host "Hiding People icon..."
+    Write-Host "Hiding People Icon..."
     If (!(Test-Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced\People")) {
         New-Item -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced\People" | Out-Null
     }
     Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced\People" -Name "PeopleBand" -Type DWord -Value 0
-    Write-Host "Hide tray icons..."
+    Write-Host "Hiding Tray Icons..."
     Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer" -Name "EnableAutoTray" -Type DWord -Value 1
-    Write-Host "Enabling NumLock after startup..."
+    Write-Host "Enabling NumLock After Startup..."
     If (!(Test-Path "HKU:")) {
         New-PSDrive -Name HKU -PSProvider Registry -Root HKEY_USERS | Out-Null
     }
     Set-ItemProperty -Path "HKU:\.DEFAULT\Control Panel\Keyboard" -Name "InitialKeyboardIndicators" -Type DWord -Value 2147483650
-    Add-Type -AssemblyName System.Windows.Forms
-    If (!([System.Windows.Forms.Control]::IsKeyLocked('NumLock'))) {
-        $wsh = New-Object -ComObject WScript.Shell
-        $wsh.SendKeys('{NUMLOCK}')
-    }
-
-    Write-Host "Changing default Explorer view to This PC..."
+    
+    
+    Write-Host "Changing Default Explorer View to This PC..."
     $ResultText.text += "`r`n" +"Quality of Life Tweaks"
     Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "LaunchTo" -Type DWord -Value 1
-
-    Write-Host "Hiding 3D Objects icon from This PC..."
+    
+    
+    Write-Host "Hiding 3D Objects Icon From This PC..."
     Remove-Item -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{0DB7E03F-FC29-4DC6-9020-FF41B59E513A}" -Recurse -ErrorAction SilentlyContinue
-
-	# Network Tweaks
-	Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters" -Name "IRPStackSize" -Type DWord -Value 20
-
+    
+    
+    # Network Tweaks
+    Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters" -Name "IRPStackSize" -Type DWord -Value 20
+    
+    
     # Group svchost.exe processes
     $ram = (Get-CimInstance -ClassName Win32_PhysicalMemory | Measure-Object -Property Capacity -Sum).Sum / 1kb
     Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control" -Name "SvcHostSplitThresholdInKB" -Type DWord -Value $ram -Force
-
+    
+    
     #Write-Host "Installing Windows Media Player..."
-	#Enable-WindowsOptionalFeature -Online -FeatureName "WindowsMediaPlayer" -NoRestart -WarningAction SilentlyContinue | Out-Null
-
+    #Enable-WindowsOptionalFeature -Online -FeatureName "WindowsMediaPlayer" -NoRestart -WarningAction SilentlyContinue | Out-Null
+    
+    
     Write-Host "Disable News and Interests"
     $ResultText.text += "`r`n" +"Disabling Extra Junk"
     Set-ItemProperty -Path "HKCU:\SOFTWARE\Policies\Microsoft\Windows\Windows Feeds" -Name "EnableFeeds" -Type DWord -Value 0
     # Remove "News and Interest" from taskbar
     Set-ItemProperty -Path  "HKCU:\Software\Microsoft\Windows\CurrentVersion\Feeds" -Name "ShellFeedsTaskbarViewMode" -Type DWord -Value 2
-
-    # remove "Meet Now" button from taskbar
-
+    
+    
+    # Remove "Meet Now" button from taskbar
     If (!(Test-Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer")) {
         New-Item -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" -Force | Out-Null
     }
-
-Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" -Name "HideSCAMeetNow" -Type DWord -Value 1
-
-    Write-Host "Removing AutoLogger file and restricting directory..."
+    Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" -Name "HideSCAMeetNow" -Type DWord -Value 1
+    
+    
+    Write-Host "Removing AutoLogger File and Restricting Directory..."
     $autoLoggerDir = "$env:PROGRAMDATA\Microsoft\Diagnosis\ETLLogs\AutoLogger"
     If (Test-Path "$autoLoggerDir\AutoLogger-Diagtrack-Listener.etl") {
         Remove-Item "$autoLoggerDir\AutoLogger-Diagtrack-Listener.etl"
     }
     icacls $autoLoggerDir /deny SYSTEM:`(OI`)`(CI`)F | Out-Null
-
-    Write-Host "Stopping and disabling Diagnostics Tracking Service..."
+    
+    
+    Write-Host "Stopping and Disabling Diagnostics Tracking Service..."
     Stop-Service "DiagTrack"
     Set-Service "DiagTrack" -StartupType Disabled
-
-    Write-Host "Showing known file extensions..."
+    
+    
+    Write-Host "Showing Known File Extensions..."
     Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "HideFileExt" -Type DWord -Value 0
-
-    # Service tweaks to Manual 
-
+    
+    
     $services = @(
     "diagnosticshub.standardcollector.service"     # Microsoft (R) Diagnostics Hub Standard Collector Service
     "DiagTrack"                                    # Diagnostics Tracking Service
@@ -1038,64 +1043,64 @@ Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Policies
     "RemoteRegistry"                               # Remote Registry
     "SharedAccess"                                 # Internet Connection Sharing (ICS)
     "TrkWks"                                       # Distributed Link Tracking Client
-    #"WbioSrvc"                                     # Windows Biometric Service (required for Fingerprint reader / facial detection)
-    #"WlanSvc"                                      # WLAN AutoConfig
+    #"WbioSrvc"                                    # Windows Biometric Service (required for Fingerprint reader / facial detection)
+    #"WlanSvc"                                     # WLAN AutoConfig
     "WMPNetworkSvc"                                # Windows Media Player Network Sharing Service
-    #"wscsvc"                                       # Windows Security Center Service
+    #"wscsvc"                                      # Windows Security Center Service
     "WSearch"                                      # Windows Search
     "XblAuthManager"                               # Xbox Live Auth Manager
     "XblGameSave"                                  # Xbox Live Game Save Service
     "XboxNetApiSvc"                                # Xbox Live Networking Service
-    "XboxGipSvc"                                   #Disables Xbox Accessory Management Service
+    "XboxGipSvc"                                   # Disables Xbox Accessory Management Service
     "ndu"                                          # Windows Network Data Usage Monitor
-    "WerSvc"                                       #disables windows error reporting
-    #"Spooler"                                      #Disables your printer
-    "Fax"                                          #Disables fax
-    "fhsvc"                                        #Disables fax histroy
-    "gupdate"                                      #Disables google update
-    "gupdatem"                                     #Disable another google update
-    "stisvc"                                       #Disables Windows Image Acquisition (WIA)
-    "AJRouter"                                     #Disables (needed for AllJoyn Router Service)
+    "WerSvc"                                       # Disables windows error reporting
+    #"Spooler"                                     # Disables your printer
+    "Fax"                                          # Disables fax
+    "fhsvc"                                        # Disables fax histroy
+    "gupdate"                                      # Disables google update
+    "gupdatem"                                     # Disable another google update
+    "stisvc"                                       # Disables Windows Image Acquisition (WIA)
+    "AJRouter"                                     # Disables (needed for AllJoyn Router Service)
     "MSDTC"                                        # Disables Distributed Transaction Coordinator
-    "WpcMonSvc"                                    #Disables Parental Controls
-    "PhoneSvc"                                     #Disables Phone Service(Manages the telephony state on the device)
-    "PrintNotify"                                  #Disables Windows printer notifications and extentions
-    "PcaSvc"                                       #Disables Program Compatibility Assistant Service
-    "WPDBusEnum"                                   #Disables Portable Device Enumerator Service
-    #"LicenseManager"                               #Disable LicenseManager(Windows store may not work properly)
-    "seclogon"                                     #Disables  Secondary Logon(disables other credentials only password will work)
-    "SysMain"                                      #Disables sysmain
-    "lmhosts"                                      #Disables TCP/IP NetBIOS Helper
-    "wisvc"                                        #Disables Windows Insider program(Windows Insider will not work)
-    "FontCache"                                    #Disables Windows font cache
-    "RetailDemo"                                   #Disables RetailDemo whic is often used when showing your device
+    "WpcMonSvc"                                    # Disables Parental Controls
+    "PhoneSvc"                                     # Disables Phone Service(Manages the telephony state on the device)
+    "PrintNotify"                                  # Disables Windows printer notifications and extentions
+    "PcaSvc"                                       # Disables Program Compatibility Assistant Service
+    "WPDBusEnum"                                   # Disables Portable Device Enumerator Service
+    #"LicenseManager"                              # Disable LicenseManager(Windows store may not work properly)
+    "seclogon"                                     # Disables  Secondary Logon(disables other credentials only password will work)
+    "SysMain"                                      # Disables sysmain
+    "lmhosts"                                      # Disables TCP/IP NetBIOS Helper
+    "wisvc"                                        # Disables Windows Insider program(Windows Insider will not work)
+    "FontCache"                                    # Disables Windows font cache
+    "RetailDemo"                                   # Disables RetailDemo whic is often used when showing your device
     "ALG"                                          # Disables Application Layer Gateway Service(Provides support for 3rd party protocol plug-ins for Internet Connection Sharing)
-    #"BFE"                                         #Disables Base Filtering Engine (BFE) (is a service that manages firewall and Internet Protocol security)
-    #"BrokerInfrastructure"                         #Disables Windows infrastructure service that controls which background tasks can run on the system.
-    "SCardSvr"                                      #Disables Windows smart card
-    "EntAppSvc"                                     #Disables enterprise application management.
-    "BthAvctpSvc"                                   #Disables AVCTP service (if you use  Bluetooth Audio Device or Wireless Headphones. then don't disable this)
-    #"FrameServer"                                   #Disables Windows Camera Frame Server(this allows multiple clients to access video frames from camera devices.)
-    "Browser"                                       #Disables computer browser
-    "BthAvctpSvc"                                   #AVCTP service (This is Audio Video Control Transport Protocol service.)
-    #"BDESVC"                                        #Disables bitlocker
-    "iphlpsvc"                                      #Disables ipv6 but most websites don't use ipv6 they use ipv4     
-    "edgeupdate"                                    # Disables one of edge update service  
-    "MicrosoftEdgeElevationService"                 # Disables one of edge  service 
-    "edgeupdatem"                                   # disbales another one of update service (disables edgeupdatem)                          
-    "SEMgrSvc"                                      #Disables Payments and NFC/SE Manager (Manages payments and Near Field Communication (NFC) based secure elements)
-    #"PNRPsvc"                                      # Disables peer Name Resolution Protocol ( some peer-to-peer and collaborative applications, such as Remote Assistance, may not function, Discord will still work)
-    #"p2psvc"                                       # Disbales Peer Name Resolution Protocol(nables multi-party communication using Peer-to-Peer Grouping.  If disabled, some applications, such as HomeGroup, may not function. Discord will still work)
-    #"p2pimsvc"                                     # Disables Peer Networking Identity Manager (Peer-to-Peer Grouping services may not function, and some applications, such as HomeGroup and Remote Assistance, may not function correctly.Discord will still work)
-    "PerfHost"                                      #Disables  remote users and 64-bit processes to query performance .
-    "BcastDVRUserService_48486de"                   #Disables GameDVR and Broadcast   is used for Game Recordings and Live Broadcasts
-    "CaptureService_48486de"                        #Disables ptional screen capture functionality for applications that call the Windows.Graphics.Capture API.  
-    "cbdhsvc_48486de"                               #Disables   cbdhsvc_48486de (clipboard service it disables)
-    #"BluetoothUserService_48486de"                  #disbales BluetoothUserService_48486de (The Bluetooth user service supports proper functionality of Bluetooth features relevant to each user session.)
-    "WpnService"                                    #Disables WpnService (Push Notifications may not work )
-    #"StorSvc"                                       #Disables StorSvc (usb external hard drive will not be reconised by windows)
-    "RtkBtManServ"                                  #Disables Realtek Bluetooth Device Manager Service
-    "QWAVE"                                         #Disables Quality Windows Audio Video Experience (audio and video might sound worse)
+    #"BFE"                                         # Disables Base Filtering Engine (BFE) (is a service that manages firewall and Internet Protocol security)
+    #"BrokerInfrastructure"                        # Disables Windows infrastructure service that controls which background tasks can run on the system.
+    "SCardSvr"                                     # Disables Windows smart card
+    "EntAppSvc"                                    # Disables enterprise application management.
+    "BthAvctpSvc"                                  # Disables AVCTP service (if you use  Bluetooth Audio Device or Wireless Headphones. then don't disable this)
+    #"FrameServer"                                 # Disables Windows Camera Frame Server(this allows multiple clients to access video frames from camera devices.)
+    "Browser"                                      # Disables computer browser
+    "BthAvctpSvc"                                  # AVCTP service (This is Audio Video Control Transport Protocol service.)
+    #"BDESVC"                                      # Disables bitlocker
+    "iphlpsvc"                                     # Disables ipv6 but most websites don't use ipv6 they use ipv4     
+    "edgeupdate"                                   # Disables one of edge update service  
+    "MicrosoftEdgeElevationService"                # Disables one of edge  service 
+    "edgeupdatem"                                  # disbales another one of update service (disables edgeupdatem)                          
+    "SEMgrSvc"                                     # Disables Payments and NFC/SE Manager (Manages payments and Near Field Communication (NFC) based secure elements)
+    #"PNRPsvc"                                     # Disables peer Name Resolution Protocol ( some peer-to-peer and collaborative applications, such as Remote Assistance, may not function, Discord will still work)
+    #"p2psvc"                                      # Disbales Peer Name Resolution Protocol(nables multi-party communication using Peer-to-Peer Grouping.  If disabled, some applications, such as HomeGroup, may not function. Discord will still work)
+    #"p2pimsvc"                                    # Disables Peer Networking Identity Manager (Peer-to-Peer Grouping services may not function, and some applications, such as HomeGroup and Remote Assistance, may not function correctly.Discord will still work)
+    "PerfHost"                                     # Disables  remote users and 64-bit processes to query performance .
+    "BcastDVRUserService_48486de"                  # Disables GameDVR and Broadcast   is used for Game Recordings and Live Broadcasts
+    "CaptureService_48486de"                       # Disables ptional screen capture functionality for applications that call the Windows.Graphics.Capture API.  
+    "cbdhsvc_48486de"                              # Disables   cbdhsvc_48486de (clipboard service it disables)
+    #"BluetoothUserService_48486de"                # Disbales BluetoothUserService_48486de (The Bluetooth user service supports proper functionality of Bluetooth features relevant to each user session.)
+    "WpnService"                                   # Disables WpnService (Push Notifications may not work )
+    #"StorSvc"                                     # Disables StorSvc (usb external hard drive will not be reconised by windows)
+    "RtkBtManServ"                                 # Disables Realtek Bluetooth Device Manager Service
+    "QWAVE"                                        # Disables Quality Windows Audio Video Experience (audio and video might sound worse)
      #Hp services
     "HPAppHelperCap"
     "HPDiagsCap"
@@ -1113,15 +1118,16 @@ Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Policies
     "vmictimesync" 
     # Services which cannot be disabled
     #"WdNisSvc"
-)
-
-foreach ($service in $services) {
-    # -ErrorAction SilentlyContinue is so it doesn't write an error to stdout if a service doesn't exist
-
+    )
+    
+    # Set listed services to manual
+    foreach ($service in $services) {
     Write-Host "Setting $service StartupType to Manual"
+    # -ErrorAction SilentlyContinue is so it doesn't write an error to stdout if a service doesn't exist
     Get-Service -Name $service -ErrorAction SilentlyContinue | Set-Service -StartupType Manual
-}
-
+    }
+    
+    
     Write-Host "Essential Tweaks Completed - Please Reboot"
     $ResultText.text = "`r`n" + "Essential Tweaks Done" + "`r`n" + "`r`n" + "Ready for Next Task"
 })
