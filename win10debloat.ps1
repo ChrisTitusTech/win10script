@@ -412,7 +412,7 @@ $reinstallbloat                  = New-Object system.Windows.Forms.Button
 $reinstallbloat.text             = "Reinstall MS Store Apps"
 $reinstallbloat.width            = 205
 $reinstallbloat.height           = 30
-$reinstallbloat.location         = New-Object System.Drawing.Point(3,813)
+$reinstallbloat.location         = New-Object System.Drawing.Point(3,818)
 $reinstallbloat.Font             = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
 $WarningLabel                    = New-Object system.Windows.Forms.Label
@@ -562,6 +562,13 @@ $dualboottime.height             = 30
 $dualboottime.location           = New-Object System.Drawing.Point(3,754)
 $dualboottime.Font               = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
+$disableinternetsearch           = New-Object system.Windows.Forms.Button
+$disableinternetsearch.text      = "Disable Web Search"
+$disableinternetsearch.width     = 205
+$disableinternetsearch.height    = 30
+$disableinternetsearch.location  = New-Object System.Drawing.Point(3,787)
+$disableinternetsearch.Font      = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
+
 $Label11                         = New-Object system.Windows.Forms.Label
 $Label11.text                    = "Videos to Fix Windows"
 $Label11.AutoSize                = $true
@@ -621,7 +628,7 @@ $Button1.Font                    = New-Object System.Drawing.Font('Microsoft San
 
 $Form.controls.AddRange(@($Panel1,$Panel2,$Label3,$Label15,$Panel4,$PictureBox1,$Label1,$Label4,$Panel3,$ResultText,$Label10,$Label11,$urlfixwinstartup,$urlremovevirus,$urlcreateiso))
 $Panel1.controls.AddRange(@($brave,$firefox,$7zip,$sharex,$adobereader,$notepad,$gchrome,$mpc,$vlc,$powertoys,$winterminal,$vscode,$Label2,$everythingsearch,$sumatrapdf,$vscodium,$imageglass,$gimp,$Label7,$Label8,$Label9,$advancedipscanner,$putty,$etcher,$translucenttb,$githubdesktop,$discord,$autohotkey))
-$Panel2.controls.AddRange(@($essentialtweaks,$backgroundapps,$cortana,$actioncenter,$darkmode,$performancefx,$onedrive,$lightmode,$essentialundo,$EActionCenter,$ECortana,$RBackgroundApps,$HTrayIcons,$EClipboardHistory,$ELocation,$InstallOneDrive,$removebloat,$reinstallbloat,$WarningLabel,$Label5,$appearancefx,$STrayIcons,$EHibernation,$dualboottime))
+$Panel2.controls.AddRange(@($essentialtweaks,$backgroundapps,$cortana,$actioncenter,$darkmode,$performancefx,$onedrive,$lightmode,$essentialundo,$EActionCenter,$ECortana,$RBackgroundApps,$HTrayIcons,$EClipboardHistory,$ELocation,$InstallOneDrive,$removebloat,$reinstallbloat,$WarningLabel,$Label5,$appearancefx,$STrayIcons,$EHibernation,$dualboottime,$disableinternetsearch))
 $Panel4.controls.AddRange(@($defaultwindowsupdate,$securitywindowsupdate,$Label16,$Label17,$Label18,$Label19))
 $Panel3.controls.AddRange(@($yourphonefix,$Label6,$windowsupdatefix,$ncpa,$oldcontrolpanel,$oldsoundpanel,$Button1))
 
@@ -1124,6 +1131,12 @@ Write-Host "Setting BIOS time to UTC..."
     Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\TimeZoneInformation" -Name "RealTimeIsUniversal" -Type DWord -Value 1
     $ResultText.text = "`r`n" + "Time set to UTC for consistent time in Dual Boot Systems" + "`r`n" + "`r`n" + "Ready for Next Task"
 })
+$disableinternetsearch.Add_Click({
+    Write-Host "Disabling Search Results from Internet..."
+    Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Search" -Name "BingSearchEnabled" -Type DWord -Value 0
+    Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Search" -Name "AllowSearchToUseLocation" -Type DWord -Value 0
+    $ResultText.text = "`r`n" + "Disabled Internet Search from Windows Search" + "`r`n" + "`r`n" + "Ready for Next Task"
+})
 
 $essentialundo.Add_Click({
     Write-Host "Creating Restore Point incase something bad happens"
@@ -1148,6 +1161,8 @@ $essentialundo.Add_Click({
     Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" -Name "SubscribedContent-338389Enabled" -Type DWord -Value 1
     Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" -Name "SubscribedContent-353698Enabled" -Type DWord -Value 1
     Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" -Name "SystemPaneSuggestionsEnabled" -Type DWord -Value 1
+    Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Search" -Name "BingSearchEnabled" -Type DWord -Value 1
+    Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Search" -Name "AllowSearchToUseLocation" -Type DWord -Value 1
     If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\CloudContent")) {
         Remove-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\CloudContent" -Recurse -ErrorAction SilentlyContinue
     }
