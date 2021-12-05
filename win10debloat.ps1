@@ -665,7 +665,7 @@ $imageglass.Add_Click({
 })
 $discord.Add_Click({
     Write-Host "Installing Discord"
-    $ResultText.text = "`r`n" +"`r`n" + "Discord... Please Wait" 
+    $ResultText.text = "`r`n" +"`r`n" + "Installing Discord... Please Wait" 
     winget install -e Discord.Discord | Out-Host
     if($?) { Write-Host "Installed Discord" }
     $ResultText.text = "`r`n" + "Finished Installing Discord" + "`r`n" + "`r`n" + "Ready for Next Task"
