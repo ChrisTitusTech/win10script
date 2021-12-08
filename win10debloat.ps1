@@ -1438,6 +1438,7 @@ $Bloatware = @(
     "*Hulu*"
     "*HiddenCity*"
     "*AdobePhotoshopExpress*"
+    "*HotspotShieldFreeVPN*"
 
     #Optional: Typically not removed but you can if you need to for some reason
     "*Microsoft.Advertising.Xaml*"
