@@ -692,7 +692,7 @@ $vlc.Add_Click({
     $ResultText.text = "`r`n" +"`r`n" + "VLC Media Player... Please Wait" 
     winget install -e VideoLAN.VLC | Out-Host
     if($?) { Write-Host "Installed VLC Media Player" }
-    $ResultText.text = "`r`n" + "Finished Installing NotePad++" + "`r`n" + "`r`n" + "Ready for Next Task"
+    $ResultText.text = "`r`n" + "Finished Installing VLC Media Player" + "`r`n" + "`r`n" + "Ready for Next Task"
 })
 
 $mpc.Add_Click({
