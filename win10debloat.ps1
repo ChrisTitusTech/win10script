@@ -274,12 +274,6 @@ $Label19.height                  = 10
 $Label19.location                = New-Object System.Drawing.Point(63,126)
 $Label19.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
 
-$PictureBox1                     = New-Object system.Windows.Forms.PictureBox
-$PictureBox1.width               = 343
-$PictureBox1.height              = 136
-$PictureBox1.location            = New-Object System.Drawing.Point(580,850)
-$PictureBox1.imageLocation       = "https://github.com/ChrisTitusTech/win10script/blob/master/titus-toolbox.png?raw=true"
-$PictureBox1.SizeMode            = [System.Windows.Forms.PictureBoxSizeMode]::zoom
 $lightmode                       = New-Object system.Windows.Forms.Button
 $lightmode.text                  = "Light Mode"
 $lightmode.width                 = 205
@@ -533,13 +527,6 @@ $windowsupdatefix.height         = 30
 $windowsupdatefix.location       = New-Object System.Drawing.Point(4,59)
 $windowsupdatefix.Font           = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
-$ResultText                      = New-Object system.Windows.Forms.TextBox
-$ResultText.multiline            = $true
-$ResultText.width                = 382
-$ResultText.height               = 130
-$ResultText.location             = New-Object System.Drawing.Point(576,491)
-$ResultText.Font                 = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
-
 $Label10                         = New-Object system.Windows.Forms.Label
 $Label10.text                    = "Current Status:"
 $Label10.AutoSize                = $true
@@ -618,6 +605,20 @@ $Button1.width                   = 211
 $Button1.height                  = 30
 $Button1.location                = New-Object System.Drawing.Point(4,197)
 $Button1.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
+
+$PictureBox1                     = New-Object system.Windows.Forms.PictureBox
+$PictureBox1.width               = 343
+$PictureBox1.height              = 136
+$PictureBox1.location            = New-Object System.Drawing.Point(580,850)
+$PictureBox1.imageLocation       = "https://github.com/ChrisTitusTech/win10script/blob/master/titus-toolbox.png?raw=true"
+$PictureBox1.SizeMode            = [System.Windows.Forms.PictureBoxSizeMode]::zoom
+
+$ResultText                      = New-Object system.Windows.Forms.TextBox
+$ResultText.multiline            = $true
+$ResultText.width                = 382
+$ResultText.height               = 130
+$ResultText.location             = New-Object System.Drawing.Point(576,491)
+$ResultText.Font                 = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
 
 $Form.controls.AddRange(@($Panel1,$Panel2,$Label3,$Label15,$Panel4,$PictureBox1,$Label1,$Label4,$Panel3,$ResultText,$Label10,$Label11,$urlfixwinstartup,$urlremovevirus,$urlcreateiso))
 $Panel1.controls.AddRange(@($brave,$firefox,$7zip,$sharex,$adobereader,$notepad,$gchrome,$mpc,$vlc,$powertoys,$winterminal,$vscode,$Label2,$everythingsearch,$sumatrapdf,$vscodium,$imageglass,$gimp,$Label7,$Label8,$Label9,$advancedipscanner,$putty,$etcher,$translucenttb,$githubdesktop,$discord,$autohotkey))
