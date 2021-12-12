@@ -193,163 +193,47 @@ $Panel2.controls.AddRange(@($essentialtweaks,$backgroundapps,$cortana,$actioncen
 $Panel4.controls.AddRange(@($defaultwindowsupdate,$securitywindowsupdate,$Label16,$Label17,$Label18,$Label19))
 $Panel3.controls.AddRange(@($yourphonefix,$Label6,$windowsupdatefix,$ncpa,$oldcontrolpanel,$oldsoundpanel,$Button1))
 
-$brave.Add_Click({
-    Write-Host "Installing Brave Browser"
-    $ResultText.text = "`r`n" +"`r`n" + "Installing Brave... Please Wait" 
-    winget install -e BraveSoftware.BraveBrowser | Out-Host
-    if($?) { Write-Host "Installed Brave Browser" }
-    $ResultText.text = "`r`n" + "Finished Installing Brave" + "`r`n" + "`r`n" + "Ready for Next Task"
-})
+$p = @(
+    ("brave","BraveSoftware.BraveBrowser"),
+    ("firefox","Mozilla.Firefox"),
+    ("gchrome","Google.Chrome"),
+    ("autohotkey","Lexikos.AutoHotkey"),
+    ("imageglass","DuongDieuPhap.ImageGlass"),
+    ("discord","Discord.Discord"),
+    ("adobereader","Adobe.AdobeAcrobatReaderDC"),
+    ("notepad","Notepad++.Notepad++"),
+    ("vlc","VideoLAN.VLC"),
+    ("mpc","clsid2.mpc-hc"),
+    ("7zip","7zip.7zip"),
+    ("vscode","Microsoft.VisualStudioCode --source winget"),
+    ("vscodium","VSCodium.VSCodium"),
+    ("winterminal","Microsoft.WindowsTerminal"),
+    ("powertoys","Microsoft.PowerToys"),
+    ("everythingsearch","voidtools.Everything --source winget"),
+    ("sumatrapdf","SumatraPDF.SumatraPDF"),
+    ("githubdesktop","GitHub.GitHubDesktop"),
+    ("translucenttb","TranslucentTB.TranslucentTB"),
+    ("etcher","Balena.Etcher")
+    ("advancedipscanner","Famatech.AdvancedIPScanner"),
+    ("sharex","ShareX.ShareX"),
+    ("gimp","GIMP.GIMP")
+)
 
-$firefox.Add_Click({
-    Write-Host "Installing Firefox"
-    $ResultText.text = "`r`n" +"`r`n" + "Installing Firefox... Please Wait" 
-    winget install -e Mozilla.Firefox | Out-Host
-    if($?) { Write-Host "Installed Firefox" }
-    $ResultText.text = "`r`n" + "Finished Installing Firefox" + "`r`n" + "`r`n" + "Ready for Next Task"
-})
-
-$gchrome.Add_Click({
-    Write-Host "Installing Google Chrome"
-    $ResultText.text = "`r`n" +"`r`n" + "Installing Google Chrome... Please Wait" 
-    winget install -e Google.Chrome | Out-Host
-    if($?) { Write-Host "Installed Google Chrome" }
-    $ResultText.text = "`r`n" + "Finished Installing Google Chrome" + "`r`n" + "`r`n" + "Ready for Next Task"
-})
-
-$autohotkey.Add_Click({
-    Write-Host "Installing AutoHotkey"
-    $ResultText.text = "`r`n" +"`r`n" + "Installing AutoHotkey... Please Wait" 
-    winget install -e Lexikos.AutoHotkey | Out-Host
-    if($?) { Write-Host "Installed AutoHotkey" }
-    $ResultText.text = "`r`n" + "Finished Installing Autohotkey" + "`r`n" + "`r`n" + "Ready for Next Task"
-})
-$imageglass.Add_Click({
-    Write-Host "Installing Image Glass (Image Viewer)"
-    $ResultText.text = "`r`n" +"`r`n" + "Installing Image Glass... Please Wait" 
-    winget install -e DuongDieuPhap.ImageGlass | Out-Host
-    if($?) { Write-Host "Installed Image Glass (Image Viewer)" }
-    $ResultText.text = "`r`n" + "Finished Installing Image Glass" + "`r`n" + "`r`n" + "Ready for Next Task"
-})
-$discord.Add_Click({
-    Write-Host "Installing Discord"
-    $ResultText.text = "`r`n" +"`r`n" + "Discord... Please Wait" 
-    winget install -e Discord.Discord | Out-Host
-    if($?) { Write-Host "Installed Discord" }
-    $ResultText.text = "`r`n" + "Finished Installing Discord" + "`r`n" + "`r`n" + "Ready for Next Task"
-})
-
-$adobereader.Add_Click({
-    Write-Host "Installing Adobe Reader DC"
-    $ResultText.text = "`r`n" +"`r`n" + "Installing Adobe Reader DC... Please Wait" 
-    winget install -e Adobe.AdobeAcrobatReaderDC | Out-Host
-    if($?) { Write-Host "Installed Adobe Reader DC" }
-    $ResultText.text = "`r`n" + "Finished Installing Adobe Reader DC" + "`r`n" + "`r`n" + "Ready for Next Task"
-})
-
-$notepad.Add_Click({
-    Write-Host "Installing Notepad++"
-    $ResultText.text = "`r`n" +"`r`n" + "Installing Notepad++... Please Wait" 
-    winget install -e Notepad++.Notepad++ | Out-Host
-    if($?) { Write-Host "Installed Notepad++" }
-    $ResultText.text = "`r`n" + "Finished Installing NotePad++" + "`r`n" + "`r`n" + "Ready for Next Task"
-})
-
-$vlc.Add_Click({
-    Write-Host "Installing VLC Media Player"
-    $ResultText.text = "`r`n" +"`r`n" + "VLC Media Player... Please Wait" 
-    winget install -e VideoLAN.VLC | Out-Host
-    if($?) { Write-Host "Installed VLC Media Player" }
-    $ResultText.text = "`r`n" + "Finished Installing VLC Media Player" + "`r`n" + "`r`n" + "Ready for Next Task"
-})
-
-$mpc.Add_Click({
-    Write-Host "Installing Media Player Classic"
-    $ResultText.text = "`r`n" +"`r`n" + "Installing Media Player Classic... Please Wait" 
-    winget install -e clsid2.mpc-hc | Out-Host
-    if($?) { Write-Host "Installed Media Player Classic" }
-    $ResultText.text = "`r`n" + "Finished Installing Media Player Classic" + "`r`n" + "`r`n" + "Ready for Next Task"
-})
-
-$7zip.Add_Click({
-    Write-Host "Installing 7-Zip Compression Tool"
-    $ResultText.text = "`r`n" +"`r`n" + "Installing 7-Zip Compression Tool... Please Wait" 
-    winget install -e 7zip.7zip | Out-Host
-    if($?) { Write-Host "Installed 7-Zip Compression Tool" }
-    $ResultText.text = "`r`n" + "Finished Installing 7-Zip Compression Tool" + "`r`n" + "`r`n" + "Ready for Next Task"
-})
-
-$vscode.Add_Click({
-    Write-Host "Installing Visual Studio Code"
-    $ResultText.text = "`r`n" +"`r`n" + "Installing Visual Studio Code... Please Wait" 
-    winget install -e Microsoft.VisualStudioCode --source winget | Out-Host
-    if($?) { Write-Host "Installed Visual Studio Code" }
-    $ResultText.text = "`r`n" + "Finished Installing Visual Studio Code" + "`r`n" + "`r`n" + "Ready for Next Task"
-})
-
-$vscodium.Add_Click({
-    Write-Host "Installing VS Codium"
-    $ResultText.text = "`r`n" +"`r`n" + "Installing VS Codium... Please Wait" 
-    winget install -e VSCodium.VSCodium | Out-Host
-    if($?) { Write-Host "Installed VS Codium" }
-    $ResultText.text = "`r`n" + "Finished Installing VS Codium" + "`r`n" + "`r`n" + "Ready for Next Task"
-})
-
-$winterminal.Add_Click({
-    Write-Host "Installing New Windows Terminal"
-    $ResultText.text = "`r`n" +"`r`n" + "Installing New Windows Terminal... Please Wait" 
-    winget install -e Microsoft.WindowsTerminal | Out-Host
-    if($?) { Write-Host "Installed New Windows Terminal" }
-    $ResultText.text = "`r`n" + "Finished Installing New Windows Terminal" + "`r`n" + "`r`n" + "Ready for Next Task"
-})
-
-$powertoys.Add_Click({
-    Write-Host "Installing Microsoft PowerToys"
-    $ResultText.text = "`r`n" +"`r`n" + "Installing Microsoft PowerToys... Please Wait" 
-    winget install -e Microsoft.PowerToys | Out-Host
-    if($?) { Write-Host "Installed Microsoft PowerToys" }
-    $ResultText.text = "`r`n" + "Finished Installing Microsoft PowerToys" + "`r`n" + "`r`n" + "Ready for Next Task"
-})
-
-$everythingsearch.Add_Click({
-    Write-Host "Installing Voidtools Everything Search"
-    $ResultText.text = "`r`n" +"`r`n" + "Installing Voidtools Everything Search... Please Wait" 
-    winget install -e voidtools.Everything --source winget | Out-Host
-    if($?) { Write-Host "Installed Everything Search" }
-    $ResultText.text = "`r`n" + "Finished Installing Voidtools Everything Search" + "`r`n" + "`r`n" + "Ready for Next Task"
-})
-
-$sumatrapdf.Add_Click({
-    Write-Host "Installing Sumatra PDF"
-    $ResultText.text = "`r`n" +"`r`n" + "Installing Sumatra PDF... Please Wait" 
-    winget install -e SumatraPDF.SumatraPDF | Out-Host
-    if($?) { Write-Host "Installed Sumatra PDF" }
-    $ResultText.text = "`r`n" + "Finished Installing Sumatra PDF" + "`r`n" + "`r`n" + "Ready for Next Task"
-})
-
-$githubdesktop.Add_Click({
-    Write-Host "Installing GitHub Desktop"
-    $ResultText.text = "`r`n" +"`r`n" + "Installing GitHub Desktop... Please Wait" 
-    winget install -e GitHub.GitHubDesktop | Out-Host
-    Write-Host "Installed Github Desktop"
-    $ResultText.text = "`r`n" + "Finished Installing GitHub Desktop" + "`r`n" + "`r`n" + "Ready for Next Task"
-})
-
-$translucenttb.Add_Click({
-    Write-Host "Installing Translucent Taskbar"
-    $ResultText.text = "`r`n" +"`r`n" + "Installing Translucent Taskbar... Please Wait" 
-    winget install -e TranslucentTB.TranslucentTB | Out-Host
-    Write-Host "Installed Translucent Taskbar"
-    $ResultText.text = "`r`n" + "Finished Installing Translucent Taskbar" + "`r`n" + "`r`n" + "Ready for Next Task"
-})
-
-$etcher.Add_Click({
-    Write-Host "Installing Etcher USB Imager"
-    $ResultText.text = "`r`n" +"`r`n" + "Installing Etcher USB Imager... Please Wait" 
-    winget install -e Balena.Etcher | Out-Host
-    Write-Host "Installed Etcher USB Imager"
-    $ResultText.text = "`r`n" + "Finished Installing Etcher USB Imager" + "`r`n" + "`r`n" + "Ready for Next Task"
-})
+foreach ($program in $p)
+{
+    $button = Get-Variable $program[0] -ValueOnly
+    Add-Member -InputObject $button -MemberType NoteProperty  -Name args -Value $program[1]
+    $button.Add_Click({
+        $text = $this.text
+        $args = $this.args
+        Write-Host "Installing $text"
+        $ResultText.text = "`r`n" +"`r`n" + "Installing $text... Please Wait" 
+        winget install -e $args | Out-Host
+        Write-Host "a: $args"
+        Write-Host "Installed $text"
+        $ResultText.text = "`r`n" + "Finished Installing $text" + "`r`n" + "`r`n" + "Ready for Next Task"
+    })
+}
 
 $putty.Add_Click({
     Write-Host "Installing PuTTY & WinSCP"
@@ -358,30 +242,6 @@ $putty.Add_Click({
     winget install -e WinSCP.WinSCP | Out-Host
     Write-Host "Installed PuTTY & WinSCP"
     $ResultText.text = "`r`n" + "Finished Installing PuTTY & WinSCP" + "`r`n" + "`r`n" + "Ready for Next Task"
-})
-
-$advancedipscanner.Add_Click({
-    Write-Host "Installing Advanced IP Scanner"
-    $ResultText.text = "`r`n" +"`r`n" + "Installing Advanced IP Scanner... Please Wait" 
-    winget install -e Famatech.AdvancedIPScanner | Out-Host
-    Write-Host "Installed Advanced IP Scanner"
-    $ResultText.text = "`r`n" + "Finished Installing Advanced IP Scanner" + "`r`n" + "`r`n" + "Ready for Next Task"
-})
-
-$sharex.Add_Click({
-    Write-Host "Installing ShareX Screenshot Tool"
-    $ResultText.text = "`r`n" +"`r`n" + "Installing ShareX Screenshot Tool... Please Wait" 
-    winget install -e ShareX.ShareX | Out-Host
-    Write-Host "Installed ShareX Screenshot Tool"
-    $ResultText.text = "`r`n" + "Finished Installing ShareX Screenshot Tool" + "`r`n" + "`r`n" + "Ready for Next Task"
-})
-
-$gimp.Add_Click({
-    Write-Host "Installing Gimp Image Editor"
-    $ResultText.text = "`r`n" +"`r`n" + "Installing Gimp Image Editor... Please Wait" 
-    winget install -e GIMP.GIMP | Out-Host
-    Write-Host "Installed Gimp Image Editor"
-    $ResultText.text = "`r`n" + "Finished Installing Gimp Image Editor" + "`r`n" + "`r`n" + "Ready for Next Task"
 })
 
 $urlremovevirus.Add_Click({
