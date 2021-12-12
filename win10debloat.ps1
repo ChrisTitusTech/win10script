@@ -295,18 +295,6 @@ $vscodium.Add_Click({
     $ResultText.text = "`r`n" + "Finished Installing VS Codium" + "`r`n" + "`r`n" + "Ready for Next Task"
 })
 
-$urlremovevirus.Add_Click({
-    Start-Process "https://youtu.be/CHtZ9-9ch2w"
-})
-
-$urlfixwinstartup.Add_Click({
-    Start-Process "https://youtu.be/sOihh4ZNOf4"
-})
-
-$urlcreateiso.Add_Click({
-    Start-Process "https://youtu.be/R6XPff38iSc"
-})
-
 $winterminal.Add_Click({
     Write-Host "Installing New Windows Terminal"
     $ResultText.text = "`r`n" +"`r`n" + "Installing New Windows Terminal... Please Wait" 
@@ -394,6 +382,18 @@ $gimp.Add_Click({
     winget install -e GIMP.GIMP | Out-Host
     Write-Host "Installed Gimp Image Editor"
     $ResultText.text = "`r`n" + "Finished Installing Gimp Image Editor" + "`r`n" + "`r`n" + "Ready for Next Task"
+})
+
+$urlremovevirus.Add_Click({
+    Start-Process "https://youtu.be/CHtZ9-9ch2w"
+})
+
+$urlfixwinstartup.Add_Click({
+    Start-Process "https://youtu.be/sOihh4ZNOf4"
+})
+
+$urlcreateiso.Add_Click({
+    Start-Process "https://youtu.be/R6XPff38iSc"
 })
 
 $essentialtweaks.Add_Click({
