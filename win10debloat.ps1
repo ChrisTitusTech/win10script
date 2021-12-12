@@ -56,6 +56,21 @@ $Panel1.height                   = 939
 $Panel1.width                    = 219
 $Panel1.location                 = New-Object System.Drawing.Point(6,54)
 
+$Panel2                          = New-Object system.Windows.Forms.Panel
+$Panel2.height                   = 938
+$Panel2.width                    = 211
+$Panel2.location                 = New-Object System.Drawing.Point(240,54)
+
+$Panel3                          = New-Object system.Windows.Forms.Panel
+$Panel3.height                   = 234
+$Panel3.width                    = 220
+$Panel3.location                 = New-Object System.Drawing.Point(464,54)
+
+$Panel4                          = New-Object system.Windows.Forms.Panel
+$Panel4.height                   = 179
+$Panel4.width                    = 340
+$Panel4.location                 = New-Object System.Drawing.Point(699,55)
+
 $brave                           = New-Object system.Windows.Forms.Button
 $brave.text                      = "Brave Browser"
 $brave.width                     = 212
@@ -148,11 +163,6 @@ $Label2.height                   = 10
 $Label2.location                 = New-Object System.Drawing.Point(89,11)
 $Label2.Font                     = New-Object System.Drawing.Font('Microsoft Sans Serif',10,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Bold))
 
-$Panel2                          = New-Object system.Windows.Forms.Panel
-$Panel2.height                   = 938
-$Panel2.width                    = 211
-$Panel2.location                 = New-Object System.Drawing.Point(240,54)
-
 $Label3                          = New-Object system.Windows.Forms.Label
 $Label3.text                     = "System Tweaks"
 $Label3.AutoSize                 = $true
@@ -217,11 +227,6 @@ $Label15.width                   = 25
 $Label15.height                  = 10
 $Label15.location                = New-Object System.Drawing.Point(732,11)
 $Label15.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',24)
-
-$Panel4                          = New-Object system.Windows.Forms.Panel
-$Panel4.height                   = 179
-$Panel4.width                    = 340
-$Panel4.location                 = New-Object System.Drawing.Point(699,55)
 
 $defaultwindowsupdate            = New-Object system.Windows.Forms.Button
 $defaultwindowsupdate.text       = "Default Settings"
@@ -297,11 +302,6 @@ $Label4.width                    = 230
 $Label4.height                   = 25
 $Label4.location                 = New-Object System.Drawing.Point(482,12)
 $Label4.Font                     = New-Object System.Drawing.Font('Microsoft Sans Serif',24)
-
-$Panel3                          = New-Object system.Windows.Forms.Panel
-$Panel3.height                   = 234
-$Panel3.width                    = 220
-$Panel3.location                 = New-Object System.Drawing.Point(464,54)
 
 $essentialundo                   = New-Object system.Windows.Forms.Button
 $essentialundo.text              = "Undo Essential Tweaks"
