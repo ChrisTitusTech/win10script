@@ -78,7 +78,7 @@ $7zip.location                   = New-Object System.Drawing.Point(4,102)
 $7zip.Font                       = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
 $sharex                          = New-Object system.Windows.Forms.Button
-$sharex.text                     = "ShareX (Screenshots)"
+$sharex.text                     = "ShareX"
 $sharex.width                    = 212
 $sharex.height                   = 30
 $sharex.location                 = New-Object System.Drawing.Point(3,561)
@@ -134,7 +134,7 @@ $winterminal.location            = New-Object System.Drawing.Point(3,32)
 $winterminal.Font                = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
 $vscode                          = New-Object system.Windows.Forms.Button
-$vscode.text                     = "VS Code"
+$vscode.text                     = "Visual Studio Code"
 $vscode.width                    = 211
 $vscode.height                   = 30
 $vscode.location                 = New-Object System.Drawing.Point(4,797)
@@ -176,7 +176,7 @@ $backgroundapps.location         = New-Object System.Drawing.Point(3,453)
 $backgroundapps.Font             = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
 $cortana                         = New-Object system.Windows.Forms.Button
-$cortana.text                    = "Disable Cortana (Search)"
+$cortana.text                    = "Disable Cortana"
 $cortana.width                   = 205
 $cortana.height                  = 30
 $cortana.location                = New-Object System.Drawing.Point(2,588)
@@ -204,7 +204,7 @@ $performancefx.location          = New-Object System.Drawing.Point(3,419)
 $performancefx.Font              = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
 $onedrive                        = New-Object system.Windows.Forms.Button
-$onedrive.text                   = "Delete & Disable  OneDrive"
+$onedrive.text                   = "Delete & Disable OneDrive"
 $onedrive.width                  = 205
 $onedrive.height                 = 30
 $onedrive.location               = New-Object System.Drawing.Point(3,521)
@@ -318,7 +318,7 @@ $EActionCenter.location          = New-Object System.Drawing.Point(3,210)
 $EActionCenter.Font              = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
 $ECortana                        = New-Object system.Windows.Forms.Button
-$ECortana.text                   = "Enable Cortana (Search)"
+$ECortana.text                   = "Enable Cortana"
 $ECortana.width                  = 205
 $ECortana.height                 = 30
 $ECortana.location               = New-Object System.Drawing.Point(3,622)
