@@ -709,17 +709,22 @@ $discord.Add_Click({
 })
 
 $adobereader.Add_Click({
-    if (winget list Adobe.AdobeAcrobatReaderDC | Select-String -Pattern "No package found matching input criteria.") {
-        Write-Host "Adobe Reader DC Already Installed."
-        $ResultText.text = "`r`n" + "Adobe Reader DC is Already Installed" + "`r`n" + "`r`n" + "Ready for Next Task"
-    }
-    else {
-        Write-Host "Installing Adobe Reader DC"
-        $ResultText.text = "`r`n" + "`r`n" + "Installing Adobe Reader DC... Please Wait" 
-        winget install -e Adobe.AdobeAcrobatReaderDC | Out-Host
-        if ($?) { Write-Host "Installed Adobe Reader DC" }
-        $ResultText.text = "`r`n" + "Finished Installing Adobe Reader DC" + "`r`n" + "`r`n" + "Ready for Next Task"
-    }
+        if (winget list Adobe.Acrobat.Reader| Select-String -Pattern "No package found matching input criteria.") {
+            Write-Host "Adobe Reader DC Already Installed."
+            $ResultText.text = "`r`n" + "Adobe Reader DC is Already Installed" + "`r`n" + "`r`n" + "Ready for Next Task"
+        }
+        else {
+            Write-Host "Installing Adobe Reader DC"
+            $ResultText.text = "`r`n" + "`r`n" + "Installing Adobe Reader DC... Please Wait" 
+            if ([System.Environment]::is64BitOperatingSystem) {
+                winget install -e Adobe.Acrobat.Reader.64-bit | Out-Host
+            }
+            else {
+                winget install -e Adobe.Acrobat.Reader.32-bit | Out-Host
+            }
+            if ($?) { Write-Host "Installed Adobe Reader DC" }
+            $ResultText.text = "`r`n" + "Finished Installing Adobe Reader DC" + "`r`n" + "`r`n" + "Ready for Next Task"
+        }
 })
 
 $notepad.Add_Click({
