@@ -665,7 +665,7 @@ $imageglass.Add_Click({
 })
 $discord.Add_Click({
     Write-Host "Installing Discord"
-    $ResultText.text = "`r`n" +"`r`n" + "Discord... Please Wait" 
+    $ResultText.text = "`r`n" +"`r`n" + "Installing Discord... Please Wait" 
     winget install -e Discord.Discord | Out-Host
     if($?) { Write-Host "Installed Discord" }
     $ResultText.text = "`r`n" + "Finished Installing Discord" + "`r`n" + "`r`n" + "Ready for Next Task"
@@ -689,7 +689,7 @@ $notepad.Add_Click({
 
 $vlc.Add_Click({
     Write-Host "Installing VLC Media Player"
-    $ResultText.text = "`r`n" +"`r`n" + "VLC Media Player... Please Wait" 
+    $ResultText.text = "`r`n" +"`r`n" + "Installing VLC Media Player... Please Wait" 
     winget install -e VideoLAN.VLC | Out-Host
     if($?) { Write-Host "Installed VLC Media Player" }
     $ResultText.text = "`r`n" + "Finished Installing VLC Media Player" + "`r`n" + "`r`n" + "Ready for Next Task"
