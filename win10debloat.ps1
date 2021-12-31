@@ -1114,7 +1114,11 @@ foreach ($service in $services) {
     Write-Host "Setting $service StartupType to Manual"
     Get-Service -Name $service -ErrorAction SilentlyContinue | Set-Service -StartupType Manual
 }
+    Write-Host "Disabling Search Results from Internet..."
+    Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Search" -Name "BingSearchEnabled" -Type DWord -Value 0
+    Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Search" -Name "AllowSearchToUseLocation" -Type DWord -Value 0
 
+    # End of essential tweaks
     Write-Host "Essential Tweaks Completed - Please Reboot"
     $ResultText.text = "`r`n" + "Essential Tweaks Done" + "`r`n" + "`r`n" + "Ready for Next Task"
 })
@@ -1235,6 +1239,10 @@ $essentialundo.Add_Click({
     cmd /c RD /S /Q "%WinDir%\System32\GroupPolicy"
     cmd /c gpupdate /force
     # Considered using Invoke-GPUpdate but requires module most people won't have installed
+    
+    Write-Host "Enabling Web Search from Start Menu"
+    Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Search" -Name "BingSearchEnabled" -Type DWord -Value 1
+    Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Search" -Name "AllowSearchToUseLocation" -Type DWord -Value 1
 
     Write-Host "Essential Undo Completed"
     $ResultText.text = "`r`n" +"`r`n" + "Essential Undo Completed - Ready for next task"
