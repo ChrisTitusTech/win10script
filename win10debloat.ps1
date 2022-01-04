@@ -228,40 +228,8 @@ $securitywindowsupdate           = New-Object system.Windows.Forms.Button
 $securitywindowsupdate.text      = "Security Updates Only"
 $securitywindowsupdate.width     = 300
 $securitywindowsupdate.height    = 30
-$securitywindowsupdate.location  = New-Object System.Drawing.Point(24,142)
+$securitywindowsupdate.location  = New-Object System.Drawing.Point(24,66)
 $securitywindowsupdate.Font      = New-Object System.Drawing.Font('Microsoft Sans Serif',14)
-
-$Label16                         = New-Object system.Windows.Forms.Label
-$Label16.text                    = "I recommend doing security updates only."
-$Label16.AutoSize                = $true
-$Label16.width                   = 25
-$Label16.height                  = 10
-$Label16.location                = New-Object System.Drawing.Point(62,65)
-$Label16.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
-
-$Label17                         = New-Object system.Windows.Forms.Label
-$Label17.text                    = "- Delays Features updates up to 3 years"
-$Label17.AutoSize                = $true
-$Label17.width                   = 25
-$Label17.height                  = 10
-$Label17.location                = New-Object System.Drawing.Point(63,84)
-$Label17.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
-
-$Label18                         = New-Object system.Windows.Forms.Label
-$Label18.text                    = "- Delays Security updates 4 days"
-$Label18.AutoSize                = $true
-$Label18.width                   = 25
-$Label18.height                  = 10
-$Label18.location                = New-Object System.Drawing.Point(63,105)
-$Label18.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
-
-$Label19                         = New-Object system.Windows.Forms.Label
-$Label19.text                    = "- Sets Maximum Active Time"
-$Label19.AutoSize                = $true
-$Label19.width                   = 25
-$Label19.height                  = 10
-$Label19.location                = New-Object System.Drawing.Point(63,126)
-$Label19.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
 
 $PictureBox1                     = New-Object system.Windows.Forms.PictureBox
 $PictureBox1.width               = 343
@@ -400,7 +368,7 @@ $removebloat                     = New-Object system.Windows.Forms.Button
 $removebloat.text                = "Remove MS Store Apps"
 $removebloat.width               = 204
 $removebloat.height              = 34
-$removebloat.location            = New-Object System.Drawing.Point(3,898)
+$removebloat.location            = New-Object System.Drawing.Point(3,848)
 $removebloat.Font                = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
 $reinstallbloat                  = New-Object system.Windows.Forms.Button
@@ -409,22 +377,6 @@ $reinstallbloat.width            = 205
 $reinstallbloat.height           = 30
 $reinstallbloat.location         = New-Object System.Drawing.Point(3,813)
 $reinstallbloat.Font             = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
-
-$WarningLabel                    = New-Object system.Windows.Forms.Label
-$WarningLabel.text               = "Warning! This will break Microsoft Store"
-$WarningLabel.AutoSize           = $true
-$WarningLabel.width              = 25
-$WarningLabel.height             = 10
-$WarningLabel.location           = New-Object System.Drawing.Point(12,856)
-$WarningLabel.Font               = New-Object System.Drawing.Font('Microsoft Sans Serif',8)
-
-$Label5                          = New-Object system.Windows.Forms.Label
-$Label5.text                     = "Games, Apps, Sysprep, etc."
-$Label5.AutoSize                 = $true
-$Label5.width                    = 25
-$Label5.height                   = 10
-$Label5.location                 = New-Object System.Drawing.Point(44,877)
-$Label5.Font                     = New-Object System.Drawing.Font('Microsoft Sans Serif',8)
 
 $Label6                          = New-Object system.Windows.Forms.Label
 $Label6.text                     = "Misc. Fixes"
@@ -1365,17 +1317,20 @@ $Bloatware = @(
 )
 
 $removebloat.Add_Click({
-    Write-Host "Removing Bloatware..."
+    $warning = [System.Windows.Forms.MessageBox]::Show("This will break Microsoft Store Games, Apps, Sysprep, etc. Would you like to continue?","Warning!","YesNo")
+    if ($warning -eq "Yes"){
+        Write-Host "Removing Bloatware..."
 
-    foreach ($Bloat in $Bloatware) {
-        Get-AppxPackage -Name $Bloat| Remove-AppxPackage
-        Get-AppxProvisionedPackage -Online | Where-Object DisplayName -like $Bloat | Remove-AppxProvisionedPackage -Online
-        Write-Host "Trying to remove $Bloat."
-        $ResultText.text = "`r`n" +"`r`n" + "Trying to remove $Bloat."
+        foreach ($Bloat in $Bloatware) {
+            Get-AppxPackage -Name $Bloat| Remove-AppxPackage
+            Get-AppxProvisionedPackage -Online | Where-Object DisplayName -like $Bloat | Remove-AppxProvisionedPackage -Online
+            Write-Host "Trying to remove $Bloat."
+            $ResultText.text = "`r`n" +"`r`n" + "Trying to remove $Bloat."
+        }
+
+        Write-Host "Finished Removing Bloatware Apps"
+        $ResultText.text = "`r`n" +"`r`n" + "Finished Removing Bloatware Apps"   
     }
-
-    Write-Host "Finished Removing Bloatware Apps"
-    $ResultText.text = "`r`n" +"`r`n" + "Finished Removing Bloatware Apps"
 })
 
 $reinstallbloat.Add_Click({
@@ -1405,28 +1360,31 @@ $defaultwindowsupdate.Add_Click({
 })
 
 $securitywindowsupdate.Add_Click({
-    Write-Host "Disabling Driver Offering Through Windows Update..."
-    If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Device Metadata")) {
-        New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Device Metadata" -Force | Out-Null
+    $pref = [System.Windows.Forms.MessageBox]::Show("- Delays Feature Updates up to 3 Years `n- Delays Security Updates for 4 Days `n- Disables Driver Offering Through Windows Update `n- Sets Maximum Active Time","Security Updates Only Info","YesNo")
+    if ($pref -eq "Yes"){
+        Write-Host "Disabling Driver Offering Through Windows Update..."
+        If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Device Metadata")) {
+            New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Device Metadata" -Force | Out-Null
+        }
+        Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Device Metadata" -Name "PreventDeviceMetadataFromNetwork" -Type DWord -Value 1
+        If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DriverSearching")) {
+            New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DriverSearching" -Force | Out-Null
+        }
+        Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DriverSearching" -Name "DontPromptForWindowsUpdate" -Type DWord -Value 1
+        Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DriverSearching" -Name "DontSearchWindowsUpdate" -Type DWord -Value 1
+        Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DriverSearching" -Name "DriverUpdateWizardWuSearchEnabled" -Type DWord -Value 0
+        If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate")) {
+            New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate" | Out-Null
+        }
+        Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate" -Name "ExcludeWUDriversInQualityUpdate" -Type DWord -Value 1
+        Write-Host "Disabling Windows Update Automatic Restart..."
+        If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU")) {
+            New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" -Force | Out-Null
+        }
+        Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" -Name "NoAutoRebootWithLoggedOnUsers" -Type DWord -Value 1
+        Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" -Name "AUPowerManagement" -Type DWord -Value 0
+        $ResultText.text = "`r`n" +"`r`n" + "Set Windows Update to Sane Settings"
     }
-    Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Device Metadata" -Name "PreventDeviceMetadataFromNetwork" -Type DWord -Value 1
-    If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DriverSearching")) {
-        New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DriverSearching" -Force | Out-Null
-    }
-    Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DriverSearching" -Name "DontPromptForWindowsUpdate" -Type DWord -Value 1
-    Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DriverSearching" -Name "DontSearchWindowsUpdate" -Type DWord -Value 1
-    Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DriverSearching" -Name "DriverUpdateWizardWuSearchEnabled" -Type DWord -Value 0
-    If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate")) {
-        New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate" | Out-Null
-    }
-    Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate" -Name "ExcludeWUDriversInQualityUpdate" -Type DWord -Value 1
-    Write-Host "Disabling Windows Update Automatic Restart..."
-    If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU")) {
-        New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" -Force | Out-Null
-    }
-    Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" -Name "NoAutoRebootWithLoggedOnUsers" -Type DWord -Value 1
-    Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" -Name "AUPowerManagement" -Type DWord -Value 0
-    $ResultText.text = "`r`n" +"`r`n" + "Set Windows Update to Sane Settings"
 })
 
 $actioncenter.Add_Click({
