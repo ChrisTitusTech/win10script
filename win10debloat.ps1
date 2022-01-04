@@ -23,8 +23,8 @@ else{
 
 # GUI Specs
 $Form                            = New-Object system.Windows.Forms.Form
-$Form.ClientSize                 = New-Object System.Drawing.Point(1050,640)
-$Form.text                       = "Windows 10 Debloat By Chris Titus"
+$Form.ClientSize                 = New-Object System.Drawing.Point(1050,1000)
+$Form.text                       = "Windows Toolbox By Chris Titus"
 $Form.StartPosition              = "CenterScreen"
 $Form.TopMost                    = $false
 $Form.BackColor                  = "#e9e9e9"
@@ -198,7 +198,7 @@ $performancefx.location          = New-Object System.Drawing.Point(3,453)
 $performancefx.Font              = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
 $onedrive                        = New-Object system.Windows.Forms.Button
-$onedrive.text                   = "Disable OneDrive"
+$onedrive.text                   = "Delete & Disable OneDrive"
 $onedrive.width                  = 205
 $onedrive.height                 = 30
 $onedrive.location               = New-Object System.Drawing.Point(2,554)
