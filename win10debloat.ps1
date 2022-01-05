@@ -156,52 +156,45 @@ $essentialtweaks.location        = New-Object System.Drawing.Point(0,17)
 $essentialtweaks.Font            = New-Object System.Drawing.Font('Microsoft Sans Serif',14)
 
 $backgroundapps                  = New-Object system.Windows.Forms.Button
-$backgroundapps.text             = "Disable Background Apps"
+$backgroundapps.text             = "Toggle Background Apps"
 $backgroundapps.width            = 205
 $backgroundapps.height           = 30
-$backgroundapps.location         = New-Object System.Drawing.Point(3,487)
+$backgroundapps.location         = New-Object System.Drawing.Point(3,346)
 $backgroundapps.Font             = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
 $cortana                         = New-Object system.Windows.Forms.Button
-$cortana.text                    = "Disable Cortana (Search)"
+$cortana.text                    = "Toggle Cortana (Search)"
 $cortana.width                   = 205
 $cortana.height                  = 30
-$cortana.location                = New-Object System.Drawing.Point(3,622)
+$cortana.location                = New-Object System.Drawing.Point(3,414)
 $cortana.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
 $disableedge                     = New-Object system.Windows.Forms.Button
-$disableedge.text                = "Disable Edge"
+$disableedge.text                = "Delete/Disable Edge"
 $disableedge.width               = 205
 $disableedge.height              = 30
 $disableedge.location            = New-Object System.Drawing.Point(3,176)
 $disableedge.Font                = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
 $actioncenter                    = New-Object system.Windows.Forms.Button
-$actioncenter.text               = "Disable Action Center"
+$actioncenter.text               = "Toggle Action Center"
 $actioncenter.width              = 205
 $actioncenter.height             = 30
 $actioncenter.location           = New-Object System.Drawing.Point(3,210)
 $actioncenter.Font               = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
 $darkmode                        = New-Object system.Windows.Forms.Button
-$darkmode.text                   = "Dark Mode"
+$darkmode.text                   = "Toggle Dark Mode"
 $darkmode.width                  = 205
 $darkmode.height                 = 30
-$darkmode.location               = New-Object System.Drawing.Point(3,350)
+$darkmode.location               = New-Object System.Drawing.Point(3,278)
 $darkmode.Font                   = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
-$performancefx                   = New-Object system.Windows.Forms.Button
-$performancefx.text              = "Performance Visual FX"
-$performancefx.width             = 205
-$performancefx.height            = 30
-$performancefx.location          = New-Object System.Drawing.Point(3,453)
-$performancefx.Font              = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
-
 $onedrive                        = New-Object system.Windows.Forms.Button
-$onedrive.text                   = "Delete & Disable OneDrive"
+$onedrive.text                   = "Install/Remove OneDrive"
 $onedrive.width                  = 205
 $onedrive.height                 = 30
-$onedrive.location               = New-Object System.Drawing.Point(2,554)
+$onedrive.location               = New-Object System.Drawing.Point(2,380)
 $onedrive.Font                   = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
 $Label15                         = New-Object system.Windows.Forms.Label
@@ -273,54 +266,26 @@ $essentialundo.height            = 70
 $essentialundo.location          = New-Object System.Drawing.Point(3,102)
 $essentialundo.Font              = New-Object System.Drawing.Font('Microsoft Sans Serif',14)
 
-$EActionCenter                   = New-Object system.Windows.Forms.Button
-$EActionCenter.text              = "Enable Action Center"
-$EActionCenter.width             = 205
-$EActionCenter.height            = 30
-$EActionCenter.location          = New-Object System.Drawing.Point(2,244)
-$EActionCenter.Font              = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
-
-$ECortana                        = New-Object system.Windows.Forms.Button
-$ECortana.text                   = "Enable Cortana (Search)"
-$ECortana.width                  = 205
-$ECortana.height                 = 30
-$ECortana.location               = New-Object System.Drawing.Point(2,655)
-$ECortana.Font                   = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
-
-$RBackgroundApps                 = New-Object system.Windows.Forms.Button
-$RBackgroundApps.text            = "Allow Background Apps"
-$RBackgroundApps.width           = 205
-$RBackgroundApps.height          = 30
-$RBackgroundApps.location        = New-Object System.Drawing.Point(3,521)
-$RBackgroundApps.Font            = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
-
-$HTrayIcons                      = New-Object system.Windows.Forms.Button
-$HTrayIcons.text                 = "Hide Tray Icons"
-$HTrayIcons.width                = 205
-$HTrayIcons.height               = 30
-$HTrayIcons.location             = New-Object System.Drawing.Point(4,315)
-$HTrayIcons.Font                 = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
+$TrayIcons                      = New-Object system.Windows.Forms.Button
+$TrayIcons.text                 = "Toogle Tray Icons"
+$TrayIcons.width                = 205
+$TrayIcons.height               = 30
+$TrayIcons.location             = New-Object System.Drawing.Point(4,244)
+$TrayIcons.Font                 = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
 $EClipboardHistory               = New-Object system.Windows.Forms.Button
 $EClipboardHistory.text          = "Enable Clipboard History"
 $EClipboardHistory.width         = 205
 $EClipboardHistory.height        = 30
-$EClipboardHistory.location      = New-Object System.Drawing.Point(3,688)
+$EClipboardHistory.location      = New-Object System.Drawing.Point(3,448)
 $EClipboardHistory.Font          = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
 $ELocation                       = New-Object system.Windows.Forms.Button
 $ELocation.text                  = "Enable Location Tracking"
 $ELocation.width                 = 205
 $ELocation.height                = 30
-$ELocation.location              = New-Object System.Drawing.Point(2,784)
+$ELocation.location              = New-Object System.Drawing.Point(2,550)
 $ELocation.Font                  = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
-
-$InstallOneDrive                 = New-Object system.Windows.Forms.Button
-$InstallOneDrive.text            = "Enable OneDrive"
-$InstallOneDrive.width           = 205
-$InstallOneDrive.height          = 30
-$InstallOneDrive.location        = New-Object System.Drawing.Point(2,588)
-$InstallOneDrive.Font            = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
 $everythingsearch                = New-Object system.Windows.Forms.Button
 $everythingsearch.text           = "Everything Search"
@@ -366,16 +331,16 @@ $yourphonefix.Font               = New-Object System.Drawing.Font('Microsoft San
 
 $removebloat                     = New-Object system.Windows.Forms.Button
 $removebloat.text                = "Remove MS Store Apps"
-$removebloat.width               = 204
-$removebloat.height              = 34
-$removebloat.location            = New-Object System.Drawing.Point(3,848)
+$removebloat.width               = 205
+$removebloat.height              = 30
+$removebloat.location            = New-Object System.Drawing.Point(3,584)
 $removebloat.Font                = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
 $reinstallbloat                  = New-Object system.Windows.Forms.Button
 $reinstallbloat.text             = "Reinstall MS Store Apps"
 $reinstallbloat.width            = 205
 $reinstallbloat.height           = 30
-$reinstallbloat.location         = New-Object System.Drawing.Point(3,813)
+$reinstallbloat.location         = New-Object System.Drawing.Point(3,618)
 $reinstallbloat.Font             = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
 $Label6                          = New-Object system.Windows.Forms.Label
@@ -459,19 +424,12 @@ $autohotkey.height               = 30
 $autohotkey.location             = New-Object System.Drawing.Point(4,136)
 $autohotkey.Font                 = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
-$appearancefx                    = New-Object system.Windows.Forms.Button
-$appearancefx.text               = "Appearance Visual FX"
-$appearancefx.width              = 205
-$appearancefx.height             = 30
-$appearancefx.location           = New-Object System.Drawing.Point(3,419)
-$appearancefx.Font               = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
-
-$STrayIcons                      = New-Object system.Windows.Forms.Button
-$STrayIcons.text                 = "Show Tray Icons"
-$STrayIcons.width                = 205
-$STrayIcons.height               = 30
-$STrayIcons.location             = New-Object System.Drawing.Point(3,278)
-$STrayIcons.Font                 = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
+$togglefx                        = New-Object system.Windows.Forms.Button
+$togglefx.text                   = "Toggle Visual FX"
+$togglefx.width                  = 205
+$togglefx.height                 = 30
+$togglefx.location               = New-Object System.Drawing.Point(3,312)
+$togglefx.Font                   = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
 $windowsupdatefix                = New-Object system.Windows.Forms.Button
 $windowsupdatefix.text           = "Windows Update Reset"
@@ -499,14 +457,14 @@ $EHibernation                    = New-Object system.Windows.Forms.Button
 $EHibernation.text               = "Enable Hibernation"
 $EHibernation.width              = 205
 $EHibernation.height             = 30
-$EHibernation.location           = New-Object System.Drawing.Point(3,721)
+$EHibernation.location           = New-Object System.Drawing.Point(3,482)
 $EHibernation.Font               = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
 $dualboottime                    = New-Object system.Windows.Forms.Button
-$dualboottime.text               = "Set Time to UTC (Dual Boot)"
+$dualboottime.text               = "Set UTC Time (Dual Boot)"
 $dualboottime.width              = 205
 $dualboottime.height             = 30
-$dualboottime.location           = New-Object System.Drawing.Point(3,754)
+$dualboottime.location           = New-Object System.Drawing.Point(3,516)
 $dualboottime.Font               = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
 $Label11                         = New-Object system.Windows.Forms.Label
@@ -568,8 +526,8 @@ $oldsystempanel.Font             = New-Object System.Drawing.Font('Microsoft San
 
 $Form.controls.AddRange(@($Panel1,$Panel2,$Label3,$Label15,$Panel4,$PictureBox1,$Label1,$Label4,$Panel3,$ResultText,$Label10,$Label11,$urlfixwinstartup,$urlremovevirus,$urlcreateiso))
 $Panel1.controls.AddRange(@($brave,$firefox,$7zip,$sharex,$adobereader,$notepad,$gchrome,$mpc,$vlc,$powertoys,$winterminal,$vscode,$Label2,$everythingsearch,$sumatrapdf,$vscodium,$imageglass,$gimp,$Label7,$Label8,$Label9,$advancedipscanner,$putty,$etcher,$translucenttb,$githubdesktop,$discord,$autohotkey))
-$Panel2.controls.AddRange(@($essentialtweaks,$backgroundapps,$disableedge,$cortana,$actioncenter,$darkmode,$performancefx,$onedrive,$lightmode,$essentialundo,$EActionCenter,$ECortana,$RBackgroundApps,$HTrayIcons,$EClipboardHistory,$ELocation,$InstallOneDrive,$removebloat,$reinstallbloat,$WarningLabel,$Label5,$appearancefx,$STrayIcons,$EHibernation,$dualboottime))
-$Panel4.controls.AddRange(@($defaultwindowsupdate,$securitywindowsupdate,$Label16,$Label17,$Label18,$Label19))
+$Panel2.controls.AddRange(@($essentialtweaks,$backgroundapps,$disableedge,$cortana,$actioncenter,$darkmode,$onedrive,$essentialundo,$TrayIcons,$EClipboardHistory,$ELocation,$removebloat,$reinstallbloat,$togglefx,$EHibernation,$dualboottime))
+$Panel4.controls.AddRange(@($defaultwindowsupdate,$securitywindowsupdate))
 $Panel3.controls.AddRange(@($yourphonefix,$Label6,$windowsupdatefix,$ncpa,$oldcontrolpanel,$oldsoundpanel,$oldsystempanel))
 
 $brave.Add_Click({
@@ -776,13 +734,12 @@ $gimp.Add_Click({
 })
 
 $disableedge.Add_Click({
-    Write-Host "Disabling Microsoft Edge"
+    Write-Host "Disabling Microsoft Edge..."
     $ResultText.text = "`r`n" +"`r`n" + "Disabling Edge... Please Wait"
-    $edge = @(Get-ChildItem 'C:\Program Files (x86)\Microsoft\Edge\Application\*\Installer\setup.exe')
+    $edge = (Get-ChildItem 'C:\Program Files (x86)\Microsoft\Edge\Application\*\Installer\setup.exe')
     & $edge[0] --uninstall --system-level --verbose-logging --force-uninstall
-    Set-Location HKLM:\SOFTWARE\Microsoft\
-    Get-Item .\ | New-Item 'EdgeUpdate' -Force
-    New-ItemProperty .\EdgeUpdate\ -Name 'DoNotUpdateToEdgeWithChromium' -Value "1" -PropertyType DWORD -Force
+    New-Item -Path "HKLM:\SOFTWARE\Microsoft\" -Name "EdgeUpdate" -Force
+    New-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\EdgeUpdate\" -Name 'DoNotUpdateToEdgeWithChromium' -Force -Type DWORD -Value 1
     Write-Host "Disabled Microsoft Edge"
     $ResultText.text = "`r`n" + "Disabled Edge" + "`r`n" + "`r`n" + "Ready for Next Task"
 })
@@ -973,7 +930,7 @@ $essentialtweaks.Add_Click({
     $services = @(
     "diagnosticshub.standardcollector.service"     # Microsoft (R) Diagnostics Hub Standard Collector Service
     "DiagTrack"                                    # Diagnostics Tracking Service
-    "DPS"
+    "DPS"                                          # Device Provisioning Service
     "dmwappushservice"                             # WAP Push Message Routing Service (see known issues)
     "lfsvc"                                        # Geolocation Service
     "MapsBroker"                                   # Downloaded Maps Manager
@@ -1040,21 +997,21 @@ $essentialtweaks.Add_Click({
     #"StorSvc"                                     # Disables StorSvc (usb external hard drive will not be reconised by windows)
     "RtkBtManServ"                                 # Disables Realtek Bluetooth Device Manager Service
     "QWAVE"                                        # Disables Quality Windows Audio Video Experience (audio and video might sound worse)
-     #Hp services
-    "HPAppHelperCap"
-    "HPDiagsCap"
-    "HPNetworkCap"
-    "HPSysInfoCap"
-    "HpTouchpointAnalyticsService"
+    #Hp services
+    "HPAppHelperCap"                              # HP App Helper HSA Service
+    "HPDiagsCap"                                  # HP Diagnostics HSA Service
+    "HPNetworkCap"                                # HP Network HSA Service
+    "HPSysInfoCap"                                # HP Sytem Info HSA Service
+    "HpTouchpointAnalyticsService"                # HP Touchpoint Analytical Services (harvests data in background)
     #hyper-v services
-     "HvHost"                          
-    "vmickvpexchange"
-    "vmicguestinterface"
-    "vmicshutdown"
-    "vmicheartbeat"
-    "vmicvmsession"
-    "vmicrdv"
-    "vmictimesync" 
+    "HvHost"                                       # Hyper-V Host Service   
+    "vmickvpexchange"                              # Hyper-V Data Exchange Service
+    "vmicguestinterface"                           # Hyper-V Integration Services
+    "vmicshutdown"                                 # Hyper-V Integration Services (virtual machine shutdown)
+    "vmicheartbeat"                                # Hyper-V Heartbeat Service
+    "vmicvmsession"                                # Hyper-V PowerShell Direct Service
+    "vmicrdv"                                      # Hyper-V Remote Desktop Virtualization Service
+    "vmictimesync"                                 # Hyper-V Time Synchronization Service
     # Services which cannot be disabled
     #"WdNisSvc"
     )
@@ -1065,7 +1022,6 @@ $essentialtweaks.Add_Click({
     # -ErrorAction SilentlyContinue is so it doesn't write an error to stdout if a service doesn't exist
     Get-Service -Name $service -ErrorAction SilentlyContinue | Set-Service -StartupType Manual
     }
-    
     Write-Host "Essential Tweaks Completed - Please Reboot"
     $ResultText.text = "`r`n" + "Essential Tweaks Done" + "`r`n" + "`r`n" + "Ready for Next Task"
 })
@@ -1193,37 +1149,71 @@ $essentialundo.Add_Click({
     $ResultText.text = "`r`n" +"`r`n" + "Essential Undo Completed - Ready for next task"
 })
 
-$backgroundapps.Add_Click({
-    Write-Host "Disabling Background Application Access..."
-    Get-ChildItem -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\BackgroundAccessApplications" -Exclude "Microsoft.Windows.Cortana*" | ForEach-Object {
-        Set-ItemProperty -Path $_.PsPath -Name "Disabled" -Type DWord -Value 1
-        Set-ItemProperty -Path $_.PsPath -Name "DisabledByUser" -Type DWord -Value 1
+$backgroundapps.Add_Click{
+    if (Get-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\BackgroundAccessApplications\*" -Name "Disabled" -ErrorAction SilentlyContinue){
+        Write-Host "Allowing Background Apps..."
+        Get-ChildItem -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\BackgroundAccessApplications" -Exclude "Microsoft.Windows.Cortana*" | ForEach-Object {
+            Remove-ItemProperty -Path $_.PsPath -Name "Disabled" -ErrorAction SilentlyContinue
+            Remove-ItemProperty -Path $_.PsPath -Name "DisabledByUser" -ErrorAction SilentlyContinue
+        }
+        Write-Host "Done - Reverted to Stock Settings"
+        $ResultText.text = "`r`n" +"`r`n" + "Enabled Background Apps"
+    } else {
+        Write-Host "Disabling Background Application Access..."
+        Get-ChildItem -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\BackgroundAccessApplications" -Exclude "Microsoft.Windows.Cortana*" | ForEach-Object {
+            Set-ItemProperty -Path $_.PsPath -Name "Disabled" -Type DWord -Value 1
+            Set-ItemProperty -Path $_.PsPath -Name "DisabledByUser" -Type DWord -Value 1
+        }
+        Write-Host "Disabled Background Application Access"
+        $ResultText.text = "`r`n" +"`r`n" + "Disabled Background Application Access"
     }
-    Write-Host "Disabled Background Application Access"
-    $ResultText.text = "`r`n" +"`r`n" + "Disabled Background Application Access"
-})
+}
 
 $cortana.Add_Click({
-    Write-Host "Disabling Cortana..."
-    If (!(Test-Path "HKCU:\SOFTWARE\Microsoft\Personalization\Settings")) {
-        New-Item -Path "HKCU:\SOFTWARE\Microsoft\Personalization\Settings" -Force | Out-Null
+    if (Get-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Personalization\Settings" -Name "AcceptedPrivacyPolicy" -ErrorAction SilentlyContinue){
+        Write-Host "Enabling Cortana..."
+	    Remove-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Personalization\Settings" -Name "AcceptedPrivacyPolicy" -ErrorAction SilentlyContinue
+	    If (!(Test-Path "HKCU:\SOFTWARE\Microsoft\InputPersonalization\TrainedDataStore")) {
+		    New-Item -Path "HKCU:\SOFTWARE\Microsoft\InputPersonalization\TrainedDataStore" -Force | Out-Null
+	    }
+	    Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\InputPersonalization" -Name "RestrictImplicitTextCollection" -Type DWord -Value 0
+	    Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\InputPersonalization" -Name "RestrictImplicitInkCollection" -Type DWord -Value 0
+	    Remove-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\InputPersonalization\TrainedDataStore" -Name "HarvestContacts" -ErrorAction SilentlyContinue
+	    Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Windows Search" -Name "AllowCortana" -ErrorAction SilentlyContinue
+	    Write-Host "Restoring Windows Search..."
+	    Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Search" -Name "BingSearchEnabled" -Type DWord -Value "1"
+	    Remove-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Search" -Name "CortanaConsent" -ErrorAction SilentlyContinue
+	    Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Windows Search" -Name "DisableWebSearch" -ErrorAction SilentlyContinue
+	    Write-Host "Restore and Starting Windows Search Service..."
+        Set-Service "WSearch" -StartupType Automatic
+        Start-Service "WSearch" -WarningAction SilentlyContinue
+        Write-Host "Restore Windows Search Icon..."
+	    Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Search" -Name "SearchboxTaskbarMode" -Type DWord -Value 1
+	    Write-Host "Done - Reverted to Stock Settings"
+        $ResultText.text = "`r`n" +"`r`n" + "Enabled Cortana and Restored Search"
+    } else {
+        Write-Host "Disabling Cortana..."
+        If (!(Test-Path "HKCU:\SOFTWARE\Microsoft\Personalization\Settings")) {
+            New-Item -Path "HKCU:\SOFTWARE\Microsoft\Personalization\Settings" -Force | Out-Null
+        }
+        Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Personalization\Settings" -Name "AcceptedPrivacyPolicy" -Type DWord -Value 0
+        If (!(Test-Path "HKCU:\SOFTWARE\Microsoft\InputPersonalization")) {
+            New-Item -Path "HKCU:\SOFTWARE\Microsoft\InputPersonalization" -Force | Out-Null
+        }
+        Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\InputPersonalization" -Name "RestrictImplicitTextCollection" -Type DWord -Value 1
+        Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\InputPersonalization" -Name "RestrictImplicitInkCollection" -Type DWord -Value 1
+        If (!(Test-Path "HKCU:\SOFTWARE\Microsoft\InputPersonalization\TrainedDataStore")) {
+            New-Item -Path "HKCU:\SOFTWARE\Microsoft\InputPersonalization\TrainedDataStore" -Force | Out-Null
+        }
+        Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\InputPersonalization\TrainedDataStore" -Name "HarvestContacts" -Type DWord -Value 0
+        If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Windows Search")) {
+            New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Windows Search" -Force | Out-Null
+        }
+        Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Windows Search" -Name "AllowCortana" -Type DWord -Value 0
+        Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Search" -Name "SearchboxTaskbarMode" -Type DWord -Value 0
+        Write-Host "Disabled Cortana"
+        $ResultText.text = "`r`n" +"`r`n" + "Disabled Cortana"
     }
-    Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Personalization\Settings" -Name "AcceptedPrivacyPolicy" -Type DWord -Value 0
-    If (!(Test-Path "HKCU:\SOFTWARE\Microsoft\InputPersonalization")) {
-        New-Item -Path "HKCU:\SOFTWARE\Microsoft\InputPersonalization" -Force | Out-Null
-    }
-    Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\InputPersonalization" -Name "RestrictImplicitTextCollection" -Type DWord -Value 1
-    Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\InputPersonalization" -Name "RestrictImplicitInkCollection" -Type DWord -Value 1
-    If (!(Test-Path "HKCU:\SOFTWARE\Microsoft\InputPersonalization\TrainedDataStore")) {
-        New-Item -Path "HKCU:\SOFTWARE\Microsoft\InputPersonalization\TrainedDataStore" -Force | Out-Null
-    }
-    Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\InputPersonalization\TrainedDataStore" -Name "HarvestContacts" -Type DWord -Value 0
-    If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Windows Search")) {
-        New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Windows Search" -Force | Out-Null
-    }
-    Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Windows Search" -Name "AllowCortana" -Type DWord -Value 0
-    Write-Host "Disabled Cortana"
-    $ResultText.text = "`r`n" +"`r`n" + "Disabled Cortana"
 })
 
 $Bloatware = @(
@@ -1388,137 +1378,120 @@ $securitywindowsupdate.Add_Click({
 })
 
 $actioncenter.Add_Click({
-    Write-Host "Disabling Action Center..."
-    If (!(Test-Path "HKCU:\SOFTWARE\Policies\Microsoft\Windows\Explorer")) {
-        New-Item -Path "HKCU:\SOFTWARE\Policies\Microsoft\Windows\Explorer" | Out-Null
+    if (Get-ItemPropertyValue -Path "HKCU:\SOFTWARE\Policies\Microsoft\Windows\Explorer" -Name "DisableNotificationCenter" -ErrorAction SilentlyContinue){
+        Write-Host "Enabling Action Center..."
+	    Set-ItemProperty -Path "HKCU:\SOFTWARE\Policies\Microsoft\Windows\Explorer" -Name "DisableNotificationCenter" -Type DWord -Value 0
+        Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\PushNotifications" -Name "ToastEnabled" -Type DWord -Value 1
+	    Write-Host "Done - Reverted to Stock Settings"
+        $ResultText.text = "`r`n" +"`r`n" + "Enabled Action Center"
+    } else {
+        Write-Host "Disabling Action Center..."
+        If (!(Test-Path "HKCU:\SOFTWARE\Policies\Microsoft\Windows\Explorer")) {
+            New-Item -Path "HKCU:\SOFTWARE\Policies\Microsoft\Windows\Explorer" | Out-Null
+        }
+        Set-ItemProperty -Path "HKCU:\SOFTWARE\Policies\Microsoft\Windows\Explorer" -Name "DisableNotificationCenter" -Type DWord -Value 1
+        Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\PushNotifications" -Name "ToastEnabled" -Type DWord -Value 0
+        Write-Host "Disabled Action Center"
+        $ResultText.text = "`r`n" +"`r`n" + "Disabled Action Center"
     }
-    Set-ItemProperty -Path "HKCU:\SOFTWARE\Policies\Microsoft\Windows\Explorer" -Name "DisableNotificationCenter" -Type DWord -Value 1
-    Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\PushNotifications" -Name "ToastEnabled" -Type DWord -Value 0
-    Write-Host "Disabled Action Center"
-    $ResultText.text = "`r`n" +"`r`n" + "Disabled Action Center"
 })
 
-$performancefx.Add_Click({
-    Write-Host "Adjusting Visual Effects for Performance..."
-    Set-ItemProperty -Path "HKCU:\Control Panel\Desktop" -Name "DragFullWindows" -Type String -Value 0
-    Set-ItemProperty -Path "HKCU:\Control Panel\Desktop" -Name "MenuShowDelay" -Type String -Value 200
-    Set-ItemProperty -Path "HKCU:\Control Panel\Desktop" -Name "UserPreferencesMask" -Type Binary -Value ([byte[]](144,18,3,128,16,0,0,0))
-    Set-ItemProperty -Path "HKCU:\Control Panel\Desktop\WindowMetrics" -Name "MinAnimate" -Type String -Value 0
-    Set-ItemProperty -Path "HKCU:\Control Panel\Keyboard" -Name "KeyboardDelay" -Type DWord -Value 0
-    Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "ListviewAlphaSelect" -Type DWord -Value 0
-    Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "ListviewShadow" -Type DWord -Value 0
-    Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "TaskbarAnimations" -Type DWord -Value 0
-    Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects" -Name "VisualFXSetting" -Type DWord -Value 3
-    Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\DWM" -Name "EnableAeroPeek" -Type DWord -Value 0
-    Write-Host "Adjusted Visual Effects for Performance"
-    $ResultText.text = "`r`n" +"`r`n" + "Adjusted VFX for Performance"
-})
-
-$appearancefx.Add_Click({
-	Write-Output "Adjusting Visual Effects for Appearance..."
-	Set-ItemProperty -Path "HKCU:\Control Panel\Desktop" -Name "DragFullWindows" -Type String -Value 1
-	Set-ItemProperty -Path "HKCU:\Control Panel\Desktop" -Name "MenuShowDelay" -Type String -Value 400
-	Set-ItemProperty -Path "HKCU:\Control Panel\Desktop" -Name "UserPreferencesMask" -Type Binary -Value ([byte[]](158,30,7,128,18,0,0,0))
-	Set-ItemProperty -Path "HKCU:\Control Panel\Desktop\WindowMetrics" -Name "MinAnimate" -Type String -Value 1
-	Set-ItemProperty -Path "HKCU:\Control Panel\Keyboard" -Name "KeyboardDelay" -Type DWord -Value 1
-	Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "ListviewAlphaSelect" -Type DWord -Value 1
-	Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "ListviewShadow" -Type DWord -Value 1
-	Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "TaskbarAnimations" -Type DWord -Value 1
-	Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects" -Name "VisualFXSetting" -Type DWord -Value 3
-	Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\DWM" -Name "EnableAeroPeek" -Type DWord -Value 1
-    Write-Output "Adjusted Visual Effects for Appearance..."
-    $ResultText.text = "`r`n" +"`r`n" + "Visual Effects are Set for Appearance (Defaults)"
+$togglefx.Add_Click({
+    $mode = Get-ItemPropertyValue -Path "HKCU:\Control Panel\Desktop" -Name "DragFullWindows"
+    if ($mode -eq 1){
+        Write-Host "Adjusting Visual Effects for Performance..."
+        Set-ItemProperty -Path "HKCU:\Control Panel\Desktop" -Name "DragFullWindows" -Type String -Value 0
+        Set-ItemProperty -Path "HKCU:\Control Panel\Desktop" -Name "MenuShowDelay" -Type String -Value 200
+        Set-ItemProperty -Path "HKCU:\Control Panel\Desktop" -Name "UserPreferencesMask" -Type Binary -Value ([byte[]](144,18,3,128,16,0,0,0))
+        Set-ItemProperty -Path "HKCU:\Control Panel\Desktop\WindowMetrics" -Name "MinAnimate" -Type String -Value 0
+        Set-ItemProperty -Path "HKCU:\Control Panel\Keyboard" -Name "KeyboardDelay" -Type DWord -Value 0
+        Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "ListviewAlphaSelect" -Type DWord -Value 0
+        Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "ListviewShadow" -Type DWord -Value 0
+        Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "TaskbarAnimations" -Type DWord -Value 0
+        Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects" -Name "VisualFXSetting" -Type DWord -Value 3
+        Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\DWM" -Name "EnableAeroPeek" -Type DWord -Value 0
+        $ResultText.text = "`r`n" +"`r`n" + "Adjusted Visual Effects for Performance"
+    } else {
+        Write-Output "Adjusting Visual Effects for Appearance..."
+	    Set-ItemProperty -Path "HKCU:\Control Panel\Desktop" -Name "DragFullWindows" -Type String -Value 1
+	    Set-ItemProperty -Path "HKCU:\Control Panel\Desktop" -Name "MenuShowDelay" -Type String -Value 400
+	    Set-ItemProperty -Path "HKCU:\Control Panel\Desktop" -Name "UserPreferencesMask" -Type Binary -Value ([byte[]](158,30,7,128,18,0,0,0))
+	    Set-ItemProperty -Path "HKCU:\Control Panel\Desktop\WindowMetrics" -Name "MinAnimate" -Type String -Value 1
+	    Set-ItemProperty -Path "HKCU:\Control Panel\Keyboard" -Name "KeyboardDelay" -Type DWord -Value 1
+	    Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "ListviewAlphaSelect" -Type DWord -Value 1
+	    Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "ListviewShadow" -Type DWord -Value 1
+	    Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "TaskbarAnimations" -Type DWord -Value 1
+	    Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects" -Name "VisualFXSetting" -Type DWord -Value 3
+	    Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\DWM" -Name "EnableAeroPeek" -Type DWord -Value 1
+        $ResultText.text = "`r`n" +"`r`n" + "Adjusted Visual Effects for Appearance (Defaults)"
+    }
 })
 
 $onedrive.Add_Click({
-    Write-Host "Disabling OneDrive..."
-    If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\OneDrive")) {
-        New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\OneDrive" | Out-Null
+    if (Get-Process "OneDrive" -ErrorAction SilentlyContinue){
+        Write-Host "Disabling OneDrive..."
+        If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\OneDrive")) {
+            New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\OneDrive" | Out-Null
+        }
+        Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\OneDrive" -Name "DisableFileSyncNGSC" -Type DWord -Value 1
+        Write-Host "Uninstalling OneDrive..."
+        Stop-Process -Name "OneDrive" -ErrorAction SilentlyContinue
+        Start-Sleep -s 2
+        $onedrive = "$env:SYSTEMROOT\SysWOW64\OneDriveSetup.exe"
+        If (!(Test-Path $onedrive)) {
+            $onedrive = "$env:SYSTEMROOT\System32\OneDriveSetup.exe"
+        }
+        Start-Process $onedrive "/uninstall" -NoNewWindow -Wait
+        Start-Sleep -s 2
+        Stop-Process -Name "explorer" -ErrorAction SilentlyContinue
+        Start-Sleep -s 2
+        Remove-Item -Path "$env:USERPROFILE\OneDrive" -Force -Recurse -ErrorAction SilentlyContinue
+        Remove-Item -Path "$env:LOCALAPPDATA\Microsoft\OneDrive" -Force -Recurse -ErrorAction SilentlyContinue
+        Remove-Item -Path "$env:PROGRAMDATA\Microsoft OneDrive" -Force -Recurse -ErrorAction SilentlyContinue
+        Remove-Item -Path "$env:SYSTEMDRIVE\OneDriveTemp" -Force -Recurse -ErrorAction SilentlyContinue
+        If (!(Test-Path "HKCR:")) {
+            New-PSDrive -Name HKCR -PSProvider Registry -Root HKEY_CLASSES_ROOT | Out-Null
+        }
+        Remove-Item -Path "HKCR:\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" -Recurse -ErrorAction SilentlyContinue
+        Remove-Item -Path "HKCR:\Wow6432Node\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" -Recurse -ErrorAction SilentlyContinue
+        Write-Host "Deleted and Disabled OneDrive"
+        $ResultText.text = "`r`n" +"`r`n" + "Deleted and Disabled OneDrive"
+    } else {
+        Write-Host "Installing Onedrive. Please Wait..."
+        Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\OneDrive" -Name "DisableFileSyncNGSC" -ErrorAction SilentlyContinue
+        winget install -e Microsoft.OneDrive --accept-source-agreements | Out-Host
+        $ResultText.text = "`r`n" +"`r`n" + "Finished Reinstalling OneDrive" 
     }
-    Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\OneDrive" -Name "DisableFileSyncNGSC" -Type DWord -Value 1
-    Write-Host "Uninstalling OneDrive..."
-    Stop-Process -Name "OneDrive" -ErrorAction SilentlyContinue
-    Start-Sleep -s 2
-    $onedrive = "$env:SYSTEMROOT\SysWOW64\OneDriveSetup.exe"
-    If (!(Test-Path $onedrive)) {
-        $onedrive = "$env:SYSTEMROOT\System32\OneDriveSetup.exe"
-    }
-    Start-Process $onedrive "/uninstall" -NoNewWindow -Wait
-    Start-Sleep -s 2
-    Stop-Process -Name "explorer" -ErrorAction SilentlyContinue
-    Start-Sleep -s 2
-    Remove-Item -Path "$env:USERPROFILE\OneDrive" -Force -Recurse -ErrorAction SilentlyContinue
-    Remove-Item -Path "$env:LOCALAPPDATA\Microsoft\OneDrive" -Force -Recurse -ErrorAction SilentlyContinue
-    Remove-Item -Path "$env:PROGRAMDATA\Microsoft OneDrive" -Force -Recurse -ErrorAction SilentlyContinue
-    Remove-Item -Path "$env:SYSTEMDRIVE\OneDriveTemp" -Force -Recurse -ErrorAction SilentlyContinue
-    If (!(Test-Path "HKCR:")) {
-        New-PSDrive -Name HKCR -PSProvider Registry -Root HKEY_CLASSES_ROOT | Out-Null
-    }
-    Remove-Item -Path "HKCR:\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" -Recurse -ErrorAction SilentlyContinue
-    Remove-Item -Path "HKCR:\Wow6432Node\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" -Recurse -ErrorAction SilentlyContinue
-    Write-Host "Deleted and Disabled OneDrive"
-    $ResultText.text = "`r`n" +"`r`n" + "Deleted and Disabled OneDrive"
 })
 
 $darkmode.Add_Click({
-    Write-Host "Enabling Dark Mode..."
-    Set-ItemProperty -Path HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize -Name SystemUsesLightTheme -Value 0
-    Set-ItemProperty -Path HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize -Name AppsUseLightTheme -Value 0
-    Write-Host "Enabled Dark Mode"
-    $ResultText.text = "`r`n" +"`r`n" + "Enabled Dark Mode"
+    if (Get-ItemPropertyValue -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize" -Name "AppsUseLightTheme"){
+        Write-Host "Enabling Dark Mode"
+        Set-ItemProperty -Path HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize -Name SystemUsesLightTheme -Value 0
+        New-ItemProperty -Path HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize -Name AppsUseLightTheme -Value 0 -Force
+        $ResultText.text = "`r`n" +"`r`n" + "Enabled Dark Mode"
+    } else {
+        Write-Host "Switching Back to Light Mode"
+        Set-ItemProperty -Path HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize -Name SystemUsesLightTheme -Value 1
+        New-ItemProperty -Path HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize -Name AppsUseLightTheme -Value 1 -Force
+        $ResultText.text = "`r`n" +"`r`n" + "Switched Back to Light Mode"
+    }
 })
 
-$lightmode.Add_Click({
-    Write-Host "Switching Back to Light Mode..."
-    Set-ItemProperty -Path HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize -Name SystemUsesLightTheme -Value 1
-    Remove-ItemProperty -Path HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize -Name AppsUseLightTheme
-    Write-Host "Switched Back to Light Mode"
-    $ResultText.text = "`r`n" +"`r`n" + "Enabled Light Mode"
-})
 
-$EActionCenter.Add_Click({
-    Write-Host "Enabling Action Center..."
-	Remove-ItemProperty -Path "HKCU:\SOFTWARE\Policies\Microsoft\Windows\Explorer" -Name "DisableNotificationCenter" -ErrorAction SilentlyContinue
-	Remove-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\PushNotifications" -Name "ToastEnabled" -ErrorAction SilentlyContinue
-	Write-Host "Done - Reverted to Stock Settings"
-    $ResultText.text = "`r`n" +"`r`n" + "Enabled Action Center"
-})
 
-$ECortana.Add_Click({
-    Write-Host "Enabling Cortana..."
-	Remove-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Personalization\Settings" -Name "AcceptedPrivacyPolicy" -ErrorAction SilentlyContinue
-	If (!(Test-Path "HKCU:\SOFTWARE\Microsoft\InputPersonalization\TrainedDataStore")) {
-		New-Item -Path "HKCU:\SOFTWARE\Microsoft\InputPersonalization\TrainedDataStore" -Force | Out-Null
-	}
-	Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\InputPersonalization" -Name "RestrictImplicitTextCollection" -Type DWord -Value 0
-	Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\InputPersonalization" -Name "RestrictImplicitInkCollection" -Type DWord -Value 0
-	Remove-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\InputPersonalization\TrainedDataStore" -Name "HarvestContacts" -ErrorAction SilentlyContinue
-	Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Windows Search" -Name "AllowCortana" -ErrorAction SilentlyContinue
-	Write-Host "Restoring Windows Search..."
-	Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Search" -Name "BingSearchEnabled" -Type DWord -Value "1"
-	Remove-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Search" -Name "CortanaConsent" -ErrorAction SilentlyContinue
-	Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Windows Search" -Name "DisableWebSearch" -ErrorAction SilentlyContinue
-	Write-Host "Restore and Starting Windows Search Service..."
-    Set-Service "WSearch" -StartupType Automatic
-    Start-Service "WSearch" -WarningAction SilentlyContinue
-    Write-Host "Restore Windows Search Icon..."
-	Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Search" -Name "SearchboxTaskbarMode" -Type DWord -Value 1
-	Write-Host "Done - Reverted to Stock Settings"
-    $ResultText.text = "`r`n" +"`r`n" + "Enabled Cortana and Restored Search"
-})
-
-$HTrayIcons.Add_Click({
-	Write-Host "Hiding tray icons..."
-	Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer" -Name "EnableAutoTray" -Type DWord -Value 1
-	Write-Host "Done - Hid Tray Icons"
-    $ResultText.text = "`r`n" +"`r`n" + "Tray Icons are Now Factory Defaults"
-})
-
-$STrayIcons.Add_Click({
-	Write-Host "Showing Tray Icons..."
-	Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer" -Name "EnableAutoTray" -Type DWord -Value 0
-	Write-Host "Done - Now Showing All Tray Icons"
-    $ResultText.text = "`r`n" +"`r`n" + "Tray Icons Now Set to Show All"
+$TrayIcons.Add_Click({
+    if (Get-ItemPropertyValue -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer" -Name "EnableAutoTray"){
+        Write-Host "Showing Tray Icons..."
+	    Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer" -Name "EnableAutoTray" -Type DWord -Value 0
+	    Write-Host "Done - Now Showing All Tray Icons"
+        $ResultText.text = "`r`n" +"`r`n" + "Tray Icons Now Set to Show All"
+    } else {
+        Write-Host "Hiding tray icons..."
+	    Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer" -Name "EnableAutoTray" -Type DWord -Value 1
+	    Write-Host "Done - Hid Tray Icons"
+        $ResultText.text = "`r`n" +"`r`n" + "Tray Icons are Now Factory Defaults"
+    }
 })
 
 $EClipboardHistory.Add_Click({
@@ -1549,29 +1522,12 @@ $ELocation.Add_Click({
     $ResultText.text = "`r`n" +"`r`n" + "Location Tracking Now on... Reboot to Check."
 })
 
-$RBackgroundApps.Add_Click({
-	Write-Host "Allowing Background Apps..."
-	Get-ChildItem -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\BackgroundAccessApplications" -Exclude "Microsoft.Windows.Cortana*" | ForEach-Object {
-		Remove-ItemProperty -Path $_.PsPath -Name "Disabled" -ErrorAction SilentlyContinue
-		Remove-ItemProperty -Path $_.PsPath -Name "DisabledByUser" -ErrorAction SilentlyContinue
-	}
-	Write-Host "Done - Reverted to Stock Settings"
-    $ResultText.text = "`r`n" +"`r`n" + "Enabled Background Apps"
-})
-
 $EHibernation.Add_Click({
     Write-Host "Enabling Hibernation..."
     Set-ItemProperty -Path "HKLM:\System\CurrentControlSet\Control\Session Manager\Power" -Name "HibernteEnabled" -Type Dword -Value 1
     Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FlyoutMenuSettings" -Name "ShowHibernateOption" -Type Dword -Value 1
     Write-Host "Done - Reverted to Stock Settings"
     $ResultText.text = "`r`n" +"`r`n" + "Enabled Hibernation"
-})
-
-$InstallOneDrive.Add_Click({
-    Write-Host "Installing Onedrive. Please Wait..."
-    Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\OneDrive" -Name "DisableFileSyncNGSC" -ErrorAction SilentlyContinue
-    %systemroot%\SysWOW64\OneDriveSetup.exe
-    $ResultText.text = "`r`n" +"`r`n" + "Finished Reinstalling OneDrive"
 })
 
 $yourphonefix.Add_Click({
