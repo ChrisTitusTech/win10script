@@ -64,7 +64,7 @@ $brave.location                  = New-Object System.Drawing.Point(4,426)
 $brave.Font                      = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
 $firefox                         = New-Object system.Windows.Forms.Button
-$firefox.text                    = "Firefox"
+$firefox.text                    = "Firefox Browser"
 $firefox.width                   = 212
 $firefox.height                  = 30
 $firefox.location                = New-Object System.Drawing.Point(4,461)
@@ -132,13 +132,6 @@ $winterminal.width               = 211
 $winterminal.height              = 30
 $winterminal.location            = New-Object System.Drawing.Point(3,32)
 $winterminal.Font                = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
-
-$vscode                          = New-Object system.Windows.Forms.Button
-$vscode.text                     = "Visual Studio Code"
-$vscode.width                    = 211
-$vscode.height                   = 30
-$vscode.location                 = New-Object System.Drawing.Point(4,797)
-$vscode.Font                     = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
 $Label2                          = New-Object system.Windows.Forms.Label
 $Label2.text                     = "Utilities"
@@ -374,7 +367,7 @@ $sumatrapdf.location             = New-Object System.Drawing.Point(4,900)
 $sumatrapdf.Font                 = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
 $vscodium                        = New-Object system.Windows.Forms.Button
-$vscodium.text                   = "VS Codium"
+$vscodium.text                   = "VS Codium (open source vs-code)"
 $vscodium.width                  = 211
 $vscodium.height                 = 30
 $vscodium.location               = New-Object System.Drawing.Point(4,763)
@@ -388,7 +381,7 @@ $imageglass.location             = New-Object System.Drawing.Point(4,595)
 $imageglass.Font                 = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
 $gimp                            = New-Object system.Windows.Forms.Button
-$gimp.text                       = "GIMP (Image Editor)"
+$gimp.text                       = "GIMP"
 $gimp.width                      = 212
 $gimp.height                     = 30
 $gimp.location                   = New-Object System.Drawing.Point(4,629)
@@ -709,14 +702,6 @@ $7zip.Add_Click({
     winget install -e 7zip.7zip | Out-Host
     if($?) { Write-Host "Installed 7-Zip Compression Tool" }
     $ResultText.text = "`r`n" + "Finished Installing 7-Zip Compression Tool" + "`r`n" + "`r`n" + "Ready for Next Task"
-})
-
-$vscode.Add_Click({
-    Write-Host "Installing Visual Studio Code"
-    $ResultText.text = "`r`n" +"`r`n" + "Installing Visual Studio Code... Please Wait" 
-    winget install -e Microsoft.VisualStudioCode --source winget | Out-Host
-    if($?) { Write-Host "Installed Visual Studio Code" }
-    $ResultText.text = "`r`n" + "Finished Installing Visual Studio Code" + "`r`n" + "`r`n" + "Ready for Next Task"
 })
 
 $vscodium.Add_Click({
