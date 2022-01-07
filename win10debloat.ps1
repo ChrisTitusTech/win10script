@@ -209,7 +209,7 @@ $essentialundo.location          = New-Object System.Drawing.Point(3,102)
 $essentialundo.Font              = New-Object System.Drawing.Font('Microsoft Sans Serif',14)
 
 $TrayIcons                      = New-Object system.Windows.Forms.Button
-$TrayIcons.text                 = "Toogle Tray Icons"
+$TrayIcons.text                 = "Toggle Tray Icons"
 $TrayIcons.width                = 205
 $TrayIcons.height               = 30
 $TrayIcons.location             = New-Object System.Drawing.Point(4,244)
