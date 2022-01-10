@@ -21,7 +21,7 @@ if (Test-Path ~\AppData\Local\Microsoft\WindowsApps\winget.exe){
 
 # GUI Specs
 $Form                            = New-Object system.Windows.Forms.Form
-$Form.ClientSize                 = New-Object System.Drawing.Point(1050,650)
+$Form.ClientSize                 = New-Object System.Drawing.Point(1050,980)
 $Form.text                       = "Windows Toolbox By Chris Titus"
 $Form.StartPosition              = "CenterScreen"
 $Form.TopMost                    = $false
@@ -77,6 +77,13 @@ $intel.height                    = 30
 $intel.location                  = New-Object System.Drawing.Point(3,158)
 $intel.Font                      = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
+$reinstallbloat                  = New-Object system.Windows.Forms.Button
+$reinstallbloat.text             = "Reinstall MS Store Apps"
+$reinstallbloat.width            = 205
+$reinstallbloat.height           = 30
+$reinstallbloat.location         = New-Object System.Drawing.Point(3,192)
+$reinstallbloat.Font             = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
+
 $Panel2                          = New-Object system.Windows.Forms.Panel
 $Panel2.height                   = 938
 $Panel2.width                    = 211
@@ -112,7 +119,7 @@ $cortana.location                = New-Object System.Drawing.Point(3,414)
 $cortana.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
 $disableedge                     = New-Object system.Windows.Forms.Button
-$disableedge.text                = "Delete/Disable Edge"
+$disableedge.text                = "Remove/Install Edge"
 $disableedge.width               = 205
 $disableedge.height              = 30
 $disableedge.location            = New-Object System.Drawing.Point(3,176)
@@ -133,7 +140,7 @@ $darkmode.location               = New-Object System.Drawing.Point(3,278)
 $darkmode.Font                   = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
 $onedrive                        = New-Object system.Windows.Forms.Button
-$onedrive.text                   = "Install/Remove OneDrive"
+$onedrive.text                   = "Remove/Install OneDrive"
 $onedrive.width                  = 205
 $onedrive.height                 = 30
 $onedrive.location               = New-Object System.Drawing.Point(2,380)
@@ -242,13 +249,6 @@ $removebloat.width               = 205
 $removebloat.height              = 30
 $removebloat.location            = New-Object System.Drawing.Point(3,584)
 $removebloat.Font                = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
-
-$reinstallbloat                  = New-Object system.Windows.Forms.Button
-$reinstallbloat.text             = "Reinstall MS Store Apps"
-$reinstallbloat.width            = 205
-$reinstallbloat.height           = 30
-$reinstallbloat.location         = New-Object System.Drawing.Point(3,618)
-$reinstallbloat.Font             = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
 $Label6                          = New-Object system.Windows.Forms.Label
 $Label6.text                     = "Misc. Fixes"
@@ -359,28 +359,37 @@ $oldsystempanel.location         = New-Object System.Drawing.Point(4,197)
 $oldsystempanel.Font             = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
 $Form.controls.AddRange(@($Panel1,$Panel2,$Label3,$Label15,$Panel4,$PictureBox1,$Label1,$Label4,$Panel3,$ResultText,$Label10,$Label11,$urlfixwinstartup,$urlremovevirus,$urlcreateiso))
-$Panel1.controls.AddRange(@($installapps,$Label2,$snappydriverinstaller,$mpv,$intel))
-$Panel2.controls.AddRange(@($essentialtweaks,$backgroundapps,$disableedge,$cortana,$actioncenter,$darkmode,$onedrive,$essentialundo,$TrayIcons,$EClipboardHistory,$ELocation,$removebloat,$reinstallbloat,$togglefx,$EHibernation,$dualboottime))
+$Panel1.controls.AddRange(@($installapps,$Label2,$snappydriverinstaller,$mpv,$intel,$reinstallbloat))
+$Panel2.controls.AddRange(@($essentialtweaks,$backgroundapps,$disableedge,$cortana,$actioncenter,$darkmode,$onedrive,$essentialundo,$TrayIcons,$EClipboardHistory,$ELocation,$removebloat,$togglefx,$EHibernation,$dualboottime))
 $Panel4.controls.AddRange(@($defaultwindowsupdate,$securitywindowsupdate))
 $Panel3.controls.AddRange(@($yourphonefix,$Label6,$windowsupdatefix,$ncpa,$oldcontrolpanel,$oldsoundpanel,$oldsystempanel))
 
-$snappydriverinstaller.Add_Click{
+$snappydriverinstaller.Add_Click({
+    Write-Host "Grabbing Latest Version of SDI..."
     $ResultText.text += "`r`n" +"Grabbing Latest Version of SDI..."
-    $latest = (Invoke-WebRequest -Uri "https://sdi-tool.org/download/").Links.Href | Select-String "SDI_R"
-    Start-BitsTransfer $latest[0] ~\Desktop\SDI_Latest.zip
-    $ResultText.text = "`r`n" + "SDI Downloaded to the Desktop" + "`r`n" + "`r`n" + "Ready for Next Task"
-}
-$mpv.Add_Click{
+    $releases = (Invoke-WebRequest -Uri "https://sdi-tool.org/releases/?C=M;O=D").Links.Href | Select-String "SDI_R"
+    $latest = $releases[0]
+    Start-BitsTransfer "https://sdi-tool.org/releases/$latest" "~\Desktop\$latest"
+    $ResultText.text = "`r`n" + "Latest SDI Downloaded & Placed on the Desktop" + "`r`n" + "`r`n" + "Ready for Next Task"
+    Write-Host "Latest SDI Downloaded & Placed on the Desktop"
+})
+
+$mpv.Add_Click({
+    Write-Host "Grabbing Latest Version of MPV"
     $ResultText.text += "`r`n" +"Grabbing Latest Version of MPV"
     $releases = (Invoke-WebRequest -Uri "https://sourceforge.net/projects/mpv-player-windows/files/64bit/").Links.Href | Select-String "mpv-x86_64"
     Start-BitsTransfer $releases[0] ~\Desktop\mpv-x86_64-latest.7z
-    $ResultText.text = "`r`n" + "MPV Downloaded to the Desktop" + "`r`n" + "`r`n" + "Ready for Next Task"
-}
-$intel.Add_Click{
+    $ResultText.text = "`r`n" + "Latest MPV Downloaded & Placed on the Desktop" + "`r`n" + "`r`n" + "Ready for Next Task"
+    Write-Host "Latest MPV Downloaded & Placed on the Desktop"
+})
+
+$intel.Add_Click({
+    Write-Host "Grabbing Latest Version of Intel Driver Assistant"
     $ResultText.text += "`r`n" +"Grabbing Latest Version of Intel Driver Assistant"
     Start-BitsTransfer https://dsadata.intel.com/installer ~\Desktop\Intel-Driver-and-Support-Assistant-Installer.exe
-    $ResultText.text = "`r`n" + "Intel Driver Assistant Downloaded to the Desktop" + "`r`n" + "`r`n" + "Ready for Next Task"
-}
+    $ResultText.text = "`r`n" + "Intel Driver Assistant Downloaded & Placed on the Desktop" + "`r`n" + "`r`n" + "Ready for Next Task"
+    Write-Host "Intel Driver Assistant Downloaded & Placed on the Desktop"
+})
 
 $urlremovevirus.Add_Click({
     Start-Process "https://youtu.be/CHtZ9-9ch2w"
@@ -394,61 +403,71 @@ $urlcreateiso.Add_Click({
     Start-Process "https://youtu.be/R6XPff38iSc"
 })
 
-$installapps.Add_Click{
+$installapps.Add_Click({
     $applications = @(
-    "## Web Browsers"            # Category
-    "BraveSoftware.BraveBrowser" # Brave
-    "Mozilla.Firefox"            # FireFox
-    "Google.Chrome"              # Google Chrome
-    "## Utilities"               # Category
-    "Microsoft.WindowsTerminal"  # Windows Terminal
-    "Microsoft.PowerToys"        # PowerToys
-    "7zip.7zip"                  # 7-Zip
-    "Lexikos.AutoHotkey"         # AutoHotkey
-    "Discord.Discord"            # Discord
-    "GitHub.GitHubDesktop"       # Github Desktop
-    "TranslucentTB.TranslucentTB"# Translucent Taskbar
-    "Etcher"                     # Etcher
-    "PuTTY.PuTTY"                # Putty
-    "WinSCP.WinSCP"              # WinSCP
-    "Famatech.AdvancedIPScanner" # Advanced IP Scanner
-    "voidtools.Everything"       # Everything Search
-    "## Video & Image Tools"     # Category
-    "ShareX.ShareX"              # ShareX
-    "DuongDieuPhap.ImageGlass"   # ImageGlass
-    "GIMP.GIMP"                  # GIMP
-    "VideoLAN.VLC"               # VLC
-    "clsid2.mpc-hc"              # Media Player Classic
-    "## Document Tools"          # Category
-    "VSCodium.VSCodium"          # VS Codium
-    "Microsoft.VisualStudioCode" # Visual Studio Code
-    "Notepad++.Notepad++"        # Notepad++
-    "SumatraPDF.SumatraPDF"      # Sumatra PDF
-    "## Gaming"                  # Category
-    "AMD.RyzenMaster"            # AMD Ryzen Master
-    "OBSProject.OBSStudio"       # OBS
-    "TechPowerUp.NVCleanstall"   # NVCleanstall
-    "Valve.Steam"                # Steam
-    "GOG.Galaxy"                 # GOG Galaxy
+    "## Web Browsers"                              # Category
+    "BraveSoftware.BraveBrowser"                   # Brave
+    "Mozilla.Firefox"                              # FireFox
+    "Google.Chrome"                                # Google Chrome
+    "## Utilities"                                 # Category
+    "Microsoft.WindowsTerminal"                    # Windows Terminal
+    "Microsoft.PowerToys"                          # PowerToys
+    "7zip.7zip"                                    # 7-Zip
+    "Lexikos.AutoHotkey"                           # AutoHotkey
+    "Discord.Discord"                              # Discord
+    "GitHub.GitHubDesktop"                         # Github Desktop
+    "TranslucentTB.TranslucentTB"                  # Translucent Taskbar
+    "Etcher"                                       # Etcher
+    "PuTTY.PuTTY"                                  # Putty
+    "WinSCP.WinSCP"                                # WinSCP
+    "Famatech.AdvancedIPScanner"                   # Advanced IP Scanner
+    "voidtools.Everything"                         # Everything Search
+    "## Video & Image Tools"                       # Category
+    "ShareX.ShareX"                                # ShareX
+    "DuongDieuPhap.ImageGlass"                     # ImageGlass
+    "GIMP.GIMP"                                    # GIMP
+    "VideoLAN.VLC"                                 # VLC
+    "clsid2.mpc-hc"                                # Media Player Classic
+    "## Document Tools"                            # Category
+    "VSCodium.VSCodium"                            # VS Codium
+    "Microsoft.VisualStudioCode"                   # Visual Studio Code
+    "Notepad++.Notepad++"                          # Notepad++
+    "SumatraPDF.SumatraPDF"                        # Sumatra PDF
+    "## Gaming"                                    # Category
+    "AMD.RyzenMaster"                              # AMD Ryzen Master
+    "OBSProject.OBSStudio"                         # OBS
+    "TechPowerUp.NVCleanstall"                     # NVCleanstall
+    "Valve.Steam"                                  # Steam
+    "GOG.Galaxy"                                   # GOG Galaxy
     )
     $install = $applications | Out-GridView -Title "Select Application(s) to Install" -OutputMode Multiple
     foreach ($app in $install) {
+        Write-Host "Installing $app"
         $ResultText.text += "`r`n" +"Installing $app"
         winget install -e $app --accept-source-agreements | Out-Host
+        Write-Host "Successfully Installed $app"
         $ResultText.text += "`r`n" +"Successfully Installed $app"
     }
     $ResultText.text = "`r`n" + "Finished Installing Application(s)" + "`r`n" + "`r`n" + "Ready for Next Task"
-}
+})
 
 $disableedge.Add_Click({
-    Write-Host "Disabling Microsoft Edge..."
-    $ResultText.text = "`r`n" +"`r`n" + "Disabling Edge... Please Wait"
-    $edge = (Get-ChildItem 'C:\Program Files (x86)\Microsoft\Edge\Application\*\Installer\setup.exe')
-    & $edge[0] --uninstall --system-level --verbose-logging --force-uninstall
-    New-Item -Path "HKLM:\SOFTWARE\Microsoft\" -Name "EdgeUpdate" -Force
-    New-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\EdgeUpdate\" -Name 'DoNotUpdateToEdgeWithChromium' -Force -Type DWORD -Value 1
-    Write-Host "Disabled Microsoft Edge"
-    $ResultText.text = "`r`n" + "Disabled Edge" + "`r`n" + "`r`n" + "Ready for Next Task"
+    if (Test-Path 'C:\Program Files (x86)\Microsoft\Edge\Application\*\Installer\'){
+        Write-Host "Disabling Microsoft Edge..."
+        $ResultText.text = "`r`n" +"`r`n" + "Disabling Edge Please Wait..."
+        $edge = (Get-ChildItem 'C:\Program Files (x86)\Microsoft\Edge\Application\*\Installer\setup.exe')
+        & $edge[0] --uninstall --system-level --verbose-logging --force-uninstall
+        New-Item -Path "HKLM:\SOFTWARE\Microsoft\" -Name "EdgeUpdate" -Force
+        New-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\EdgeUpdate\" -Name 'DoNotUpdateToEdgeWithChromium' -Force -Type DWORD -Value 1
+        Write-Host "Disabled Microsoft Edge"
+        $ResultText.text = "`r`n" + "Successfully Disabled Edge" + "`r`n" + "`r`n" + "Ready for Next Task"
+    } else {
+        Write-Host "Reinstalling Microsoft Edge..."
+        $ResultText.text = "`r`n" +"`r`n" + "Reinstalling Edge Please Wait..."
+        winget install -e Microsoft.Edge --accept-source-agreements | Out-Host
+        Write-Host "Successfully Installed Edge"
+        $ResultText.text = "`r`n" + "Successfully Installed Edge" + "`r`n" + "`r`n" + "Ready for Next Task"
+    }  
 })
 
 $essentialtweaks.Add_Click({
@@ -480,16 +499,10 @@ $essentialtweaks.Add_Click({
     Set-ItemProperty -Path "HKLM:\Software\Microsoft\PolicyManager\default\WiFi\AllowWiFiHotSpotReporting" -Name "Value" -Type DWord -Value 0
     Set-ItemProperty -Path "HKLM:\Software\Microsoft\PolicyManager\default\WiFi\AllowAutoConnectToWiFiSenseHotspots" -Name "Value" -Type DWord -Value 0
     Write-Host "Disabling Application suggestions..."
-    Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" -Name "ContentDeliveryAllowed" -Type DWord -Value 0
-    Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" -Name "OemPreInstalledAppsEnabled" -Type DWord -Value 0
-    Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" -Name "PreInstalledAppsEnabled" -Type DWord -Value 0
-    Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" -Name "PreInstalledAppsEverEnabled" -Type DWord -Value 0
-    Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" -Name "SilentInstalledAppsEnabled" -Type DWord -Value 0
-    Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" -Name "SubscribedContent-338387Enabled" -Type DWord -Value 0
-    Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" -Name "SubscribedContent-338388Enabled" -Type DWord -Value 0
-    Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" -Name "SubscribedContent-338389Enabled" -Type DWord -Value 0
-    Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" -Name "SubscribedContent-353698Enabled" -Type DWord -Value 0
-    Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" -Name "SystemPaneSuggestionsEnabled" -Type DWord -Value 0
+    $suggestions = @("ContentDeliveryAllowed","OemPreInstalledAppsEnabled","PreInstalledAppsEnabled","PreInstalledAppsEverEnabled","SilentInstalledAppsEnabled","SubscribedContent-338387Enabled","SubscribedContent-338388Enabled","SubscribedContent-338389Enabled","SubscribedContent-353698Enabled","SystemPaneSuggestionsEnabled")
+    foreach ($suggestion in $suggestions){
+        Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" -Name $suggestion -Type DWord -Value 0
+    }
     If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\CloudContent")) {
         New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\CloudContent" -Force | Out-Null
     }
@@ -705,11 +718,11 @@ $essentialtweaks.Add_Click({
     "RtkBtManServ"                                 # Disables Realtek Bluetooth Device Manager Service
     "QWAVE"                                        # Disables Quality Windows Audio Video Experience (audio and video might sound worse)
     #Hp services
-    "HPAppHelperCap"                              # HP App Helper HSA Service
-    "HPDiagsCap"                                  # HP Diagnostics HSA Service
-    "HPNetworkCap"                                # HP Network HSA Service
-    "HPSysInfoCap"                                # HP Sytem Info HSA Service
-    "HpTouchpointAnalyticsService"                # HP Touchpoint Analytical Services (harvests data in background)
+    "HPAppHelperCap"                               # HP App Helper HSA Service
+    "HPDiagsCap"                                   # HP Diagnostics HSA Service
+    "HPNetworkCap"                                 # HP Network HSA Service
+    "HPSysInfoCap"                                 # HP Sytem Info HSA Service
+    "HpTouchpointAnalyticsService"                 # HP Touchpoint Analytical Services (harvests data in background)
     #hyper-v services
     "HvHost"                                       # Hyper-V Host Service   
     "vmickvpexchange"                              # Hyper-V Data Exchange Service
@@ -752,16 +765,10 @@ $essentialundo.Add_Click({
     Set-ItemProperty -Path "HKLM:\Software\Microsoft\PolicyManager\default\WiFi\AllowWiFiHotSpotReporting" -Name "Value" -Type DWord -Value 1
     Set-ItemProperty -Path "HKLM:\Software\Microsoft\PolicyManager\default\WiFi\AllowAutoConnectToWiFiSenseHotspots" -Name "Value" -Type DWord -Value 1
     Write-Host "Enabling Application Suggestions..."
-    Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" -Name "ContentDeliveryAllowed" -Type DWord -Value 1
-    Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" -Name "OemPreInstalledAppsEnabled" -Type DWord -Value 1
-    Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" -Name "PreInstalledAppsEnabled" -Type DWord -Value 1
-    Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" -Name "PreInstalledAppsEverEnabled" -Type DWord -Value 1
-    Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" -Name "SilentInstalledAppsEnabled" -Type DWord -Value 1
-    Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" -Name "SubscribedContent-338387Enabled" -Type DWord -Value 1
-    Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" -Name "SubscribedContent-338388Enabled" -Type DWord -Value 1
-    Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" -Name "SubscribedContent-338389Enabled" -Type DWord -Value 1
-    Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" -Name "SubscribedContent-353698Enabled" -Type DWord -Value 1
-    Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" -Name "SystemPaneSuggestionsEnabled" -Type DWord -Value 1
+    $suggestions = @("ContentDeliveryAllowed","OemPreInstalledAppsEnabled","PreInstalledAppsEnabled","PreInstalledAppsEverEnabled","SilentInstalledAppsEnabled","SubscribedContent-338387Enabled","SubscribedContent-338388Enabled","SubscribedContent-338389Enabled","SubscribedContent-353698Enabled","SystemPaneSuggestionsEnabled")
+    foreach ($suggestion in $suggestions){
+        Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" -Name $suggestion -Type DWord -Value 1
+    }
     If ((Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\CloudContent")) {
         Remove-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\CloudContent" -Recurse -ErrorAction SilentlyContinue
     }
@@ -856,7 +863,7 @@ $essentialundo.Add_Click({
     $ResultText.text = "`r`n" +"`r`n" + "Essential Undo Completed - Ready for next task"
 })
 
-$backgroundapps.Add_Click{
+$backgroundapps.Add_Click({
     if (Get-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\BackgroundAccessApplications\*" -Name "Disabled" -ErrorAction SilentlyContinue){
         Write-Host "Allowing Background Apps..."
         Get-ChildItem -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\BackgroundAccessApplications" -Exclude "Microsoft.Windows.Cortana*" | ForEach-Object {
@@ -874,7 +881,7 @@ $backgroundapps.Add_Click{
         Write-Host "Disabled Background Application Access"
         $ResultText.text = "`r`n" +"`r`n" + "Disabled Background Application Access"
     }
-}
+})
 
 $cortana.Add_Click({
     if (Get-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Personalization\Settings" -Name "AcceptedPrivacyPolicy" -ErrorAction SilentlyContinue){
@@ -1057,7 +1064,7 @@ $defaultwindowsupdate.Add_Click({
 })
 
 $securitywindowsupdate.Add_Click({
-    $pref = [System.Windows.Forms.MessageBox]::Show("- Delays Feature Updates up to 3 Years `n- Delays Security Updates for 4 Days `n- Disables Driver Offering Through Windows Update `n- Sets Maximum Active Time","Security Updates Only Info","YesNo")
+    $pref = [System.Windows.Forms.MessageBox]::Show("- Delays Feature Updates up to 3 Years `n- Delays Security Updates for 4 Days `n- Disables Driver Offering Through Windows Update `n- Sets Maximum Active Time","Do You Agree to the Changes? (Yes to Continue)","YesNo")
     if ($pref -eq "Yes"){
         Write-Host "Disabling Driver Offering Through Windows Update..."
         If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Device Metadata")) {
@@ -1108,6 +1115,7 @@ $togglefx.Add_Click({
     if ($mode -eq 1){
         Write-Host "Adjusting Visual Effects for Performance..."
         Set-ItemProperty -Path "HKCU:\Control Panel\Desktop" -Name "DragFullWindows" -Type String -Value 0
+        Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize" -Name "EnableTransparency" -Type DWord -Value 0
         Set-ItemProperty -Path "HKCU:\Control Panel\Desktop" -Name "MenuShowDelay" -Type String -Value 200
         Set-ItemProperty -Path "HKCU:\Control Panel\Desktop" -Name "UserPreferencesMask" -Type Binary -Value ([byte[]](144,18,3,128,16,0,0,0))
         Set-ItemProperty -Path "HKCU:\Control Panel\Desktop\WindowMetrics" -Name "MinAnimate" -Type String -Value 0
@@ -1121,6 +1129,7 @@ $togglefx.Add_Click({
     } else {
         Write-Output "Adjusting Visual Effects for Appearance..."
 	    Set-ItemProperty -Path "HKCU:\Control Panel\Desktop" -Name "DragFullWindows" -Type String -Value 1
+        Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize" -Name "EnableTransparency" -Type DWord -Value 1
 	    Set-ItemProperty -Path "HKCU:\Control Panel\Desktop" -Name "MenuShowDelay" -Type String -Value 400
 	    Set-ItemProperty -Path "HKCU:\Control Panel\Desktop" -Name "UserPreferencesMask" -Type Binary -Value ([byte[]](158,30,7,128,18,0,0,0))
 	    Set-ItemProperty -Path "HKCU:\Control Panel\Desktop\WindowMetrics" -Name "MinAnimate" -Type String -Value 1
