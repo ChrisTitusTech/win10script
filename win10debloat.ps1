@@ -3,8 +3,6 @@ Add-Type -AssemblyName System.Windows.Forms
 
 $ErrorActionPreference = 'SilentlyContinue'
 $wshell = New-Object -ComObject Wscript.Shell
-$Button = [System.Windows.MessageBoxButton]::YesNoCancel
-$ErrorIco = [System.Windows.MessageBoxImage]::Error
 If (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]'Administrator')) {
 	Start-Process powershell.exe "-NoProfile -ExecutionPolicy Bypass -File `"$PSCommandPath`"" -Verb RunAs
 	Exit
@@ -626,105 +624,191 @@ $Panel4.controls.AddRange(@($defaultwindowsupdate,$securitywindowsupdate,$Label1
 $Panel3.controls.AddRange(@($yourphonefix,$Label6,$windowsupdatefix,$ncpa,$oldcontrolpanel,$oldsoundpanel,$Button1))
 
 $brave.Add_Click({
-    Write-Host "Installing Brave Browser"
-    $ResultText.text = "`r`n" +"`r`n" + "Installing Brave... Please Wait" 
-    winget install -e BraveSoftware.BraveBrowser | Out-Host
-    if($?) { Write-Host "Installed Brave Browser" }
-    $ResultText.text = "`r`n" + "Finished Installing Brave" + "`r`n" + "`r`n" + "Ready for Next Task"
+    if (winget list BraveSoftware.BraveBrowser | Select-String -Pattern "No package found matching input criteria.") {
+        Write-Host "Brave Browser Already Installed."
+        $ResultText.text = "`r`n" + "Brave Browser is Already Installed" + "`r`n" + "`r`n" + "Ready for Next Task"
+    }
+    else {
+        Write-Host "Installing Brave Browser"
+        $ResultText.text = "`r`n" + "`r`n" + "Installing Brave... Please Wait" 
+        winget install -e BraveSoftware.BraveBrowser | Out-Host
+        if ($?) { Write-Host "Installed Brave Browser" }
+        $ResultText.text = "`r`n" + "Finished Installing Brave" + "`r`n" + "`r`n" + "Ready for Next Task"
+    }
 })
 
 $firefox.Add_Click({
-    Write-Host "Installing Firefox"
-    $ResultText.text = "`r`n" +"`r`n" + "Installing Firefox... Please Wait" 
-    winget install -e Mozilla.Firefox | Out-Host
-    if($?) { Write-Host "Installed Firefox" }
-    $ResultText.text = "`r`n" + "Finished Installing Firefox" + "`r`n" + "`r`n" + "Ready for Next Task"
+    if (winget list Mozilla.Firefox | Select-String -Pattern "No package found matching input criteria.") {
+        Write-Host "Firefox Already Installed."
+        $ResultText.text = "`r`n" + "Firefox is Already Installed" + "`r`n" + "`r`n" + "Ready for Next Task"
+    }
+    else {
+        Write-Host "Installing Firefox"
+        $ResultText.text = "`r`n" + "`r`n" + "Installing Firefox... Please Wait" 
+        winget install -e Mozilla.Firefox | Out-Host
+        if ($?) { Write-Host "Installed Firefox" }
+        $ResultText.text = "`r`n" + "Finished Installing Firefox" + "`r`n" + "`r`n" + "Ready for Next Task"
+    }
+
 })
 
 $gchrome.Add_Click({
-    Write-Host "Installing Google Chrome"
-    $ResultText.text = "`r`n" +"`r`n" + "Installing Google Chrome... Please Wait" 
-    winget install -e Google.Chrome | Out-Host
-    if($?) { Write-Host "Installed Google Chrome" }
-    $ResultText.text = "`r`n" + "Finished Installing Google Chrome" + "`r`n" + "`r`n" + "Ready for Next Task"
+    if (winget list Google.Chrome | Select-String -Pattern "No package found matching input criteria.") {
+        Write-Host "Google Chrome Already Installed."
+        $ResultText.text = "`r`n" + "Google Chrome is Already Installed" + "`r`n" + "`r`n" + "Ready for Next Task"
+    }
+    else {
+        Write-Host "Installing Google Chrome"
+        $ResultText.text = "`r`n" + "`r`n" + "Installing Google Chrome... Please Wait" 
+        winget install -e Google.Chrome | Out-Host
+        if ($?) { Write-Host "Installed Google Chrome" }
+        $ResultText.text = "`r`n" + "Finished Installing Google Chrome" + "`r`n" + "`r`n" + "Ready for Next Task"
+    }
 })
 
-$autohotkey.Add_Click({
-    Write-Host "Installing AutoHotkey"
-    $ResultText.text = "`r`n" +"`r`n" + "Installing AutoHotkey... Please Wait" 
-    winget install -e Lexikos.AutoHotkey | Out-Host
-    if($?) { Write-Host "Installed AutoHotkey" }
-    $ResultText.text = "`r`n" + "Finished Installing Autohotkey" + "`r`n" + "`r`n" + "Ready for Next Task"
+$autohotkey.Add_Click({ 
+    if (winget list Lexikos.AutoHotkey | Select-String -Pattern "No package found matching input criteria.") {
+        Write-Host "AutoHotkey Already Installed."
+        $ResultText.text = "`r`n" + "AutoHotkey is Already Installed" + "`r`n" + "`r`n" + "Ready for Next Task"
+    }
+    else {
+        Write-Host "Installing AutoHotkey"
+        $ResultText.text = "`r`n" + "`r`n" + "Installing AutoHotkey... Please Wait" 
+        winget install -e Lexikos.AutoHotkey | Out-Host
+        if ($?) { Write-Host "Installed AutoHotkey" }
+        $ResultText.text = "`r`n" + "Finished Installing Autohotkey" + "`r`n" + "`r`n" + "Ready for Next Task"
+    }
 })
+
 $imageglass.Add_Click({
-    Write-Host "Installing Image Glass (Image Viewer)"
-    $ResultText.text = "`r`n" +"`r`n" + "Installing Image Glass... Please Wait" 
-    winget install -e DuongDieuPhap.ImageGlass | Out-Host
-    if($?) { Write-Host "Installed Image Glass (Image Viewer)" }
-    $ResultText.text = "`r`n" + "Finished Installing Image Glass" + "`r`n" + "`r`n" + "Ready for Next Task"
+    if (winget list DuongDieuPhap.ImageGlass | Select-String -Pattern "No package found matching input criteria.") {
+        Write-Host "Image Glass Already Installed."
+        $ResultText.text = "`r`n" + "Image Glass is Already Installed" + "`r`n" + "`r`n" + "Ready for Next Task"
+    }
+    else {
+        Write-Host "Installing Image Glass (Image Viewer)"
+        $ResultText.text = "`r`n" + "`r`n" + "Installing Image Glass... Please Wait" 
+        winget install -e DuongDieuPhap.ImageGlass | Out-Host
+        if ($?) { Write-Host "Installed Image Glass (Image Viewer)" }
+        $ResultText.text = "`r`n" + "Finished Installing Image Glass" + "`r`n" + "`r`n" + "Ready for Next Task"
+    }
 })
+
 $discord.Add_Click({
-    Write-Host "Installing Discord"
-    $ResultText.text = "`r`n" +"`r`n" + "Installing Discord... Please Wait" 
-    winget install -e Discord.Discord | Out-Host
-    if($?) { Write-Host "Installed Discord" }
-    $ResultText.text = "`r`n" + "Finished Installing Discord" + "`r`n" + "`r`n" + "Ready for Next Task"
+    if (winget list Discord.Discord | Select-String -Pattern "No package found matching input criteria.") {
+        Write-Host "Discord Already Installed."
+        $ResultText.text = "`r`n" + "Discord is Already Installed" + "`r`n" + "`r`n" + "Ready for Next Task"
+    }
+    else {
+        Write-Host "Installing Discord"
+        $ResultText.text = "`r`n" + "`r`n" + "Installing Discord... Please Wait" 
+        winget install -e Discord.Discord | Out-Host
+        if ($?) { Write-Host "Installed Discord" }
+        $ResultText.text = "`r`n" + "Finished Installing Discord" + "`r`n" + "`r`n" + "Ready for Next Task"
+    }
 })
 
 $adobereader.Add_Click({
-    Write-Host "Installing Adobe Reader DC"
-    $ResultText.text = "`r`n" +"`r`n" + "Installing Adobe Reader DC... Please Wait" 
-    winget install -e Adobe.AdobeAcrobatReaderDC | Out-Host
-    if($?) { Write-Host "Installed Adobe Reader DC" }
-    $ResultText.text = "`r`n" + "Finished Installing Adobe Reader DC" + "`r`n" + "`r`n" + "Ready for Next Task"
+        if (winget list Adobe.Acrobat.Reader| Select-String -Pattern "No package found matching input criteria.") {
+            Write-Host "Adobe Reader DC Already Installed."
+            $ResultText.text = "`r`n" + "Adobe Reader DC is Already Installed" + "`r`n" + "`r`n" + "Ready for Next Task"
+        }
+        else {
+            Write-Host "Installing Adobe Reader DC"
+            $ResultText.text = "`r`n" + "`r`n" + "Installing Adobe Reader DC... Please Wait" 
+            if ([System.Environment]::is64BitOperatingSystem) {
+                winget install -e Adobe.Acrobat.Reader.64-bit | Out-Host
+            }
+            else {
+                winget install -e Adobe.Acrobat.Reader.32-bit | Out-Host
+            }
+            if ($?) { Write-Host "Installed Adobe Reader DC" }
+            $ResultText.text = "`r`n" + "Finished Installing Adobe Reader DC" + "`r`n" + "`r`n" + "Ready for Next Task"
+        }
 })
 
 $notepad.Add_Click({
-    Write-Host "Installing Notepad++"
-    $ResultText.text = "`r`n" +"`r`n" + "Installing Notepad++... Please Wait" 
-    winget install -e Notepad++.Notepad++ | Out-Host
-    if($?) { Write-Host "Installed Notepad++" }
-    $ResultText.text = "`r`n" + "Finished Installing NotePad++" + "`r`n" + "`r`n" + "Ready for Next Task"
+    if (winget list Notepad++.Notepad++ | Select-String -Pattern "No package found matching input criteria.") {
+        Write-Host "Notepad++ Already Installed."
+        $ResultText.text = "`r`n" + "Notepad++ is Already Installed" + "`r`n" + "`r`n" + "Ready for Next Task"
+    }
+    else {
+        Write-Host "Installing Notepad++"
+        $ResultText.text = "`r`n" + "`r`n" + "Installing Notepad++... Please Wait" 
+        winget install -e Notepad++.Notepad++ | Out-Host
+        if ($?) { Write-Host "Installed Notepad++" }
+        $ResultText.text = "`r`n" + "Finished Installing NotePad++" + "`r`n" + "`r`n" + "Ready for Next Task"
+    }
 })
 
 $vlc.Add_Click({
-    Write-Host "Installing VLC Media Player"
-    $ResultText.text = "`r`n" +"`r`n" + "Installing VLC Media Player... Please Wait" 
-    winget install -e VideoLAN.VLC | Out-Host
-    if($?) { Write-Host "Installed VLC Media Player" }
-    $ResultText.text = "`r`n" + "Finished Installing VLC Media Player" + "`r`n" + "`r`n" + "Ready for Next Task"
+    if (winget list VideoLAN.VLC | Select-String -Pattern "No package found matching input criteria.") {
+        Write-Host "VLC Media Player Already Installed."
+        $ResultText.text = "`r`n" + "VLC Media Player is Already Installed" + "`r`n" + "`r`n" + "Ready for Next Task"
+    }
+    else {
+        Write-Host "Installing VLC Media Player"
+        $ResultText.text = "`r`n" + "`r`n" + "Installing VLC Media Player... Please Wait" 
+        winget install -e VideoLAN.VLC | Out-Host
+        if ($?) { Write-Host "Installed VLC Media Player" }
+        $ResultText.text = "`r`n" + "Finished Installing VLC Media Player" + "`r`n" + "`r`n" + "Ready for Next Task"
+    } 
 })
 
 $mpc.Add_Click({
-    Write-Host "Installing Media Player Classic"
-    $ResultText.text = "`r`n" +"`r`n" + "Installing Media Player Classic... Please Wait" 
-    winget install -e clsid2.mpc-hc | Out-Host
-    if($?) { Write-Host "Installed Media Player Classic" }
-    $ResultText.text = "`r`n" + "Finished Installing Media Player Classic" + "`r`n" + "`r`n" + "Ready for Next Task"
+    if (winget list clsid2.mpc-hc | Select-String -Pattern "No package found matching input criteria.") {
+        Write-Host "Media Player Classic Already Installed."
+        $ResultText.text = "`r`n" + "Media Player Classic is Already Installed" + "`r`n" + "`r`n" + "Ready for Next Task"
+    }
+    else {
+        Write-Host "Installing Media Player Classic"
+        $ResultText.text = "`r`n" + "`r`n" + "Installing Media Player Classic... Please Wait" 
+        winget install -e clsid2.mpc-hc | Out-Host
+        if ($?) { Write-Host "Installed Media Player Classic" }
+        $ResultText.text = "`r`n" + "Finished Installing Media Player Classic" + "`r`n" + "`r`n" + "Ready for Next Task"
+    }
 })
 
 $7zip.Add_Click({
-    Write-Host "Installing 7-Zip Compression Tool"
-    $ResultText.text = "`r`n" +"`r`n" + "Installing 7-Zip Compression Tool... Please Wait" 
-    winget install -e 7zip.7zip | Out-Host
-    if($?) { Write-Host "Installed 7-Zip Compression Tool" }
-    $ResultText.text = "`r`n" + "Finished Installing 7-Zip Compression Tool" + "`r`n" + "`r`n" + "Ready for Next Task"
+    if (winget list 7zip.7zip | Select-String -Pattern "No package found matching input criteria.") {
+        Write-Host "7-Zip Compression Tool Already Installed."
+        $ResultText.text = "`r`n" + "7-Zip Compression Tool is Already Installed" + "`r`n" + "`r`n" + "Ready for Next Task"
+    }
+    else {
+        Write-Host "Installing 7-Zip Compression Tool"
+        $ResultText.text = "`r`n" + "`r`n" + "Installing 7-Zip Compression Tool... Please Wait" 
+        winget install -e 7zip.7zip | Out-Host
+        if ($?) { Write-Host "Installed 7-Zip Compression Tool" }
+        $ResultText.text = "`r`n" + "Finished Installing 7-Zip Compression Tool" + "`r`n" + "`r`n" + "Ready for Next Task"
+    }
 })
 
 $vscode.Add_Click({
-    Write-Host "Installing Visual Studio Code"
-    $ResultText.text = "`r`n" +"`r`n" + "Installing Visual Studio Code... Please Wait" 
-    winget install -e Microsoft.VisualStudioCode --source winget | Out-Host
-    if($?) { Write-Host "Installed Visual Studio Code" }
-    $ResultText.text = "`r`n" + "Finished Installing Visual Studio Code" + "`r`n" + "`r`n" + "Ready for Next Task"
+    if (winget list Microsoft.VisualStudioCode | Select-String -Pattern "No package found matching input criteria.") {
+        Write-Host "Visual Studio Code Already Installed."
+        $ResultText.text = "`r`n" + "Visual Studio Code is Already Installed" + "`r`n" + "`r`n" + "Ready for Next Task"
+    }
+    else {
+        Write-Host "Installing Visual Studio Code"
+        $ResultText.text = "`r`n" + "`r`n" + "Installing Visual Studio Code... Please Wait" 
+        winget install -e Microsoft.VisualStudioCode --source winget | Out-Host
+        if ($?) { Write-Host "Installed Visual Studio Code" }
+        $ResultText.text = "`r`n" + "Finished Installing Visual Studio Code" + "`r`n" + "`r`n" + "Ready for Next Task"
+    }
 })
 
 $vscodium.Add_Click({
-    Write-Host "Installing VS Codium"
-    $ResultText.text = "`r`n" +"`r`n" + "Installing VS Codium... Please Wait" 
-    winget install -e VSCodium.VSCodium | Out-Host
-    if($?) { Write-Host "Installed VS Codium" }
-    $ResultText.text = "`r`n" + "Finished Installing VS Codium" + "`r`n" + "`r`n" + "Ready for Next Task"
+    if (winget list VSCodium.VSCodium | Select-String -Pattern "No package found matching input criteria.") {
+        Write-Host "VS Codium Already Installed."
+        $ResultText.text = "`r`n" + "VS Codium is Already Installed" + "`r`n" + "`r`n" + "Ready for Next Task"
+    }
+    else {
+        Write-Host "Installing VS Codium"
+        $ResultText.text = "`r`n" + "`r`n" + "Installing VS Codium... Please Wait" 
+        winget install -e VSCodium.VSCodium | Out-Host
+        if ($?) { Write-Host "Installed VS Codium" }
+        $ResultText.text = "`r`n" + "Finished Installing VS Codium" + "`r`n" + "`r`n" + "Ready for Next Task"
+    }
 })
 
 $urlremovevirus.Add_Click({
@@ -740,92 +824,168 @@ $urlcreateiso.Add_Click({
 })
 
 $winterminal.Add_Click({
-    Write-Host "Installing New Windows Terminal"
-    $ResultText.text = "`r`n" +"`r`n" + "Installing New Windows Terminal... Please Wait" 
-    winget install -e Microsoft.WindowsTerminal | Out-Host
-    if($?) { Write-Host "Installed New Windows Terminal" }
-    $ResultText.text = "`r`n" + "Finished Installing New Windows Terminal" + "`r`n" + "`r`n" + "Ready for Next Task"
+    if (winget list Microsoft.WindowsTerminal | Select-String -Pattern "No package found matching input criteria.") {
+        Write-Host "New Windows Terminal Already Installed."
+        $ResultText.text = "`r`n" + "New Windows Terminal is Already Installed" + "`r`n" + "`r`n" + "Ready for Next Task"
+    }
+    else {
+        Write-Host "Installing New Windows Terminal"
+        $ResultText.text = "`r`n" + "`r`n" + "Installing New Windows Terminal... Please Wait" 
+        winget install -e Microsoft.WindowsTerminal | Out-Host
+        if ($?) { Write-Host "Installed New Windows Terminal" }
+        $ResultText.text = "`r`n" + "Finished Installing New Windows Terminal" + "`r`n" + "`r`n" + "Ready for Next Task"
+    }
 })
 
 $powertoys.Add_Click({
-    Write-Host "Installing Microsoft PowerToys"
-    $ResultText.text = "`r`n" +"`r`n" + "Installing Microsoft PowerToys... Please Wait" 
-    winget install -e Microsoft.PowerToys | Out-Host
-    if($?) { Write-Host "Installed Microsoft PowerToys" }
-    $ResultText.text = "`r`n" + "Finished Installing Microsoft PowerToys" + "`r`n" + "`r`n" + "Ready for Next Task"
+    if (winget list Microsoft.PowerToys | Select-String -Pattern "No package found matching input criteria.") {
+        Write-Host "Microsoft PowerToys Already Installed."
+        $ResultText.text = "`r`n" + "Microsoft PowerToys is Already Installed" + "`r`n" + "`r`n" + "Ready for Next Task"
+    }
+    else {
+        Write-Host "Installing Microsoft PowerToys"
+        $ResultText.text = "`r`n" + "`r`n" + "Installing Microsoft PowerToys... Please Wait" 
+        winget install -e Microsoft.PowerToys | Out-Host
+        if ($?) { Write-Host "Installed Microsoft PowerToys" }
+        $ResultText.text = "`r`n" + "Finished Installing Microsoft PowerToys" + "`r`n" + "`r`n" + "Ready for Next Task"
+    }
 })
 
 $everythingsearch.Add_Click({
-    Write-Host "Installing Voidtools Everything Search"
-    $ResultText.text = "`r`n" +"`r`n" + "Installing Voidtools Everything Search... Please Wait" 
-    winget install -e voidtools.Everything --source winget | Out-Host
-    if($?) { Write-Host "Installed Everything Search" }
-    $ResultText.text = "`r`n" + "Finished Installing Voidtools Everything Search" + "`r`n" + "`r`n" + "Ready for Next Task"
+    if (winget list voidtools.Everything | Select-String -Pattern "No package found matching input criteria.") {
+        Write-Host "Voidtools Everything Search Already Installed."
+        $ResultText.text = "`r`n" + "Voidtools Everything Search is Already Installed" + "`r`n" + "`r`n" + "Ready for Next Task"
+    }
+    else {
+        Write-Host "Installing Voidtools Everything Search"
+        $ResultText.text = "`r`n" + "`r`n" + "Installing Voidtools Everything Search... Please Wait" 
+        winget install -e voidtools.Everything --source winget | Out-Host
+        if ($?) { Write-Host "Installed Voidtools Everything Search" }
+        $ResultText.text = "`r`n" + "Finished Installing Voidtools Everything Search" + "`r`n" + "`r`n" + "Ready for Next Task"
+    }
 })
 
 $sumatrapdf.Add_Click({
-    Write-Host "Installing Sumatra PDF"
-    $ResultText.text = "`r`n" +"`r`n" + "Installing Sumatra PDF... Please Wait" 
-    winget install -e SumatraPDF.SumatraPDF | Out-Host
-    if($?) { Write-Host "Installed Sumatra PDF" }
-    $ResultText.text = "`r`n" + "Finished Installing Sumatra PDF" + "`r`n" + "`r`n" + "Ready for Next Task"
+    if (winget list SumatraPDF.SumatraPDF | Select-String -Pattern "No package found matching input criteria.") {
+        Write-Host "Sumatra PDF Already Installed."
+        $ResultText.text = "`r`n" + "Sumatra PDF is Already Installed" + "`r`n" + "`r`n" + "Ready for Next Task"
+    }
+    else {
+        Write-Host "Installing Sumatra PDF"
+        $ResultText.text = "`r`n" + "`r`n" + "Installing Sumatra PDF... Please Wait" 
+        winget install -e SumatraPDF.SumatraPDF | Out-Host
+        if ($?) { Write-Host "Installed Sumatra PDF" }
+        $ResultText.text = "`r`n" + "Finished Installing Sumatra PDF" + "`r`n" + "`r`n" + "Ready for Next Task"
+    }
 })
 
 $githubdesktop.Add_Click({
-    Write-Host "Installing GitHub Desktop"
-    $ResultText.text = "`r`n" +"`r`n" + "Installing GitHub Desktop... Please Wait" 
-    winget install -e GitHub.GitHubDesktop | Out-Host
-    Write-Host "Installed Github Desktop"
-    $ResultText.text = "`r`n" + "Finished Installing GitHub Desktop" + "`r`n" + "`r`n" + "Ready for Next Task"
+    if (winget list GitHub.GitHubDesktop | Select-String -Pattern "No package found matching input criteria.") {
+        Write-Host "GitHub Desktop Already Installed."
+        $ResultText.text = "`r`n" + "GitHub Desktop is Already Installed" + "`r`n" + "`r`n" + "Ready for Next Task"
+    }
+    else {
+        Write-Host "Installing GitHub Desktop"
+        $ResultText.text = "`r`n" + "`r`n" + "Installing GitHub Desktop... Please Wait" 
+        winget install -e GitHub.GitHubDesktop | Out-Host
+        Write-Host "Installed Github Desktop"
+        $ResultText.text = "`r`n" + "Finished Installing GitHub Desktop" + "`r`n" + "`r`n" + "Ready for Next Task"
+    }
 })
 
 $translucenttb.Add_Click({
-    Write-Host "Installing Translucent Taskbar"
-    $ResultText.text = "`r`n" +"`r`n" + "Installing Translucent Taskbar... Please Wait" 
-    winget install -e TranslucentTB.TranslucentTB | Out-Host
-    Write-Host "Installed Translucent Taskbar"
-    $ResultText.text = "`r`n" + "Finished Installing Translucent Taskbar" + "`r`n" + "`r`n" + "Ready for Next Task"
+    if (winget list TranslucentTB.TranslucentTB | Select-String -Pattern "No package found matching input criteria.") {
+        Write-Host "Translucent Taskbar Already Installed."
+        $ResultText.text = "`r`n" + "Translucent Taskbar is Already Installed" + "`r`n" + "`r`n" + "Ready for Next Task"
+    }
+    else {
+        Write-Host "Installing Translucent Taskbar"
+        $ResultText.text = "`r`n" + "`r`n" + "Installing Translucent Taskbar... Please Wait" 
+        winget install -e TranslucentTB.TranslucentTB | Out-Host
+        Write-Host "Installed Translucent Taskbar"
+        $ResultText.text = "`r`n" + "Finished Installing Translucent Taskbar" + "`r`n" + "`r`n" + "Ready for Next Task"
+    }
 })
 
 $etcher.Add_Click({
-    Write-Host "Installing Etcher USB Imager"
-    $ResultText.text = "`r`n" +"`r`n" + "Installing Etcher USB Imager... Please Wait" 
-    winget install -e Balena.Etcher | Out-Host
-    Write-Host "Installed Etcher USB Imager"
-    $ResultText.text = "`r`n" + "Finished Installing Etcher USB Imager" + "`r`n" + "`r`n" + "Ready for Next Task"
+    if (winget list Balena.Etcher | Select-String -Pattern "No package found matching input criteria.") {
+        Write-Host "Etcher USB Imager Already Installed."
+        $ResultText.text = "`r`n" + "Etcher USB Imager is Already Installed" + "`r`n" + "`r`n" + "Ready for Next Task"
+    }
+    else {
+        Write-Host "Installing Etcher USB Imager"
+        $ResultText.text = "`r`n" + "`r`n" + "Installing Etcher USB Imager... Please Wait" 
+        winget install -e Balena.Etcher | Out-Host
+        Write-Host "Installed Etcher USB Imager"
+        $ResultText.text = "`r`n" + "Finished Installing Etcher USB Imager" + "`r`n" + "`r`n" + "Ready for Next Task"
+    }
 })
 
 $putty.Add_Click({
-    Write-Host "Installing PuTTY & WinSCP"
-    $ResultText.text = "`r`n" +"`r`n" + "Installing PuTTY & WinSCP... Please Wait" 
-    winget install -e PuTTY.PuTTY | Out-Host
-    winget install -e WinSCP.WinSCP | Out-Host
-    Write-Host "Installed PuTTY & WinSCP"
-    $ResultText.text = "`r`n" + "Finished Installing PuTTY & WinSCP" + "`r`n" + "`r`n" + "Ready for Next Task"
+    if (winget list PuTTY.PuTTY | Select-String -Pattern "No package found matching input criteria.") {
+        Write-Host "PuTTY Already Installed."
+        $ResultText.text = "`r`n" + "PuTTY is Already Installed" + "`r`n" + "`r`n" + "Ready for Next Task"
+    }
+    else {
+        Write-Host "Installing PuTTY"
+        $ResultText.text = "`r`n" + "`r`n" + "Installing PuTTY ... Please Wait" 
+        winget install -e PuTTY.PuTTY | Out-Host
+        Write-Host "Installed PuTTY"
+        $ResultText.text = "`r`n" + "Finished Installing PuTTY" + "`r`n" + "`r`n" + "Ready for Next Task"
+    }
+    if (winget list WinSCP.WinSCP | Select-String -Pattern "No package found matching input criteria.") {
+        Write-Host "WinSCP Already Installed."
+        $ResultText.text = "`r`n" + "WinSCP is Already Installed" + "`r`n" + "`r`n" + "Ready for Next Task"
+    }
+    else {
+        Write-Host "Installing WinSCP"
+        $ResultText.text = "`r`n" + "`r`n" + "Installing WinSCP... Please Wait" 
+        winget install -e WinSCP.WinSCP | Out-Host
+        Write-Host "Installed WinSCP"
+        $ResultText.text = "`r`n" + "Finished Installing WinSCP" + "`r`n" + "`r`n" + "Ready for Next Task"
+    }
 })
 
 $advancedipscanner.Add_Click({
-    Write-Host "Installing Advanced IP Scanner"
-    $ResultText.text = "`r`n" +"`r`n" + "Installing Advanced IP Scanner... Please Wait" 
-    winget install -e Famatech.AdvancedIPScanner | Out-Host
-    Write-Host "Installed Advanced IP Scanner"
-    $ResultText.text = "`r`n" + "Finished Installing Advanced IP Scanner" + "`r`n" + "`r`n" + "Ready for Next Task"
+    if (winget list Famatech.AdvancedIPScanner | Select-String -Pattern "No package found matching input criteria.") {
+        Write-Host "Advanced IP Scanner Already Installed."
+        $ResultText.text = "`r`n" + "Advanced IP Scanner is Already Installed" + "`r`n" + "`r`n" + "Ready for Next Task"
+    }
+    else {
+        Write-Host "Installing Advanced IP Scanner"
+        $ResultText.text = "`r`n" + "`r`n" + "Installing Advanced IP Scanner... Please Wait" 
+        winget install -e Famatech.AdvancedIPScanner | Out-Host
+        Write-Host "Installed Advanced IP Scanner"
+        $ResultText.text = "`r`n" + "Finished Installing Advanced IP Scanner" + "`r`n" + "`r`n" + "Ready for Next Task"
+    }
 })
 
 $sharex.Add_Click({
-    Write-Host "Installing ShareX Screenshot Tool"
-    $ResultText.text = "`r`n" +"`r`n" + "Installing ShareX Screenshot Tool... Please Wait" 
-    winget install -e ShareX.ShareX | Out-Host
-    Write-Host "Installed ShareX Screenshot Tool"
-    $ResultText.text = "`r`n" + "Finished Installing ShareX Screenshot Tool" + "`r`n" + "`r`n" + "Ready for Next Task"
+    if (winget list ShareX.ShareX | Select-String -Pattern "No package found matching input criteria.") {
+        Write-Host "ShareX Screenshot Tool Already Installed."
+        $ResultText.text = "`r`n" + "ShareX Screenshot Tool is Already Installed" + "`r`n" + "`r`n" + "Ready for Next Task"
+    }
+    else {
+        Write-Host "Installing ShareX Screenshot Tool"
+        $ResultText.text = "`r`n" + "`r`n" + "Installing ShareX Screenshot Tool... Please Wait" 
+        winget install -e ShareX.ShareX | Out-Host
+        Write-Host "Installed ShareX Screenshot Tool"
+        $ResultText.text = "`r`n" + "Finished Installing ShareX Screenshot Tool" + "`r`n" + "`r`n" + "Ready for Next Task"
+    }
 })
 
 $gimp.Add_Click({
-    Write-Host "Installing Gimp Image Editor"
-    $ResultText.text = "`r`n" +"`r`n" + "Installing Gimp Image Editor... Please Wait" 
-    winget install -e GIMP.GIMP | Out-Host
-    Write-Host "Installed Gimp Image Editor"
-    $ResultText.text = "`r`n" + "Finished Installing Gimp Image Editor" + "`r`n" + "`r`n" + "Ready for Next Task"
+    if (winget list GIMP.GIMP | Select-String -Pattern "No package found matching input criteria.") {
+        Write-Host "Gimp Image Editor Already Installed."
+        $ResultText.text = "`r`n" + "Gimp Image Editor is Already Installed" + "`r`n" + "`r`n" + "Ready for Next Task"
+    }
+    else {
+        Write-Host "Installing Gimp Image Editor"
+        $ResultText.text = "`r`n" + "`r`n" + "Installing Gimp Image Editor... Please Wait" 
+        winget install -e GIMP.GIMP | Out-Host
+        Write-Host "Installed Gimp Image Editor"
+        $ResultText.text = "`r`n" + "Finished Installing Gimp Image Editor" + "`r`n" + "`r`n" + "Ready for Next Task"
+    }
 })
 
 $essentialtweaks.Add_Click({
@@ -1335,7 +1495,7 @@ $windowssearch.Add_Click({
 
 $backgroundapps.Add_Click({
     Write-Host "Disabling Background application access..."
-    Get-ChildItem -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\BackgroundAccessApplications" -Exclude "Microsoft.Windows.Cortana*" | ForEach {
+    Get-ChildItem -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\BackgroundAccessApplications" -Exclude "Microsoft.Windows.Cortana*" | ForEach-Object {
         Set-ItemProperty -Path $_.PsPath -Name "Disabled" -Type DWord -Value 1
         Set-ItemProperty -Path $_.PsPath -Name "DisabledByUser" -Type DWord -Value 1
     }
@@ -1446,6 +1606,7 @@ $Bloatware = @(
     "*Hulu*"
     "*HiddenCity*"
     "*AdobePhotoshopExpress*"
+    "*HotspotShieldFreeVPN*"
 
     #Optional: Typically not removed but you can if you need to for some reason
     "*Microsoft.Advertising.Xaml*"
@@ -1687,7 +1848,7 @@ $ELocation.Add_Click({
 
 $RBackgroundApps.Add_Click({
 	Write-Host "Allowing Background Apps..."
-	Get-ChildItem -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\BackgroundAccessApplications" -Exclude "Microsoft.Windows.Cortana*" | ForEach {
+	Get-ChildItem -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\BackgroundAccessApplications" -Exclude "Microsoft.Windows.Cortana*" | ForEach-Object {
 		Remove-ItemProperty -Path $_.PsPath -Name "Disabled" -ErrorAction SilentlyContinue
 		Remove-ItemProperty -Path $_.PsPath -Name "DisabledByUser" -ErrorAction SilentlyContinue
 	}
@@ -1729,7 +1890,7 @@ $yourphonefix.Add_Click({
     Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\System" -Name "EnableCdp" -Type DWord -Value 1
     Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Messaging" -Name "AllowMessageSync" -Type DWord -Value 1
     Write-Host "Allowing Background Apps..."
-	Get-ChildItem -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\BackgroundAccessApplications" -Exclude "Microsoft.Windows.Cortana*" | ForEach {
+	Get-ChildItem -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\BackgroundAccessApplications" -Exclude "Microsoft.Windows.Cortana*" | ForEach-Object {
 		Remove-ItemProperty -Path $_.PsPath -Name "Disabled" -ErrorAction SilentlyContinue
 		Remove-ItemProperty -Path $_.PsPath -Name "DisabledByUser" -ErrorAction SilentlyContinue
 	}
