@@ -15,5 +15,9 @@ Paste this command into Powershell (admin):
 ```
 iex ((New-Object System.Net.WebClient).DownloadString('https://git.io/JJ8R4'))
 ```
+Or, shorter:
+```
+iwr -useb https://git.io/JJ8R4 | iex
+```
 
 For complete details check out https://christitus.com/debloat-windows-10-2020/
