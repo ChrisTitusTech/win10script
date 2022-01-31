@@ -48,7 +48,7 @@ exit
 netsh advfirewall firewall delete rule name="Block Windows Telemetry" > nul
 netsh advfirewall firewall delete rule name="Block NVIDIA Telemetry" > nul
 cls
-echo Telemetry Sucessfully unblocked!
+echo Telemetry Successfully unblocked!
 timeout 2 > nul
 cls
 echo Exiting.
