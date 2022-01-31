@@ -57,7 +57,7 @@ $services = @(
     "iphlpsvc"                                      #Disables ipv6 but most websites don't use ipv6 they use ipv4     
     "edgeupdate"                                    # Disables one of edge update service  
     "MicrosoftEdgeElevationService"                 # Disables one of edge  service 
-    "edgeupdatem"                                   # disbales another one of update service (disables edgeupdatem)                          
+    "edgeupdatem"                                   # disables another one of update service (disables edgeupdatem)                          
     "SEMgrSvc"                                      #Disables Payments and NFC/SE Manager (Manages payments and Near Field Communication (NFC) based secure elements)
     #"PNRPsvc"                                      # Disables peer Name Resolution Protocol ( some peer-to-peer and collaborative applications, such as Remote Assistance, may not function, Discord will still work)
     #"p2psvc"                                       # Disbales Peer Name Resolution Protocol(nables multi-party communication using Peer-to-Peer Grouping.  If disabled, some applications, such as HomeGroup, may not function. Discord will still work)
