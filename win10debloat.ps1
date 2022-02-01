@@ -78,7 +78,7 @@ $7zip.location                   = New-Object System.Drawing.Point(4,102)
 $7zip.Font                       = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
 $sharex                          = New-Object system.Windows.Forms.Button
-$sharex.text                     = "ShareX"
+$sharex.text                     = "ShareX (Screenshots)"
 $sharex.width                    = 212
 $sharex.height                   = 30
 $sharex.location                 = New-Object System.Drawing.Point(3,561)
@@ -134,7 +134,7 @@ $winterminal.location            = New-Object System.Drawing.Point(3,32)
 $winterminal.Font                = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
 $vscode                          = New-Object system.Windows.Forms.Button
-$vscode.text                     = "Visual Studio Code"
+$vscode.text                     = "VS Code"
 $vscode.width                    = 211
 $vscode.height                   = 30
 $vscode.location                 = New-Object System.Drawing.Point(4,797)
@@ -176,7 +176,7 @@ $backgroundapps.location         = New-Object System.Drawing.Point(3,453)
 $backgroundapps.Font             = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
 $cortana                         = New-Object system.Windows.Forms.Button
-$cortana.text                    = "Disable Cortana"
+$cortana.text                    = "Disable Cortana (Search)"
 $cortana.width                   = 205
 $cortana.height                  = 30
 $cortana.location                = New-Object System.Drawing.Point(2,588)
@@ -204,7 +204,7 @@ $performancefx.location          = New-Object System.Drawing.Point(3,419)
 $performancefx.Font              = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
 $onedrive                        = New-Object system.Windows.Forms.Button
-$onedrive.text                   = "Delete & Disable OneDrive"
+$onedrive.text                   = "Delete & Disable  OneDrive"
 $onedrive.width                  = 205
 $onedrive.height                 = 30
 $onedrive.location               = New-Object System.Drawing.Point(3,521)
@@ -299,7 +299,7 @@ $Label4.location                 = New-Object System.Drawing.Point(482,12)
 $Label4.Font                     = New-Object System.Drawing.Font('Microsoft Sans Serif',24)
 
 $Panel3                          = New-Object system.Windows.Forms.Panel
-$Panel3.height                   = 234
+$Panel3.height                   = 327
 $Panel3.width                    = 220
 $Panel3.location                 = New-Object System.Drawing.Point(464,54)
 
@@ -318,7 +318,7 @@ $EActionCenter.location          = New-Object System.Drawing.Point(3,210)
 $EActionCenter.Font              = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
 $ECortana                        = New-Object system.Windows.Forms.Button
-$ECortana.text                   = "Enable Cortana"
+$ECortana.text                   = "Enable Cortana (Search)"
 $ECortana.width                  = 205
 $ECortana.height                 = 30
 $ECortana.location               = New-Object System.Drawing.Point(3,622)
@@ -619,11 +619,18 @@ $Button1.height                  = 30
 $Button1.location                = New-Object System.Drawing.Point(4,197)
 $Button1.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
+$NFS                             = New-Object system.Windows.Forms.Button
+$NFS.text                        = "Enable NFS"
+$NFS.width                       = 211
+$NFS.height                      = 30
+$NFS.location                    = New-Object System.Drawing.Point(4,232)
+$NFS.Font                        = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
+
 $Form.controls.AddRange(@($Panel1,$Panel2,$Label3,$Label15,$Panel4,$PictureBox1,$Label1,$Label4,$Panel3,$ResultText,$Label10,$Label11,$urlfixwinstartup,$urlremovevirus,$urlcreateiso))
 $Panel1.controls.AddRange(@($brave,$firefox,$7zip,$sharex,$adobereader,$notepad,$gchrome,$mpc,$vlc,$powertoys,$winterminal,$vscode,$Label2,$everythingsearch,$sumatrapdf,$vscodium,$imageglass,$gimp,$Label7,$Label8,$Label9,$advancedipscanner,$putty,$etcher,$translucenttb,$githubdesktop,$discord,$autohotkey))
 $Panel2.controls.AddRange(@($essentialtweaks,$backgroundapps,$cortana,$actioncenter,$darkmode,$performancefx,$onedrive,$lightmode,$essentialundo,$EActionCenter,$ECortana,$RBackgroundApps,$HTrayIcons,$EClipboardHistory,$ELocation,$InstallOneDrive,$removebloat,$reinstallbloat,$WarningLabel,$Label5,$appearancefx,$STrayIcons,$EHibernation,$dualboottime))
 $Panel4.controls.AddRange(@($defaultwindowsupdate,$securitywindowsupdate,$Label16,$Label17,$Label18,$Label19))
-$Panel3.controls.AddRange(@($yourphonefix,$Label6,$windowsupdatefix,$ncpa,$oldcontrolpanel,$oldsoundpanel,$Button1))
+$Panel3.controls.AddRange(@($yourphonefix,$Label6,$windowsupdatefix,$ncpa,$oldcontrolpanel,$oldsoundpanel,$Button1,$NFS))
 
 $brave.Add_Click({
     Write-Host "Installing Brave Browser"
@@ -1742,7 +1749,18 @@ $oldcontrolpanel.Add_Click({
 $oldsystempanel.Add_Click({
     cmd /c sysdm.cpl
 })
-
+$NFS.Add_Click({
+    Enable-WindowsOptionalFeature -Online -FeatureName "ServicesForNFS-ClientOnly" -All
+    Enable-WindowsOptionalFeature -Online -FeatureName "ClientForNFS-Infrastructure" -All
+    Enable-WindowsOptionalFeature -Online -FeatureName "NFS-Administration" -All
+    nfsadmin client stop
+    Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\ClientForNFS\CurrentVersion\Default" -Name "AnonymousUID" -Type DWord -Value 0
+    Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\ClientForNFS\CurrentVersion\Default" -Name "AnonymousGID" -Type DWord -Value 0
+    nfsadmin client start
+    nfsadmin client localhost config fileaccess=755 SecFlavors=+sys -krb5 -krb5i
+    Write-Host "NFS is now setup for user based NFS mounts"
+    $ResultText.text = "`r`n" +"`r`n" + "NFS is now setup for user based NFS mounts"
+})
 $windowsupdatefix.Add_Click({
     Write-Host "1. Stopping Windows Update Services..." 
     Stop-Service -Name BITS 
