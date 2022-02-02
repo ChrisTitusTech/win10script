@@ -1,33 +1,24 @@
 Add-Type -AssemblyName System.Windows.Forms
 [System.Windows.Forms.Application]::EnableVisualStyles()
 
-$ErrorActionPreference = 'SilentlyContinue'
-$wshell = New-Object -ComObject Wscript.Shell
-$Button = [System.Windows.MessageBoxButton]::YesNoCancel
-$ErrorIco = [System.Windows.MessageBoxImage]::Error
+# Get Admin Privilages
 If (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]'Administrator')) {
 	Start-Process powershell.exe "-NoProfile -ExecutionPolicy Bypass -File `"$PSCommandPath`"" -Verb RunAs
 	Exit
 }
 
-# GUI Specs
-Write-Host "Checking winget..."
-
-# Check if winget is installed
-if (Test-Path ~\AppData\Local\Microsoft\WindowsApps\winget.exe){
-    'Winget Already Installed'
-}  
-else{
-    # Installing winget from the Microsoft Store
-	Write-Host "Winget not found, installing it now."
-    $ResultText.text = "`r`n" +"`r`n" + "Installing Winget... Please Wait"
+# Check if WinGet is Installed, if Not Install From MS Store
+Write-Host "Checking Winget..."
+if (!(Test-Path ~\AppData\Local\Microsoft\WindowsApps\winget.exe)){  
+    Write-Host "Winget not Found, Installing Now."
 	Start-Process "ms-appinstaller:?source=https://aka.ms/getwinget"
 	$nid = (Get-Process AppInstaller).Id
 	Wait-Process -Id $nid
-	Write-Host Winget Installed
+	Write-Host "Winget Installed"
     $ResultText.text = "`r`n" +"`r`n" + "Winget Installed - Ready for Next Task"
 }
 
+# GUI Specs
 $Form                            = New-Object system.Windows.Forms.Form
 $Form.ClientSize                 = New-Object System.Drawing.Point(1050,1000)
 $Form.text                       = "Windows Toolbox By Chris Titus"
@@ -126,12 +117,12 @@ $powertoys.height                = 30
 $powertoys.location              = New-Object System.Drawing.Point(4,67)
 $powertoys.Font                  = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
-$winterminal                     = New-Object system.Windows.Forms.Button
-$winterminal.text                = "Windows Terminal"
-$winterminal.width               = 211
-$winterminal.height              = 30
-$winterminal.location            = New-Object System.Drawing.Point(3,32)
-$winterminal.Font                = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
+$batchinstall                     = New-Object system.Windows.Forms.Button
+$batchinstall.text                = "Batch Install"
+$batchinstall.width               = 211
+$batchinstall.height              = 30
+$batchinstall.location            = New-Object System.Drawing.Point(3,32)
+$batchinstall.Font                = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
 $vscode                          = New-Object system.Windows.Forms.Button
 $vscode.text                     = "VS Code"
@@ -612,12 +603,12 @@ $oldsoundpanel.height            = 30
 $oldsoundpanel.location          = New-Object System.Drawing.Point(4,163)
 $oldsoundpanel.Font              = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
-$Button1                         = New-Object system.Windows.Forms.Button
-$Button1.text                    = "Old System Panel"
-$Button1.width                   = 211
-$Button1.height                  = 30
-$Button1.location                = New-Object System.Drawing.Point(4,197)
-$Button1.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
+$oldsystempanel                         = New-Object system.Windows.Forms.Button
+$oldsystempanel.text                    = "Old System Panel"
+$oldsystempanel.width                   = 211
+$oldsystempanel.height                  = 30
+$oldsystempanel.location                = New-Object System.Drawing.Point(4,197)
+$oldsystempanel.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
 $NFS                             = New-Object system.Windows.Forms.Button
 $NFS.text                        = "Enable NFS"
@@ -627,10 +618,10 @@ $NFS.location                    = New-Object System.Drawing.Point(4,232)
 $NFS.Font                        = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
 $Form.controls.AddRange(@($Panel1,$Panel2,$Label3,$Label15,$Panel4,$PictureBox1,$Label1,$Label4,$Panel3,$ResultText,$Label10,$Label11,$urlfixwinstartup,$urlremovevirus,$urlcreateiso))
-$Panel1.controls.AddRange(@($brave,$firefox,$7zip,$sharex,$adobereader,$notepad,$gchrome,$mpc,$vlc,$powertoys,$winterminal,$vscode,$Label2,$everythingsearch,$sumatrapdf,$vscodium,$imageglass,$gimp,$Label7,$Label8,$Label9,$advancedipscanner,$putty,$etcher,$translucenttb,$githubdesktop,$discord,$autohotkey))
+$Panel1.controls.AddRange(@($brave,$firefox,$7zip,$sharex,$adobereader,$notepad,$gchrome,$mpc,$vlc,$powertoys,$batchinstall,$vscode,$Label2,$everythingsearch,$sumatrapdf,$vscodium,$imageglass,$gimp,$Label7,$Label8,$Label9,$advancedipscanner,$putty,$etcher,$translucenttb,$githubdesktop,$discord,$autohotkey))
 $Panel2.controls.AddRange(@($essentialtweaks,$backgroundapps,$cortana,$actioncenter,$darkmode,$performancefx,$onedrive,$lightmode,$essentialundo,$EActionCenter,$ECortana,$RBackgroundApps,$HTrayIcons,$EClipboardHistory,$ELocation,$InstallOneDrive,$removebloat,$reinstallbloat,$WarningLabel,$Label5,$appearancefx,$STrayIcons,$EHibernation,$dualboottime))
 $Panel4.controls.AddRange(@($defaultwindowsupdate,$securitywindowsupdate,$Label16,$Label17,$Label18,$Label19))
-$Panel3.controls.AddRange(@($yourphonefix,$Label6,$windowsupdatefix,$ncpa,$oldcontrolpanel,$oldsoundpanel,$Button1,$NFS))
+$Panel3.controls.AddRange(@($yourphonefix,$Label6,$windowsupdatefix,$ncpa,$oldcontrolpanel,$oldsoundpanel,$oldsystempanel,$NFS))
 
 $brave.Add_Click({
     Write-Host "Installing Brave Browser"
@@ -746,12 +737,43 @@ $urlcreateiso.Add_Click({
     Start-Process "https://youtu.be/R6XPff38iSc"
 })
 
-$winterminal.Add_Click({
-    Write-Host "Installing New Windows Terminal"
-    $ResultText.text = "`r`n" +"`r`n" + "Installing New Windows Terminal... Please Wait" 
-    winget install -e Microsoft.WindowsTerminal | Out-Host
-    if($?) { Write-Host "Installed New Windows Terminal" }
-    $ResultText.text = "`r`n" + "Finished Installing New Windows Terminal" + "`r`n" + "`r`n" + "Ready for Next Task"
+$batchinstall.Add_Click({
+    $applications = @(
+        "## Utilities"
+        "Windows Terminal"
+        "PowerToys (Preview)"
+        "7-Zip"
+        "AutoHotkey"
+        "Discord"
+        "GitHub Desktop"
+        "TranslucentTB"
+        "balenaEtcher"
+        "PuTTY"
+        "WinSCP"
+        "Advanced IP Scanner"
+        "Everything"
+        "## Web Browsers"
+        "Brave"
+        "Mozilla Firefox"
+        "Google Chrome"
+        "## Video & Image Tools"
+        "ShareX"
+        "ImageGlass"
+        "GIMP"
+        "VLC media player"
+        "MPC-HC"
+        "## Document Tools"
+        "VSCodium"
+        "Microsoft Visual Studio Code"
+        "Notepad++"
+        "Adobe Acrobat Reader DC"
+    )
+    $install = $applications | Out-GridView -Title "Select Application(s) to Install" -OutputMode Multiple
+    foreach ($application in $install){
+    	$ResultText.text = "`r`n" +"`r`n" + "Installing $application"
+    	winget install -s winget -e "$application" --accept-source-agreements | Out-Host
+	}
+    $ResultText.text = "`r`n" + "Finished Installing Application(s)" + "`r`n" + "`r`n" + "Ready for Next Task"
 })
 
 $powertoys.Add_Click({
@@ -1247,94 +1269,9 @@ $essentialundo.Add_Click({
     $ResultText.text = "`r`n" +"`r`n" + "Essential Undo Completed - Ready for next task"
 })
 
-$windowssearch.Add_Click({
-    Write-Host "Disabling Bing Search in Start Menu..."
-    $ResultText.text = "`r`n" +"`r`n" + "Disabling Search, Cortana, Start menu search... Please Wait"
-    Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Search" -Name "BingSearchEnabled" -Type DWord -Value 0
-    <#
-    Write-Host "Disabling Cortana"
-    Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Search" -Name "CortanaConsent" -Type DWord -Value 0
-    If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Windows Search")) {
-        New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Windows Search" -Force | Out-Null
-    }
-    #>
-    Write-Host "Hiding Search Box / Button..."
-    Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Search" -Name "SearchboxTaskbarMode" -Type DWord -Value 0
-
-    Write-Host "Removing Start Menu Tiles"
-
-    Set-Content -Path 'C:\Users\Default\AppData\Local\Microsoft\Windows\Shell\DefaultLayouts.xml' -Value '<LayoutModificationTemplate xmlns:defaultlayout="http://schemas.microsoft.com/Start/2014/FullDefaultLayout" xmlns:start="http://schemas.microsoft.com/Start/2014/StartLayout" Version="1" xmlns="http://schemas.microsoft.com/Start/2014/LayoutModification">'
-    Add-Content -Path 'C:\Users\Default\AppData\Local\Microsoft\Windows\Shell\DefaultLayouts.xml' -value '  <LayoutOptions StartTileGroupCellWidth="6" />'
-    Add-Content -Path 'C:\Users\Default\AppData\Local\Microsoft\Windows\Shell\DefaultLayouts.xml' -value '  <DefaultLayoutOverride>'
-    Add-Content -Path 'C:\Users\Default\AppData\Local\Microsoft\Windows\Shell\DefaultLayouts.xml' -value '    <StartLayoutCollection>'
-    Add-Content -Path 'C:\Users\Default\AppData\Local\Microsoft\Windows\Shell\DefaultLayouts.xml' -value '      <defaultlayout:StartLayout GroupCellWidth="6" />'
-    Add-Content -Path 'C:\Users\Default\AppData\Local\Microsoft\Windows\Shell\DefaultLayouts.xml' -value '    </StartLayoutCollection>'
-    Add-Content -Path 'C:\Users\Default\AppData\Local\Microsoft\Windows\Shell\DefaultLayouts.xml' -value '  </DefaultLayoutOverride>'
-    Add-Content -Path 'C:\Users\Default\AppData\Local\Microsoft\Windows\Shell\DefaultLayouts.xml' -value '    <CustomTaskbarLayoutCollection>'
-    Add-Content -Path 'C:\Users\Default\AppData\Local\Microsoft\Windows\Shell\DefaultLayouts.xml' -value '      <defaultlayout:TaskbarLayout>'
-    Add-Content -Path 'C:\Users\Default\AppData\Local\Microsoft\Windows\Shell\DefaultLayouts.xml' -value '        <taskbar:TaskbarPinList>'
-    Add-Content -Path 'C:\Users\Default\AppData\Local\Microsoft\Windows\Shell\DefaultLayouts.xml' -value '          <taskbar:UWA AppUserModelID="Microsoft.MicrosoftEdge_8wekyb3d8bbwe!MicrosoftEdge" />'
-    Add-Content -Path 'C:\Users\Default\AppData\Local\Microsoft\Windows\Shell\DefaultLayouts.xml' -value '          <taskbar:DesktopApp DesktopApplicationLinkPath="%APPDATA%\Microsoft\Windows\Start Menu\Programs\System Tools\File Explorer.lnk" />'
-    Add-Content -Path 'C:\Users\Default\AppData\Local\Microsoft\Windows\Shell\DefaultLayouts.xml' -value '        </taskbar:TaskbarPinList>'
-    Add-Content -Path 'C:\Users\Default\AppData\Local\Microsoft\Windows\Shell\DefaultLayouts.xml' -value '      </defaultlayout:TaskbarLayout>'
-    Add-Content -Path 'C:\Users\Default\AppData\Local\Microsoft\Windows\Shell\DefaultLayouts.xml' -value '    </CustomTaskbarLayoutCollection>'
-    Add-Content -Path 'C:\Users\Default\AppData\Local\Microsoft\Windows\Shell\DefaultLayouts.xml' -value '</LayoutModificationTemplate>'
-
-    $START_MENU_LAYOUT = @"
-    <LayoutModificationTemplate xmlns:defaultlayout="http://schemas.microsoft.com/Start/2014/FullDefaultLayout" xmlns:start="http://schemas.microsoft.com/Start/2014/StartLayout" Version="1" xmlns:taskbar="http://schemas.microsoft.com/Start/2014/TaskbarLayout" xmlns="http://schemas.microsoft.com/Start/2014/LayoutModification">
-        <LayoutOptions StartTileGroupCellWidth="6" />
-        <DefaultLayoutOverride>
-            <StartLayoutCollection>
-                <defaultlayout:StartLayout GroupCellWidth="6" />
-            </StartLayoutCollection>
-        </DefaultLayoutOverride>
-    </LayoutModificationTemplate>
-"@
-
-    $layoutFile="C:\Windows\StartMenuLayout.xml"
-
-    #Delete layout file if it already exists
-    If(Test-Path $layoutFile)
-    {
-        Remove-Item $layoutFile
-    }
-
-    #Creates the blank layout file
-    $START_MENU_LAYOUT | Out-File $layoutFile -Encoding ASCII
-
-    $regAliases = @("HKLM", "HKCU")
-
-    #Assign the start layout and force it to apply with "LockedStartLayout" at both the machine and user level
-    foreach ($regAlias in $regAliases){
-        $basePath = $regAlias + ":\SOFTWARE\Policies\Microsoft\Windows"
-        $keyPath = $basePath + "\Explorer"
-        IF(!(Test-Path -Path $keyPath)) {
-            New-Item -Path $basePath -Name "Explorer"
-        }
-        Set-ItemProperty -Path $keyPath -Name "LockedStartLayout" -Value 1
-        Set-ItemProperty -Path $keyPath -Name "StartLayoutFile" -Value $layoutFile
-    }
-
-    #Restart Explorer, open the start menu (necessary to load the new layout), and give it a few seconds to process
-    Stop-Process -name explorer
-    Start-Sleep -s 5
-    $wshell = New-Object -ComObject wscript.shell; $wshell.SendKeys('^{ESCAPE}')
-    Start-Sleep -s 5
-
-    #Enable the ability to pin items again by disabling "LockedStartLayout"
-    foreach ($regAlias in $regAliases){
-        $basePath = $regAlias + ":\SOFTWARE\Policies\Microsoft\Windows"
-        $keyPath = $basePath + "\Explorer"
-        Set-ItemProperty -Path $keyPath -Name "LockedStartLayout" -Value 0
-
-    Write-Host "Search and Start Menu Tweaks Complete"
-    $ResultText.text = "`r`n" +"`r`n" + "Search and Start Menu Tweaks Complete"
-    }
-})
-
 $backgroundapps.Add_Click({
     Write-Host "Disabling Background application access..."
-    Get-ChildItem -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\BackgroundAccessApplications" -Exclude "Microsoft.Windows.Cortana*" | ForEach {
+    Get-ChildItem -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\BackgroundAccessApplications" -Exclude "Microsoft.Windows.Cortana*" | ForEach-Object {
         Set-ItemProperty -Path $_.PsPath -Name "Disabled" -Type DWord -Value 1
         Set-ItemProperty -Path $_.PsPath -Name "DisabledByUser" -Type DWord -Value 1
     }
@@ -1687,7 +1624,7 @@ $ELocation.Add_Click({
 
 $RBackgroundApps.Add_Click({
 	Write-Host "Allowing Background Apps..."
-	Get-ChildItem -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\BackgroundAccessApplications" -Exclude "Microsoft.Windows.Cortana*" | ForEach {
+	Get-ChildItem -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\BackgroundAccessApplications" -Exclude "Microsoft.Windows.Cortana*" | ForEach-Object {
 		Remove-ItemProperty -Path $_.PsPath -Name "Disabled" -ErrorAction SilentlyContinue
 		Remove-ItemProperty -Path $_.PsPath -Name "DisabledByUser" -ErrorAction SilentlyContinue
 	}
@@ -1710,17 +1647,6 @@ $InstallOneDrive.Add_Click({
     $ResultText.text = "`r`n" +"`r`n" + "Finished Reinstalling OneDrive"
 })
 
-$DisableNumLock.Add_Click({
-    Write-Host "Disable NumLock after startup..."
-    Set-ItemProperty -Path "HKU:\.DEFAULT\Control Panel\Keyboard" -Name "InitialKeyboardIndicators" -Type DWord -Value 0
-    Add-Type -AssemblyName System.Windows.Forms
-    If (([System.Windows.Forms.Control]::IsKeyLocked('NumLock'))) {
-        $wsh = New-Object -ComObject WScript.Shell
-        $wsh.SendKeys('{NUMLOCK}')
-    }
-    $ResultText.text = "`r`n" +"`r`n" + "NUMLOCK Disabled"
-})
-
 $yourphonefix.Add_Click({
     Write-Host "Reinstalling Your Phone App"
     Add-AppxPackage -DisableDevelopmentMode -Register "$($(Get-AppXPackage -AllUsers "Microsoft.YourPhone").InstallLocation)\AppXManifest.xml"
@@ -1729,7 +1655,7 @@ $yourphonefix.Add_Click({
     Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\System" -Name "EnableCdp" -Type DWord -Value 1
     Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Messaging" -Name "AllowMessageSync" -Type DWord -Value 1
     Write-Host "Allowing Background Apps..."
-	Get-ChildItem -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\BackgroundAccessApplications" -Exclude "Microsoft.Windows.Cortana*" | ForEach {
+	Get-ChildItem -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\BackgroundAccessApplications" -Exclude "Microsoft.Windows.Cortana*" | ForEach-Object {
 		Remove-ItemProperty -Path $_.PsPath -Name "Disabled" -ErrorAction SilentlyContinue
 		Remove-ItemProperty -Path $_.PsPath -Name "DisabledByUser" -ErrorAction SilentlyContinue
 	}
@@ -1761,6 +1687,7 @@ $NFS.Add_Click({
     Write-Host "NFS is now setup for user based NFS mounts"
     $ResultText.text = "`r`n" +"`r`n" + "NFS is now setup for user based NFS mounts"
 })
+
 $windowsupdatefix.Add_Click({
     Write-Host "1. Stopping Windows Update Services..." 
     Stop-Service -Name BITS 
