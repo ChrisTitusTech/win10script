@@ -60,14 +60,14 @@ $brave                           = New-Object system.Windows.Forms.Button
 $brave.text                      = "Brave Browser"
 $brave.width                     = 212
 $brave.height                    = 30
-$brave.location                  = New-Object System.Drawing.Point(4,426)
+$brave.location                  = New-Object System.Drawing.Point(4,461)
 $brave.Font                      = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
 $firefox                         = New-Object system.Windows.Forms.Button
 $firefox.text                    = "Firefox"
 $firefox.width                   = 212
 $firefox.height                  = 30
-$firefox.location                = New-Object System.Drawing.Point(4,461)
+$firefox.location                = New-Object System.Drawing.Point(4,494)
 $firefox.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
 $7zip                            = New-Object system.Windows.Forms.Button
@@ -81,42 +81,42 @@ $sharex                          = New-Object system.Windows.Forms.Button
 $sharex.text                     = "ShareX (Screenshots)"
 $sharex.width                    = 212
 $sharex.height                   = 30
-$sharex.location                 = New-Object System.Drawing.Point(3,561)
+$sharex.location                 = New-Object System.Drawing.Point(3,595)
 $sharex.Font                     = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
 $adobereader                     = New-Object system.Windows.Forms.Button
 $adobereader.text                = "Adobe Reader DC"
 $adobereader.width               = 212
 $adobereader.height              = 30
-$adobereader.location            = New-Object System.Drawing.Point(3,865)
+$adobereader.location            = New-Object System.Drawing.Point(3,934)
 $adobereader.Font                = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
 $notepad                         = New-Object system.Windows.Forms.Button
 $notepad.text                    = "Notepad++"
 $notepad.width                   = 212
 $notepad.height                  = 30
-$notepad.location                = New-Object System.Drawing.Point(3,831)
+$notepad.location                = New-Object System.Drawing.Point(3,865)
 $notepad.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
 $gchrome                         = New-Object system.Windows.Forms.Button
 $gchrome.text                    = "Google Chrome"
 $gchrome.width                   = 212
 $gchrome.height                  = 30
-$gchrome.location                = New-Object System.Drawing.Point(3,494)
+$gchrome.location                = New-Object System.Drawing.Point(3,527)
 $gchrome.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
 $mpc                             = New-Object system.Windows.Forms.Button
 $mpc.text                        = "Media Player Classic"
 $mpc.width                       = 211
 $mpc.height                      = 30
-$mpc.location                    = New-Object System.Drawing.Point(3,697)
+$mpc.location                    = New-Object System.Drawing.Point(3,730)
 $mpc.Font                        = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
 $vlc                             = New-Object system.Windows.Forms.Button
 $vlc.text                        = "VLC"
 $vlc.width                       = 212
 $vlc.height                      = 30
-$vlc.location                    = New-Object System.Drawing.Point(3,663)
+$vlc.location                    = New-Object System.Drawing.Point(3,697)
 $vlc.Font                        = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
 $powertoys                       = New-Object system.Windows.Forms.Button
@@ -137,7 +137,7 @@ $vscode                          = New-Object system.Windows.Forms.Button
 $vscode.text                     = "VS Code"
 $vscode.width                    = 211
 $vscode.height                   = 30
-$vscode.location                 = New-Object System.Drawing.Point(4,797)
+$vscode.location                 = New-Object System.Drawing.Point(4,831)
 $vscode.Font                     = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
 $Label2                          = New-Object system.Windows.Forms.Label
@@ -377,21 +377,21 @@ $vscodium                        = New-Object system.Windows.Forms.Button
 $vscodium.text                   = "VS Codium"
 $vscodium.width                  = 211
 $vscodium.height                 = 30
-$vscodium.location               = New-Object System.Drawing.Point(4,763)
+$vscodium.location               = New-Object System.Drawing.Point(4,797) 
 $vscodium.Font                   = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
 $imageglass                      = New-Object system.Windows.Forms.Button
 $imageglass.text                 = "ImageGlass (Image Viewer)"
 $imageglass.width                = 212
 $imageglass.height               = 30
-$imageglass.location             = New-Object System.Drawing.Point(4,595)
+$imageglass.location             = New-Object System.Drawing.Point(4,629)
 $imageglass.Font                 = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
 $gimp                            = New-Object system.Windows.Forms.Button
 $gimp.text                       = "GIMP (Image Editor)"
 $gimp.width                      = 212
 $gimp.height                     = 30
-$gimp.location                   = New-Object System.Drawing.Point(4,629)
+$gimp.location                   = New-Object System.Drawing.Point(4,664)
 $gimp.Font                       = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
 $yourphonefix                    = New-Object system.Windows.Forms.Button
@@ -444,7 +444,7 @@ $Label7.text                     = "Document Tools"
 $Label7.AutoSize                 = $true
 $Label7.width                    = 25
 $Label7.height                   = 10
-$Label7.location                 = New-Object System.Drawing.Point(60,740)
+$Label7.location                 = New-Object System.Drawing.Point(60,773)
 $Label7.Font                     = New-Object System.Drawing.Font('Microsoft Sans Serif',10,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Bold))
 
 $Label8                          = New-Object system.Windows.Forms.Label
@@ -452,7 +452,7 @@ $Label8.text                     = "Video and Image Tools"
 $Label8.AutoSize                 = $true
 $Label8.width                    = 25
 $Label8.height                   = 10
-$Label8.location                 = New-Object System.Drawing.Point(41,537)
+$Label8.location                 = New-Object System.Drawing.Point(41,570)
 $Label8.Font                     = New-Object System.Drawing.Font('Microsoft Sans Serif',10,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Bold))
 
 $Label9                          = New-Object system.Windows.Forms.Label
@@ -460,36 +460,43 @@ $Label9.text                     = "Web Browsers"
 $Label9.AutoSize                 = $true
 $Label9.width                    = 25
 $Label9.height                   = 10
-$Label9.location                 = New-Object System.Drawing.Point(67,406)
+$Label9.location                 = New-Object System.Drawing.Point(67,442)
 $Label9.Font                     = New-Object System.Drawing.Font('Microsoft Sans Serif',10,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Bold))
 
 $advancedipscanner               = New-Object system.Windows.Forms.Button
 $advancedipscanner.text          = "Advanced IP Scanner"
 $advancedipscanner.width         = 211
 $advancedipscanner.height        = 30
-$advancedipscanner.location      = New-Object System.Drawing.Point(3,335)
+$advancedipscanner.location      = New-Object System.Drawing.Point(3,406)
 $advancedipscanner.Font          = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
 $putty                           = New-Object system.Windows.Forms.Button
 $putty.text                      = "PuTTY & WinSCP"
 $putty.width                     = 211
 $putty.height                    = 30
-$putty.location                  = New-Object System.Drawing.Point(3,302)
+$putty.location                  = New-Object System.Drawing.Point(3,335)
 $putty.Font                      = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
 $etcher                          = New-Object system.Windows.Forms.Button
 $etcher.text                     = "Etcher USB Creator"
 $etcher.width                    = 211
 $etcher.height                   = 30
-$etcher.location                 = New-Object System.Drawing.Point(3,269)
+$etcher.location                 = New-Object System.Drawing.Point(3,302)
 $etcher.Font                     = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
 $translucenttb                   = New-Object system.Windows.Forms.Button
 $translucenttb.text              = "Translucent Taskbar"
 $translucenttb.width             = 211
 $translucenttb.height            = 30
-$translucenttb.location          = New-Object System.Drawing.Point(3,236)
+$translucenttb.location          = New-Object System.Drawing.Point(3,269)
 $translucenttb.Font              = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
+
+$gitforwindows                  = New-Object system.Windows.Forms.Button
+$gitforwindows.text              = "Git for Windows"
+$gitforwindows.width             = 211
+$gitforwindows.height            = 30
+$gitforwindows.location          = New-Object System.Drawing.Point(3,236)
+$gitforwindows.Font              = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
 $githubdesktop                   = New-Object system.Windows.Forms.Button
 $githubdesktop.text              = "Github Desktop"
@@ -627,7 +634,7 @@ $NFS.location                    = New-Object System.Drawing.Point(4,232)
 $NFS.Font                        = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
 $Form.controls.AddRange(@($Panel1,$Panel2,$Label3,$Label15,$Panel4,$PictureBox1,$Label1,$Label4,$Panel3,$ResultText,$Label10,$Label11,$urlfixwinstartup,$urlremovevirus,$urlcreateiso))
-$Panel1.controls.AddRange(@($brave,$firefox,$7zip,$sharex,$adobereader,$notepad,$gchrome,$mpc,$vlc,$powertoys,$winterminal,$vscode,$Label2,$everythingsearch,$sumatrapdf,$vscodium,$imageglass,$gimp,$Label7,$Label8,$Label9,$advancedipscanner,$putty,$etcher,$translucenttb,$githubdesktop,$discord,$autohotkey))
+$Panel1.controls.AddRange(@($brave,$firefox,$7zip,$sharex,$adobereader,$notepad,$gchrome,$mpc,$vlc,$powertoys,$winterminal,$vscode,$Label2,$everythingsearch,$sumatrapdf,$vscodium,$imageglass,$gimp,$Label7,$Label8,$Label9,$advancedipscanner,$putty,$etcher,$translucenttb,$gitforwindows,$githubdesktop,$discord,$autohotkey))
 $Panel2.controls.AddRange(@($essentialtweaks,$backgroundapps,$cortana,$actioncenter,$darkmode,$performancefx,$onedrive,$lightmode,$essentialundo,$EActionCenter,$ECortana,$RBackgroundApps,$HTrayIcons,$EClipboardHistory,$ELocation,$InstallOneDrive,$removebloat,$reinstallbloat,$WarningLabel,$Label5,$appearancefx,$STrayIcons,$EHibernation,$dualboottime))
 $Panel4.controls.AddRange(@($defaultwindowsupdate,$securitywindowsupdate,$Label16,$Label17,$Label18,$Label19))
 $Panel3.controls.AddRange(@($yourphonefix,$Label6,$windowsupdatefix,$ncpa,$oldcontrolpanel,$oldsoundpanel,$Button1,$NFS))
@@ -784,6 +791,14 @@ $githubdesktop.Add_Click({
     winget install -e GitHub.GitHubDesktop | Out-Host
     Write-Host "Installed Github Desktop"
     $ResultText.text = "`r`n" + "Finished Installing GitHub Desktop" + "`r`n" + "`r`n" + "Ready for Next Task"
+})
+
+$gitforwindows.Add_Click({
+    Write-Host "Installing Git for Windows"
+    $ResultText.text = "`r`n" +"`r`n" + "Installing Git for Windows... Please Wait" 
+    winget install -e Git.Git | Out-Host
+    Write-Host "Installed Git for Windows"
+    $ResultText.text = "`r`n" + "Finished Installing Git for Windows" + "`r`n" + "`r`n" + "Ready for Next Task"
 })
 
 $translucenttb.Add_Click({
