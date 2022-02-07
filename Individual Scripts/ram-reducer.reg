@@ -1,6 +1,6 @@
 Windows Registry Editor Version 5.00
 
-; lowers ram usage and process count by a lot
+; Lowers ram usage and process count by a lot
 [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control]
 "WaitToKillServiceTimeout"="2000"
 
@@ -11,6 +11,7 @@ Windows Registry Editor Version 5.00
 [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\DriverSearching]
 "SearchOrderConfig"=dword:00000000
 
+; Disables Fast Startup
 [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Power]
 "HiberbootEnabled"=dword:00000000
 
@@ -64,12 +65,14 @@ Windows Registry Editor Version 5.00
 "LowLevelHooksTimeout"=dword:00001000
 "WaitToKillServiceTimeout"=dword:00002000
 
-[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender]
-"DisableAntiSpyware"=dword:00000001
+; Disables Windows Defender (Only works pre-1903)
+;[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender]
+;"DisableAntiSpyware"=dword:00000001
 
 [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management]
 "ClearPageFileAtShutdown"=dword:00000001
 
+; Disables Windows Network Data Usage Monitor Service (Had Memory Leak, Might be fixed but can't find anything saying it is)
 [HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\Ndu]
 "Start"=dword:00000004
 
