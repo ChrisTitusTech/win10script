@@ -1062,22 +1062,22 @@ Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Policies
     "PrintNotify"                                  #Windows printer notifications and extentions
     "PcaSvc"                                       #Program Compatibility Assistant Service
     "WPDBusEnum"                                   #Portable Device Enumerator Service
-    #"LicenseManager"                              #Disable LicenseManager(Windows store may not work properly)
-    "seclogon"                                     #Secondary Logon(disables other credentials only password will work)
+    #"LicenseManager"                              #Disable LicenseManager (Windows Store may not work properly)
+    "seclogon"                                     #Secondary Logon (Disables other credentials only password will work)
     "SysMain"                                      #Analyses System Usage and Improves Performance
     "lmhosts"                                      #TCP/IP NetBIOS Helper
     "wisvc"                                        #Windows Insider program(Windows Insider will not work)
     "FontCache"                                    #Windows font cache
     "RetailDemo"                                   #RetailDemo which is often used when showing your device
     "ALG"                                          #Application Layer Gateway Service(Provides support for 3rd party protocol plug-ins for Internet Connection Sharing)
-    #"BFE"                                         #Base Filtering Engine (BFE) (is a service that manages firewall and Internet Protocol security)
-    #"BrokerInfrastructure"                        #Windows infrastructure service that controls which background tasks can run on the system.
+    #"BFE"                                         #Base Filtering Engine (Manages Firewall and Internet Protocol security)
+    #"BrokerInfrastructure"                        #Windows Infrastructure Service (Controls which background tasks can run on the system)
     "SCardSvr"                                     #Windows Smart Card Service
     "EntAppSvc"                                    #Enterprise Application Management.
-    "BthAvctpSvc"                                  #AVCTP service (if you use  Bluetooth Audio Device or Wireless Headphones. then don't disable this)
-    #"FrameServer"                                 #Windows Camera Frame Server(this allows multiple clients to access video frames from camera devices.)
+    "BthAvctpSvc"                                  #AVCTP service (needed for Bluetooth Audio Devices or Wireless Headphones)
+    #"FrameServer"                                 #Windows Camera Frame Server (Allows multiple clients to access video frames from camera devices)
     "Browser"                                      #Let users browse and locate shared resources in neighboring computers
-    "BthAvctpSvc"                                  #AVCTP service (This is Audio Video Control Transport Protocol service.)
+    "BthAvctpSvc"                                  #AVCTP service (This is Audio Video Control Transport Protocol service)
     #"BDESVC"                                      #Bitlocker Drive Encryption Service
     "iphlpsvc"                                     #ipv6(Most websites use ipv4 instead)
     "edgeupdate"                                   #Edge Update Service
@@ -1086,7 +1086,7 @@ Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Policies
     "SEMgrSvc"                                     #Payments and NFC/SE Manager (Manages payments and Near Field Communication (NFC) based secure elements)
     #"PNRPsvc"                                     #Peer Name Resolution Protocol (Some peer-to-peer and collaborative applications, such as Remote Assistance, may not function, Discord will still work)
     #"p2psvc"                                      #Peer Name Resolution Protocol(Enables multi-party communication using Peer-to-Peer Grouping.  If disabled, some applications, such as HomeGroup, may not function. Discord will still work)iscord will still work)
-    #"p2pimsvc"                                    #Peer Networking Identity Manager (Peer-to-Peer Grouping services may not function, and some applications, such as HomeGroup and Remote Assistance, may not function correctly.Discord will still wor correctly.Discord will still work)
+    #"p2pimsvc"                                    #Peer Networking Identity Manager (Peer-to-Peer Grouping services may not function, and some applications, such as HomeGroup and Remote Assistance, may not function correctly. Discord will still work)
     "PerfHost"                                     #Remote users and 64-bit processes to query performance.
     "BcastDVRUserService_48486de"                  #GameDVR and Broadcast  is used for Game Recordings and Live Broadcasts
     "CaptureService_48486de"                       #Optional screen capture functionality for applications that call the Windows.Graphics.Capture API.  
