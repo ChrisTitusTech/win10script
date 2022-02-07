@@ -204,7 +204,7 @@ $performancefx.location          = New-Object System.Drawing.Point(3,419)
 $performancefx.Font              = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
 $onedrive                        = New-Object system.Windows.Forms.Button
-$onedrive.text                   = "Delete & Disable  OneDrive"
+$onedrive.text                   = "Delete & Disable OneDrive"
 $onedrive.width                  = 205
 $onedrive.height                 = 30
 $onedrive.location               = New-Object System.Drawing.Point(3,521)
@@ -246,7 +246,7 @@ $Label16.location                = New-Object System.Drawing.Point(62,65)
 $Label16.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
 
 $Label17                         = New-Object system.Windows.Forms.Label
-$Label17.text                    = "- Delays Features updates up to 3 years"
+$Label17.text                    = "- Delays Feature updates up to 3 years"
 $Label17.AutoSize                = $true
 $Label17.width                   = 25
 $Label17.height                  = 10
@@ -1027,75 +1027,75 @@ Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Policies
     # Service tweaks to Manual 
 
     $services = @(
-    "diagnosticshub.standardcollector.service"     # Microsoft (R) Diagnostics Hub Standard Collector Service
-    "DiagTrack"                                    # Diagnostics Tracking Service
+    "diagnosticshub.standardcollector.service"     #Microsoft (R) Diagnostics Hub Standard Collector Service
+    "DiagTrack"                                    #Diagnostics Tracking Service
     "DPS"
-    "dmwappushservice"                             # WAP Push Message Routing Service (see known issues)
-    "lfsvc"                                        # Geolocation Service
-    "MapsBroker"                                   # Downloaded Maps Manager
-    "NetTcpPortSharing"                            # Net.Tcp Port Sharing Service
-    "RemoteAccess"                                 # Routing and Remote Access
-    "RemoteRegistry"                               # Remote Registry
-    "SharedAccess"                                 # Internet Connection Sharing (ICS)
-    "TrkWks"                                       # Distributed Link Tracking Client
-    #"WbioSrvc"                                     # Windows Biometric Service (required for Fingerprint reader / facial detection)
-    #"WlanSvc"                                      # WLAN AutoConfig
-    "WMPNetworkSvc"                                # Windows Media Player Network Sharing Service
-    #"wscsvc"                                       # Windows Security Center Service
-    "WSearch"                                      # Windows Search
-    "XblAuthManager"                               # Xbox Live Auth Manager
-    "XblGameSave"                                  # Xbox Live Game Save Service
-    "XboxNetApiSvc"                                # Xbox Live Networking Service
-    "XboxGipSvc"                                   #Disables Xbox Accessory Management Service
-    "ndu"                                          # Windows Network Data Usage Monitor
-    "WerSvc"                                       #disables windows error reporting
-    #"Spooler"                                      #Disables your printer
-    "Fax"                                          #Disables fax
-    "fhsvc"                                        #Disables fax histroy
-    "gupdate"                                      #Disables google update
-    "gupdatem"                                     #Disable another google update
-    "stisvc"                                       #Disables Windows Image Acquisition (WIA)
-    "AJRouter"                                     #Disables (needed for AllJoyn Router Service)
-    "MSDTC"                                        # Disables Distributed Transaction Coordinator
-    "WpcMonSvc"                                    #Disables Parental Controls
-    "PhoneSvc"                                     #Disables Phone Service(Manages the telephony state on the device)
-    "PrintNotify"                                  #Disables Windows printer notifications and extentions
-    "PcaSvc"                                       #Disables Program Compatibility Assistant Service
-    "WPDBusEnum"                                   #Disables Portable Device Enumerator Service
-    #"LicenseManager"                               #Disable LicenseManager(Windows store may not work properly)
-    "seclogon"                                     #Disables  Secondary Logon(disables other credentials only password will work)
-    "SysMain"                                      #Disables sysmain
-    "lmhosts"                                      #Disables TCP/IP NetBIOS Helper
-    "wisvc"                                        #Disables Windows Insider program(Windows Insider will not work)
-    "FontCache"                                    #Disables Windows font cache
-    "RetailDemo"                                   #Disables RetailDemo whic is often used when showing your device
-    "ALG"                                          # Disables Application Layer Gateway Service(Provides support for 3rd party protocol plug-ins for Internet Connection Sharing)
-    #"BFE"                                         #Disables Base Filtering Engine (BFE) (is a service that manages firewall and Internet Protocol security)
-    #"BrokerInfrastructure"                         #Disables Windows infrastructure service that controls which background tasks can run on the system.
-    "SCardSvr"                                      #Disables Windows smart card
-    "EntAppSvc"                                     #Disables enterprise application management.
-    "BthAvctpSvc"                                   #Disables AVCTP service (if you use  Bluetooth Audio Device or Wireless Headphones. then don't disable this)
-    #"FrameServer"                                   #Disables Windows Camera Frame Server(this allows multiple clients to access video frames from camera devices.)
-    "Browser"                                       #Disables computer browser
-    "BthAvctpSvc"                                   #AVCTP service (This is Audio Video Control Transport Protocol service.)
-    #"BDESVC"                                        #Disables bitlocker
-    "iphlpsvc"                                      #Disables ipv6 but most websites don't use ipv6 they use ipv4     
-    "edgeupdate"                                    # Disables one of edge update service  
-    "MicrosoftEdgeElevationService"                 # Disables one of edge  service 
-    "edgeupdatem"                                   # disbales another one of update service (disables edgeupdatem)                          
-    "SEMgrSvc"                                      #Disables Payments and NFC/SE Manager (Manages payments and Near Field Communication (NFC) based secure elements)
-    #"PNRPsvc"                                      # Disables peer Name Resolution Protocol ( some peer-to-peer and collaborative applications, such as Remote Assistance, may not function, Discord will still work)
-    #"p2psvc"                                       # Disbales Peer Name Resolution Protocol(nables multi-party communication using Peer-to-Peer Grouping.  If disabled, some applications, such as HomeGroup, may not function. Discord will still work)
-    #"p2pimsvc"                                     # Disables Peer Networking Identity Manager (Peer-to-Peer Grouping services may not function, and some applications, such as HomeGroup and Remote Assistance, may not function correctly.Discord will still work)
-    "PerfHost"                                      #Disables  remote users and 64-bit processes to query performance .
-    "BcastDVRUserService_48486de"                   #Disables GameDVR and Broadcast   is used for Game Recordings and Live Broadcasts
-    "CaptureService_48486de"                        #Disables ptional screen capture functionality for applications that call the Windows.Graphics.Capture API.  
-    "cbdhsvc_48486de"                               #Disables   cbdhsvc_48486de (clipboard service it disables)
-    #"BluetoothUserService_48486de"                  #disbales BluetoothUserService_48486de (The Bluetooth user service supports proper functionality of Bluetooth features relevant to each user session.)
-    "WpnService"                                    #Disables WpnService (Push Notifications may not work )
-    #"StorSvc"                                       #Disables StorSvc (usb external hard drive will not be reconised by windows)
-    "RtkBtManServ"                                  #Disables Realtek Bluetooth Device Manager Service
-    "QWAVE"                                         #Disables Quality Windows Audio Video Experience (audio and video might sound worse)
+    "dmwappushservice"                             #WAP Push Message Routing Service
+    "lfsvc"                                        #Geolocation Service
+    "MapsBroker"                                   #Downloaded Maps Manager
+    "NetTcpPortSharing"                            #Net.Tcp Port Sharing Service
+    "RemoteAccess"                                 #Routing and Remote Access
+    "RemoteRegistry"                               #Remote Registry
+    "SharedAccess"                                 #Internet Connection Sharing (ICS)
+    "TrkWks"                                       #Distributed Link Tracking Client
+    #"WbioSrvc"                                    #Windows Biometric Service (required for Fingerprint reader / facial detection)
+    #"WlanSvc"                                     #WLAN AutoConfig
+    "WMPNetworkSvc"                                #Windows Media Player Network Sharing Service
+    #"wscsvc"                                      #Windows Security Center Service
+    "WSearch"                                      #Windows Search
+    "XblAuthManager"                               #Xbox Live Auth Manager
+    "XblGameSave"                                  #Xbox Live Game Save Service
+    "XboxNetApiSvc"                                #Xbox Live Networking Service
+    "XboxGipSvc"                                   #Xbox Accessory Management Service
+    "ndu"                                          #Windows Network Data Usage Monitor
+    "WerSvc"                                       #windows error reporting
+    #"Spooler"                                     #Printing
+    "Fax"                                          #Fax Service
+    "fhsvc"                                        #Fax History
+    "gupdate"                                      #Google Update
+    "gupdatem"                                     #Disable Another Google Update Service
+    "stisvc"                                       #Windows Image Acquisition (WIA)
+    "AJRouter"                                     #Needed for AllJoyn Router Service
+    "MSDTC"                                        #Distributed Transaction Coordinator
+    "WpcMonSvc"                                    #Parental Controls
+    "PhoneSvc"                                     #Phone Service(Manages the telephony state on the device)
+    "PrintNotify"                                  #Windows printer notifications and extentions
+    "PcaSvc"                                       #Program Compatibility Assistant Service
+    "WPDBusEnum"                                   #Portable Device Enumerator Service
+    #"LicenseManager"                              #Disable LicenseManager(Windows store may not work properly)
+    "seclogon"                                     #Secondary Logon(disables other credentials only password will work)
+    "SysMain"                                      #Analyses System Usage and Improves Performance
+    "lmhosts"                                      #TCP/IP NetBIOS Helper
+    "wisvc"                                        #Windows Insider program(Windows Insider will not work)
+    "FontCache"                                    #Windows font cache
+    "RetailDemo"                                   #RetailDemo which is often used when showing your device
+    "ALG"                                          #Application Layer Gateway Service(Provides support for 3rd party protocol plug-ins for Internet Connection Sharing)
+    #"BFE"                                         #Base Filtering Engine (BFE) (is a service that manages firewall and Internet Protocol security)
+    #"BrokerInfrastructure"                        #Windows infrastructure service that controls which background tasks can run on the system.
+    "SCardSvr"                                     #Windows Smart Card Service
+    "EntAppSvc"                                    #Enterprise Application Management.
+    "BthAvctpSvc"                                  #AVCTP service (if you use  Bluetooth Audio Device or Wireless Headphones. then don't disable this)
+    #"FrameServer"                                 #Windows Camera Frame Server(this allows multiple clients to access video frames from camera devices.)
+    "Browser"                                      #Let users browse and locate shared resources in neighboring computers
+    "BthAvctpSvc"                                  #AVCTP service (This is Audio Video Control Transport Protocol service.)
+    #"BDESVC"                                      #Bitlocker Drive Encryption Service
+    "iphlpsvc"                                     #ipv6(Most websites use ipv4 instead)
+    "edgeupdate"                                   #Edge Update Service
+    "MicrosoftEdgeElevationService"                #Another Edge Update Service 
+    "edgeupdatem"                                  #Another Update Service                          
+    "SEMgrSvc"                                     #Payments and NFC/SE Manager (Manages payments and Near Field Communication (NFC) based secure elements)
+    #"PNRPsvc"                                     #Peer Name Resolution Protocol (Some peer-to-peer and collaborative applications, such as Remote Assistance, may not function, Discord will still work)
+    #"p2psvc"                                      #Peer Name Resolution Protocol(Enables multi-party communication using Peer-to-Peer Grouping.  If disabled, some applications, such as HomeGroup, may not function. Discord will still work)iscord will still work)
+    #"p2pimsvc"                                    #Peer Networking Identity Manager (Peer-to-Peer Grouping services may not function, and some applications, such as HomeGroup and Remote Assistance, may not function correctly.Discord will still wor correctly.Discord will still work)
+    "PerfHost"                                     #Remote users and 64-bit processes to query performance.
+    "BcastDVRUserService_48486de"                  #GameDVR and Broadcast  is used for Game Recordings and Live Broadcasts
+    "CaptureService_48486de"                       #Optional screen capture functionality for applications that call the Windows.Graphics.Capture API.  
+    "cbdhsvc_48486de"                              #Clipboard Service
+    #"BluetoothUserService_48486de"                #Bluetooth user service supports proper functionality of Bluetooth features relevant to each user session.
+    "WpnService"                                   #WpnService (Push Notifications may not work)
+    #"StorSvc"                                     #StorSvc (usb external hard drive will not be reconized by windows)
+    "RtkBtManServ"                                 #Realtek Bluetooth Device Manager Service
+    "QWAVE"                                        #Quality Windows Audio Video Experience (audio and video might sound worse)
      #Hp services
     "HPAppHelperCap"
     "HPDiagsCap"
@@ -1458,6 +1458,7 @@ $Bloatware = @(
 
 $removebloat.Add_Click({
     Write-Host "Removing Bloatware"
+    $ResultText.text = "`r`n" +"`r`n" + "Removing Bloatware"
 
     foreach ($Bloat in $Bloatware) {
         Get-AppxPackage -Name $Bloat| Remove-AppxPackage
@@ -1472,6 +1473,7 @@ $removebloat.Add_Click({
 
 $reinstallbloat.Add_Click({
     Write-Host "Reinstalling Bloatware"
+    $ResultText.text = "`r`n" +"`r`n" + "Reinstalling Bloatware"
 
     foreach ($app in $Bloatware) {
         Write-Output "Trying to add $app"
@@ -1520,7 +1522,7 @@ $securitywindowsupdate.Add_Click({
     Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" -Name "NoAutoRebootWithLoggedOnUsers" -Type DWord -Value 1
     Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" -Name "AUPowerManagement" -Type DWord -Value 0
     Write-Host "Disabled driver offering through Windows Update"
-    $ResultText.text = "`r`n" +"`r`n" + "Set Windows Update to Sane Settings"
+    $ResultText.text = "`r`n" +"`r`n" + "Set Windows Update to Safe Settings"
 })
 
 $actioncenter.Add_Click({
@@ -1567,10 +1569,15 @@ $appearancefx.Add_Click({
 
 $onedrive.Add_Click({
     Write-Host "Disabling OneDrive..."
+    $ResultText.text = "`r`n" +"`r`n" + "Disabling OneDrive"
+
+    #Disable OneDrive
     If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\OneDrive")) {
         New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\OneDrive" | Out-Null
     }
     Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\OneDrive" -Name "DisableFileSyncNGSC" -Type DWord -Value 1
+
+    #Uninstall OneDrive
     Write-Host "Uninstalling OneDrive..."
     Stop-Process -Name "OneDrive" -ErrorAction SilentlyContinue
     Start-Sleep -s 2
@@ -1705,8 +1712,12 @@ $EHibernation.Add_Click({
 
 $InstallOneDrive.Add_Click({
     Write-Host "Installing Onedrive. Please Wait..."
+    $ResultText.text = "`r`n" +"`r`n" + "Installing Onedrive..."
+
     Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\OneDrive" -Name "DisableFileSyncNGSC" -ErrorAction SilentlyContinue
     %systemroot%\SysWOW64\OneDriveSetup.exe
+
+    Write-Host "Done - Installed Onedrive"
     $ResultText.text = "`r`n" +"`r`n" + "Finished Reinstalling OneDrive"
 })
 
@@ -1723,6 +1734,8 @@ $DisableNumLock.Add_Click({
 
 $yourphonefix.Add_Click({
     Write-Host "Reinstalling Your Phone App"
+    $ResultText.text = "`r`n" +"`r`n" + "Reinstalling Your Phone App..."
+
     Add-AppxPackage -DisableDevelopmentMode -Register "$($(Get-AppXPackage -AllUsers "Microsoft.YourPhone").InstallLocation)\AppXManifest.xml"
     Write-Host "Enable needed data collection for Your Phone..."
     Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\System" -Name "EnableMmx" -Type DWord -Value 1
@@ -1733,6 +1746,7 @@ $yourphonefix.Add_Click({
 		Remove-ItemProperty -Path $_.PsPath -Name "Disabled" -ErrorAction SilentlyContinue
 		Remove-ItemProperty -Path $_.PsPath -Name "DisabledByUser" -ErrorAction SilentlyContinue
 	}
+
     Write-Host "You may need to Reboot and right-click Your Phone app and select repair"
     $ResultText.text = "`r`n" +"`r`n" + "You may need to Reboot and right-click Your Phone app and select repair"
 })
@@ -1740,16 +1754,23 @@ $yourphonefix.Add_Click({
 $ncpa.Add_Click({
     cmd /c ncpa.cpl
 })
+
 $oldsoundpanel.Add_Click({
     cmd /c mmsys.cpl
 })
+
 $oldcontrolpanel.Add_Click({
     cmd /c control
 })
+
 $oldsystempanel.Add_Click({
     cmd /c sysdm.cpl
 })
+
 $NFS.Add_Click({
+    Write-Host "Enabling NFS..."
+    $ResultText.text = "`r`n" +"`r`n" + "Enabling NFS..."
+
     Enable-WindowsOptionalFeature -Online -FeatureName "ServicesForNFS-ClientOnly" -All
     Enable-WindowsOptionalFeature -Online -FeatureName "ClientForNFS-Infrastructure" -All
     Enable-WindowsOptionalFeature -Online -FeatureName "NFS-Administration" -All
@@ -1758,10 +1779,15 @@ $NFS.Add_Click({
     Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\ClientForNFS\CurrentVersion\Default" -Name "AnonymousGID" -Type DWord -Value 0
     nfsadmin client start
     nfsadmin client localhost config fileaccess=755 SecFlavors=+sys -krb5 -krb5i
+
     Write-Host "NFS is now setup for user based NFS mounts"
     $ResultText.text = "`r`n" +"`r`n" + "NFS is now setup for user based NFS mounts"
 })
+
 $windowsupdatefix.Add_Click({
+    Write-Host "Resetting/Fixing Windows Update..."
+    $ResultText.text = "`r`n" +"`r`n" + "Resetting/Fixing Windows Update..."
+
     Write-Host "1. Stopping Windows Update Services..." 
     Stop-Service -Name BITS 
     Stop-Service -Name wuauserv 
@@ -1853,7 +1879,6 @@ $windowsupdatefix.Add_Click({
     
     Write-Host "Process complete. Please reboot your computer."
     $ResultText.text = "`r`n" +"`r`n" + "Process complete. Please reboot your computer."
-
 })
 
 [void]$Form.ShowDialog()

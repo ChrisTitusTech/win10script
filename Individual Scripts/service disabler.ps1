@@ -5,7 +5,7 @@
 $services = @(
     "diagnosticshub.standardcollector.service"      #Microsoft (R) Diagnostics Hub Standard Collector Service
     "DiagTrack"                                     #Diagnostics Tracking Service
-    "dmwappushservice"                              #WAP Push Message Routing Service (see known issues)
+    "dmwappushservice"                              #WAP Push Message Routing Service
     "lfsvc"                                         #Geolocation Service
     "MapsBroker"                                    #Downloaded Maps Manager
     "NetTcpPortSharing"                             #Net.Tcp Port Sharing Service
@@ -13,7 +13,7 @@ $services = @(
     "RemoteRegistry"                                #Remote Registry
     "SharedAccess"                                  #Internet Connection Sharing (ICS)
     "TrkWks"                                        #Distributed Link Tracking Client
-    "WbioSrvc"                                      #Windows Biometric Service (required for Fingerprint reader / facial detection)
+    "WbioSrvc"                                      #Windows Biometric Service (Required for Fingerprint reader / facial detection)
     #"WlanSvc"                                      #WLAN AutoConfig
     "WMPNetworkSvc"                                 #Windows Media Player Network Sharing Service
     #"wscsvc"                                       #Windows Security Center Service
@@ -21,56 +21,56 @@ $services = @(
     "XblAuthManager"                                #Xbox Live Auth Manager
     "XblGameSave"                                   #Xbox Live Game Save Service
     "XboxNetApiSvc"                                 #Xbox Live Networking Service
-    "XboxGipSvc"                                    #Disables Xbox Accessory Management Service
+    "XboxGipSvc"                                    #Xbox Accessory Management Service
     "ndu"                                           #Windows Network Data Usage Monitor
-    "WerSvc"                                        #Disables windows error reporting
-    "Spooler"                                       #Disables your printer
-    "Fax"                                           #Disables fax
-    "fhsvc"                                         #Disables fax histroy
-    "gupdate"                                       #Disables google update
-    "gupdatem"                                      #Disable another google update
-    "stisvc"                                        #Disables Windows Image Acquisition (WIA)
-    "AJRouter"                                      #Disables (needed for AllJoyn Router Service)
-    "MSDTC"                                         #Disables Distributed Transaction Coordinator
-    "WpcMonSvc"                                     #Disables Parental Controls
-    "PhoneSvc"                                      #Disables Phone Service(Manages the telephony state on the device)
-    "PrintNotify"                                   #Disables Windows printer notifications and extentions
-    "PcaSvc"                                        #Disables Program Compatibility Assistant Service
-    "WPDBusEnum"                                    #Disables Portable Device Enumerator Service
+    "WerSvc"                                        #windows error reporting
+    "Spooler"                                       #Printing
+    "Fax"                                           #Fax Service
+    "fhsvc"                                         #Fax History
+    "gupdate"                                       #Google Update
+    "gupdatem"                                      #Disable Another Google Update Service
+    "stisvc"                                        #Windows Image Acquisition (WIA)
+    "AJRouter"                                      #Needed for AllJoyn Router Service
+    "MSDTC"                                         #Distributed Transaction Coordinator
+    "WpcMonSvc"                                     #Parental Controls
+    "PhoneSvc"                                      #Phone Service(Manages the telephony state on the device)
+    "PrintNotify"                                   #Windows printer notifications and extentions
+    "PcaSvc"                                        #Program Compatibility Assistant Service
+    "WPDBusEnum"                                    #Portable Device Enumerator Service
     #"LicenseManager"                               #Disable LicenseManager(Windows store may not work properly)
-    "seclogon"                                      #Disables Secondary Logon(disables other credentials only password will work)
-    "SysMain"                                       #Disables sysmain
-    "lmhosts"                                       #Disables TCP/IP NetBIOS Helper
-    "wisvc"                                         #Disables Windows Insider program(Windows Insider will not work)
-    "FontCache"                                     #Disables Windows font cache
-    "RetailDemo"                                    #Disables RetailDemo whic is often used when showing your device
-    "ALG"                                           #Disables Application Layer Gateway Service(Provides support for 3rd party protocol plug-ins for Internet Connection Sharing)
-    #"BFE"                                          #Disables Base Filtering Engine (BFE) (is a service that manages firewall and Internet Protocol security)
-    #"BrokerInfrastructure"                         #Disables Windows infrastructure service that controls which background tasks can run on the system.
-    "SCardSvr"                                      #Disables Windows smart card
-    "EntAppSvc"                                     #Disables enterprise application management.
-    "BthAvctpSvc"                                   #Disables AVCTP service (if you use  Bluetooth Audio Device or Wireless Headphones. then don't disable this)
-    #"FrameServer"                                  #Disables Windows Camera Frame Server(this allows multiple clients to access video frames from camera devices.)
-    "Browser"                                       #Disables computer browser
+    "seclogon"                                      #Secondary Logon(disables other credentials only password will work)
+    "SysMain"                                       #Analyses System Usage and Improves Performance
+    "lmhosts"                                       #TCP/IP NetBIOS Helper
+    "wisvc"                                         #Windows Insider program(Windows Insider will not work)
+    "FontCache"                                     #Windows font cache
+    "RetailDemo"                                    #RetailDemo which is often used when showing your device
+    "ALG"                                           #Application Layer Gateway Service(Provides support for 3rd party protocol plug-ins for Internet Connection Sharing)
+    #"BFE"                                          #Base Filtering Engine (BFE) (is a service that manages firewall and Internet Protocol security)
+    #"BrokerInfrastructure"                         #Windows infrastructure service that controls which background tasks can run on the system.
+    "SCardSvr"                                      #Windows Smart Card Service
+    "EntAppSvc"                                     #Enterprise Application Management.
+    "BthAvctpSvc"                                   #AVCTP service (if you use  Bluetooth Audio Device or Wireless Headphones. then don't disable this)
+    #"FrameServer"                                  #Windows Camera Frame Server(this allows multiple clients to access video frames from camera devices.)
+    "Browser"                                       #Let users browse and locate shared resources in neighboring computers
     "BthAvctpSvc"                                   #AVCTP service (This is Audio Video Control Transport Protocol service.)
-    "BDESVC"                                        #Disables bitlocker
-    "iphlpsvc"                                      #Disables ipv6 but most websites don't use ipv6 they use ipv4     
-    "edgeupdate"                                    #Disables one of edge update service  
-    "MicrosoftEdgeElevationService"                 #Disables one of edge  service 
-    "edgeupdatem"                                   #Disables another one of update service (disables edgeupdatem)                          
-    "SEMgrSvc"                                      #Disables Payments and NFC/SE Manager (Manages payments and Near Field Communication (NFC) based secure elements)
-    #"PNRPsvc"                                      #Disables peer Name Resolution Protocol ( some peer-to-peer and collaborative applications, such as Remote Assistance, may not function, Discord will still work)
-    #"p2psvc"                                       #Disables Peer Name Resolution Protocol(nables multi-party communication using Peer-to-Peer Grouping.  If disabled, some applications, such as HomeGroup, may not function. Discord will still work)
-    #"p2pimsvc"                                     #Disables Peer Networking Identity Manager (Peer-to-Peer Grouping services may not function, and some applications, such as HomeGroup and Remote Assistance, may not function correctly.Discord will still work)
-    "PerfHost"                                      #Disables remote users and 64-bit processes to query performance .
-    "BcastDVRUserService_48486de"                   #Disables GameDVR and Broadcast   is used for Game Recordings and Live Broadcasts
-    "CaptureService_48486de"                        #Disables optional screen capture functionality for applications that call the Windows.Graphics.Capture API.  
-    "cbdhsvc_48486de"                               #Disables cbdhsvc_48486de (clipboard service it disables)
-    "BluetoothUserService_48486de"                  #Disables BluetoothUserService_48486de (The Bluetooth user service supports proper functionality of Bluetooth features relevant to each user session.)
-    "WpnService"                                    #Disables WpnService (Push Notifications may not work )
-    #"StorSvc"                                      #Disables StorSvc (usb external hard drive will not be reconised by windows)
-    "RtkBtManServ"                                  #Disables Realtek Bluetooth Device Manager Service
-    "QWAVE"                                         #Disables Quality Windows Audio Video Experience (audio and video might sound worse)
+    "BDESVC"                                        #Bitlocker Drive Encryption Service
+    "iphlpsvc"                                      #ipv6(Most websites use ipv4 instead)
+    "edgeupdate"                                    #Edge Update Service
+    "MicrosoftEdgeElevationService"                 #Another Edge Update Service 
+    "edgeupdatem"                                   #Another Update Service                          
+    "SEMgrSvc"                                      #Payments and NFC/SE Manager (Manages payments and Near Field Communication (NFC) based secure elements)
+    #"PNRPsvc"                                      #Peer Name Resolution Protocol (Some peer-to-peer and collaborative applications, such as Remote Assistance, may not function, Discord will still work)
+    #"p2psvc"                                       #Peer Name Resolution Protocol(Enables multi-party communication using Peer-to-Peer Grouping.  If disabled, some applications, such as HomeGroup, may not function. Discord will still work)
+    #"p2pimsvc"                                     #Peer Networking Identity Manager (Peer-to-Peer Grouping services may not function, and some applications, such as HomeGroup and Remote Assistance, may not function correctly.Discord will still work)
+    "PerfHost"                                      #Remote users and 64-bit processes to query performance.
+    "BcastDVRUserService_48486de"                   #GameDVR and Broadcast is used for Game Recordings and Live Broadcasts
+    "CaptureService_48486de"                        #Optional screen capture functionality for applications that call the Windows.Graphics.Capture API.  
+    "cbdhsvc_48486de"                               #Clipboard Service
+    "BluetoothUserService_48486de"                  #Bluetooth user service supports proper functionality of Bluetooth features relevant to each user session.
+    "WpnService"                                    #WpnService (Push Notifications may not work)
+    #"StorSvc"                                      #StorSvc (usb external hard drive will not be reconized by windows)
+    "RtkBtManServ"                                  #Realtek Bluetooth Device Manager Service
+    "QWAVE"                                         #Quality Windows Audio Video Experience (audio and video might sound worse)
      #Hp services
     "HPAppHelperCap"
     "HPDiagsCap"
