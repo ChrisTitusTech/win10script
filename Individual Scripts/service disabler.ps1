@@ -28,7 +28,7 @@ $services = @(
     "Fax"                                           #Fax Service
     "fhsvc"                                         #Fax History
     "gupdate"                                       #Google Update
-    "gupdatem"                                      #Disable Another Google Update Service
+    "gupdatem"                                      #Another Google Update Service
     "stisvc"                                        #Windows Image Acquisition (WIA)
     "AJRouter"                                      #Needed for AllJoyn Router Service
     "MSDTC"                                         #Distributed Transaction Coordinator
@@ -56,7 +56,7 @@ $services = @(
     "BDESVC"                                        #Bitlocker Drive Encryption Service
     "iphlpsvc"                                      #ipv6 (Most websites use ipv4 instead)
     "edgeupdate"                                    #Edge Update Service
-    "MicrosoftEdgeElevationService"                 #Another Edge Update Service 
+    "MicrosoftEdgeElevationService"                 #Another Edge Update Service
     "edgeupdatem"                                   #Another Update Service
     "SEMgrSvc"                                      #Payments and NFC/SE Manager (Manages payments and Near Field Communication (NFC) based secure elements)
     #"PNRPsvc"                                      #Peer Name Resolution Protocol (Some peer-to-peer and collaborative applications, such as Remote Assistance, may not function, Discord will still work)
@@ -93,7 +93,7 @@ $services = @(
 foreach ($service in $services) {
     # -ErrorAction SilentlyContinue is so it doesn't write an error if a service doesn't exist
 
-    Write-Host "Setting $service StartupType to Disabled"
+    Write-Host "Disabling $service"
     Get-Service -Name $service -ErrorAction SilentlyContinue | Set-Service -StartupType Disabled
 
     $running = Get-Service -Name $service -ErrorAction SilentlyContinue | Where-Object {$_.Status -eq 'Running'}
