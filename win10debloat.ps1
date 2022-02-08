@@ -8,13 +8,16 @@ If (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]:
 }
 
 # Check if WinGet is Installed, if Not Install From MS Store
-Write-Host "Checking Winget..."
+Write-Host "Checking for Winget..."
 if (!(Test-Path ~\AppData\Local\Microsoft\WindowsApps\winget.exe)){  
     Write-Host "Winget not Found, Installing Now."
-	Start-Process "ms-appinstaller:?source=https://aka.ms/getwinget"
+	# "ms-appinstaller" Method Disabled for Now Because of Security Vulnerabilities
+    	#Start-Process "ms-appinstaller:?source=https://aka.ms/getwinget"
+    	Start-BitsTransfer "https://aka.ms/getwinget" .\Microsoft.DesktopAppInstaller.msixbundle
+    	./Microsoft.DesktopAppInstaller.msixbundle
 	$nid = (Get-Process AppInstaller).Id
-	Wait-Process -Id $nid
-	Write-Host "Winget Installed"
+    	Wait-Process -Id $nid
+    	Write-Host "Winget Installed"
     $ResultText.text = "`r`n" +"`r`n" + "Winget Installed - Ready for Next Task"
 }
 
