@@ -13,7 +13,7 @@ If (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]:
 }
 
 #Check if winget is installed
-Write-Host "Checking if Winget's Installed..."
+Write-Host "Checking if Winget is Installed..."
 if (Test-Path ~\AppData\Local\Microsoft\WindowsApps\winget.exe){
     Write-Host "Winget Already Installed"
 }
@@ -26,8 +26,8 @@ else{
 	$nid = (Get-Process AppInstaller).Id
 	Wait-Process -Id $nid
     
-	Write-Host Winget Installed
-    $ResultText.text = "`r`n" +"`r`n" + "Winget Installed - Ready for Next Task"
+	Write-Host "Winget Installed"
+    $ResultText.text = "`r`n" +"`r`n" + "Winget Installed"
 }
 
 #GUI Specs
@@ -787,7 +787,7 @@ $githubdesktop.Add_Click({
     Write-Host "Installing GitHub Desktop"
     $ResultText.text = "`r`n" +"`r`n" + "Installing GitHub Desktop..."
     winget install -e GitHub.GitHubDesktop | Out-Host
-    Write-Host "Installed Github Desktop"
+    Write-Host "Installed GitHub Desktop"
     $ResultText.text = "`r`n" + "Finished Installing GitHub Desktop" + "`r`n" + "`r`n" + "Ready for Next Task"
 })
 
@@ -841,7 +841,7 @@ $gimp.Add_Click({
 })
 
 $essentialtweaks.Add_Click({
-    Write-Host "Creating Restore Point incase something bad happens"
+    Write-Host "Creating Restore Point in case something bad happens"
     $ResultText.text = "`r`n" +"`r`n" + "Applying Essential Tweaks..."
     Enable-ComputerRestore -Drive "C:\"
     Checkpoint-Computer -Description "RestorePoint1" -RestorePointType "MODIFY_SETTINGS"
@@ -871,7 +871,7 @@ $essentialtweaks.Add_Click({
     Set-ItemProperty -Path "HKLM:\Software\Microsoft\PolicyManager\default\WiFi\AllowWiFiHotSpotReporting" -Name "Value" -Type DWord -Value 0
     Set-ItemProperty -Path "HKLM:\Software\Microsoft\PolicyManager\default\WiFi\AllowAutoConnectToWiFiSenseHotspots" -Name "Value" -Type DWord -Value 0
 
-    Write-Host "Disabling Application suggestions..."
+    Write-Host "Disabling Application Suggestions..."
     Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" -Name "ContentDeliveryAllowed" -Type DWord -Value 0
     Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" -Name "OemPreInstalledAppsEnabled" -Type DWord -Value 0
     Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" -Name "PreInstalledAppsEnabled" -Type DWord -Value 0
@@ -900,7 +900,7 @@ $essentialtweaks.Add_Click({
     Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Sensor\Overrides\{BFA794E4-F964-4FDB-90F6-51056BFE4B44}" -Name "SensorPermissionState" -Type DWord -Value 0
     Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\lfsvc\Service\Configuration" -Name "Status" -Type DWord -Value 0
 
-    Write-Host "Disabling automatic Maps updates..."
+    Write-Host "Disabling Automatic Map updates..."
     Set-ItemProperty -Path "HKLM:\SYSTEM\Maps" -Name "AutoUpdateEnabled" -Type DWord -Value 0
 
     Write-Host "Disabling Feedback..."
@@ -934,18 +934,18 @@ $essentialtweaks.Add_Click({
     }
     Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\DeliveryOptimization\Config" -Name "DODownloadMode" -Type DWord -Value 1
 
-    Write-Host "Stopping and disabling Diagnostics Tracking Service..."
+    Write-Host "Stopping and Disabling Diagnostics Tracking Service..."
     Stop-Service "DiagTrack" -WarningAction SilentlyContinue
     Set-Service "DiagTrack" -StartupType Disabled
 
-    Write-Host "Stopping and disabling WAP Push Service..."
+    Write-Host "Stopping and Disabling WAP Push Service..."
     Stop-Service "dmwappushservice" -WarningAction SilentlyContinue
     Set-Service "dmwappushservice" -StartupType Disabled
 
     Write-Host "Enabling F8 boot menu options..."
     bcdedit /set `{current`} bootmenupolicy Legacy | Out-Null
 
-    Write-Host "Stopping and disabling Home Groups services..."
+    Write-Host "Stopping and Disabling HomeGroup services..."
     Stop-Service "HomeGroupListener" -WarningAction SilentlyContinue
     Set-Service "HomeGroupListener" -StartupType Disabled
     Stop-Service "HomeGroupProvider" -WarningAction SilentlyContinue
@@ -957,7 +957,7 @@ $essentialtweaks.Add_Click({
     Write-Host "Disabling Storage Sense..."
     Remove-Item -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\StorageSense\Parameters\StoragePolicy" -Recurse -ErrorAction SilentlyContinue
 
-    Write-Host "Stopping and disabling Superfetch service..."
+    Write-Host "Stopping and Disabling Superfetch service..."
     Stop-Service "SysMain" -WarningAction SilentlyContinue
     Set-Service "SysMain" -StartupType Disabled
     Write-Host "Disabling Hibernation..."
@@ -967,7 +967,7 @@ $essentialtweaks.Add_Click({
     }
     Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FlyoutMenuSettings" -Name "ShowHibernateOption" -Type Dword -Value 0
 
-    Write-Host "Showing task manager details..."
+    Write-Host "Showing Task Manager details..."
     $taskmgr = Start-Process -WindowStyle Hidden -FilePath taskmgr.exe -PassThru
     Do {
         Start-Sleep -Milliseconds 100
@@ -977,7 +977,7 @@ $essentialtweaks.Add_Click({
     $preferences.Preferences[28] = 0
     Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\TaskManager" -Name "Preferences" -Type Binary -Value $preferences.Preferences
 
-    Write-Host "Showing file operations details..."
+    Write-Host "Showing File Operation details..."
     If (!(Test-Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\OperationStatusManager")) {
         New-Item -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\OperationStatusManager" | Out-Null
     }
@@ -992,7 +992,7 @@ $essentialtweaks.Add_Click({
     }
     Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced\People" -Name "PeopleBand" -Type DWord -Value 0
 
-    Write-Host "Hide tray icons..."
+    Write-Host "Hide Tray icons..."
     Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer" -Name "EnableAutoTray" -Type DWord -Value 1
 
     Write-Host "Enabling NumLock after startup..."
@@ -1006,7 +1006,7 @@ $essentialtweaks.Add_Click({
         $wsh.SendKeys('{NUMLOCK}')
     }
 
-    Write-Host "Changing default Explorer view to This PC..."
+    Write-Host "Changing Default Explorer view to This PC..."
     $ResultText.text += "`r`n" +"Quality of Life Tweaks"
     Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "LaunchTo" -Type DWord -Value 1
 
@@ -1025,26 +1025,26 @@ $essentialtweaks.Add_Click({
 	#Enable-WindowsOptionalFeature -Online -FeatureName "WindowsMediaPlayer" -NoRestart -WarningAction SilentlyContinue | Out-Null
 
     Write-Host "Disabling News and Interests..."
-    $ResultText.text += "`r`n" +"Disabling Extra Junk"
+    $ResultText.text += "`r`n" +"Disabling Extra Junk..."
     Set-ItemProperty -Path "HKCU:\SOFTWARE\Policies\Microsoft\Windows\Windows Feeds" -Name "EnableFeeds" -Type DWord -Value 0
     #Remove "News and Interest" from taskbar
     Set-ItemProperty -Path  "HKCU:\Software\Microsoft\Windows\CurrentVersion\Feeds" -Name "ShellFeedsTaskbarViewMode" -Type DWord -Value 2
 
     #Remove "Meet Now" button from taskbar
-    Write-Host "Removing Meet Now button from taskbar..."
+    Write-Host "Removing Meet Now Button from taskbar..."
     If (!(Test-Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer")) {
         New-Item -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" -Force | Out-Null
     }
     Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" -Name "HideSCAMeetNow" -Type DWord -Value 1
 
-    Write-Host "Removing AutoLogger file and restricting directory..."
+    Write-Host "Removing AutoLogger file and Restricting directory..."
     $autoLoggerDir = "$env:PROGRAMDATA\Microsoft\Diagnosis\ETLLogs\AutoLogger"
     If (Test-Path "$autoLoggerDir\AutoLogger-Diagtrack-Listener.etl") {
         Remove-Item "$autoLoggerDir\AutoLogger-Diagtrack-Listener.etl"
     }
     icacls $autoLoggerDir /deny SYSTEM:`(OI`)`(CI`)F | Out-Null
 
-    Write-Host "Stopping and disabling Diagnostics Tracking Service..."
+    Write-Host "Stopping and Disabling Diagnostics Tracking Service..."
     Stop-Service "DiagTrack"
     Set-Service "DiagTrack" -StartupType Disabled
 
@@ -1052,7 +1052,7 @@ $essentialtweaks.Add_Click({
     Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "HideFileExt" -Type DWord -Value 0
 
     #Service tweaks to Manual
-    $ResultText.text += "`r`n" +"Service Tweaks"
+    $ResultText.text += "`r`n" +"Setting Services to Manual..."
     $services = @(
     "ALG"                                          #Application Layer Gateway Service(Provides support for 3rd party protocol plug-ins for Internet Connection Sharing)
     "AJRouter"                                     #Needed for AllJoyn Router Service
@@ -1142,7 +1142,7 @@ $essentialtweaks.Add_Click({
 )
 
 foreach ($service in $services) {
-    Write-Host "Setting $service StartupType to Manual"
+    Write-Host "Setting $service StartupType to Manual..."
     Get-Service -Name $service -ErrorAction SilentlyContinue | Set-Service -StartupType Manual
 }
 
@@ -1157,7 +1157,7 @@ $dualboottime.Add_Click({
 })
 
 $essentialundo.Add_Click({
-    Write-Host "Creating Restore Point incase something bad happens"
+    Write-Host "Creating Restore Point in case something bad happens"
     $ResultText.text = "`r`n" +"`r`n" + "Creating Restore Point and Reverting Settings..."
     Enable-ComputerRestore -Drive "C:\"
     Checkpoint-Computer -Description "RestorePoint1" -RestorePointType "MODIFY_SETTINGS"
@@ -1166,11 +1166,11 @@ $essentialundo.Add_Click({
     Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\DataCollection" -Name "AllowTelemetry" -Type DWord -Value 1
     Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DataCollection" -Name "AllowTelemetry" -Type DWord -Value 1
 
-    Write-Host "Enabling Wi-Fi Sense"
+    Write-Host "Enabling Wi-Fi Sense..."
     Set-ItemProperty -Path "HKLM:\Software\Microsoft\PolicyManager\default\WiFi\AllowWiFiHotSpotReporting" -Name "Value" -Type DWord -Value 1
     Set-ItemProperty -Path "HKLM:\Software\Microsoft\PolicyManager\default\WiFi\AllowAutoConnectToWiFiSenseHotspots" -Name "Value" -Type DWord -Value 1
 
-    Write-Host "Enabling Application suggestions..."
+    Write-Host "Enabling Application Suggestions..."
     Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" -Name "ContentDeliveryAllowed" -Type DWord -Value 1
     Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" -Name "OemPreInstalledAppsEnabled" -Type DWord -Value 1
     Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" -Name "PreInstalledAppsEnabled" -Type DWord -Value 1
@@ -1199,7 +1199,7 @@ $essentialundo.Add_Click({
     Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Sensor\Overrides\{BFA794E4-F964-4FDB-90F6-51056BFE4B44}" -Name "SensorPermissionState" -Type DWord -Value 1
     Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\lfsvc\Service\Configuration" -Name "Status" -Type DWord -Value 1
 
-    Write-Host "Enabling automatic Maps updates..."
+    Write-Host "Enabling automatic Map updates..."
     Set-ItemProperty -Path "HKLM:\SYSTEM\Maps" -Name "AutoUpdateEnabled" -Type DWord -Value 1
 
     Write-Host "Enabling Feedback..."
@@ -1232,7 +1232,7 @@ $essentialundo.Add_Click({
     Stop-Service "dmwappushservice" -WarningAction SilentlyContinue
     Set-Service "dmwappushservice" -StartupType Manual
 
-    Write-Host "Allowing Home Groups services..."
+    Write-Host "Allowing HomeGroup Services..."
     Stop-Service "HomeGroupListener" -WarningAction SilentlyContinue
     Set-Service "HomeGroupListener" -StartupType Manual
     Stop-Service "HomeGroupProvider" -WarningAction SilentlyContinue
@@ -1245,7 +1245,7 @@ $essentialundo.Add_Click({
     Stop-Service "SysMain" -WarningAction SilentlyContinue
     Set-Service "SysMain" -StartupType Manual
 
-    Write-Host "Setting BIOS time to Local Time instead of UTC..."
+    Write-Host "Setting BIOS to Local Time instead of UTC..."
     Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\TimeZoneInformation" -Name "RealTimeIsUniversal" -Type DWord -Value 0
 
     Write-Host "Enabling Hibernation..."
@@ -1253,7 +1253,7 @@ $essentialundo.Add_Click({
     Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FlyoutMenuSettings" -Name "ShowHibernateOption" -Type Dword -Value 1
 	Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Personalization" -Name "NoLockScreen" -ErrorAction SilentlyContinue
 
-    Write-Host "Hiding file operations details..."
+    Write-Host "Hiding File Operation details..."
     If (!(Test-Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\OperationStatusManager")) {
         Remove-Item -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\OperationStatusManager" -Recurse -ErrorAction SilentlyContinue
     }
@@ -1266,7 +1266,7 @@ $essentialundo.Add_Click({
     Write-Host "Changing default Explorer view to Quick Access..."
     Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "LaunchTo" -Type DWord -Value 1
 
-    Write-Host "Unrestricting AutoLogger directory"
+    Write-Host "Unrestricting AutoLogger directory..."
     $autoLoggerDir = "$env:PROGRAMDATA\Microsoft\Diagnosis\ETLLogs\AutoLogger"
     icacls $autoLoggerDir /grant:r SYSTEM:`(OI`)`(CI`)F | Out-Null
 
@@ -1274,7 +1274,7 @@ $essentialundo.Add_Click({
     Set-Service "DiagTrack" -StartupType Automatic
     Start-Service "DiagTrack"
 
-    Write-Host "Hiding known file extensions"
+    Write-Host "Hiding known File extensions"
     Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "HideFileExt" -Type DWord -Value 1
 
     Write-Host "Reset Local Group Policies to Stock Defaults"
@@ -1284,8 +1284,8 @@ $essentialundo.Add_Click({
     cmd /c gpupdate /force
     #Considered using Invoke-GPUpdate but requires module most people won't have installed
 
-    Write-Host "Essential Undo Completed"
-    $ResultText.text = "`r`n" +"`r`n" + "Essential Undo Completed - Ready for next task"
+    Write-Host "Essential Undo Complete"
+    $ResultText.text = "`r`n" +"`r`n" + "Essential Undo Complete"
 })
 
 $windowssearch.Add_Click({
@@ -1295,7 +1295,7 @@ $windowssearch.Add_Click({
     Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Search" -Name "BingSearchEnabled" -Type DWord -Value 0
     
     <#
-    Write-Host "Disabling Cortana"
+    Write-Host "Disabling Cortana..."
     Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Search" -Name "CortanaConsent" -Type DWord -Value 0
     If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Windows Search")) {
         New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Windows Search" -Force | Out-Null
@@ -1375,13 +1375,13 @@ $windowssearch.Add_Click({
 })
 
 $backgroundapps.Add_Click({
-    Write-Host "Disabling Background application access..."
+    Write-Host "Disabling Background Application access..."
     Get-ChildItem -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\BackgroundAccessApplications" -Exclude "Microsoft.Windows.Cortana*" | ForEach {
         Set-ItemProperty -Path $_.PsPath -Name "Disabled" -Type DWord -Value 1
         Set-ItemProperty -Path $_.PsPath -Name "DisabledByUser" -Type DWord -Value 1
     }
-    Write-Host "Disabled Background application access"
-    $ResultText.text = "`r`n" +"`r`n" + "Disabled Background application access"
+    Write-Host "Disabled Background Application access"
+    $ResultText.text = "`r`n" +"`r`n" + "Disabled Background Application access"
 })
 
 $cortana.Add_Click({
@@ -1497,8 +1497,8 @@ $Bloatware = @(
 )
 
 $removebloat.Add_Click({
-    Write-Host "Removing Bloatware"
-    $ResultText.text = "`r`n" +"`r`n" + "Removing Bloatware"
+    Write-Host "Removing Bloatware..."
+    $ResultText.text = "`r`n" +"`r`n" + "Removing Bloatware..."
 
     foreach ($Bloat in $Bloatware) {
         Get-AppxPackage -Name $Bloat | Remove-AppxPackage
@@ -1512,8 +1512,8 @@ $removebloat.Add_Click({
 })
 
 $reinstallbloat.Add_Click({
-    Write-Host "Reinstalling Bloatware"
-    $ResultText.text = "`r`n" +"`r`n" + "Reinstalling Bloatware"
+    Write-Host "Reinstalling Bloatware..."
+    $ResultText.text = "`r`n" +"`r`n" + "Reinstalling Bloatware..."
 
     foreach ($app in $Bloatware) {
         Write-Output "Trying to add $app"
@@ -1526,7 +1526,7 @@ $reinstallbloat.Add_Click({
 })
 
 $defaultwindowsupdate.Add_Click({
-    Write-Host "Enabling driver offering through Windows Update..."
+    Write-Host "Enabling Driver offering through Windows Update..."
     Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Device Metadata" -Name "PreventDeviceMetadataFromNetwork" -ErrorAction SilentlyContinue
     Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DriverSearching" -Name "DontPromptForWindowsUpdate" -ErrorAction SilentlyContinue
     Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DriverSearching" -Name "DontSearchWindowsUpdate" -ErrorAction SilentlyContinue
@@ -1542,7 +1542,7 @@ $defaultwindowsupdate.Add_Click({
 })
 
 $securitywindowsupdate.Add_Click({
-    Write-Host "Disabling driver offering through Windows Update..."
+    Write-Host "Disabling Driver offering through Windows Update..."
     If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Device Metadata")) {
         New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Device Metadata" -Force | Out-Null
     }
@@ -1581,7 +1581,7 @@ $actioncenter.Add_Click({
 })
 
 $performancefx.Add_Click({
-    Write-Host "Adjusting visual effects for performance..."
+    Write-Host "Adjusting Visual Effects for performance..."
     Set-ItemProperty -Path "HKCU:\Control Panel\Desktop" -Name "DragFullWindows" -Type String -Value 0
     Set-ItemProperty -Path "HKCU:\Control Panel\Desktop" -Name "MenuShowDelay" -Type String -Value 200
     Set-ItemProperty -Path "HKCU:\Control Panel\Desktop" -Name "UserPreferencesMask" -Type Binary -Value ([byte[]](144,18,3,128,16,0,0,0))
@@ -1592,12 +1592,12 @@ $performancefx.Add_Click({
     Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "TaskbarAnimations" -Type DWord -Value 0
     Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects" -Name "VisualFXSetting" -Type DWord -Value 3
     Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\DWM" -Name "EnableAeroPeek" -Type DWord -Value 0
-    Write-Host "Adjusted visual effects for performance"
+    Write-Host "Adjusted Visual Effects for performance"
     $ResultText.text = "`r`n" +"`r`n" + "Adjusted VFX for performance"
 })
 
 $appearancefx.Add_Click({
-	Write-Output "Adjusting visual effects for appearance..."
+	Write-Output "Adjusting Visual Effects for appearance..."
 	Set-ItemProperty -Path "HKCU:\Control Panel\Desktop" -Name "DragFullWindows" -Type String -Value 1
 	Set-ItemProperty -Path "HKCU:\Control Panel\Desktop" -Name "MenuShowDelay" -Type String -Value 400
 	Set-ItemProperty -Path "HKCU:\Control Panel\Desktop" -Name "UserPreferencesMask" -Type Binary -Value ([byte[]](158,30,7,128,18,0,0,0))
@@ -1608,13 +1608,13 @@ $appearancefx.Add_Click({
 	Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "TaskbarAnimations" -Type DWord -Value 1
 	Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects" -Name "VisualFXSetting" -Type DWord -Value 3
 	Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\DWM" -Name "EnableAeroPeek" -Type DWord -Value 1
-    Write-Host "Visual effects set for appearance (Default)"
+    Write-Host "Visual Effects set for appearance (Default)"
     $ResultText.text = "`r`n" +"`r`n" + "Visual effects are set for appearance (Default)"
 })
 
 $onedrive.Add_Click({
     Write-Host "Disabling OneDrive..."
-    $ResultText.text = "`r`n" +"`r`n" + "Disabling OneDrive"
+    $ResultText.text = "`r`n" +"`r`n" + "Disabling OneDrive..."
 
     #Disable OneDrive
     If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\OneDrive")) {
@@ -1695,7 +1695,7 @@ $ECortana.Add_Click({
 })
 
 $HTrayIcons.Add_Click({
-	Write-Host "Hiding tray icons..."
+	Write-Host "Hiding Tray icons..."
 	Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer" -Name "EnableAutoTray" -Type DWord -Value 1
 	Write-Host "Hid Tray Icons"
     $ResultText.text = "`r`n" +"`r`n" + "Tray icons are now factory defaults"
@@ -1703,10 +1703,10 @@ $HTrayIcons.Add_Click({
 
 
 $STrayIcons.Add_Click({
-	Write-Host "Showing tray icons..."
+	Write-Host "Showing Tray Icons..."
 	Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer" -Name "EnableAutoTray" -Type DWord -Value 0
-	Write-Host "Now showing all tray icons"
-    $ResultText.text = "`r`n" +"`r`n" + "Tray Icons now set to show all"
+	Write-Host "Now showing all Tray Icons"
+    $ResultText.text = "`r`n" +"`r`n" + "Tray Icons set to show all"
 })
 
 $EClipboardHistory.Add_Click({
@@ -1752,7 +1752,7 @@ $RBackgroundApps.Add_Click({
 })
 
 $EHibernation.Add_Click({
-    Write-Host "Enabling Hibernation"
+    Write-Host "Enabling Hibernation..."
     Set-ItemProperty -Path "HKLM:\System\CurrentControlSet\Control\Session Manager\Power" -Name "HibernteEnabled" -Type Dword -Value 1
     Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FlyoutMenuSettings" -Name "ShowHibernateOption" -Type Dword -Value 1
     Write-Host "Enabled Hibernation"
@@ -1830,7 +1830,7 @@ $NFS.Add_Click({
     nfsadmin client start
     nfsadmin client localhost config fileaccess=755 SecFlavors=+sys -krb5 -krb5i
 
-    Write-Host "NFS is now setup for user based NFS mounts"
+    Write-Host "NFS is now setup for User based NFS mounts"
     $ResultText.text = "`r`n" +"`r`n" + "NFS is now setup for user based NFS mounts"
 })
 
@@ -1924,10 +1924,10 @@ $windowsupdatefix.Add_Click({
     Start-Service -Name appidsvc
     Start-Service -Name cryptsvc
 
-    Write-Host "12) Forcing discovery..."
+    Write-Host "12) Forcing Discovery..."
     wuauclt /resetauthorization /detectnow
 
-    Write-Host "Process complete. Please reboot your computer."
+    Write-Host "Process Complete. Please reboot your computer."
     $ResultText.text = "`r`n" +"`r`n" + "Process complete. Please reboot your computer."
 })
 
