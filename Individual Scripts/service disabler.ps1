@@ -85,7 +85,7 @@ $services = @(
     "vmicheartbeat"
     "vmicvmsession"
     "vmicrdv"
-    "vmictimesync" 
+    "vmictimesync"
      #Services that cannot be disabled
     #"WdNisSvc"
 )
