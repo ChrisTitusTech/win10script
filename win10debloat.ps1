@@ -681,7 +681,7 @@ $discord.Add_Click({
 $adobereader.Add_Click({
     Write-Host "Installing Adobe Reader DC"
     $ResultText.text = "`r`n" +"`r`n" + "Installing Adobe Reader DC... Please Wait" 
-    winget install -e Adobe.AdobeAcrobatReaderDC | Out-Host
+    winget install -e --id Adobe.Acrobat.Reader.64-bit | Out-Host
     if($?) { Write-Host "Installed Adobe Reader DC" }
     $ResultText.text = "`r`n" + "Finished Installing Adobe Reader DC" + "`r`n" + "`r`n" + "Ready for Next Task"
 })
