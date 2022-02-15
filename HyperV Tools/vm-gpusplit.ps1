@@ -1,4 +1,4 @@
-$vm = "Ubuntu 20.04"
+$vm = "Windows GPU"
 Remove-VMGpuPartitionAdapter -VMName $vm
 Add-VMGpuPartitionAdapter -VMName $vm
 Set-VMGpuPartitionAdapter -VMName $vm -MinPartitionVRAM 1
