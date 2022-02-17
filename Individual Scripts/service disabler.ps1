@@ -17,7 +17,6 @@ $services = @(
     #"WlanSvc"                                      # WLAN AutoConfig
     "WMPNetworkSvc"                                # Windows Media Player Network Sharing Service
     #"wscsvc"                                       # Windows Security Center Service
-    "WSearch"                                      # Windows Search
     "XblAuthManager"                               # Xbox Live Auth Manager
     "XblGameSave"                                  # Xbox Live Game Save Service
     "XboxNetApiSvc"                                # Xbox Live Networking Service
@@ -37,7 +36,6 @@ $services = @(
     "PrintNotify"                                  #Disables Windows printer notifications and extentions
     "PcaSvc"                                       #Disables Program Compatibility Assistant Service
     "WPDBusEnum"                                   #Disables Portable Device Enumerator Service
-    #"LicenseManager"                               #Disable LicenseManager(Windows store may not work properly)
     "seclogon"                                     #Disables  Secondary Logon(disables other credentials only password will work)
     "SysMain"                                      #Disables sysmain
     "lmhosts"                                      #Disables TCP/IP NetBIOS Helper
@@ -68,9 +66,7 @@ $services = @(
     "cbdhsvc_48486de"                               #Disables   cbdhsvc_48486de (clipboard service it disables)
     "BluetoothUserService_48486de"                  #Disables BluetoothUserService_48486de (The Bluetooth user service supports proper functionality of Bluetooth features relevant to each user session.)
     "WpnService"                                    #Disables WpnService (Push Notifications may not work )
-    #"StorSvc"                                       #Disables StorSvc (usb external hard drive will not be reconised by windows)
     "RtkBtManServ"                                  #Disables Realtek Bluetooth Device Manager Service
-    "QWAVE"                                         #Disables Quality Windows Audio Video Experience (audio and video might sound worse)
      #Hp services
     "HPAppHelperCap"
     "HPDiagsCap"
