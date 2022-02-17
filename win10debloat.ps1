@@ -1834,6 +1834,22 @@ $NFS.Add_Click({
     $ResultText.text = "`r`n" +"`r`n" + "NFS is now setup for user based NFS mounts"
 })
 
+$Virtualization.Add_Click({
+    Enable-WindowsOptionalFeature -Online -FeatureName "HypervisorPlatform" -All
+    Enable-WindowsOptionalFeature -Online -FeatureName "VirtualMachinePlatform" -All
+    Enable-WindowsOptionalFeature -Online -FeatureName "Microsoft-Windows-Subsystem-Linux" -All
+    Enable-WindowsOptionalFeature -Online -FeatureName "Microsoft-Hyper-V-All" -All
+    Enable-WindowsOptionalFeature -Online -FeatureName "Microsoft-Hyper-V" -All
+    Enable-WindowsOptionalFeature -Online -FeatureName "Microsoft-Hyper-V-Tools-All" -All
+    Enable-WindowsOptionalFeature -Online -FeatureName "Microsoft-Hyper-V-Management-PowerShell" -All
+    Enable-WindowsOptionalFeature -Online -FeatureName "Microsoft-Hyper-V-Hypervisor" -All
+    Enable-WindowsOptionalFeature -Online -FeatureName "Microsoft-Hyper-V-Services" -All
+    Enable-WindowsOptionalFeature -Online -FeatureName "Microsoft-Hyper-V-Management-Clients" -All
+    cmd /c bcdedit /set hypervisorschedulertype classic
+    Write-Host "HyperV is now installed and configured. Please Reboot before using."
+    $ResultText.text = "`r`n" +"`r`n" + "HyperV is now installed and configured. Please Reboot before using."
+})
+
 $windowsupdatefix.Add_Click({
     Write-Host "Resetting/Repairing Windows Update..."
     $ResultText.text = "`r`n" +"`r`n" + "Resetting/Repairing Windows Update..."
