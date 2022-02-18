@@ -293,7 +293,7 @@ $Label4.location                 = New-Object System.Drawing.Point(482,12)
 $Label4.Font                     = New-Object System.Drawing.Font('Microsoft Sans Serif',24)
 
 $Panel3                          = New-Object system.Windows.Forms.Panel
-$Panel3.height                   = 327
+$Panel3.height                   = 363
 $Panel3.width                    = 220
 $Panel3.location                 = New-Object System.Drawing.Point(464,54)
 
@@ -465,7 +465,7 @@ $advancedipscanner.location      = New-Object System.Drawing.Point(3,335)
 $advancedipscanner.Font          = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
 $putty                           = New-Object system.Windows.Forms.Button
-$putty.text                      = "PuTTY & WinSCP"
+$putty.text                      = "PuTTY + WinSCP"
 $putty.width                     = 211
 $putty.height                    = 30
 $putty.location                  = New-Object System.Drawing.Point(3,302)
@@ -539,7 +539,7 @@ $Label10.text                    = "Current Status:"
 $Label10.AutoSize                = $true
 $Label10.width                   = 25
 $Label10.height                  = 10
-$Label10.location                = New-Object System.Drawing.Point(657,430)
+$Label10.location                = New-Object System.Drawing.Point(658,448)
 $Label10.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',24)
 
 $EHibernation                    = New-Object system.Windows.Forms.Button
@@ -624,14 +624,14 @@ $laptopnumlock                   = New-Object system.Windows.Forms.Button
 $laptopnumlock.text              = "Laptop Numlock Fix"
 $laptopnumlock.width             = 211
 $laptopnumlock.height            = 30
-$laptopnumlock.location          = New-Object System.Drawing.Point(4,267)
+$laptopnumlock.location          = New-Object System.Drawing.Point(4,301)
 $laptopnumlock.Font              = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
 $disableupdates                  = New-Object system.Windows.Forms.Button
 $disableupdates.text             = "Disable Update Services"
 $disableupdates.width            = 300
 $disableupdates.height           = 30
-$disableupdates.location         = New-Object System.Drawing.Point(24,282)
+$disableupdates.location         = New-Object System.Drawing.Point(24,251)
 $disableupdates.Font             = New-Object System.Drawing.Font('Microsoft Sans Serif',14)
 
 $enableupdates                   = New-Object system.Windows.Forms.Button
@@ -646,14 +646,21 @@ $Label12.text                    = "NOT RECOMMENDED!!!"
 $Label12.AutoSize                = $true
 $Label12.width                   = 25
 $Label12.height                  = 10
-$Label12.location                = New-Object System.Drawing.Point(102,262)
+$Label12.location                = New-Object System.Drawing.Point(98,236)
 $Label12.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Bold))
+
+$Virtualization                  = New-Object system.Windows.Forms.Button
+$Virtualization.text             = "Enable HyperV + WSL"
+$Virtualization.width            = 211
+$Virtualization.height           = 30
+$Virtualization.location         = New-Object System.Drawing.Point(4,267)
+$Virtualization.Font             = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
 $Form.controls.AddRange(@($Panel1,$Panel2,$Label3,$Label15,$Panel4,$PictureBox1,$Label1,$Label4,$Panel3,$ResultText,$Label10,$Label11,$urlfixwinstartup,$urlremovevirus,$urlcreateiso))
 $Panel1.controls.AddRange(@($brave,$firefox,$7zip,$sharex,$adobereader,$notepad,$gchrome,$mpc,$vlc,$powertoys,$batchinstall,$vscode,$Label2,$everythingsearch,$sumatrapdf,$vscodium,$imageglass,$gimp,$Label7,$Label8,$Label9,$advancedipscanner,$putty,$etcher,$translucenttb,$githubdesktop,$discord,$autohotkey))
 $Panel2.controls.AddRange(@($essentialtweaks,$backgroundapps,$cortana,$actioncenter,$darkmode,$performancefx,$onedrive,$lightmode,$essentialundo,$EActionCenter,$ECortana,$RBackgroundApps,$HTrayIcons,$EClipboardHistory,$ELocation,$InstallOneDrive,$removebloat,$reinstallbloat,$WarningLabel,$Label5,$appearancefx,$STrayIcons,$EHibernation,$dualboottime))
 $Panel4.controls.AddRange(@($defaultwindowsupdate,$securitywindowsupdate,$Label16,$Label17,$Label18,$Label19,$disableupdates,$enableupdates,$Label12))
-$Panel3.controls.AddRange(@($yourphonefix,$Label6,$windowsupdatefix,$ncpa,$oldcontrolpanel,$oldsoundpanel,$oldsystempanel,$NFS,$laptopnumlock))
+$Panel3.controls.AddRange(@($yourphonefix,$Label6,$windowsupdatefix,$ncpa,$oldcontrolpanel,$oldsoundpanel,$oldsystempanel,$NFS,$laptopnumlock,$Virtualization))
 
 $brave.Add_Click({
     Write-Host "Installing Brave Browser"
@@ -1310,9 +1317,94 @@ $essentialundo.Add_Click({
     $ResultText.text = "`r`n" +"`r`n" + "Essential Undo Completed - Ready for next task"
 })
 
+$windowssearch.Add_Click({
+    Write-Host "Disabling Bing Search in Start Menu..."
+    $ResultText.text = "`r`n" +"`r`n" + "Disabling Search, Cortana, Start menu search... Please Wait"
+    Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Search" -Name "BingSearchEnabled" -Type DWord -Value 0
+    <#
+    Write-Host "Disabling Cortana"
+    Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Search" -Name "CortanaConsent" -Type DWord -Value 0
+    If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Windows Search")) {
+        New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Windows Search" -Force | Out-Null
+    }
+    #>
+    Write-Host "Hiding Search Box / Button..."
+    Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Search" -Name "SearchboxTaskbarMode" -Type DWord -Value 0
+
+    Write-Host "Removing Start Menu Tiles"
+
+    Set-Content -Path 'C:\Users\Default\AppData\Local\Microsoft\Windows\Shell\DefaultLayouts.xml' -Value '<LayoutModificationTemplate xmlns:defaultlayout="http://schemas.microsoft.com/Start/2014/FullDefaultLayout" xmlns:start="http://schemas.microsoft.com/Start/2014/StartLayout" Version="1" xmlns="http://schemas.microsoft.com/Start/2014/LayoutModification">'
+    Add-Content -Path 'C:\Users\Default\AppData\Local\Microsoft\Windows\Shell\DefaultLayouts.xml' -value '  <LayoutOptions StartTileGroupCellWidth="6" />'
+    Add-Content -Path 'C:\Users\Default\AppData\Local\Microsoft\Windows\Shell\DefaultLayouts.xml' -value '  <DefaultLayoutOverride>'
+    Add-Content -Path 'C:\Users\Default\AppData\Local\Microsoft\Windows\Shell\DefaultLayouts.xml' -value '    <StartLayoutCollection>'
+    Add-Content -Path 'C:\Users\Default\AppData\Local\Microsoft\Windows\Shell\DefaultLayouts.xml' -value '      <defaultlayout:StartLayout GroupCellWidth="6" />'
+    Add-Content -Path 'C:\Users\Default\AppData\Local\Microsoft\Windows\Shell\DefaultLayouts.xml' -value '    </StartLayoutCollection>'
+    Add-Content -Path 'C:\Users\Default\AppData\Local\Microsoft\Windows\Shell\DefaultLayouts.xml' -value '  </DefaultLayoutOverride>'
+    Add-Content -Path 'C:\Users\Default\AppData\Local\Microsoft\Windows\Shell\DefaultLayouts.xml' -value '    <CustomTaskbarLayoutCollection>'
+    Add-Content -Path 'C:\Users\Default\AppData\Local\Microsoft\Windows\Shell\DefaultLayouts.xml' -value '      <defaultlayout:TaskbarLayout>'
+    Add-Content -Path 'C:\Users\Default\AppData\Local\Microsoft\Windows\Shell\DefaultLayouts.xml' -value '        <taskbar:TaskbarPinList>'
+    Add-Content -Path 'C:\Users\Default\AppData\Local\Microsoft\Windows\Shell\DefaultLayouts.xml' -value '          <taskbar:UWA AppUserModelID="Microsoft.MicrosoftEdge_8wekyb3d8bbwe!MicrosoftEdge" />'
+    Add-Content -Path 'C:\Users\Default\AppData\Local\Microsoft\Windows\Shell\DefaultLayouts.xml' -value '          <taskbar:DesktopApp DesktopApplicationLinkPath="%APPDATA%\Microsoft\Windows\Start Menu\Programs\System Tools\File Explorer.lnk" />'
+    Add-Content -Path 'C:\Users\Default\AppData\Local\Microsoft\Windows\Shell\DefaultLayouts.xml' -value '        </taskbar:TaskbarPinList>'
+    Add-Content -Path 'C:\Users\Default\AppData\Local\Microsoft\Windows\Shell\DefaultLayouts.xml' -value '      </defaultlayout:TaskbarLayout>'
+    Add-Content -Path 'C:\Users\Default\AppData\Local\Microsoft\Windows\Shell\DefaultLayouts.xml' -value '    </CustomTaskbarLayoutCollection>'
+    Add-Content -Path 'C:\Users\Default\AppData\Local\Microsoft\Windows\Shell\DefaultLayouts.xml' -value '</LayoutModificationTemplate>'
+
+    $START_MENU_LAYOUT = @"
+    <LayoutModificationTemplate xmlns:defaultlayout="http://schemas.microsoft.com/Start/2014/FullDefaultLayout" xmlns:start="http://schemas.microsoft.com/Start/2014/StartLayout" Version="1" xmlns:taskbar="http://schemas.microsoft.com/Start/2014/TaskbarLayout" xmlns="http://schemas.microsoft.com/Start/2014/LayoutModification">
+        <LayoutOptions StartTileGroupCellWidth="6" />
+        <DefaultLayoutOverride>
+            <StartLayoutCollection>
+                <defaultlayout:StartLayout GroupCellWidth="6" />
+            </StartLayoutCollection>
+        </DefaultLayoutOverride>
+    </LayoutModificationTemplate>
+"@
+
+    $layoutFile="C:\Windows\StartMenuLayout.xml"
+
+    #Delete layout file if it already exists
+    If(Test-Path $layoutFile)
+    {
+        Remove-Item $layoutFile
+    }
+
+    #Creates the blank layout file
+    $START_MENU_LAYOUT | Out-File $layoutFile -Encoding ASCII
+
+    $regAliases = @("HKLM", "HKCU")
+
+    #Assign the start layout and force it to apply with "LockedStartLayout" at both the machine and user level
+    foreach ($regAlias in $regAliases){
+        $basePath = $regAlias + ":\SOFTWARE\Policies\Microsoft\Windows"
+        $keyPath = $basePath + "\Explorer"
+        IF(!(Test-Path -Path $keyPath)) {
+            New-Item -Path $basePath -Name "Explorer"
+        }
+        Set-ItemProperty -Path $keyPath -Name "LockedStartLayout" -Value 1
+        Set-ItemProperty -Path $keyPath -Name "StartLayoutFile" -Value $layoutFile
+    }
+
+    #Restart Explorer, open the start menu (necessary to load the new layout), and give it a few seconds to process
+    Stop-Process -name explorer
+    Start-Sleep -s 5
+    $wshell = New-Object -ComObject wscript.shell; $wshell.SendKeys('^{ESCAPE}')
+    Start-Sleep -s 5
+
+    #Enable the ability to pin items again by disabling "LockedStartLayout"
+    foreach ($regAlias in $regAliases){
+        $basePath = $regAlias + ":\SOFTWARE\Policies\Microsoft\Windows"
+        $keyPath = $basePath + "\Explorer"
+        Set-ItemProperty -Path $keyPath -Name "LockedStartLayout" -Value 0
+
+    Write-Host "Search and Start Menu Tweaks Complete"
+    $ResultText.text = "`r`n" +"`r`n" + "Search and Start Menu Tweaks Complete"
+    }
+})
+
 $backgroundapps.Add_Click({
     Write-Host "Disabling Background application access..."
-    Get-ChildItem -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\BackgroundAccessApplications" -Exclude "Microsoft.Windows.Cortana*" | ForEach-Object {
+    Get-ChildItem -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\BackgroundAccessApplications" -Exclude "Microsoft.Windows.Cortana*" | ForEach {
         Set-ItemProperty -Path $_.PsPath -Name "Disabled" -Type DWord -Value 1
         Set-ItemProperty -Path $_.PsPath -Name "DisabledByUser" -Type DWord -Value 1
     }
@@ -1665,7 +1757,7 @@ $ELocation.Add_Click({
 
 $RBackgroundApps.Add_Click({
 	Write-Host "Allowing Background Apps..."
-	Get-ChildItem -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\BackgroundAccessApplications" -Exclude "Microsoft.Windows.Cortana*" | ForEach-Object {
+	Get-ChildItem -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\BackgroundAccessApplications" -Exclude "Microsoft.Windows.Cortana*" | ForEach {
 		Remove-ItemProperty -Path $_.PsPath -Name "Disabled" -ErrorAction SilentlyContinue
 		Remove-ItemProperty -Path $_.PsPath -Name "DisabledByUser" -ErrorAction SilentlyContinue
 	}
@@ -1707,7 +1799,7 @@ $yourphonefix.Add_Click({
     Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\System" -Name "EnableCdp" -Type DWord -Value 1
     Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Messaging" -Name "AllowMessageSync" -Type DWord -Value 1
     Write-Host "Allowing Background Apps..."
-	Get-ChildItem -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\BackgroundAccessApplications" -Exclude "Microsoft.Windows.Cortana*" | ForEach-Object {
+	Get-ChildItem -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\BackgroundAccessApplications" -Exclude "Microsoft.Windows.Cortana*" | ForEach {
 		Remove-ItemProperty -Path $_.PsPath -Name "Disabled" -ErrorAction SilentlyContinue
 		Remove-ItemProperty -Path $_.PsPath -Name "DisabledByUser" -ErrorAction SilentlyContinue
 	}
@@ -1739,6 +1831,23 @@ $NFS.Add_Click({
     Write-Host "NFS is now setup for user based NFS mounts"
     $ResultText.text = "`r`n" +"`r`n" + "NFS is now setup for user based NFS mounts"
 })
+
+$Virtualization.Add_Click({
+    Enable-WindowsOptionalFeature -Online -FeatureName "HypervisorPlatform" -All
+    Enable-WindowsOptionalFeature -Online -FeatureName "VirtualMachinePlatform" -All
+    Enable-WindowsOptionalFeature -Online -FeatureName "Microsoft-Windows-Subsystem-Linux" -All
+    Enable-WindowsOptionalFeature -Online -FeatureName "Microsoft-Hyper-V-All" -All
+    Enable-WindowsOptionalFeature -Online -FeatureName "Microsoft-Hyper-V" -All
+    Enable-WindowsOptionalFeature -Online -FeatureName "Microsoft-Hyper-V-Tools-All" -All
+    Enable-WindowsOptionalFeature -Online -FeatureName "Microsoft-Hyper-V-Management-PowerShell" -All
+    Enable-WindowsOptionalFeature -Online -FeatureName "Microsoft-Hyper-V-Hypervisor" -All
+    Enable-WindowsOptionalFeature -Online -FeatureName "Microsoft-Hyper-V-Services" -All
+    Enable-WindowsOptionalFeature -Online -FeatureName "Microsoft-Hyper-V-Management-Clients" -All
+    cmd /c bcdedit /set hypervisorschedulertype classic
+    Write-Host "HyperV is now installed and configured. Please Reboot before using."
+    $ResultText.text = "`r`n" +"`r`n" + "HyperV is now installed and configured. Please Reboot before using."
+})
+
 $windowsupdatefix.Add_Click({
     Write-Host "1. Stopping Windows Update Services..." 
     Stop-Service -Name BITS 
