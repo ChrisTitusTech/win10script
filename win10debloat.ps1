@@ -1782,7 +1782,7 @@ $DisableNumLock.Add_Click({
 })
 
 $yourphonefix.Add_Click({
-    Write-Host "Reinstalling Your Phone App"
+    Write-Host "Reinstalling Your Phone App..."
     $ResultText.text = "`r`n" +"`r`n" + "Reinstalling Your Phone App..."
     Add-AppxPackage -DisableDevelopmentMode -Register "$($(Get-AppXPackage -AllUsers "Microsoft.YourPhone").InstallLocation)\AppXManifest.xml"
 
@@ -1835,9 +1835,17 @@ $NFS.Add_Click({
 })
 
 $Virtualization.Add_Click({
+    Write-Host "Enabling WSL and Hyper-V..."
+    $ResultText.text = "`r`n" +"`r`n" + "Enabling WSL and Hyper-V..."
+
+    Write-Host "Enable Prerequisites"
     Enable-WindowsOptionalFeature -Online -FeatureName "HypervisorPlatform" -All
     Enable-WindowsOptionalFeature -Online -FeatureName "VirtualMachinePlatform" -All
+
+    Write-Host "Enable WSL"
     Enable-WindowsOptionalFeature -Online -FeatureName "Microsoft-Windows-Subsystem-Linux" -All
+
+    Write-Host "Enable Hyper-V"
     Enable-WindowsOptionalFeature -Online -FeatureName "Microsoft-Hyper-V-All" -All
     Enable-WindowsOptionalFeature -Online -FeatureName "Microsoft-Hyper-V" -All
     Enable-WindowsOptionalFeature -Online -FeatureName "Microsoft-Hyper-V-Tools-All" -All
@@ -1845,7 +1853,10 @@ $Virtualization.Add_Click({
     Enable-WindowsOptionalFeature -Online -FeatureName "Microsoft-Hyper-V-Hypervisor" -All
     Enable-WindowsOptionalFeature -Online -FeatureName "Microsoft-Hyper-V-Services" -All
     Enable-WindowsOptionalFeature -Online -FeatureName "Microsoft-Hyper-V-Management-Clients" -All
+
+    Write-Host "Set Hypervisor CPU Scheduler to Classic Mode"
     cmd /c bcdedit /set hypervisorschedulertype classic
+
     Write-Host "HyperV is now installed and configured. Please Reboot before using."
     $ResultText.text = "`r`n" +"`r`n" + "HyperV is now installed and configured. Please Reboot before using."
 })
