@@ -222,9 +222,9 @@ $Label15.location                = New-Object System.Drawing.Point(732,11)
 $Label15.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',24)
 
 $Panel4                          = New-Object system.Windows.Forms.Panel
-$Panel4.height                   = 179
+$Panel4.height                   = 328
 $Panel4.width                    = 340
-$Panel4.location                 = New-Object System.Drawing.Point(699,55)
+$Panel4.location                 = New-Object System.Drawing.Point(699,54)
 
 $defaultwindowsupdate            = New-Object system.Windows.Forms.Button
 $defaultwindowsupdate.text       = "Default Settings"
@@ -302,7 +302,7 @@ $Label4.location                 = New-Object System.Drawing.Point(482,12)
 $Label4.Font                     = New-Object System.Drawing.Font('Microsoft Sans Serif',24)
 
 $Panel3                          = New-Object system.Windows.Forms.Panel
-$Panel3.height                   = 327
+$Panel3.height                   = 363
 $Panel3.width                    = 220
 $Panel3.location                 = New-Object System.Drawing.Point(464,54)
 
@@ -474,7 +474,7 @@ $advancedipscanner.location      = New-Object System.Drawing.Point(3,335)
 $advancedipscanner.Font          = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
 $putty                           = New-Object system.Windows.Forms.Button
-$putty.text                      = "PuTTY & WinSCP"
+$putty.text                      = "PuTTY + WinSCP"
 $putty.width                     = 211
 $putty.height                    = 30
 $putty.location                  = New-Object System.Drawing.Point(3,302)
@@ -548,7 +548,7 @@ $Label10.text                    = "Current Status:"
 $Label10.AutoSize                = $true
 $Label10.width                   = 25
 $Label10.height                  = 10
-$Label10.location                = New-Object System.Drawing.Point(657,430)
+$Label10.location                = New-Object System.Drawing.Point(658,448)
 $Label10.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',24)
 
 $EHibernation                    = New-Object system.Windows.Forms.Button
@@ -615,12 +615,12 @@ $oldsoundpanel.height            = 30
 $oldsoundpanel.location          = New-Object System.Drawing.Point(4,163)
 $oldsoundpanel.Font              = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
-$Button1                         = New-Object system.Windows.Forms.Button
-$Button1.text                    = "Old System Panel"
-$Button1.width                   = 211
-$Button1.height                  = 30
-$Button1.location                = New-Object System.Drawing.Point(4,197)
-$Button1.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
+$oldsystempanel                  = New-Object system.Windows.Forms.Button
+$oldsystempanel.text             = "Old System Panel"
+$oldsystempanel.width            = 211
+$oldsystempanel.height           = 30
+$oldsystempanel.location         = New-Object System.Drawing.Point(4,197)
+$oldsystempanel.Font             = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
 $NFS                             = New-Object system.Windows.Forms.Button
 $NFS.text                        = "Enable NFS"
@@ -629,11 +629,47 @@ $NFS.height                      = 30
 $NFS.location                    = New-Object System.Drawing.Point(4,232)
 $NFS.Font                        = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
+$laptopnumlock                   = New-Object system.Windows.Forms.Button
+$laptopnumlock.text              = "Laptop Numlock Fix"
+$laptopnumlock.width             = 211
+$laptopnumlock.height            = 30
+$laptopnumlock.location          = New-Object System.Drawing.Point(4,301)
+$laptopnumlock.Font              = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
+
+$disableupdates                  = New-Object system.Windows.Forms.Button
+$disableupdates.text             = "Disable Update Services"
+$disableupdates.width            = 300
+$disableupdates.height           = 30
+$disableupdates.location         = New-Object System.Drawing.Point(24,251)
+$disableupdates.Font             = New-Object System.Drawing.Font('Microsoft Sans Serif',14)
+
+$enableupdates                   = New-Object system.Windows.Forms.Button
+$enableupdates.text              = "Enable Update Services"
+$enableupdates.width             = 300
+$enableupdates.height            = 30
+$enableupdates.location          = New-Object System.Drawing.Point(25,179)
+$enableupdates.Font              = New-Object System.Drawing.Font('Microsoft Sans Serif',14)
+
+$Label12                         = New-Object system.Windows.Forms.Label
+$Label12.text                    = "NOT RECOMMENDED!!!"
+$Label12.AutoSize                = $true
+$Label12.width                   = 25
+$Label12.height                  = 10
+$Label12.location                = New-Object System.Drawing.Point(98,236)
+$Label12.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Bold))
+
+$Virtualization                  = New-Object system.Windows.Forms.Button
+$Virtualization.text             = "Enable HyperV + WSL"
+$Virtualization.width            = 211
+$Virtualization.height           = 30
+$Virtualization.location         = New-Object System.Drawing.Point(4,267)
+$Virtualization.Font             = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
+
 $Form.controls.AddRange(@($Panel1,$Panel2,$Label3,$Label15,$Panel4,$PictureBox1,$Label1,$Label4,$Panel3,$ResultText,$Label10,$Label11,$urlfixwinstartup,$urlremovevirus,$urlcreateiso))
 $Panel1.controls.AddRange(@($brave,$firefox,$7zip,$sharex,$adobereader,$notepad,$gchrome,$mpc,$vlc,$powertoys,$winterminal,$vscode,$Label2,$everythingsearch,$sumatrapdf,$vscodium,$imageglass,$gimp,$Label7,$Label8,$Label9,$advancedipscanner,$putty,$etcher,$translucenttb,$githubdesktop,$discord,$autohotkey))
 $Panel2.controls.AddRange(@($essentialtweaks,$backgroundapps,$cortana,$actioncenter,$darkmode,$performancefx,$onedrive,$lightmode,$essentialundo,$EActionCenter,$ECortana,$RBackgroundApps,$HTrayIcons,$EClipboardHistory,$ELocation,$InstallOneDrive,$removebloat,$reinstallbloat,$WarningLabel,$Label5,$appearancefx,$STrayIcons,$EHibernation,$dualboottime))
-$Panel4.controls.AddRange(@($defaultwindowsupdate,$securitywindowsupdate,$Label16,$Label17,$Label18,$Label19))
-$Panel3.controls.AddRange(@($yourphonefix,$Label6,$windowsupdatefix,$ncpa,$oldcontrolpanel,$oldsoundpanel,$Button1,$NFS))
+$Panel4.controls.AddRange(@($defaultwindowsupdate,$securitywindowsupdate,$Label16,$Label17,$Label18,$Label19,$disableupdates,$enableupdates,$Label12))
+$Panel3.controls.AddRange(@($yourphonefix,$Label6,$windowsupdatefix,$ncpa,$oldcontrolpanel,$oldsoundpanel,$oldsystempanel,$NFS,$laptopnumlock,$Virtualization))
 
 $brave.Add_Click({
     Write-Host "Installing Brave Browser"
@@ -1154,6 +1190,15 @@ $dualboottime.Add_Click({
     Write-Host "Setting BIOS time to UTC..."
     Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\TimeZoneInformation" -Name "RealTimeIsUniversal" -Type DWord -Value 1
     $ResultText.text = "`r`n" + "Time set to UTC for consistent time in Dual Boot Systems" + "`r`n" + "`r`n" + "Ready for Next Task"
+})
+
+$laptopnumlock.Add_Click({
+    Set-ItemProperty -Path "HKU:\.DEFAULT\Control Panel\Keyboard" -Name "InitialKeyboardIndicators" -Type DWord -Value 0
+    Add-Type -AssemblyName System.Windows.Forms
+    If (([System.Windows.Forms.Control]::IsKeyLocked('NumLock'))) {
+        $wsh = New-Object -ComObject WScript.Shell
+        $wsh.SendKeys('{NUMLOCK}')
+    }
 })
 
 $essentialundo.Add_Click({
@@ -1959,6 +2004,178 @@ $windowsupdatefix.Add_Click({
 })
 
 [void]$Form.ShowDialog()
+$disableupdates.Add_Click({
+
+    # Source: https://github.com/rgl/windows-vagrant/blob/master/disable-windows-updates.ps1
+    Set-StrictMode -Version Latest
+$ProgressPreference = 'SilentlyContinue'
+$ErrorActionPreference = 'Stop'
+trap {
+    Write-Host
+    Write-Host "ERROR: $_"
+    Write-Host (($_.ScriptStackTrace -split '\r?\n') -replace '^(.*)$','ERROR: $1')
+    Write-Host (($_.Exception.ToString() -split '\r?\n') -replace '^(.*)$','ERROR EXCEPTION: $1')
+    Write-Host
+    Write-Host 'Sleeping for 60m to give you time to look around the virtual machine before self-destruction...'
+    Start-Sleep -Seconds (60*60)
+    Exit 1
+}
+
+# disable automatic updates.
+# XXX this does not seem to work anymore.
+# see How to configure automatic updates by using Group Policy or registry settings
+#     at https://support.microsoft.com/en-us/help/328010
+function New-Directory($path) {
+    $p, $components = $path -split '[\\/]'
+    $components | ForEach-Object {
+        $p = "$p\$_"
+        if (!(Test-Path $p)) {
+            New-Item -ItemType Directory $p | Out-Null
+        }
+    }
+    $null
+}
+$auPath = 'HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU'
+New-Directory $auPath 
+# set NoAutoUpdate.
+# 0: Automatic Updates is enabled (default).
+# 1: Automatic Updates is disabled.
+New-ItemProperty `
+    -Path $auPath `
+    -Name NoAutoUpdate `
+    -Value 1 `
+    -PropertyType DWORD `
+    -Force `
+    | Out-Null
+# set AUOptions.
+# 1: Keep my computer up to date has been disabled in Automatic Updates.
+# 2: Notify of download and installation.
+# 3: Automatically download and notify of installation.
+# 4: Automatically download and scheduled installation.
+New-ItemProperty `
+    -Path $auPath `
+    -Name AUOptions `
+    -Value 1 `
+    -PropertyType DWORD `
+    -Force `
+    | Out-Null
+
+# disable Windows Update Delivery Optimization.
+# NB this applies to Windows 10.
+# 0: Disabled
+# 1: PCs on my local network
+# 3: PCs on my local network, and PCs on the Internet
+$deliveryOptimizationPath = 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\DeliveryOptimization\Config'
+if (Test-Path $deliveryOptimizationPath) {
+    New-ItemProperty `
+        -Path $deliveryOptimizationPath `
+        -Name DODownloadMode `
+        -Value 0 `
+        -PropertyType DWORD `
+        -Force `
+        | Out-Null
+}
+# Service tweaks for Windows Update
+
+$services = @(
+    "BITS"
+    "wuauserv"
+)
+
+foreach ($service in $services) {
+    # -ErrorAction SilentlyContinue is so it doesn't write an error to stdout if a service doesn't exist
+
+    Write-Host "Setting $service StartupType to Disabled"
+    Get-Service -Name $service -ErrorAction SilentlyContinue | Set-Service -StartupType Disabled
+}
+})
+
+$enableupdates.Add_Click({
+
+    # Source: https://github.com/rgl/windows-vagrant/blob/master/disable-windows-updates.ps1
+    Set-StrictMode -Version Latest
+$ProgressPreference = 'SilentlyContinue'
+$ErrorActionPreference = 'Stop'
+trap {
+    Write-Host
+    Write-Host "ERROR: $_"
+    Write-Host (($_.ScriptStackTrace -split '\r?\n') -replace '^(.*)$','ERROR: $1')
+    Write-Host (($_.Exception.ToString() -split '\r?\n') -replace '^(.*)$','ERROR EXCEPTION: $1')
+    Write-Host
+    Write-Host 'Sleeping for 60m to give you time to look around the virtual machine before self-destruction...'
+    Start-Sleep -Seconds (60*60)
+    Exit 1
+}
+
+# disable automatic updates.
+# XXX this does not seem to work anymore.
+# see How to configure automatic updates by using Group Policy or registry settings
+#     at https://support.microsoft.com/en-us/help/328010
+function New-Directory($path) {
+    $p, $components = $path -split '[\\/]'
+    $components | ForEach-Object {
+        $p = "$p\$_"
+        if (!(Test-Path $p)) {
+            New-Item -ItemType Directory $p | Out-Null
+        }
+    }
+    $null
+}
+$auPath = 'HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU'
+New-Directory $auPath 
+# set NoAutoUpdate.
+# 0: Automatic Updates is enabled (default).
+# 1: Automatic Updates is disabled.
+New-ItemProperty `
+    -Path $auPath `
+    -Name NoAutoUpdate `
+    -Value 0 `
+    -PropertyType DWORD `
+    -Force `
+    | Out-Null
+# set AUOptions.
+# 1: Keep my computer up to date has been disabled in Automatic Updates.
+# 2: Notify of download and installation.
+# 3: Automatically download and notify of installation.
+# 4: Automatically download and scheduled installation.
+New-ItemProperty `
+    -Path $auPath `
+    -Name AUOptions `
+    -Value 3 `
+    -PropertyType DWORD `
+    -Force `
+    | Out-Null
+
+# disable Windows Update Delivery Optimization.
+# NB this applies to Windows 10.
+# 0: Disabled
+# 1: PCs on my local network
+# 3: PCs on my local network, and PCs on the Internet
+$deliveryOptimizationPath = 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\DeliveryOptimization\Config'
+if (Test-Path $deliveryOptimizationPath) {
+    New-ItemProperty `
+        -Path $deliveryOptimizationPath `
+        -Name DODownloadMode `
+        -Value 0 `
+        -PropertyType DWORD `
+        -Force `
+        | Out-Null
+}
+# Service tweaks for Windows Update
+
+$services = @(
+    "BITS"
+    "wuauserv"
+)
+
+foreach ($service in $services) {
+    # -ErrorAction SilentlyContinue is so it doesn't write an error to stdout if a service doesn't exist
+
+    Write-Host "Setting $service StartupType to Automatic"
+    Get-Service -Name $service -ErrorAction SilentlyContinue | Set-Service -StartupType Automatic
+}
+})
+
 $disableupdates.Add_Click({
 
     # Source: https://github.com/rgl/windows-vagrant/blob/master/disable-windows-updates.ps1
