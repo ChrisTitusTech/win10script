@@ -1067,7 +1067,6 @@ Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Policies
     "DiagTrack"                                    # Diagnostics Tracking Service
     "DPS"
     "dmwappushservice"                             # WAP Push Message Routing Service (see known issues)
-    "lfsvc"                                        # Geolocation Service
     "MapsBroker"                                   # Downloaded Maps Manager
     "NetTcpPortSharing"                            # Net.Tcp Port Sharing Service
     "RemoteAccess"                                 # Routing and Remote Access
@@ -1078,14 +1077,12 @@ Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Policies
     #"WlanSvc"                                      # WLAN AutoConfig
     "WMPNetworkSvc"                                # Windows Media Player Network Sharing Service
     #"wscsvc"                                       # Windows Security Center Service
-    #"WSearch"                                      # Windows Search
     "XblAuthManager"                               # Xbox Live Auth Manager
     "XblGameSave"                                  # Xbox Live Game Save Service
     "XboxNetApiSvc"                                # Xbox Live Networking Service
     "XboxGipSvc"                                   #Disables Xbox Accessory Management Service
     "ndu"                                          # Windows Network Data Usage Monitor
     "WerSvc"                                       #disables windows error reporting
-    "Spooler"                                      #Disables your printer
     "Fax"                                          #Disables fax
     "fhsvc"                                        #Disables fax histroy
     "gupdate"                                      #Disables google update
@@ -1093,9 +1090,7 @@ Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Policies
     "stisvc"                                       #Disables Windows Image Acquisition (WIA)
     "AJRouter"                                     #Disables (needed for AllJoyn Router Service)
     "MSDTC"                                        # Disables Distributed Transaction Coordinator
-    "WpcMonSvc"                                    #Disables Parental Controls
     "PhoneSvc"                                     #Disables Phone Service(Manages the telephony state on the device)
-    "PrintNotify"                                  #Disables Windows printer notifications and extentions
     "PcaSvc"                                       #Disables Program Compatibility Assistant Service
     "WPDBusEnum"                                   #Disables Portable Device Enumerator Service
     #"LicenseManager"                               #Disable LicenseManager(Windows store may not work properly)
@@ -1126,12 +1121,7 @@ Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Policies
     "PerfHost"                                      #Disables  remote users and 64-bit processes to query performance .
     "BcastDVRUserService_48486de"                   #Disables GameDVR and Broadcast   is used for Game Recordings and Live Broadcasts
     "CaptureService_48486de"                        #Disables ptional screen capture functionality for applications that call the Windows.Graphics.Capture API.  
-    "cbdhsvc_48486de"                               #Disables   cbdhsvc_48486de (clipboard service it disables)
     #"BluetoothUserService_48486de"                  #disbales BluetoothUserService_48486de (The Bluetooth user service supports proper functionality of Bluetooth features relevant to each user session.)
-    "WpnService"                                    #Disables WpnService (Push Notifications may not work )
-    #"StorSvc"                                       #Disables StorSvc (usb external hard drive will not be reconised by windows)
-    "RtkBtManServ"                                  #Disables Realtek Bluetooth Device Manager Service
-    #"QWAVE"                                         #Disables Quality Windows Audio Video Experience (audio and video might sound worse)
      #Hp services
     "HPAppHelperCap"
     "HPDiagsCap"
