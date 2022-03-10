@@ -29,7 +29,7 @@ else{
 }
 
 $Form                            = New-Object system.Windows.Forms.Form
-$Form.ClientSize                 = New-Object System.Drawing.Point(1600,1000)
+$Form.ClientSize                 = New-Object System.Drawing.Point(1050,1000)
 $Form.text                       = "Windows Toolbox By Chris Titus"
 $Form.StartPosition              = "CenterScreen"
 $Form.TopMost                    = $false
@@ -380,12 +380,12 @@ $vscodium.height                 = 30
 $vscodium.location               = New-Object System.Drawing.Point(4,763)
 $vscodium.Font                   = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
-$imageglass                      = New-Object system.Windows.Forms.Button
-$imageglass.text                 = "ImageGlass (Image Viewer)"
-$imageglass.width                = 212
-$imageglass.height               = 30
-$imageglass.location             = New-Object System.Drawing.Point(4,1500)
-$imageglass.Font                 = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
+$MSVC                            = New-Object system.Windows.Forms.Button
+$MSVC.text                       = "MSVC"
+$MSVC.width                      = 212
+$MSVC.height                     = 30
+$MSVC.location                   = New-Object System.Drawing.Point(4,595)
+$MSVC.Font                       = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
 $gimp                            = New-Object system.Windows.Forms.Button
 $gimp.text                       = "GIMP (Image Editor)"
@@ -394,12 +394,6 @@ $gimp.height                     = 30
 $gimp.location                   = New-Object System.Drawing.Point(4,629)
 $gimp.Font                       = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
-$MSVC                            = New-Object system.Windows.Forms.Button
-$MSVC.text                       = "Microsft visual c++ runtime 2015-2019"
-$MSVC.width                      = 212
-$MSVC.height                     = 30
-$MSVC.location                   = New-Object System.Drawing.Point(4,629)
-$MSVC.Font                       = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
 $yourphonefix                    = New-Object system.Windows.Forms.Button
 $yourphonefix.text               = "Your Phone App Fix"
@@ -670,7 +664,7 @@ $Virtualization.location         = New-Object System.Drawing.Point(4,267)
 $Virtualization.Font             = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
 $Form.controls.AddRange(@($Panel1,$Panel2,$Label3,$Label15,$Panel4,$PictureBox1,$Label1,$Label4,$Panel3,$ResultText,$Label10,$Label11,$urlfixwinstartup,$urlremovevirus,$urlcreateiso))
-$Panel1.controls.AddRange(@($brave,$firefox,$7zip,$sharex,$adobereader,$notepad,$gchrome,$mpc,$vlc,$powertoys,$winterminal,$vscode,$Label2,$everythingsearch,$sumatrapdf,$vscodium,$imageglass,$gimp,$Label7,$Label8,$Label9,$advancedipscanner,$putty,$etcher,$translucenttb,$githubdesktop,$discord,$autohotkey))
+$Panel1.controls.AddRange(@($brave,$firefox,$7zip,$sharex,$adobereader,$notepad,$gchrome,$mpc,$vlc,$powertoys,$winterminal,$vscode,$Label2,$everythingsearch,$sumatrapdf,$vscodium,$MSVC,$gimp,$Label7,$Label8,$Label9,$advancedipscanner,$putty,$etcher,$translucenttb,$githubdesktop,$discord,$autohotkey))
 $Panel2.controls.AddRange(@($essentialtweaks,$backgroundapps,$cortana,$actioncenter,$darkmode,$performancefx,$onedrive,$lightmode,$essentialundo,$EActionCenter,$ECortana,$RBackgroundApps,$HTrayIcons,$EClipboardHistory,$ELocation,$InstallOneDrive,$removebloat,$reinstallbloat,$WarningLabel,$Label5,$appearancefx,$STrayIcons,$EHibernation,$dualboottime))
 $Panel4.controls.AddRange(@($defaultwindowsupdate,$securitywindowsupdate,$Label16,$Label17,$Label18,$Label19,$disableupdates,$enableupdates,$Label12))
 $Panel3.controls.AddRange(@($yourphonefix,$Label6,$windowsupdatefix,$ncpa,$oldcontrolpanel,$oldsoundpanel,$oldsystempanel,$NFS,$laptopnumlock,$Virtualization))
