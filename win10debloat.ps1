@@ -29,7 +29,7 @@ else{
 }
 
 $Form                            = New-Object system.Windows.Forms.Form
-$Form.ClientSize                 = New-Object System.Drawing.Point(1050,1000)
+$Form.ClientSize                 = New-Object System.Drawing.Point(1600,1000)
 $Form.text                       = "Windows Toolbox By Chris Titus"
 $Form.StartPosition              = "CenterScreen"
 $Form.TopMost                    = $false
@@ -384,7 +384,7 @@ $imageglass                      = New-Object system.Windows.Forms.Button
 $imageglass.text                 = "ImageGlass (Image Viewer)"
 $imageglass.width                = 212
 $imageglass.height               = 30
-$imageglass.location             = New-Object System.Drawing.Point(4,595)
+$imageglass.location             = New-Object System.Drawing.Point(4,1500)
 $imageglass.Font                 = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
 $gimp                            = New-Object system.Windows.Forms.Button
@@ -393,6 +393,13 @@ $gimp.width                      = 212
 $gimp.height                     = 30
 $gimp.location                   = New-Object System.Drawing.Point(4,629)
 $gimp.Font                       = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
+
+$MSVC                            = New-Object system.Windows.Forms.Button
+$MSVC.text                       = "Microsft visual c++ runtime 2015-2019"
+$MSVC.width                      = 212
+$MSVC.height                     = 30
+$MSVC.location                   = New-Object System.Drawing.Point(4,629)
+$MSVC.Font                       = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
 $yourphonefix                    = New-Object system.Windows.Forms.Button
 $yourphonefix.text               = "Your Phone App Fix"
@@ -869,6 +876,16 @@ $gimp.Add_Click({
     winget install -e GIMP.GIMP | Out-Host
     Write-Host "Installed Gimp Image Editor"
     $ResultText.text = "`r`n" + "Finished Installing Gimp Image Editor" + "`r`n" + "`r`n" + "Ready for Next Task"
+})
+
+$MSVC.Add_Click({
+    Write-Host "Installing Microsft visual c++ runtime 2015-2019"
+    $ResultText.text = "`r`n" +"`r`n" + "Installing Microsft visual c++ runtime 2015-2019x86... Please Wait" 
+    winget install -e -h Microsoft.VC++2015-2022Redist-x86 | Out-Host
+    $ResultText.text = "`r`n" +"`r`n" + "Installing Microsft visual c++ runtime 2015-2019x64... Please Wait" 
+    winget install -e -h Microsoft.VC++2015-2022Redist-x64 | Out-Host
+    Write-Host "Installed Microsft visual c++ runtime 2015-2019"
+    $ResultText.text = "`r`n" + "Installed Microsft visual c++ runtime 2015-2019 x86 & x64" + "`r`n" + "`r`n" + "Ready for Next Task"
 })
 
 $essentialtweaks.Add_Click({
