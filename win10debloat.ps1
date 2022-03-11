@@ -1613,14 +1613,19 @@ $securitywindowsupdate.Add_Click({
 })
 
 $actioncenter.Add_Click({
-    Write-Host "Disabling Action Center..."
-    If (!(Test-Path "HKCU:\SOFTWARE\Policies\Microsoft\Windows\Explorer")) {
-        New-Item -Path "HKCU:\SOFTWARE\Policies\Microsoft\Windows\Explorer" | Out-Null
+    if((Get-ComputerInfo).OSName.Substring(0,20) -eq 'Microsoft Windows 11'){
+        Write-Host "This breaks quick settings in Windows 11 and is therefore not executed."
+        $ResultText.text = "`r`n" +"`r`n" + "This breaks quick settings in Windows 11 and is therefore not executed."
+    }else{
+        Write-Host "Disabling Action Center..."
+        If (!(Test-Path "HKCU:\SOFTWARE\Policies\Microsoft\Windows\Explorer")) {
+            New-Item -Path "HKCU:\SOFTWARE\Policies\Microsoft\Windows\Explorer" | Out-Null
+        }
+        Set-ItemProperty -Path "HKCU:\SOFTWARE\Policies\Microsoft\Windows\Explorer" -Name "DisableNotificationCenter" -Type DWord -Value 1
+        Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\PushNotifications" -Name "ToastEnabled" -Type DWord -Value 0
+        Write-Host "Disabled Action Center"
+        $ResultText.text = "`r`n" +"`r`n" + "Disabled Action Center"
     }
-    Set-ItemProperty -Path "HKCU:\SOFTWARE\Policies\Microsoft\Windows\Explorer" -Name "DisableNotificationCenter" -Type DWord -Value 1
-    Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\PushNotifications" -Name "ToastEnabled" -Type DWord -Value 0
-    Write-Host "Disabled Action Center"
-    $ResultText.text = "`r`n" +"`r`n" + "Disabled Action Center"
 })
 
 $performancefx.Add_Click({
