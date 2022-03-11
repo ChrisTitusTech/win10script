@@ -1121,7 +1121,7 @@ $essentialtweaks.Add_Click({
     "MapsBroker"                                   #Downloaded Maps Manager
     "MicrosoftEdgeElevationService"                #Another Edge Update Service
     "MSDTC"                                        #Distributed Transaction Coordinator
-    "ndu"                                          #Windows Network Data Usage Monitor
+    #"ndu"                                         #Windows Network Data Usage Monitor (Disabling Breaks Task Manager Per-Process Network Monitoring)
     "NetTcpPortSharing"                            #Net.Tcp Port Sharing Service
     "PcaSvc"                                       #Program Compatibility Assistant Service
     "PerfHost"                                     #Remote users and 64-bit processes to query performance.

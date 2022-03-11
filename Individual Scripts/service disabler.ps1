@@ -22,7 +22,7 @@ $services = @(
     "XblGameSave"                                   #Xbox Live Game Save Service
     "XboxNetApiSvc"                                 #Xbox Live Networking Service
     "XboxGipSvc"                                    #Xbox Accessory Management Service
-    "ndu"                                           #Windows Network Data Usage Monitor
+    #"ndu"                                         #Windows Network Data Usage Monitor (Disabling Breaks Task Manager Per-Process Network Monitoring)
     "WerSvc"                                        #Windows error reporting
     "Spooler"                                       #Printing
     "Fax"                                           #Fax Service
