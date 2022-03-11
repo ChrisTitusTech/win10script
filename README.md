@@ -10,6 +10,9 @@ This script is the culmination of many scripts and gists from github with featur
 - Dark/Light mode
 - Semi-configurable
 
+## My reductions
+
+
 ## How to Run
 Paste this command into Powershell (admin):
 ```
