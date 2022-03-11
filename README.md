@@ -14,7 +14,6 @@ This script is the culmination of many scripts and gists from github with featur
 - WSearch Service is enabled (for search)
 - StorSvc service is enabled (for external usb drives)
 - QWAVE service is enabled (for sound)
-- lfsvc service is enabled (for location, but you can comment/remove it in the script)
 - Spooler service is enabled (even network printers don't seem to work)
 - WpcMonSvcis serviec enabled (parental control, if you have children)
 - PrintNotify service is enabled (printer notification)
