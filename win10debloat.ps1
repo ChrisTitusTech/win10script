@@ -1065,6 +1065,7 @@ Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Policies
     "DiagTrack"                                    # Diagnostics Tracking Service
     "DPS"
     "dmwappushservice"                             # WAP Push Message Routing Service (see known issues)
+    "lfsvc"                                        # Geolocation Service
     "MapsBroker"                                   # Downloaded Maps Manager
     "NetTcpPortSharing"                            # Net.Tcp Port Sharing Service
     "RemoteAccess"                                 # Routing and Remote Access
