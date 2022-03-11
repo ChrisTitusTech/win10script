@@ -25,11 +25,6 @@ This script is the culmination of many scripts and gists from github with featur
 ## How to Run
 Paste this command into Powershell (admin):
 ```
-iex ((New-Object System.Net.WebClient).DownloadString('https://git.io/JJ8R4'))
+iex ((New-Object System.Net.WebClient).DownloadString('https://github.com/d4rklynk/win10script/blob/master/win10debloat.ps1'))
 ```
-Or, shorter:
-```
-iwr -useb https://git.io/JJ8R4 | iex
-```
-
 For complete details check out https://christitus.com/debloat-windows-10-2020/
