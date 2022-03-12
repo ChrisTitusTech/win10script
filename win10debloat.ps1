@@ -109,7 +109,7 @@ $gchrome                         = New-Object system.Windows.Forms.Button
 $gchrome.text                    = "Google Chrome"
 $gchrome.width                   = 212
 $gchrome.height                  = 30
-$gchrome.location                = New-Object System.Drawing.Point(3,494)
+$gchrome.location                = New-Object System.Drawing.Point(3,529)
 $gchrome.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
 $mpc                             = New-Object system.Windows.Forms.Button
