@@ -10,7 +10,7 @@ This script is the culmination of many scripts and gists from github with featur
 - Dark/Light mode
 - Semi-configurable
 
-- Librewolf (Fork of Firefox without Mozilla)
+- **Librewolf (Fork of Firefox without Mozilla)**
 
 ## My reductions
 - WSearch Service is enabled (for search)
