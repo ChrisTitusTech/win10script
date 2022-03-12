@@ -67,14 +67,14 @@ $firefox                         = New-Object system.Windows.Forms.Button
 $firefox.text                    = "Firefox"
 $firefox.width                   = 212
 $firefox.height                  = 30
-$firefox.location                = New-Object System.Drawing.Point(4,461)
+$firefox.location                = New-Object System.Drawing.Point(4,494)
 $firefox.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
 $librewolf                       = New-Object system.Windows.Forms.Button
 $librewolf.text                  = "Librewolf"
 $librewolf.width                 = 212
 $librewolf.height                = 30
-$librewolf.location              = New-Object System.Drawing.Point(4,440)
+$librewolf.location              = New-Object System.Drawing.Point(5,461)
 $flibrewolf.Font                 = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
 $7zip                            = New-Object system.Windows.Forms.Button
