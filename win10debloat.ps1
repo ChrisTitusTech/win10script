@@ -67,15 +67,8 @@ $firefox                         = New-Object system.Windows.Forms.Button
 $firefox.text                    = "Firefox"
 $firefox.width                   = 212
 $firefox.height                  = 30
-$firefox.location                = New-Object System.Drawing.Point(4,494)
+$firefox.location                = New-Object System.Drawing.Point(4,461)
 $firefox.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
-
-$librewolf                       = New-Object system.Windows.Forms.Button
-$librewolf.text                  = "Librewolf"
-$librewolf.width                 = 212
-$librewolf.height                = 30
-$librewolf.location              = New-Object System.Drawing.Point(5,461)
-$flibrewolf.Font                 = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
 $7zip                            = New-Object system.Windows.Forms.Button
 $7zip.text                       = "7-Zip"
@@ -668,7 +661,7 @@ $restorepower.location           = New-Object System.Drawing.Point(4,159)
 $restorepower.Font               = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
 $Form.controls.AddRange(@($Panel1,$Panel2,$Label3,$Label15,$Panel4,$PictureBox1,$Label1,$Panel3,$ResultText,$Label10,$Label11,$urlfixwinstartup,$urlremovevirus,$urlcreateiso))
-$Panel1.controls.AddRange(@($brave,$firefox,$librewolf,$7zip,$sharex,$adobereader,$notepad,$gchrome,$mpc,$vlc,$powertoys,$winterminal,$vscode,$Label2,$everythingsearch,$sumatrapdf,$vscodium,$imageglass,$gimp,$Label7,$Label8,$Label9,$advancedipscanner,$putty,$etcher,$translucenttb,$githubdesktop,$discord,$autohotkey))
+$Panel1.controls.AddRange(@($brave,$firefox,$7zip,$sharex,$adobereader,$notepad,$gchrome,$mpc,$vlc,$powertoys,$winterminal,$vscode,$Label2,$everythingsearch,$sumatrapdf,$vscodium,$imageglass,$gimp,$Label7,$Label8,$Label9,$advancedipscanner,$putty,$etcher,$translucenttb,$githubdesktop,$discord,$autohotkey))
 $Panel2.controls.AddRange(@($essentialtweaks,$backgroundapps,$cortana,$actioncenter,$darkmode,$performancefx,$onedrive,$lightmode,$essentialundo,$EActionCenter,$ECortana,$RBackgroundApps,$HTrayIcons,$EClipboardHistory,$ELocation,$InstallOneDrive,$removebloat,$reinstallbloat,$WarningLabel,$Label5,$appearancefx,$STrayIcons,$EHibernation,$dualboottime))
 $Panel4.controls.AddRange(@($defaultwindowsupdate,$securitywindowsupdate,$Label16,$Label17,$Label18,$Label19,$windowsupdatefix,$disableupdates,$enableupdates,$Label12))
 $Panel3.controls.AddRange(@($yourphonefix,$ncpa,$oldcontrolpanel,$oldsoundpanel,$oldsystempanel,$NFS,$laptopnumlock,$Virtualization,$oldpower,$restorepower))
@@ -687,14 +680,6 @@ $firefox.Add_Click({
     winget install -e Mozilla.Firefox | Out-Host
     if($?) { Write-Host "Installed Firefox" }
     $ResultText.text = "`r`n" + "Finished Installing Firefox" + "`r`n" + "`r`n" + "Ready for Next Task"
-})
-
-$librewolf.Add_Click({
-    Write-Host "Installing Librewolf"
-    $ResultText.text = "`r`n" +"`r`n" + "Installing Librewolf... Please Wait" 
-    winget install --id=LibreWolf.LibreWolf -e | Out-Host
-    if($?) { Write-Host "Installed Librewolf" }
-    $ResultText.text = "`r`n" + "Finished Installing Librewolf" + "`r`n" + "`r`n" + "Ready for Next Task"
 })
 
 $gchrome.Add_Click({
