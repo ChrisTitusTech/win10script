@@ -1072,16 +1072,18 @@ Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Policies
     "RemoteRegistry"                               # Remote Registry
     "SharedAccess"                                 # Internet Connection Sharing (ICS)
     "TrkWks"                                       # Distributed Link Tracking Client
-    "WbioSrvc"                                     # Windows Biometric Service (required for Fingerprint reader / facial detection)
+    #"WbioSrvc"                                     # Windows Biometric Service (required for Fingerprint reader / facial detection)
     #"WlanSvc"                                      # WLAN AutoConfig
     "WMPNetworkSvc"                                # Windows Media Player Network Sharing Service
     #"wscsvc"                                       # Windows Security Center Service
+    #"WSearch"                                      # Windows Search
     "XblAuthManager"                               # Xbox Live Auth Manager
     "XblGameSave"                                  # Xbox Live Game Save Service
     "XboxNetApiSvc"                                # Xbox Live Networking Service
     "XboxGipSvc"                                   #Disables Xbox Accessory Management Service
     "ndu"                                          # Windows Network Data Usage Monitor
     "WerSvc"                                       #disables windows error reporting
+    #"Spooler"                                      #Disables your printer
     "Fax"                                          #Disables fax
     "fhsvc"                                        #Disables fax histroy
     "gupdate"                                      #Disables google update
@@ -1089,7 +1091,9 @@ Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Policies
     "stisvc"                                       #Disables Windows Image Acquisition (WIA)
     "AJRouter"                                     #Disables (needed for AllJoyn Router Service)
     "MSDTC"                                        # Disables Distributed Transaction Coordinator
+    "WpcMonSvc"                                    #Disables Parental Controls
     "PhoneSvc"                                     #Disables Phone Service(Manages the telephony state on the device)
+    #"PrintNotify"                                  #Disables Windows printer notifications and extentions
     "PcaSvc"                                       #Disables Program Compatibility Assistant Service
     "WPDBusEnum"                                   #Disables Portable Device Enumerator Service
     #"LicenseManager"                               #Disable LicenseManager(Windows store may not work properly)
@@ -1104,7 +1108,7 @@ Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Policies
     #"BrokerInfrastructure"                         #Disables Windows infrastructure service that controls which background tasks can run on the system.
     "SCardSvr"                                      #Disables Windows smart card
     "EntAppSvc"                                     #Disables enterprise application management.
-    #"BthAvctpSvc"                                   #Disables AVCTP service (if you use  Bluetooth Audio Device or Wireless Headphones. then don't disable this)
+    "BthAvctpSvc"                                   #Disables AVCTP service (if you use  Bluetooth Audio Device or Wireless Headphones. then don't disable this)
     #"FrameServer"                                   #Disables Windows Camera Frame Server(this allows multiple clients to access video frames from camera devices.)
     "Browser"                                       #Disables computer browser
     "BthAvctpSvc"                                   #AVCTP service (This is Audio Video Control Transport Protocol service.)
@@ -1120,7 +1124,12 @@ Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Policies
     "PerfHost"                                      #Disables  remote users and 64-bit processes to query performance .
     "BcastDVRUserService_48486de"                   #Disables GameDVR and Broadcast   is used for Game Recordings and Live Broadcasts
     "CaptureService_48486de"                        #Disables ptional screen capture functionality for applications that call the Windows.Graphics.Capture API.  
+    #"cbdhsvc_48486de"                               #Disables   cbdhsvc_48486de (clipboard service it disables)
     #"BluetoothUserService_48486de"                  #disbales BluetoothUserService_48486de (The Bluetooth user service supports proper functionality of Bluetooth features relevant to each user session.)
+    #"WpnService"                                    #Disables WpnService (Push Notifications may not work )
+    #"StorSvc"                                       #Disables StorSvc (usb external hard drive will not be reconised by windows)
+    #"RtkBtManServ"                                  #Disables Realtek Bluetooth Device Manager Service
+    #"QWAVE"                                         #Disables Quality Windows Audio Video Experience (audio and video might sound worse)
      #Hp services
     "HPAppHelperCap"
     "HPDiagsCap"
