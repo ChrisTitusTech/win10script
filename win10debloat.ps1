@@ -74,7 +74,7 @@ $librewolf                       = New-Object system.Windows.Forms.Button
 $librewolf.text                  = "Librewolf"
 $librewolf.width                 = 212
 $librewolf.height                = 30
-$librewolf.location              = New-Object System.Drawing.Point(4,461)
+$librewolf.location              = New-Object System.Drawing.Point(4,440)
 $flibrewolf.Font                 = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
 $7zip                            = New-Object system.Windows.Forms.Button
