@@ -689,6 +689,13 @@ $firefox.Add_Click({
     $ResultText.text = "`r`n" + "Finished Installing Firefox" + "`r`n" + "`r`n" + "Ready for Next Task"
 })
 
+$librewolf.Add_Click({
+    Write-Host "Installing Librewolf"
+    $ResultText.text = "`r`n" +"`r`n" + "Installing Librewolf... Please Wait" 
+    winget install --id=LibreWolf.LibreWolf -e | Out-Host
+    if($?) { Write-Host "Installed Librewolf" }
+    $ResultText.text = "`r`n" + "Finished Installing Librewolf" + "`r`n" + "`r`n" + "Ready for Next Task"
+})
 $gchrome.Add_Click({
     Write-Host "Installing Google Chrome"
     $ResultText.text = "`r`n" +"`r`n" + "Installing Google Chrome... Please Wait" 
