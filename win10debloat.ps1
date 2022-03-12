@@ -52,7 +52,7 @@ $Form.Width                   = $objImage.Width
 $Form.Height                  = $objImage.Height
 
 $Panel1                          = New-Object system.Windows.Forms.Panel
-$Panel1.height                   = 939
+$Panel1.height                   = 1000
 $Panel1.width                    = 219
 $Panel1.location                 = New-Object System.Drawing.Point(6,54)
 
@@ -149,7 +149,7 @@ $Label2.location                 = New-Object System.Drawing.Point(89,11)
 $Label2.Font                     = New-Object System.Drawing.Font('Microsoft Sans Serif',10,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Bold))
 
 $Panel2                          = New-Object system.Windows.Forms.Panel
-$Panel2.height                   = 938
+$Panel2.height                   = 1000
 $Panel2.width                    = 211
 $Panel2.location                 = New-Object System.Drawing.Point(240,54)
 
@@ -160,6 +160,15 @@ $Label3.width                    = 230
 $Label3.height                   = 25
 $Label3.location                 = New-Object System.Drawing.Point(229,11)
 $Label3.Font                     = New-Object System.Drawing.Font('Microsoft Sans Serif',24)
+
+$Label4                          = New-Object system.Windows.Forms.Label
+$Label4.text                     = "Troubleshoot"
+$Label4.AutoSize                 = $true
+$Label4.width                    = 230
+$Label4.height                   = 25
+$Label4.location                 = New-Object System.Drawing.Point(482,12)
+$Label4.Font                     = New-Object System.Drawing.Font('Microsoft Sans Serif',24)
+
 
 $essentialtweaks                 = New-Object system.Windows.Forms.Button
 $essentialtweaks.text            = "Essential Tweaks"
@@ -290,16 +299,8 @@ $Label1.height                   = 25
 $Label1.location                 = New-Object System.Drawing.Point(76,11)
 $Label1.Font                     = New-Object System.Drawing.Font('Microsoft Sans Serif',24)
 
-$Label4                          = New-Object system.Windows.Forms.Label
-$Label4.text                     = "Troubleshoot"
-$Label4.AutoSize                 = $true
-$Label4.width                    = 230
-$Label4.height                   = 25
-$Label4.location                 = New-Object System.Drawing.Point(482,12)
-$Label4.Font                     = New-Object System.Drawing.Font('Microsoft Sans Serif',24)
-
 $Panel3                          = New-Object system.Windows.Forms.Panel
-$Panel3.height                   = 363
+$Panel3.height                   = 381
 $Panel3.width                    = 220
 $Panel3.location                 = New-Object System.Drawing.Point(464,54)
 
@@ -373,6 +374,14 @@ $sumatrapdf.height               = 30
 $sumatrapdf.location             = New-Object System.Drawing.Point(4,900)
 $sumatrapdf.Font                 = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
+$msvc                            = New-Object system.Windows.Forms.Button
+$msvc.text                       = "msvc"
+$msvc.width                      = 212
+$msvc.height                     = 30
+$msvc.location                   = New-Object System.Drawing.Point(4,934)
+$msvc.Font                       = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
+
+
 $vscodium                        = New-Object system.Windows.Forms.Button
 $vscodium.text                   = "VS Codium"
 $vscodium.width                  = 211
@@ -380,12 +389,12 @@ $vscodium.height                 = 30
 $vscodium.location               = New-Object System.Drawing.Point(4,763)
 $vscodium.Font                   = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
-$MSVC                            = New-Object system.Windows.Forms.Button
-$MSVC.text                       = "MSVC"
-$MSVC.width                      = 212
-$MSVC.height                     = 30
-$MSVC.location                   = New-Object System.Drawing.Point(4,595)
-$MSVC.Font                       = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
+$imageglass                      = New-Object system.Windows.Forms.Button
+$imageglass.text                 = "ImageGlass (Image Viewer)"
+$imageglass.width                = 212
+$imageglass.height               = 30
+$imageglass.location             = New-Object System.Drawing.Point(4,595)
+$imageglass.Font                 = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
 $gimp                            = New-Object system.Windows.Forms.Button
 $gimp.text                       = "GIMP (Image Editor)"
@@ -394,12 +403,11 @@ $gimp.height                     = 30
 $gimp.location                   = New-Object System.Drawing.Point(4,629)
 $gimp.Font                       = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
-
 $yourphonefix                    = New-Object system.Windows.Forms.Button
 $yourphonefix.text               = "Your Phone App Fix"
 $yourphonefix.width              = 211
 $yourphonefix.height             = 30
-$yourphonefix.location           = New-Object System.Drawing.Point(4,25)
+$yourphonefix.location           = New-Object System.Drawing.Point(5,332)
 $yourphonefix.Font               = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
 $removebloat                     = New-Object system.Windows.Forms.Button
@@ -431,14 +439,6 @@ $Label5.width                    = 25
 $Label5.height                   = 10
 $Label5.location                 = New-Object System.Drawing.Point(44,877)
 $Label5.Font                     = New-Object System.Drawing.Font('Microsoft Sans Serif',8)
-
-$Label6                          = New-Object system.Windows.Forms.Label
-$Label6.text                     = "Misc. Fixes"
-$Label6.AutoSize                 = $true
-$Label6.width                    = 25
-$Label6.height                   = 10
-$Label6.location                 = New-Object System.Drawing.Point(78,7)
-$Label6.Font                     = New-Object System.Drawing.Font('Microsoft Sans Serif',10,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Bold))
 
 $Label7                          = New-Object system.Windows.Forms.Label
 $Label7.text                     = "Document Tools"
@@ -472,7 +472,7 @@ $advancedipscanner.location      = New-Object System.Drawing.Point(3,335)
 $advancedipscanner.Font          = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
 $putty                           = New-Object system.Windows.Forms.Button
-$putty.text                      = "PuTTY + WinSCP"
+$putty.text                      = "PuTTY & WinSCP"
 $putty.width                     = 211
 $putty.height                    = 30
 $putty.location                  = New-Object System.Drawing.Point(3,302)
@@ -529,10 +529,10 @@ $STrayIcons.Font                 = New-Object System.Drawing.Font('Microsoft San
 
 $windowsupdatefix                = New-Object system.Windows.Forms.Button
 $windowsupdatefix.text           = "Windows Update Reset"
-$windowsupdatefix.width          = 211
+$windowsupdatefix.width          = 300
 $windowsupdatefix.height         = 30
-$windowsupdatefix.location       = New-Object System.Drawing.Point(4,59)
-$windowsupdatefix.Font           = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
+$windowsupdatefix.location       = New-Object System.Drawing.Point(25,216)
+$windowsupdatefix.Font           = New-Object System.Drawing.Font('Microsoft Sans Serif',14)
 
 $ResultText                      = New-Object system.Windows.Forms.TextBox
 $ResultText.multiline            = $true
@@ -596,49 +596,49 @@ $ncpa                            = New-Object system.Windows.Forms.Button
 $ncpa.text                       = "Network Connections"
 $ncpa.width                      = 211
 $ncpa.height                     = 30
-$ncpa.location                   = New-Object System.Drawing.Point(4,94)
+$ncpa.location                   = New-Object System.Drawing.Point(4,126)
 $ncpa.Font                       = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
 $oldcontrolpanel                 = New-Object system.Windows.Forms.Button
-$oldcontrolpanel.text            = "Old Control Panel"
+$oldcontrolpanel.text            = "Win7 Control Panel"
 $oldcontrolpanel.width           = 211
 $oldcontrolpanel.height          = 30
-$oldcontrolpanel.location        = New-Object System.Drawing.Point(4,128)
+$oldcontrolpanel.location        = New-Object System.Drawing.Point(4,193)
 $oldcontrolpanel.Font            = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
 $oldsoundpanel                   = New-Object system.Windows.Forms.Button
-$oldsoundpanel.text              = "Old Sound Panel"
+$oldsoundpanel.text              = "Win7 Sound Panel"
 $oldsoundpanel.width             = 211
 $oldsoundpanel.height            = 30
-$oldsoundpanel.location          = New-Object System.Drawing.Point(4,163)
+$oldsoundpanel.location          = New-Object System.Drawing.Point(5,262)
 $oldsoundpanel.Font              = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
 $oldsystempanel                  = New-Object system.Windows.Forms.Button
-$oldsystempanel.text             = "Old System Panel"
+$oldsystempanel.text             = "Win7 System Panel"
 $oldsystempanel.width            = 211
 $oldsystempanel.height           = 30
-$oldsystempanel.location         = New-Object System.Drawing.Point(4,197)
+$oldsystempanel.location         = New-Object System.Drawing.Point(5,298)
 $oldsystempanel.Font             = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
 $NFS                             = New-Object system.Windows.Forms.Button
 $NFS.text                        = "Enable NFS"
 $NFS.width                       = 211
 $NFS.height                      = 30
-$NFS.location                    = New-Object System.Drawing.Point(4,232)
+$NFS.location                    = New-Object System.Drawing.Point(4,57)
 $NFS.Font                        = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
 $laptopnumlock                   = New-Object system.Windows.Forms.Button
 $laptopnumlock.text              = "Laptop Numlock Fix"
 $laptopnumlock.width             = 211
 $laptopnumlock.height            = 30
-$laptopnumlock.location          = New-Object System.Drawing.Point(4,301)
+$laptopnumlock.location          = New-Object System.Drawing.Point(4,92)
 $laptopnumlock.Font              = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
 $disableupdates                  = New-Object system.Windows.Forms.Button
 $disableupdates.text             = "Disable Update Services"
 $disableupdates.width            = 300
 $disableupdates.height           = 30
-$disableupdates.location         = New-Object System.Drawing.Point(24,251)
+$disableupdates.location         = New-Object System.Drawing.Point(23,292)
 $disableupdates.Font             = New-Object System.Drawing.Font('Microsoft Sans Serif',14)
 
 $enableupdates                   = New-Object system.Windows.Forms.Button
@@ -653,21 +653,35 @@ $Label12.text                    = "NOT RECOMMENDED!!!"
 $Label12.AutoSize                = $true
 $Label12.width                   = 25
 $Label12.height                  = 10
-$Label12.location                = New-Object System.Drawing.Point(98,236)
+$Label12.location                = New-Object System.Drawing.Point(98,275)
 $Label12.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Bold))
 
 $Virtualization                  = New-Object system.Windows.Forms.Button
 $Virtualization.text             = "Enable HyperV + WSL"
 $Virtualization.width            = 211
 $Virtualization.height           = 30
-$Virtualization.location         = New-Object System.Drawing.Point(4,267)
+$Virtualization.location         = New-Object System.Drawing.Point(4,23)
 $Virtualization.Font             = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
-$Form.controls.AddRange(@($Panel1,$Panel2,$Label3,$Label15,$Panel4,$PictureBox1,$Label1,$Label4,$Panel3,$ResultText,$Label10,$Label11,$urlfixwinstartup,$urlremovevirus,$urlcreateiso))
-$Panel1.controls.AddRange(@($brave,$firefox,$7zip,$sharex,$adobereader,$notepad,$gchrome,$mpc,$vlc,$powertoys,$winterminal,$vscode,$Label2,$everythingsearch,$sumatrapdf,$vscodium,$MSVC,$gimp,$Label7,$Label8,$Label9,$advancedipscanner,$putty,$etcher,$translucenttb,$githubdesktop,$discord,$autohotkey))
+$oldpower                        = New-Object system.Windows.Forms.Button
+$oldpower.text                   = "Win7 Power Panel"
+$oldpower.width                  = 211
+$oldpower.height                 = 30
+$oldpower.location               = New-Object System.Drawing.Point(4,227)
+$oldpower.Font                   = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
+
+$restorepower                    = New-Object system.Windows.Forms.Button
+$restorepower.text               = "Restore Power Options"
+$restorepower.width              = 211
+$restorepower.height             = 30
+$restorepower.location           = New-Object System.Drawing.Point(4,159)
+$restorepower.Font               = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
+
+$Form.controls.AddRange(@($Panel1,$Panel2,$Label3,$Label15,$Panel4,$PictureBox1,$Label1,$Panel3,$ResultText,$Label10,$Label11,$urlfixwinstartup,$urlremovevirus,$urlcreateiso))
+$Panel1.controls.AddRange(@($brave,$firefox,$7zip,$sharex,$adobereader,$notepad,$gchrome,$mpc,$vlc,$powertoys,$winterminal,$vscode,$Label2,$everythingsearch,$sumatrapdf,$msvc,$vscodium,$imageglass,$gimp,$Label7,$Label8,$Label9,$advancedipscanner,$putty,$etcher,$translucenttb,$githubdesktop,$discord,$autohotkey))
 $Panel2.controls.AddRange(@($essentialtweaks,$backgroundapps,$cortana,$actioncenter,$darkmode,$performancefx,$onedrive,$lightmode,$essentialundo,$EActionCenter,$ECortana,$RBackgroundApps,$HTrayIcons,$EClipboardHistory,$ELocation,$InstallOneDrive,$removebloat,$reinstallbloat,$WarningLabel,$Label5,$appearancefx,$STrayIcons,$EHibernation,$dualboottime))
-$Panel4.controls.AddRange(@($defaultwindowsupdate,$securitywindowsupdate,$Label16,$Label17,$Label18,$Label19,$disableupdates,$enableupdates,$Label12))
-$Panel3.controls.AddRange(@($yourphonefix,$Label6,$windowsupdatefix,$ncpa,$oldcontrolpanel,$oldsoundpanel,$oldsystempanel,$NFS,$laptopnumlock,$Virtualization))
+$Panel4.controls.AddRange(@($defaultwindowsupdate,$securitywindowsupdate,$Label16,$Label17,$Label18,$Label19,$windowsupdatefix,$disableupdates,$enableupdates,$Label12))
+$Panel3.controls.AddRange(@($yourphonefix,$ncpa,$oldcontrolpanel,$oldsoundpanel,$oldsystempanel,$NFS,$laptopnumlock,$Virtualization,$oldpower,$restorepower))
 
 $brave.Add_Click({
     Write-Host "Installing Brave Browser"
@@ -872,7 +886,7 @@ $gimp.Add_Click({
     $ResultText.text = "`r`n" + "Finished Installing Gimp Image Editor" + "`r`n" + "`r`n" + "Ready for Next Task"
 })
 
-$MSVC.Add_Click({
+$msvc.Add_Click({
     Write-Host "Installing Microsft visual c++ runtime 2015-2019"
     $ResultText.text = "`r`n" +"`r`n" + "Installing Microsft visual c++ runtime 2015-2019x86... Please Wait" 
     winget install -e -h Microsoft.VC++2015-2022Redist-x86 | Out-Host
@@ -1804,6 +1818,16 @@ $oldcontrolpanel.Add_Click({
 })
 $oldsystempanel.Add_Click({
     cmd /c sysdm.cpl
+})
+$oldpower.Add_Click({
+    cmd /c powercfg.cpl
+})
+$restorepower.Add_Click({
+    powercfg -duplicatescheme a1841308-3541-4fab-bc81-f71556f20b4a
+    powercfg -duplicatescheme 381b4222-f694-41f0-9685-ff5bb260df2e
+    powercfg -duplicatescheme e9a42b02-d5df-448d-aa00-03f14749eb61
+    Write-Host "Restored all power plans: Balanced, High Performance, and Power Saver"
+    $ResultText.text = "`r`n" +"`r`n" + "Restored all power plans: Balanced, High Performance, and Power Saver"
 })
 $NFS.Add_Click({
     Enable-WindowsOptionalFeature -Online -FeatureName "ServicesForNFS-ClientOnly" -All
