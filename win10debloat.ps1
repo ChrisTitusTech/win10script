@@ -1452,7 +1452,6 @@ $Bloatware = @(
     "Microsoft.ScreenSketch"
     "Microsoft.Xbox.TCUI"
     "Microsoft.XboxGameOverlay"
-    "Microsoft.XboxGameCallableUI"
     "Microsoft.XboxSpeechToTextOverlay"
     "Microsoft.MixedReality.Portal"
     "Microsoft.XboxIdentityProvider"
