@@ -70,6 +70,13 @@ $firefox.height                  = 30
 $firefox.location                = New-Object System.Drawing.Point(4,461)
 $firefox.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
+$librewolf                         = New-Object system.Windows.Forms.Button
+$librewolf.text                    = "Librewolf"
+$librewolf.width                   = 212
+$librewolf.height                  = 30
+$librewolf.location                = New-Object System.Drawing.Point(4,461)
+$librewolf.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
+
 $7zip                            = New-Object system.Windows.Forms.Button
 $7zip.text                       = "7-Zip"
 $7zip.width                      = 211
@@ -680,6 +687,14 @@ $firefox.Add_Click({
     winget install -e Mozilla.Firefox | Out-Host
     if($?) { Write-Host "Installed Firefox" }
     $ResultText.text = "`r`n" + "Finished Installing Firefox" + "`r`n" + "`r`n" + "Ready for Next Task"
+})
+
+$librewolf.Add_Click({
+    Write-Host "Installing Librewolf"
+    $ResultText.text = "`r`n" +"`r`n" + "Installing Librewolf... Please Wait" 
+    winget install -e LibreWolf.LibreWolf | Out-Host
+    if($?) { Write-Host "Installed Librewolf" }
+    $ResultText.text = "`r`n" + "Finished Installing Librewolf" + "`r`n" + "`r`n" + "Ready for Next Task"
 })
 
 $gchrome.Add_Click({
