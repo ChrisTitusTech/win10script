@@ -1313,14 +1313,14 @@ $essentialundo.Add_Click({
     $autoLoggerDir = "$env:PROGRAMDATA\Microsoft\Diagnosis\ETLLogs\AutoLogger"
     icacls $autoLoggerDir /grant:r SYSTEM:`(OI`)`(CI`)F | Out-Null
 
-    Write-Host "Enabling and starting Diagnostics Tracking Service"
+    Write-Host "Enabling and starting Diagnostics Tracking Service..."
     Set-Service "DiagTrack" -StartupType Automatic
     Start-Service "DiagTrack"
 
-    Write-Host "Hiding known File extensions"
+    Write-Host "Hiding known File extensions..."
     Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "HideFileExt" -Type DWord -Value 1
 
-    Write-Host "Reset Local Group Policies to Stock Defaults"
+    Write-Host "Resetting Local Group Policies to Stock Defaults..."
     #cmd /c secedit /configure /cfg %windir%\inf\defltbase.inf /db defltbase.sdb /verbose
     cmd /c RD /S /Q "%WinDir%\System32\GroupPolicyUsers"
     cmd /c RD /S /Q "%WinDir%\System32\GroupPolicy"
@@ -1348,7 +1348,7 @@ $windowssearch.Add_Click({
     Write-Host "Hiding Search Box / Button..."
     Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Search" -Name "SearchboxTaskbarMode" -Type DWord -Value 0
 
-    Write-Host "Removing Start Menu Tiles"
+    Write-Host "Removing Start Menu Tiles..."
     Set-Content -Path 'C:\Users\Default\AppData\Local\Microsoft\Windows\Shell\DefaultLayouts.xml' -Value '<LayoutModificationTemplate xmlns:defaultlayout="http://schemas.microsoft.com/Start/2014/FullDefaultLayout" xmlns:start="http://schemas.microsoft.com/Start/2014/StartLayout" Version="1" xmlns="http://schemas.microsoft.com/Start/2014/LayoutModification">'
     Add-Content -Path 'C:\Users\Default\AppData\Local\Microsoft\Windows\Shell\DefaultLayouts.xml' -value '  <LayoutOptions StartTileGroupCellWidth="6" />'
     Add-Content -Path 'C:\Users\Default\AppData\Local\Microsoft\Windows\Shell\DefaultLayouts.xml' -value '  <DefaultLayoutOverride>'
@@ -1546,8 +1546,8 @@ $removebloat.Add_Click({
     foreach ($Bloat in $Bloatware) {
         Get-AppxPackage -Name $Bloat | Remove-AppxPackage
         Get-AppxProvisionedPackage -Online | Where-Object DisplayName -like $Bloat | Remove-AppxProvisionedPackage -Online
-        Write-Host "Trying to remove $Bloat."
-        $ResultText.text = "`r`n" +"`r`n" + "Trying to remove $Bloat."
+        Write-Host "Trying to remove $Bloat..."
+        $ResultText.text = "`r`n" +"`r`n" + "Trying to remove $Bloat..."
     }
 
     Write-Host "Finished Removing Bloatware Apps"
@@ -1614,8 +1614,8 @@ $securitywindowsupdate.Add_Click({
 
 $actioncenter.Add_Click({
     if((Get-ComputerInfo).OSName.Substring(0,20) -eq 'Microsoft Windows 11'){
-        Write-Host "This breaks quick settings in Windows 11 and is therefore not executed."
-        $ResultText.text = "`r`n" +"`r`n" + "This breaks quick settings in Windows 11 and is therefore not executed."
+        Write-Host "This breaks Quick Settings in Windows 11 and is therefore not executed."
+        $ResultText.text = "`r`n" +"`r`n" + "This breaks Quick Settings in Windows 11 and is therefore not executed."
     }else{
         Write-Host "Disabling Action Center..."
         If (!(Test-Path "HKCU:\SOFTWARE\Policies\Microsoft\Windows\Explorer")) {
@@ -1645,7 +1645,7 @@ $performancefx.Add_Click({
 })
 
 $appearancefx.Add_Click({
-	Write-Output "Adjusting Visual Effects for appearance..."
+	Write-Host "Adjusting Visual Effects for appearance..."
 	Set-ItemProperty -Path "HKCU:\Control Panel\Desktop" -Name "DragFullWindows" -Type String -Value 1
 	Set-ItemProperty -Path "HKCU:\Control Panel\Desktop" -Name "MenuShowDelay" -Type String -Value 400
 	Set-ItemProperty -Path "HKCU:\Control Panel\Desktop" -Name "UserPreferencesMask" -Type Binary -Value ([byte[]](158,30,7,128,18,0,0,0))
@@ -1698,14 +1698,14 @@ $onedrive.Add_Click({
 })
 
 $darkmode.Add_Click({
-    Write-Host "Enabling Dark Mode"
+    Write-Host "Enabling Dark Mode..."
     Set-ItemProperty -Path HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize -Name AppsUseLightTheme -Value 0
     Write-Host "Enabled Dark Mode"
     $ResultText.text = "`r`n" +"`r`n" + "Enabled Dark Mode"
 })
 
 $lightmode.Add_Click({
-    Write-Host "Enabling Light Mode"
+    Write-Host "Enabling Light Mode..."
     Remove-ItemProperty -Path HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize -Name AppsUseLightTheme
     Write-Host "Enabling Light Mode"
     $ResultText.text = "`r`n" +"`r`n" + "Enabled Light Mode"
@@ -1870,11 +1870,11 @@ $oldpower.Add_Click({
 })
 
 $restorepower.Add_Click({
-    powercfg -duplicatescheme a1841308-3541-4fab-bc81-f71556f20b4a
-    powercfg -duplicatescheme 381b4222-f694-41f0-9685-ff5bb260df2e
-    powercfg -duplicatescheme e9a42b02-d5df-448d-aa00-03f14749eb61
-    Write-Host "Restored all power plans: Balanced, High Performance, and Power Saver"
-    $ResultText.text = "`r`n" +"`r`n" + "Restored all power plans: Balanced, High Performance, and Power Saver"
+    if((Get-CimInstance -Name root\cimv2\power -Class Win32_PowerPlan | Where-Object ElementName -Like "Power Saver")){powercfg -duplicatescheme a1841308-3541-4fab-bc81-f71556f20b4a}
+    if((Get-CimInstance -Name root\cimv2\power -Class Win32_PowerPlan | Where-Object ElementName -Like "Balanced")){powercfg -duplicatescheme 381b4222-f694-41f0-9685-ff5bb260df2e}
+    if((Get-CimInstance -Name root\cimv2\power -Class Win32_PowerPlan | Where-Object ElementName -Like "Ultimate Performance")){powercfg -duplicatescheme e9a42b02-d5df-448d-aa00-03f14749eb61}
+    Write-Host "Restored all power plans: Power Saver, Balanced, and Ultimate Performance"
+    $ResultText.text = "`r`n" +"`r`n" + "Restored all power plans: Power Saver, Balanced, and Ultimate Performance"
 })
 
 $NFS.Add_Click({
@@ -1898,14 +1898,14 @@ $Virtualization.Add_Click({
     Write-Host "Enabling WSL and Hyper-V..."
     $ResultText.text = "`r`n" +"`r`n" + "Enabling WSL and Hyper-V..."
 
-    Write-Host "Enable Prerequisites"
+    Write-Host "Enabling Prerequisites..."
     Enable-WindowsOptionalFeature -Online -FeatureName "HypervisorPlatform" -All
     Enable-WindowsOptionalFeature -Online -FeatureName "VirtualMachinePlatform" -All
 
-    Write-Host "Enable WSL"
+    Write-Host "Enabling WSL..."
     Enable-WindowsOptionalFeature -Online -FeatureName "Microsoft-Windows-Subsystem-Linux" -All
 
-    Write-Host "Enable Hyper-V"
+    Write-Host "Enabling Hyper-V..."
     Enable-WindowsOptionalFeature -Online -FeatureName "Microsoft-Hyper-V-All" -All
     Enable-WindowsOptionalFeature -Online -FeatureName "Microsoft-Hyper-V" -All
     Enable-WindowsOptionalFeature -Online -FeatureName "Microsoft-Hyper-V-Tools-All" -All
@@ -1914,7 +1914,7 @@ $Virtualization.Add_Click({
     Enable-WindowsOptionalFeature -Online -FeatureName "Microsoft-Hyper-V-Services" -All
     Enable-WindowsOptionalFeature -Online -FeatureName "Microsoft-Hyper-V-Management-Clients" -All
 
-    Write-Host "Set Hypervisor CPU Scheduler to Classic Mode"
+    Write-Host "Setting Hypervisor CPU Scheduler to Classic Mode..."
     cmd /c bcdedit /set hypervisorschedulertype classic
 
     Write-Host "HyperV is now installed and configured. Please Reboot before using."
@@ -2016,179 +2016,6 @@ $windowsupdatefix.Add_Click({
 
     Write-Host "Process Complete. Please reboot your computer."
     $ResultText.text = "`r`n" +"`r`n" + "Process complete. Please reboot your computer."
-})
-
-[void]$Form.ShowDialog()
-$disableupdates.Add_Click({
-
-    # Source: https://github.com/rgl/windows-vagrant/blob/master/disable-windows-updates.ps1
-    Set-StrictMode -Version Latest
-$ProgressPreference = 'SilentlyContinue'
-$ErrorActionPreference = 'Stop'
-trap {
-    Write-Host
-    Write-Host "ERROR: $_"
-    Write-Host (($_.ScriptStackTrace -split '\r?\n') -replace '^(.*)$','ERROR: $1')
-    Write-Host (($_.Exception.ToString() -split '\r?\n') -replace '^(.*)$','ERROR EXCEPTION: $1')
-    Write-Host
-    Write-Host 'Sleeping for 60m to give you time to look around the virtual machine before self-destruction...'
-    Start-Sleep -Seconds (60*60)
-    Exit 1
-}
-
-# disable automatic updates.
-# XXX this does not seem to work anymore.
-# see How to configure automatic updates by using Group Policy or registry settings
-#     at https://support.microsoft.com/en-us/help/328010
-function New-Directory($path) {
-    $p, $components = $path -split '[\\/]'
-    $components | ForEach-Object {
-        $p = "$p\$_"
-        if (!(Test-Path $p)) {
-            New-Item -ItemType Directory $p | Out-Null
-        }
-    }
-    $null
-}
-$auPath = 'HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU'
-New-Directory $auPath 
-# set NoAutoUpdate.
-# 0: Automatic Updates is enabled (default).
-# 1: Automatic Updates is disabled.
-New-ItemProperty `
-    -Path $auPath `
-    -Name NoAutoUpdate `
-    -Value 1 `
-    -PropertyType DWORD `
-    -Force `
-    | Out-Null
-# set AUOptions.
-# 1: Keep my computer up to date has been disabled in Automatic Updates.
-# 2: Notify of download and installation.
-# 3: Automatically download and notify of installation.
-# 4: Automatically download and scheduled installation.
-New-ItemProperty `
-    -Path $auPath `
-    -Name AUOptions `
-    -Value 1 `
-    -PropertyType DWORD `
-    -Force `
-    | Out-Null
-
-# disable Windows Update Delivery Optimization.
-# NB this applies to Windows 10.
-# 0: Disabled
-# 1: PCs on my local network
-# 3: PCs on my local network, and PCs on the Internet
-$deliveryOptimizationPath = 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\DeliveryOptimization\Config'
-if (Test-Path $deliveryOptimizationPath) {
-    New-ItemProperty `
-        -Path $deliveryOptimizationPath `
-        -Name DODownloadMode `
-        -Value 0 `
-        -PropertyType DWORD `
-        -Force `
-        | Out-Null
-}
-# Service tweaks for Windows Update
-
-$services = @(
-    "BITS"
-    "wuauserv"
-)
-
-foreach ($service in $services) {
-    # -ErrorAction SilentlyContinue is so it doesn't write an error to stdout if a service doesn't exist
-
-    Write-Host "Setting $service StartupType to Disabled"
-    Get-Service -Name $service -ErrorAction SilentlyContinue | Set-Service -StartupType Disabled
-}
-})
-
-$enableupdates.Add_Click({
-
-    # Source: https://github.com/rgl/windows-vagrant/blob/master/disable-windows-updates.ps1
-    Set-StrictMode -Version Latest
-$ProgressPreference = 'SilentlyContinue'
-$ErrorActionPreference = 'Stop'
-trap {
-    Write-Host
-    Write-Host "ERROR: $_"
-    Write-Host (($_.ScriptStackTrace -split '\r?\n') -replace '^(.*)$','ERROR: $1')
-    Write-Host (($_.Exception.ToString() -split '\r?\n') -replace '^(.*)$','ERROR EXCEPTION: $1')
-    Write-Host
-    Write-Host 'Sleeping for 60m to give you time to look around the virtual machine before self-destruction...'
-    Start-Sleep -Seconds (60*60)
-    Exit 1
-}
-
-# disable automatic updates.
-# XXX this does not seem to work anymore.
-# see How to configure automatic updates by using Group Policy or registry settings
-#     at https://support.microsoft.com/en-us/help/328010
-function New-Directory($path) {
-    $p, $components = $path -split '[\\/]'
-    $components | ForEach-Object {
-        $p = "$p\$_"
-        if (!(Test-Path $p)) {
-            New-Item -ItemType Directory $p | Out-Null
-        }
-    }
-    $null
-}
-$auPath = 'HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU'
-New-Directory $auPath 
-# set NoAutoUpdate.
-# 0: Automatic Updates is enabled (default).
-# 1: Automatic Updates is disabled.
-New-ItemProperty `
-    -Path $auPath `
-    -Name NoAutoUpdate `
-    -Value 0 `
-    -PropertyType DWORD `
-    -Force `
-    | Out-Null
-# set AUOptions.
-# 1: Keep my computer up to date has been disabled in Automatic Updates.
-# 2: Notify of download and installation.
-# 3: Automatically download and notify of installation.
-# 4: Automatically download and scheduled installation.
-New-ItemProperty `
-    -Path $auPath `
-    -Name AUOptions `
-    -Value 3 `
-    -PropertyType DWORD `
-    -Force `
-    | Out-Null
-
-# disable Windows Update Delivery Optimization.
-# NB this applies to Windows 10.
-# 0: Disabled
-# 1: PCs on my local network
-# 3: PCs on my local network, and PCs on the Internet
-$deliveryOptimizationPath = 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\DeliveryOptimization\Config'
-if (Test-Path $deliveryOptimizationPath) {
-    New-ItemProperty `
-        -Path $deliveryOptimizationPath `
-        -Name DODownloadMode `
-        -Value 0 `
-        -PropertyType DWORD `
-        -Force `
-        | Out-Null
-}
-# Service tweaks for Windows Update
-
-$services = @(
-    "BITS"
-    "wuauserv"
-)
-
-foreach ($service in $services) {
-    # -ErrorAction SilentlyContinue is so it doesn't write an error to stdout if a service doesn't exist
-
-    Write-Host "Setting $service StartupType to Automatic"
-    Get-Service -Name $service -ErrorAction SilentlyContinue | Set-Service -StartupType Automatic
-}
 })
 
 $disableupdates.Add_Click({
