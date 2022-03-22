@@ -1,0 +1,9 @@
+Windows Registry Editor Version 5.00
+
+;Disables Hardware Acceleration
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\GraphicsDrivers]
+"HwSchMode"=dword:00000001
+
+;UNDO
+;[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\GraphicsDrivers]
+;"HwSchMode"=dword:00000002
