@@ -877,7 +877,7 @@ $gimp.Add_Click({
 $essentialtweaks.Add_Click({
     Write-Host "Creating Restore Point in case something bad happens"
     $ResultText.text = "`r`n" +"`r`n" + "Applying Essential Tweaks..."
-    Enable-ComputerRestore -Drive "C:\"
+    Enable-ComputerRestore -Drive "$env:homedrive"
     Checkpoint-Computer -Description "RestorePoint1" -RestorePointType "MODIFY_SETTINGS"
 
     Write-Host "Running O&O Shutup with Recommended Settings"
@@ -1202,7 +1202,7 @@ $laptopnumlock.Add_Click({
 $essentialundo.Add_Click({
     Write-Host "Creating Restore Point in case something bad happens"
     $ResultText.text = "`r`n" +"`r`n" + "Creating Restore Point and Reverting Settings..."
-    Enable-ComputerRestore -Drive "C:\"
+    Enable-ComputerRestore -Drive "$env:homedrive"
     Checkpoint-Computer -Description "RestorePoint1" -RestorePointType "MODIFY_SETTINGS"
 
     Write-Host "Enabling Telemetry..."
