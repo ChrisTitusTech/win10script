@@ -50,7 +50,7 @@ if (Test-Path ~\AppData\Local\Microsoft\WindowsApps\winget.exe){
         Remove-Item -Path ".\b0a0692da1034339b76dce1c298a1e42_License1.xml" -Force
         Write-Host "Unneeded Files Removed"
         $ResultText.Text = "`r`n" +"`r`n" + "Unneeded Files Removed"
-    }elseif(((Get-ComputerInfo).WindowsVersion) -lt "1809")){#Checks if Windows Version is too old for winget
+    }elseif(((Get-ComputerInfo).WindowsVersion) -lt "1809"){#Checks if Windows Version is too old for winget
         Write-Host "Winget is not supported on this version of Windows"
     }else{
         #Installing Winget from the Microsoft Store
