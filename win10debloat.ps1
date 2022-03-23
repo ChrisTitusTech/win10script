@@ -1082,6 +1082,52 @@ $essentialtweaks.Add_Click({
     Set-ItemProperty -Path "HKLM:\SYSTEM\ControlSet001\Services\Ndu" -Name "Start" -Type DWord -Value 00000004
     Set-ItemProperty -Path "HKLM:\Control Panel\Mouse" -Name "MouseHoverTime" -Type DWord -Value 00000010
 
+
+    Write-Host "Blocking Ip telemetry "
+
+    cmd.exe /c "netsh advfirewall firewall add rule name="Block Windows Telemetry" dir=in action=block remoteip=134.170.30.202,137.116.81.24,157.56.106.189,184.86.53.99,2.22.61.43,2.22.61.66,204.79.197.200,23.218.212.69,65.39.117.23,65.55.108.23,64.4.54.254 enable=yes > nul"
+    cmd.exe /c "netsh advfirewall firewall add rule name="Block NVIDIA Telemetry" dir=in action=block remoteip=8.36.80.197,8.36.80.224,8.36.80.252,8.36.113.118,8.36.113.141,8.36.80.230,8.36.80.231,8.36.113.126,8.36.80.195,8.36.80.217,8.36.80.237,8.36.80.246,8.36.113.116,8.36.113.139,8.36.80.244,216.228.121.209 enable=yes > nul"
+
+
+    $WindowsTele = {
+        134.170.30.202,
+        137.116.81.24,
+        157.56.106.189,
+        184.86.53.99,
+        2.22.61.43,
+        2.22.61.66,
+        204.79.197.200,
+        23.218.212.69,
+        65.39.117.23,
+        65.55.108.23,
+        64.4.54.254
+    }
+
+    $NividiaTele = {
+        8.36.80.197,
+        8.36.80.224,
+        8.36.80.252,
+        8.36.113.118,
+        8.36.113.141,
+        8.36.80.230,
+        8.36.80.231,
+        8.36.113.126,
+        8.36.80.195,
+        8.36.80.217,
+        8.36.80.237,
+        8.36.80.246,
+        8.36.113.116,
+        8.36.113.139,
+        8.36.80.244,
+        216.228.121.209
+    }
+
+    NetSH AdvFirewall Firewall Add Rule Name=$NividiaTele Dir=in Action=Block enable=yes > null
+
+
+
+
+
 	# Network Tweaks
 	Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters" -Name "IRPStackSize" -Type DWord -Value 20
 
