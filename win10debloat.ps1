@@ -989,7 +989,7 @@ $essentialtweaks.Add_Click({
     	Stop-Process $taskmgr
     	$preferences.Preferences[28] = 0
     	Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\TaskManager" -Name "Preferences" -Type Binary -Value $preferences.Preferences
-    }
+    } else {Write-Host "Task Manager patch not run in builds 22557+ due to bug"}
     Write-Host "Showing file operations details..."
     If (!(Test-Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\OperationStatusManager")) {
         New-Item -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\OperationStatusManager" | Out-Null
