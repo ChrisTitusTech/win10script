@@ -1,3 +1,41 @@
+param(
+    [switch]$Essential = $false,
+    [switch]$UndoEssential = $false,
+    [switch]$UTCTime = $false,
+    [switch]$Numlock = $false,
+    [switch]$NumlockFix = $false,
+    [switch]$Search = $false,
+    [switch]$Background = $false,
+    [switch]$BackgroundUndo = $false,
+    [switch]$DisableCortana = $false,
+    [switch]$EnableCortana = $false,
+    [switch]$BloatApps = $false,
+    [switch]$BloatUndo = $false,
+    [switch]$SecurityWindowsUpdates = $false,
+    [switch]$DefaultWindowsUpdates = $false,
+    [switch]$DisableWindowsUpdates = $false,
+    [switch]$EnableWindowsUpdates = $false,
+    [switch]$DisableActionCenter = $false,
+    [switch]$EnableActionCenter = $false,
+    [switch]$PerformanceVisuals = $false,
+    [switch]$AppearanceVisuals = $false,
+    [switch]$DisableOnedrive = $false,
+    [switch]$EnableOnedrive = $false,
+    [switch]$Dark = $false,
+    [switch]$Light = $false,
+    [switch]$HideTrayIcons = $false,
+    [switch]$ShowTrayIcons = $false,
+    [switch]$ClipboardHistoryUndo = $false,
+    [switch]$LocationTrackingUndo = $false,
+    [switch]$EnableHibernation = $false,
+    [switch]$YourPhoneUndo = $false,
+    [switch]$PowerPlans = $false,
+    [switch]$EnableNFS = $false,
+    [switch]$EnableVirtualization = $false,
+    [switch]$WindowsUpdateRepair = $false,
+    [switch]$QuitAfter = $false
+)
+
 Add-Type -AssemblyName System.Windows.Forms
 [System.Windows.Forms.Application]::EnableVisualStyles()
 
@@ -910,7 +948,7 @@ $gimp.Add_Click({
     $ResultText.text = "`r`n" + "Finished Installing Gimp Image Editor" + "`r`n" + "`r`n" + "Ready for Next Task"
 })
 
-$essentialtweaks.Add_Click({
+function essentialtweaks{
     Write-Host "Creating Restore Point in case something bad happens"
     $ResultText.text = "`r`n" +"`r`n" + "Applying Essential Tweaks..."
     Enable-ComputerRestore -Drive "$env:homedrive"
@@ -1138,118 +1176,124 @@ $essentialtweaks.Add_Click({
     #Service tweaks to Manual
     $ResultText.text += "`r`n" +"Setting Services to Manual..."
     $services = @(
-    "ALG"                                          #Application Layer Gateway Service(Provides support for 3rd party protocol plug-ins for Internet Connection Sharing)
-    "AJRouter"                                     #Needed for AllJoyn Router Service
-    "BcastDVRUserService_48486de"                  #GameDVR and Broadcast is used for Game Recordings and Live Broadcasts
-    #"BDESVC"                                      #Bitlocker Drive Encryption Service
-    #"BFE"                                         #Base Filtering Engine (Manages Firewall and Internet Protocol security)
-    #"BluetoothUserService_48486de"                #Bluetooth user service supports proper functionality of Bluetooth features relevant to each user session.
-    #"BrokerInfrastructure"                        #Windows Infrastructure Service (Controls which background tasks can run on the system)
-    "Browser"                                      #Let users browse and locate shared resources in neighboring computers
-    "BthAvctpSvc"                                  #AVCTP service (needed for Bluetooth Audio Devices or Wireless Headphones)
-    "CaptureService_48486de"                       #Optional screen capture functionality for applications that call the Windows.Graphics.Capture API.
-    "cbdhsvc_48486de"                              #Clipboard Service
-    "diagnosticshub.standardcollector.service"     #Microsoft (R) Diagnostics Hub Standard Collector Service
-    "DiagTrack"                                    #Diagnostics Tracking Service
-    "dmwappushservice"                             #WAP Push Message Routing Service
-    "DPS"                                          #Diagnostic Policy Service (Detects and Troubleshoots Potential Problems)
-    "edgeupdate"                                   #Edge Update Service
-    "edgeupdatem"                                  #Another Update Service
-    "EntAppSvc"                                    #Enterprise Application Management.
-    "Fax"                                          #Fax Service
-    "fhsvc"                                        #Fax History
-    "FontCache"                                    #Windows font cache
-    #"FrameServer"                                 #Windows Camera Frame Server (Allows multiple clients to access video frames from camera devices)
-    "gupdate"                                      #Google Update
-    "gupdatem"                                     #Another Google Update Service
-    "iphlpsvc"                                     #ipv6(Most websites use ipv4 instead)
-    "lfsvc"                                        #Geolocation Service
-    #"LicenseManager"                              #Disable LicenseManager (Windows Store may not work properly)
-    "lmhosts"                                      #TCP/IP NetBIOS Helper
-    "MapsBroker"                                   #Downloaded Maps Manager
-    "MicrosoftEdgeElevationService"                #Another Edge Update Service
-    "MSDTC"                                        #Distributed Transaction Coordinator
-    #"ndu"                                         #Windows Network Data Usage Monitor (Disabling Breaks Task Manager Per-Process Network Monitoring)
-    "NetTcpPortSharing"                            #Net.Tcp Port Sharing Service
-    "PcaSvc"                                       #Program Compatibility Assistant Service
-    "PerfHost"                                     #Remote users and 64-bit processes to query performance.
-    "PhoneSvc"                                     #Phone Service(Manages the telephony state on the device)
-    #"PNRPsvc"                                     #Peer Name Resolution Protocol (Some peer-to-peer and collaborative applications, such as Remote Assistance, may not function, Discord will still work)
-    #"p2psvc"                                      #Peer Name Resolution Protocol(Enables multi-party communication using Peer-to-Peer Grouping.  If disabled, some applications, such as HomeGroup, may not function. Discord will still work)iscord will still work)
-    #"p2pimsvc"                                    #Peer Networking Identity Manager (Peer-to-Peer Grouping services may not function, and some applications, such as HomeGroup and Remote Assistance, may not function correctly. Discord will still work)
-    "PrintNotify"                                  #Windows printer notifications and extentions
-    "QWAVE"                                        #Quality Windows Audio Video Experience (audio and video might sound worse)
-    "RemoteAccess"                                 #Routing and Remote Access
-    "RemoteRegistry"                               #Remote Registry
-    "RetailDemo"                                   #Demo Mode for Store Display
-    "RtkBtManServ"                                 #Realtek Bluetooth Device Manager Service
-    "SCardSvr"                                     #Windows Smart Card Service
-    "seclogon"                                     #Secondary Logon (Disables other credentials only password will work)
-    "SEMgrSvc"                                     #Payments and NFC/SE Manager (Manages payments and Near Field Communication (NFC) based secure elements)
-    "SharedAccess"                                 #Internet Connection Sharing (ICS)
-    #"Spooler"                                     #Printing
-    "stisvc"                                       #Windows Image Acquisition (WIA)
-    #"StorSvc"                                     #StorSvc (usb external hard drive will not be reconized by windows)
-    "SysMain"                                      #Analyses System Usage and Improves Performance
-    "TrkWks"                                       #Distributed Link Tracking Client
-    #"WbioSrvc"                                    #Windows Biometric Service (required for Fingerprint reader / facial detection)
-    "WerSvc"                                       #Windows error reporting
-    "wisvc"                                        #Windows Insider program(Windows Insider will not work if Disabled)
-    #"WlanSvc"                                     #WLAN AutoConfig
-    "WMPNetworkSvc"                                #Windows Media Player Network Sharing Service
-    "WpcMonSvc"                                    #Parental Controls
-    "WPDBusEnum"                                   #Portable Device Enumerator Service
-    "WpnService"                                   #WpnService (Push Notifications may not work)
-    #"wscsvc"                                      #Windows Security Center Service
-    "WSearch"                                      #Windows Search
-    "XblAuthManager"                               #Xbox Live Auth Manager
-    "XblGameSave"                                  #Xbox Live Game Save Service
-    "XboxNetApiSvc"                                #Xbox Live Networking Service
-    "XboxGipSvc"                                   #Xbox Accessory Management Service
-     #Hp services
-    "HPAppHelperCap"
-    "HPDiagsCap"
-    "HPNetworkCap"
-    "HPSysInfoCap"
-    "HpTouchpointAnalyticsService"
-    #hyper-v services
-    "HvHost"
-    "vmicguestinterface"
-    "vmicheartbeat"
-    "vmickvpexchange"
-    "vmicrdv"
-    "vmicshutdown"
-    "vmictimesync"
-    "vmicvmsession"
-    #Services that cannot be disabled
-    #"WdNisSvc"
-)
+        "ALG"                                          #Application Layer Gateway Service(Provides support for 3rd party protocol plug-ins for Internet Connection Sharing)
+        "AJRouter"                                     #Needed for AllJoyn Router Service
+        "BcastDVRUserService_48486de"                  #GameDVR and Broadcast is used for Game Recordings and Live Broadcasts
+        #"BDESVC"                                      #Bitlocker Drive Encryption Service
+        #"BFE"                                         #Base Filtering Engine (Manages Firewall and Internet Protocol security)
+        #"BluetoothUserService_48486de"                #Bluetooth user service supports proper functionality of Bluetooth features relevant to each user session.
+        #"BrokerInfrastructure"                        #Windows Infrastructure Service (Controls which background tasks can run on the system)
+        "Browser"                                      #Let users browse and locate shared resources in neighboring computers
+        "BthAvctpSvc"                                  #AVCTP service (needed for Bluetooth Audio Devices or Wireless Headphones)
+        "CaptureService_48486de"                       #Optional screen capture functionality for applications that call the Windows.Graphics.Capture API.
+        "cbdhsvc_48486de"                              #Clipboard Service
+        "diagnosticshub.standardcollector.service"     #Microsoft (R) Diagnostics Hub Standard Collector Service
+        "DiagTrack"                                    #Diagnostics Tracking Service
+        "dmwappushservice"                             #WAP Push Message Routing Service
+        "DPS"                                          #Diagnostic Policy Service (Detects and Troubleshoots Potential Problems)
+        "edgeupdate"                                   #Edge Update Service
+        "edgeupdatem"                                  #Another Update Service
+        "EntAppSvc"                                    #Enterprise Application Management.
+        "Fax"                                          #Fax Service
+        "fhsvc"                                        #Fax History
+        "FontCache"                                    #Windows font cache
+        #"FrameServer"                                 #Windows Camera Frame Server (Allows multiple clients to access video frames from camera devices)
+        "gupdate"                                      #Google Update
+        "gupdatem"                                     #Another Google Update Service
+        "iphlpsvc"                                     #ipv6(Most websites use ipv4 instead)
+        "lfsvc"                                        #Geolocation Service
+        #"LicenseManager"                              #Disable LicenseManager (Windows Store may not work properly)
+        "lmhosts"                                      #TCP/IP NetBIOS Helper
+        "MapsBroker"                                   #Downloaded Maps Manager
+        "MicrosoftEdgeElevationService"                #Another Edge Update Service
+        "MSDTC"                                        #Distributed Transaction Coordinator
+        #"ndu"                                         #Windows Network Data Usage Monitor (Disabling Breaks Task Manager Per-Process Network Monitoring)
+        "NetTcpPortSharing"                            #Net.Tcp Port Sharing Service
+        "PcaSvc"                                       #Program Compatibility Assistant Service
+        "PerfHost"                                     #Remote users and 64-bit processes to query performance.
+        "PhoneSvc"                                     #Phone Service(Manages the telephony state on the device)
+        #"PNRPsvc"                                     #Peer Name Resolution Protocol (Some peer-to-peer and collaborative applications, such as Remote Assistance, may not function, Discord will still work)
+        #"p2psvc"                                      #Peer Name Resolution Protocol(Enables multi-party communication using Peer-to-Peer Grouping.  If disabled, some applications, such as HomeGroup, may not function. Discord will still work)iscord will still work)
+        #"p2pimsvc"                                    #Peer Networking Identity Manager (Peer-to-Peer Grouping services may not function, and some applications, such as HomeGroup and Remote Assistance, may not function correctly. Discord will still work)
+        "PrintNotify"                                  #Windows printer notifications and extentions
+        "QWAVE"                                        #Quality Windows Audio Video Experience (audio and video might sound worse)
+        "RemoteAccess"                                 #Routing and Remote Access
+        "RemoteRegistry"                               #Remote Registry
+        "RetailDemo"                                   #Demo Mode for Store Display
+        "RtkBtManServ"                                 #Realtek Bluetooth Device Manager Service
+        "SCardSvr"                                     #Windows Smart Card Service
+        "seclogon"                                     #Secondary Logon (Disables other credentials only password will work)
+        "SEMgrSvc"                                     #Payments and NFC/SE Manager (Manages payments and Near Field Communication (NFC) based secure elements)
+        "SharedAccess"                                 #Internet Connection Sharing (ICS)
+        #"Spooler"                                     #Printing
+        "stisvc"                                       #Windows Image Acquisition (WIA)
+        #"StorSvc"                                     #StorSvc (usb external hard drive will not be reconized by windows)
+        "SysMain"                                      #Analyses System Usage and Improves Performance
+        "TrkWks"                                       #Distributed Link Tracking Client
+        #"WbioSrvc"                                    #Windows Biometric Service (required for Fingerprint reader / facial detection)
+        "WerSvc"                                       #Windows error reporting
+        "wisvc"                                        #Windows Insider program(Windows Insider will not work if Disabled)
+        #"WlanSvc"                                     #WLAN AutoConfig
+        "WMPNetworkSvc"                                #Windows Media Player Network Sharing Service
+        "WpcMonSvc"                                    #Parental Controls
+        "WPDBusEnum"                                   #Portable Device Enumerator Service
+        "WpnService"                                   #WpnService (Push Notifications may not work)
+        #"wscsvc"                                      #Windows Security Center Service
+        "WSearch"                                      #Windows Search
+        "XblAuthManager"                               #Xbox Live Auth Manager
+        "XblGameSave"                                  #Xbox Live Game Save Service
+        "XboxNetApiSvc"                                #Xbox Live Networking Service
+        "XboxGipSvc"                                   #Xbox Accessory Management Service
+         #Hp services
+        "HPAppHelperCap"
+        "HPDiagsCap"
+        "HPNetworkCap"
+        "HPSysInfoCap"
+        "HpTouchpointAnalyticsService"
+        #hyper-v services
+        "HvHost"
+        "vmicguestinterface"
+        "vmicheartbeat"
+        "vmickvpexchange"
+        "vmicrdv"
+        "vmicshutdown"
+        "vmictimesync"
+        "vmicvmsession"
+        #Services that cannot be disabled
+        #"WdNisSvc"
+    )
 
-foreach ($service in $services) {
-    Write-Host "Setting $service StartupType to Manual..."
-    Get-Service -Name $service -ErrorAction SilentlyContinue | Set-Service -StartupType Manual
-}
+    foreach ($service in $services) {
+        Write-Host "Setting $service StartupType to Manual..."
+        Get-Service -Name $service -ErrorAction SilentlyContinue | Set-Service -StartupType Manual
+    }
 
     Write-Host "Essential Tweaks Completed - Please Reboot"
     $ResultText.text = "`r`n" + "Essential Tweaks Done" + "`r`n" + "`r`n" + "Ready for Next Task"
-})
+}
 
-$dualboottime.Add_Click({
+$essentialtweaks.Add_Click({essentialtweaks})
+
+function dualboottime{
     Write-Host "Setting BIOS time to UTC..."
     Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\TimeZoneInformation" -Name "RealTimeIsUniversal" -Type DWord -Value 1
     $ResultText.text = "`r`n" + "Time set to UTC for consistent time in Dual Boot Systems" + "`r`n" + "`r`n" + "Ready for Next Task"
-})
+}
 
-$laptopnumlock.Add_Click({
+$dualboottime.Add_Click({dualboottime})
+
+function laptopnumlock{
     Set-ItemProperty -Path "HKU:\.DEFAULT\Control Panel\Keyboard" -Name "InitialKeyboardIndicators" -Type DWord -Value 0
     Add-Type -AssemblyName System.Windows.Forms
     If (([System.Windows.Forms.Control]::IsKeyLocked('NumLock'))) {
         $wsh = New-Object -ComObject WScript.Shell
         $wsh.SendKeys('{NUMLOCK}')
     }
-})
+}
 
-$essentialundo.Add_Click({
+$laptopnumlock.Add_Click({laptopnumlock})
+
+function essentialundo{
     Write-Host "Creating Restore Point in case something bad happens"
     $ResultText.text = "`r`n" +"`r`n" + "Creating Restore Point and Reverting Settings..."
     Enable-ComputerRestore -Drive "$env:homedrive"
@@ -1386,9 +1430,12 @@ $essentialundo.Add_Click({
 
     Write-Host "Essential Undo Complete"
     $ResultText.text = "`r`n" +"`r`n" + "Essential Undo Complete"
-})
+}
 
-$windowssearch.Add_Click({
+$essentialundo.Add_Click({essentialundo})
+
+function windowssearch{
+    Write-Host "Tweaking Search and Start Menu..."
     $ResultText.text = "`r`n" +"`r`n" + "Tweaking Search and Start Menu..."
 
     Write-Host "Disabling Bing Search in Start Menu..."
@@ -1472,9 +1519,11 @@ $windowssearch.Add_Click({
 
     Write-Host "Search and Start Menu Tweaks Complete"
     $ResultText.text = "`r`n" +"`r`n" + "Search and Start Menu Tweaks Complete"
-})
+}
 
-$backgroundapps.Add_Click({
+$windowssearch.Add_Click({windowssearch})
+
+function backgroundapps{
     Write-Host "Disabling Background Application access..."
     Get-ChildItem -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\BackgroundAccessApplications" -Exclude "Microsoft.Windows.Cortana*" | ForEach {
         Set-ItemProperty -Path $_.PsPath -Name "Disabled" -Type DWord -Value 1
@@ -1482,9 +1531,11 @@ $backgroundapps.Add_Click({
     }
     Write-Host "Disabled Background Application access"
     $ResultText.text = "`r`n" +"`r`n" + "Disabled Background Application access"
-})
+}
 
-$cortana.Add_Click({
+$backgroundapps.Add_Click({backgroundapps})
+
+function cortana{
     Write-Host "Disabling Cortana..."
     If (!(Test-Path "HKCU:\SOFTWARE\Microsoft\Personalization\Settings")) {
         New-Item -Path "HKCU:\SOFTWARE\Microsoft\Personalization\Settings" -Force | Out-Null
@@ -1505,7 +1556,9 @@ $cortana.Add_Click({
     Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Windows Search" -Name "AllowCortana" -Type DWord -Value 0
     Write-Host "Disabled Cortana"
     $ResultText.text = "`r`n" +"`r`n" + "Disabled Cortana"
-})
+}
+
+$cortana.Add_Click({cortana})
 
 $Bloatware = @(
     #Unnecessary Windows 10/11 AppX Apps
@@ -1596,7 +1649,7 @@ $Bloatware = @(
     #"*Microsoft.WindowsStore*"
 )
 
-$removebloat.Add_Click({
+function removebloat{
     Write-Host "Removing Bloatware..."
     $ResultText.text = "`r`n" +"`r`n" + "Removing Bloatware..."
 
@@ -1609,9 +1662,11 @@ $removebloat.Add_Click({
 
     Write-Host "Finished Removing Bloatware Apps"
     $ResultText.text = "`r`n" +"`r`n" + "Finished Removing Bloatware Apps"
-})
+}
 
-$reinstallbloat.Add_Click({
+$removebloat.Add_Click({removebloat})
+
+function reinstallbloat{
     Write-Host "Reinstalling Bloatware..."
     $ResultText.text = "`r`n" +"`r`n" + "Reinstalling Bloatware..."
 
@@ -1623,9 +1678,11 @@ $reinstallbloat.Add_Click({
 
     Write-Host "Finished Reinstalling Bloatware Apps"
     $ResultText.text = "`r`n" +"`r`n" + "Finished Reinstalling Bloatware Apps"
-})
+}
 
-$defaultwindowsupdate.Add_Click({
+$reinstallbloat.Add_Click({reinstallbloat})
+
+function defaultwindowsupdate{
     Write-Host "Enabling Driver offering through Windows Update..."
     Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Device Metadata" -Name "PreventDeviceMetadataFromNetwork" -ErrorAction SilentlyContinue
     Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DriverSearching" -Name "DontPromptForWindowsUpdate" -ErrorAction SilentlyContinue
@@ -1639,9 +1696,11 @@ $defaultwindowsupdate.Add_Click({
 
     Write-Host "Set Windows Updates to Stock Settings"
     $ResultText.text = "`r`n" +"`r`n" + "Set Windows Updates to Stock Settings"
-})
+}
 
-$securitywindowsupdate.Add_Click({
+$defaultwindowsupdate.Add_Click({defaultwindowsupdate})
+
+function securitywindowsupdate{
     Write-Host "Disabling Driver offering through Windows Update..."
     If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Device Metadata")) {
         New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Device Metadata" -Force | Out-Null
@@ -1667,9 +1726,11 @@ $securitywindowsupdate.Add_Click({
 
     Write-Host "Set Windows Updates to Safe Settings"
     $ResultText.text = "`r`n" +"`r`n" + "Set Windows Update to Safe Settings"
-})
+}
 
-$actioncenter.Add_Click({
+$securitywindowsupdate.Add_Click({securitywindowsupdate})
+
+function actioncenter{
     if((Get-ComputerInfo).OSName.Substring(0,20) -eq 'Microsoft Windows 11'){
         Write-Host "This breaks Quick Settings in Windows 11 and is therefore not executed."
         $ResultText.text = "`r`n" +"`r`n" + "This breaks Quick Settings in Windows 11 and is therefore not executed."
@@ -1683,9 +1744,11 @@ $actioncenter.Add_Click({
         Write-Host "Disabled Action Center"
         $ResultText.text = "`r`n" +"`r`n" + "Disabled Action Center"
     }
-})
+}
 
-$performancefx.Add_Click({
+$actioncenter.Add_Click({actioncenter})
+
+function performancefx{
     Write-Host "Adjusting Visual Effects for performance..."
     Set-ItemProperty -Path "HKCU:\Control Panel\Desktop" -Name "DragFullWindows" -Type String -Value 0
     Set-ItemProperty -Path "HKCU:\Control Panel\Desktop" -Name "MenuShowDelay" -Type String -Value 200
@@ -1699,9 +1762,11 @@ $performancefx.Add_Click({
     Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\DWM" -Name "EnableAeroPeek" -Type DWord -Value 0
     Write-Host "Adjusted Visual Effects for performance"
     $ResultText.text = "`r`n" +"`r`n" + "Adjusted VFX for performance"
-})
+}
 
-$appearancefx.Add_Click({
+$performancefx.Add_Click({performancefx})
+
+function appearancefx{
 	Write-Host "Adjusting Visual Effects for appearance..."
 	Set-ItemProperty -Path "HKCU:\Control Panel\Desktop" -Name "DragFullWindows" -Type String -Value 1
 	Set-ItemProperty -Path "HKCU:\Control Panel\Desktop" -Name "MenuShowDelay" -Type String -Value 400
@@ -1715,9 +1780,11 @@ $appearancefx.Add_Click({
 	Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\DWM" -Name "EnableAeroPeek" -Type DWord -Value 1
     Write-Host "Visual Effects set for appearance (Default)"
     $ResultText.text = "`r`n" +"`r`n" + "Visual effects are set for appearance (Default)"
-})
+}
 
-$onedrive.Add_Click({
+$appearancefx.Add_Click({appearancefx})
+
+function onedrive{
     Write-Host "Disabling OneDrive..."
     $ResultText.text = "`r`n" +"`r`n" + "Disabling OneDrive..."
 
@@ -1752,31 +1819,39 @@ $onedrive.Add_Click({
 
     Write-Host "Disabled OneDrive"
     $ResultText.text = "`r`n" +"`r`n" + "Deleted and Disabled OneDrive"
-})
+}
 
-$darkmode.Add_Click({
+$onedrive.Add_Click({onedrive})
+
+function darkmode{
     Write-Host "Enabling Dark Mode..."
     Set-ItemProperty -Path HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize -Name AppsUseLightTheme -Value 0
     Write-Host "Enabled Dark Mode"
     $ResultText.text = "`r`n" +"`r`n" + "Enabled Dark Mode"
-})
+}
 
-$lightmode.Add_Click({
+$darkmode.Add_Click({darkmode})
+
+function lightmode{
     Write-Host "Enabling Light Mode..."
     Remove-ItemProperty -Path HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize -Name AppsUseLightTheme
     Write-Host "Enabling Light Mode"
     $ResultText.text = "`r`n" +"`r`n" + "Enabled Light Mode"
-})
+}
 
-$EActionCenter.Add_Click({
+$lightmode.Add_Click({lightmode})
+
+function EActionCenter{
     Write-Host "Enabling Action Center..."
 	Remove-ItemProperty -Path "HKCU:\SOFTWARE\Policies\Microsoft\Windows\Explorer" -Name "DisableNotificationCenter" -ErrorAction SilentlyContinue
 	Remove-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\PushNotifications" -Name "ToastEnabled" -ErrorAction SilentlyContinue
 	Write-Host "Enabled Action Center"
     $ResultText.text = "`r`n" +"`r`n" + "Enabled Action Center"
-})
+}
 
-$ECortana.Add_Click({
+$EActionCenter.Add_Click({EActionCenter})
+
+function ECortana{
     Write-Host "Enabling Cortana..."
 	Remove-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Personalization\Settings" -Name "AcceptedPrivacyPolicy" -ErrorAction SilentlyContinue
 	If (!(Test-Path "HKCU:\SOFTWARE\Microsoft\InputPersonalization\TrainedDataStore")) {
@@ -1797,32 +1872,39 @@ $ECortana.Add_Click({
 	Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Search" -Name "SearchboxTaskbarMode" -Type DWord -Value 1
 	Write-Host "Enabled Cortana"
     $ResultText.text = "`r`n" +"`r`n" + "Enabled Cortana and Restored Search"
-})
+}
 
-$HTrayIcons.Add_Click({
+$ECortana.Add_Click({ECortana})
+
+function HTrayIcons{
 	Write-Host "Hiding Tray icons..."
 	Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer" -Name "EnableAutoTray" -Type DWord -Value 1
 	Write-Host "Hid Tray Icons"
     $ResultText.text = "`r`n" +"`r`n" + "Tray icons are now factory defaults"
-})
+}
 
+$HTrayIcons.Add_Click({HTrayIcons})
 
-$STrayIcons.Add_Click({
+function STrayIcons{
 	Write-Host "Showing Tray Icons..."
 	Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer" -Name "EnableAutoTray" -Type DWord -Value 0
 	Write-Host "Now showing all Tray Icons"
     $ResultText.text = "`r`n" +"`r`n" + "Tray Icons set to show all"
-})
+}
 
-$EClipboardHistory.Add_Click({
+$STrayIcons.Add_Click({STrayIcons})
+
+function EClipboardHistory{
 	Write-Host "Enabling Clipboard History..."
 	Remove-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Clipboard" -Name "EnableClipboardHistory" -ErrorAction SilentlyContinue
     Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\System" -Name "AllowClipboardHistory" -ErrorAction SilentlyContinue
 	Write-Host "Enabled Clipboard History"
     $ResultText.text = "`r`n" +"`r`n" + "Enabled Clipboard History"
-})
+}
 
-$ELocation.Add_Click({
+$EClipboardHistory.Add_Click({EClipboardHistory})
+
+function ELocation{
 	Write-Host "Enabling Location Provider..."
 	Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\LocationAndSensors" -Name "DisableWindowsLocationProvider" -ErrorAction SilentlyContinue
 
@@ -1844,9 +1926,11 @@ $ELocation.Add_Click({
 
 	Write-Host "Enabled Location Tracking"
     $ResultText.text = "`r`n" +"`r`n" + "Location Tracking now on... Reboot to check."
-})
+}
 
-$RBackgroundApps.Add_Click({
+$ELocation.Add_Click({ELocation})
+
+function RBackgroundApps{
 	Write-Host "Allowing Background Apps..."
 	Get-ChildItem -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\BackgroundAccessApplications" -Exclude "Microsoft.Windows.Cortana*" | ForEach {
 		Remove-ItemProperty -Path $_.PsPath -Name "Disabled" -ErrorAction SilentlyContinue
@@ -1854,17 +1938,21 @@ $RBackgroundApps.Add_Click({
 	}
 	Write-Host "Enabled Background Apps"
     $ResultText.text = "`r`n" +"`r`n" + "Enabled Background Apps"
-})
+}
 
-$EHibernation.Add_Click({
+$RBackgroundApps.Add_Click({RBackgroundApps})
+
+function EHibernation{
     Write-Host "Enabling Hibernation..."
     Set-ItemProperty -Path "HKLM:\System\CurrentControlSet\Control\Session Manager\Power" -Name "HibernteEnabled" -Type Dword -Value 1
     Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FlyoutMenuSettings" -Name "ShowHibernateOption" -Type Dword -Value 1
     Write-Host "Enabled Hibernation"
     $ResultText.text = "`r`n" +"`r`n" + "Enabled Hibernation"
-})
+}
 
-$InstallOneDrive.Add_Click({
+$EHibernation.Add_Click({EHibernation})
+
+function InstallOneDrive{
     Write-Host "Installing Onedrive..."
     $ResultText.text = "`r`n" +"`r`n" + "Installing Onedrive..."
 
@@ -1873,9 +1961,11 @@ $InstallOneDrive.Add_Click({
 
     Write-Host "Installed Onedrive"
     $ResultText.text = "`r`n" +"`r`n" + "Finished Reinstalling OneDrive"
-})
+}
 
-$DisableNumLock.Add_Click({
+$InstallOneDrive.Add_Click({InstallOneDrive})
+
+function DisableNumLock{
     Write-Host "Disable NumLock after startup..."
     Set-ItemProperty -Path "HKU:\.DEFAULT\Control Panel\Keyboard" -Name "InitialKeyboardIndicators" -Type DWord -Value 0
     Add-Type -AssemblyName System.Windows.Forms
@@ -1884,9 +1974,11 @@ $DisableNumLock.Add_Click({
         $wsh.SendKeys('{NUMLOCK}')
     }
     $ResultText.text = "`r`n" +"`r`n" + "NUMLOCK Disabled"
-})
+}
 
-$yourphonefix.Add_Click({
+$DisableNumLock.Add_Click({DisableNumLock})
+
+function yourphonefix{
     Write-Host "Reinstalling Your Phone App..."
     $ResultText.text = "`r`n" +"`r`n" + "Reinstalling Your Phone App..."
     Add-AppxPackage -DisableDevelopmentMode -Register "$($(Get-AppXPackage -AllUsers "Microsoft.YourPhone").InstallLocation)\AppXManifest.xml"
@@ -1904,7 +1996,9 @@ $yourphonefix.Add_Click({
 
     Write-Host "You may need to Reboot and right-click Your Phone app and select repair"
     $ResultText.text = "`r`n" +"`r`n" + "You may need to Reboot and right-click Your Phone app and select repair"
-})
+}
+
+$yourphonefix.Add_Click({yourphonefix})
 
 $ncpa.Add_Click({
     cmd /c ncpa.cpl
@@ -1926,15 +2020,17 @@ $oldpower.Add_Click({
     cmd /c powercfg.cpl
 })
 
-$restorepower.Add_Click({
+function restorepower{
     if((Get-CimInstance -Name root\cimv2\power -Class Win32_PowerPlan | Where-Object ElementName -Like "Power Saver")){powercfg -duplicatescheme a1841308-3541-4fab-bc81-f71556f20b4a}
     if((Get-CimInstance -Name root\cimv2\power -Class Win32_PowerPlan | Where-Object ElementName -Like "Balanced")){powercfg -duplicatescheme 381b4222-f694-41f0-9685-ff5bb260df2e}
     if((Get-CimInstance -Name root\cimv2\power -Class Win32_PowerPlan | Where-Object ElementName -Like "Ultimate Performance")){powercfg -duplicatescheme e9a42b02-d5df-448d-aa00-03f14749eb61}
     Write-Host "Restored all power plans: Power Saver, Balanced, and Ultimate Performance"
     $ResultText.text = "`r`n" +"`r`n" + "Restored all power plans: Power Saver, Balanced, and Ultimate Performance"
-})
+}
 
-$NFS.Add_Click({
+$restorepower.Add_Click({restorepower})
+
+function NFS{
     Write-Host "Enabling NFS..."
     $ResultText.text = "`r`n" +"`r`n" + "Enabling NFS..."
 
@@ -1949,9 +2045,11 @@ $NFS.Add_Click({
 
     Write-Host "NFS is now setup for User based NFS mounts"
     $ResultText.text = "`r`n" +"`r`n" + "NFS is now setup for user based NFS mounts"
-})
+}
 
-$Virtualization.Add_Click({
+$NFS.Add_Click({NFS})
+
+function Virtualization{
     Write-Host "Enabling WSL and Hyper-V..."
     $ResultText.text = "`r`n" +"`r`n" + "Enabling WSL and Hyper-V..."
 
@@ -1976,9 +2074,11 @@ $Virtualization.Add_Click({
 
     Write-Host "HyperV is now installed and configured. Please Reboot before using."
     $ResultText.text = "`r`n" +"`r`n" + "HyperV is now installed and configured. Please Reboot before using."
-})
+}
 
-$windowsupdatefix.Add_Click({
+$Virtualization.Add_Click({Virtualization})
+
+function windowsupdatefix{
     Write-Host "Resetting/Repairing Windows Update..."
     $ResultText.text = "`r`n" +"`r`n" + "Resetting/Repairing Windows Update..."
 
@@ -2073,9 +2173,11 @@ $windowsupdatefix.Add_Click({
 
     Write-Host "Process Complete. Please reboot your computer."
     $ResultText.text = "`r`n" +"`r`n" + "Process complete. Please reboot your computer."
-})
+}
 
-$disableupdates.Add_Click({
+$windowsupdatefix.Add_Click({windowsupdatefix})
+
+function disableupdates{
     #Source: https://github.com/rgl/windows-vagrant/blob/master/disable-windows-updates.ps1
     Set-StrictMode -Version Latest
     $ProgressPreference = 'SilentlyContinue'
@@ -2158,9 +2260,11 @@ $disableupdates.Add_Click({
         Write-Host "Setting $service StartupType to Disabled"
         Get-Service -Name $service -ErrorAction SilentlyContinue | Set-Service -StartupType Disabled
     }
-})
+}
 
-$enableupdates.Add_Click({
+$disableupdates.Add_Click({disableupdates})
+
+function enableupdates{
     #Source: https://github.com/rgl/windows-vagrant/blob/master/disable-windows-updates.ps1
     Set-StrictMode -Version Latest
     $ProgressPreference = 'SilentlyContinue'
@@ -2243,6 +2347,46 @@ $enableupdates.Add_Click({
         Write-Host "Setting $service StartupType to Automatic"
         Get-Service -Name $service -ErrorAction SilentlyContinue | Set-Service -StartupType Automatic
     }
-})
+}
+
+$enableupdates.Add_Click({enableupdates})
+
+if($Essential -or $UndoEssential -or $UTCTime -or $Numlock -or $NumlockFix -or $Search -or $Background -or $BackgroundUndo -or $DisableCortana -or $EnableCortana -or $BloatApps -or $BloatUndo -or $SecurityWindowsUpdates -or $DefaultWindowsUpdates -or $DisableWindowsUpdates -or $EnableWindowsUpdates -or $DisableActionCenter -or $EnableActionCenter -or $PerformanceVisuals -or $AppearanceVisuals -or $DisableOnedrive -or $EnableOnedrive -or $Dark -or $Light -or $HideTrayIcons -or $ShowTrayIcons -or $ClipboardHistoryUndo -or $LocationTrackingUndo -or $EnableHibernation -or $YourPhoneUndo -or $PowerPlans -or $EnableNFS -or $EnableVirtualization -or $WindowsUpdateRepair){
+    if($Essential){essentialtweaks}
+    if($UndoEssential){essentialundo}
+    if($UTCTime){dualboottime}
+    if($Numlock){laptopnumlock}
+    if($NumlockFix){DisableNumLock}
+    if($Search){windowssearch}
+    if($Background){backgroundapps}
+    if($BackgroundUndo){RBackgroundApps}
+    if($DisableCortana){cortana}
+    if($EnableCortana){ECortana}
+    if($BloatApps){removebloat}
+    if($BloatUndo){reinstallbloat}
+    if($SecurityWindowsUpdates){securitywindowsupdate}
+    if($DefaultWindowsUpdates){defaultwindowsupdate}
+    if($DisableWindowsUpdates){disableupdates}
+    if($EnableWindowsUpdates){enableupdates}
+    if($DisableActionCenter){actioncenter}
+    if($EnableActionCenter){EActionCenter}
+    if($PerformanceVisuals){performancefx}
+    if($AppearanceVisuals){appearancefx}
+    if($DisableOnedrive){onedrive}
+    if($EnableOnedrive){InstallOneDrive}
+    if($Dark){darkmode}
+    if($Light){lightmode}
+    if($HideTrayIcons){HTrayIcons}
+    if($ShowTrayIcons){STrayIcons}
+    if($ClipboardHistoryUndo){EClipboardHistory}
+    if($LocationTrackingUndo){ELocation}
+    if($EnableHibernation){EHibernation}
+    if($YourPhoneUndo){yourphonefix}
+    if($PowerPlans){restorepower}
+    if($EnableNFS){NFS}
+    if($EnableVirtualization){Virtualization}
+    if($WindowsUpdateRepair){windowsupdatefix}
+    if($QuitAfter){Break}
+}
 
 [void]$Form.ShowDialog()
