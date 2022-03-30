@@ -1103,7 +1103,7 @@ function essentialtweaks{
     Write-Host "Hiding Tray icons..."
     Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer" -Name "EnableAutoTray" -Type DWord -Value 1
 
-    if((Get-ComputerInfo).OSName.Substring(0,20) -eq 'Microsoft Windows 11'){
+    if((Get-ComputerInfo).OSName.Substring(0,20) -eq "Microsoft Windows 11"){
         Write-Host "Enabling Old Right Click Menu..."
         if(!(Test-Path "HKCU:\SOFTWARE\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32")){
             New-Item -Path "HKCU:\SOFTWARE\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32" | Out-Null
@@ -1396,7 +1396,7 @@ function essentialundo{
     }
     Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\OperationStatusManager" -Name "EnthusiastMode" -Type DWord -Value 0
 
-    if((Get-ComputerInfo).OSName.Substring(0,20) -eq 'Microsoft Windows 11'){
+    if((Get-ComputerInfo).OSName.Substring(0,20) -eq "Microsoft Windows 11"){
         Write-Host "Enabling New Right Click Menu..."
         if(Test-Path "HKCU:\SOFTWARE\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32"){
             Remove-Item -Path "HKCU:\SOFTWARE\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}" -Recurse -Force | Out-Null
@@ -1453,22 +1453,22 @@ function windowssearch{
     Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Search" -Name "SearchboxTaskbarMode" -Type DWord -Value 0
 
     Write-Host "Removing Start Menu Tiles..."
-    Set-Content -Path 'C:\Users\Default\AppData\Local\Microsoft\Windows\Shell\DefaultLayouts.xml' -Value '<LayoutModificationTemplate xmlns:defaultlayout="http://schemas.microsoft.com/Start/2014/FullDefaultLayout" xmlns:start="http://schemas.microsoft.com/Start/2014/StartLayout" Version="1" xmlns="http://schemas.microsoft.com/Start/2014/LayoutModification">'
-    Add-Content -Path 'C:\Users\Default\AppData\Local\Microsoft\Windows\Shell\DefaultLayouts.xml' -value '  <LayoutOptions StartTileGroupCellWidth="6" />'
-    Add-Content -Path 'C:\Users\Default\AppData\Local\Microsoft\Windows\Shell\DefaultLayouts.xml' -value '  <DefaultLayoutOverride>'
-    Add-Content -Path 'C:\Users\Default\AppData\Local\Microsoft\Windows\Shell\DefaultLayouts.xml' -value '    <StartLayoutCollection>'
-    Add-Content -Path 'C:\Users\Default\AppData\Local\Microsoft\Windows\Shell\DefaultLayouts.xml' -value '      <defaultlayout:StartLayout GroupCellWidth="6" />'
-    Add-Content -Path 'C:\Users\Default\AppData\Local\Microsoft\Windows\Shell\DefaultLayouts.xml' -value '    </StartLayoutCollection>'
-    Add-Content -Path 'C:\Users\Default\AppData\Local\Microsoft\Windows\Shell\DefaultLayouts.xml' -value '  </DefaultLayoutOverride>'
-    Add-Content -Path 'C:\Users\Default\AppData\Local\Microsoft\Windows\Shell\DefaultLayouts.xml' -value '    <CustomTaskbarLayoutCollection>'
-    Add-Content -Path 'C:\Users\Default\AppData\Local\Microsoft\Windows\Shell\DefaultLayouts.xml' -value '      <defaultlayout:TaskbarLayout>'
-    Add-Content -Path 'C:\Users\Default\AppData\Local\Microsoft\Windows\Shell\DefaultLayouts.xml' -value '        <taskbar:TaskbarPinList>'
-    Add-Content -Path 'C:\Users\Default\AppData\Local\Microsoft\Windows\Shell\DefaultLayouts.xml' -value '          <taskbar:UWA AppUserModelID="Microsoft.MicrosoftEdge_8wekyb3d8bbwe!MicrosoftEdge" />'
-    Add-Content -Path 'C:\Users\Default\AppData\Local\Microsoft\Windows\Shell\DefaultLayouts.xml' -value '          <taskbar:DesktopApp DesktopApplicationLinkPath="%APPDATA%\Microsoft\Windows\Start Menu\Programs\System Tools\File Explorer.lnk" />'
-    Add-Content -Path 'C:\Users\Default\AppData\Local\Microsoft\Windows\Shell\DefaultLayouts.xml' -value '        </taskbar:TaskbarPinList>'
-    Add-Content -Path 'C:\Users\Default\AppData\Local\Microsoft\Windows\Shell\DefaultLayouts.xml' -value '      </defaultlayout:TaskbarLayout>'
-    Add-Content -Path 'C:\Users\Default\AppData\Local\Microsoft\Windows\Shell\DefaultLayouts.xml' -value '    </CustomTaskbarLayoutCollection>'
-    Add-Content -Path 'C:\Users\Default\AppData\Local\Microsoft\Windows\Shell\DefaultLayouts.xml' -value '</LayoutModificationTemplate>'
+    Set-Content -Path "$env:systemdrive\Users\Default\AppData\Local\Microsoft\Windows\Shell\DefaultLayouts.xml" -Value '<LayoutModificationTemplate xmlns:defaultlayout="http://schemas.microsoft.com/Start/2014/FullDefaultLayout" xmlns:start="http://schemas.microsoft.com/Start/2014/StartLayout" Version="1" xmlns="http://schemas.microsoft.com/Start/2014/LayoutModification">'
+    Add-Content -Path "$env:systemdrive\Users\Default\AppData\Local\Microsoft\Windows\Shell\DefaultLayouts.xml" -value '  <LayoutOptions StartTileGroupCellWidth="6" />'
+    Add-Content -Path "$env:systemdrive\Users\Default\AppData\Local\Microsoft\Windows\Shell\DefaultLayouts.xml" -value '  <DefaultLayoutOverride>'
+    Add-Content -Path "$env:systemdrive\Users\Default\AppData\Local\Microsoft\Windows\Shell\DefaultLayouts.xml" -value '    <StartLayoutCollection>'
+    Add-Content -Path "$env:systemdrive\Users\Default\AppData\Local\Microsoft\Windows\Shell\DefaultLayouts.xml" -value '      <defaultlayout:StartLayout GroupCellWidth="6" />'
+    Add-Content -Path "$env:systemdrive\Users\Default\AppData\Local\Microsoft\Windows\Shell\DefaultLayouts.xml" -value '    </StartLayoutCollection>'
+    Add-Content -Path "$env:systemdrive\Users\Default\AppData\Local\Microsoft\Windows\Shell\DefaultLayouts.xml" -value '  </DefaultLayoutOverride>'
+    Add-Content -Path "$env:systemdrive\Users\Default\AppData\Local\Microsoft\Windows\Shell\DefaultLayouts.xml" -value '    <CustomTaskbarLayoutCollection>'
+    Add-Content -Path "$env:systemdrive\Users\Default\AppData\Local\Microsoft\Windows\Shell\DefaultLayouts.xml" -value '      <defaultlayout:TaskbarLayout>'
+    Add-Content -Path "$env:systemdrive\Users\Default\AppData\Local\Microsoft\Windows\Shell\DefaultLayouts.xml" -value '        <taskbar:TaskbarPinList>'
+    Add-Content -Path "$env:systemdrive\Users\Default\AppData\Local\Microsoft\Windows\Shell\DefaultLayouts.xml" -value '          <taskbar:UWA AppUserModelID="Microsoft.MicrosoftEdge_8wekyb3d8bbwe!MicrosoftEdge" />'
+    Add-Content -Path "$env:systemdrive\Users\Default\AppData\Local\Microsoft\Windows\Shell\DefaultLayouts.xml" -value '          <taskbar:DesktopApp DesktopApplicationLinkPath="%APPDATA%\Microsoft\Windows\Start Menu\Programs\System Tools\File Explorer.lnk" />'
+    Add-Content -Path "$env:systemdrive\Users\Default\AppData\Local\Microsoft\Windows\Shell\DefaultLayouts.xml" -value '        </taskbar:TaskbarPinList>'
+    Add-Content -Path "$env:systemdrive\Users\Default\AppData\Local\Microsoft\Windows\Shell\DefaultLayouts.xml" -value '      </defaultlayout:TaskbarLayout>'
+    Add-Content -Path "$env:systemdrive\Users\Default\AppData\Local\Microsoft\Windows\Shell\DefaultLayouts.xml" -value '    </CustomTaskbarLayoutCollection>'
+    Add-Content -Path "$env:systemdrive\Users\Default\AppData\Local\Microsoft\Windows\Shell\DefaultLayouts.xml" -value '</LayoutModificationTemplate>'
 
     $START_MENU_LAYOUT = @"
     <LayoutModificationTemplate xmlns:defaultlayout="http://schemas.microsoft.com/Start/2014/FullDefaultLayout" xmlns:start="http://schemas.microsoft.com/Start/2014/StartLayout" Version="1" xmlns:taskbar="http://schemas.microsoft.com/Start/2014/TaskbarLayout" xmlns="http://schemas.microsoft.com/Start/2014/LayoutModification">
@@ -1482,7 +1482,7 @@ function windowssearch{
 "@
 
     #Delete layout file if it already exists
-    $layoutFile="C:\Windows\StartMenuLayout.xml"
+    $layoutFile="$env:systemroot\Windows\StartMenuLayout.xml"
     If(Test-Path $layoutFile)
     {
         Remove-Item $layoutFile
@@ -1731,7 +1731,7 @@ function securitywindowsupdate{
 $securitywindowsupdate.Add_Click({securitywindowsupdate})
 
 function actioncenter{
-    if((Get-ComputerInfo).OSName.Substring(0,20) -eq 'Microsoft Windows 11'){
+    if((Get-ComputerInfo).OSName.Substring(0,20) -eq "Microsoft Windows 11"){
         Write-Host "This breaks Quick Settings in Windows 11 and is therefore not executed."
         $ResultText.text = "`r`n" +"`r`n" + "This breaks Quick Settings in Windows 11 and is therefore not executed."
     }else{
@@ -2188,7 +2188,7 @@ function disableupdates{
         Write-Host (($_.ScriptStackTrace -split '\r?\n') -replace '^(.*)$','ERROR: $1')
         Write-Host (($_.Exception.ToString() -split '\r?\n') -replace '^(.*)$','ERROR EXCEPTION: $1')
         Write-Host
-        Write-Host 'Sleeping for 60m to give you time to look around the instance before self-termination...'
+        Write-Host "Sleeping for 60m to give you time to look around the instance before self-termination..."
         Start-Sleep -Seconds (3600)
         Exit 1
     }
@@ -2275,7 +2275,7 @@ function enableupdates{
         Write-Host (($_.ScriptStackTrace -split '\r?\n') -replace '^(.*)$','ERROR: $1')
         Write-Host (($_.Exception.ToString() -split '\r?\n') -replace '^(.*)$','ERROR EXCEPTION: $1')
         Write-Host
-        Write-Host 'Sleeping for 60m to give you time to look around the instance before self-termination...'
+        Write-Host "Sleeping for 60m to give you time to look around the instance before self-termination..."
         Start-Sleep -Seconds (3600)
         Exit 1
     }
