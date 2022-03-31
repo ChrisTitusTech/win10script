@@ -55,10 +55,10 @@ Write-Host "Checking if Winget is Installed..."
 if (Test-Path ~\AppData\Local\Microsoft\WindowsApps\winget.exe){
     Write-Host "Winget Already Installed"
 }else{
-    if((((Get-ComputerInfo).OSName.IndexOf("LTSC")) -ne -1) -and (((Get-ComputerInfo).WindowsVersion) -ge "1809")){#Checks if Windows edition is LTSC 2019+
+    if(((((Get-ComputerInfo).OSName.IndexOf("LTSC")) -ne -1) -or ((Get-ComputerInfo).OSName.IndexOf("Server") -ne -1)) -and (((Get-ComputerInfo).WindowsVersion) -ge "1809")){#Checks if Windows edition is LTSC 2019+
         #Manually Installing Winget
-        Write-Host "Running Alternative Installer for LTSC Edition"
-        $ResultText.Text = "`r`n" +"`r`n" + "Running Alternative Installer for LTSC Edition"
+        Write-Host "Running Alternative Installer for LTSC/Server Editions"
+        $ResultText.Text = "`r`n" +"`r`n" + "Running Alternative Installer for LTSC/Server Editions"
 
         #Download Needed Files
         Write-Host "Downloading Needed Files..."
