@@ -10,21 +10,13 @@ If (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]:
 	Exit
 }
 
-# GUI Specs
-Write-Host "Checking winget..."
-
-# Check if winget is installed
-if (Test-Path ~\AppData\Local\Microsoft\WindowsApps\winget.exe){
-    'Winget Already Installed'
-}  
-else{
-    # Installing winget from the Microsoft Store
-	Write-Host "Winget not found, installing it now."
+# Check if Winget is Installed, if not Install From GitHub
+if (!(Test-Path ~\AppData\Local\Microsoft\WindowsApps\winget.exe)){
+    Write-Host "Winget not Found, Installing Now..."
     $ResultText.text = "`r`n" +"`r`n" + "Installing Winget... Please Wait"
-	Start-Process "ms-appinstaller:?source=https://aka.ms/getwinget"
-	$nid = (Get-Process AppInstaller).Id
-	Wait-Process -Id $nid
-	Write-Host Winget Installed
+    $latest = (Invoke-WebRequest -UseBasicParsing -URI "https://github.com/microsoft/winget-cli/releases/latest").Links.Href | Select-String ".msixbundle"
+    Start-BitsTransfer "https://github.com$latest"; .\Microsoft.DesktopAppInstaller_*.msixbundle
+    Write-Host "Winget Successfully Installed"
     $ResultText.text = "`r`n" +"`r`n" + "Winget Installed - Ready for Next Task"
 }
 
@@ -126,12 +118,12 @@ $powertoys.height                = 30
 $powertoys.location              = New-Object System.Drawing.Point(4,67)
 $powertoys.Font                  = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
-$winterminal                     = New-Object system.Windows.Forms.Button
-$winterminal.text                = "Windows Terminal"
-$winterminal.width               = 211
-$winterminal.height              = 30
-$winterminal.location            = New-Object System.Drawing.Point(3,32)
-$winterminal.Font                = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
+$batchinstall                     = New-Object system.Windows.Forms.Button
+$batchinstall.text                = "Batch Install"
+$batchinstall.width               = 211
+$batchinstall.height              = 30
+$batchinstall.location            = New-Object System.Drawing.Point(3,32)
+$batchinstall.Font                = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
 $vscode                          = New-Object system.Windows.Forms.Button
 $vscode.text                     = "VS Code"
@@ -661,7 +653,7 @@ $restorepower.location           = New-Object System.Drawing.Point(4,159)
 $restorepower.Font               = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
 $Form.controls.AddRange(@($Panel1,$Panel2,$Label3,$Label15,$Panel4,$PictureBox1,$Label1,$Panel3,$ResultText,$Label10,$Label11,$urlfixwinstartup,$urlremovevirus,$urlcreateiso))
-$Panel1.controls.AddRange(@($brave,$firefox,$7zip,$sharex,$adobereader,$notepad,$gchrome,$mpc,$vlc,$powertoys,$winterminal,$vscode,$Label2,$everythingsearch,$sumatrapdf,$vscodium,$imageglass,$gimp,$Label7,$Label8,$Label9,$advancedipscanner,$putty,$etcher,$translucenttb,$githubdesktop,$discord,$autohotkey))
+$Panel1.controls.AddRange(@($brave,$firefox,$7zip,$sharex,$adobereader,$notepad,$gchrome,$mpc,$vlc,$powertoys,$batchinstall,$vscode,$Label2,$everythingsearch,$sumatrapdf,$vscodium,$imageglass,$gimp,$Label7,$Label8,$Label9,$advancedipscanner,$putty,$etcher,$translucenttb,$githubdesktop,$discord,$autohotkey))
 $Panel2.controls.AddRange(@($essentialtweaks,$backgroundapps,$cortana,$actioncenter,$darkmode,$performancefx,$onedrive,$lightmode,$essentialundo,$EActionCenter,$ECortana,$RBackgroundApps,$HTrayIcons,$EClipboardHistory,$ELocation,$InstallOneDrive,$removebloat,$reinstallbloat,$WarningLabel,$Label5,$appearancefx,$STrayIcons,$EHibernation,$dualboottime))
 $Panel4.controls.AddRange(@($defaultwindowsupdate,$securitywindowsupdate,$Label16,$Label17,$Label18,$Label19,$windowsupdatefix,$disableupdates,$enableupdates,$Label12))
 $Panel3.controls.AddRange(@($yourphonefix,$ncpa,$oldcontrolpanel,$oldsoundpanel,$oldsystempanel,$NFS,$laptopnumlock,$Virtualization,$oldpower,$restorepower))
@@ -780,12 +772,44 @@ $urlcreateiso.Add_Click({
     Start-Process "https://youtu.be/R6XPff38iSc"
 })
 
-$winterminal.Add_Click({
-    Write-Host "Installing New Windows Terminal"
-    $ResultText.text = "`r`n" +"`r`n" + "Installing New Windows Terminal... Please Wait" 
-    winget install -e Microsoft.WindowsTerminal | Out-Host
-    if($?) { Write-Host "Installed New Windows Terminal" }
-    $ResultText.text = "`r`n" + "Finished Installing New Windows Terminal" + "`r`n" + "`r`n" + "Ready for Next Task"
+$batchinstall.Add_Click({
+    $applications = @(
+        "## Utilities"
+        "Windows Terminal"
+        "PowerToys (Preview)"
+        "7-Zip"
+        "AutoHotkey"
+        "Discord"
+        "BleachBit"
+        "GitHub Desktop"
+        "TranslucentTB"
+        "balenaEtcher"
+        "PuTTY"
+        "WinSCP"
+        "Advanced IP Scanner"
+        "Everything"
+        "## Web Browsers"
+        "Brave"
+        "Mozilla Firefox"
+        "Google Chrome"
+        "## Video & Image Tools"
+        "ShareX"
+        "ImageGlass"
+        "GIMP"
+        "VLC media player"
+        "MPC-HC"
+        "## Document Tools"
+        "VSCodium"
+        "Microsoft Visual Studio Code"
+        "Notepad++"
+        "Adobe Acrobat Reader DC"
+    )
+    $install = $applications | Out-GridView -Title "Select Application(s) to Install" -OutputMode Multiple
+    foreach ($application in $install){
+    	$ResultText.text = "`r`n" +"`r`n" + "Installing $application"
+    	winget install -s winget -e "$application" --accept-source-agreements | Out-Host
+	}
+    $ResultText.text = "`r`n" + "Finished Installing Application(s)" + "`r`n" + "`r`n" + "Ready for Next Task"
 })
 
 $powertoys.Add_Click({
