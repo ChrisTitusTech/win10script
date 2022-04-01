@@ -15,8 +15,7 @@ if (!(Test-Path ~\AppData\Local\Microsoft\WindowsApps\winget.exe)){
     Write-Host "Winget not Found, Installing Now..."
     $ResultText.text = "`r`n" +"`r`n" + "Installing Winget... Please Wait"
     $latest = (Invoke-WebRequest -UseBasicParsing -URI "https://github.com/microsoft/winget-cli/releases/latest").Links.Href | Select-String ".msixbundle"
-    Start-BitsTransfer "https://github.com$latest"; .\Microsoft.DesktopAppInstaller_*.msixbundle
-    $nid = (Get-Process AppInstaller).Id; Wait-Process -Id $nid
+    Start-BitsTransfer "https://github.com$latest"; Add-AppxPackage -Path "C:\Users\mrhaydendp\Downloads\Microsoft.DesktopAppInstaller_*.msixbundle"
     Write-Host "Winget Successfully Installed"
     $ResultText.text = "`r`n" +"`r`n" + "Winget Installed - Ready for Next Task"
 }
