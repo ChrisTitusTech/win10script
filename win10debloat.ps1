@@ -119,6 +119,14 @@ $vlc.height                      = 30
 $vlc.location                    = New-Object System.Drawing.Point(3,663)
 $vlc.Font                        = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
+# I couldn't find mpv in winget.
+# $mpv                             = New-Object system.Windows.Forms.Button #FIXPOS
+# $mpv.text                        = "mpv" #FIXPOS
+# $mpv.width                       = 211 #FIXPOS
+# $mpv.height                      = 30 
+# $mpv.location                    = New-Object System.Drawing.Point(4,67) #FIXPOS
+# $mpv.Font                        = New-Object System.Drawing.Font('Microsoft Sans Serif',12) #FIXPOS
+
 $powertoys                       = New-Object system.Windows.Forms.Button
 $powertoys.text                  = "PowerToys"
 $powertoys.width                 = 211
@@ -133,12 +141,26 @@ $winterminal.height              = 30
 $winterminal.location            = New-Object System.Drawing.Point(3,32)
 $winterminal.Font                = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
+$nsis                     = New-Object system.Windows.Forms.Button #FIXPOS
+$nsis.text                = "NSIS"
+$nsis.width               = 211
+$nsis.height              = 30
+$nsis.location            = New-Object System.Drawing.Point(3,32)
+$nsis.Font                = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
+
 $vscode                          = New-Object system.Windows.Forms.Button
 $vscode.text                     = "VS Code"
 $vscode.width                    = 211
 $vscode.height                   = 30
 $vscode.location                 = New-Object System.Drawing.Point(4,797)
 $vscode.Font                     = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
+
+$vs                          = New-Object system.Windows.Forms.Button #FIXPOS
+$vs.text                     = "Visual Studio"
+$vs.width                    = 211
+$vs.height                   = 30
+$vs.location                 = New-Object System.Drawing.Point(4,797) # Please add the correct position, as I don't wanna test it out as I don't have a VM.
+$vs.Font                     = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
 $Label2                          = New-Object system.Windows.Forms.Label
 $Label2.text                     = "Utilities"
@@ -661,7 +683,7 @@ $restorepower.location           = New-Object System.Drawing.Point(4,159)
 $restorepower.Font               = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
 $Form.controls.AddRange(@($Panel1,$Panel2,$Label3,$Label15,$Panel4,$PictureBox1,$Label1,$Panel3,$ResultText,$Label10,$Label11,$urlfixwinstartup,$urlremovevirus,$urlcreateiso))
-$Panel1.controls.AddRange(@($brave,$firefox,$7zip,$sharex,$adobereader,$notepad,$gchrome,$mpc,$vlc,$powertoys,$winterminal,$vscode,$Label2,$everythingsearch,$sumatrapdf,$vscodium,$imageglass,$gimp,$Label7,$Label8,$Label9,$advancedipscanner,$putty,$etcher,$translucenttb,$githubdesktop,$discord,$autohotkey))
+$Panel1.controls.AddRange(@($brave,$firefox,$7zip,$sharex,$adobereader,$notepad,$gchrome,$mpc,$vlc,$powertoys,$winterminal,$vscode,$Label2,$everythingsearch,$sumatrapdf,$vscodium,$imageglass,$gimp,$Label7,$Label8,$Label9,$advancedipscanner,$putty,$etcher,$translucenttb,$githubdesktop,$discord,$autohotkey,$vs,$nsis))
 $Panel2.controls.AddRange(@($essentialtweaks,$backgroundapps,$cortana,$actioncenter,$darkmode,$performancefx,$onedrive,$lightmode,$essentialundo,$EActionCenter,$ECortana,$RBackgroundApps,$HTrayIcons,$EClipboardHistory,$ELocation,$InstallOneDrive,$removebloat,$reinstallbloat,$WarningLabel,$Label5,$appearancefx,$STrayIcons,$EHibernation,$dualboottime))
 $Panel4.controls.AddRange(@($defaultwindowsupdate,$securitywindowsupdate,$Label16,$Label17,$Label18,$Label19,$windowsupdatefix,$disableupdates,$enableupdates,$Label12))
 $Panel3.controls.AddRange(@($yourphonefix,$ncpa,$oldcontrolpanel,$oldsoundpanel,$oldsystempanel,$NFS,$laptopnumlock,$Virtualization,$oldpower,$restorepower))
@@ -682,6 +704,14 @@ $firefox.Add_Click({
     $ResultText.text = "`r`n" + "Finished Installing Firefox" + "`r`n" + "`r`n" + "Ready for Next Task"
 })
 
+$vs.Add_Click({
+    Write-Host "Installing Visual Studio 2022 Professional" 
+    $ResultText.text = "`r`n" +"`r`n" + "Installing VS... Please Wait" 
+    winget install -e Microsoft.VisualStudio.2022.Professional | Out-Host
+    if($?) { Write-Host "Installed Firefox" }
+    $ResultText.text = "`r`n" + "Finished Installing Firefox" + "`r`n" + "`r`n" + "Ready for Next Task"
+})
+
 $gchrome.Add_Click({
     Write-Host "Installing Google Chrome"
     $ResultText.text = "`r`n" +"`r`n" + "Installing Google Chrome... Please Wait" 
@@ -696,14 +726,16 @@ $autohotkey.Add_Click({
     winget install -e Lexikos.AutoHotkey | Out-Host
     if($?) { Write-Host "Installed AutoHotkey" }
     $ResultText.text = "`r`n" + "Finished Installing Autohotkey" + "`r`n" + "`r`n" + "Ready for Next Task"
-})
+}) # please fix your spacing
+
 $imageglass.Add_Click({
     Write-Host "Installing Image Glass (Image Viewer)"
     $ResultText.text = "`r`n" +"`r`n" + "Installing Image Glass... Please Wait" 
     winget install -e DuongDieuPhap.ImageGlass | Out-Host
     if($?) { Write-Host "Installed Image Glass (Image Viewer)" }
     $ResultText.text = "`r`n" + "Finished Installing Image Glass" + "`r`n" + "`r`n" + "Ready for Next Task"
-})
+}) # please fix your spacing
+
 $discord.Add_Click({
     Write-Host "Installing Discord"
     $ResultText.text = "`r`n" +"`r`n" + "Installing Discord... Please Wait" 
@@ -766,6 +798,14 @@ $vscodium.Add_Click({
     winget install -e VSCodium.VSCodium | Out-Host
     if($?) { Write-Host "Installed VS Codium" }
     $ResultText.text = "`r`n" + "Finished Installing VS Codium" + "`r`n" + "`r`n" + "Ready for Next Task"
+})
+
+$nsis.Add_Click({
+    Write-Host "Installing NSIS"
+    $ResultText.text = "`r`n" +"`r`n" + "Installing NSIS... Please Wait" 
+    winget install -e VSCodium.VSCodium | Out-Host
+    if($?) { Write-Host "Installed NSIS" }
+    $ResultText.text = "`r`n" + "Finished Installing NSIS" + "`r`n" + "`r`n" + "Ready for Next Task"
 })
 
 $urlremovevirus.Add_Click({
