@@ -2,3 +2,4 @@
 + NSIS Installer
 + Scoop Installer
 + Chocolatey Installer
++ Chocolatey Fixed Install Link

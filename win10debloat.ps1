@@ -175,7 +175,7 @@ $scoop.location                 = New-Object System.Drawing.Point(4,797) # Pleas
 $scoop.Font                     = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
 $choco                          = New-Object system.Windows.Forms.Button #FIXPOS
-$choco.text                     = "Chocolatey"
+$choco.text                     = "Chocolatey" 
 $choco.width                    = 211
 $choco.height                   = 30
 $choco.location                 = New-Object System.Drawing.Point(4,797) # Please add the correct position, as I don't wanna test it out as I don't have a VM.
@@ -724,6 +724,7 @@ $brave.Add_Click({
 # })
 
 $scoop.Add_Click({
+    	# WSYI 727 HAHAH OSU! PLAYER
 	# Check if Execution Policy is Restricted.
 	$rest = "Restricted" 
 	If ((Get-ExecutionPolicy) -ne $rest) {    
@@ -740,7 +741,6 @@ $scoop.Add_Click({
 })
 
 $choco.Add_Click({
-	# WSYI 727 HAHAH OSU! PLAYER
 	# Check if Execution Policy is Restricted.
 	$rest = "Restricted" 
 	If ((Get-ExecutionPolicy) -ne $rest) {    
@@ -750,7 +750,7 @@ $choco.Add_Click({
     Write-Host "Installing Chocolatey"
     $ResultText.text = "`r`n" +"`r`n" + "Installing Chocolatey... Please Wait" 
     Write-Host "iwr -useb get.scoop.sh | iex" 
-    iwr -useb get.scoop.sh | iex
+    Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
     if($?) { Write-Host "Installed Chocolatey" }
     $ResultText.text = "`r`n" + "Finished Installing Chocolatey" + "`r`n" + "`r`n" + "Ready for Next Task"
     }
