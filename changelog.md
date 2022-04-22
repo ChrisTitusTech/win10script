@@ -3,3 +3,4 @@
 + Scoop Installer
 + Chocolatey Installer
 + Chocolatey Fixed Install Link
++ Update Checker
