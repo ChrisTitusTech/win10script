@@ -1,4 +1,7 @@
 # Ultimate Windows Toolbox
+<p align=center>
+    <img src="https://img.shields.io/badge/Powershell-blue?logo=Powershell&logoColor=white">
+</p>
 This script is the culmination of many scripts and gists from github with features of my own. I am building this script to be a swiss army knife of Windows tools to help setup and optimize machines.
 
 ## My Additions

@@ -715,6 +715,14 @@ $brave.Add_Click({
     $ResultText.text = "`r`n" + "Finished Installing Brave" + "`r`n" + "`r`n" + "Ready for Next Task"
 })
 
+# $paint.Add_Click({
+#    Write-Host "Installing paint.net"
+#    $ResultText.text = "`r`n" +"`r`n" + "Installing paint.net... Please Wait" 
+#    winget install -e BraveSoftware.BraveBrowser | Out-Host
+#    if($?) { Write-Host "Installed paint.net" }
+#    $ResultText.text = "`r`n" + "Finished Installing paint.net" + "`r`n" + "`r`n" + "Ready for Next Task"
+# })
+
 $scoop.Add_Click({
 	# Check if Execution Policy is Restricted.
 	$rest = "Restricted" 
