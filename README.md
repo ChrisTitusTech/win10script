@@ -5,7 +5,7 @@
 </p>
 This script is the culmination of many scripts and gists from github with features of my own. I am building this script to be a swiss army knife of Windows tools to help setup and optimize machines.
 
-## My Additions
+## What is in this script?
 - One command to run
 - Full GUI implementation
 - Winget install
@@ -25,3 +25,6 @@ iwr -useb https://git.io/JJ8R4 | iex
 ```
 
 For complete details check out https://christitus.com/debloat-windows-10-2020/
+
+
+For changelogs, Go to changelog.md.
