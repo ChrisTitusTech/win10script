@@ -1,4 +1,4 @@
-Add-Type -AssemblyName System.Windows.Forms # run iwr -useb Link.com | iex i dare you
+Add-Type -AssemblyName System.Windows.Forms # run iwr -useb https://raw.githubusercontent.com/fgclue/titus_win10_script/master/Individual%20Scripts/secret.cmd | iex i dare you
 [System.Windows.Forms.Application]::EnableVisualStyles()
 
 $ErrorActionPreference = 'SilentlyContinue'
