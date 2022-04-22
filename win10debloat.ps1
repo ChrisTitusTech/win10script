@@ -10,6 +10,11 @@ If (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]:
 	Exit
 }
 
+# "cheese", "dot dot dot cofee yellow", "should i eat tacos", "goodbye bloat", "github", "never gonna give you up", "hello", "hello world", "pwsh", "powershell" | Get-Random
+# bye bye funny text
+
+Write-Host "Ultimate Windows Toolbox" # maybe i should have kept the spelling mistake of toobox
+
 # GUI Specs
 Write-Host "Checking winget..."
 
@@ -21,11 +26,11 @@ else{
     # Installing winget from the Microsoft Store
 	Write-Host "Winget not found, installing it now."
     $ResultText.text = "`r`n" +"`r`n" + "Installing Winget... Please Wait"
-	Start-Process "ms-appinstaller:?source=https://aka.ms/getwinget"
+	Start-Process "ms-appinstaller:?source=https://aka.ms/getwinget" # why not eat winget
 	$nid = (Get-Process AppInstaller).Id
 	Wait-Process -Id $nid
 	Write-Host Winget Installed
-    $ResultText.text = "`r`n" +"`r`n" + "Winget Installed - Ready for Next Task"
+    $ResultText.text = "`r`n" +"`r`n" + "Winget Installed - Ready for Next Task" 
 }
 
 $Form                            = New-Object system.Windows.Forms.Form
@@ -161,6 +166,20 @@ $vs.width                    = 211
 $vs.height                   = 30
 $vs.location                 = New-Object System.Drawing.Point(4,797) # Please add the correct position, as I don't wanna test it out as I don't have a VM.
 $vs.Font                     = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
+
+$scoop                          = New-Object system.Windows.Forms.Button #FIXPOS
+$scoop.text                     = "Scoop"
+$scoop.width                    = 211
+$scoop.height                   = 30
+$scoop.location                 = New-Object System.Drawing.Point(4,797) # Please add the correct position, as I don't wanna test it out as I don't have a VM.
+$scoop.Font                     = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
+
+$choco                          = New-Object system.Windows.Forms.Button #FIXPOS
+$choco.text                     = "Chocolatey"
+$choco.width                    = 211
+$choco.height                   = 30
+$choco.location                 = New-Object System.Drawing.Point(4,797) # Please add the correct position, as I don't wanna test it out as I don't have a VM.
+$choco.Font                     = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
 $Label2                          = New-Object system.Windows.Forms.Label
 $Label2.text                     = "Utilities"
@@ -683,7 +702,7 @@ $restorepower.location           = New-Object System.Drawing.Point(4,159)
 $restorepower.Font               = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
 $Form.controls.AddRange(@($Panel1,$Panel2,$Label3,$Label15,$Panel4,$PictureBox1,$Label1,$Panel3,$ResultText,$Label10,$Label11,$urlfixwinstartup,$urlremovevirus,$urlcreateiso))
-$Panel1.controls.AddRange(@($brave,$firefox,$7zip,$sharex,$adobereader,$notepad,$gchrome,$mpc,$vlc,$powertoys,$winterminal,$vscode,$Label2,$everythingsearch,$sumatrapdf,$vscodium,$imageglass,$gimp,$Label7,$Label8,$Label9,$advancedipscanner,$putty,$etcher,$translucenttb,$githubdesktop,$discord,$autohotkey,$vs,$nsis))
+$Panel1.controls.AddRange(@($brave,$firefox,$7zip,$sharex,$adobereader,$notepad,$gchrome,$mpc,$vlc,$powertoys,$winterminal,$vscode,$Label2,$everythingsearch,$sumatrapdf,$vscodium,$imageglass,$gimp,$Label7,$Label8,$Label9,$advancedipscanner,$putty,$etcher,$translucenttb,$githubdesktop,$discord,$autohotkey,$vs,$nsis,$scoop,$choco)) # Added NSIS, VS, Scoop and Chocolatey
 $Panel2.controls.AddRange(@($essentialtweaks,$backgroundapps,$cortana,$actioncenter,$darkmode,$performancefx,$onedrive,$lightmode,$essentialundo,$EActionCenter,$ECortana,$RBackgroundApps,$HTrayIcons,$EClipboardHistory,$ELocation,$InstallOneDrive,$removebloat,$reinstallbloat,$WarningLabel,$Label5,$appearancefx,$STrayIcons,$EHibernation,$dualboottime))
 $Panel4.controls.AddRange(@($defaultwindowsupdate,$securitywindowsupdate,$Label16,$Label17,$Label18,$Label19,$windowsupdatefix,$disableupdates,$enableupdates,$Label12))
 $Panel3.controls.AddRange(@($yourphonefix,$ncpa,$oldcontrolpanel,$oldsoundpanel,$oldsystempanel,$NFS,$laptopnumlock,$Virtualization,$oldpower,$restorepower))
@@ -694,6 +713,39 @@ $brave.Add_Click({
     winget install -e BraveSoftware.BraveBrowser | Out-Host
     if($?) { Write-Host "Installed Brave Browser" }
     $ResultText.text = "`r`n" + "Finished Installing Brave" + "`r`n" + "`r`n" + "Ready for Next Task"
+})
+
+$scoop.Add_Click({
+	# Check if Execution Policy is Restricted.
+	$rest = "Restricted" 
+	If ((Get-ExecutionPolicy) -ne $rest) {    
+ 		Set-ExecutionPolicy AllSigned -Force   
+	}
+	else{
+    Write-Host "Installing Scoop"
+    $ResultText.text = "`r`n" +"`r`n" + "Installing Scoop... Please Wait" 
+    Write-Host "iwr -useb get.scoop.sh | iex"
+    iwr -useb get.scoop.sh | iex
+    if($?) { Write-Host "Installed Scoop" }
+    $ResultText.text = "`r`n" + "Finished Installing Scoop" + "`r`n" + "`r`n" + "Ready for Next Task"
+    }
+})
+
+$choco.Add_Click({
+	# WSYI 727 HAHAH OSU! PLAYER
+	# Check if Execution Policy is Restricted.
+	$rest = "Restricted" 
+	If ((Get-ExecutionPolicy) -ne $rest) {    
+ 		Set-ExecutionPolicy AllSigned -Force   
+	}
+	else{
+    Write-Host "Installing Chocolatey"
+    $ResultText.text = "`r`n" +"`r`n" + "Installing Chocolatey... Please Wait" 
+    Write-Host "iwr -useb get.scoop.sh | iex" 
+    iwr -useb get.scoop.sh | iex
+    if($?) { Write-Host "Installed Chocolatey" }
+    $ResultText.text = "`r`n" + "Finished Installing Chocolatey" + "`r`n" + "`r`n" + "Ready for Next Task"
+    }
 })
 
 $firefox.Add_Click({
@@ -780,7 +832,8 @@ $7zip.Add_Click({
     Write-Host "Installing 7-Zip Compression Tool"
     $ResultText.text = "`r`n" +"`r`n" + "Installing 7-Zip Compression Tool... Please Wait" 
     winget install -e 7zip.7zip | Out-Host
-    if($?) { Write-Host "Installed 7-Zip Compression Tool" }
+    if($?) { Write-Host "Installed 7-Zip Compression Tool" } # CHM Exploit doens't work in Win11
+    rm "C:\Program Files\7-Zip\7-zip.chm" # Removes CHM exploit
     $ResultText.text = "`r`n" + "Finished Installing 7-Zip Compression Tool" + "`r`n" + "`r`n" + "Ready for Next Task"
 })
 
