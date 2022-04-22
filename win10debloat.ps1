@@ -813,11 +813,12 @@ $sumatrapdf.Add_Click({
 })
 
 $githubdesktop.Add_Click({
-    Write-Host "Installing GitHub Desktop"
-    $ResultText.text = "`r`n" +"`r`n" + "Installing GitHub Desktop... Please Wait" 
+    Write-Host "Installing Git and GitHub Desktop"
+    $ResultText.text = "`r`n" +"`r`n" + "Installing Git and GitHub Desktop... Please Wait" 
+    winget install -e Git.Git | Out-Host
     winget install -e GitHub.GitHubDesktop | Out-Host
-    Write-Host "Installed Github Desktop"
-    $ResultText.text = "`r`n" + "Finished Installing GitHub Desktop" + "`r`n" + "`r`n" + "Ready for Next Task"
+    Write-Host "Installed Git and Github Desktop"
+    $ResultText.text = "`r`n" + "Finished Installing Git and GitHub Desktop" + "`r`n" + "`r`n" + "Ready for Next Task"
 })
 
 $translucenttb.Add_Click({
