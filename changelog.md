@@ -4,3 +4,7 @@
 + Chocolatey Installer
 + Chocolatey Fixed Install Link
 + Update Checker
++ KeePassXC Installer
++ qBitTorrent Installer
++ Node.JS Installer
++ Python 3 Installer
