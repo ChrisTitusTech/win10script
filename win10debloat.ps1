@@ -14,7 +14,8 @@ If (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]:
 # bye bye funny text
 
 Write-Host "Ultimate Windows Toolbox" # maybe i should have kept the spelling mistake of toobox
-
+Write-Host "By Chris Titus Tech" # Remove this text and put your name if you are forking this.
+Write-Host "       "
 # GUI Specs
 Write-Host "Checking winget..."
 
@@ -26,7 +27,7 @@ else{
     # Installing winget from the Microsoft Store
 	Write-Host "Winget not found, installing it now."
     $ResultText.text = "`r`n" +"`r`n" + "Installing Winget... Please Wait"
-	Start-Process "ms-appinstaller:?source=https://aka.ms/getwinget" # why not eat winget
+	Start-Process "ms-appinstaller:?source=https://aka.ms/getwinget" # Where winget is
 	$nid = (Get-Process AppInstaller).Id
 	Wait-Process -Id $nid
 	Write-Host Winget Installed
@@ -727,7 +728,7 @@ $scoop.Add_Click({
     	# WSYI 727 HAHAH OSU! PLAYER
 	# Check if Execution Policy is Restricted.
 	$rest = "Restricted" 
-	If ((Get-ExecutionPolicy) -ne $rest) {    
+	If ((Get-ExecutionPolicy) -eq $rest) {    # sdipuofijoahsfjoklç
  		Set-ExecutionPolicy AllSigned -Force   
 	}
 	else{
