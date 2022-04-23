@@ -589,7 +589,7 @@ $windowsupdatefix.height         = 30
 $windowsupdatefix.location       = New-Object System.Drawing.Point(25,216)
 $windowsupdatefix.Font           = New-Object System.Drawing.Font('Microsoft Sans Serif',14)
 
-$more                      = New-Object system.Windows.Forms.Button
+$more                      = New-Object system.Windows.Forms.Button #FIXPOS
 $more.text                 = "More"
 $more.width                = 205
 $more.height               = 30
