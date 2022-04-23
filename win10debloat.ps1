@@ -83,6 +83,13 @@ $7zip.height                     = 30
 $7zip.location                   = New-Object System.Drawing.Point(4,102)
 $7zip.Font                       = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
+$kpxc                            = New-Object system.Windows.Forms.Button #FIXPOS
+$kpxc.text                       = "KeePassXC" # KeePassXC
+$kpxc.width                      = 211
+$kpxc.height                     = 30
+$kpxc.location                   = New-Object System.Drawing.Point(4,102)
+$kpxc.Font                       = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
+
 $sharex                          = New-Object system.Windows.Forms.Button
 $sharex.text                     = "ShareX (Screenshots)"
 $sharex.width                    = 212
@@ -110,6 +117,13 @@ $gchrome.width                   = 212
 $gchrome.height                  = 30
 $gchrome.location                = New-Object System.Drawing.Point(3,494)
 $gchrome.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
+
+$qbt                            = New-Object system.Windows.Forms.Button #FIXPOS
+$qbt.text                       = "qBitTorrent" # qbittorrent
+$qbt.width                      = 211
+$qbt.height                     = 30
+$qbt.location                   = New-Object System.Drawing.Point(4,102)
+$qbt.Font                       = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
 $mpc                             = New-Object system.Windows.Forms.Button
 $mpc.text                        = "Media Player Classic"
@@ -703,7 +717,7 @@ $restorepower.location           = New-Object System.Drawing.Point(4,159)
 $restorepower.Font               = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
 $Form.controls.AddRange(@($Panel1,$Panel2,$Label3,$Label15,$Panel4,$PictureBox1,$Label1,$Panel3,$ResultText,$Label10,$Label11,$urlfixwinstartup,$urlremovevirus,$urlcreateiso))
-$Panel1.controls.AddRange(@($brave,$firefox,$7zip,$sharex,$adobereader,$notepad,$gchrome,$mpc,$vlc,$powertoys,$winterminal,$vscode,$Label2,$everythingsearch,$sumatrapdf,$vscodium,$imageglass,$gimp,$Label7,$Label8,$Label9,$advancedipscanner,$putty,$etcher,$translucenttb,$githubdesktop,$discord,$autohotkey,$vs,$nsis,$scoop,$choco)) # Added NSIS, VS, Scoop and Chocolatey
+$Panel1.controls.AddRange(@($brave,$firefox,$7zip,$sharex,$adobereader,$notepad,$gchrome,$mpc,$vlc,$powertoys,$winterminal,$vscode,$Label2,$everythingsearch,$sumatrapdf,$vscodium,$imageglass,$gimp,$Label7,$Label8,$Label9,$advancedipscanner,$putty,$etcher,$translucenttb,$githubdesktop,$discord,$autohotkey,$vs,$nsis,$scoop,$choco,$qbt,$kpxc)) # Added NSIS, VS, Scoop, Chocolatey, KeePassXC and qBitTorrent
 $Panel2.controls.AddRange(@($essentialtweaks,$backgroundapps,$cortana,$actioncenter,$darkmode,$performancefx,$onedrive,$lightmode,$essentialundo,$EActionCenter,$ECortana,$RBackgroundApps,$HTrayIcons,$EClipboardHistory,$ELocation,$InstallOneDrive,$removebloat,$reinstallbloat,$WarningLabel,$Label5,$appearancefx,$STrayIcons,$EHibernation,$dualboottime))
 $Panel4.controls.AddRange(@($defaultwindowsupdate,$securitywindowsupdate,$Label16,$Label17,$Label18,$Label19,$windowsupdatefix,$disableupdates,$enableupdates,$Label12))
 $Panel3.controls.AddRange(@($yourphonefix,$ncpa,$oldcontrolpanel,$oldsoundpanel,$oldsystempanel,$NFS,$laptopnumlock,$Virtualization,$oldpower,$restorepower))
@@ -771,6 +785,22 @@ $vs.Add_Click({
     winget install -e Microsoft.VisualStudio.2022.Professional | Out-Host
     if($?) { Write-Host "Installed Firefox" }
     $ResultText.text = "`r`n" + "Finished Installing Firefox" + "`r`n" + "`r`n" + "Ready for Next Task"
+})
+
+$kpxc.Add_Click({
+    Write-Host "Installing KeePassXC" 
+    $ResultText.text = "`r`n" +"`r`n" + "Installing KeePassXC... Please Wait" 
+    winget install -e KeePassXCTeam.KeePassXC | Out-Host
+    if($?) { Write-Host "Installed KeePassXC" }
+    $ResultText.text = "`r`n" + "Finished Installing KeePassXC" + "`r`n" + "`r`n" + "Ready for Next Task"
+})
+
+$qbt.Add_Click({
+    Write-Host "Installing qBitTorrent" 
+    $ResultText.text = "`r`n" +"`r`n" + "Installing qBitTorrent... Please Wait" 
+    winget install -e qBittorrent.qBittorrent | Out-Host
+    if($?) { Write-Host "Installed qBitTorrent" }
+    $ResultText.text = "`r`n" + "Finished Installing qBitTorrent" + "`r`n" + "`r`n" + "Ready for Next Task"
 })
 
 $gchrome.Add_Click({
