@@ -10,10 +10,8 @@ If (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]:
 	Exit
 }
 
-# GUI Specs
-Write-Host "Checking winget..."
-
 # Check if winget is installed
+Write-Host "Checking winget..."
 if (Test-Path ~\AppData\Local\Microsoft\WindowsApps\winget.exe){
     'Winget Already Installed'
 }  
