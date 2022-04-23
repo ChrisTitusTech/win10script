@@ -14,7 +14,7 @@ If (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]:
 
 # Check if winget is installed
 Write-Host "Checking if Winget is Installed..."
-if (Test-Path ~\AppData\Local\Microsoft\WindowsApps\winget.exe){
+if ((Test-Path ~\AppData\Local\Microsoft\WindowsApps\winget.exe) -and (((Get-ComputerInfo).WindowsVersion) -ge "1809")){ #Checks if winget executable exists and if the Windows Version is 1809 or higher
     Write-Host "Winget Already Installed"
 }else{
     if(((((Get-ComputerInfo).OSName.IndexOf("LTSC")) -ne -1) -or ((Get-ComputerInfo).OSName.IndexOf("Server") -ne -1)) -and (((Get-ComputerInfo).WindowsVersion) -ge "1809")){#Checks if Windows edition is LTSC 2019+
@@ -38,20 +38,20 @@ if (Test-Path ~\AppData\Local\Microsoft\WindowsApps\winget.exe){
         $ResultText.Text = "`r`n" +"`r`n" + "winget Installed (Reboot might be required before winget will work)"
 
         #Sleep for 5 seconds to maximize chance that winget will work without reboot
-        Write-Host "Sleeping for 5 seconds to maximize chance that winget will work without reboot"
-        $ResultText.Text = "`r`n" +"`r`n" + "Sleeping for 5 seconds to maximize chance that winget will work without reboot"
+        Write-Host "Pausing for 5 seconds to maximize chance that winget will work without reboot"
+        $ResultText.Text = "`r`n" +"`r`n" + "Pausing for 5 seconds to maximize chance that winget will work without reboot"
         Start-Sleep -s 5
 
-        #Removing Unneeded Files
-        Write-Host "Removing Unneeded Files..."
-        $ResultText.Text = "`r`n" +"`r`n" + "Removing Unneeded Files..."
+        #Removing no longer needed Files
+        Write-Host "Removing no longer needed Files..."
+        $ResultText.Text = "`r`n" +"`r`n" + "Removing no longer needed Files..."
         Remove-Item -Path ".\Microsoft.VCLibs.x64.14.00.Desktop.appx" -Force
         Remove-Item -Path ".\Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle" -Force
         Remove-Item -Path ".\b0a0692da1034339b76dce1c298a1e42_License1.xml" -Force
-        Write-Host "Unneeded Files Removed"
-        $ResultText.Text = "`r`n" +"`r`n" + "Unneeded Files Removed"
-    }elseif(((Get-ComputerInfo).WindowsVersion) -lt "1809"){#Checks if Windows Version is too old for winget
-        Write-Host "Winget is not supported on this version of Windows"
+        Write-Host "Removed Files no longer needed"
+        $ResultText.Text = "`r`n" +"`r`n" + "Removed Files no longer needed"
+    }elseif(((Get-ComputerInfo).WindowsVersion) -lt "1809"){ #Checks if Windows Version is too old for winget
+        Write-Host "Winget is not supported on this version of Windows (Pre-1809)"
     }else{
         #Installing Winget from the Microsoft Store
 	    Write-Host "Winget not found, installing it now."
