@@ -75,17 +75,38 @@ $fet.Add_Click({
     Write-Host "Starting to Install Scoop"
     	$rest = "Restricted" 
 	If (Get-ExecutionPolicy -eq $rest) {    # sdipuofijoahsfjoklç
- 		Set-ExecutionPolicy AllSigned -Force   # Continues the script
+ 		Set-ExecutionPolicy AllSigned -scope CurrentUser   # Continues the script
 	}
 	else{
         iex -useb get.scoop.sh | iwr
         Write-Host "Starting to Install Chocolatey"
     	$rest = "Restricted" 
 	If (Get-ExecutionPolicy -eq $rest) {    # sdipuofijoahsfjoklç
- 		Set-ExecutionPolicy AllSigned -Force   # Continues the script
+ 		Set-ExecutionPolicy AllSigned  # Continues the script
 	}
 	else{
-        iex -useb get.scoop.sh | iwr
+    }
+    Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
+    choco install everything
+    choco install files
+    choco install ngrok
+    choco install nuget.commandline
+    scoop install 7zip
+    scoop install ffmpeg
+    scoop install figlet
+    scoop install curl
+    scoop install git
+    scoop install lua
+    scoop install neofetch
+    scoop install mpv
+    scoop install make
+    scoop install neovim
+    scoop install neofetch
+    scoop install yt-dlp
+    scoop install ruby
+    scoop install sudo 
+    scoop install wget
+    Write-Host "Done!"
 })
     
 [void]$MainForm.ShowDialog()    
