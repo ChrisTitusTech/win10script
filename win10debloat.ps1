@@ -782,7 +782,7 @@ $choco.Add_Click({
 	# Check if Execution Policy is Restricted.
 	$rest = "Restricted" 
 	If ((Get-ExecutionPolicy) -eq $rest) {    
- 		Set-ExecutionPolicy AllSigned -Force   
+ 		Set-ExecutionPolicy AllSigned # DO NOT FORCE.
 	}
 	else{
     Write-Host "Installing Chocolatey"
