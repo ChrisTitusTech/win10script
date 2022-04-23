@@ -787,7 +787,6 @@ $choco.Add_Click({
 	else{
     Write-Host "Installing Chocolatey"
     $ResultText.text = "`r`n" +"`r`n" + "Installing Chocolatey... Please Wait" 
-    Write-Host "iwr -useb get.scoop.sh | iex" 
     Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
     if($?) { Write-Host "Installed Chocolatey" }
     $ResultText.text = "`r`n" + "Finished Installing Chocolatey" + "`r`n" + "`r`n" + "Ready for Next Task"

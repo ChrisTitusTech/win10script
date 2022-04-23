@@ -63,12 +63,29 @@ $MainForm.controls.AddRange(@($Label1,$Label2,$et,$Button1,$fet,$vbox))
 $vbox.Add_Click({
     Write-Host "Installing VirtualBox"
     Write-Host "Installing VirtualBox... Please Wait" 
-    # winget install -e Oracle.VirtualBox | Out-Host
+    winget install -e Oracle.VirtualBox | Out-Host
     if($?) { Write-Host "Installed VirtualBox" }
     Write-Host "Finished Installing VirtualBox" 
     Write-Host "Ready for Next Task"
 })
 
-
+$fet.Add_Click({
+    Write-Host "Starting to Install VirtualBox"
+    winget install -e  Oracle.VirtualBox
+    Write-Host "Starting to Install Scoop"
+    	$rest = "Restricted" 
+	If (Get-ExecutionPolicy -eq $rest) {    # sdipuofijoahsfjoklç
+ 		Set-ExecutionPolicy AllSigned -Force   # Continues the script
+	}
+	else{
+        iex -useb get.scoop.sh | iwr
+        Write-Host "Starting to Install Chocolatey"
+    	$rest = "Restricted" 
+	If (Get-ExecutionPolicy -eq $rest) {    # sdipuofijoahsfjoklç
+ 		Set-ExecutionPolicy AllSigned -Force   # Continues the script
+	}
+	else{
+        iex -useb get.scoop.sh | iwr
+})
     
 [void]$MainForm.ShowDialog()    
