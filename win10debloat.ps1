@@ -1649,7 +1649,7 @@ $Bloatware = @(
     "Microsoft.WindowsMaps"
     "Microsoft.WindowsPhone"
     "Microsoft.WindowsSoundRecorder"
-    "Microsoft.XboxApp"
+    "Microsoft.XboxApp" # *angry xbox player sounds*
     "Microsoft.ConnectivityStore"
     "Microsoft.CommsPhone"
     "Microsoft.ScreenSketch"
