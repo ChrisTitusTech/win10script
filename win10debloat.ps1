@@ -728,7 +728,7 @@ $scoop.Add_Click({
     	# WSYI 727 HAHAH OSU! PLAYER
 	# Check if Execution Policy is Restricted.
 	$rest = "Restricted" 
-	If ((Get-ExecutionPolicy) -eq $rest) {    # sdipuofijoahsfjoklç
+	If (Get-ExecutionPolicy -eq $rest) {    # sdipuofijoahsfjoklç
  		Set-ExecutionPolicy AllSigned -Force   
 	}
 	else{
