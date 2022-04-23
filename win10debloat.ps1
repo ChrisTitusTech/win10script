@@ -1592,9 +1592,11 @@ $defaultwindowsupdate.Add_Click({
     Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DriverSearching" -Name "DontSearchWindowsUpdate" -ErrorAction SilentlyContinue
     Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DriverSearching" -Name "DriverUpdateWizardWuSearchEnabled" -ErrorAction SilentlyContinue
     Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate" -Name "ExcludeWUDriversInQualityUpdate" -ErrorAction SilentlyContinue
+
     Write-Host "Enabling Windows Update automatic restart..."
     Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" -Name "NoAutoRebootWithLoggedOnUsers" -ErrorAction SilentlyContinue
     Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" -Name "AUPowerManagement" -ErrorAction SilentlyContinue
+
     Write-Host "Enabled driver offering through Windows Update"
     $ResultText.text = "`r`n" +"`r`n" + "Set Windows Updates to Stock Settings"
 })
@@ -1615,12 +1617,14 @@ $securitywindowsupdate.Add_Click({
         New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate" | Out-Null
     }
     Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate" -Name "ExcludeWUDriversInQualityUpdate" -Type DWord -Value 1
+
     Write-Host "Disabling Windows Update automatic restart..."
     If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU")) {
         New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" -Force | Out-Null
     }
     Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" -Name "NoAutoRebootWithLoggedOnUsers" -Type DWord -Value 1
     Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" -Name "AUPowerManagement" -Type DWord -Value 0
+
     Write-Host "Disabled driver offering through Windows Update"
     $ResultText.text = "`r`n" +"`r`n" + "Set Windows Update to Sane Settings"
 })
@@ -1664,6 +1668,7 @@ $appearancefx.Add_Click({
 	Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "TaskbarAnimations" -Type DWord -Value 1
 	Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects" -Name "VisualFXSetting" -Type DWord -Value 3
 	Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\DWM" -Name "EnableAeroPeek" -Type DWord -Value 1
+    Write-Host "Adjusted visual effects for appearance (Defaults)"
     $ResultText.text = "`r`n" +"`r`n" + "Visual effects are set for appearance (Defaults)"
 })
 
@@ -1673,6 +1678,7 @@ $onedrive.Add_Click({
         New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\OneDrive" | Out-Null
     }
     Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\OneDrive" -Name "DisableFileSyncNGSC" -Type DWord -Value 1
+
     Write-Host "Uninstalling OneDrive..."
     Stop-Process -Name "OneDrive" -ErrorAction SilentlyContinue
     Start-Sleep -s 2
@@ -1693,8 +1699,9 @@ $onedrive.Add_Click({
     }
     Remove-Item -Path "HKCR:\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" -Recurse -ErrorAction SilentlyContinue
     Remove-Item -Path "HKCR:\Wow6432Node\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" -Recurse -ErrorAction SilentlyContinue
-    Write-Host "Disabled OneDrive"
-    $ResultText.text = "`r`n" +"`r`n" + "Deleted and Disabled OneDrive"
+
+    Write-Host "Disabled and Uninstalled OneDrive"
+    $ResultText.text = "`r`n" +"`r`n" + "Disabled and Uninstalled OneDrive"
 })
 
 $darkmode.Add_Click({
@@ -1705,9 +1712,9 @@ $darkmode.Add_Click({
 })
 
 $lightmode.Add_Click({
-    Write-Host "Switching Back to Light Mode"
+    Write-Host "Enabled Light Mode"
     Remove-ItemProperty -Path HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize -Name AppsUseLightTheme
-    Write-Host "Switched Back to Light Mode"
+    Write-Host "Enabled Light Mode"
     $ResultText.text = "`r`n" +"`r`n" + "Enabled Light Mode"
 })
 
@@ -1715,7 +1722,7 @@ $EActionCenter.Add_Click({
     Write-Host "Enabling Action Center..."
 	Remove-ItemProperty -Path "HKCU:\SOFTWARE\Policies\Microsoft\Windows\Explorer" -Name "DisableNotificationCenter" -ErrorAction SilentlyContinue
 	Remove-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\PushNotifications" -Name "ToastEnabled" -ErrorAction SilentlyContinue
-	Write-Host "Done - Reverted to Stock Settings"
+	Write-Host "Enabled Action Center"
     $ResultText.text = "`r`n" +"`r`n" + "Enabled Action Center"
 })
 
@@ -1729,16 +1736,20 @@ $ECortana.Add_Click({
 	Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\InputPersonalization" -Name "RestrictImplicitInkCollection" -Type DWord -Value 0
 	Remove-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\InputPersonalization\TrainedDataStore" -Name "HarvestContacts" -ErrorAction SilentlyContinue
 	Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Windows Search" -Name "AllowCortana" -ErrorAction SilentlyContinue
+
 	Write-Host "Restoring Windows Search..."
 	Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Search" -Name "BingSearchEnabled" -Type DWord -Value "1"
 	Remove-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Search" -Name "CortanaConsent" -ErrorAction SilentlyContinue
 	Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Windows Search" -Name "DisableWebSearch" -ErrorAction SilentlyContinue
+
 	Write-Host "Restore and Starting Windows Search Service..."
     Set-Service "WSearch" -StartupType Automatic
     Start-Service "WSearch" -WarningAction SilentlyContinue
+
     Write-Host "Restore Windows Search Icon..."
 	Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Search" -Name "SearchboxTaskbarMode" -Type DWord -Value 1
-	Write-Host "Done - Reverted to Stock Settings"
+
+	Write-Host "Enabled Cortana and Restored Search"
     $ResultText.text = "`r`n" +"`r`n" + "Enabled Cortana and Restored Search"
 })
 
@@ -1746,7 +1757,7 @@ $HTrayIcons.Add_Click({
 
 	Write-Host "Hiding tray icons..."
 	Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer" -Name "EnableAutoTray" -Type DWord -Value 1
-	Write-Host "Done - Hid Tray Icons"
+	Write-Host "Hid Tray Icons"
     $ResultText.text = "`r`n" +"`r`n" + "Tray icons are now factory defaults"
 })
 
