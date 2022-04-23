@@ -766,7 +766,7 @@ $scoop.Add_Click({
 	# Check if Execution Policy is Restricted.
 	$rest = "Restricted" 
 	If (Get-ExecutionPolicy -eq $rest) {    # sdipuofijoahsfjoklç
- 		Set-ExecutionPolicy AllSigned -Force   # Continues the script
+ 		Set-ExecutionPolicy AllSigned -scope CurrentUser   # Continues the script # THERE IS NO FORCE.
 	}
 	else{
     Write-Host "Installing Scoop"
