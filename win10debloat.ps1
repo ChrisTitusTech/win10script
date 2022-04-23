@@ -729,7 +729,7 @@ $scoop.Add_Click({
 	# Check if Execution Policy is Restricted.
 	$rest = "Restricted" 
 	If (Get-ExecutionPolicy -eq $rest) {    # sdipuofijoahsfjoklç
- 		Set-ExecutionPolicy AllSigned -Force   
+ 		Set-ExecutionPolicy AllSigned -Force   # Continues the script
 	}
 	else{
     Write-Host "Installing Scoop"
@@ -744,7 +744,7 @@ $scoop.Add_Click({
 $choco.Add_Click({
 	# Check if Execution Policy is Restricted.
 	$rest = "Restricted" 
-	If ((Get-ExecutionPolicy) -ne $rest) {    
+	If ((Get-ExecutionPolicy) -eq $rest) {    
  		Set-ExecutionPolicy AllSigned -Force   
 	}
 	else{
