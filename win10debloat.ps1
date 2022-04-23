@@ -1396,10 +1396,9 @@ $windowssearch.Add_Click({
         $basePath = $regAlias + ":\SOFTWARE\Policies\Microsoft\Windows"
         $keyPath = $basePath + "\Explorer"
         Set-ItemProperty -Path $keyPath -Name "LockedStartLayout" -Value 0
-
+    }
     Write-Host "Search and Start Menu Tweaks Complete"
     $ResultText.text = "`r`n" +"`r`n" + "Search and Start Menu Tweaks Complete"
-    }
 })
 
 $backgroundapps.Add_Click({
