@@ -17,21 +17,21 @@ Write-Host "Ultimate Windows Toolbox" # maybe i should have kept the spelling mi
 Write-Host "By Chris Titus Tech" # Remove this text and put your name if you are forking this.
 Write-Host "       "
 # GUI Specs
-Write-Host "Checking winget..."
+Write-Host "Checking if winget is installed..."
 
 # Check if winget is installed
 if (Test-Path ~\AppData\Local\Microsoft\WindowsApps\winget.exe){
-    'Winget Already Installed'
+    'winget is already installed.'
 }  
 else{
     # Installing winget from the Microsoft Store
-	Write-Host "Winget not found, installing it now."
-    $ResultText.text = "`r`n" +"`r`n" + "Installing Winget... Please Wait"
+	Write-Host "winget not found, installing it now."
+    $ResultText.text = "`r`n" +"`r`n" + "Installing winget... Please Wait"
 	Start-Process "ms-appinstaller:?source=https://aka.ms/getwinget" # Where winget is
 	$nid = (Get-Process AppInstaller).Id
-	Wait-Process -Id $nid
-	Write-Host Winget Installed
-    $ResultText.text = "`r`n" +"`r`n" + "Winget Installed - Ready for Next Task" 
+	Wait-Process -Id $nid # Am I a joke to you?
+	Write-Host winget Installed
+    $ResultText.text = "`r`n" +"`r`n" + "winget has been installed - Ready for Next Task" 
 }
 
 $Form                            = New-Object system.Windows.Forms.Form
@@ -589,6 +589,13 @@ $windowsupdatefix.height         = 30
 $windowsupdatefix.location       = New-Object System.Drawing.Point(25,216)
 $windowsupdatefix.Font           = New-Object System.Drawing.Font('Microsoft Sans Serif',14)
 
+$more                      = New-Object system.Windows.Forms.Button
+$more.text                 = "More"
+$more.width                = 205
+$more.height               = 30
+$more.location             = New-Object System.Drawing.Point(2,244)
+$more.Font                 = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
+
 $ResultText                      = New-Object system.Windows.Forms.TextBox
 $ResultText.multiline            = $true
 $ResultText.width                = 382
@@ -1016,6 +1023,11 @@ $advancedipscanner.Add_Click({
     winget install -e Famatech.AdvancedIPScanner | Out-Host
     Write-Host "Installed Advanced IP Scanner"
     $ResultText.text = "`r`n" + "Finished Installing Advanced IP Scanner" + "`r`n" + "`r`n" + "Ready for Next Task"
+})
+
+$more.Add_Click({
+    cd scripts
+    .\more.ps1
 })
 
 $sharex.Add_Click({
