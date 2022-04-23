@@ -552,7 +552,7 @@ $autohotkey.height               = 30
 $autohotkey.location             = New-Object System.Drawing.Point(4,136)
 $autohotkey.Font                 = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
-$njs                      = New-Object system.Windows.Forms.Button
+$njs                      = New-Object system.Windows.Forms.Button #FIXPOS
 $njs.text                 = "Node.JS"
 $njs.width                = 211
 $njs.height               = 30
@@ -560,7 +560,7 @@ $njs.location             = New-Object System.Drawing.Point(4,136)
 $njs.Font                 = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
 $py                      = New-Object system.Windows.Forms.Button
-$py.text                 = "Python 3"
+$py.text                 = "Python 3" #FIXPOS
 $py.width                = 211
 $py.height               = 30y
 $py.location             = New-Object System.Drawing.Point(4,136)
