@@ -976,7 +976,7 @@ $essentialtweaks.Add_Click({
     Write-Host "Enabling F8 boot menu options..."
     bcdedit /set `{current`} bootmenupolicy Legacy | Out-Null
 
-    Write-Host "Stopping and disabling Home Groups services..."
+    Write-Host "Stopping and disabling HomeGroup services..."
     Stop-Service "HomeGroupListener" -WarningAction SilentlyContinue
     Set-Service "HomeGroupListener" -StartupType Disabled
     Stop-Service "HomeGroupProvider" -WarningAction SilentlyContinue
@@ -1563,6 +1563,7 @@ $Bloatware = @(
 
 $removebloat.Add_Click({
     Write-Host "Removing Bloatware"
+    $ResultText.text = "`r`n" +"`r`n" + "Removing Bloatware"
 
     foreach ($Bloat in $Bloatware) {
         Get-AppxPackage -Name $Bloat| Remove-AppxPackage
@@ -1577,6 +1578,7 @@ $removebloat.Add_Click({
 
 $reinstallbloat.Add_Click({
     Write-Host "Reinstalling Bloatware"
+    $ResultText.text = "`r`n" +"`r`n" + "Reinstalling Bloatware"
 
     foreach ($app in $Bloatware) {
         Write-Output "Trying to add $app"
@@ -1677,6 +1679,9 @@ $appearancefx.Add_Click({
 
 $onedrive.Add_Click({
     Write-Host "Disabling OneDrive..."
+    $ResultText.text = "`r`n" +"`r`n" + "Disabling and Uninstalling OneDrive"
+
+    # Disable OneDrive
     if (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\OneDrive")) {
         New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\OneDrive" | Out-Null
     }
@@ -1823,6 +1828,7 @@ $EHibernation.Add_Click({
 
 $InstallOneDrive.Add_Click({
     Write-Host "Installing Onedrive. Please Wait..."
+    $ResultText.text = "`r`n" +"`r`n" + "Installing Onedrive. Please Wait..."
     Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\OneDrive" -Name "DisableFileSyncNGSC" -ErrorAction SilentlyContinue
     %systemroot%\SysWOW64\OneDriveSetup.exe
     $ResultText.text = "`r`n" +"`r`n" + "Finished Reinstalling OneDrive"
@@ -1842,6 +1848,9 @@ $DisableNumLock.Add_Click({
 
 $yourphonefix.Add_Click({
     Write-Host "Reinstalling Your Phone App"
+    $ResultText.text = "`r`n" +"`r`n" + "Reinstalling Your Phone App"
+
+    # Reinstalling Your Phone App
     Add-AppxPackage -DisableDevelopmentMode -Register "$($(Get-AppXPackage -AllUsers "Microsoft.YourPhone").InstallLocation)\AppXManifest.xml"
 
     Write-Host "Enable needed data collection for Your Phone..."
@@ -2012,7 +2021,6 @@ $windowsupdatefix.Add_Click({
     
     Write-Host "Process complete. Please reboot your computer."
     $ResultText.text = "`r`n" +"`r`n" + "Process complete. Please reboot your computer."
-
 })
 
 $disableupdates.Add_Click({
