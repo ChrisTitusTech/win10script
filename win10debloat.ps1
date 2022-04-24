@@ -202,7 +202,7 @@ $performancefx.location          = New-Object System.Drawing.Point(3,419)
 $performancefx.Font              = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
 $onedrive                        = New-Object system.Windows.Forms.Button
-$onedrive.text                   = "Delete & Disable  OneDrive"
+$onedrive.text                   = "Delete & Disable OneDrive"
 $onedrive.width                  = 205
 $onedrive.height                 = 30
 $onedrive.location               = New-Object System.Drawing.Point(3,521)
@@ -244,7 +244,7 @@ $Label16.location                = New-Object System.Drawing.Point(62,65)
 $Label16.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
 
 $Label17                         = New-Object system.Windows.Forms.Label
-$Label17.text                    = "- Delays Features updates up to 3 years"
+$Label17.text                    = "- Delays Feature updates up to 3 years"
 $Label17.AutoSize                = $true
 $Label17.width                   = 25
 $Label17.height                  = 10
@@ -1587,7 +1587,7 @@ $securitywindowsupdate.Add_Click({
     Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" -Name "NoAutoRebootWithLoggedOnUsers" -Type DWord -Value 1
     Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" -Name "AUPowerManagement" -Type DWord -Value 0
     Write-Host "Disabled driver offering through Windows Update"
-    $ResultText.text = "`r`n" +"`r`n" + "Set Windows Update to Sane Settings"
+    $ResultText.text = "`r`n" +"`r`n" + "Set Windows Update to Safe Settings"
 })
 
 $actioncenter.Add_Click({
