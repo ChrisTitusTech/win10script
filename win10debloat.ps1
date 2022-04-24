@@ -1204,13 +1204,15 @@ $essentialtweaks.Add_Click({
 })
 
 $dualboottime.Add_Click({
-Write-Host "Setting BIOS time to UTC..."
+    Write-Host "Setting BIOS time to UTC..."
     Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\TimeZoneInformation" -Name "RealTimeIsUniversal" -Type DWord -Value 1
+    Write-Host "Time set to UTC for consistent time in Dual Boot Systems"
     $ResultText.text = "`r`n" + "Time set to UTC for consistent time in Dual Boot Systems" + "`r`n" + "`r`n" + "Ready for Next Task"
 })
 
 $laptopnumlock.Add_Click({
     Write-Host "Enabling Numlock at startup..."
+    $ResultText.text = "`r`n" + "`r`n" + "Enabling Numlock at startup..."
     Set-ItemProperty -Path "HKU:\.DEFAULT\Control Panel\Keyboard" -Name "InitialKeyboardIndicators" -Type DWord -Value 0
     Add-Type -AssemblyName System.Windows.Forms
     if (([System.Windows.Forms.Control]::IsKeyLocked('NumLock'))) {
@@ -1231,7 +1233,7 @@ $essentialundo.Add_Click({
     Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\DataCollection" -Name "AllowTelemetry" -Type DWord -Value 1
     Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DataCollection" -Name "AllowTelemetry" -Type DWord -Value 1
 
-    Write-Host "Enabling Wi-Fi Sense"
+    Write-Host "Enabling Wi-Fi Sense..."
     Set-ItemProperty -Path "HKLM:\Software\Microsoft\PolicyManager\default\WiFi\AllowWiFiHotSpotReporting" -Name "Value" -Type DWord -Value 1
     Set-ItemProperty -Path "HKLM:\Software\Microsoft\PolicyManager\default\WiFi\AllowAutoConnectToWiFiSenseHotspots" -Name "Value" -Type DWord -Value 1
 
@@ -1331,18 +1333,18 @@ $essentialundo.Add_Click({
     Write-Host "Changing default Explorer view to Quick Access..."
     Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "LaunchTo" -Type DWord -Value 1
 
-    Write-Host "Unrestricting AutoLogger directory"
+    Write-Host "Unrestricting AutoLogger directory..."
     $autoLoggerDir = "$env:PROGRAMDATA\Microsoft\Diagnosis\ETLLogs\AutoLogger"
     icacls $autoLoggerDir /grant:r SYSTEM:`(OI`)`(CI`)F | Out-Null
 
-    Write-Host "Enabling and starting Diagnostics Tracking Service"
+    Write-Host "Enabling and starting Diagnostics Tracking Service..."
     Set-Service "DiagTrack" -StartupType Automatic
     Start-Service "DiagTrack"
 
-    Write-Host "Hiding known file extensions"
+    Write-Host "Hiding known file extensions..."
     Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "HideFileExt" -Type DWord -Value 1
 
-    Write-Host "Reset Local Group Policies to Stock Defaults"
+    Write-Host "Resetting Local Group Policies to Stock Defaults..."
     #cmd /c secedit /configure /cfg %windir%\inf\defltbase.inf /db defltbase.sdb /verbose
     cmd /c RD /S /Q "%WinDir%\System32\GroupPolicyUsers"
     cmd /c RD /S /Q "%WinDir%\System32\GroupPolicy"
@@ -1354,12 +1356,12 @@ $essentialundo.Add_Click({
 })
 
 $windowssearch.Add_Click({
-    Write-Host "Disabling Search, Cortana, Start menu search..."
-    $ResultText.text = "`r`n" +"`r`n" + "Disabling Search, Cortana, Start menu search... Please Wait"
+    Write-Host "Disabling Search and Start menu search..."
+    $ResultText.text = "`r`n" +"`r`n" + "Disabling Search and Start menu search... Please Wait"
     Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Search" -Name "BingSearchEnabled" -Type DWord -Value 0
 
     <#
-    Write-Host "Disabling Cortana"
+    Write-Host "Disabling Cortana..."
     Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Search" -Name "CortanaConsent" -Type DWord -Value 0
     if (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Windows Search")) {
         New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Windows Search" -Force | Out-Null
@@ -1369,7 +1371,7 @@ $windowssearch.Add_Click({
     Write-Host "Hiding Search Box / Button..."
     Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Search" -Name "SearchboxTaskbarMode" -Type DWord -Value 0
 
-    Write-Host "Removing Start Menu Tiles"
+    Write-Host "Removing Start Menu Tiles..."
     Set-Content -Path 'C:\Users\Default\AppData\Local\Microsoft\Windows\Shell\DefaultLayouts.xml' -Value '<LayoutModificationTemplate xmlns:defaultlayout="http://schemas.microsoft.com/Start/2014/FullDefaultLayout" xmlns:start="http://schemas.microsoft.com/Start/2014/StartLayout" Version="1" xmlns="http://schemas.microsoft.com/Start/2014/LayoutModification">'
     Add-Content -Path 'C:\Users\Default\AppData\Local\Microsoft\Windows\Shell\DefaultLayouts.xml' -value '  <LayoutOptions StartTileGroupCellWidth="6" />'
     Add-Content -Path 'C:\Users\Default\AppData\Local\Microsoft\Windows\Shell\DefaultLayouts.xml' -value '  <DefaultLayoutOverride>'
@@ -1433,14 +1435,14 @@ $windowssearch.Add_Click({
         $basePath = $regAlias + ":\SOFTWARE\Policies\Microsoft\Windows"
         $keyPath = $basePath + "\Explorer"
         Set-ItemProperty -Path $keyPath -Name "LockedStartLayout" -Value 0
-
+    }
     Write-Host "Search and Start Menu Tweaks Complete"
     $ResultText.text = "`r`n" +"`r`n" + "Search and Start Menu Tweaks Complete"
-    }
 })
 
 $backgroundapps.Add_Click({
     Write-Host "Disabling Background applications..."
+    $ResultText.text = "`r`n" +"`r`n" + "Disabling Background applications..."
     Get-ChildItem -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\BackgroundAccessApplications" -Exclude "Microsoft.Windows.Cortana*" | ForEach {
         Set-ItemProperty -Path $_.PsPath -Name "Disabled" -Type DWord -Value 1
         Set-ItemProperty -Path $_.PsPath -Name "DisabledByUser" -Type DWord -Value 1
@@ -1602,7 +1604,7 @@ $defaultwindowsupdate.Add_Click({
     Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" -Name "NoAutoRebootWithLoggedOnUsers" -ErrorAction SilentlyContinue
     Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" -Name "AUPowerManagement" -ErrorAction SilentlyContinue
 
-    Write-Host "Enabled driver offering through Windows Update"
+    Write-Host "Set Windows Updates to Stock Settings"
     $ResultText.text = "`r`n" +"`r`n" + "Set Windows Updates to Stock Settings"
 })
 
@@ -1630,7 +1632,7 @@ $securitywindowsupdate.Add_Click({
     Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" -Name "NoAutoRebootWithLoggedOnUsers" -Type DWord -Value 1
     Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" -Name "AUPowerManagement" -Type DWord -Value 0
 
-    Write-Host "Disabled driver offering through Windows Update"
+    Write-Host "Set Windows Update to Safe Settings"
     $ResultText.text = "`r`n" +"`r`n" + "Set Windows Update to Sane Settings"
 })
 
@@ -1678,10 +1680,9 @@ $appearancefx.Add_Click({
 })
 
 $onedrive.Add_Click({
-    Write-Host "Disabling OneDrive..."
     $ResultText.text = "`r`n" +"`r`n" + "Disabling and Uninstalling OneDrive"
 
-    # Disable OneDrive
+    Write-Host "Disabling OneDrive..."
     if (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\OneDrive")) {
         New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\OneDrive" | Out-Null
     }
@@ -1735,6 +1736,8 @@ $EActionCenter.Add_Click({
 })
 
 $ECortana.Add_Click({
+    $ResultText.text = "`r`n" +"`r`n" + "Enabling Cortana amd Restoring Search..."
+
     Write-Host "Enabling Cortana..."
 	Remove-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Personalization\Settings" -Name "AcceptedPrivacyPolicy" -ErrorAction SilentlyContinue
 	if (!(Test-Path "HKCU:\SOFTWARE\Microsoft\InputPersonalization\TrainedDataStore")) {
@@ -1764,8 +1767,8 @@ $ECortana.Add_Click({
 $HTrayIcons.Add_Click({
 	Write-Host "Hiding tray icons..."
 	Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer" -Name "EnableAutoTray" -Type DWord -Value 1
-	Write-Host "Hid Tray Icons"
-    $ResultText.text = "`r`n" +"`r`n" + "Tray icons are now factory defaults"
+	Write-Host "Tray Icons Hidden (Default)"
+    $ResultText.text = "`r`n" +"`r`n" + "Tray icons Hidden (Default)"
 })
 
 
@@ -1773,7 +1776,7 @@ $STrayIcons.Add_Click({
 	Write-Host "Showing tray icons..."
 	Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer" -Name "EnableAutoTray" -Type DWord -Value 0
 	Write-Host "Now showing all tray icons"
-    $ResultText.text = "`r`n" +"`r`n" + "Tray Icons now set to show all"
+    $ResultText.text = "`r`n" +"`r`n" + "Now showing all tray icons"
 })
 
 $EClipboardHistory.Add_Click({
@@ -1827,15 +1830,16 @@ $EHibernation.Add_Click({
 })
 
 $InstallOneDrive.Add_Click({
-    Write-Host "Installing Onedrive. Please Wait..."
-    $ResultText.text = "`r`n" +"`r`n" + "Installing Onedrive. Please Wait..."
+    Write-Host "Installing Onedrive, Please Wait..."
+    $ResultText.text = "`r`n" +"`r`n" + "Installing Onedrive, Please Wait..."
     Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\OneDrive" -Name "DisableFileSyncNGSC" -ErrorAction SilentlyContinue
     %systemroot%\SysWOW64\OneDriveSetup.exe
     $ResultText.text = "`r`n" +"`r`n" + "Finished Reinstalling OneDrive"
 })
 
 $DisableNumLock.Add_Click({
-    Write-Host "Disable NumLock after startup..."
+    Write-Host "Disable NumLock at startup..."
+    $ResultText.text = "`r`n" +"`r`n" + "Disabling NumLock at startup..."
     Set-ItemProperty -Path "HKU:\.DEFAULT\Control Panel\Keyboard" -Name "InitialKeyboardIndicators" -Type DWord -Value 0
     Add-Type -AssemblyName System.Windows.Forms
     if (([System.Windows.Forms.Control]::IsKeyLocked('NumLock'))) {
@@ -1869,22 +1873,32 @@ $yourphonefix.Add_Click({
 })
 
 $ncpa.Add_Click({
+    Write-Host "Opening Network Connections..."
+    $ResultText.text = "`r`n" +"`r`n" + "Opening Network Connections..."
     cmd /c ncpa.cpl
 })
 
 $oldsoundpanel.Add_Click({
+    Write-Host "Opening Old Sound Panel..."
+    $ResultText.text = "`r`n" +"`r`n" + "Opening Old Sound Panel..."
     cmd /c mmsys.cpl
 })
 
 $oldcontrolpanel.Add_Click({
+    Write-Host "Opening Old Control Panel..."
+    $ResultText.text = "`r`n" +"`r`n" + "Opening Old Control Panel..."
     cmd /c control
 })
 
 $oldsystempanel.Add_Click({
+    Write-Host "Opening Old System Panel..."
+    $ResultText.text = "`r`n" +"`r`n" + "Opening Old System Panel..."
     cmd /c sysdm.cpl
 })
 
 $oldpower.Add_Click({
+    Write-Host "Opening Old Power Options..."
+    $ResultText.text = "`r`n" +"`r`n" + "Opening Old Power Options..."
     cmd /c powercfg.cpl
 })
 
@@ -1912,8 +1926,8 @@ $NFS.Add_Click({
 })
 
 $Virtualization.Add_Click({
-    Write-Host "Installing Hyper-V"
-    $ResultText.text = "`r`n" +"`r`n" + "Installing Hyper-V"
+    Write-Host "Installing Hyper-V..."
+    $ResultText.text = "`r`n" +"`r`n" + "Installing Hyper-V..."
     Enable-WindowsOptionalFeature -Online -FeatureName "HypervisorPlatform" -All
     Enable-WindowsOptionalFeature -Online -FeatureName "VirtualMachinePlatform" -All
     Enable-WindowsOptionalFeature -Online -FeatureName "Microsoft-Windows-Subsystem-Linux" -All
@@ -1930,6 +1944,9 @@ $Virtualization.Add_Click({
 })
 
 $windowsupdatefix.Add_Click({
+    Write-Host "Repairing/Resetting Windows Update..."
+    $ResultText.text = "`r`n" +"`r`n" + "Repairing/Resetting Windows Update..."
+
     Write-Host "1. Stopping Windows Update Services..." 
     Stop-Service -Name BITS 
     Stop-Service -Name wuauserv 
@@ -2024,6 +2041,9 @@ $windowsupdatefix.Add_Click({
 })
 
 $disableupdates.Add_Click({
+    Write-Host "Disabling Windows Update..."
+    $ResultText.text = "`r`n" +"`r`n" + "Disabling Windows Update..."
+
     # Source: https://github.com/rgl/windows-vagrant/blob/master/disable-windows-updates.ps1
     Set-StrictMode -Version Latest
     $ProgressPreference = 'SilentlyContinue'
@@ -2104,9 +2124,15 @@ $disableupdates.Add_Click({
         Write-Host "Setting $service StartupType to Disabled"
         Get-Service -Name $service -ErrorAction SilentlyContinue | Set-Service -StartupType Disabled
     }
+
+    Write-Host "Windows Update disabled."
+    $ResultText.text = "`r`n" +"`r`n" + "Windows Update disabled."
 })
 
 $enableupdates.Add_Click({
+    Write-Host "Enabling Windows Update..."
+    $ResultText.text = "`r`n" +"`r`n" + "Enabling Windows Update..."
+
     # Source: https://github.com/rgl/windows-vagrant/blob/master/disable-windows-updates.ps1
     Set-StrictMode -Version Latest
     $ProgressPreference = 'SilentlyContinue'
@@ -2185,6 +2211,9 @@ $enableupdates.Add_Click({
         Write-Host "Setting $service StartupType to Automatic"
         Get-Service -Name $service -ErrorAction SilentlyContinue | Set-Service -StartupType Automatic
     }
+
+    Write-Host "Windows Update enabled."
+    $ResultText.text = "`r`n" +"`r`n" + "Windows Update enabled."
 })
 
 [void]$Form.ShowDialog()
