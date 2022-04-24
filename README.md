@@ -16,7 +16,15 @@ This script is the culmination of many scripts and gists from github with featur
 
 ## How to Run
 # Graphical Install
+Paste this command into Powershell (admin):
+```
+iex ((New-Object System.Net.WebClient).DownloadString('https://t.ly/OUwh'))
+```
 
+Or, Shorter:
+```
+iwr -useb https://t.ly/OUwh | iex
+```
 
 # CLI Install
 Paste this command into Powershell (admin):
