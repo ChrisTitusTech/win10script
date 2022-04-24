@@ -13,7 +13,7 @@ try {
     else {
         "Update available!" # Thanks for Santiago Squarzon on stackoverflow for giving me this code!
         "Update? (y/n)"
-        $YN = Read-Host "Choice"
+        $YN = Read-Host "Choice"  
         if (yn -eq y){
             "Please download the new version and close this window."
             Start-Sleep -s 5
