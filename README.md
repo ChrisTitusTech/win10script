@@ -15,6 +15,10 @@ This script is the culmination of many scripts and gists from github with featur
 - Semi-configurable
 
 ## How to Run
+# Graphical Install
+
+
+# CLI Install
 Paste this command into Powershell (admin):
 ```
 iex ((New-Object System.Net.WebClient).DownloadString('https://t.ly/YgR_')) 

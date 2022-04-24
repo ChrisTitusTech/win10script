@@ -1,0 +1,16 @@
+{
+    "data": {
+        "repo": "https://github.com/ChrisTitusTech/win10script/",
+        "toolbox": "win10debloat.ps1",
+        "installcmd": "install.cmd",
+        "install": "/setup/setupuwt.exe",
+        "more": "/scripts/more.ps1",
+        "readme": "readme.md",
+        "license": "LICENSE",
+        "pagechangelog": "pagechangelog.md",
+        "screenshots": "/screenshots/"
+    },
+    "img": {
+        "tbs": "tbs.png"
+    }
+}
