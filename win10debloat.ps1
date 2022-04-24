@@ -28,6 +28,8 @@ else{
     $ResultText.text = "`r`n" +"`r`n" + "Winget Installed - Ready for Next Task"
 }
 
+# GUI Specs
+
 $Form                            = New-Object system.Windows.Forms.Form
 $Form.ClientSize                 = New-Object System.Drawing.Point(1050,1000)
 $Form.text                       = "Windows Toolbox By Chris Titus"
@@ -50,6 +52,8 @@ $Form.Icon                    = [System.Drawing.Icon]::FromHandle((New-Object Sy
 
 $Form.Width                   = $objImage.Width
 $Form.Height                  = $objImage.Height
+
+# GUI Objects
 
 $Panel1                          = New-Object system.Windows.Forms.Panel
 $Panel1.height                   = 939
@@ -665,6 +669,8 @@ $Panel1.controls.AddRange(@($brave,$firefox,$7zip,$sharex,$adobereader,$notepad,
 $Panel2.controls.AddRange(@($essentialtweaks,$backgroundapps,$cortana,$actioncenter,$darkmode,$performancefx,$onedrive,$lightmode,$essentialundo,$EActionCenter,$ECortana,$RBackgroundApps,$HTrayIcons,$EClipboardHistory,$ELocation,$InstallOneDrive,$removebloat,$reinstallbloat,$WarningLabel,$Label5,$appearancefx,$STrayIcons,$EHibernation,$dualboottime))
 $Panel4.controls.AddRange(@($defaultwindowsupdate,$securitywindowsupdate,$Label16,$Label17,$Label18,$Label19,$windowsupdatefix,$disableupdates,$enableupdates,$Label12))
 $Panel3.controls.AddRange(@($yourphonefix,$ncpa,$oldcontrolpanel,$oldsoundpanel,$oldsystempanel,$NFS,$laptopnumlock,$Virtualization,$oldpower,$restorepower))
+
+# Functions/Scripts
 
 $brave.Add_Click({
     Write-Host "Installing Brave Browser"
@@ -2216,4 +2222,4 @@ $enableupdates.Add_Click({
     $ResultText.text = "`r`n" +"`r`n" + "Windows Update enabled."
 })
 
-[void]$Form.ShowDialog()
+[void]$Form.ShowDialog()  # Show GUI
