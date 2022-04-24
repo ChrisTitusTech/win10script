@@ -16,7 +16,7 @@ try {
         $YN = Read-Host "Choice"  
         if (yn -eq y){
             "Please download the new version and close this window."
-            Start-Sleep -s 5
+            Start-Sleep -s 5  
             Start-Process "https://github.com/ChrisTitusTech/win10script"
         }
         if (yn -eq n){
