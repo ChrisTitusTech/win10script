@@ -14,12 +14,12 @@ $stream                          = New-Object IO.MemoryStream($iconBytes, 0, $ic
 $stream.Write($iconBytes, 0, $iconBytes.Length)
 $MainForm.Icon                    = [System.Drawing.Icon]::FromHandle((New-Object System.Drawing.Bitmap -Argument $stream).GetHIcon())
 
-$et                              = New-Object system.Windows.Forms.Button
-$et.text                         = "Extra Tweaks"
-$et.width                        = 156
-$et.height                       = 30
-$et.location                     = New-Object System.Drawing.Point(123,88)
-$et.Font                         = New-Object System.Drawing.Font('Microsoft Sans Serif',9)
+# $et                              = New-Object system.Windows.Forms.Button
+# $et.text                         = "Extra Tweaks"
+# $et.width                        = 156
+# $et.height                       = 30
+# $et.location                     = New-Object System.Drawing.Point(123,88)
+# $et.Font                         = New-Object System.Drawing.Font('Microsoft Sans Serif',9)
 
 # $Button1                         = New-Object system.Windows.Forms.Button
 # $Button1.text                    = "Extra Tools"
@@ -58,7 +58,7 @@ $Label2.height                   = 10
 $Label2.location                 = New-Object System.Drawing.Point(126,8)
 $Label2.Font                     = New-Object System.Drawing.Font('Microsoft Sans Serif',24)
 
-$MainForm.controls.AddRange(@($Label1,$Label2,$et,$Button1,$fet,$vbox))
+$MainForm.controls.AddRange(@($Label1,$Label2,$fet,$vbox))
 
 $vbox.Add_Click({
     Write-Host "Installing VirtualBox"
@@ -106,6 +106,18 @@ $fet.Add_Click({
     scoop install ruby
     scoop install sudo 
     scoop install wget
+    winget install -e Microsoft.PowerShell
+    winget install -e KeePassXCTeam.KeePassXC
+    winget install -e Microsoft.VisualStudioCode
+    winget install -e Python.Python.3
+    winget install -e OpenJS.NodeJS.LTS
+    winget install -e Microsoft.PowerToys
+    winget install -e qBittorrent.qBittorrent
+    winget install -e Balena.Etcher
+    winget install -e VideoLAN.VLC
+    winget install -e Notepad++.Notepad++
+    winget install -e NSIS.NSIS
+    winget install -e GitHub.GitHubDesktop
     Write-Host "Done!"
 })
     
