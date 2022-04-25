@@ -1,3 +1,42 @@
+# Arguments
+param(
+    [switch]$Essential = $false,
+    [switch]$UTCTime = $false,
+    [switch]$Numlock = $false,
+    [switch]$UndoEssential = $false,
+    [switch]$Search = $false,
+    [switch]$Background = $false,
+    [switch]$DisableCortana = $false,
+    [switch]$BloatApps = $false,
+    [switch]$BloatUndo = $false,
+    [switch]$DefaultWindowsUpdates = $false,
+    [switch]$SecurityWindowsUpdates = $false,
+    [switch]$DisableActionCenter = $false,
+    [switch]$PerformanceVisuals = $false,
+    [switch]$AppearanceVisuals = $false,
+    [switch]$DisableOnedrive = $false,
+    [switch]$Dark = $false,
+    [switch]$Light = $false,
+    [switch]$EnableActionCenter = $false,
+    [switch]$EnableCortana = $false,
+    [switch]$HideTrayIcons = $false,
+    [switch]$ShowTrayIcons = $false,
+    [switch]$ClipboardHistoryUndo = $false,
+    [switch]$LocationTrackingUndo = $false,
+    [switch]$BackgroundUndo = $false,
+    [switch]$EnableHibernation = $false,
+    [switch]$EnableOnedrive = $false,
+    [switch]$NumlockFix = $false,
+    [switch]$YourPhoneUndo = $false,
+    [switch]$PowerPlans = $false,
+    [switch]$EnableNFS = $false,
+    [switch]$EnableVirtualization = $false,
+    [switch]$WindowsUpdateRepair = $false,
+    [switch]$DisableWindowsUpdates = $false,
+    [switch]$EnableWindowsUpdates = $false,
+    [switch]$QuitAfter = $false
+)
+
 Add-Type -AssemblyName System.Windows.Forms
 [System.Windows.Forms.Application]::EnableVisualStyles()
 
@@ -870,7 +909,7 @@ $gimp.Add_Click({
     $ResultText.text = "`r`n" + "Finished Installing Gimp Image Editor" + "`r`n" + "`r`n" + "Ready for Next Task"
 })
 
-$essentialtweaks.Add_Click({
+function essentialtweaks{
     Write-Host "Creating Restore Point incase something bad happens"
     $ResultText.text = "`r`n" +"`r`n" + "Installing Essential Tools... Please Wait" 
     Enable-ComputerRestore -Drive "C:\"
@@ -1185,24 +1224,36 @@ foreach ($service in $services) {
 
     Write-Host "Essential Tweaks Completed - Please Reboot"
     $ResultText.text = "`r`n" + "Essential Tweaks Done" + "`r`n" + "`r`n" + "Ready for Next Task"
+}
+
+$essentialtweaks.Add_Click({
+    essentialtweaks
 })
 
-$dualboottime.Add_Click({
-Write-Host "Setting BIOS time to UTC..."
+function dualboottime{
+    Write-Host "Setting BIOS time to UTC..."
     Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\TimeZoneInformation" -Name "RealTimeIsUniversal" -Type DWord -Value 1
     $ResultText.text = "`r`n" + "Time set to UTC for consistent time in Dual Boot Systems" + "`r`n" + "`r`n" + "Ready for Next Task"
+}
+
+$dualboottime.Add_Click({
+    dualboottime
 })
 
-$laptopnumlock.Add_Click({
+function laptopnumlock{
     Set-ItemProperty -Path "HKU:\.DEFAULT\Control Panel\Keyboard" -Name "InitialKeyboardIndicators" -Type DWord -Value 0
     Add-Type -AssemblyName System.Windows.Forms
     If (([System.Windows.Forms.Control]::IsKeyLocked('NumLock'))) {
         $wsh = New-Object -ComObject WScript.Shell
         $wsh.SendKeys('{NUMLOCK}')
     }
+}
+
+$laptopnumlock.Add_Click({
+    laptopnumlock
 })
 
-$essentialundo.Add_Click({
+function essentialundo{
     Write-Host "Creating Restore Point incase something bad happens"
     $ResultText.text = "`r`n" +"`r`n" + "Creating Restore Point and Reverting Settings... Please Wait"
     Enable-ComputerRestore -Drive "C:\"
@@ -1315,9 +1366,13 @@ $essentialundo.Add_Click({
 
     Write-Host "Essential Undo Completed"
     $ResultText.text = "`r`n" +"`r`n" + "Essential Undo Completed - Ready for next task"
+}
+
+$essentialundo.Add_Click({
+    essentialundo
 })
 
-$windowssearch.Add_Click({
+function windowssearch{
     Write-Host "Disabling Bing Search in Start Menu..."
     $ResultText.text = "`r`n" +"`r`n" + "Disabling Search, Cortana, Start menu search... Please Wait"
     Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Search" -Name "BingSearchEnabled" -Type DWord -Value 0
@@ -1400,9 +1455,13 @@ $windowssearch.Add_Click({
     Write-Host "Search and Start Menu Tweaks Complete"
     $ResultText.text = "`r`n" +"`r`n" + "Search and Start Menu Tweaks Complete"
     }
+}
+
+$windowssearch.Add_Click({
+    windowssearch
 })
 
-$backgroundapps.Add_Click({
+function backgroundapps{
     Write-Host "Disabling Background application access..."
     Get-ChildItem -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\BackgroundAccessApplications" -Exclude "Microsoft.Windows.Cortana*" | ForEach {
         Set-ItemProperty -Path $_.PsPath -Name "Disabled" -Type DWord -Value 1
@@ -1410,9 +1469,13 @@ $backgroundapps.Add_Click({
     }
     Write-Host "Disabled Background application access"
     $ResultText.text = "`r`n" +"`r`n" + "Disabled Background application access"
+}
+
+$backgroundapps.Add_Click({
+    backgroundapps
 })
 
-$cortana.Add_Click({
+function cortana{
     Write-Host "Disabling Cortana..."
     If (!(Test-Path "HKCU:\SOFTWARE\Microsoft\Personalization\Settings")) {
         New-Item -Path "HKCU:\SOFTWARE\Microsoft\Personalization\Settings" -Force | Out-Null
@@ -1433,7 +1496,25 @@ $cortana.Add_Click({
     Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Windows Search" -Name "AllowCortana" -Type DWord -Value 0
     Write-Host "Disabled Cortana"
     $ResultText.text = "`r`n" +"`r`n" + "Disabled Cortana"
+}
+
+$cortana.Add_Click({
+    cortana
 })
+
+function removebloat{
+    Write-Host "Removing Bloatware"
+
+    foreach ($Bloat in $Bloatware) {
+        Get-AppxPackage -Name $Bloat| Remove-AppxPackage
+        Get-AppxProvisionedPackage -Online | Where-Object DisplayName -like $Bloat | Remove-AppxProvisionedPackage -Online
+        Write-Host "Trying to remove $Bloat."
+        $ResultText.text = "`r`n" +"`r`n" + "Trying to remove $Bloat."
+    }
+
+    Write-Host "Finished Removing Bloatware Apps"
+    $ResultText.text = "`r`n" +"`r`n" + "Finished Removing Bloatware Apps"
+}
 
 $Bloatware = @(
     #Unnecessary Windows 10 AppX Apps
@@ -1527,20 +1608,10 @@ $Bloatware = @(
 )
 
 $removebloat.Add_Click({
-    Write-Host "Removing Bloatware"
-
-    foreach ($Bloat in $Bloatware) {
-        Get-AppxPackage -Name $Bloat| Remove-AppxPackage
-        Get-AppxProvisionedPackage -Online | Where-Object DisplayName -like $Bloat | Remove-AppxProvisionedPackage -Online
-        Write-Host "Trying to remove $Bloat."
-        $ResultText.text = "`r`n" +"`r`n" + "Trying to remove $Bloat."
-    }
-
-    Write-Host "Finished Removing Bloatware Apps"
-    $ResultText.text = "`r`n" +"`r`n" + "Finished Removing Bloatware Apps"
+    removebloat
 })
 
-$reinstallbloat.Add_Click({
+function reinstallbloat{
     Write-Host "Reinstalling Bloatware"
 
     foreach ($app in $Bloatware) {
@@ -1551,9 +1622,13 @@ $reinstallbloat.Add_Click({
 
     Write-Host "Finished Reinstalling Bloatware Apps"
     $ResultText.text = "`r`n" +"`r`n" + "Finished Reinstalling Bloatware Apps"
+}
+
+$reinstallbloat.Add_Click({
+    reinstallbloat
 })
 
-$defaultwindowsupdate.Add_Click({
+function defaultwindowsupdate{
     Write-Host "Enabling driver offering through Windows Update..."
     Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Device Metadata" -Name "PreventDeviceMetadataFromNetwork" -ErrorAction SilentlyContinue
     Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DriverSearching" -Name "DontPromptForWindowsUpdate" -ErrorAction SilentlyContinue
@@ -1565,9 +1640,13 @@ $defaultwindowsupdate.Add_Click({
     Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" -Name "AUPowerManagement" -ErrorAction SilentlyContinue
     Write-Host "Enabled driver offering through Windows Update"
     $ResultText.text = "`r`n" +"`r`n" + "Set Windows Updates to Stock Settings"
+}
+
+$defaultwindowsupdate.Add_Click({
+    defaultwindowsupdate
 })
 
-$securitywindowsupdate.Add_Click({
+function securitywindowsupdate{
     Write-Host "Disabling driver offering through Windows Update..."
     If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Device Metadata")) {
         New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Device Metadata" -Force | Out-Null
@@ -1591,9 +1670,13 @@ $securitywindowsupdate.Add_Click({
     Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" -Name "AUPowerManagement" -Type DWord -Value 0
     Write-Host "Disabled driver offering through Windows Update"
     $ResultText.text = "`r`n" +"`r`n" + "Set Windows Update to Sane Settings"
+}
+
+$securitywindowsupdate.Add_Click({
+    securitywindowsupdate
 })
 
-$actioncenter.Add_Click({
+function actioncenter{
     Write-Host "Disabling Action Center..."
     If (!(Test-Path "HKCU:\SOFTWARE\Policies\Microsoft\Windows\Explorer")) {
         New-Item -Path "HKCU:\SOFTWARE\Policies\Microsoft\Windows\Explorer" | Out-Null
@@ -1602,9 +1685,13 @@ $actioncenter.Add_Click({
     Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\PushNotifications" -Name "ToastEnabled" -Type DWord -Value 0
     Write-Host "Disabled Action Center"
     $ResultText.text = "`r`n" +"`r`n" + "Disabled Action Center"
+}
+
+$actioncenter.Add_Click({
+    actioncenter
 })
 
-$performancefx.Add_Click({
+function performancefx{
     Write-Host "Adjusting visual effects for performance..."
     Set-ItemProperty -Path "HKCU:\Control Panel\Desktop" -Name "DragFullWindows" -Type String -Value 0
     Set-ItemProperty -Path "HKCU:\Control Panel\Desktop" -Name "MenuShowDelay" -Type String -Value 200
@@ -1618,9 +1705,13 @@ $performancefx.Add_Click({
     Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\DWM" -Name "EnableAeroPeek" -Type DWord -Value 0
     Write-Host "Adjusted visual effects for performance"
     $ResultText.text = "`r`n" +"`r`n" + "Adjusted VFX for performance"
+}
+
+$performancefx.Add_Click({
+    performancefx
 })
 
-$appearancefx.Add_Click({
+function appearancefx{
 	Write-Output "Adjusting visual effects for appearance..."
 	Set-ItemProperty -Path "HKCU:\Control Panel\Desktop" -Name "DragFullWindows" -Type String -Value 1
 	Set-ItemProperty -Path "HKCU:\Control Panel\Desktop" -Name "MenuShowDelay" -Type String -Value 400
@@ -1633,9 +1724,13 @@ $appearancefx.Add_Click({
 	Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects" -Name "VisualFXSetting" -Type DWord -Value 3
 	Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\DWM" -Name "EnableAeroPeek" -Type DWord -Value 1
     $ResultText.text = "`r`n" +"`r`n" + "Visual effects are set for appearance (Defaults)"
+}
+
+$appearancefx.Add_Click({
+    appearancefx
 })
 
-$onedrive.Add_Click({
+function onedrive{
     Write-Host "Disabling OneDrive..."
     If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\OneDrive")) {
         New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\OneDrive" | Out-Null
@@ -1663,31 +1758,47 @@ $onedrive.Add_Click({
     Remove-Item -Path "HKCR:\Wow6432Node\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" -Recurse -ErrorAction SilentlyContinue
     Write-Host "Disabled OneDrive"
     $ResultText.text = "`r`n" +"`r`n" + "Deleted and Disabled OneDrive"
+}
+
+$onedrive.Add_Click({
+    onedrive
 })
 
-$darkmode.Add_Click({
+function darkmode{
     Write-Host "Enabling Dark Mode"
     Set-ItemProperty -Path HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize -Name AppsUseLightTheme -Value 0
     Write-Host "Enabled Dark Mode"
     $ResultText.text = "`r`n" +"`r`n" + "Enabled Dark Mode"
+}
+
+$darkmode.Add_Click({
+    darkmode
 })
 
-$lightmode.Add_Click({
+function lightmode{
     Write-Host "Switching Back to Light Mode"
     Remove-ItemProperty -Path HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize -Name AppsUseLightTheme
     Write-Host "Switched Back to Light Mode"
     $ResultText.text = "`r`n" +"`r`n" + "Enabled Light Mode"
+}
+
+$lightmode.Add_Click({
+    lightmode
 })
 
-$EActionCenter.Add_Click({
+function EActionCenter{
     Write-Host "Enabling Action Center..."
 	Remove-ItemProperty -Path "HKCU:\SOFTWARE\Policies\Microsoft\Windows\Explorer" -Name "DisableNotificationCenter" -ErrorAction SilentlyContinue
 	Remove-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\PushNotifications" -Name "ToastEnabled" -ErrorAction SilentlyContinue
 	Write-Host "Done - Reverted to Stock Settings"
     $ResultText.text = "`r`n" +"`r`n" + "Enabled Action Center"
+}
+
+$EActionCenter.Add_Click({
+    EActionCenter
 })
 
-$ECortana.Add_Click({
+function ECortana{
     Write-Host "Enabling Cortana..."
 	Remove-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Personalization\Settings" -Name "AcceptedPrivacyPolicy" -ErrorAction SilentlyContinue
 	If (!(Test-Path "HKCU:\SOFTWARE\Microsoft\InputPersonalization\TrainedDataStore")) {
@@ -1708,34 +1819,47 @@ $ECortana.Add_Click({
 	Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Search" -Name "SearchboxTaskbarMode" -Type DWord -Value 1
 	Write-Host "Done - Reverted to Stock Settings"
     $ResultText.text = "`r`n" +"`r`n" + "Enabled Cortana and Restored Search"
+}
+
+$ECortana.Add_Click({
+    ECortana
 })
 
-$HTrayIcons.Add_Click({
-
+function HTrayIcons{
 	Write-Host "Hiding tray icons..."
 	Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer" -Name "EnableAutoTray" -Type DWord -Value 1
 	Write-Host "Done - Hid Tray Icons"
     $ResultText.text = "`r`n" +"`r`n" + "Tray icons are now factory defaults"
+}
+
+$HTrayIcons.Add_Click({
+    HTrayIcons
 })
 
-
-$STrayIcons.Add_Click({
-
+function STrayIcons{
 	Write-Host "Showing tray icons..."
 	Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer" -Name "EnableAutoTray" -Type DWord -Value 0
 	Write-Host "Done - Now showing all tray icons"
     $ResultText.text = "`r`n" +"`r`n" + "Tray Icons now set to show all"
+}
+
+$STrayIcons.Add_Click({
+    STrayIcons
 })
 
-$EClipboardHistory.Add_Click({
+function EClipboardHistory{
 	Write-Host "Restoring Clipboard History..."
 	Remove-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Clipboard" -Name "EnableClipboardHistory" -ErrorAction SilentlyContinue
     Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\System" -Name "AllowClipboardHistory" -ErrorAction SilentlyContinue
 	Write-Host "Done - Reverted to Stock Settings"
     $ResultText.text = "`r`n" +"`r`n" + "Enabled Clipboard History"
+}
+
+$EClipboardHistory.Add_Click({
+    EClipboardHistory
 })
 
-$ELocation.Add_Click({
+function ELocation{
 	Write-Host "Enabling Location Provider..."
 	Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\LocationAndSensors" -Name "DisableWindowsLocationProvider" -ErrorAction SilentlyContinue
 	Write-Host "Enabling Location Scripting..."
@@ -1753,9 +1877,13 @@ $ELocation.Add_Click({
 	Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\AppPrivacy" -Name "LetAppsAccessLocation_ForceDenyTheseApps" -ErrorAction SilentlyContinue
 	Write-Host "Done - Reverted to Stock Settings"
     $ResultText.text = "`r`n" +"`r`n" + "Location Tracking now on... Reboot to check."
+}
+
+$ELocation.Add_Click({
+    ELocation
 })
 
-$RBackgroundApps.Add_Click({
+function RBackgroundApps{
 	Write-Host "Allowing Background Apps..."
 	Get-ChildItem -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\BackgroundAccessApplications" -Exclude "Microsoft.Windows.Cortana*" | ForEach {
 		Remove-ItemProperty -Path $_.PsPath -Name "Disabled" -ErrorAction SilentlyContinue
@@ -1763,24 +1891,36 @@ $RBackgroundApps.Add_Click({
 	}
 	Write-Host "Done - Reverted to Stock Settings"
     $ResultText.text = "`r`n" +"`r`n" + "Enabled Background Apps"
+}
+
+$RBackgroundApps.Add_Click({
+    RBackgroundApps
 })
 
-$EHibernation.Add_Click({
+function EHibernation{
     Write-Host "Enabling Hibernation"
     Set-ItemProperty -Path "HKLM:\System\CurrentControlSet\Control\Session Manager\Power" -Name "HibernteEnabled" -Type Dword -Value 1
     Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FlyoutMenuSettings" -Name "ShowHibernateOption" -Type Dword -Value 1
     Write-Host "Done - Reverted to Stock Settings"
     $ResultText.text = "`r`n" +"`r`n" + "Enabled Hibernation"
+}
+
+$EHibernation.Add_Click({
+    EHibernation
 })
 
-$InstallOneDrive.Add_Click({
+function InstallOneDrive{
     Write-Host "Installing Onedrive. Please Wait..."
     Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\OneDrive" -Name "DisableFileSyncNGSC" -ErrorAction SilentlyContinue
     %systemroot%\SysWOW64\OneDriveSetup.exe
     $ResultText.text = "`r`n" +"`r`n" + "Finished Reinstalling OneDrive"
+}
+
+$InstallOneDrive.Add_Click({
+    InstallOneDrive
 })
 
-$DisableNumLock.Add_Click({
+function DisableNumLock{
     Write-Host "Disable NumLock after startup..."
     Set-ItemProperty -Path "HKU:\.DEFAULT\Control Panel\Keyboard" -Name "InitialKeyboardIndicators" -Type DWord -Value 0
     Add-Type -AssemblyName System.Windows.Forms
@@ -1789,9 +1929,13 @@ $DisableNumLock.Add_Click({
         $wsh.SendKeys('{NUMLOCK}')
     }
     $ResultText.text = "`r`n" +"`r`n" + "NUMLOCK Disabled"
+}
+
+$DisableNumLock.Add_Click({
+    DisableNumLock
 })
 
-$yourphonefix.Add_Click({
+function yourphonefix{
     Write-Host "Reinstalling Your Phone App"
     Add-AppxPackage -DisableDevelopmentMode -Register "$($(Get-AppXPackage -AllUsers "Microsoft.YourPhone").InstallLocation)\AppXManifest.xml"
     Write-Host "Enable needed data collection for Your Phone..."
@@ -1805,6 +1949,10 @@ $yourphonefix.Add_Click({
 	}
     Write-Host "You may need to Reboot and right-click Your Phone app and select repair"
     $ResultText.text = "`r`n" +"`r`n" + "You may need to Reboot and right-click Your Phone app and select repair"
+}
+
+$yourphonefix.Add_Click({
+    yourphonefix
 })
 
 $ncpa.Add_Click({
@@ -1822,14 +1970,20 @@ $oldsystempanel.Add_Click({
 $oldpower.Add_Click({
     cmd /c powercfg.cpl
 })
-$restorepower.Add_Click({
+
+function restorepower{
     powercfg -duplicatescheme a1841308-3541-4fab-bc81-f71556f20b4a
     powercfg -duplicatescheme 381b4222-f694-41f0-9685-ff5bb260df2e
     powercfg -duplicatescheme e9a42b02-d5df-448d-aa00-03f14749eb61
     Write-Host "Restored all power plans: Balanced, High Performance, and Power Saver"
     $ResultText.text = "`r`n" +"`r`n" + "Restored all power plans: Balanced, High Performance, and Power Saver"
+}
+
+$restorepower.Add_Click({
+    restorepower
 })
-$NFS.Add_Click({
+
+function NFS{
     Enable-WindowsOptionalFeature -Online -FeatureName "ServicesForNFS-ClientOnly" -All
     Enable-WindowsOptionalFeature -Online -FeatureName "ClientForNFS-Infrastructure" -All
     Enable-WindowsOptionalFeature -Online -FeatureName "NFS-Administration" -All
@@ -1840,9 +1994,13 @@ $NFS.Add_Click({
     nfsadmin client localhost config fileaccess=755 SecFlavors=+sys -krb5 -krb5i
     Write-Host "NFS is now setup for user based NFS mounts"
     $ResultText.text = "`r`n" +"`r`n" + "NFS is now setup for user based NFS mounts"
+}
+
+$NFS.Add_Click({
+    NFS
 })
 
-$Virtualization.Add_Click({
+function Virtualization{
     Enable-WindowsOptionalFeature -Online -FeatureName "HypervisorPlatform" -All
     Enable-WindowsOptionalFeature -Online -FeatureName "VirtualMachinePlatform" -All
     Enable-WindowsOptionalFeature -Online -FeatureName "Microsoft-Windows-Subsystem-Linux" -All
@@ -1856,9 +2014,13 @@ $Virtualization.Add_Click({
     cmd /c bcdedit /set hypervisorschedulertype classic
     Write-Host "HyperV is now installed and configured. Please Reboot before using."
     $ResultText.text = "`r`n" +"`r`n" + "HyperV is now installed and configured. Please Reboot before using."
+}
+
+$Virtualization.Add_Click({
+    Virtualization
 })
 
-$windowsupdatefix.Add_Click({
+function windowsupdatefix{
     Write-Host "1. Stopping Windows Update Services..." 
     Stop-Service -Name BITS 
     Stop-Service -Name wuauserv 
@@ -1950,11 +2112,13 @@ $windowsupdatefix.Add_Click({
     
     Write-Host "Process complete. Please reboot your computer."
     $ResultText.text = "`r`n" +"`r`n" + "Process complete. Please reboot your computer."
+}
 
+$windowsupdatefix.Add_Click({
+    windowsupdatefix
 })
 
-$disableupdates.Add_Click({
-
+function disableupdates{
     # Source: https://github.com/rgl/windows-vagrant/blob/master/disable-windows-updates.ps1
     Set-StrictMode -Version Latest
 $ProgressPreference = 'SilentlyContinue'
@@ -2037,10 +2201,13 @@ foreach ($service in $services) {
     Write-Host "Setting $service StartupType to Disabled"
     Get-Service -Name $service -ErrorAction SilentlyContinue | Set-Service -StartupType Disabled
 }
+}
+
+$disableupdates.Add_Click({
+    disableupdates
 })
 
-$enableupdates.Add_Click({
-
+function enableupdates{
     # Source: https://github.com/rgl/windows-vagrant/blob/master/disable-windows-updates.ps1
     Set-StrictMode -Version Latest
 $ProgressPreference = 'SilentlyContinue'
@@ -2123,6 +2290,51 @@ foreach ($service in $services) {
     Write-Host "Setting $service StartupType to Automatic"
     Get-Service -Name $service -ErrorAction SilentlyContinue | Set-Service -StartupType Automatic
 }
+}
+
+$enableupdates.Add_Click({
+    enableupdates
 })
+
+if($Essential){essentialtweaks}
+if($UTCTime){dualboottime}
+if($Numlock){laptopnumlock}
+if($UndoEssential){essentialundo}
+if($Search){windowssearch}
+if($Background){backgroundapps}
+if($DisableCortana){cortana}
+if($BloatApps){removebloat}
+if($BloatUndo){reinstallbloat}
+if($DefaultWindowsUpdates){defaultwindowsupdate}
+if($SecurityWindowsUpdates){securitywindowsupdate}
+if($DisableActionCenter){actioncenter}
+if($PerformanceVisuals){performancefx}
+if($AppearanceVisuals){appearancefx}
+if($DisableOnedrive){onedrive}
+if($Dark){darkmode}
+if($Light){lightmode}
+if($EnableActionCenter){EActionCenter}
+if($EnableCortana){ECortana}
+if($HideTrayIcons){HTrayIcons}
+if($ShowTrayIcons){STrayIcons}
+if($ClipboardHistoryUndo){EClipboardHistory}
+if($LocationTrackingUndo){ELocation}
+if($BackgroundUndo){RBackgroundApps}
+if($EnableHibernation){EHibernation}
+if($EnableOnedrive){InstallOneDrive}
+if($NumlockFix){DisableNumLock}
+if($YourPhoneUndo){yourphonefix}
+if($PowerPlans){restorepower}
+if($EnableNFS){NFS}
+if($EnableVirtualization){Virtualization}
+if($WindowsUpdateRepair){windowsupdatefix}
+if($DisableWindowsUpdates){disableupdates}
+if($EnableWindowsUpdates){enableupdates}
+if($QuitAfter){
+    # Long if-statement is to prevent passing QuitAfter without any other arguments
+    if($Essential -or $UndoEssential -or $UTCTime -or $Numlock -or $NumlockFix -or $Search -or $Background -or $BackgroundUndo -or $DisableCortana -or $EnableCortana -or $BloatApps -or $BloatUndo -or $SecurityWindowsUpdates -or $DefaultWindowsUpdates -or $DisableWindowsUpdates -or $EnableWindowsUpdates -or $DisableActionCenter -or $EnableActionCenter -or $PerformanceVisuals -or $AppearanceVisuals -or $DisableOnedrive -or $EnableOnedrive -or $Dark -or $Light -or $HideTrayIcons -or $ShowTrayIcons -or $ClipboardHistoryUndo -or $LocationTrackingUndo -or $EnableHibernation -or $YourPhoneUndo -or $PowerPlans -or $EnableNFS -or $EnableVirtualization -or $WindowsUpdateRepair){
+        Break
+    }
+}
 
 [void]$Form.ShowDialog()
