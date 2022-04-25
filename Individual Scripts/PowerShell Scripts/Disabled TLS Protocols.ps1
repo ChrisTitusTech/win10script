@@ -23,16 +23,16 @@ if (-Not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdent
  }
 }
 
-#Initialization
+# Initialization
 $version = $Null
 $SessionTime = (get-date -f dddd-MMMM-dd-yyyy-HH.mm.ss)
 $FilePath = $path+$env:computername+" "+$SessionTime+".reg"
 $path = "C:\temp\registry backups\"
 
-#Determine of path exist and if not create path
+# Determine of path exist and if not create path
 If(!(test-path $path))
 {
-New-Item -ItemType Directory -Force -Path $path
+    New-Item -ItemType Directory -Force -Path $path
 }
 # Display current settings
 
@@ -63,52 +63,51 @@ $TLS_1_Server_Enabled = $null
 
 # Multi-Protocol Unified Hello\Client
 if (test-path -Path $($Multi_Protocol_Unified_Hello_Path)){
+    if (test-path -Path "$($Multi_Protocol_Unified_Hello_Path)Client\")
+    {
+        $Multi_Protocol_Unified_Hello_Client_DisabledByDefault = (Get-ItemProperty ($Multi_Protocol_Unified_Hello_Path + "Client")).DisabledByDefault
+    }
+    else 
+    {
+        Write-host "The Path $($Multi_Protocol_Unified_Hello_Path)Client does not exist" -ForegroundColor Red
+    }
+    Write-host 
+    if (1 -eq $Multi_Protocol_Unified_Hello_Client_DisabledByDefault)
+    {
+        Write-Host "Multi-Protocol Unified Hello\Client\DisabledByDefault Value ="$Multi_Protocol_Unified_Hello_Client_DisabledByDefault""  -nonewline -ForegroundColor Yellow
+        Write-Host " Enabled" -ForegroundColor Green
+    }
 
-if (test-path -Path "$($Multi_Protocol_Unified_Hello_Path)Client\")
-{
-$Multi_Protocol_Unified_Hello_Client_DisabledByDefault = (Get-ItemProperty ($Multi_Protocol_Unified_Hello_Path + "Client")).DisabledByDefault
+    if (0 -eq $Multi_Protocol_Unified_Hello_Client_DisabledByDefault)
+    {
+        Write-Host "Multi-Protocol Unified Hello\Client\DisabledByDefault Value ="$Multi_Protocol_Unified_Hello_Client_DisabledByDefault"" -nonewline -ForegroundColor Yellow
+        Write-host "  Disabled" -ForegroundColor Red
+    }
+
+    if (test-path -Path "$($Multi_Protocol_Unified_Hello_Path)Client")
+    {
+        $Multi_Protocol_Unified_Hello_Client_Enabled = (Get-ItemProperty ($Multi_Protocol_Unified_Hello_Path + "Client")).Enabled
+    }
+    else 
+    {
+        Write-host "The Path $($Multi_Protocol_Unified_Hello_Path)Client does not exist" -ForegroundColor Red
+    }
+
+    if (1 -eq $Multi_Protocol_Unified_Hello_Client_Enabled)
+    {
+        Write-Host "Multi-Protocol Unified Hello\Client\Enabled Value ="$Multi_Protocol_Unified_Hello_Client_Enabled"" -nonewline -ForegroundColor Yellow
+        Write-host " Enabled" -ForegroundColor Red
+    }
+
+    if (0 -eq $Multi_Protocol_Unified_Hello_Client_Enabled)
+    {
+        Write-Host "Multi-Protocol Unified Hello\Client\Enabled Value ="$Multi_Protocol_Unified_Hello_Client_Enabled"" -nonewline -ForegroundColor Yellow
+        Write-host " Disabled" -ForegroundColor Green
+    }
 }
 else 
 {
-Write-host "The Path $($Multi_Protocol_Unified_Hello_Path)Client does not exist" -ForegroundColor Red
-}
-Write-host 
-if (1 -eq $Multi_Protocol_Unified_Hello_Client_DisabledByDefault)
-{
-Write-Host "Multi-Protocol Unified Hello\Client\DisabledByDefault Value ="$Multi_Protocol_Unified_Hello_Client_DisabledByDefault""  -nonewline -ForegroundColor Yellow
-Write-Host " Enabled" -ForegroundColor Green
-}
-
-if (0 -eq $Multi_Protocol_Unified_Hello_Client_DisabledByDefault)
-{
-Write-Host "Multi-Protocol Unified Hello\Client\DisabledByDefault Value ="$Multi_Protocol_Unified_Hello_Client_DisabledByDefault"" -nonewline -ForegroundColor Yellow
-Write-host "  Disabled" -ForegroundColor Red
-}
-
-if (test-path -Path "$($Multi_Protocol_Unified_Hello_Path)Client")
-{
-$Multi_Protocol_Unified_Hello_Client_Enabled = (Get-ItemProperty ($Multi_Protocol_Unified_Hello_Path + "Client")).Enabled
-}
-else 
-{
-Write-host "The Path $($Multi_Protocol_Unified_Hello_Path)Client does not exist" -ForegroundColor Red
-}
-
-if (1 -eq $Multi_Protocol_Unified_Hello_Client_Enabled)
-{
-Write-Host "Multi-Protocol Unified Hello\Client\Enabled Value ="$Multi_Protocol_Unified_Hello_Client_Enabled"" -nonewline -ForegroundColor Yellow
-Write-host " Enabled" -ForegroundColor Red
-}
-
-if (0 -eq $Multi_Protocol_Unified_Hello_Client_Enabled)
-{
-Write-Host "Multi-Protocol Unified Hello\Client\Enabled Value ="$Multi_Protocol_Unified_Hello_Client_Enabled"" -nonewline -ForegroundColor Yellow
-Write-host " Disabled" -ForegroundColor Green
-}
-}
-else 
-{
-Write-host "The Path $($Multi_Protocol_Unified_Hello_Path)Client does not exist" -ForegroundColor Red
+    Write-host "The Path $($Multi_Protocol_Unified_Hello_Path)Client does not exist" -ForegroundColor Red
 }
 
 
@@ -117,99 +116,99 @@ Write-host "The Path $($Multi_Protocol_Unified_Hello_Path)Client does not exist"
 
 if (test-path -Path "$($Multi_Protocol_Unified_Hello_Path)Server")
 {
-$Multi_Protocol_Unified_Hello_Server_DisabledByDefault = (Get-ItemProperty ($Multi_Protocol_Unified_Hello_Path + "Server")).DisabledByDefault
+    $Multi_Protocol_Unified_Hello_Server_DisabledByDefault = (Get-ItemProperty ($Multi_Protocol_Unified_Hello_Path + "Server")).DisabledByDefault
 }
 else 
 {
-Write-host "The Path $($Multi_Protocol_Unified_Hello_Path)Server does not exist" -ForegroundColor Red
+    Write-host "The Path $($Multi_Protocol_Unified_Hello_Path)Server does not exist" -ForegroundColor Red
 }
 
 if (1 -eq $Multi_Protocol_Unified_Hello_Server_DisabledByDefault)
 {
-Write-Host "Multi-Protocol Unified Hello\Server\DisabledByDefault Value ="$Multi_Protocol_Unified_Hello_Server_DisabledByDefault""  -nonewline -ForegroundColor Yellow
-Write-Host " Enabled" -ForegroundColor Green
+    Write-Host "Multi-Protocol Unified Hello\Server\DisabledByDefault Value ="$Multi_Protocol_Unified_Hello_Server_DisabledByDefault""  -nonewline -ForegroundColor Yellow
+    Write-Host " Enabled" -ForegroundColor Green
 }
 
 if (0 -eq $Multi_Protocol_Unified_Hello_Server_DisabledByDefault)
 {
-Write-Host "Multi-Protocol Unified Hello\Server\DisabledByDefault Value ="$Multi_Protocol_Unified_Hello_Server_DisabledByDefault"" -nonewline -ForegroundColor Yellow
-Write-host "  Disabled" -ForegroundColor Red
+    Write-Host "Multi-Protocol Unified Hello\Server\DisabledByDefault Value ="$Multi_Protocol_Unified_Hello_Server_DisabledByDefault"" -nonewline -ForegroundColor Yellow
+    Write-host "  Disabled" -ForegroundColor Red
 }
 
 if (test-path -Path "$($Multi_Protocol_Unified_Hello_Path)Server")
 {
-$Multi_Protocol_Unified_Hello_Server_Enabled = (Get-ItemProperty ($Multi_Protocol_Unified_Hello_Path + "Server")).Enabled
+    $Multi_Protocol_Unified_Hello_Server_Enabled = (Get-ItemProperty ($Multi_Protocol_Unified_Hello_Path + "Server")).Enabled
 }
 else 
 {
-Write-host "The Path $($Multi_Protocol_Unified_Hello_Path)Client does not exist" -ForegroundColor Red
+    Write-host "The Path $($Multi_Protocol_Unified_Hello_Path)Client does not exist" -ForegroundColor Red
 }
 
 if (1 -eq $Multi_Protocol_Unified_Hello_Servert_Enabled)
 {
-Write-Host "Multi-Protocol Unified Hello\Server\Enabled Value ="$Multi_Protocol_Unified_Hello_Server_Enabled"" -nonewline -ForegroundColor Yellow
-Write-host " Enabled" -ForegroundColor Red
+    Write-Host "Multi-Protocol Unified Hello\Server\Enabled Value ="$Multi_Protocol_Unified_Hello_Server_Enabled"" -nonewline -ForegroundColor Yellow
+    Write-host " Enabled" -ForegroundColor Red
 }
 
 if (0 -eq $Multi_Protocol_Unified_Hello_Server_Enabled)
 {
-Write-Host "Multi-Protocol Unified Hello\Server\Enabled Value ="$Multi_Protocol_Unified_Hello_Server_Enabled"" -nonewline -ForegroundColor Yellow
-Write-host " Disabled" -ForegroundColor Green
+    Write-Host "Multi-Protocol Unified Hello\Server\Enabled Value ="$Multi_Protocol_Unified_Hello_Server_Enabled"" -nonewline -ForegroundColor Yellow
+    Write-host " Disabled" -ForegroundColor Green
 }
 else 
 {
-Write-host "The Path $($Multi_Protocol_Unified_Hello_Path)Server does not exist" -ForegroundColor Red
+    Write-host "The Path $($Multi_Protocol_Unified_Hello_Path)Server does not exist" -ForegroundColor Red
 }
 
 
-#SSL 2.0\Client
+# SSL 2.0\Client
 if (test-path -Path $($SSL_2_Path)){
 
-if (test-path -Path "$($SSL_2_Path)Client\")
-{
-$SSL_2_Client_DisabledByDefault = (Get-ItemProperty ($SSL_2_Path + "Client")).DisabledByDefault
+    if (test-path -Path "$($SSL_2_Path)Client\")
+    {
+        $SSL_2_Client_DisabledByDefault = (Get-ItemProperty ($SSL_2_Path + "Client")).DisabledByDefault
+    }
+    else 
+    {
+        Write-host "The Path $($SSL_2_Path)Client does not exist" -ForegroundColor Red
+    }
+
+    if (1 -eq $SSL_2_Client_DisabledByDefault)
+    {
+        Write-Host "SSL 2.0\Client\DisabledByDefault Value ="$SSL_2_Client_DisabledByDefault""  -nonewline -ForegroundColor Yellow
+        Write-Host " Enabled" -ForegroundColor Green
+    }
+
+    if (0 -eq $SSL_2_Client_DisabledByDefault)
+    {
+        Write-Host "SSL 2.0\Client\DisabledByDefault Value ="$SSL_2_Client_DisabledByDefault"" -nonewline -ForegroundColor Yellow
+        Write-host "  Disabled" -ForegroundColor Red
+    }
+
+    if (test-path -Path "$($SSL_2_Path)Client")
+    {
+        $SSL_2_Client_Enabled = (Get-ItemProperty ($SSL_2_Path + "Client")).Enabled
+    }
+    else 
+    {
+        Write-host "The Path $($SSL_2_Path)Client does not exist" -ForegroundColor Red
+    }
+
+    if (1 -eq $SSL_2_Client_Enabled)
+    {
+        Write-Host "SSL 2.0\Client\Enabled Value ="$SSL_2_Client_Enabled"" -nonewline -ForegroundColor Yellow
+        Write-host " Enabled" -ForegroundColor Red
+    }
+
+    if (0 -eq $SSL_2_Client_Enabled)
+    {
+        Write-Host "SSL 2.0\Client\Enabled Value ="$SSL_2_Client_Enabled"" -nonewline -ForegroundColor Yellow
+        Write-host " Disabled" -ForegroundColor Green
+    }
 }
 else 
 {
-Write-host "The Path $($SSL_2_Path)Client does not exist" -ForegroundColor Red
-}
-
-if (1 -eq $SSL_2_Client_DisabledByDefault)
-{
-Write-Host "SSL 2.0\Client\DisabledByDefault Value ="$SSL_2_Client_DisabledByDefault""  -nonewline -ForegroundColor Yellow
-Write-Host " Enabled" -ForegroundColor Green
-}
-
-if (0 -eq $SSL_2_Client_DisabledByDefault)
-{
-Write-Host "SSL 2.0\Client\DisabledByDefault Value ="$SSL_2_Client_DisabledByDefault"" -nonewline -ForegroundColor Yellow
-Write-host "  Disabled" -ForegroundColor Red
-}
-
-if (test-path -Path "$($SSL_2_Path)Client")
-{
-$SSL_2_Client_Enabled = (Get-ItemProperty ($SSL_2_Path + "Client")).Enabled
-}
-else 
-{
-Write-host "The Path $($SSL_2_Path)Client does not exist" -ForegroundColor Red
-}
-
-if (1 -eq $SSL_2_Client_Enabled)
-{
-Write-Host "SSL 2.0\Client\Enabled Value ="$SSL_2_Client_Enabled"" -nonewline -ForegroundColor Yellow
-Write-host " Enabled" -ForegroundColor Red
-}
-
-if (0 -eq $SSL_2_Client_Enabled)
-{
-Write-Host "SSL 2.0\Client\Enabled Value ="$SSL_2_Client_Enabled"" -nonewline -ForegroundColor Yellow
-Write-host " Disabled" -ForegroundColor Green
-}
-}
-else 
-{
-Write-host "The Path $($SSL_2_Path)Client does not exist" -ForegroundColor Red
+    Write-host "The Path $($SSL_2_Path)Client does not exist" -ForegroundColor Red
 }
 
 
@@ -218,100 +217,100 @@ Write-host "The Path $($SSL_2_Path)Client does not exist" -ForegroundColor Red
 
 if (test-path -Path "$($SSL_2_Path)Server")
 {
-$SSL_2_Server_DisabledByDefault = (Get-ItemProperty ($SSL_2_Path + "Server")).DisabledByDefault
+    $SSL_2_Server_DisabledByDefault = (Get-ItemProperty ($SSL_2_Path + "Server")).DisabledByDefault
 }
 else 
 {
-Write-host "The Path $($SSL_2_Path)Server does not exist" -ForegroundColor Red
+    Write-host "The Path $($SSL_2_Path)Server does not exist" -ForegroundColor Red
 }
 
 if (1 -eq $SSL_2_Server_DisabledByDefault)
 {
-Write-Host "SSL 2.0\Server\DisabledByDefault Value ="$SSL_2_Server_DisabledByDefault""  -nonewline -ForegroundColor Yellow
-Write-Host " Enabled" -ForegroundColor Green
+    Write-Host "SSL 2.0\Server\DisabledByDefault Value ="$SSL_2_Server_DisabledByDefault""  -nonewline -ForegroundColor Yellow
+    Write-Host " Enabled" -ForegroundColor Green
 }
 
 if (0 -eq $SSL_2_Server_DisabledByDefault)
 {
-Write-Host "SSL 2.0\Server\DisabledByDefault Value ="$SSL_2_Server_DisabledByDefault"" -nonewline -ForegroundColor Yellow
-Write-host "  Disabled" -ForegroundColor Red
+    Write-Host "SSL 2.0\Server\DisabledByDefault Value ="$SSL_2_Server_DisabledByDefault"" -nonewline -ForegroundColor Yellow
+    Write-host "  Disabled" -ForegroundColor Red
 }
 
 if (test-path -Path "$($SSL_2_Path)Server")
 {
-$SSL_2_Server_Enabled = (Get-ItemProperty ($SSL_2_Path + "Server")).Enabled
+    $SSL_2_Server_Enabled = (Get-ItemProperty ($SSL_2_Path + "Server")).Enabled
 }
 else 
 {
-Write-host "The Path $($SSL_2_Path)Client does not exist" -ForegroundColor Red
+    Write-host "The Path $($SSL_2_Path)Client does not exist" -ForegroundColor Red
 }
 
 if (1 -eq $SSL_2_Server_Enabled)
 {
-Write-Host "SSL 2.0\Server\Enabled Value ="$SSL_2_Server_Enabled"" -nonewline -ForegroundColor Yellow
-Write-host " Enabled" -ForegroundColor Red
+    Write-Host "SSL 2.0\Server\Enabled Value ="$SSL_2_Server_Enabled"" -nonewline -ForegroundColor Yellow
+    Write-host " Enabled" -ForegroundColor Red
 }
 
 if (0 -eq $SSL_2_Server_Enabled)
 {
-Write-Host "SSL 2.0\Server\Enabled Value ="$SSL_2_Server_Enabled"" -nonewline -ForegroundColor Yellow
-Write-host " Disabled" -ForegroundColor Green
+    Write-Host "SSL 2.0\Server\Enabled Value ="$SSL_2_Server_Enabled"" -nonewline -ForegroundColor Yellow
+    Write-host " Disabled" -ForegroundColor Green
 }
 else 
 {
-Write-host "The Path $($SSL_2_Path)Server does not exist" -ForegroundColor Red
+    Write-host "The Path $($SSL_2_Path)Server does not exist" -ForegroundColor Red
 }
 
 
 
-#SSL 3.0\Client
+# SSL 3.0\Client
 if (test-path -Path $($SSL_3_Path)){
 
-if (test-path -Path "$($SSL_3_Path)Client\")
-{
-$SSL_3_Client_DisabledByDefault = (Get-ItemProperty ($SSL_3_Path + "Client")).DisabledByDefault
+    if (test-path -Path "$($SSL_3_Path)Client\")
+    {
+        $SSL_3_Client_DisabledByDefault = (Get-ItemProperty ($SSL_3_Path + "Client")).DisabledByDefault
+    }
+    else 
+    {
+        Write-host "The Path $($SSL_3_Path)Client does not exist" -ForegroundColor Red
+    }
+
+    if (1 -eq $SSL_3_Client_DisabledByDefault)
+    {
+        Write-Host "SSL 3.0\Client\DisabledByDefault Value ="$SSL_3_Client_DisabledByDefault""  -nonewline -ForegroundColor Yellow
+        Write-Host " Enabled" -ForegroundColor Green
+    }
+
+    if (0 -eq $SSL_3_Client_DisabledByDefault)
+    {
+        Write-Host "SSL 3.0\Client\DisabledByDefault Value ="$SSL_3_Client_DisabledByDefault"" -nonewline -ForegroundColor Yellow
+        Write-host "  Disabled" -ForegroundColor Red
+    }
+
+    if (test-path -Path "$($SSL_3_Path)Client")
+    {
+        $SSL_3_Client_Enabled = (Get-ItemProperty ($SSL_3_Path + "Client")).Enabled
+    }
+    else 
+    {
+        Write-host "The Path $($SSL_3_Path)Client does not exist" -ForegroundColor Red
+    }
+
+    if (1 -eq $SSL_3_Client_Enabled)
+    {
+        Write-Host "SSL 3.0\Client\Enabled Value ="$SSL_3_Client_Enabled"" -nonewline -ForegroundColor Yellow
+        Write-host " Enabled" -ForegroundColor Red
+    }
+
+    if (0 -eq $SSL_3_Client_Enabled)
+    {
+        Write-Host "SSL 3.0\Client\Enabled Value ="$SSL_3_Client_Enabled"" -nonewline -ForegroundColor Yellow
+        Write-host " Disabled" -ForegroundColor Green
+    }
 }
 else 
 {
-Write-host "The Path $($SSL_3_Path)Client does not exist" -ForegroundColor Red
-}
-
-if (1 -eq $SSL_3_Client_DisabledByDefault)
-{
-Write-Host "SSL 3.0\Client\DisabledByDefault Value ="$SSL_3_Client_DisabledByDefault""  -nonewline -ForegroundColor Yellow
-Write-Host " Enabled" -ForegroundColor Green
-}
-
-if (0 -eq $SSL_3_Client_DisabledByDefault)
-{
-Write-Host "SSL 3.0\Client\DisabledByDefault Value ="$SSL_3_Client_DisabledByDefault"" -nonewline -ForegroundColor Yellow
-Write-host "  Disabled" -ForegroundColor Red
-}
-
-if (test-path -Path "$($SSL_3_Path)Client")
-{
-$SSL_3_Client_Enabled = (Get-ItemProperty ($SSL_3_Path + "Client")).Enabled
-}
-else 
-{
-Write-host "The Path $($SSL_3_Path)Client does not exist" -ForegroundColor Red
-}
-
-if (1 -eq $SSL_3_Client_Enabled)
-{
-Write-Host "SSL 3.0\Client\Enabled Value ="$SSL_3_Client_Enabled"" -nonewline -ForegroundColor Yellow
-Write-host " Enabled" -ForegroundColor Red
-}
-
-if (0 -eq $SSL_3_Client_Enabled)
-{
-Write-Host "SSL 3.0\Client\Enabled Value ="$SSL_3_Client_Enabled"" -nonewline -ForegroundColor Yellow
-Write-host " Disabled" -ForegroundColor Green
-}
-}
-else 
-{
-Write-host "The Path $($SSL_3_Path)Client does not exist" -ForegroundColor Red
+    Write-host "The Path $($SSL_3_Path)Client does not exist" -ForegroundColor Red
 }
 
 
@@ -320,149 +319,149 @@ Write-host "The Path $($SSL_3_Path)Client does not exist" -ForegroundColor Red
 
 if (test-path -Path "$($SSL_3_Path)Server")
 {
-$SSL_3_Server_DisabledByDefault = (Get-ItemProperty ($SSL_3_Path + "Server")).DisabledByDefault
+    $SSL_3_Server_DisabledByDefault = (Get-ItemProperty ($SSL_3_Path + "Server")).DisabledByDefault
 }
 else 
 {
-Write-host "The Path $($SSL_3_Path)Server does not exist" -ForegroundColor Red
+    Write-host "The Path $($SSL_3_Path)Server does not exist" -ForegroundColor Red
 }
 
 if (1 -eq $SSL_3_Server_DisabledByDefault)
 {
-Write-Host "SSL 3.0\Server\DisabledByDefault Value ="$SSL_3_Server_DisabledByDefault""  -nonewline -ForegroundColor Yellow
-Write-Host " Enabled" -ForegroundColor Green
+    Write-Host "SSL 3.0\Server\DisabledByDefault Value ="$SSL_3_Server_DisabledByDefault""  -nonewline -ForegroundColor Yellow
+    Write-Host " Enabled" -ForegroundColor Green
 }
 
 if (0 -eq $SSL_3_Server_DisabledByDefault)
 {
-Write-Host "SSL 3.0\Server\DisabledByDefault Value ="$SSL_3_Server_DisabledByDefault"" -nonewline -ForegroundColor Yellow
-Write-host "  Disabled" -ForegroundColor Red
+    Write-Host "SSL 3.0\Server\DisabledByDefault Value ="$SSL_3_Server_DisabledByDefault"" -nonewline -ForegroundColor Yellow
+    Write-host "  Disabled" -ForegroundColor Red
 }
 
 if (test-path -Path "$($SSL_3_Path)Server")
 {
-$SSL_3_Server_Enabled = (Get-ItemProperty ($SSL_3_Path + "Server")).Enabled
+    $SSL_3_Server_Enabled = (Get-ItemProperty ($SSL_3_Path + "Server")).Enabled
 }
 else 
 {
-Write-host "The Path $($SSL_3_Path)Client does not exist" -ForegroundColor Red
+    Write-host "The Path $($SSL_3_Path)Client does not exist" -ForegroundColor Red
 }
 
 if (1 -eq $SSL_3_Server_Enabled)
 {
-Write-Host "SSL 3.0\Server\Enabled Value ="$SSL_3_Server_Enabled"" -nonewline -ForegroundColor Yellow
-Write-host " Enabled" -ForegroundColor Red
+    Write-Host "SSL 3.0\Server\Enabled Value ="$SSL_3_Server_Enabled"" -nonewline -ForegroundColor Yellow
+    Write-host " Enabled" -ForegroundColor Red
 }
 
 if (0 -eq $SSL_3_Server_Enabled)
 {
-Write-Host "SSL 3.0\Server\Enabled Value ="$SSL_3_Server_Enabled"" -nonewline -ForegroundColor Yellow
-Write-host " Disabled" -ForegroundColor Green
+    Write-Host "SSL 3.0\Server\Enabled Value ="$SSL_3_Server_Enabled"" -nonewline -ForegroundColor Yellow
+    Write-host " Disabled" -ForegroundColor Green
 }
 else 
 {
-Write-host "The Path $($SSL_3_Path)Server does not exist" -ForegroundColor Red
+    Write-host "The Path $($SSL_3_Path)Server does not exist" -ForegroundColor Red
 }
 
 
-#TLS 1.0\Client
+# TLS 1.0\Client
 if (test-path -Path $($TLS_1_Path)){
 
-if (test-path -Path "$($TLS_1_Path)Client\")
-{
-$TLS_1_Client_DisabledByDefault = (Get-ItemProperty ($TLS_1_Path + "Client")).DisabledByDefault
+    if (test-path -Path "$($TLS_1_Path)Client\")
+    {
+        $TLS_1_Client_DisabledByDefault = (Get-ItemProperty ($TLS_1_Path + "Client")).DisabledByDefault
+    }
+    else 
+    {
+        Write-host "The Path $($TLS_1_Path)Client does not exist" -ForegroundColor Red
+    }
+
+    if (1 -eq $TLS_1_Client_DisabledByDefault)
+    {
+        Write-Host "TLS 1.0\Client\DisabledByDefault Value ="$TLS_1_Client_DisabledByDefault""  -nonewline -ForegroundColor Yellow
+        Write-Host " Enabled" -ForegroundColor Green
+    }
+
+    if (0 -eq $TLS_1_Client_DisabledByDefault)
+    {
+        Write-Host "TLS 1.0\Client\DisabledByDefault Value ="$TLS_1_Client_DisabledByDefault"" -nonewline -ForegroundColor Yellow
+        Write-host "  Disabled" -ForegroundColor Red
+    }
+
+    if (test-path -Path "$($TLS_1_Path)Client")
+    {
+        $TLS_1_Client_Enabled = (Get-ItemProperty ($TLS_1_Path + "Client")).Enabled
+    }
+    else 
+    {
+        Write-host "The Path $($TLS_1_Path)Client does not exist" -ForegroundColor Red
+    }
+
+    if (1 -eq $TLS_1_Client_Enabled)
+    {
+        Write-Host "TLS 1.0\Client\Enabled Value ="$TLS_1_Client_Enabled"" -nonewline -ForegroundColor Yellow
+        Write-host " Enabled" -ForegroundColor Red
+    }
+
+    if (0 -eq $TLS_1_Client_Enabled)
+    {
+        Write-Host "TLS 1.0\Client\Enabled Value ="$TLS_1_Client_Enabled"" -nonewline -ForegroundColor Yellow
+        Write-host " Disabled" -ForegroundColor Green
+    }
 }
 else 
 {
-Write-host "The Path $($TLS_1_Path)Client does not exist" -ForegroundColor Red
-}
-
-if (1 -eq $TLS_1_Client_DisabledByDefault)
-{
-Write-Host "TLS 1.0\Client\DisabledByDefault Value ="$TLS_1_Client_DisabledByDefault""  -nonewline -ForegroundColor Yellow
-Write-Host " Enabled" -ForegroundColor Green
-}
-
-if (0 -eq $TLS_1_Client_DisabledByDefault)
-{
-Write-Host "TLS 1.0\Client\DisabledByDefault Value ="$TLS_1_Client_DisabledByDefault"" -nonewline -ForegroundColor Yellow
-Write-host "  Disabled" -ForegroundColor Red
-}
-
-if (test-path -Path "$($TLS_1_Path)Client")
-{
-$TLS_1_Client_Enabled = (Get-ItemProperty ($TLS_1_Path + "Client")).Enabled
-}
-else 
-{
-Write-host "The Path $($TLS_1_Path)Client does not exist" -ForegroundColor Red
-}
-
-if (1 -eq $TLS_1_Client_Enabled)
-{
-Write-Host "TLS 1.0\Client\Enabled Value ="$TLS_1_Client_Enabled"" -nonewline -ForegroundColor Yellow
-Write-host " Enabled" -ForegroundColor Red
-}
-
-if (0 -eq $TLS_1_Client_Enabled)
-{
-Write-Host "TLS 1.0\Client\Enabled Value ="$TLS_1_Client_Enabled"" -nonewline -ForegroundColor Yellow
-Write-host " Disabled" -ForegroundColor Green
-}
-}
-else 
-{
-Write-host "The Path $($TLS_1_Path)Client does not exist" -ForegroundColor Red
+    Write-host "The Path $($TLS_1_Path)Client does not exist" -ForegroundColor Red
 }
 
 
 
-#TLS 1.0\Server
+# TLS 1.0\Server
 
 if (test-path -Path "$($TLS_1_Path)Server")
 {
-$TLS_1_Server_DisabledByDefault = (Get-ItemProperty ($TLS_1_Path + "Server")).DisabledByDefault
+    $TLS_1_Server_DisabledByDefault = (Get-ItemProperty ($TLS_1_Path + "Server")).DisabledByDefault
 }
 else 
 {
-Write-host "The Path $($TLS_1_Path)Server does not exist" -ForegroundColor Red
+    Write-host "The Path $($TLS_1_Path)Server does not exist" -ForegroundColor Red
 }
 
 if (1 -eq $TLS_1_Server_DisabledByDefault)
 {
-Write-Host "TLS 1.0\Server\DisabledByDefault Value ="$TLS_1_Server_DisabledByDefault""  -nonewline -ForegroundColor Yellow
-Write-Host " Enabled" -ForegroundColor Green
+    Write-Host "TLS 1.0\Server\DisabledByDefault Value ="$TLS_1_Server_DisabledByDefault""  -nonewline -ForegroundColor Yellow
+    Write-Host " Enabled" -ForegroundColor Green
 }
 
 if (0 -eq $TLS_1_Server_DisabledByDefault)
 {
-Write-Host "TLS 1.0\Server\DisabledByDefault Value ="$TLS_1_Server_DisabledByDefault"" -nonewline -ForegroundColor Yellow
-Write-host "  Disabled" -ForegroundColor Red
+    Write-Host "TLS 1.0\Server\DisabledByDefault Value ="$TLS_1_Server_DisabledByDefault"" -nonewline -ForegroundColor Yellow
+    Write-host "  Disabled" -ForegroundColor Red
 }
 
 if (test-path -Path "$($TLS_1_Path)Server")
 {
-$TLS_1_Server_Enabled = (Get-ItemProperty ($TLS_1_Path + "Server")).Enabled
+    $TLS_1_Server_Enabled = (Get-ItemProperty ($TLS_1_Path + "Server")).Enabled
 }
 else 
 {
-Write-host "The Path $($TLS_1_Path)Client does not exist" -ForegroundColor Red
+    Write-host "The Path $($TLS_1_Path)Client does not exist" -ForegroundColor Red
 }
 
 if (1 -eq $TLS_1_Server_Enabled)
 {
-Write-Host "TLS 1.0\Server\Enabled Value ="$TLS_1_Server_Enabled"" -nonewline -ForegroundColor Yellow
-Write-host " Enabled" -ForegroundColor Red
+    Write-Host "TLS 1.0\Server\Enabled Value ="$TLS_1_Server_Enabled"" -nonewline -ForegroundColor Yellow
+    Write-host " Enabled" -ForegroundColor Red
 }
 
 if (0 -eq $TLS_1_Server_Enabled)
 {
-Write-Host "TLS 1.0\Server\Enabled Value ="$TLS_1_Server_Enabled"" -nonewline -ForegroundColor Yellow
-Write-host " Disabled" -ForegroundColor Green
+    Write-Host "TLS 1.0\Server\Enabled Value ="$TLS_1_Server_Enabled"" -nonewline -ForegroundColor Yellow
+    Write-host " Disabled" -ForegroundColor Green
 }
 else 
 {
-Write-host "The Path $($TLS_1_Path)Server does not exist" -ForegroundColor Red
+    Write-host "The Path $($TLS_1_Path)Server does not exist" -ForegroundColor Red
 }
 # Pause so user can review the current setting before proceeding
 Write-Host " "
@@ -531,21 +530,21 @@ New-ItemProperty –Path "HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProvide
 New-Item –Path "HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Ciphers\RC4 128/128" -Force
 New-ItemProperty –Path "HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Ciphers\RC4 128/128" -Name "Enabled" -PropertyType "DWORD" -value "00000000" -Force
 
-#Get OS information
+# Get OS information
 $version = [System.Environment]::OSVersion.Version
 
 If (($version.Major -ige 10) -and ($version.Build -ige 18362)){
-New-Item –Path "HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols" -Name "TLS 1.3" -Force
-New-Item –Path "HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\TLS 1.3" -Name "Client" -Force
-New-Item –Path "HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\TLS 1.3" -Name "Server" -Force
-New-ItemProperty –Path "HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\TLS 1.3\Client" -Name "Enabled" -PropertyType "DWORD" -value "00000001" -Force
-New-ItemProperty –Path "HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\TLS 1.3\Server" -Name "Enabled" -PropertyType "DWORD" -value "00000001" -Force
-New-ItemProperty –Path "HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\TLS 1.3\Client" -Name "DisabledByDefault" -PropertyType "DWORD" -value "00000000" -Force
-New-ItemProperty –Path "HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\TLS 1.3\Server" -Name "DisabledByDefault" -PropertyType "DWORD" -value "00000000" -Force
+    New-Item –Path "HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols" -Name "TLS 1.3" -Force
+    New-Item –Path "HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\TLS 1.3" -Name "Client" -Force
+    New-Item –Path "HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\TLS 1.3" -Name "Server" -Force
+    New-ItemProperty –Path "HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\TLS 1.3\Client" -Name "Enabled" -PropertyType "DWORD" -value "00000001" -Force
+    New-ItemProperty –Path "HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\TLS 1.3\Server" -Name "Enabled" -PropertyType "DWORD" -value "00000001" -Force
+    New-ItemProperty –Path "HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\TLS 1.3\Client" -Name "DisabledByDefault" -PropertyType "DWORD" -value "00000000" -Force
+    New-ItemProperty –Path "HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\TLS 1.3\Server" -Name "DisabledByDefault" -PropertyType "DWORD" -value "00000000" -Force
 }
-{else Write-host "OS is not the right version for TLS 1.3"} 
+else{Write-host "OS is not the right version for TLS 1.3"} 
 
-#WinHttp setting to TLS 1.2
+# WinHttp setting to TLS 1.2
 New-ItemProperty –Path "HKLM:\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Internet Settings\WinHttp" -Name "DefaultSecureProtocols" -PropertyType "DWORD" -value 0x800  -Force
 
 $Multi_Protocol_Unified_Hello_Path = "HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\Multi-Protocol Unified Hello\"
@@ -576,51 +575,51 @@ $TLS_1_Server_Enabled = $null
 # Multi-Protocol Unified Hello\Client
 if (test-path -Path $($Multi_Protocol_Unified_Hello_Path)){
 
-if (test-path -Path "$($Multi_Protocol_Unified_Hello_Path)Client\")
-{
-$Multi_Protocol_Unified_Hello_Client_DisabledByDefault = (Get-ItemProperty ($Multi_Protocol_Unified_Hello_Path + "Client")).DisabledByDefault
+    if (test-path -Path "$($Multi_Protocol_Unified_Hello_Path)Client\")
+    {
+        $Multi_Protocol_Unified_Hello_Client_DisabledByDefault = (Get-ItemProperty ($Multi_Protocol_Unified_Hello_Path + "Client")).DisabledByDefault
+    }
+    else 
+    {
+        Write-host "The Path $($Multi_Protocol_Unified_Hello_Path)Client does not exist" -ForegroundColor Red
+    }
+    Write-host 
+    if (1 -eq $Multi_Protocol_Unified_Hello_Client_DisabledByDefault)
+    {
+        Write-Host "Multi-Protocol Unified Hello\Client\DisabledByDefault Value ="$Multi_Protocol_Unified_Hello_Client_DisabledByDefault""  -nonewline -ForegroundColor Yellow
+        Write-Host " Enabled" -ForegroundColor Green
+    }
+
+    if (0 -eq $Multi_Protocol_Unified_Hello_Client_DisabledByDefault)
+    {
+        Write-Host "Multi-Protocol Unified Hello\Client\DisabledByDefault Value ="$Multi_Protocol_Unified_Hello_Client_DisabledByDefault"" -nonewline -ForegroundColor Yellow
+        Write-host "  Disabled" -ForegroundColor Red
+    }
+
+    if (test-path -Path "$($Multi_Protocol_Unified_Hello_Path)Client")
+    {
+        $Multi_Protocol_Unified_Hello_Client_Enabled = (Get-ItemProperty ($Multi_Protocol_Unified_Hello_Path + "Client")).Enabled
+    }
+    else 
+    {
+        Write-host "The Path $($Multi_Protocol_Unified_Hello_Path)Client does not exist" -ForegroundColor Red
+    }
+
+    if (1 -eq $Multi_Protocol_Unified_Hello_Client_Enabled)
+    {
+        Write-Host "Multi-Protocol Unified Hello\Client\Enabled Value ="$Multi_Protocol_Unified_Hello_Client_Enabled"" -nonewline -ForegroundColor Yellow
+        Write-host " Enabled" -ForegroundColor Red
+    }
+
+    if (0 -eq $Multi_Protocol_Unified_Hello_Client_Enabled)
+    {
+        Write-Host "Multi-Protocol Unified Hello\Client\Enabled Value ="$Multi_Protocol_Unified_Hello_Client_Enabled"" -nonewline -ForegroundColor Yellow
+        Write-host " Disabled" -ForegroundColor Green
+    }
 }
 else 
 {
-Write-host "The Path $($Multi_Protocol_Unified_Hello_Path)Client does not exist" -ForegroundColor Red
-}
-Write-host 
-if (1 -eq $Multi_Protocol_Unified_Hello_Client_DisabledByDefault)
-{
-Write-Host "Multi-Protocol Unified Hello\Client\DisabledByDefault Value ="$Multi_Protocol_Unified_Hello_Client_DisabledByDefault""  -nonewline -ForegroundColor Yellow
-Write-Host " Enabled" -ForegroundColor Green
-}
-
-if (0 -eq $Multi_Protocol_Unified_Hello_Client_DisabledByDefault)
-{
-Write-Host "Multi-Protocol Unified Hello\Client\DisabledByDefault Value ="$Multi_Protocol_Unified_Hello_Client_DisabledByDefault"" -nonewline -ForegroundColor Yellow
-Write-host "  Disabled" -ForegroundColor Red
-}
-
-if (test-path -Path "$($Multi_Protocol_Unified_Hello_Path)Client")
-{
-$Multi_Protocol_Unified_Hello_Client_Enabled = (Get-ItemProperty ($Multi_Protocol_Unified_Hello_Path + "Client")).Enabled
-}
-else 
-{
-Write-host "The Path $($Multi_Protocol_Unified_Hello_Path)Client does not exist" -ForegroundColor Red
-}
-
-if (1 -eq $Multi_Protocol_Unified_Hello_Client_Enabled)
-{
-Write-Host "Multi-Protocol Unified Hello\Client\Enabled Value ="$Multi_Protocol_Unified_Hello_Client_Enabled"" -nonewline -ForegroundColor Yellow
-Write-host " Enabled" -ForegroundColor Red
-}
-
-if (0 -eq $Multi_Protocol_Unified_Hello_Client_Enabled)
-{
-Write-Host "Multi-Protocol Unified Hello\Client\Enabled Value ="$Multi_Protocol_Unified_Hello_Client_Enabled"" -nonewline -ForegroundColor Yellow
-Write-host " Disabled" -ForegroundColor Green
-}
-}
-else 
-{
-Write-host "The Path $($Multi_Protocol_Unified_Hello_Path)Client does not exist" -ForegroundColor Red
+    Write-host "The Path $($Multi_Protocol_Unified_Hello_Path)Client does not exist" -ForegroundColor Red
 }
 
 
@@ -629,99 +628,99 @@ Write-host "The Path $($Multi_Protocol_Unified_Hello_Path)Client does not exist"
 
 if (test-path -Path "$($Multi_Protocol_Unified_Hello_Path)Server")
 {
-$Multi_Protocol_Unified_Hello_Server_DisabledByDefault = (Get-ItemProperty ($Multi_Protocol_Unified_Hello_Path + "Server")).DisabledByDefault
+    $Multi_Protocol_Unified_Hello_Server_DisabledByDefault = (Get-ItemProperty ($Multi_Protocol_Unified_Hello_Path + "Server")).DisabledByDefault
 }
 else 
 {
-Write-host "The Path $($Multi_Protocol_Unified_Hello_Path)Server does not exist" -ForegroundColor Red
+    Write-host "The Path $($Multi_Protocol_Unified_Hello_Path)Server does not exist" -ForegroundColor Red
 }
 
 if (1 -eq $Multi_Protocol_Unified_Hello_Server_DisabledByDefault)
 {
-Write-Host "Multi-Protocol Unified Hello\Server\DisabledByDefault Value ="$Multi_Protocol_Unified_Hello_Server_DisabledByDefault""  -nonewline -ForegroundColor Yellow
-Write-Host " Enabled" -ForegroundColor Green
+    Write-Host "Multi-Protocol Unified Hello\Server\DisabledByDefault Value ="$Multi_Protocol_Unified_Hello_Server_DisabledByDefault""  -nonewline -ForegroundColor Yellow
+    Write-Host " Enabled" -ForegroundColor Green
 }
 
 if (0 -eq $Multi_Protocol_Unified_Hello_Server_DisabledByDefault)
 {
-Write-Host "Multi-Protocol Unified Hello\Server\DisabledByDefault Value ="$Multi_Protocol_Unified_Hello_Server_DisabledByDefault"" -nonewline -ForegroundColor Yellow
-Write-host "  Disabled" -ForegroundColor Red
+    Write-Host "Multi-Protocol Unified Hello\Server\DisabledByDefault Value ="$Multi_Protocol_Unified_Hello_Server_DisabledByDefault"" -nonewline -ForegroundColor Yellow
+    Write-host "  Disabled" -ForegroundColor Red
 }
 
 if (test-path -Path "$($Multi_Protocol_Unified_Hello_Path)Server")
 {
-$Multi_Protocol_Unified_Hello_Server_Enabled = (Get-ItemProperty ($Multi_Protocol_Unified_Hello_Path + "Server")).Enabled
+    $Multi_Protocol_Unified_Hello_Server_Enabled = (Get-ItemProperty ($Multi_Protocol_Unified_Hello_Path + "Server")).Enabled
 }
 else 
 {
-Write-host "The Path $($Multi_Protocol_Unified_Hello_Path)Client does not exist" -ForegroundColor Red
+    Write-host "The Path $($Multi_Protocol_Unified_Hello_Path)Client does not exist" -ForegroundColor Red
 }
 
 if (1 -eq $Multi_Protocol_Unified_Hello_Servert_Enabled)
 {
-Write-Host "Multi-Protocol Unified Hello\Server\Enabled Value ="$Multi_Protocol_Unified_Hello_Server_Enabled"" -nonewline -ForegroundColor Yellow
-Write-host " Enabled" -ForegroundColor Red
+    Write-Host "Multi-Protocol Unified Hello\Server\Enabled Value ="$Multi_Protocol_Unified_Hello_Server_Enabled"" -nonewline -ForegroundColor Yellow
+    Write-host " Enabled" -ForegroundColor Red
 }
 
 if (0 -eq $Multi_Protocol_Unified_Hello_Server_Enabled)
 {
-Write-Host "Multi-Protocol Unified Hello\Server\Enabled Value ="$Multi_Protocol_Unified_Hello_Server_Enabled"" -nonewline -ForegroundColor Yellow
-Write-host " Disabled" -ForegroundColor Green
+    Write-Host "Multi-Protocol Unified Hello\Server\Enabled Value ="$Multi_Protocol_Unified_Hello_Server_Enabled"" -nonewline -ForegroundColor Yellow
+    Write-host " Disabled" -ForegroundColor Green
 }
 else 
 {
-Write-host "The Path $($Multi_Protocol_Unified_Hello_Path)Server does not exist" -ForegroundColor Red
+    Write-host "The Path $($Multi_Protocol_Unified_Hello_Path)Server does not exist" -ForegroundColor Red
 }
 
 
-#SSL 2.0\Client
+# SSL 2.0\Client
 if (test-path -Path $($SSL_2_Path)){
 
-if (test-path -Path "$($SSL_2_Path)Client\")
-{
-$SSL_2_Client_DisabledByDefault = (Get-ItemProperty ($SSL_2_Path + "Client")).DisabledByDefault
+    if (test-path -Path "$($SSL_2_Path)Client\")
+    {
+        $SSL_2_Client_DisabledByDefault = (Get-ItemProperty ($SSL_2_Path + "Client")).DisabledByDefault
+    }
+    else 
+    {
+        Write-host "The Path $($SSL_2_Path)Client does not exist" -ForegroundColor Red
+    }
+
+    if (1 -eq $SSL_2_Client_DisabledByDefault)
+    {
+        Write-Host "SSL 2.0\Client\DisabledByDefault Value ="$SSL_2_Client_DisabledByDefault""  -nonewline -ForegroundColor Yellow
+        Write-Host " Enabled" -ForegroundColor Green
+    }
+
+    if (0 -eq $SSL_2_Client_DisabledByDefault)
+    {
+        Write-Host "SSL 2.0\Client\DisabledByDefault Value ="$SSL_2_Client_DisabledByDefault"" -nonewline -ForegroundColor Yellow
+        Write-host "  Disabled" -ForegroundColor Red
+    }
+
+    if (test-path -Path "$($SSL_2_Path)Client")
+    {
+        $SSL_2_Client_Enabled = (Get-ItemProperty ($SSL_2_Path + "Client")).Enabled
+    }
+    else 
+    {
+        Write-host "The Path $($SSL_2_Path)Client does not exist" -ForegroundColor Red
+    }
+
+    if (1 -eq $SSL_2_Client_Enabled)
+    {
+        Write-Host "SSL 2.0\Client\Enabled Value ="$SSL_2_Client_Enabled"" -nonewline -ForegroundColor Yellow
+        Write-host " Enabled" -ForegroundColor Red
+    }
+
+    if (0 -eq $SSL_2_Client_Enabled)
+    {
+        Write-Host "SSL 2.0\Client\Enabled Value ="$SSL_2_Client_Enabled"" -nonewline -ForegroundColor Yellow
+        Write-host " Disabled" -ForegroundColor Green
+    }
 }
 else 
 {
-Write-host "The Path $($SSL_2_Path)Client does not exist" -ForegroundColor Red
-}
-
-if (1 -eq $SSL_2_Client_DisabledByDefault)
-{
-Write-Host "SSL 2.0\Client\DisabledByDefault Value ="$SSL_2_Client_DisabledByDefault""  -nonewline -ForegroundColor Yellow
-Write-Host " Enabled" -ForegroundColor Green
-}
-
-if (0 -eq $SSL_2_Client_DisabledByDefault)
-{
-Write-Host "SSL 2.0\Client\DisabledByDefault Value ="$SSL_2_Client_DisabledByDefault"" -nonewline -ForegroundColor Yellow
-Write-host "  Disabled" -ForegroundColor Red
-}
-
-if (test-path -Path "$($SSL_2_Path)Client")
-{
-$SSL_2_Client_Enabled = (Get-ItemProperty ($SSL_2_Path + "Client")).Enabled
-}
-else 
-{
-Write-host "The Path $($SSL_2_Path)Client does not exist" -ForegroundColor Red
-}
-
-if (1 -eq $SSL_2_Client_Enabled)
-{
-Write-Host "SSL 2.0\Client\Enabled Value ="$SSL_2_Client_Enabled"" -nonewline -ForegroundColor Yellow
-Write-host " Enabled" -ForegroundColor Red
-}
-
-if (0 -eq $SSL_2_Client_Enabled)
-{
-Write-Host "SSL 2.0\Client\Enabled Value ="$SSL_2_Client_Enabled"" -nonewline -ForegroundColor Yellow
-Write-host " Disabled" -ForegroundColor Green
-}
-}
-else 
-{
-Write-host "The Path $($SSL_2_Path)Client does not exist" -ForegroundColor Red
+    Write-host "The Path $($SSL_2_Path)Client does not exist" -ForegroundColor Red
 }
 
 
@@ -730,100 +729,100 @@ Write-host "The Path $($SSL_2_Path)Client does not exist" -ForegroundColor Red
 
 if (test-path -Path "$($SSL_2_Path)Server")
 {
-$SSL_2_Server_DisabledByDefault = (Get-ItemProperty ($SSL_2_Path + "Server")).DisabledByDefault
+    $SSL_2_Server_DisabledByDefault = (Get-ItemProperty ($SSL_2_Path + "Server")).DisabledByDefault
 }
 else 
 {
-Write-host "The Path $($SSL_2_Path)Server does not exist" -ForegroundColor Red
+    Write-host "The Path $($SSL_2_Path)Server does not exist" -ForegroundColor Red
 }
 
 if (1 -eq $SSL_2_Server_DisabledByDefault)
 {
-Write-Host "SSL 2.0\Server\DisabledByDefault Value ="$SSL_2_Server_DisabledByDefault""  -nonewline -ForegroundColor Yellow
-Write-Host " Enabled" -ForegroundColor Green
+    Write-Host "SSL 2.0\Server\DisabledByDefault Value ="$SSL_2_Server_DisabledByDefault""  -nonewline -ForegroundColor Yellow
+    Write-Host " Enabled" -ForegroundColor Green
 }
 
 if (0 -eq $SSL_2_Server_DisabledByDefault)
 {
-Write-Host "SSL 2.0\Server\DisabledByDefault Value ="$SSL_2_Server_DisabledByDefault"" -nonewline -ForegroundColor Yellow
-Write-host "  Disabled" -ForegroundColor Red
+    Write-Host "SSL 2.0\Server\DisabledByDefault Value ="$SSL_2_Server_DisabledByDefault"" -nonewline -ForegroundColor Yellow
+    Write-host "  Disabled" -ForegroundColor Red
 }
 
 if (test-path -Path "$($SSL_2_Path)Server")
 {
-$SSL_2_Server_Enabled = (Get-ItemProperty ($SSL_2_Path + "Server")).Enabled
+    $SSL_2_Server_Enabled = (Get-ItemProperty ($SSL_2_Path + "Server")).Enabled
 }
 else 
 {
-Write-host "The Path $($SSL_2_Path)Client does not exist" -ForegroundColor Red
+    Write-host "The Path $($SSL_2_Path)Client does not exist" -ForegroundColor Red
 }
 
 if (1 -eq $SSL_2_Server_Enabled)
 {
-Write-Host "SSL 2.0\Server\Enabled Value ="$SSL_2_Server_Enabled"" -nonewline -ForegroundColor Yellow
-Write-host " Enabled" -ForegroundColor Red
+    Write-Host "SSL 2.0\Server\Enabled Value ="$SSL_2_Server_Enabled"" -nonewline -ForegroundColor Yellow
+    Write-host " Enabled" -ForegroundColor Red
 }
 
 if (0 -eq $SSL_2_Server_Enabled)
 {
-Write-Host "SSL 2.0\Server\Enabled Value ="$SSL_2_Server_Enabled"" -nonewline -ForegroundColor Yellow
-Write-host " Disabled" -ForegroundColor Green
+    Write-Host "SSL 2.0\Server\Enabled Value ="$SSL_2_Server_Enabled"" -nonewline -ForegroundColor Yellow
+    Write-host " Disabled" -ForegroundColor Green
 }
 else 
 {
-Write-host "The Path $($SSL_2_Path)Server does not exist" -ForegroundColor Red
+    Write-host "The Path $($SSL_2_Path)Server does not exist" -ForegroundColor Red
 }
 
 
 
-#SSL 3.0\Client
+# SSL 3.0\Client
 if (test-path -Path $($SSL_3_Path)){
 
-if (test-path -Path "$($SSL_3_Path)Client\")
-{
-$SSL_3_Client_DisabledByDefault = (Get-ItemProperty ($SSL_3_Path + "Client")).DisabledByDefault
+    if (test-path -Path "$($SSL_3_Path)Client\")
+    {
+        $SSL_3_Client_DisabledByDefault = (Get-ItemProperty ($SSL_3_Path + "Client")).DisabledByDefault
+    }
+    else 
+    {
+        Write-host "The Path $($SSL_3_Path)Client does not exist" -ForegroundColor Red
+    }
+
+    if (1 -eq $SSL_3_Client_DisabledByDefault)
+    {
+        Write-Host "SSL 3.0\Client\DisabledByDefault Value ="$SSL_3_Client_DisabledByDefault""  -nonewline -ForegroundColor Yellow
+        Write-Host " Enabled" -ForegroundColor Green
+    }
+
+    if (0 -eq $SSL_3_Client_DisabledByDefault)
+    {
+        Write-Host "SSL 3.0\Client\DisabledByDefault Value ="$SSL_3_Client_DisabledByDefault"" -nonewline -ForegroundColor Yellow
+        Write-host "  Disabled" -ForegroundColor Red
+    }
+
+    if (test-path -Path "$($SSL_3_Path)Client")
+    {
+        $SSL_3_Client_Enabled = (Get-ItemProperty ($SSL_3_Path + "Client")).Enabled
+    }
+    else 
+    {
+        Write-host "The Path $($SSL_3_Path)Client does not exist" -ForegroundColor Red
+    }
+
+    if (1 -eq $SSL_3_Client_Enabled)
+    {
+        Write-Host "SSL 3.0\Client\Enabled Value ="$SSL_3_Client_Enabled"" -nonewline -ForegroundColor Yellow
+        Write-host " Enabled" -ForegroundColor Red
+    }
+
+    if (0 -eq $SSL_3_Client_Enabled)
+    {
+        Write-Host "SSL 3.0\Client\Enabled Value ="$SSL_3_Client_Enabled"" -nonewline -ForegroundColor Yellow
+        Write-host " Disabled" -ForegroundColor Green
+    }
 }
 else 
 {
-Write-host "The Path $($SSL_3_Path)Client does not exist" -ForegroundColor Red
-}
-
-if (1 -eq $SSL_3_Client_DisabledByDefault)
-{
-Write-Host "SSL 3.0\Client\DisabledByDefault Value ="$SSL_3_Client_DisabledByDefault""  -nonewline -ForegroundColor Yellow
-Write-Host " Enabled" -ForegroundColor Green
-}
-
-if (0 -eq $SSL_3_Client_DisabledByDefault)
-{
-Write-Host "SSL 3.0\Client\DisabledByDefault Value ="$SSL_3_Client_DisabledByDefault"" -nonewline -ForegroundColor Yellow
-Write-host "  Disabled" -ForegroundColor Red
-}
-
-if (test-path -Path "$($SSL_3_Path)Client")
-{
-$SSL_3_Client_Enabled = (Get-ItemProperty ($SSL_3_Path + "Client")).Enabled
-}
-else 
-{
-Write-host "The Path $($SSL_3_Path)Client does not exist" -ForegroundColor Red
-}
-
-if (1 -eq $SSL_3_Client_Enabled)
-{
-Write-Host "SSL 3.0\Client\Enabled Value ="$SSL_3_Client_Enabled"" -nonewline -ForegroundColor Yellow
-Write-host " Enabled" -ForegroundColor Red
-}
-
-if (0 -eq $SSL_3_Client_Enabled)
-{
-Write-Host "SSL 3.0\Client\Enabled Value ="$SSL_3_Client_Enabled"" -nonewline -ForegroundColor Yellow
-Write-host " Disabled" -ForegroundColor Green
-}
-}
-else 
-{
-Write-host "The Path $($SSL_3_Path)Client does not exist" -ForegroundColor Red
+    Write-host "The Path $($SSL_3_Path)Client does not exist" -ForegroundColor Red
 }
 
 
@@ -832,153 +831,153 @@ Write-host "The Path $($SSL_3_Path)Client does not exist" -ForegroundColor Red
 
 if (test-path -Path "$($SSL_3_Path)Server")
 {
-$SSL_3_Server_DisabledByDefault = (Get-ItemProperty ($SSL_3_Path + "Server")).DisabledByDefault
+    $SSL_3_Server_DisabledByDefault = (Get-ItemProperty ($SSL_3_Path + "Server")).DisabledByDefault
 }
 else 
 {
-Write-host "The Path $($SSL_3_Path)Server does not exist" -ForegroundColor Red
+    Write-host "The Path $($SSL_3_Path)Server does not exist" -ForegroundColor Red
 }
 
 if (1 -eq $SSL_3_Server_DisabledByDefault)
 {
-Write-Host "SSL 3.0\Server\DisabledByDefault Value ="$SSL_3_Server_DisabledByDefault""  -nonewline -ForegroundColor Yellow
-Write-Host " Enabled" -ForegroundColor Green
+    Write-Host "SSL 3.0\Server\DisabledByDefault Value ="$SSL_3_Server_DisabledByDefault""  -nonewline -ForegroundColor Yellow
+    Write-Host " Enabled" -ForegroundColor Green
 }
 
 if (0 -eq $SSL_3_Server_DisabledByDefault)
 {
-Write-Host "SSL 3.0\Server\DisabledByDefault Value ="$SSL_3_Server_DisabledByDefault"" -nonewline -ForegroundColor Yellow
-Write-host "  Disabled" -ForegroundColor Red
+    Write-Host "SSL 3.0\Server\DisabledByDefault Value ="$SSL_3_Server_DisabledByDefault"" -nonewline -ForegroundColor Yellow
+    Write-host "  Disabled" -ForegroundColor Red
 }
 
 if (test-path -Path "$($SSL_3_Path)Server")
 {
-$SSL_3_Server_Enabled = (Get-ItemProperty ($SSL_3_Path + "Server")).Enabled
+    $SSL_3_Server_Enabled = (Get-ItemProperty ($SSL_3_Path + "Server")).Enabled
 }
 else 
 {
-Write-host "The Path $($SSL_3_Path)Client does not exist" -ForegroundColor Red
+    Write-host "The Path $($SSL_3_Path)Client does not exist" -ForegroundColor Red
 }
 
 if (1 -eq $SSL_3_Server_Enabled)
 {
-Write-Host "SSL 3.0\Server\Enabled Value ="$SSL_3_Server_Enabled"" -nonewline -ForegroundColor Yellow
-Write-host " Enabled" -ForegroundColor Red
+    Write-Host "SSL 3.0\Server\Enabled Value ="$SSL_3_Server_Enabled"" -nonewline -ForegroundColor Yellow
+    Write-host " Enabled" -ForegroundColor Red
 }
 
 if (0 -eq $SSL_3_Server_Enabled)
 {
-Write-Host "SSL 3.0\Server\Enabled Value ="$SSL_3_Server_Enabled"" -nonewline -ForegroundColor Yellow
-Write-host " Disabled" -ForegroundColor Green
+    Write-Host "SSL 3.0\Server\Enabled Value ="$SSL_3_Server_Enabled"" -nonewline -ForegroundColor Yellow
+    Write-host " Disabled" -ForegroundColor Green
 }
 else 
 {
-Write-host "The Path $($SSL_3_Path)Server does not exist" -ForegroundColor Red
+    Write-host "The Path $($SSL_3_Path)Server does not exist" -ForegroundColor Red
 }
 
 
-#TLS 1.0\Client
+# TLS 1.0\Client
 if (test-path -Path $($TLS_1_Path)){
 
-if (test-path -Path "$($TLS_1_Path)Client\")
-{
-$TLS_1_Client_DisabledByDefault = (Get-ItemProperty ($TLS_1_Path + "Client")).DisabledByDefault
+    if (test-path -Path "$($TLS_1_Path)Client\")
+    {
+        $TLS_1_Client_DisabledByDefault = (Get-ItemProperty ($TLS_1_Path + "Client")).DisabledByDefault
+    }
+    else 
+    {
+        Write-host "The Path $($TLS_1_Path)Client does not exist" -ForegroundColor Red
+    }
+    
+    if (1 -eq $TLS_1_Client_DisabledByDefault)
+    {
+        Write-Host "TLS 1.0\Client\DisabledByDefault Value ="$TLS_1_Client_DisabledByDefault""  -nonewline -ForegroundColor Yellow
+        Write-Host " Enabled" -ForegroundColor Green
+    }
+    
+    if (0 -eq $TLS_1_Client_DisabledByDefault)
+    {
+        Write-Host "TLS 1.0\Client\DisabledByDefault Value ="$TLS_1_Client_DisabledByDefault"" -nonewline -ForegroundColor Yellow
+        Write-host "  Disabled" -ForegroundColor Red
+    }
+    
+    if (test-path -Path "$($TLS_1_Path)Client")
+    {
+        $TLS_1_Client_Enabled = (Get-ItemProperty ($TLS_1_Path + "Client")).Enabled
+    }
+    else 
+    {
+        Write-host "The Path $($TLS_1_Path)Client does not exist" -ForegroundColor Red
+    }
+    
+    if (1 -eq $TLS_1_Client_Enabled)
+    {
+        Write-Host "TLS 1.0\Client\Enabled Value ="$TLS_1_Client_Enabled"" -nonewline -ForegroundColor Yellow
+        Write-host " Enabled" -ForegroundColor Red
+    }
+    
+    if (0 -eq $TLS_1_Client_Enabled)
+    {
+        Write-Host "TLS 1.0\Client\Enabled Value ="$TLS_1_Client_Enabled"" -nonewline -ForegroundColor Yellow
+        Write-host " Disabled" -ForegroundColor Green
+    }
 }
 else 
 {
-Write-host "The Path $($TLS_1_Path)Client does not exist" -ForegroundColor Red
-}
-
-if (1 -eq $TLS_1_Client_DisabledByDefault)
-{
-Write-Host "TLS 1.0\Client\DisabledByDefault Value ="$TLS_1_Client_DisabledByDefault""  -nonewline -ForegroundColor Yellow
-Write-Host " Enabled" -ForegroundColor Green
-}
-
-if (0 -eq $TLS_1_Client_DisabledByDefault)
-{
-Write-Host "TLS 1.0\Client\DisabledByDefault Value ="$TLS_1_Client_DisabledByDefault"" -nonewline -ForegroundColor Yellow
-Write-host "  Disabled" -ForegroundColor Red
-}
-
-if (test-path -Path "$($TLS_1_Path)Client")
-{
-$TLS_1_Client_Enabled = (Get-ItemProperty ($TLS_1_Path + "Client")).Enabled
-}
-else 
-{
-Write-host "The Path $($TLS_1_Path)Client does not exist" -ForegroundColor Red
-}
-
-if (1 -eq $TLS_1_Client_Enabled)
-{
-Write-Host "TLS 1.0\Client\Enabled Value ="$TLS_1_Client_Enabled"" -nonewline -ForegroundColor Yellow
-Write-host " Enabled" -ForegroundColor Red
-}
-
-if (0 -eq $TLS_1_Client_Enabled)
-{
-Write-Host "TLS 1.0\Client\Enabled Value ="$TLS_1_Client_Enabled"" -nonewline -ForegroundColor Yellow
-Write-host " Disabled" -ForegroundColor Green
-}
-}
-else 
-{
-Write-host "The Path $($TLS_1_Path)Client does not exist" -ForegroundColor Red
+    Write-host "The Path $($TLS_1_Path)Client does not exist" -ForegroundColor Red
 }
 
 
 
-#TLS 1.0\Server
+# TLS 1.0\Server
 
 if (test-path -Path "$($TLS_1_Path)Server")
 {
-$TLS_1_Server_DisabledByDefault = (Get-ItemProperty ($TLS_1_Path + "Server")).DisabledByDefault
+    $TLS_1_Server_DisabledByDefault = (Get-ItemProperty ($TLS_1_Path + "Server")).DisabledByDefault
 }
 else 
 {
-Write-host "The Path $($TLS_1_Path)Server does not exist" -ForegroundColor Red
+    Write-host "The Path $($TLS_1_Path)Server does not exist" -ForegroundColor Red
 }
 
 if (1 -eq $TLS_1_Server_DisabledByDefault)
 {
-Write-Host "TLS 1.0\Server\DisabledByDefault Value ="$TLS_1_Server_DisabledByDefault""  -nonewline -ForegroundColor Yellow
-Write-Host " Enabled" -ForegroundColor Green
+    Write-Host "TLS 1.0\Server\DisabledByDefault Value ="$TLS_1_Server_DisabledByDefault""  -nonewline -ForegroundColor Yellow
+    Write-Host " Enabled" -ForegroundColor Green
 }
 
 if (0 -eq $TLS_1_Server_DisabledByDefault)
 {
-Write-Host "TLS 1.0\Server\DisabledByDefault Value ="$TLS_1_Server_DisabledByDefault"" -nonewline -ForegroundColor Yellow
-Write-host "  Disabled" -ForegroundColor Red
+    Write-Host "TLS 1.0\Server\DisabledByDefault Value ="$TLS_1_Server_DisabledByDefault"" -nonewline -ForegroundColor Yellow
+    Write-host "  Disabled" -ForegroundColor Red
 }
 
 if (test-path -Path "$($TLS_1_Path)Server")
 {
-$TLS_1_Server_Enabled = (Get-ItemProperty ($TLS_1_Path + "Server")).Enabled
+    $TLS_1_Server_Enabled = (Get-ItemProperty ($TLS_1_Path + "Server")).Enabled
 }
 else 
 {
-Write-host "The Path $($TLS_1_Path)Client does not exist" -ForegroundColor Red
+    Write-host "The Path $($TLS_1_Path)Client does not exist" -ForegroundColor Red
 }
 
 if (1 -eq $TLS_1_Server_Enabled)
 {
-Write-Host "TLS 1.0\Server\Enabled Value ="$TLS_1_Server_Enabled"" -nonewline -ForegroundColor Yellow
-Write-host " Enabled" -ForegroundColor Red
+    Write-Host "TLS 1.0\Server\Enabled Value ="$TLS_1_Server_Enabled"" -nonewline -ForegroundColor Yellow
+    Write-host " Enabled" -ForegroundColor Red
 }
 
 if (0 -eq $TLS_1_Server_Enabled)
 {
-Write-Host "TLS 1.0\Server\Enabled Value ="$TLS_1_Server_Enabled"" -nonewline -ForegroundColor Yellow
-Write-host " Disabled" -ForegroundColor Green
+    Write-Host "TLS 1.0\Server\Enabled Value ="$TLS_1_Server_Enabled"" -nonewline -ForegroundColor Yellow
+    Write-host " Disabled" -ForegroundColor Green
 }
 else 
 {
-Write-host "The Path $($TLS_1_Path)Server does not exist" -ForegroundColor Red
+    Write-host "The Path $($TLS_1_Path)Server does not exist" -ForegroundColor Red
 }
 
 
-#Done
+# Done
 Write-Host " "
 Write-Host "All Done - REBOOT, Pretty Please, with sugar on top..." -ForegroundColor Green
 Write-Host " "
