@@ -638,7 +638,7 @@ $Label12.location                = New-Object System.Drawing.Point(98,275)
 $Label12.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Bold))
 
 $Virtualization                  = New-Object system.Windows.Forms.Button
-$Virtualization.text             = "Enable HyperV + WSL"
+$Virtualization.text             = "Enable HyperV"
 $Virtualization.width            = 211
 $Virtualization.height           = 30
 $Virtualization.location         = New-Object System.Drawing.Point(4,23)
