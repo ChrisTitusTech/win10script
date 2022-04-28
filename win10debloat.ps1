@@ -1005,6 +1005,15 @@ $essentialtweaks.Add_Click({
     Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced\People" -Name "PeopleBand" -Type DWord -Value 0
     Write-Host "Hide tray icons..."
     Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer" -Name "EnableAutoTray" -Type DWord -Value 1
+
+    if((Get-ComputerInfo).OSName.Substring(0,20) -eq 'Microsoft Windows 11'){
+        Write-Host "Enabling Old Right Click Menu..."
+        if(!(Test-Path "HKCU:\SOFTWARE\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32")){
+            New-Item -Path "HKCU:\SOFTWARE\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32" | Out-Null
+        }
+        Set-Item -Path "HKCU:\SOFTWARE\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32" -Value ""
+    }
+    
     Write-Host "Enabling NumLock after startup..."
     If (!(Test-Path "HKU:")) {
         New-PSDrive -Name HKU -PSProvider Registry -Root HKEY_USERS | Out-Null
@@ -1022,6 +1031,12 @@ $essentialtweaks.Add_Click({
 
     Write-Host "Hiding 3D Objects icon from This PC..."
     Remove-Item -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{0DB7E03F-FC29-4DC6-9020-FF41B59E513A}" -Recurse -ErrorAction SilentlyContinue
+
+    Write-Host "Enabling Hardware Acceleration..."
+    if(!(Test-Path "HKLM:\SYSTEM\CurrentControlSet\Control\GraphicsDrivers")){
+        New-Item -Path "HKLM:\SYSTEM\CurrentControlSet\Control\GraphicsDrivers" | Out-Null
+    }
+    Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\GraphicsDrivers" -Name "HwSchMode" -Type DWord -Value 2
 
     # reuducing ram via regedit
     Write-Host "Using regedit to improve RAM performace"
@@ -1288,6 +1303,14 @@ $essentialundo.Add_Click({
         Remove-Item -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\OperationStatusManager" -Recurse -ErrorAction SilentlyContinue
     }
     Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\OperationStatusManager" -Name "EnthusiastMode" -Type DWord -Value 0
+
+    if((Get-ComputerInfo).OSName.Substring(0,20) -eq 'Microsoft Windows 11'){
+        Write-Host "Enabling New Right Click Menu..."
+        if(Test-Path "HKCU:\SOFTWARE\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32"){
+            Remove-Item -Path "HKCU:\SOFTWARE\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}" -Recurse -Force | Out-Null
+        }
+    }
+
     Write-Host "Showing Task View button..."
     Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "ShowTaskViewButton" -Type DWord -Value 1
     Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced\People" -Name "PeopleBand" -Type DWord -Value 1
