@@ -1043,7 +1043,7 @@ $essentialtweaks.Add_Click({
     Set-ItemProperty -Path "HKLM:\Control Panel\Desktop" -Name "LowLevelHooksTimeout" -Type DWord -Value 00001000
     Set-ItemProperty -Path "HKLM:\Control Panel\Desktop" -Name "WaitToKillServiceTimeout" -Type DWord -Value 00002000
     Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" -Name "ClearPageFileAtShutdown" -Type DWord -Value 00000001
-    Set-ItemProperty -Path "HKLM:\SYSTEM\ControlSet001\Services\Ndu" -Name "Start" -Type DWord -Value 00000004
+    #Set-ItemProperty -Path "HKLM:\SYSTEM\ControlSet001\Services\Ndu" -Name "Start" -Type DWord -Value 00000004  # Breaks Network Data Usage/Task Manager Network Usage
     Set-ItemProperty -Path "HKLM:\Control Panel\Mouse" -Name "MouseHoverTime" -Type DWord -Value 00000010
 
 
@@ -1108,7 +1108,7 @@ Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Policies
     "XblGameSave"                                  # Xbox Live Game Save Service
     "XboxNetApiSvc"                                # Xbox Live Networking Service
     "XboxGipSvc"                                   #Disables Xbox Accessory Management Service
-    "ndu"                                          # Windows Network Data Usage Monitor
+    #"ndu"                                          # Windows Network Data Usage Monitor, Breaks Network Data Usage/Task Manager Network Usage
     "WerSvc"                                       #disables windows error reporting
     #"Spooler"                                      #Disables your printer
     "Fax"                                          #Disables fax
