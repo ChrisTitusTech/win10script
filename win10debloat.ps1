@@ -10,10 +10,8 @@ If (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]:
 	Exit
 }
 
-# GUI Specs
-Write-Host "Checking winget..."
-
 # Check if winget is installed
+Write-Host "Checking winget..."
 if (Test-Path ~\AppData\Local\Microsoft\WindowsApps\winget.exe){
     'Winget Already Installed'
 }  
@@ -204,7 +202,7 @@ $performancefx.location          = New-Object System.Drawing.Point(3,419)
 $performancefx.Font              = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
 $onedrive                        = New-Object system.Windows.Forms.Button
-$onedrive.text                   = "Delete & Disable  OneDrive"
+$onedrive.text                   = "Delete & Disable OneDrive"
 $onedrive.width                  = 205
 $onedrive.height                 = 30
 $onedrive.location               = New-Object System.Drawing.Point(3,521)
@@ -246,7 +244,7 @@ $Label16.location                = New-Object System.Drawing.Point(62,65)
 $Label16.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
 
 $Label17                         = New-Object system.Windows.Forms.Label
-$Label17.text                    = "- Delays Features updates up to 3 years"
+$Label17.text                    = "- Delays Feature updates up to 3 years"
 $Label17.AutoSize                = $true
 $Label17.width                   = 25
 $Label17.height                  = 10
@@ -640,7 +638,7 @@ $Label12.location                = New-Object System.Drawing.Point(98,275)
 $Label12.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Bold))
 
 $Virtualization                  = New-Object system.Windows.Forms.Button
-$Virtualization.text             = "Enable HyperV + WSL"
+$Virtualization.text             = "Enable HyperV"
 $Virtualization.width            = 211
 $Virtualization.height           = 30
 $Virtualization.location         = New-Object System.Drawing.Point(4,23)
@@ -918,7 +916,7 @@ $essentialtweaks.Add_Click({
     Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\System" -Name "EnableActivityFeed" -Type DWord -Value 0
     Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\System" -Name "PublishUserActivities" -Type DWord -Value 0
     Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\System" -Name "UploadUserActivities" -Type DWord -Value 0
-    # Keep Location Tracking commented out if you want the ability to locate your device
+    # Comment out Location Tracking if you want the ability to locate your device
     Write-Host "Disabling Location Tracking..."
     If (!(Test-Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\location")) {
         New-Item -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\location" -Force | Out-Null
@@ -962,7 +960,7 @@ $essentialtweaks.Add_Click({
     Set-Service "dmwappushservice" -StartupType Disabled
     Write-Host "Enabling F8 boot menu options..."
     bcdedit /set `{current`} bootmenupolicy Legacy | Out-Null
-    Write-Host "Stopping and disabling Home Groups services..."
+    Write-Host "Stopping and disabling HomeGroup services..."
     Stop-Service "HomeGroupListener" -WarningAction SilentlyContinue
     Set-Service "HomeGroupListener" -StartupType Disabled
     Stop-Service "HomeGroupProvider" -WarningAction SilentlyContinue
@@ -991,7 +989,7 @@ $essentialtweaks.Add_Click({
     	$preferences.Preferences[28] = 0
     	Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\TaskManager" -Name "Preferences" -Type Binary -Value $preferences.Preferences
     } else {Write-Host "Task Manager patch not run in builds 22557+ due to bug"}
-    Write-Host "Showing file operations details..."
+    Write-Host "Showing file operation details..."
     If (!(Test-Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\OperationStatusManager")) {
         New-Item -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\OperationStatusManager" | Out-Null
     }
@@ -1003,7 +1001,7 @@ $essentialtweaks.Add_Click({
         New-Item -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced\People" | Out-Null
     }
     Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced\People" -Name "PeopleBand" -Type DWord -Value 0
-    Write-Host "Hide tray icons..."
+    Write-Host "Hiding tray icons..."
     Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer" -Name "EnableAutoTray" -Type DWord -Value 1
     Write-Host "Enabling NumLock after startup..."
     If (!(Test-Path "HKU:")) {
@@ -1023,7 +1021,7 @@ $essentialtweaks.Add_Click({
     Write-Host "Hiding 3D Objects icon from This PC..."
     Remove-Item -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{0DB7E03F-FC29-4DC6-9020-FF41B59E513A}" -Recurse -ErrorAction SilentlyContinue
 
-    # reuducing ram via regedit
+    #Reducing ram via regedit
     Write-Host "Using regedit to improve RAM performace"
 
     Set-ItemProperty -Path "HKLM:\System\GameConfigStore" -Name "GameDVR_DXGIHonorFSEWindowsCompatible" -Type Hex -Value 00000000
@@ -1152,7 +1150,7 @@ Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Policies
     "BcastDVRUserService_48486de"                   #Disables GameDVR and Broadcast   is used for Game Recordings and Live Broadcasts
     "CaptureService_48486de"                        #Disables ptional screen capture functionality for applications that call the Windows.Graphics.Capture API.  
     "cbdhsvc_48486de"                               #Disables   cbdhsvc_48486de (clipboard service it disables)
-    #"BluetoothUserService_48486de"                  #disbales BluetoothUserService_48486de (The Bluetooth user service supports proper functionality of Bluetooth features relevant to each user session.)
+    #"BluetoothUserService_48486de"                  #Disables BluetoothUserService_48486de (The Bluetooth user service supports proper functionality of Bluetooth features relevant to each user session.)
     "WpnService"                                    #Disables WpnService (Push Notifications may not work )
     #"StorSvc"                                       #Disables StorSvc (usb external hard drive will not be reconised by windows)
     "RtkBtManServ"                                  #Disables Realtek Bluetooth Device Manager Service
@@ -1177,7 +1175,7 @@ Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Policies
 )
 
 foreach ($service in $services) {
-    # -ErrorAction SilentlyContinue is so it doesn't write an error to stdout if a service doesn't exist
+    # -ErrorAction SilentlyContinue is so it doesn't throw an error if a service doesn't exist
 
     Write-Host "Setting $service StartupType to Manual"
     Get-Service -Name $service -ErrorAction SilentlyContinue | Set-Service -StartupType Manual
@@ -1266,7 +1264,7 @@ $essentialundo.Add_Click({
     Write-Host "Allowing WAP Push Service..."
     Stop-Service "dmwappushservice" -WarningAction SilentlyContinue
     Set-Service "dmwappushservice" -StartupType Manual
-    Write-Host "Allowing Home Groups services..."
+    Write-Host "Allowing HomeGroup services..."
     Stop-Service "HomeGroupListener" -WarningAction SilentlyContinue
     Set-Service "HomeGroupListener" -StartupType Manual
     Stop-Service "HomeGroupProvider" -WarningAction SilentlyContinue
@@ -1283,7 +1281,7 @@ $essentialundo.Add_Click({
     Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FlyoutMenuSettings" -Name "ShowHibernateOption" -Type Dword -Value 1
 	Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Personalization" -Name "NoLockScreen" -ErrorAction SilentlyContinue
 
-    Write-Host "Hiding file operations details..."
+    Write-Host "Hiding file operation details..."
     If (!(Test-Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\OperationStatusManager")) {
         Remove-Item -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\OperationStatusManager" -Recurse -ErrorAction SilentlyContinue
     }
@@ -1396,10 +1394,9 @@ $windowssearch.Add_Click({
         $basePath = $regAlias + ":\SOFTWARE\Policies\Microsoft\Windows"
         $keyPath = $basePath + "\Explorer"
         Set-ItemProperty -Path $keyPath -Name "LockedStartLayout" -Value 0
-
+    }
     Write-Host "Search and Start Menu Tweaks Complete"
     $ResultText.text = "`r`n" +"`r`n" + "Search and Start Menu Tweaks Complete"
-    }
 })
 
 $backgroundapps.Add_Click({
@@ -1590,7 +1587,7 @@ $securitywindowsupdate.Add_Click({
     Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" -Name "NoAutoRebootWithLoggedOnUsers" -Type DWord -Value 1
     Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" -Name "AUPowerManagement" -Type DWord -Value 0
     Write-Host "Disabled driver offering through Windows Update"
-    $ResultText.text = "`r`n" +"`r`n" + "Set Windows Update to Sane Settings"
+    $ResultText.text = "`r`n" +"`r`n" + "Set Windows Update to Safe Settings"
 })
 
 $actioncenter.Add_Click({
@@ -1928,7 +1925,7 @@ $windowsupdatefix.Add_Click({
     netsh winsock reset 
     netsh winhttp reset proxy 
     
-    Write-Host "9) Delete all BITS jobs..." 
+    Write-Host "9) Deleting all BITS jobs..." 
     Get-BitsTransfer | Remove-BitsTransfer 
     
     Write-Host "10) Attempting to install the Windows Update Agent..." 
@@ -1954,175 +1951,170 @@ $windowsupdatefix.Add_Click({
 })
 
 $disableupdates.Add_Click({
-
     # Source: https://github.com/rgl/windows-vagrant/blob/master/disable-windows-updates.ps1
     Set-StrictMode -Version Latest
-$ProgressPreference = 'SilentlyContinue'
-$ErrorActionPreference = 'Stop'
-trap {
-    Write-Host
-    Write-Host "ERROR: $_"
-    Write-Host (($_.ScriptStackTrace -split '\r?\n') -replace '^(.*)$','ERROR: $1')
-    Write-Host (($_.Exception.ToString() -split '\r?\n') -replace '^(.*)$','ERROR EXCEPTION: $1')
-    Write-Host
-    Write-Host 'Sleeping for 60m to give you time to look around the virtual machine before self-destruction...'
-    Start-Sleep -Seconds (60*60)
-    Exit 1
-}
-
-# disable automatic updates.
-# XXX this does not seem to work anymore.
-# see How to configure automatic updates by using Group Policy or registry settings
-#     at https://support.microsoft.com/en-us/help/328010
-function New-Directory($path) {
-    $p, $components = $path -split '[\\/]'
-    $components | ForEach-Object {
-        $p = "$p\$_"
-        if (!(Test-Path $p)) {
-            New-Item -ItemType Directory $p | Out-Null
-        }
+    $ProgressPreference = 'SilentlyContinue'
+    $ErrorActionPreference = 'Stop'
+    trap {
+        Write-Host
+        Write-Host "ERROR: $_"
+        Write-Host (($_.ScriptStackTrace -split '\r?\n') -replace '^(.*)$','ERROR: $1')
+        Write-Host (($_.Exception.ToString() -split '\r?\n') -replace '^(.*)$','ERROR EXCEPTION: $1')
+        Write-Host
+        Write-Host 'Sleeping for 60m to give you time to look around the virtual machine before self-destruction...'
+        Start-Sleep -Seconds (60*60)
+        Exit 1
     }
-    $null
-}
-$auPath = 'HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU'
-New-Directory $auPath 
-# set NoAutoUpdate.
-# 0: Automatic Updates is enabled (default).
-# 1: Automatic Updates is disabled.
-New-ItemProperty `
-    -Path $auPath `
-    -Name NoAutoUpdate `
-    -Value 1 `
-    -PropertyType DWORD `
-    -Force `
-    | Out-Null
-# set AUOptions.
-# 1: Keep my computer up to date has been disabled in Automatic Updates.
-# 2: Notify of download and installation.
-# 3: Automatically download and notify of installation.
-# 4: Automatically download and scheduled installation.
-New-ItemProperty `
-    -Path $auPath `
-    -Name AUOptions `
-    -Value 1 `
-    -PropertyType DWORD `
-    -Force `
-    | Out-Null
 
-# disable Windows Update Delivery Optimization.
-# NB this applies to Windows 10.
-# 0: Disabled
-# 1: PCs on my local network
-# 3: PCs on my local network, and PCs on the Internet
-$deliveryOptimizationPath = 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\DeliveryOptimization\Config'
-if (Test-Path $deliveryOptimizationPath) {
+    # Disable automatic updates.
+    # This does not seem to work anymore.
+    # See How to configure automatic updates by using Group Policy or registry settings at https://support.microsoft.com/en-us/help/328010
+    function New-Directory($path) {
+        $p, $components = $path -split '[\\/]'
+        $components | ForEach-Object {
+            $p = "$p\$_"
+            if (!(Test-Path $p)) {
+                New-Item -ItemType Directory $p | Out-Null
+            }
+        }
+        $null
+    }
+    $auPath = 'HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU'
+    New-Directory $auPath 
+    # Set NoAutoUpdate.
+    # 0: Automatic Updates is enabled (default).
+    # 1: Automatic Updates is disabled.
     New-ItemProperty `
-        -Path $deliveryOptimizationPath `
-        -Name DODownloadMode `
-        -Value 0 `
+        -Path $auPath `
+        -Name NoAutoUpdate `
+        -Value 1 `
         -PropertyType DWORD `
         -Force `
         | Out-Null
-}
-# Service tweaks for Windows Update
+    # Set AUOptions.
+    # 1: Keep my computer up to date has been disabled in Automatic Updates.
+    # 2: Notify of download and installation.
+    # 3: Automatically download and notify of installation.
+    # 4: Automatically download and scheduled installation.
+    New-ItemProperty `
+        -Path $auPath `
+        -Name AUOptions `
+        -Value 1 `
+        -PropertyType DWORD `
+        -Force `
+        | Out-Null
 
-$services = @(
-    "BITS"
-    "wuauserv"
-)
+    # Disable Windows Update Delivery Optimization.
+    # 0: Disabled
+    # 1: PCs on my local network
+    # 3: PCs on my local network, and PCs on the Internet
+    $deliveryOptimizationPath = 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\DeliveryOptimization\Config'
+    if (Test-Path $deliveryOptimizationPath) {
+        New-ItemProperty `
+            -Path $deliveryOptimizationPath `
+            -Name DODownloadMode `
+            -Value 0 `
+            -PropertyType DWORD `
+            -Force `
+            | Out-Null
+    }
+    # Service tweaks for Windows Update
 
-foreach ($service in $services) {
-    # -ErrorAction SilentlyContinue is so it doesn't write an error to stdout if a service doesn't exist
+    $services = @(
+        "BITS"
+        "wuauserv"
+    )
 
-    Write-Host "Setting $service StartupType to Disabled"
-    Get-Service -Name $service -ErrorAction SilentlyContinue | Set-Service -StartupType Disabled
-}
+    foreach ($service in $services) {
+        # -ErrorAction SilentlyContinue is so it doesn't write an error to stdout if a service doesn't exist
+
+        Write-Host "Setting $service StartupType to Disabled"
+        Get-Service -Name $service -ErrorAction SilentlyContinue | Set-Service -StartupType Disabled
+    }
 })
 
 $enableupdates.Add_Click({
-
     # Source: https://github.com/rgl/windows-vagrant/blob/master/disable-windows-updates.ps1
     Set-StrictMode -Version Latest
-$ProgressPreference = 'SilentlyContinue'
-$ErrorActionPreference = 'Stop'
-trap {
-    Write-Host
-    Write-Host "ERROR: $_"
-    Write-Host (($_.ScriptStackTrace -split '\r?\n') -replace '^(.*)$','ERROR: $1')
-    Write-Host (($_.Exception.ToString() -split '\r?\n') -replace '^(.*)$','ERROR EXCEPTION: $1')
-    Write-Host
-    Write-Host 'Sleeping for 60m to give you time to look around the virtual machine before self-destruction...'
-    Start-Sleep -Seconds (60*60)
-    Exit 1
-}
-
-# disable automatic updates.
-# XXX this does not seem to work anymore.
-# see How to configure automatic updates by using Group Policy or registry settings
-#     at https://support.microsoft.com/en-us/help/328010
-function New-Directory($path) {
-    $p, $components = $path -split '[\\/]'
-    $components | ForEach-Object {
-        $p = "$p\$_"
-        if (!(Test-Path $p)) {
-            New-Item -ItemType Directory $p | Out-Null
-        }
+    $ProgressPreference = 'SilentlyContinue'
+    $ErrorActionPreference = 'Stop'
+    trap {
+        Write-Host
+        Write-Host "ERROR: $_"
+        Write-Host (($_.ScriptStackTrace -split '\r?\n') -replace '^(.*)$','ERROR: $1')
+        Write-Host (($_.Exception.ToString() -split '\r?\n') -replace '^(.*)$','ERROR EXCEPTION: $1')
+        Write-Host
+        Write-Host 'Sleeping for 60m to give you time to look around the virtual machine before self-destruction...'
+        Start-Sleep -Seconds (60*60)
+        Exit 1
     }
-    $null
-}
-$auPath = 'HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU'
-New-Directory $auPath 
-# set NoAutoUpdate.
-# 0: Automatic Updates is enabled (default).
-# 1: Automatic Updates is disabled.
-New-ItemProperty `
-    -Path $auPath `
-    -Name NoAutoUpdate `
-    -Value 0 `
-    -PropertyType DWORD `
-    -Force `
-    | Out-Null
-# set AUOptions.
-# 1: Keep my computer up to date has been disabled in Automatic Updates.
-# 2: Notify of download and installation.
-# 3: Automatically download and notify of installation.
-# 4: Automatically download and scheduled installation.
-New-ItemProperty `
-    -Path $auPath `
-    -Name AUOptions `
-    -Value 3 `
-    -PropertyType DWORD `
-    -Force `
-    | Out-Null
 
-# disable Windows Update Delivery Optimization.
-# NB this applies to Windows 10.
-# 0: Disabled
-# 1: PCs on my local network
-# 3: PCs on my local network, and PCs on the Internet
-$deliveryOptimizationPath = 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\DeliveryOptimization\Config'
-if (Test-Path $deliveryOptimizationPath) {
+    # Disable automatic updates.
+    # This does not seem to work anymore.
+    # See How to configure automatic updates by using Group Policy or registry settings at https://support.microsoft.com/en-us/help/328010
+    function New-Directory($path) {
+        $p, $components = $path -split '[\\/]'
+        $components | ForEach-Object {
+            $p = "$p\$_"
+            if (!(Test-Path $p)) {
+                New-Item -ItemType Directory $p | Out-Null
+            }
+        }
+        $null
+    }
+    $auPath = 'HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU'
+    New-Directory $auPath 
+    # Set NoAutoUpdate.
+    # 0: Automatic Updates is enabled (default).
+    # 1: Automatic Updates is disabled.
     New-ItemProperty `
-        -Path $deliveryOptimizationPath `
-        -Name DODownloadMode `
+        -Path $auPath `
+        -Name NoAutoUpdate `
         -Value 0 `
         -PropertyType DWORD `
         -Force `
         | Out-Null
-}
-# Service tweaks for Windows Update
+    # Set AUOptions.
+    # 1: Keep my computer up to date has been disabled in Automatic Updates.
+    # 2: Notify of download and installation.
+    # 3: Automatically download and notify of installation.
+    # 4: Automatically download and scheduled installation.
+    New-ItemProperty `
+        -Path $auPath `
+        -Name AUOptions `
+        -Value 3 `
+        -PropertyType DWORD `
+        -Force `
+        | Out-Null
 
-$services = @(
-    "BITS"
-    "wuauserv"
-)
+    # Disable Windows Update Delivery Optimization.
+    # This applies to Windows 10.
+    # 0: Disabled
+    # 1: PCs on my local network
+    # 3: PCs on my local network, and PCs on the Internet
+    $deliveryOptimizationPath = 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\DeliveryOptimization\Config'
+    if (Test-Path $deliveryOptimizationPath) {
+        New-ItemProperty `
+            -Path $deliveryOptimizationPath `
+            -Name DODownloadMode `
+            -Value 0 `
+            -PropertyType DWORD `
+            -Force `
+            | Out-Null
+    }
+    # Service tweaks for Windows Update
 
-foreach ($service in $services) {
-    # -ErrorAction SilentlyContinue is so it doesn't write an error to stdout if a service doesn't exist
+    $services = @(
+        "BITS"
+        "wuauserv"
+    )
 
-    Write-Host "Setting $service StartupType to Automatic"
-    Get-Service -Name $service -ErrorAction SilentlyContinue | Set-Service -StartupType Automatic
-}
+    foreach ($service in $services) {
+        # -ErrorAction SilentlyContinue is so it doesn't write an error to stdout if a service doesn't exist
+
+        Write-Host "Setting $service StartupType to Automatic"
+        Get-Service -Name $service -ErrorAction SilentlyContinue | Set-Service -StartupType Automatic
+    }
 })
 
 [void]$Form.ShowDialog()
