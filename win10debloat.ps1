@@ -1104,9 +1104,9 @@ Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Policies
     "WMPNetworkSvc"                                # Windows Media Player Network Sharing Service
     #"wscsvc"                                       # Windows Security Center Service
     "WSearch"                                      # Windows Search
-    "XblAuthManager"                               # Xbox Live Auth Manager
-    "XblGameSave"                                  # Xbox Live Game Save Service
-    "XboxNetApiSvc"                                # Xbox Live Networking Service
+    "XblAuthManager"                               # Xbox Live Auth Manager (Disabling Breaks Xbox Live Games)
+    "XblGameSave"                                  # Xbox Live Game Save Service (Disabling Breaks Xbox Live Games)
+    "XboxNetApiSvc"                                # Xbox Live Networking Service (Disabling Breaks Xbox Live Games)
     "XboxGipSvc"                                   #Disables Xbox Accessory Management Service
     "ndu"                                          # Windows Network Data Usage Monitor
     "WerSvc"                                       #disables windows error reporting
@@ -1482,7 +1482,7 @@ $Bloatware = @(
     "Microsoft.XboxGameCallableUI"
     "Microsoft.XboxSpeechToTextOverlay"
     "Microsoft.MixedReality.Portal"
-    "Microsoft.XboxIdentityProvider"
+    #"Microsoft.XboxIdentityProvider" # Breaks Xbox Live in games like Minecraft UWP
     "Microsoft.ZuneMusic"
     "Microsoft.ZuneVideo"
     "Microsoft.YourPhone"
