@@ -1104,9 +1104,9 @@ Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Policies
     "WMPNetworkSvc"                                # Windows Media Player Network Sharing Service
     #"wscsvc"                                       # Windows Security Center Service
     "WSearch"                                      # Windows Search
-    #"XblAuthManager"                              # Xbox Live Auth Manager (Disabling Breaks Xbox Live Games)
-    #"XblGameSave"                                 # Xbox Live Game Save Service (Disabling Breaks Xbox Live Games)
-    #"XboxNetApiSvc"                               # Xbox Live Networking Service (Disabling Breaks Xbox Live Games)
+    "XblAuthManager"                               # Xbox Live Auth Manager (Disabling Breaks Xbox Live Games)
+    "XblGameSave"                                  # Xbox Live Game Save Service (Disabling Breaks Xbox Live Games)
+    "XboxNetApiSvc"                                # Xbox Live Networking Service (Disabling Breaks Xbox Live Games)
     "XboxGipSvc"                                   #Disables Xbox Accessory Management Service
     "ndu"                                          # Windows Network Data Usage Monitor
     "WerSvc"                                       #disables windows error reporting
