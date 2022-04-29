@@ -1177,9 +1177,9 @@ $essentialtweaks.Add_Click({
         "WpnService"                                   # WpnService (Push Notifications may not work)
         #"wscsvc"                                      # Windows Security Center Service
         "WSearch"                                      # Windows Search
-        "XblAuthManager"                               # Xbox Live Auth Manager
-        "XblGameSave"                                  # Xbox Live Game Save Service
-        "XboxNetApiSvc"                                # Xbox Live Networking Service
+        "XblAuthManager"                               # Xbox Live Auth Manager (Disabling Breaks Xbox Live Games)
+        "XblGameSave"                                  # Xbox Live Game Save Service (Disabling Breaks Xbox Live Games)
+        "XboxNetApiSvc"                                # Xbox Live Networking Service (Disabling Breaks Xbox Live Games)
         "XboxGipSvc"                                   # Xbox Accessory Management Service
          # Hp services
         "HPAppHelperCap"
