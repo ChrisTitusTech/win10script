@@ -1823,11 +1823,11 @@ $oldpower.Add_Click({
     cmd /c powercfg.cpl
 })
 $restorepower.Add_Click({
-    powercfg -duplicatescheme a1841308-3541-4fab-bc81-f71556f20b4a
-    powercfg -duplicatescheme 381b4222-f694-41f0-9685-ff5bb260df2e
-    powercfg -duplicatescheme e9a42b02-d5df-448d-aa00-03f14749eb61
-    Write-Host "Restored all power plans: Balanced, High Performance, and Power Saver"
-    $ResultText.text = "`r`n" +"`r`n" + "Restored all power plans: Balanced, High Performance, and Power Saver"
+    if(!(Get-CimInstance -Name root\cimv2\power -Class Win32_PowerPlan | Where-Object ElementName -Like "Power Saver")){powercfg -duplicatescheme a1841308-3541-4fab-bc81-f71556f20b4a}
+    if(!(Get-CimInstance -Name root\cimv2\power -Class Win32_PowerPlan | Where-Object ElementName -Like "Balanced")){powercfg -duplicatescheme 381b4222-f694-41f0-9685-ff5bb260df2e}
+    if(!(Get-CimInstance -Name root\cimv2\power -Class Win32_PowerPlan | Where-Object ElementName -Like "Ultimate Performance")){powercfg -duplicatescheme e9a42b02-d5df-448d-aa00-03f14749eb61}
+    Write-Host "Restored all power plans: Power Saver, Balanced, and Ultimate Performance"
+    $ResultText.text = "`r`n" +"`r`n" + "Restored all power plans: Power Saver, Balanced, and Ultimate Performance"
 })
 $NFS.Add_Click({
     Enable-WindowsOptionalFeature -Online -FeatureName "ServicesForNFS-ClientOnly" -All
