@@ -873,7 +873,7 @@ $gimp.Add_Click({
 $essentialtweaks.Add_Click({
     Write-Host "Creating Restore Point incase something bad happens"
     $ResultText.text = "`r`n" +"`r`n" + "Installing Essential Tools... Please Wait" 
-    Enable-ComputerRestore -Drive "C:\"
+    Enable-ComputerRestore -Drive "$env:SystemDrive"
     Checkpoint-Computer -Description "RestorePoint1" -RestorePointType "MODIFY_SETTINGS"
 
     Write-Host "Running O&O Shutup with Recommended Settings"
@@ -1205,7 +1205,7 @@ $laptopnumlock.Add_Click({
 $essentialundo.Add_Click({
     Write-Host "Creating Restore Point incase something bad happens"
     $ResultText.text = "`r`n" +"`r`n" + "Creating Restore Point and Reverting Settings... Please Wait"
-    Enable-ComputerRestore -Drive "C:\"
+    Enable-ComputerRestore -Drive "$env:SystemDrive"
     Checkpoint-Computer -Description "RestorePoint1" -RestorePointType "MODIFY_SETTINGS"
 
     Write-Host "Enabling Telemetry..."
@@ -1333,22 +1333,22 @@ $windowssearch.Add_Click({
 
     Write-Host "Removing Start Menu Tiles"
 
-    Set-Content -Path 'C:\Users\Default\AppData\Local\Microsoft\Windows\Shell\DefaultLayouts.xml' -Value '<LayoutModificationTemplate xmlns:defaultlayout="http://schemas.microsoft.com/Start/2014/FullDefaultLayout" xmlns:start="http://schemas.microsoft.com/Start/2014/StartLayout" Version="1" xmlns="http://schemas.microsoft.com/Start/2014/LayoutModification">'
-    Add-Content -Path 'C:\Users\Default\AppData\Local\Microsoft\Windows\Shell\DefaultLayouts.xml' -value '  <LayoutOptions StartTileGroupCellWidth="6" />'
-    Add-Content -Path 'C:\Users\Default\AppData\Local\Microsoft\Windows\Shell\DefaultLayouts.xml' -value '  <DefaultLayoutOverride>'
-    Add-Content -Path 'C:\Users\Default\AppData\Local\Microsoft\Windows\Shell\DefaultLayouts.xml' -value '    <StartLayoutCollection>'
-    Add-Content -Path 'C:\Users\Default\AppData\Local\Microsoft\Windows\Shell\DefaultLayouts.xml' -value '      <defaultlayout:StartLayout GroupCellWidth="6" />'
-    Add-Content -Path 'C:\Users\Default\AppData\Local\Microsoft\Windows\Shell\DefaultLayouts.xml' -value '    </StartLayoutCollection>'
-    Add-Content -Path 'C:\Users\Default\AppData\Local\Microsoft\Windows\Shell\DefaultLayouts.xml' -value '  </DefaultLayoutOverride>'
-    Add-Content -Path 'C:\Users\Default\AppData\Local\Microsoft\Windows\Shell\DefaultLayouts.xml' -value '    <CustomTaskbarLayoutCollection>'
-    Add-Content -Path 'C:\Users\Default\AppData\Local\Microsoft\Windows\Shell\DefaultLayouts.xml' -value '      <defaultlayout:TaskbarLayout>'
-    Add-Content -Path 'C:\Users\Default\AppData\Local\Microsoft\Windows\Shell\DefaultLayouts.xml' -value '        <taskbar:TaskbarPinList>'
-    Add-Content -Path 'C:\Users\Default\AppData\Local\Microsoft\Windows\Shell\DefaultLayouts.xml' -value '          <taskbar:UWA AppUserModelID="Microsoft.MicrosoftEdge_8wekyb3d8bbwe!MicrosoftEdge" />'
-    Add-Content -Path 'C:\Users\Default\AppData\Local\Microsoft\Windows\Shell\DefaultLayouts.xml' -value '          <taskbar:DesktopApp DesktopApplicationLinkPath="%APPDATA%\Microsoft\Windows\Start Menu\Programs\System Tools\File Explorer.lnk" />'
-    Add-Content -Path 'C:\Users\Default\AppData\Local\Microsoft\Windows\Shell\DefaultLayouts.xml' -value '        </taskbar:TaskbarPinList>'
-    Add-Content -Path 'C:\Users\Default\AppData\Local\Microsoft\Windows\Shell\DefaultLayouts.xml' -value '      </defaultlayout:TaskbarLayout>'
-    Add-Content -Path 'C:\Users\Default\AppData\Local\Microsoft\Windows\Shell\DefaultLayouts.xml' -value '    </CustomTaskbarLayoutCollection>'
-    Add-Content -Path 'C:\Users\Default\AppData\Local\Microsoft\Windows\Shell\DefaultLayouts.xml' -value '</LayoutModificationTemplate>'
+    Set-Content -Path "$env:SystemDrive\Users\Default\AppData\Local\Microsoft\Windows\Shell\DefaultLayouts.xml" -Value '<LayoutModificationTemplate xmlns:defaultlayout="http://schemas.microsoft.com/Start/2014/FullDefaultLayout" xmlns:start="http://schemas.microsoft.com/Start/2014/StartLayout" Version="1" xmlns="http://schemas.microsoft.com/Start/2014/LayoutModification">'
+    Add-Content -Path "$env:SystemDrive\Users\Default\AppData\Local\Microsoft\Windows\Shell\DefaultLayouts.xml" -value '  <LayoutOptions StartTileGroupCellWidth="6" />'
+    Add-Content -Path "$env:SystemDrive\Users\Default\AppData\Local\Microsoft\Windows\Shell\DefaultLayouts.xml" -value '  <DefaultLayoutOverride>'
+    Add-Content -Path "$env:SystemDrive\Users\Default\AppData\Local\Microsoft\Windows\Shell\DefaultLayouts.xml" -value '    <StartLayoutCollection>'
+    Add-Content -Path "$env:SystemDrive\Users\Default\AppData\Local\Microsoft\Windows\Shell\DefaultLayouts.xml" -value '      <defaultlayout:StartLayout GroupCellWidth="6" />'
+    Add-Content -Path "$env:SystemDrive\Users\Default\AppData\Local\Microsoft\Windows\Shell\DefaultLayouts.xml" -value '    </StartLayoutCollection>'
+    Add-Content -Path "$env:SystemDrive\Users\Default\AppData\Local\Microsoft\Windows\Shell\DefaultLayouts.xml" -value '  </DefaultLayoutOverride>'
+    Add-Content -Path "$env:SystemDrive\Users\Default\AppData\Local\Microsoft\Windows\Shell\DefaultLayouts.xml" -value '    <CustomTaskbarLayoutCollection>'
+    Add-Content -Path "$env:SystemDrive\Users\Default\AppData\Local\Microsoft\Windows\Shell\DefaultLayouts.xml" -value '      <defaultlayout:TaskbarLayout>'
+    Add-Content -Path "$env:SystemDrive\Users\Default\AppData\Local\Microsoft\Windows\Shell\DefaultLayouts.xml" -value '        <taskbar:TaskbarPinList>'
+    Add-Content -Path "$env:SystemDrive\Users\Default\AppData\Local\Microsoft\Windows\Shell\DefaultLayouts.xml" -value '          <taskbar:UWA AppUserModelID="Microsoft.MicrosoftEdge_8wekyb3d8bbwe!MicrosoftEdge" />'
+    Add-Content -Path "$env:SystemDrive\Users\Default\AppData\Local\Microsoft\Windows\Shell\DefaultLayouts.xml" -value '          <taskbar:DesktopApp DesktopApplicationLinkPath="%APPDATA%\Microsoft\Windows\Start Menu\Programs\System Tools\File Explorer.lnk" />'
+    Add-Content -Path "$env:SystemDrive\Users\Default\AppData\Local\Microsoft\Windows\Shell\DefaultLayouts.xml" -value '        </taskbar:TaskbarPinList>'
+    Add-Content -Path "$env:SystemDrive\Users\Default\AppData\Local\Microsoft\Windows\Shell\DefaultLayouts.xml" -value '      </defaultlayout:TaskbarLayout>'
+    Add-Content -Path "$env:SystemDrive\Users\Default\AppData\Local\Microsoft\Windows\Shell\DefaultLayouts.xml" -value '    </CustomTaskbarLayoutCollection>'
+    Add-Content -Path "$env:SystemDrive\Users\Default\AppData\Local\Microsoft\Windows\Shell\DefaultLayouts.xml" -value '</LayoutModificationTemplate>'
 
     $START_MENU_LAYOUT = @"
     <LayoutModificationTemplate xmlns:defaultlayout="http://schemas.microsoft.com/Start/2014/FullDefaultLayout" xmlns:start="http://schemas.microsoft.com/Start/2014/StartLayout" Version="1" xmlns:taskbar="http://schemas.microsoft.com/Start/2014/TaskbarLayout" xmlns="http://schemas.microsoft.com/Start/2014/LayoutModification">
@@ -1361,7 +1361,7 @@ $windowssearch.Add_Click({
     </LayoutModificationTemplate>
 "@
 
-    $layoutFile="C:\Windows\StartMenuLayout.xml"
+    $layoutFile="$env:SystemDrive\Windows\StartMenuLayout.xml"
 
     #Delete layout file if it already exists
     If(Test-Path $layoutFile)
