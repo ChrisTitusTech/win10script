@@ -1,4 +1,13 @@
 ## Known Issues and Fixes
+- [#333](https://github.com/ChrisTitusTech/win10script/issues/333) Windows taking longer to shut down:
+  - Turn on fast startup: Press Windows key + R, then type:
+  ```
+  control /name Microsoft.PowerOptions /page pageGlobalSettings
+  ```
+  - If that doesn't work, Disable Hibernation: Press Windows Key+X and select 'PowerShell (Admin)' (Windows 10) or 'Windows Terminal (Admin)' (Windows 11) and enter:
+  ```
+  powercfg /H off
+  ```
 - [#253](https://github.com/ChrisTitusTech/win10script/issues/253) Windows Search does not work: Enable Background Apps
 - [#278](https://github.com/ChrisTitusTech/win10script/issues/278) Xbox Game Bar Activation Broken: Set the Xbox Accessory Management Service to Automatic
 ```
