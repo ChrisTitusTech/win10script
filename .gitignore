@@ -4,4 +4,5 @@ defltbase.sdb
 bin/x64/ctt-toolbox.exe
 bin/x64/ctt-toolbox.zip
 win10debloat.ps1.psbuild
-.vs
+ctt-toolbox.exe
+winget-latest.appxbundle
