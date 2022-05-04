@@ -6,3 +6,4 @@ bin/x64/ctt-toolbox.zip
 win10debloat.ps1.psbuild
 ctt-toolbox.exe
 winget-latest.appxbundle
+.vs
