@@ -11,21 +11,14 @@ If (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]:
 }
 
 # GUI Specs
-Write-Host "Checking winget..."
+Write-Host "Checking for Winget..."
 
-# Check if winget is installed
-if (Test-Path ~\AppData\Local\Microsoft\WindowsApps\winget.exe){
-    'Winget Already Installed'
-}  
-else{
-    # Installing winget from the Microsoft Store
-	Write-Host "Winget not found, installing it now."
-    $ResultText.text = "`r`n" +"`r`n" + "Installing Winget... Please Wait"
-	Start-Process "ms-appinstaller:?source=https://aka.ms/getwinget"
-	$nid = (Get-Process AppInstaller).Id
-	Wait-Process -Id $nid
-	Write-Host Winget Installed
-    $ResultText.text = "`r`n" +"`r`n" + "Winget Installed - Ready for Next Task"
+# If Winget isn't Installed, Open MS Store Window to Install
+if (!Get-AppPackage -name 'Microsoft.DesktopAppInstaller') {
+    Write-Host "Winget not Found, Installing Now"
+    Start-Process "ms-windows-store://pdp/?ProductId=9NBLGGH4NNS1"
+    $nid = (Get-Process AppInstaller).Id; Wait-Process -Id $nid
+    Write-Host "Winget Successfully Installed"
 }
 
 $Form                            = New-Object system.Windows.Forms.Form
