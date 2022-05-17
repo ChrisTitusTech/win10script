@@ -14,7 +14,7 @@ If (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]:
 Write-Host "Checking for Winget..."
 
 # If Winget isn't Installed, Open MS Store Window to Install
-if (!Get-AppPackage -name 'Microsoft.DesktopAppInstaller') {
+if (!(Get-AppPackage -name 'Microsoft.DesktopAppInstaller')) {
     Write-Host "Winget not Found, Installing Now"
     Start-Process "ms-windows-store://pdp/?ProductId=9NBLGGH4NNS1"
     $nid = (Get-Process AppInstaller).Id; Wait-Process -Id $nid
