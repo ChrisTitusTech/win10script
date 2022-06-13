@@ -1875,7 +1875,7 @@ $windowsupdatefix.Add_Click({
     Write-Host "4. Removing old Windows Update log..." 
     Remove-Item $env:systemroot\WindowsUpdate.log -ErrorAction SilentlyContinue 
     
-    Write-Host "5. Resetting the Windows Update Services to defualt settings..." 
+    Write-Host "5. Resetting the Windows Update Services to default settings..." 
     "sc.exe sdset bits D:(A;;CCLCSWRPWPDTLOCRRC;;;SY)(A;;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;BA)(A;;CCLCSWLOCRRC;;;AU)(A;;CCLCSWRPWPDTLOCRRC;;;PU)" 
     "sc.exe sdset wuauserv D:(A;;CCLCSWRPWPDTLOCRRC;;;SY)(A;;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;BA)(A;;CCLCSWLOCRRC;;;AU)(A;;CCLCSWRPWPDTLOCRRC;;;PU)" 
     
